@@ -4,3 +4,4 @@
 
 import libc::types::common::c99::*;
 
+mod linkhack;
