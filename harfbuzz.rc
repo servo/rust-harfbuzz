@@ -1,0 +1,6 @@
+#[link(name = "azure",
+       vers = "0.1")];
+#[crate_type = "lib"];
+
+import libc::types::common::c99::*;
+
