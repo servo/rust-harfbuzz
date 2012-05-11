@@ -1,4 +1,4 @@
-#[link(name = "azure",
+#[link(name = "harfbuzz",
        vers = "0.1")];
 #[crate_type = "lib"];
 
