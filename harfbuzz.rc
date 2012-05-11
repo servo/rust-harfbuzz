@@ -2,6 +2,8 @@
        vers = "0.1")];
 #[crate_type = "lib"];
 
+use std;
+
 import libc::types::common::c99::*;
 
 mod linkhack;
