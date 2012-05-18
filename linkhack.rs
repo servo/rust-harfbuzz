@@ -3,7 +3,7 @@
 // relevance to servo.
 
 #[cfg(target_os = "linux")]
-#[link_args = "../harfbuzz/src/.libs/libharfbuzz.a -lpango-1.0"]
+#[link_args = "../harfbuzz/src/.libs/libharfbuzz.a -lpango-1.0 -lglib-2.0"]
 #[no_link]
 native mod m { }
 
