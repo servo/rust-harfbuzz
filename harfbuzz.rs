@@ -10,7 +10,7 @@ type hb_position_t = int32_t;
 
 type hb_mask_t = uint32_t;
 
-type union__hb_var_int_t = int;
+type union__hb_var_int_t = i32;
 
 type hb_var_int_t = union__hb_var_int_t;
 
