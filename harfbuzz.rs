@@ -290,7 +290,7 @@ type struct__hb_feature_t = {
 type hb_feature_t = struct__hb_feature_t;
 
 #[nolink]
-native mod bindgen {
+extern mod bindgen {
 
 fn hb_tag_from_string(++str: *c_char, ++len: c_int) -> hb_tag_t;
 

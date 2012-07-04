@@ -5,9 +5,9 @@
 #[cfg(target_os = "linux")]
 #[link_args = "../harfbuzz/src/.libs/libharfbuzz.a -lpango-1.0 -lglib-2.0"]
 #[no_link]
-native mod m { }
+extern mod m { }
 
 #[cfg(target_os = "macos")]
 #[link_args = "../harfbuzz/src/.libs/libharfbuzz.a -lstdc++"]
 #[no_link]
-native mod m { }
+extern mod m { }
