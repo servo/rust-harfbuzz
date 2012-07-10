@@ -4,6 +4,7 @@
 
 #[cfg(target_os = "linux")]
 #[link_args = "../harfbuzz/src/.libs/libharfbuzz.a -lpango-1.0 -lglib-2.0"]
+#[link_args = "-lstdc++"]
 #[no_link]
 extern mod m { }
 
