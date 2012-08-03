@@ -64,6 +64,7 @@ harfbuzz/src/%.o: harfbuzz/src/%.cc
 
 libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
 	$(RUSTC) $(RUSTFLAGS) $< -o $@
+	touch $@
 
 harfbuzz-test: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
 	$(RUSTC) $(RUSTFLAGS) $< -o $@ --test
