@@ -1,0 +1,96 @@
+General fixes:
+=============
+
+- Warn at compile time (and runtime with HB_DEBUG?) if no Unicode funcs
+  found / set.
+
+- In hb_shape(), assert if direction is INVALID.
+
+- Fix TT 'kern' on/off and GPOS interaction (move kerning before GPOS).
+
+- Do proper rounding when scaling from font space?  May be a non-issue.
+
+- Misc features:
+  * init/medi/fina/isol for non-cursive scripts
+  * vkna,hkna etc for kana, etc
+
+- Move non-native direction and normalization handling to the generic non-OT
+  layer, such that uniscribe and other backends can use.
+
+- Uniscribe backend needs to enforce one direction only, otherwise cluster
+  values can confused the user.
+
+- GSUB ligation should call merge_clusters().
+
+
+API issues to fix before 1.0:
+============================
+
+- Add pkg-config files for glue codes (harfbuzz-glib, etc)
+
+- Figure out how many .so objects, how to link, etc
+
+- 'const' for getter APIs? (use mutable internally)
+
+
+API additions
+=============
+
+- Buffer (de)serialize API ala hb-shape?
+- Move feature parsing from util into the library
+
+- Add hb-cairo glue
+
+- Add sanitize API (and a cached version, that saves result on blob user-data)
+
+- Add glib GBoxedType stuff and introspection
+
+- Add Uniscribe face / font get API
+
+- BCP 47 language handling / API (language_matches?)
+
+- Add hb_face_get_glyph_count()?
+
+- Add hb_font_create_linear()?
+
+- Add hb_shape_plan()/hb_shape_planned()
+
+- Add query API for aalt-like features?
+
+- SFNT api? get_num_faces? get_table_tags? (there's something in stash)
+
+- Add segmentation API
+
+- Add hb-fribidi glue?
+
+- Add segmentation API
+
+
+hb-view / hb-shape enhancements:
+===============================
+
+- Add --width, --height, --auto-size, --align, etc?
+- Add XML and JSON formats to hb-shape
+- --features="init=medi=isol=fina=0"
+
+
+Tests to write:
+==============
+
+- ot-layout enumeration API (needs font)
+
+- Finish test-shape.c, grep for TODO
+
+- Finish test-unicode.c, grep for TODO
+
+- GObject, FreeType, etc
+
+- hb_set_t
+
+
+Optimizations:
+=============
+
+- Avoid allocating blob objects internally for for_data() faces?
+
+- Add caching layer to hb-ft?

@@ -3,12 +3,66 @@ VPATH=%VPATH%
 RUSTC ?= rustc
 RUSTFLAGS ?=
 
+UNAME=$(shell uname)
+
+ifeq ($(UNAME),Darwin)
+    OSTYPE=darwin
+endif
+ifeq ($(UNAME),Linux)
+    OSTYPE=linux
+endif
+
 RUST_SRC = $(shell find $(VPATH)/. -type f -name '*.rs')
+
+C_SRC = \
+	harfbuzz/src/hb-blob.cc \
+	harfbuzz/src/hb-buffer.cc \
+	harfbuzz/src/hb-common.cc \
+	harfbuzz/src/hb-fallback-shape.cc \
+	harfbuzz/src/hb-font.cc \
+	harfbuzz/src/hb-ot-layout.cc \
+	harfbuzz/src/hb-ot-map.cc \
+	harfbuzz/src/hb-ot-shape.cc \
+	harfbuzz/src/hb-ot-shape-complex-arabic.cc \
+	harfbuzz/src/hb-ot-shape-complex-indic.cc \
+	harfbuzz/src/hb-ot-shape-complex-misc.cc \
+	harfbuzz/src/hb-ot-shape-normalize.cc \
+	harfbuzz/src/hb-ot-tag.cc \
+	harfbuzz/src/hb-set.cc \
+	harfbuzz/src/hb-shape.cc \
+	harfbuzz/src/hb-tt-font.cc \
+	harfbuzz/src/hb-unicode.cc \
+	harfbuzz/src/hb-warning.cc \
+	$(NULL)
+
+HBFLAGS = -DHAVE_OT
+
+ifeq ($(OSTYPE),darwin)
+endif
+
+ifeq ($(OSTYPE),linux)
+	C_SRC += \
+		harfbuzz/src/hb-ft.cc \
+		harfbuzz/src/hb-glib.cc \
+		harfbuzz/src/hb-gobject-structs.cc \
+		$(NULL)
+	CFLAGS += $(shell pkg-config --cflags glib-2.0 freetype2)
+	HBFLAGS += -DHAVE_GLIB
+endif
+
+C_OBJS = $(patsubst %.cc,%.o,$(C_SRC))
+CFLAGS += -I$(VPATH)/harfbuzz/src $(HBFLAGS) -fPIC
 
 .PHONY: all
 all: libharfbuzz.dummy
 
-libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC)
+libharfbuzz.a: $(C_OBJS)
+	$(AR) rcs $@ $^
+
+harfbuzz/src/%.o: harfbuzz/src/%.cc
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
 	$(RUSTC) $(RUSTFLAGS) $< -o $@
 
 harfbuzz-test: harfbuzz.rc $(RUST_SRC)

@@ -2,3 +2,5 @@
 
 SRCDIR="$(cd $(dirname $0) && pwd)"
 sed "s#%VPATH%#${SRCDIR}#" ${SRCDIR}/Makefile.in > Makefile
+
+mkdir -p harfbuzz/src || exit $?
