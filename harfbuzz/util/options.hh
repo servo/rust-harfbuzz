@@ -40,11 +40,17 @@
 #include <locale.h>
 #include <errno.h>
 #include <fcntl.h>
+#ifdef HAVE_UNISTD_H
+#include <unistd.h> /* for isatty() */
+#endif
 #ifdef HAVE_IO_H
 #include <io.h> /* for _setmode() under Windows */
 #endif
 
 #include <hb.h>
+#ifdef HAVE_OT
+#include <hb-ot.h>
+#endif
 #include <glib.h>
 #include <glib/gprintf.h>
 
@@ -102,10 +108,10 @@ struct option_parser_t
 };
 
 
-#define DEFAULT_MARGIN 18
+#define DEFAULT_MARGIN 16
 #define DEFAULT_FORE "#000000"
 #define DEFAULT_BACK "#FFFFFF"
-#define DEFAULT_FONT_SIZE 36
+#define DEFAULT_FONT_SIZE 256
 
 struct view_options_t : option_group_t
 {
@@ -135,30 +141,34 @@ struct view_options_t : option_group_t
 
 struct shape_options_t : option_group_t
 {
-  shape_options_t (option_parser_t *parser) {
+  shape_options_t (option_parser_t *parser)
+  {
     direction = language = script = NULL;
     features = NULL;
     num_features = 0;
     shapers = NULL;
     utf8_clusters = false;
+    normalize_glyphs = false;
 
     add_options (parser);
   }
-  ~shape_options_t (void) {
+  ~shape_options_t (void)
+  {
     free (features);
-    g_free (shapers);
+    g_strfreev (shapers);
   }
 
   void add_options (option_parser_t *parser);
 
-  void setup_buffer (hb_buffer_t *buffer) {
+  void setup_buffer (hb_buffer_t *buffer)
+  {
     hb_buffer_set_direction (buffer, hb_direction_from_string (direction, -1));
     hb_buffer_set_script (buffer, hb_script_from_string (script, -1));
     hb_buffer_set_language (buffer, hb_language_from_string (language, -1));
   }
 
-  hb_bool_t shape (const char *text, int text_len,
-		   hb_font_t *font, hb_buffer_t *buffer) {
+  void populate_buffer (hb_buffer_t *buffer, const char *text, int text_len)
+  {
     hb_buffer_reset (buffer);
     hb_buffer_add_utf8 (buffer, text, text_len, 0, text_len);
 
@@ -175,7 +185,24 @@ struct shape_options_t : option_group_t
     }
 
     setup_buffer (buffer);
-    return hb_shape_full (font, buffer, features, num_features, shapers);
+  }
+
+  hb_bool_t shape (hb_font_t *font, hb_buffer_t *buffer)
+  {
+    hb_bool_t res = hb_shape_full (font, buffer, features, num_features, shapers);
+    if (normalize_glyphs)
+      hb_buffer_normalize_glyphs (buffer);
+    return res;
+  }
+
+  void shape_closure (const char *text, int text_len,
+		      hb_font_t *font, hb_buffer_t *buffer,
+		      hb_set_t *glyphs)
+  {
+    hb_buffer_reset (buffer);
+    hb_buffer_add_utf8 (buffer, text, text_len, 0, text_len);
+    setup_buffer (buffer);
+    hb_ot_shape_glyphs_closure (font, buffer, features, num_features, glyphs);
   }
 
   const char *direction;
@@ -185,6 +212,7 @@ struct shape_options_t : option_group_t
   unsigned int num_features;
   char **shapers;
   hb_bool_t utf8_clusters;
+  hb_bool_t normalize_glyphs;
 };
 
 
@@ -228,7 +256,7 @@ struct text_options_t : option_group_t
   }
   ~text_options_t (void) {
     if (gs)
-      g_string_free (gs, TRUE);
+      g_string_free (gs, true);
     if (fp)
       fclose (fp);
   }
@@ -239,7 +267,7 @@ struct text_options_t : option_group_t
     if (text && text_file)
       g_set_error (error,
 		   G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
-		   "Only one of text and text-file must be set");
+		   "Only one of text and text-file can be set");
 
   };
 
@@ -285,17 +313,8 @@ struct output_options_t : option_group_t
 
   FILE *get_file_handle (void);
 
-  virtual void init (const font_options_t *font_opts) = 0;
-  virtual void consume_line (hb_buffer_t  *buffer,
-			     const char   *text,
-			     unsigned int  text_len,
-			     hb_bool_t     utf8_clusters) = 0;
-  virtual void finish (const font_options_t *font_opts) = 0;
-
   const char *output_file;
   const char *output_format;
-
-  protected:
 
   mutable FILE *fp;
 };
@@ -309,12 +328,8 @@ struct format_options_t : option_group_t
     show_text = false;
     show_unicode = false;
     show_line_num = false;
-    scratch = hb_buffer_create ();
 
     add_options (parser);
-  }
-  ~format_options_t (void) {
-    hb_buffer_destroy (scratch);
   }
 
   void add_options (option_parser_t *parser);
@@ -327,24 +342,31 @@ struct format_options_t : option_group_t
 			 GString      *gs);
   void serialize_line_no (unsigned int  line_no,
 			  GString      *gs);
-  void serialize_line (hb_buffer_t  *buffer,
-		       unsigned int  line_no,
-		       const char   *text,
-		       unsigned int  text_len,
-		       hb_font_t    *font,
-		       hb_bool_t     utf8_clusters,
-		       GString      *gs);
+  void serialize_buffer_of_text (hb_buffer_t  *buffer,
+				 unsigned int  line_no,
+				 const char   *text,
+				 unsigned int  text_len,
+				 hb_font_t    *font,
+				 hb_bool_t     utf8_clusters,
+				 GString      *gs);
+  void serialize_message (unsigned int  line_no,
+			  const char   *msg,
+			  GString      *gs);
+  void serialize_buffer_of_glyphs (hb_buffer_t  *buffer,
+				   unsigned int  line_no,
+				   const char   *text,
+				   unsigned int  text_len,
+				   hb_font_t    *font,
+				   hb_bool_t     utf8_clusters,
+				   GString      *gs);
 
 
-  protected:
   hb_bool_t show_glyph_names;
   hb_bool_t show_positions;
   hb_bool_t show_clusters;
   hb_bool_t show_text;
   hb_bool_t show_unicode;
   hb_bool_t show_line_num;
-  private:
-  hb_buffer_t *scratch;
 };
 
 

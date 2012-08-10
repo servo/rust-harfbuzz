@@ -1,6 +1,6 @@
 /*
  * Copyright © 2010  Behdad Esfahbod
- * Copyright © 2011  Google, Inc.
+ * Copyright © 2011,2012  Google, Inc.
  *
  *  This is part of HarfBuzz, a text shaping library.
  *
@@ -25,11 +25,13 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb-view.hh"
+#include "main-font-text.hh"
+#include "shape-consumer.hh"
 #include "view-cairo.hh"
 
 int
 main (int argc, char **argv)
 {
-  return hb_view_t<view_cairo_t>::main (argc, argv);
+  main_font_text_t<shape_consumer_t<view_cairo_t> > driver;
+  return driver.main (argc, argv);
 }

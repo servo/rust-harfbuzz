@@ -29,6 +29,7 @@
 #include <cairo-ft.h>
 #include <hb-ft.h>
 
+#include "helper-cairo-ansi.hh"
 #ifdef CAIRO_HAS_SVG_SURFACE
 #  include <cairo-svg.h>
 #endif
@@ -49,7 +50,7 @@ _cairo_eps_surface_create_for_stream (cairo_write_func_t  write_func,
   cairo_surface_t *surface;
 
   surface = cairo_ps_surface_create_for_stream (write_func, closure, width, height);
-  cairo_ps_surface_set_eps (surface, TRUE);
+  cairo_ps_surface_set_eps (surface, true);
 
   return surface;
 }
@@ -111,6 +112,63 @@ struct finalize_closure_t {
 };
 static cairo_user_data_key_t finalize_closure_key;
 
+
+static void
+finalize_ansi (finalize_closure_t *closure)
+{
+  cairo_status_t status;
+  status = helper_cairo_surface_write_to_ansi_stream (closure->surface,
+						      closure->write_func,
+						      closure->closure);
+  if (status != CAIRO_STATUS_SUCCESS)
+    fail (false, "Failed to write output: %s",
+	  cairo_status_to_string (status));
+}
+
+static cairo_surface_t *
+_cairo_ansi_surface_create_for_stream (cairo_write_func_t write_func,
+				       void *closure,
+				       double width,
+				       double height,
+				       cairo_content_t content)
+{
+  cairo_surface_t *surface;
+  int w = ceil (width);
+  int h = ceil (height);
+
+  switch (content) {
+    case CAIRO_CONTENT_ALPHA:
+      surface = cairo_image_surface_create (CAIRO_FORMAT_A8, w, h);
+      break;
+    default:
+    case CAIRO_CONTENT_COLOR:
+      surface = cairo_image_surface_create (CAIRO_FORMAT_RGB24, w, h);
+      break;
+    case CAIRO_CONTENT_COLOR_ALPHA:
+      surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
+      break;
+  }
+  cairo_status_t status = cairo_surface_status (surface);
+  if (status != CAIRO_STATUS_SUCCESS)
+    fail (false, "Failed to create cairo surface: %s",
+	  cairo_status_to_string (status));
+
+  finalize_closure_t *ansi_closure = g_new0 (finalize_closure_t, 1);
+  ansi_closure->callback = finalize_ansi;
+  ansi_closure->surface = surface;
+  ansi_closure->write_func = write_func;
+  ansi_closure->closure = closure;
+
+  if (cairo_surface_set_user_data (surface,
+				   &finalize_closure_key,
+				   (void *) ansi_closure,
+				   (cairo_destroy_func_t) g_free))
+    g_free ((void *) closure);
+
+  return surface;
+}
+
+
 #ifdef CAIRO_HAS_PNG_FUNCTIONS
 
 static void
@@ -121,7 +179,7 @@ finalize_png (finalize_closure_t *closure)
 					      closure->write_func,
 					      closure->closure);
   if (status != CAIRO_STATUS_SUCCESS)
-    fail (FALSE, "Failed to write output: %s",
+    fail (false, "Failed to write output: %s",
 	  cairo_status_to_string (status));
 }
 
@@ -150,7 +208,7 @@ _cairo_png_surface_create_for_stream (cairo_write_func_t write_func,
   }
   cairo_status_t status = cairo_surface_status (surface);
   if (status != CAIRO_STATUS_SUCCESS)
-    fail (FALSE, "Failed to create cairo surface: %s",
+    fail (false, "Failed to create cairo surface: %s",
 	  cairo_status_to_string (status));
 
   finalize_closure_t *png_closure = g_new0 (finalize_closure_t, 1);
@@ -182,7 +240,7 @@ stdio_write_func (void                *closure,
     size -= ret;
     data += ret;
     if (size && ferror (fp))
-      fail (FALSE, "Failed to write output: %s", strerror (errno));
+      fail (false, "Failed to write output: %s", strerror (errno));
   }
 
   return CAIRO_STATUS_SUCCESS;
@@ -204,10 +262,18 @@ helper_cairo_create_context (double w, double h,
 				    cairo_content_t content) = NULL;
 
   const char *extension = out_opts->output_format;
-  if (!extension)
-    extension = "png";
+  if (!extension) {
+#if HAVE_ISATTY
+    if (isatty (fileno (out_opts->get_file_handle ())))
+      extension = "ansi";
+    else
+#endif
+      extension = "png";
+  }
   if (0)
     ;
+    else if (0 == strcasecmp (extension, "ansi"))
+      constructor2 = _cairo_ansi_surface_create_for_stream;
   #ifdef CAIRO_HAS_PNG_FUNCTIONS
     else if (0 == strcasecmp (extension, "png"))
       constructor2 = _cairo_png_surface_create_for_stream;
@@ -231,7 +297,7 @@ helper_cairo_create_context (double w, double h,
 
 
   unsigned int fr, fg, fb, fa, br, bg, bb, ba;
-  br = bg = bb = ba = 255;
+  br = bg = bb = 0; ba = 255;
   sscanf (view_opts->back + (*view_opts->back=='#'), "%2x%2x%2x%2x", &br, &bg, &bb, &ba);
   fr = fg = fb = 0; fa = 255;
   sscanf (view_opts->fore + (*view_opts->fore=='#'), "%2x%2x%2x%2x", &fr, &fg, &fb, &fa);
@@ -251,7 +317,7 @@ helper_cairo_create_context (double w, double h,
   else if (constructor2)
     surface = constructor2 (stdio_write_func, f, w, h, content);
   else
-    fail (FALSE, "Unknown output format `%s'", extension);
+    fail (false, "Unknown output format `%s'", extension);
 
   cairo_t *cr = cairo_create (surface);
   content = cairo_surface_get_content (surface);
@@ -290,7 +356,7 @@ helper_cairo_destroy_context (cairo_t *cr)
 
   cairo_status_t status = cairo_status (cr);
   if (status != CAIRO_STATUS_SUCCESS)
-    fail (FALSE, "Failed: %s",
+    fail (false, "Failed: %s",
 	  cairo_status_to_string (status));
   cairo_destroy (cr);
 }
@@ -350,7 +416,7 @@ helper_cairo_line_from_buffer (helper_cairo_line_t *l,
     hb_bool_t backward = HB_DIRECTION_IS_BACKWARD (hb_buffer_get_direction (buffer));
     l->cluster_flags = backward ? CAIRO_TEXT_CLUSTER_FLAG_BACKWARD : (cairo_text_cluster_flags_t) 0;
     unsigned int cluster = 0;
-    const char *start = l->utf8, *end = start;
+    const char *start = l->utf8, *end;
     l->clusters[cluster].num_glyphs++;
     if (backward) {
       for (i = l->num_glyphs - 2; i >= 0; i--) {

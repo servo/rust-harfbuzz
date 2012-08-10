@@ -33,6 +33,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 HB_BEGIN_DECLS
 
@@ -75,7 +76,9 @@ srcdir (void)
 static inline void
 hb_test_init (int *argc, char ***argv)
 {
+#if !GLIB_CHECK_VERSION(2,32,0)
   g_thread_init (NULL);
+#endif
   g_test_init (argc, argv, NULL);
 }
 

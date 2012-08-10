@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011  Google, Inc.
+ * Copyright © 2011,2012  Google, Inc.
  *
  *  This is part of HarfBuzz, a text shaping library.
  *
@@ -54,10 +54,10 @@ struct hmtx
     TRACE_SANITIZE ();
     /* We don't check for anything specific here.  The users of the
      * struct do all the hard work... */
-    return true;
+    return TRACE_RETURN (true);
   }
 
-  private:
+  protected:
   LongHorMetric	longHorMetric[VAR];	/* Paired advance width and left side
 					 * bearing values for each glyph. The
 					 * value numOfHMetrics comes from

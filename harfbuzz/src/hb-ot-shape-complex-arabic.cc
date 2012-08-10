@@ -25,11 +25,12 @@
  */
 
 #include "hb-ot-shape-complex-private.hh"
+#include "hb-ot-shape-private.hh"
 
 
 
 /* buffer var allocations */
-#define arabic_shaping_action() complex_var_temporary_u16() /* arabic shaping action */
+#define arabic_shaping_action() complex_var_u8_0() /* arabic shaping action */
 
 
 /*
@@ -163,9 +164,11 @@ static const struct arabic_state_table_entry {
 
 
 
-void
-_hb_ot_shape_complex_collect_features_arabic (hb_ot_map_builder_t *map, const hb_segment_properties_t  *props)
+static void
+collect_features_arabic (hb_ot_shape_planner_t *plan)
 {
+  hb_ot_map_builder_t *map = &plan->map;
+
   /* For Language forms (in ArabicOT speak), we do the iso/fina/medi/init together,
    * then rlig and calt each in their own stage.  This makes IranNastaliq's ALLAH
    * ligature work correctly. It's unfortunate though...
@@ -179,28 +182,22 @@ _hb_ot_shape_complex_collect_features_arabic (hb_ot_map_builder_t *map, const hb
   map->add_bool_feature (HB_TAG('c','c','m','p'));
   map->add_bool_feature (HB_TAG('l','o','c','l'));
 
-  map->add_gsub_pause (NULL, NULL);
+  map->add_gsub_pause (NULL);
 
-  unsigned int num_features = props->script == HB_SCRIPT_SYRIAC ? SYRIAC_NUM_FEATURES : COMMON_NUM_FEATURES;
+  unsigned int num_features = plan->props.script == HB_SCRIPT_SYRIAC ? SYRIAC_NUM_FEATURES : COMMON_NUM_FEATURES;
   for (unsigned int i = 0; i < num_features; i++)
     map->add_bool_feature (arabic_syriac_features[i], false);
 
-  map->add_gsub_pause (NULL, NULL);
+  map->add_gsub_pause (NULL);
 
   map->add_bool_feature (HB_TAG('r','l','i','g'));
-  map->add_gsub_pause (NULL, NULL);
+  map->add_gsub_pause (NULL);
 
   map->add_bool_feature (HB_TAG('c','a','l','t'));
-  map->add_gsub_pause (NULL, NULL);
+  map->add_gsub_pause (NULL);
 
   /* ArabicOT spec enables 'cswh' for Arabic where as for basic shaper it's disabled by default. */
   map->add_bool_feature (HB_TAG('c','s','w','h'));
-}
-
-hb_ot_shape_normalization_mode_t
-_hb_ot_shape_complex_normalization_preference_arabic (void)
-{
-  return HB_OT_SHAPE_NORMALIZATION_MODE_COMPOSED_DIACRITICS;
 }
 
 
@@ -214,16 +211,16 @@ arabic_fallback_shape (hb_font_t *font, hb_buffer_t *buffer)
   for (unsigned int i = 0; i < count; i++) {
     hb_codepoint_t u = buffer->info[i].codepoint;
     hb_codepoint_t shaped = get_arabic_shape (u, buffer->info[i].arabic_shaping_action());
-    if (shaped != u && hb_font_get_glyph (font, shaped, 0, &glyph))
+    if (shaped != u && font->get_glyph (shaped, 0, &glyph))
       buffer->info[i].codepoint = shaped;
   }
 
   /* Mandatory ligatures */
   buffer->clear_output ();
   for (buffer->idx = 0; buffer->idx + 1 < count;) {
-    hb_codepoint_t ligature = get_ligature (buffer->info[buffer->idx].codepoint,
-					    buffer->info[buffer->idx + 1].codepoint);
-    if (likely (!ligature) || !(hb_font_get_glyph (font, ligature, 0, &glyph))) {
+    hb_codepoint_t ligature = get_ligature (buffer->cur().codepoint,
+					    buffer->cur(+1).codepoint);
+    if (likely (!ligature) || !(font->get_glyph (ligature, 0, &glyph))) {
       buffer->next_glyph ();
       continue;
     }
@@ -238,8 +235,10 @@ arabic_fallback_shape (hb_font_t *font, hb_buffer_t *buffer)
   buffer->swap_buffers ();
 }
 
-void
-_hb_ot_shape_complex_setup_masks_arabic (hb_ot_map_t *map, hb_buffer_t *buffer, hb_font_t *font)
+static void
+setup_masks_arabic (const hb_ot_shape_plan_t *plan,
+		    hb_buffer_t              *buffer,
+		    hb_font_t                *font)
 {
   unsigned int count = buffer->len;
   unsigned int prev = 0, state = 0;
@@ -248,7 +247,7 @@ _hb_ot_shape_complex_setup_masks_arabic (hb_ot_map_t *map, hb_buffer_t *buffer, 
 
   for (unsigned int i = 0; i < count; i++)
   {
-    unsigned int this_type = get_joining_type (buffer->info[i].codepoint, (hb_unicode_general_category_t) buffer->info[i].general_category());
+    unsigned int this_type = get_joining_type (buffer->info[i].codepoint, _hb_glyph_info_get_general_category (&buffer->info[i]));
 
     if (unlikely (this_type == JOINING_TYPE_T)) {
       buffer->info[i].arabic_shaping_action() = NONE;
@@ -270,7 +269,7 @@ _hb_ot_shape_complex_setup_masks_arabic (hb_ot_map_t *map, hb_buffer_t *buffer, 
   hb_mask_t total_masks = 0;
   unsigned int num_masks = buffer->props.script == HB_SCRIPT_SYRIAC ? SYRIAC_NUM_FEATURES : COMMON_NUM_FEATURES;
   for (unsigned int i = 0; i < num_masks; i++) {
-    mask_array[i] = map->get_1_mask (arabic_syriac_features[i]);
+    mask_array[i] = plan->map.get_1_mask (arabic_syriac_features[i]);
     total_masks |= mask_array[i];
   }
 
@@ -292,4 +291,14 @@ _hb_ot_shape_complex_setup_masks_arabic (hb_ot_map_t *map, hb_buffer_t *buffer, 
   HB_BUFFER_DEALLOCATE_VAR (buffer, arabic_shaping_action);
 }
 
-
+const hb_ot_complex_shaper_t _hb_ot_complex_shaper_arabic =
+{
+  "arabic",
+  collect_features_arabic,
+  NULL, /* override_features */
+  NULL, /* data_create */
+  NULL, /* data_destroy */
+  NULL, /* normalization_preference */
+  setup_masks_arabic,
+  true, /* zero_width_attached_marks */
+};

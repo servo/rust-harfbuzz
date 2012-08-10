@@ -1,6 +1,6 @@
 AC_PREREQ([2.64])
-AC_INIT([harfbuzz],
-        [0.7.0],
+AC_INIT([HarfBuzz],
+        [0.9.0],
         [http://bugs.freedesktop.org/enter_bug.cgi?product=harfbuzz],
         [harfbuzz],
         [http://harfbuzz.org/])
@@ -49,11 +49,12 @@ m4_define([hb_libtool_current],
 HB_LIBTOOL_VERSION_INFO=hb_libtool_current:hb_libtool_revision:hb_libtool_age
 AC_SUBST(HB_LIBTOOL_VERSION_INFO)
 
+dnl GOBJECT_INTROSPECTION_CHECK([0.9.0])
 dnl GTK_DOC_CHECK([1.15],[--flavour no-tmpl])
 
 # Functions and headers
-AC_CHECK_FUNCS(mprotect sysconf getpagesize mmap _setmode)
-AC_CHECK_HEADERS(unistd.h sys/mman.h io.h)
+AC_CHECK_FUNCS(atexit mprotect sysconf getpagesize sched_yield mmap _setmode isatty)
+AC_CHECK_HEADERS(unistd.h sys/mman.h sched.h io.h)
 
 # Compiler flags
 AC_CANONICAL_HOST
@@ -65,6 +66,18 @@ if test "x$GCC" = "xyes"; then
 	# Make sure we don't link to libstdc++
 	CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
 
+	# Assorted warnings
+	CXXFLAGS="$CXXFLAGS -Wcast-align"
+
+	case "$host" in
+		*-*-mingw*)
+		;;
+		*)
+			# Hide inline methods
+			CXXFLAGS="$CXXFLAGS -fvisibility-inlines-hidden"
+		;;
+	esac
+
 	case "$host" in
 		arm-*-*)
 			# Request byte alignment on arm
@@ -73,7 +86,35 @@ if test "x$GCC" = "xyes"; then
 	esac
 fi
 
+AC_MSG_CHECKING([for native Win32])
+case "$host" in
+  *-*-mingw*)
+    hb_os_win32=yes
+    ;;
+  *)
+    hb_os_win32=no
+    ;;
+esac
+AC_MSG_RESULT([$hb_os_win32])
+AM_CONDITIONAL(OS_WIN32, test "$hb_os_win32" = "yes")
+
 dnl ==========================================================================
+
+have_ot=true
+if $have_ot; then
+	AC_DEFINE(HAVE_OT, 1, [Have native OpenType Layout backend])
+fi
+AM_CONDITIONAL(HAVE_OT, $have_ot)
+
+dnl ===========================================================================
+
+have_hb_old=true
+if $have_hb_old; then
+	AC_DEFINE(HAVE_HB_OLD, 1, [Have Old HarfBuzz backend])
+fi
+AM_CONDITIONAL(HAVE_HB_OLD, $have_hb_old)
+
+dnl ===========================================================================
 
 PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.16, have_glib=true, have_glib=false)
 if $have_glib; then
@@ -159,14 +200,6 @@ AM_CONDITIONAL(HAVE_FREETYPE, $have_freetype)
 
 dnl ===========================================================================
 
-have_ot=true;
-if $have_ot; then
-	AC_DEFINE(HAVE_OT, 1, [Have native OpenType Layout backend])
-fi
-AM_CONDITIONAL(HAVE_OT, $have_ot)
-
-dnl ===========================================================================
-
 AC_CHECK_HEADERS(usp10.h windows.h, have_uniscribe=true, have_uniscribe=false)
 if $have_uniscribe; then
 	UNISCRIBE_CFLAGS=
@@ -177,11 +210,42 @@ if $have_uniscribe; then
 fi
 AM_CONDITIONAL(HAVE_UNISCRIBE, $have_uniscribe)
 
+dnl ===========================================================================
+
+AC_CHECK_HEADERS(ApplicationServices/ApplicationServices.h, have_coretext=true, have_coretext=false)
+if $have_coretext; then
+	CORETEXT_CFLAGS=
+	CORETEXT_LIBS=
+	AC_SUBST(CORETEXT_CFLAGS)
+	AC_SUBST(CORETEXT_LIBS)
+	AC_DEFINE(HAVE_CORETEXT, 1, [Have Core Text backend])
+fi
+AM_CONDITIONAL(HAVE_CORETEXT, $have_coretext)
+
+dnl ===========================================================================
+
+AC_CACHE_CHECK([for Intel atomic primitives], hb_cv_have_intel_atomic_primitives, [
+	hb_cv_have_intel_atomic_primitives=false
+	AC_TRY_LINK([
+		void memory_barrier (void) { __sync_synchronize (); }
+		int atomic_add (int *i) { return __sync_fetch_and_add (i, 1); }
+		int mutex_trylock (int *m) { return __sync_lock_test_and_set (m, 1); }
+		void mutex_unlock (int *m) { __sync_lock_release (m); }
+		], [], hb_cv_have_intel_atomic_primitives=true
+	)
+])
+if $hb_cv_have_intel_atomic_primitives; then
+	AC_DEFINE(HAVE_INTEL_ATOMIC_PRIMITIVES, 1, [Have Intel __sync_* atomic primitives])
+fi
+
+dnl ===========================================================================
+
 AC_CONFIG_FILES([
 Makefile
 harfbuzz.pc
 src/Makefile
 src/hb-version.h
+src/hb-old/Makefile
 util/Makefile
 test/Makefile
 test/api/Makefile

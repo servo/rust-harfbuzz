@@ -34,8 +34,7 @@
 #include "hb-set-private.hh"
 
 
-#define NO_CONTEXT		((unsigned int) 0x110000)
-#define NOT_COVERED		((unsigned int) 0x110000)
+#define NOT_COVERED		((unsigned int) -1)
 #define MAX_NESTING_LEVEL	8
 
 
@@ -60,8 +59,7 @@ struct Record
 
   inline bool sanitize (hb_sanitize_context_t *c, void *base) {
     TRACE_SANITIZE ();
-    return c->check_struct (this)
-	&& offset.sanitize (c, base);
+    return TRACE_RETURN (c->check_struct (this) && offset.sanitize (c, base));
   }
 
   Tag		tag;		/* 4-byte Tag identifier */
@@ -115,7 +113,7 @@ struct RecordListOf : RecordArrayOf<Type>
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return RecordArrayOf<Type>::sanitize (c, this);
+    return TRACE_RETURN (RecordArrayOf<Type>::sanitize (c, this));
   }
 };
 
@@ -129,11 +127,16 @@ struct RangeRecord
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this);
+    return TRACE_RETURN (c->check_struct (this));
   }
 
   inline bool intersects (const hb_set_t *glyphs) const {
     return glyphs->intersects (start, end);
+  }
+
+  template <typename set_t>
+  inline void add_coverage (set_t *glyphs) const {
+    glyphs->add_range (start, end);
   }
 
   GlyphID	start;		/* First GlyphID in the range */
@@ -188,8 +191,7 @@ struct LangSys
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this)
-	&& featureIndex.sanitize (c);
+    return TRACE_RETURN (c->check_struct (this) && featureIndex.sanitize (c));
   }
 
   Offset	lookupOrder;	/* = Null (reserved for an offset to a
@@ -227,11 +229,10 @@ struct Script
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return defaultLangSys.sanitize (c, this)
-	&& langSys.sanitize (c, this);
+    return TRACE_RETURN (defaultLangSys.sanitize (c, this) && langSys.sanitize (c, this));
   }
 
-  private:
+  protected:
   OffsetTo<LangSys>
 		defaultLangSys;	/* Offset to DefaultLangSys table--from
 				 * beginning of Script table--may be Null */
@@ -258,8 +259,7 @@ struct Feature
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this)
-	&& lookupIndex.sanitize (c);
+    return TRACE_RETURN (c->check_struct (this) && lookupIndex.sanitize (c));
   }
 
   Offset	featureParams;	/* Offset to Feature Parameters table (if one
@@ -313,14 +313,13 @@ struct Lookup
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
     /* Real sanitize of the subtables is done by GSUB/GPOS/... */
-    if (!(c->check_struct (this)
-       && subTable.sanitize (c))) return false;
+    if (!(c->check_struct (this) && subTable.sanitize (c))) return TRACE_RETURN (false);
     if (unlikely (lookupFlag & LookupFlag::UseMarkFilteringSet))
     {
       USHORT &markFilteringSet = StructAfter<USHORT> (subTable);
-      if (!markFilteringSet.sanitize (c)) return false;
+      if (!markFilteringSet.sanitize (c)) return TRACE_RETURN (false);
     }
-    return true;
+    return TRACE_RETURN (true);
   }
 
   USHORT	lookupType;		/* Different enumerations for GSUB and GPOS */
@@ -349,18 +348,24 @@ struct CoverageFormat1
   inline unsigned int get_coverage (hb_codepoint_t glyph_id) const
   {
     int i = glyphArray.search (glyph_id);
-    if (i != -1)
-        return i;
-    return NOT_COVERED;
+    ASSERT_STATIC (((unsigned int) -1) == NOT_COVERED);
+    return i;
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return glyphArray.sanitize (c);
+    return TRACE_RETURN (glyphArray.sanitize (c));
   }
 
   inline bool intersects_coverage (const hb_set_t *glyphs, unsigned int index) const {
     return glyphs->has (glyphArray[index]);
+  }
+
+  template <typename set_t>
+  inline void add_coverage (set_t *glyphs) const {
+    unsigned int count = glyphArray.len;
+    for (unsigned int i = 0; i < count; i++)
+      glyphs->add (glyphArray[i]);
   }
 
   struct Iter {
@@ -375,7 +380,7 @@ struct CoverageFormat1
     unsigned int i;
   };
 
-  private:
+  protected:
   USHORT	coverageFormat;	/* Format identifier--format = 1 */
   SortedArrayOf<GlyphID>
 		glyphArray;	/* Array of GlyphIDs--in numerical order */
@@ -400,7 +405,7 @@ struct CoverageFormat2
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return rangeRecord.sanitize (c);
+    return TRACE_RETURN (rangeRecord.sanitize (c));
   }
 
   inline bool intersects_coverage (const hb_set_t *glyphs, unsigned int index) const {
@@ -409,13 +414,20 @@ struct CoverageFormat2
     for (i = 0; i < count; i++) {
       const RangeRecord &range = rangeRecord[i];
       if (range.value <= index &&
-	  index < range.value + (range.end - range.start) &&
+	  index < (unsigned int) range.value + (range.end - range.start) &&
 	  range.intersects (glyphs))
         return true;
       else if (index < range.value)
         return false;
     }
     return false;
+  }
+
+  template <typename set_t>
+  inline void add_coverage (set_t *glyphs) const {
+    unsigned int count = rangeRecord.len;
+    for (unsigned int i = 0; i < count; i++)
+      rangeRecord[i].add_coverage (glyphs);
   }
 
   struct Iter {
@@ -444,7 +456,7 @@ struct CoverageFormat2
     unsigned int i, j, coverage;
   };
 
-  private:
+  protected:
   USHORT	coverageFormat;	/* Format identifier--format = 2 */
   SortedArrayOf<RangeRecord>
 		rangeRecord;	/* Array of glyph ranges--ordered by
@@ -469,11 +481,11 @@ struct Coverage
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    if (!u.format.sanitize (c)) return false;
+    if (!u.format.sanitize (c)) return TRACE_RETURN (false);
     switch (u.format) {
-    case 1: return u.format1.sanitize (c);
-    case 2: return u.format2.sanitize (c);
-    default:return true;
+    case 1: return TRACE_RETURN (u.format1.sanitize (c));
+    case 2: return TRACE_RETURN (u.format2.sanitize (c));
+    default:return TRACE_RETURN (true);
     }
   }
 
@@ -492,6 +504,15 @@ struct Coverage
     case 1: return u.format1.intersects_coverage (glyphs, index);
     case 2: return u.format2.intersects_coverage (glyphs, index);
     default:return false;
+    }
+  }
+
+  template <typename set_t>
+  inline void add_coverage (set_t *glyphs) const {
+    switch (u.format) {
+    case 1: u.format1.add_coverage (glyphs); break;
+    case 2: u.format2.add_coverage (glyphs); break;
+    default:                                 break;
     }
   }
 
@@ -542,7 +563,7 @@ struct Coverage
     } u;
   };
 
-  private:
+  protected:
   union {
   USHORT		format;		/* Format identifier */
   CoverageFormat1	format1;
@@ -564,15 +585,14 @@ struct ClassDefFormat1
   private:
   inline unsigned int get_class (hb_codepoint_t glyph_id) const
   {
-    if ((unsigned int) (glyph_id - startGlyph) < classValue.len)
+    if (unlikely ((unsigned int) (glyph_id - startGlyph) < classValue.len))
       return classValue[glyph_id - startGlyph];
     return 0;
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this)
-	&& classValue.sanitize (c);
+    return TRACE_RETURN (c->check_struct (this) && classValue.sanitize (c));
   }
 
   inline bool intersects_class (const hb_set_t *glyphs, unsigned int klass) const {
@@ -583,6 +603,7 @@ struct ClassDefFormat1
     return false;
   }
 
+  protected:
   USHORT	classFormat;		/* Format identifier--format = 1 */
   GlyphID	startGlyph;		/* First GlyphID of the classValueArray */
   ArrayOf<USHORT>
@@ -606,7 +627,7 @@ struct ClassDefFormat2
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return rangeRecord.sanitize (c);
+    return TRACE_RETURN (rangeRecord.sanitize (c));
   }
 
   inline bool intersects_class (const hb_set_t *glyphs, unsigned int klass) const {
@@ -617,6 +638,7 @@ struct ClassDefFormat2
     return false;
   }
 
+  protected:
   USHORT	classFormat;	/* Format identifier--format = 2 */
   SortedArrayOf<RangeRecord>
 		rangeRecord;	/* Array of glyph ranges--ordered by
@@ -640,11 +662,11 @@ struct ClassDef
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    if (!u.format.sanitize (c)) return false;
+    if (!u.format.sanitize (c)) return TRACE_RETURN (false);
     switch (u.format) {
-    case 1: return u.format1.sanitize (c);
-    case 2: return u.format2.sanitize (c);
-    default:return true;
+    case 1: return TRACE_RETURN (u.format1.sanitize (c));
+    case 2: return TRACE_RETURN (u.format2.sanitize (c));
+    default:return TRACE_RETURN (true);
     }
   }
 
@@ -656,7 +678,7 @@ struct ClassDef
     }
   }
 
-  private:
+  protected:
   union {
   USHORT		format;		/* Format identifier */
   ClassDefFormat1	format1;
@@ -724,11 +746,10 @@ struct Device
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this)
-	&& c->check_range (this, this->get_size ());
+    return TRACE_RETURN (c->check_struct (this) && c->check_range (this, this->get_size ()));
   }
 
-  private:
+  protected:
   USHORT	startSize;		/* Smallest size to correct--in ppem */
   USHORT	endSize;		/* Largest size to correct--in ppem */
   USHORT	deltaFormat;		/* Format of DeltaValue array data: 1, 2, or 3

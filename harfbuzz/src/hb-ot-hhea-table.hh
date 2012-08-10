@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011  Google, Inc.
+ * Copyright © 2011,2012  Google, Inc.
  *
  *  This is part of HarfBuzz, a text shaping library.
  *
@@ -44,10 +44,10 @@ struct hhea
 
   inline bool sanitize (hb_sanitize_context_t *c) {
     TRACE_SANITIZE ();
-    return c->check_struct (this) && likely (version.major == 1);
+    return TRACE_RETURN (c->check_struct (this) && likely (version.major == 1));
   }
 
-  private:
+  protected:
   FixedVersion	version;		/* 0x00010000 for version 1.0. */
   FWORD		ascender;		/* Typographic ascent. <a
 					 * href="http://developer.apple.com/fonts/TTRefMan/RM06/Chap6hhea.html">

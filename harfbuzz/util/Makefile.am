@@ -24,14 +24,20 @@ LDADD = \
 
 if HAVE_GLIB
 if HAVE_FREETYPE
+
 if HAVE_CAIRO_FT
 hb_view_SOURCES = \
 	hb-view.cc \
-	hb-view.hh \
 	options.cc \
 	options.hh \
+	main-font-text.hh \
+	shape-consumer.hh \
+	ansi-print.cc \
+	ansi-print.hh \
 	helper-cairo.cc \
 	helper-cairo.hh \
+	helper-cairo-ansi.cc \
+	helper-cairo-ansi.hh \
 	view-cairo.cc \
 	view-cairo.hh \
 	$(NULL)
@@ -41,20 +47,28 @@ hb_view_LDADD = \
 	$(CAIRO_FT_LIBS) \
 	$(NULL)
 bin_PROGRAMS += hb-view
-endif
-endif
-endif
+endif # HAVE_CAIRO_FT
 
-if HAVE_GLIB
-if HAVE_FREETYPE
 hb_shape_SOURCES = \
 	hb-shape.cc \
-	hb-view.hh \
 	options.cc \
 	options.hh \
+	main-font-text.hh \
+	shape-consumer.hh \
 	$(NULL)
 bin_PROGRAMS += hb-shape
-endif
-endif
+
+if HAVE_OT
+hb_ot_shape_closure_SOURCES = \
+	hb-ot-shape-closure.cc \
+	options.cc \
+	options.hh \
+	main-font-text.hh \
+	$(NULL)
+bin_PROGRAMS += hb-ot-shape-closure
+endif # HAVE_OT
+
+endif # HAVE_FREETYPE
+endif # HAVE_GLIB
 
 -include $(top_srcdir)/git.mk

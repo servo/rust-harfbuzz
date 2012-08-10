@@ -36,7 +36,7 @@
 HB_BEGIN_DECLS
 
 
-typedef struct _hb_set_t hb_set_t;
+typedef struct hb_set_t hb_set_t;
 
 
 hb_set_t *
@@ -63,7 +63,7 @@ hb_set_get_user_data (hb_set_t           *set,
 		      hb_user_data_key_t *key);
 
 
-/* Returns FALSE if allocation has failed before */
+/* Returns false if allocation has failed before */
 hb_bool_t
 hb_set_allocation_successful (hb_set_t  *set);
 
@@ -77,6 +77,8 @@ hb_bool_t
 hb_set_has (hb_set_t       *set,
 	    hb_codepoint_t  codepoint);
 
+/* Right now limited to 16-bit integers.  Eventually will do full codepoint range, sans -1
+ * which we will use as a sentinel. */
 void
 hb_set_add (hb_set_t       *set,
 	    hb_codepoint_t  codepoint);
@@ -105,11 +107,22 @@ void
 hb_set_subtract (hb_set_t *set,
 		 hb_set_t *other);
 
+void
+hb_set_symmetric_difference (hb_set_t *set,
+			     hb_set_t *other);
+
+/* Returns -1 if set empty. */
 hb_codepoint_t
 hb_set_min (hb_set_t *set);
 
+/* Returns -1 if set empty. */
 hb_codepoint_t
 hb_set_max (hb_set_t *set);
+
+/* Pass -1 in to get started. */
+hb_bool_t
+hb_set_next (hb_set_t       *set,
+	     hb_codepoint_t *codepoint);
 
 /* TODO: Add faster iteration API? */
 

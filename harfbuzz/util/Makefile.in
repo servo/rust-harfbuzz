@@ -36,9 +36,10 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2)
+bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3)
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_1 = hb-view
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_2 = hb-shape
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__append_3 = hb-ot-shape-closure
 subdir = util
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -51,29 +52,45 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__EXEEXT_1 = hb-view$(EXEEXT)
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__EXEEXT_2 = hb-shape$(EXEEXT)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__EXEEXT_3 = hb-ot-shape-closure$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__hb_shape_SOURCES_DIST = hb-shape.cc hb-view.hh options.cc \
-	options.hh
+am__hb_ot_shape_closure_SOURCES_DIST = hb-ot-shape-closure.cc \
+	options.cc options.hh main-font-text.hh
 am__objects_1 =
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am_hb_ot_shape_closure_OBJECTS = hb-ot-shape-closure.$(OBJEXT) \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	options.$(OBJEXT) \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(am__objects_1)
+hb_ot_shape_closure_OBJECTS = $(am_hb_ot_shape_closure_OBJECTS)
+hb_ot_shape_closure_LDADD = $(LDADD)
+am__DEPENDENCIES_1 =
+hb_ot_shape_closure_DEPENDENCIES = $(top_builddir)/src/libharfbuzz.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__hb_shape_SOURCES_DIST = hb-shape.cc options.cc options.hh \
+	main-font-text.hh shape-consumer.hh
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am_hb_shape_OBJECTS =  \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	hb-shape.$(OBJEXT) \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.$(OBJEXT) \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(am__objects_1)
 hb_shape_OBJECTS = $(am_hb_shape_OBJECTS)
 hb_shape_LDADD = $(LDADD)
-am__DEPENDENCIES_1 =
 hb_shape_DEPENDENCIES = $(top_builddir)/src/libharfbuzz.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
-am__v_lt_0 = --silent
-am__hb_view_SOURCES_DIST = hb-view.cc hb-view.hh options.cc options.hh \
-	helper-cairo.cc helper-cairo.hh view-cairo.cc view-cairo.hh
+am__hb_view_SOURCES_DIST = hb-view.cc options.cc options.hh \
+	main-font-text.hh shape-consumer.hh ansi-print.cc \
+	ansi-print.hh helper-cairo.cc helper-cairo.hh \
+	helper-cairo-ansi.cc helper-cairo-ansi.hh view-cairo.cc \
+	view-cairo.hh
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am_hb_view_OBJECTS = hb-view.$(OBJEXT) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.$(OBJEXT) \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	ansi-print.$(OBJEXT) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo.$(OBJEXT) \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo-ansi.$(OBJEXT) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	view-cairo.$(OBJEXT) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(am__objects_1)
 hb_view_OBJECTS = $(am_hb_view_OBJECTS)
@@ -126,9 +143,10 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(hb_shape_SOURCES) $(hb_view_SOURCES)
-DIST_SOURCES = $(am__hb_shape_SOURCES_DIST) \
-	$(am__hb_view_SOURCES_DIST)
+SOURCES = $(hb_ot_shape_closure_SOURCES) $(hb_shape_SOURCES) \
+	$(hb_view_SOURCES)
+DIST_SOURCES = $(am__hb_ot_shape_closure_SOURCES_DIST) \
+	$(am__hb_shape_SOURCES_DIST) $(am__hb_view_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -147,6 +165,8 @@ CAIRO_LIBS = @CAIRO_LIBS@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CORETEXT_CFLAGS = @CORETEXT_CFLAGS@
+CORETEXT_LIBS = @CORETEXT_LIBS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
@@ -298,11 +318,16 @@ LDADD = \
 
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@hb_view_SOURCES = \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	hb-view.cc \
-@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	hb-view.hh \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.cc \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.hh \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	main-font-text.hh \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	shape-consumer.hh \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	ansi-print.cc \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	ansi-print.hh \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo.cc \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo.hh \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo-ansi.cc \
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	helper-cairo-ansi.hh \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	view-cairo.cc \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	view-cairo.hh \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(NULL)
@@ -315,10 +340,18 @@ LDADD = \
 
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@hb_shape_SOURCES = \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	hb-shape.cc \
-@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	hb-view.hh \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.cc \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	options.hh \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	main-font-text.hh \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	shape-consumer.hh \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(NULL)
+
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@hb_ot_shape_closure_SOURCES = \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	hb-ot-shape-closure.cc \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	options.cc \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	options.hh \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	main-font-text.hh \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(NULL)
 
 all: all-am
 
@@ -397,6 +430,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+hb-ot-shape-closure$(EXEEXT): $(hb_ot_shape_closure_OBJECTS) $(hb_ot_shape_closure_DEPENDENCIES) 
+	@rm -f hb-ot-shape-closure$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(hb_ot_shape_closure_OBJECTS) $(hb_ot_shape_closure_LDADD) $(LIBS)
 hb-shape$(EXEEXT): $(hb_shape_OBJECTS) $(hb_shape_DEPENDENCIES) 
 	@rm -f hb-shape$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(hb_shape_OBJECTS) $(hb_shape_LDADD) $(LIBS)
@@ -410,8 +446,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ansi-print.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-ot-shape-closure.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-shape.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-view.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/helper-cairo-ansi.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/helper-cairo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/view-cairo.Po@am__quote@

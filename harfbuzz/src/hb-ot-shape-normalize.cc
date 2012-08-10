@@ -62,25 +62,228 @@
  *     knowledge too.  We need to provide assistance to the itemizer.
  *
  *   - When a font does not support a character but supports its decomposition,
- *     well, use the decomposition.
+ *     well, use the decomposition (preferring the canonical decomposition, but
+ *     falling back to the compatibility decomposition if necessary).  The
+ *     compatibility decomposition is really nice to have, for characters like
+ *     ellipsis, or various-sized space characters.
  *
- *   - The Indic shaper requests decomposed output.  This will handle splitting
- *     matra for the Indic shaper.
+ *   - The complex shapers can customize the compose and decompose functions to
+ *     offload some of their requirements to the normalizer.  For example, the
+ *     Indic shaper may want to disallow recomposing of two matras.
+ *
+ *   - We try compatibility decomposition if decomposing through canonical
+ *     decomposition alone failed to find a sequence that the font supports.
+ *     We don't try compatibility decomposition recursively during the canonical
+ *     decomposition phase.  This has minimal impact.  There are only a handful
+ *     of Greek letter that have canonical decompositions that include characters
+ *     with compatibility decomposition.  Those can be found using this command:
+ *
+ *     egrep  "`echo -n ';('; grep ';<' UnicodeData.txt | cut -d';' -f1 | tr '\n' '|'; echo ') '`" UnicodeData.txt
  */
 
-static inline void
-set_unicode_props (hb_glyph_info_t *info, hb_unicode_funcs_t *unicode)
+static hb_bool_t
+decompose_func (hb_unicode_funcs_t *unicode,
+		hb_codepoint_t  ab,
+		hb_codepoint_t *a,
+		hb_codepoint_t *b)
 {
-  info->general_category() = hb_unicode_general_category (unicode, info->codepoint);
-  info->combining_class() = _hb_unicode_modified_combining_class (unicode, info->codepoint);
+  /* XXX FIXME, move these to complex shapers and propagage to normalizer.*/
+  switch (ab) {
+    case 0x0AC9  : return false;
+
+    case 0x0931  : return false;
+    case 0x0B94  : return false;
+
+    /* These ones have Unicode decompositions, but we do it
+     * this way to be close to what Uniscribe does. */
+    case 0x0DDA  : *a = 0x0DD9; *b= 0x0DDA; return true;
+    case 0x0DDC  : *a = 0x0DD9; *b= 0x0DDC; return true;
+    case 0x0DDD  : *a = 0x0DD9; *b= 0x0DDD; return true;
+    case 0x0DDE  : *a = 0x0DD9; *b= 0x0DDE; return true;
+
+    case 0x0F77  : *a = 0x0FB2; *b= 0x0F81; return true;
+    case 0x0F79  : *a = 0x0FB3; *b= 0x0F81; return true;
+    case 0x17BE  : *a = 0x17C1; *b= 0x17BE; return true;
+    case 0x17BF  : *a = 0x17C1; *b= 0x17BF; return true;
+    case 0x17C0  : *a = 0x17C1; *b= 0x17C0; return true;
+    case 0x17C4  : *a = 0x17C1; *b= 0x17C4; return true;
+    case 0x17C5  : *a = 0x17C1; *b= 0x17C5; return true;
+    case 0x1925  : *a = 0x1920; *b= 0x1923; return true;
+    case 0x1926  : *a = 0x1920; *b= 0x1924; return true;
+    case 0x1B3C  : *a = 0x1B42; *b= 0x1B3C; return true;
+    case 0x1112E  : *a = 0x11127; *b= 0x11131; return true;
+    case 0x1112F  : *a = 0x11127; *b= 0x11132; return true;
+#if 0
+    case 0x0B57  : *a = 0xno decomp, -> RIGHT; return true;
+    case 0x1C29  : *a = 0xno decomp, -> LEFT; return true;
+    case 0xA9C0  : *a = 0xno decomp, -> RIGHT; return true;
+    case 0x111BF  : *a = 0xno decomp, -> ABOVE; return true;
+#endif
+  }
+  return unicode->decompose (ab, a, b);
 }
 
-static void
-output_glyph (hb_font_t *font, hb_buffer_t *buffer,
-	      hb_codepoint_t glyph)
+static hb_bool_t
+compose_func (hb_unicode_funcs_t *unicode,
+	      hb_codepoint_t  a,
+	      hb_codepoint_t  b,
+	      hb_codepoint_t *ab)
 {
-  buffer->output_glyph (glyph);
-  set_unicode_props (&buffer->out_info[buffer->out_len - 1], buffer->unicode);
+  /* XXX, this belongs to indic normalizer. */
+  if ((FLAG (unicode->general_category (a)) &
+       (FLAG (HB_UNICODE_GENERAL_CATEGORY_SPACING_MARK) |
+	FLAG (HB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK) |
+	FLAG (HB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK))))
+    return false;
+  /* XXX, add composition-exclusion exceptions to Indic shaper. */
+  if (a == 0x09AF && b == 0x09BC) { *ab = 0x09DF; return true; }
+
+  /* XXX, these belong to the hebew / default shaper. */
+  /* Hebrew presentation-form shaping.
+   * https://bugzilla.mozilla.org/show_bug.cgi?id=728866 */
+  // Hebrew presentation forms with dagesh, for characters 0x05D0..0x05EA;
+  // note that some letters do not have a dagesh presForm encoded
+  static const hb_codepoint_t sDageshForms[0x05EA - 0x05D0 + 1] = {
+    0xFB30, // ALEF
+    0xFB31, // BET
+    0xFB32, // GIMEL
+    0xFB33, // DALET
+    0xFB34, // HE
+    0xFB35, // VAV
+    0xFB36, // ZAYIN
+    0, // HET
+    0xFB38, // TET
+    0xFB39, // YOD
+    0xFB3A, // FINAL KAF
+    0xFB3B, // KAF
+    0xFB3C, // LAMED
+    0, // FINAL MEM
+    0xFB3E, // MEM
+    0, // FINAL NUN
+    0xFB40, // NUN
+    0xFB41, // SAMEKH
+    0, // AYIN
+    0xFB43, // FINAL PE
+    0xFB44, // PE
+    0, // FINAL TSADI
+    0xFB46, // TSADI
+    0xFB47, // QOF
+    0xFB48, // RESH
+    0xFB49, // SHIN
+    0xFB4A // TAV
+  };
+
+  hb_bool_t found = unicode->compose (a, b, ab);
+
+  if (!found && (b & ~0x7F) == 0x0580) {
+      // special-case Hebrew presentation forms that are excluded from
+      // standard normalization, but wanted for old fonts
+      switch (b) {
+      case 0x05B4: // HIRIQ
+	  if (a == 0x05D9) { // YOD
+	      *ab = 0xFB1D;
+	      found = true;
+	  }
+	  break;
+      case 0x05B7: // patah
+	  if (a == 0x05F2) { // YIDDISH YOD YOD
+	      *ab = 0xFB1F;
+	      found = true;
+	  } else if (a == 0x05D0) { // ALEF
+	      *ab = 0xFB2E;
+	      found = true;
+	  }
+	  break;
+      case 0x05B8: // QAMATS
+	  if (a == 0x05D0) { // ALEF
+	      *ab = 0xFB2F;
+	      found = true;
+	  }
+	  break;
+      case 0x05B9: // HOLAM
+	  if (a == 0x05D5) { // VAV
+	      *ab = 0xFB4B;
+	      found = true;
+	  }
+	  break;
+      case 0x05BC: // DAGESH
+	  if (a >= 0x05D0 && a <= 0x05EA) {
+	      *ab = sDageshForms[a - 0x05D0];
+	      found = (*ab != 0);
+	  } else if (a == 0xFB2A) { // SHIN WITH SHIN DOT
+	      *ab = 0xFB2C;
+	      found = true;
+	  } else if (a == 0xFB2B) { // SHIN WITH SIN DOT
+	      *ab = 0xFB2D;
+	      found = true;
+	  }
+	  break;
+      case 0x05BF: // RAFE
+	  switch (a) {
+	  case 0x05D1: // BET
+	      *ab = 0xFB4C;
+	      found = true;
+	      break;
+	  case 0x05DB: // KAF
+	      *ab = 0xFB4D;
+	      found = true;
+	      break;
+	  case 0x05E4: // PE
+	      *ab = 0xFB4E;
+	      found = true;
+	      break;
+	  }
+	  break;
+      case 0x05C1: // SHIN DOT
+	  if (a == 0x05E9) { // SHIN
+	      *ab = 0xFB2A;
+	      found = true;
+	  } else if (a == 0xFB49) { // SHIN WITH DAGESH
+	      *ab = 0xFB2C;
+	      found = true;
+	  }
+	  break;
+      case 0x05C2: // SIN DOT
+	  if (a == 0x05E9) { // SHIN
+	      *ab = 0xFB2B;
+	      found = true;
+	  } else if (a == 0xFB49) { // SHIN WITH DAGESH
+	      *ab = 0xFB2D;
+	      found = true;
+	  }
+	  break;
+      }
+  }
+
+  return found;
+}
+
+
+static inline void
+set_glyph (hb_glyph_info_t &info, hb_font_t *font)
+{
+  hb_font_get_glyph (font, info.codepoint, 0, &info.glyph_index());
+}
+
+static inline void
+output_char (hb_buffer_t *buffer, hb_codepoint_t unichar, hb_codepoint_t glyph)
+{
+  buffer->cur().glyph_index() = glyph;
+  buffer->output_glyph (unichar);
+  _hb_glyph_info_set_unicode_props (&buffer->prev(), buffer->unicode);
+}
+
+static inline void
+next_char (hb_buffer_t *buffer, hb_codepoint_t glyph)
+{
+  buffer->cur().glyph_index() = glyph;
+  buffer->next_glyph ();
+}
+
+static inline void
+skip_char (hb_buffer_t *buffer)
+{
+  buffer->skip_glyph ();
 }
 
 static bool
@@ -88,60 +291,99 @@ decompose (hb_font_t *font, hb_buffer_t *buffer,
 	   bool shortest,
 	   hb_codepoint_t ab)
 {
-  hb_codepoint_t a, b, glyph;
+  hb_codepoint_t a, b, a_glyph, b_glyph;
 
-  if (!hb_unicode_decompose (buffer->unicode, ab, &a, &b) ||
-      (b && !hb_font_get_glyph (font, b, 0, &glyph)))
-    return FALSE;
+  if (!decompose_func (buffer->unicode, ab, &a, &b) ||
+      (b && !font->get_glyph (b, 0, &b_glyph)))
+    return false;
 
-  bool has_a = hb_font_get_glyph (font, a, 0, &glyph);
+  bool has_a = font->get_glyph (a, 0, &a_glyph);
   if (shortest && has_a) {
     /* Output a and b */
-    output_glyph (font, buffer, a);
+    output_char (buffer, a, a_glyph);
     if (b)
-      output_glyph (font, buffer, b);
-    return TRUE;
+      output_char (buffer, b, b_glyph);
+    return true;
   }
 
   if (decompose (font, buffer, shortest, a)) {
     if (b)
-      output_glyph (font, buffer, b);
-    return TRUE;
+      output_char (buffer, b, b_glyph);
+    return true;
   }
 
   if (has_a) {
-    output_glyph (font, buffer, a);
+    output_char (buffer, a, a_glyph);
     if (b)
-      output_glyph (font, buffer, b);
-    return TRUE;
+      output_char (buffer, b, b_glyph);
+    return true;
   }
 
-  return FALSE;
+  return false;
 }
 
-static void
-decompose_current_glyph (hb_font_t *font, hb_buffer_t *buffer,
-			 bool shortest)
+static bool
+decompose_compatibility (hb_font_t *font, hb_buffer_t *buffer,
+			 hb_codepoint_t u)
 {
-  if (decompose (font, buffer, shortest, buffer->info[buffer->idx].codepoint))
-    buffer->skip_glyph ();
-  else
-    buffer->next_glyph ();
+  unsigned int len, i;
+  hb_codepoint_t decomposed[HB_UNICODE_MAX_DECOMPOSITION_LEN];
+  hb_codepoint_t glyphs[HB_UNICODE_MAX_DECOMPOSITION_LEN];
+
+  len = buffer->unicode->decompose_compatibility (u, decomposed);
+  if (!len)
+    return false;
+
+  for (i = 0; i < len; i++)
+    if (!font->get_glyph (decomposed[i], 0, &glyphs[i]))
+      return false;
+
+  for (i = 0; i < len; i++)
+    output_char (buffer, decomposed[i], glyphs[i]);
+
+  return true;
 }
 
 static void
-decompose_single_char_cluster (hb_font_t *font, hb_buffer_t *buffer,
-			       bool will_recompose)
+decompose_current_character (hb_font_t *font, hb_buffer_t *buffer,
+			     bool shortest)
 {
   hb_codepoint_t glyph;
 
-  /* If recomposing and font supports this, we're good to go */
-  if (will_recompose && hb_font_get_glyph (font, buffer->info[buffer->idx].codepoint, 0, &glyph)) {
-    buffer->next_glyph ();
-    return;
+  /* Kind of a cute waterfall here... */
+  if (shortest && font->get_glyph (buffer->cur().codepoint, 0, &glyph))
+    next_char (buffer, glyph);
+  else if (decompose (font, buffer, shortest, buffer->cur().codepoint))
+    skip_char (buffer);
+  else if (!shortest && font->get_glyph (buffer->cur().codepoint, 0, &glyph))
+    next_char (buffer, glyph);
+  else if (decompose_compatibility (font, buffer, buffer->cur().codepoint))
+    skip_char (buffer);
+  else {
+    /* A glyph-not-found case... */
+    font->get_glyph (buffer->cur().codepoint, 0, &glyph);
+    next_char (buffer, glyph);
   }
+}
 
-  decompose_current_glyph (font, buffer, will_recompose);
+static inline void
+handle_variation_selector_cluster (hb_font_t *font, hb_buffer_t *buffer,
+				   unsigned int end)
+{
+  for (; buffer->idx < end - 1;) {
+    if (unlikely (buffer->unicode->is_variation_selector (buffer->cur(+1).codepoint))) {
+      /* The next two lines are some ugly lines... But work. */
+      font->get_glyph (buffer->cur().codepoint, buffer->cur(+1).codepoint, &buffer->cur().glyph_index());
+      buffer->replace_glyphs (2, 1, &buffer->cur().codepoint);
+    } else {
+      set_glyph (buffer->cur(), font);
+      buffer->next_glyph ();
+    }
+  }
+  if (likely (buffer->idx < end)) {
+    set_glyph (buffer->cur(), font);
+    buffer->next_glyph ();
+  }
 }
 
 static void
@@ -150,21 +392,20 @@ decompose_multi_char_cluster (hb_font_t *font, hb_buffer_t *buffer,
 {
   /* TODO Currently if there's a variation-selector we give-up, it's just too hard. */
   for (unsigned int i = buffer->idx; i < end; i++)
-    if (unlikely (_hb_unicode_is_variation_selector (buffer->info[i].codepoint))) {
-      while (buffer->idx < end)
-	buffer->next_glyph ();
+    if (unlikely (buffer->unicode->is_variation_selector (buffer->info[i].codepoint))) {
+      handle_variation_selector_cluster (font, buffer, end);
       return;
     }
 
   while (buffer->idx < end)
-    decompose_current_glyph (font, buffer, FALSE);
+    decompose_current_character (font, buffer, false);
 }
 
 static int
 compare_combining_class (const hb_glyph_info_t *pa, const hb_glyph_info_t *pb)
 {
-  unsigned int a = pa->combining_class();
-  unsigned int b = pb->combining_class();
+  unsigned int a = _hb_glyph_info_get_modified_combining_class (pa);
+  unsigned int b = _hb_glyph_info_get_modified_combining_class (pb);
 
   return a < b ? -1 : a == b ? 0 : +1;
 }
@@ -174,7 +415,7 @@ _hb_ot_shape_normalize (hb_font_t *font, hb_buffer_t *buffer,
 			hb_ot_shape_normalization_mode_t mode)
 {
   bool recompose = mode != HB_OT_SHAPE_NORMALIZATION_MODE_DECOMPOSED;
-  bool has_multichar_clusters = FALSE;
+  bool has_multichar_clusters = false;
   unsigned int count;
 
   /* We do a fairly straightforward yet custom normalization process in three
@@ -192,14 +433,14 @@ _hb_ot_shape_normalize (hb_font_t *font, hb_buffer_t *buffer,
   {
     unsigned int end;
     for (end = buffer->idx + 1; end < count; end++)
-      if (buffer->info[buffer->idx].cluster != buffer->info[end].cluster)
+      if (buffer->cur().cluster != buffer->info[end].cluster)
         break;
 
     if (buffer->idx + 1 == end)
-      decompose_single_char_cluster (font, buffer, recompose);
+      decompose_current_character (font, buffer, recompose);
     else {
       decompose_multi_char_cluster (font, buffer, end);
-      has_multichar_clusters = TRUE;
+      has_multichar_clusters = true;
     }
   }
   buffer->swap_buffers ();
@@ -214,12 +455,12 @@ _hb_ot_shape_normalize (hb_font_t *font, hb_buffer_t *buffer,
   count = buffer->len;
   for (unsigned int i = 0; i < count; i++)
   {
-    if (buffer->info[i].combining_class() == 0)
+    if (_hb_glyph_info_get_modified_combining_class (&buffer->info[i]) == 0)
       continue;
 
     unsigned int end;
     for (end = i + 1; end < count; end++)
-      if (buffer->info[end].combining_class() == 0)
+      if (_hb_glyph_info_get_modified_combining_class (&buffer->info[end]) == 0)
         break;
 
     /* We are going to do a bubble-sort.  Only do this if the
@@ -254,32 +495,36 @@ _hb_ot_shape_normalize (hb_font_t *font, hb_buffer_t *buffer,
     if (/* If mode is NOT COMPOSED_FULL (ie. it's COMPOSED_DIACRITICS), we don't try to
 	 * compose a CCC=0 character with it's preceding starter. */
 	(mode == HB_OT_SHAPE_NORMALIZATION_MODE_COMPOSED_FULL ||
-	 buffer->info[buffer->idx].combining_class() != 0) &&
+	 _hb_glyph_info_get_modified_combining_class (&buffer->cur()) != 0) &&
 	/* If there's anything between the starter and this char, they should have CCC
 	 * smaller than this character's. */
 	(starter == buffer->out_len - 1 ||
-	 buffer->out_info[buffer->out_len - 1].combining_class() < buffer->info[buffer->idx].combining_class()) &&
+	 _hb_glyph_info_get_modified_combining_class (&buffer->prev()) < _hb_glyph_info_get_modified_combining_class (&buffer->cur())) &&
 	/* And compose. */
-	hb_unicode_compose (buffer->unicode,
-			    buffer->out_info[starter].codepoint,
-			    buffer->info[buffer->idx].codepoint,
-			    &composed) &&
+	compose_func (buffer->unicode,
+		      buffer->out_info[starter].codepoint,
+		      buffer->cur().codepoint,
+		      &composed) &&
 	/* And the font has glyph for the composite. */
-	hb_font_get_glyph (font, composed, 0, &glyph))
+	font->get_glyph (composed, 0, &glyph))
     {
-      /* Composes. Modify starter and carry on. */
-      buffer->out_info[starter].codepoint = composed;
-      /* XXX update cluster */
-      set_unicode_props (&buffer->out_info[starter], buffer->unicode);
+      /* Composes. */
+      buffer->next_glyph (); /* Copy to out-buffer. */
+      if (unlikely (buffer->in_error))
+        return;
+      buffer->merge_out_clusters (starter, buffer->out_len);
+      buffer->out_len--; /* Remove the second composable. */
+      buffer->out_info[starter].codepoint = composed; /* Modify starter and carry on. */
+      set_glyph (buffer->out_info[starter], font);
+      _hb_glyph_info_set_unicode_props (&buffer->out_info[starter], buffer->unicode);
 
-      buffer->skip_glyph ();
       continue;
     }
 
     /* Blocked, or doesn't compose. */
     buffer->next_glyph ();
 
-    if (buffer->out_info[buffer->out_len - 1].combining_class() == 0)
+    if (_hb_glyph_info_get_modified_combining_class (&buffer->prev()) == 0)
       starter = buffer->out_len - 1;
   }
   buffer->swap_buffers ();

@@ -37,8 +37,8 @@
 HB_BEGIN_DECLS
 
 
-typedef struct _hb_face_t hb_face_t;
-typedef struct _hb_font_t hb_font_t;
+typedef struct hb_face_t hb_face_t;
+typedef struct hb_font_t hb_font_t;
 
 /*
  * hb_face_t
@@ -52,7 +52,7 @@ typedef hb_blob_t * (*hb_reference_table_func_t)  (hb_face_t *face, hb_tag_t tag
 
 /* calls destroy() when not needing user_data anymore */
 hb_face_t *
-hb_face_create_for_tables (hb_reference_table_func_t  reference_table,
+hb_face_create_for_tables (hb_reference_table_func_t  reference_table_func,
 			   void                      *user_data,
 			   hb_destroy_func_t          destroy);
 
@@ -110,7 +110,7 @@ hb_face_get_upem (hb_face_t *face);
  * hb_font_funcs_t
  */
 
-typedef struct _hb_font_funcs_t hb_font_funcs_t;
+typedef struct hb_font_funcs_t hb_font_funcs_t;
 
 hb_font_funcs_t *
 hb_font_funcs_create (void);
@@ -143,9 +143,10 @@ hb_font_funcs_make_immutable (hb_font_funcs_t *ffuncs);
 hb_bool_t
 hb_font_funcs_is_immutable (hb_font_funcs_t *ffuncs);
 
-/* funcs */
 
-typedef struct _hb_glyph_extents_t
+/* glyph extents */
+
+typedef struct hb_glyph_extents_t
 {
   hb_position_t x_bearing;
   hb_position_t y_bearing;
@@ -192,6 +193,16 @@ typedef hb_bool_t (*hb_font_get_glyph_contour_point_func_t) (hb_font_t *font, vo
 							     void *user_data);
 
 
+typedef hb_bool_t (*hb_font_get_glyph_name_func_t) (hb_font_t *font, void *font_data,
+						    hb_codepoint_t glyph,
+						    char *name, unsigned int size,
+						    void *user_data);
+typedef hb_bool_t (*hb_font_get_glyph_from_name_func_t) (hb_font_t *font, void *font_data,
+							 const char *name, int len, /* -1 means nul-terminated */
+							 hb_codepoint_t *glyph,
+							 void *user_data);
+
+
 /* func setters */
 
 void
@@ -235,6 +246,15 @@ hb_font_funcs_set_glyph_contour_point_func (hb_font_funcs_t *ffuncs,
 					    hb_font_get_glyph_contour_point_func_t func,
 					    void *user_data, hb_destroy_func_t destroy);
 
+void
+hb_font_funcs_set_glyph_name_func (hb_font_funcs_t *ffuncs,
+				   hb_font_get_glyph_name_func_t glyph_func,
+				   void *user_data, hb_destroy_func_t destroy);
+void
+hb_font_funcs_set_glyph_from_name_func (hb_font_funcs_t *ffuncs,
+					hb_font_get_glyph_from_name_func_t glyph_func,
+					void *user_data, hb_destroy_func_t destroy);
+
 
 /* func dispatch */
 
@@ -275,6 +295,15 @@ hb_bool_t
 hb_font_get_glyph_contour_point (hb_font_t *font,
 				 hb_codepoint_t glyph, unsigned int point_index,
 				 hb_position_t *x, hb_position_t *y);
+
+hb_bool_t
+hb_font_get_glyph_name (hb_font_t *font,
+			hb_codepoint_t glyph,
+			char *name, unsigned int size);
+hb_bool_t
+hb_font_get_glyph_from_name (hb_font_t *font,
+			     const char *name, int len, /* -1 means nul-terminated */
+			     hb_codepoint_t *glyph);
 
 
 /* high-level funcs, with fallback */
@@ -317,6 +346,17 @@ hb_font_get_glyph_contour_point_for_origin (hb_font_t *font,
 					    hb_codepoint_t glyph, unsigned int point_index,
 					    hb_direction_t direction,
 					    hb_position_t *x, hb_position_t *y);
+
+/* Generates gidDDD if glyph has no name. */
+void
+hb_font_glyph_to_string (hb_font_t *font,
+			 hb_codepoint_t glyph,
+			 char *s, unsigned int size);
+/* Parses gidDDD and uniUUUU strings automatically. */
+hb_bool_t
+hb_font_glyph_from_string (hb_font_t *font,
+			   const char *s, int len, /* -1 means nul-terminated */
+			   hb_codepoint_t *glyph);
 
 
 /*
