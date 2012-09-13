@@ -2,7 +2,7 @@
        vers = "0.1")];
 #[crate_type = "lib"];
 
-use std;
+extern mod std;
 
 use libc::types::common::c99::*;
 
