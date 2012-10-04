@@ -6,4 +6,4 @@ extern mod std;
 
 use libc::types::common::c99::*;
 
-mod linkhack;
+pub mod linkhack;
