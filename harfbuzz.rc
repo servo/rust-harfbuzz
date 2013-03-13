@@ -178,9 +178,9 @@ pub const HB_SCRIPT_SORA_SOMPENG: u32 = 1399812705_u32;
 pub const HB_SCRIPT_TAKRI: u32 = 1415670642_u32;
 pub const HB_SCRIPT_INVALID: u32 = 0_u32;
 
-pub type struct__hb_user_data_key_t = {
+pub struct struct__hb_user_data_key_t {
     unused: c_char,
-};
+}
 
 pub type hb_user_data_key_t = struct__hb_user_data_key_t;
 
@@ -219,23 +219,23 @@ pub type struct__hb_buffer_t = c_void;
 
 pub type hb_buffer_t = struct__hb_buffer_t;
 
-pub type struct__hb_glyph_info_t = {
+pub struct struct__hb_glyph_info_t {
     codepoint: hb_codepoint_t,
     mask: hb_mask_t,
     cluster: uint32_t,
     var1: hb_var_int_t,
     var2: hb_var_int_t,
-};
+}
 
 pub type hb_glyph_info_t = struct__hb_glyph_info_t;
 
-pub type struct__hb_glyph_position_t = {
+pub struct struct__hb_glyph_position_t {
     x_advance: hb_position_t,
     y_advance: hb_position_t,
     x_offset: hb_position_t,
     y_offset: hb_position_t,
     var: hb_var_int_t,
-};
+}
 
 pub type hb_glyph_position_t = struct__hb_glyph_position_t;
 
@@ -253,12 +253,12 @@ pub type struct__hb_font_funcs_t = c_void;
 
 pub type hb_font_funcs_t = struct__hb_font_funcs_t;
 
-pub type struct__hb_glyph_extents_t = {
+pub struct struct__hb_glyph_extents_t {
     x_bearing: hb_position_t,
     y_bearing: hb_position_t,
     width: hb_position_t,
     height: hb_position_t,
-};
+}
 
 pub type hb_glyph_extents_t = struct__hb_glyph_extents_t;
 
@@ -290,12 +290,12 @@ pub type struct__hb_set_t = c_void;
 
 pub type hb_set_t = struct__hb_set_t;
 
-pub type struct__hb_feature_t = {
+pub struct struct__hb_feature_t {
     tag: hb_tag_t,
     value: uint32_t,
     start: c_uint,
     end: c_uint,
-};
+}
 
 pub type hb_feature_t = struct__hb_feature_t;
 
