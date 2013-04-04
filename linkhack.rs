@@ -3,12 +3,12 @@
 // relevance to servo.
 
 #[cfg(target_os = "linux")]
-#[link_args = "libharfbuzz.a -lpango-1.0 -lglib-2.0"]
+#[link_args = "-L. -lharfbuzz -lpango-1.0 -lglib-2.0"]
 #[link_args = "-lstdc++"]
 #[no_link]
 extern { }
 
 #[cfg(target_os = "macos")]
-#[link_args = "libharfbuzz.a -lstdc++"]
+#[link_args = "-L. -lharfbuzz -lstdc++"]
 #[no_link]
 extern { }
