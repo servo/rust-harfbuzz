@@ -309,332 +309,332 @@ pub type hb_feature_t = struct__hb_feature_t;
 #[nolink]
 pub extern mod bindgen {
 
-pub fn hb_tag_from_string(++str: *c_char, ++len: c_int) -> hb_tag_t;
+pub fn hb_tag_from_string(str: *c_char, len: c_int) -> hb_tag_t;
 
-pub fn hb_direction_from_string(++str: *c_char, ++len: c_int) -> hb_direction_t;
+pub fn hb_direction_from_string(str: *c_char, len: c_int) -> hb_direction_t;
 
-pub fn hb_direction_to_string(++direction: hb_direction_t) -> *c_char;
+pub fn hb_direction_to_string(direction: hb_direction_t) -> *c_char;
 
-pub fn hb_language_from_string(++str: *c_char, ++len: c_int) -> hb_language_t;
+pub fn hb_language_from_string(str: *c_char, len: c_int) -> hb_language_t;
 
-pub fn hb_language_to_string(++language: hb_language_t) -> *c_char;
+pub fn hb_language_to_string(language: hb_language_t) -> *c_char;
 
 pub fn hb_language_get_default() -> hb_language_t;
 
-pub fn hb_script_from_iso15924_tag(++tag: hb_tag_t) -> hb_script_t;
+pub fn hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
 
-pub fn hb_script_from_string(++s: *c_char, ++len: c_int) -> hb_script_t;
+pub fn hb_script_from_string(s: *c_char, len: c_int) -> hb_script_t;
 
-pub fn hb_script_to_iso15924_tag(++script: hb_script_t) -> hb_tag_t;
+pub fn hb_script_to_iso15924_tag(script: hb_script_t) -> hb_tag_t;
 
-pub fn hb_script_get_horizontal_direction(++script: hb_script_t) -> hb_direction_t;
+pub fn hb_script_get_horizontal_direction(script: hb_script_t) -> hb_direction_t;
 
-pub fn hb_blob_create(++data: *c_char, ++length: c_uint, ++mode: hb_memory_mode_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t) -> *hb_blob_t;
+pub fn hb_blob_create(data: *c_char, length: c_uint, mode: hb_memory_mode_t, user_data: *c_void, destroy: hb_destroy_func_t) -> *hb_blob_t;
 
-pub fn hb_blob_create_sub_blob(++parent: *hb_blob_t, ++offset: c_uint, ++length: c_uint) -> *hb_blob_t;
+pub fn hb_blob_create_sub_blob(parent: *hb_blob_t, offset: c_uint, length: c_uint) -> *hb_blob_t;
 
 pub fn hb_blob_get_empty() -> *hb_blob_t;
 
-pub fn hb_blob_reference(++blob: *hb_blob_t) -> *hb_blob_t;
+pub fn hb_blob_reference(blob: *hb_blob_t) -> *hb_blob_t;
 
-pub fn hb_blob_destroy(++blob: *hb_blob_t);
+pub fn hb_blob_destroy(blob: *hb_blob_t);
 
-pub fn hb_blob_set_user_data(++blob: *hb_blob_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_blob_set_user_data(blob: *hb_blob_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_blob_get_user_data(++blob: *hb_blob_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_blob_get_user_data(blob: *hb_blob_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_blob_make_immutable(++blob: *hb_blob_t);
+pub fn hb_blob_make_immutable(blob: *hb_blob_t);
 
-pub fn hb_blob_is_immutable(++blob: *hb_blob_t) -> hb_bool_t;
+pub fn hb_blob_is_immutable(blob: *hb_blob_t) -> hb_bool_t;
 
-pub fn hb_blob_get_length(++blob: *hb_blob_t) -> c_uint;
+pub fn hb_blob_get_length(blob: *hb_blob_t) -> c_uint;
 
-pub fn hb_blob_get_data(++blob: *hb_blob_t, ++length: *c_uint) -> *c_char;
+pub fn hb_blob_get_data(blob: *hb_blob_t, length: *c_uint) -> *c_char;
 
-pub fn hb_blob_get_data_writable(++blob: *hb_blob_t, ++length: *c_uint) -> *c_char;
+pub fn hb_blob_get_data_writable(blob: *hb_blob_t, length: *c_uint) -> *c_char;
 
 pub fn hb_unicode_funcs_get_default() -> *hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_create(++parent: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
+pub fn hb_unicode_funcs_create(parent: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
 
 pub fn hb_unicode_funcs_get_empty() -> *hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_reference(++ufuncs: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
+pub fn hb_unicode_funcs_reference(ufuncs: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_destroy(++ufuncs: *hb_unicode_funcs_t);
+pub fn hb_unicode_funcs_destroy(ufuncs: *hb_unicode_funcs_t);
 
-pub fn hb_unicode_funcs_set_user_data(++ufuncs: *hb_unicode_funcs_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_unicode_funcs_set_user_data(ufuncs: *hb_unicode_funcs_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_unicode_funcs_get_user_data(++ufuncs: *hb_unicode_funcs_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_unicode_funcs_get_user_data(ufuncs: *hb_unicode_funcs_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_unicode_funcs_make_immutable(++ufuncs: *hb_unicode_funcs_t);
+pub fn hb_unicode_funcs_make_immutable(ufuncs: *hb_unicode_funcs_t);
 
-pub fn hb_unicode_funcs_is_immutable(++ufuncs: *hb_unicode_funcs_t) -> hb_bool_t;
+pub fn hb_unicode_funcs_is_immutable(ufuncs: *hb_unicode_funcs_t) -> hb_bool_t;
 
-pub fn hb_unicode_funcs_get_parent(++ufuncs: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
+pub fn hb_unicode_funcs_get_parent(ufuncs: *hb_unicode_funcs_t) -> *hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_set_combining_class_func(++ufuncs: *hb_unicode_funcs_t, ++combining_class_func: hb_unicode_combining_class_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_combining_class_func(ufuncs: *hb_unicode_funcs_t, combining_class_func: hb_unicode_combining_class_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_eastasian_width_func(++ufuncs: *hb_unicode_funcs_t, ++eastasian_width_func: hb_unicode_eastasian_width_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_eastasian_width_func(ufuncs: *hb_unicode_funcs_t, eastasian_width_func: hb_unicode_eastasian_width_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_general_category_func(++ufuncs: *hb_unicode_funcs_t, ++general_category_func: hb_unicode_general_category_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_general_category_func(ufuncs: *hb_unicode_funcs_t, general_category_func: hb_unicode_general_category_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_mirroring_func(++ufuncs: *hb_unicode_funcs_t, ++mirroring_func: hb_unicode_mirroring_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_mirroring_func(ufuncs: *hb_unicode_funcs_t, mirroring_func: hb_unicode_mirroring_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_script_func(++ufuncs: *hb_unicode_funcs_t, ++script_func: hb_unicode_script_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_script_func(ufuncs: *hb_unicode_funcs_t, script_func: hb_unicode_script_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_compose_func(++ufuncs: *hb_unicode_funcs_t, ++compose_func: hb_unicode_compose_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_compose_func(ufuncs: *hb_unicode_funcs_t, compose_func: hb_unicode_compose_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_decompose_func(++ufuncs: *hb_unicode_funcs_t, ++decompose_func: hb_unicode_decompose_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_unicode_funcs_set_decompose_func(ufuncs: *hb_unicode_funcs_t, decompose_func: hb_unicode_decompose_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_combining_class(++ufuncs: *hb_unicode_funcs_t, ++unicode: hb_codepoint_t) -> c_uint;
+pub fn hb_unicode_combining_class(ufuncs: *hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
 
-pub fn hb_unicode_eastasian_width(++ufuncs: *hb_unicode_funcs_t, ++unicode: hb_codepoint_t) -> c_uint;
+pub fn hb_unicode_eastasian_width(ufuncs: *hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
 
-pub fn hb_unicode_general_category(++ufuncs: *hb_unicode_funcs_t, ++unicode: hb_codepoint_t) -> hb_unicode_general_category_t;
+pub fn hb_unicode_general_category(ufuncs: *hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_unicode_general_category_t;
 
-pub fn hb_unicode_mirroring(++ufuncs: *hb_unicode_funcs_t, ++unicode: hb_codepoint_t) -> hb_codepoint_t;
+pub fn hb_unicode_mirroring(ufuncs: *hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_codepoint_t;
 
-pub fn hb_unicode_script(++ufuncs: *hb_unicode_funcs_t, ++unicode: hb_codepoint_t) -> hb_script_t;
+pub fn hb_unicode_script(ufuncs: *hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_script_t;
 
-pub fn hb_unicode_compose(++ufuncs: *hb_unicode_funcs_t, ++a: hb_codepoint_t, ++b: hb_codepoint_t, ++ab: *hb_codepoint_t) -> hb_bool_t;
+pub fn hb_unicode_compose(ufuncs: *hb_unicode_funcs_t, a: hb_codepoint_t, b: hb_codepoint_t, ab: *hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_unicode_decompose(++ufuncs: *hb_unicode_funcs_t, ++ab: hb_codepoint_t, ++a: *hb_codepoint_t, ++b: *hb_codepoint_t) -> hb_bool_t;
+pub fn hb_unicode_decompose(ufuncs: *hb_unicode_funcs_t, ab: hb_codepoint_t, a: *hb_codepoint_t, b: *hb_codepoint_t) -> hb_bool_t;
 
 pub fn hb_buffer_create() -> *hb_buffer_t;
 
 pub fn hb_buffer_get_empty() -> *hb_buffer_t;
 
-pub fn hb_buffer_reference(++buffer: *hb_buffer_t) -> *hb_buffer_t;
+pub fn hb_buffer_reference(buffer: *hb_buffer_t) -> *hb_buffer_t;
 
-pub fn hb_buffer_destroy(++buffer: *hb_buffer_t);
+pub fn hb_buffer_destroy(buffer: *hb_buffer_t);
 
-pub fn hb_buffer_set_user_data(++buffer: *hb_buffer_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_buffer_set_user_data(buffer: *hb_buffer_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_buffer_get_user_data(++buffer: *hb_buffer_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_buffer_get_user_data(buffer: *hb_buffer_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_buffer_set_unicode_funcs(++buffer: *hb_buffer_t, ++unicode_funcs: *hb_unicode_funcs_t);
+pub fn hb_buffer_set_unicode_funcs(buffer: *hb_buffer_t, unicode_funcs: *hb_unicode_funcs_t);
 
-pub fn hb_buffer_get_unicode_funcs(++buffer: *hb_buffer_t) -> *hb_unicode_funcs_t;
+pub fn hb_buffer_get_unicode_funcs(buffer: *hb_buffer_t) -> *hb_unicode_funcs_t;
 
-pub fn hb_buffer_set_direction(++buffer: *hb_buffer_t, ++direction: hb_direction_t);
+pub fn hb_buffer_set_direction(buffer: *hb_buffer_t, direction: hb_direction_t);
 
-pub fn hb_buffer_get_direction(++buffer: *hb_buffer_t) -> hb_direction_t;
+pub fn hb_buffer_get_direction(buffer: *hb_buffer_t) -> hb_direction_t;
 
-pub fn hb_buffer_set_script(++buffer: *hb_buffer_t, ++script: hb_script_t);
+pub fn hb_buffer_set_script(buffer: *hb_buffer_t, script: hb_script_t);
 
-pub fn hb_buffer_get_script(++buffer: *hb_buffer_t) -> hb_script_t;
+pub fn hb_buffer_get_script(buffer: *hb_buffer_t) -> hb_script_t;
 
-pub fn hb_buffer_set_language(++buffer: *hb_buffer_t, ++language: hb_language_t);
+pub fn hb_buffer_set_language(buffer: *hb_buffer_t, language: hb_language_t);
 
-pub fn hb_buffer_get_language(++buffer: *hb_buffer_t) -> hb_language_t;
+pub fn hb_buffer_get_language(buffer: *hb_buffer_t) -> hb_language_t;
 
-pub fn hb_buffer_reset(++buffer: *hb_buffer_t);
+pub fn hb_buffer_reset(buffer: *hb_buffer_t);
 
-pub fn hb_buffer_pre_allocate(++buffer: *hb_buffer_t, ++size: c_uint) -> hb_bool_t;
+pub fn hb_buffer_pre_allocate(buffer: *hb_buffer_t, size: c_uint) -> hb_bool_t;
 
-pub fn hb_buffer_allocation_successful(++buffer: *hb_buffer_t) -> hb_bool_t;
+pub fn hb_buffer_allocation_successful(buffer: *hb_buffer_t) -> hb_bool_t;
 
-pub fn hb_buffer_reverse(++buffer: *hb_buffer_t);
+pub fn hb_buffer_reverse(buffer: *hb_buffer_t);
 
-pub fn hb_buffer_reverse_clusters(++buffer: *hb_buffer_t);
+pub fn hb_buffer_reverse_clusters(buffer: *hb_buffer_t);
 
-pub fn hb_buffer_guess_properties(++buffer: *hb_buffer_t);
+pub fn hb_buffer_guess_properties(buffer: *hb_buffer_t);
 
-pub fn hb_buffer_add(++buffer: *hb_buffer_t, ++codepoint: hb_codepoint_t, ++mask: hb_mask_t, ++cluster: c_uint);
+pub fn hb_buffer_add(buffer: *hb_buffer_t, codepoint: hb_codepoint_t, mask: hb_mask_t, cluster: c_uint);
 
-pub fn hb_buffer_add_utf8(++buffer: *hb_buffer_t, ++text: *c_char, ++text_length: c_int, ++item_offset: c_uint, ++item_length: c_int);
+pub fn hb_buffer_add_utf8(buffer: *hb_buffer_t, text: *c_char, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_add_utf16(++buffer: *hb_buffer_t, ++text: *uint16_t, ++text_length: c_int, ++item_offset: c_uint, ++item_length: c_int);
+pub fn hb_buffer_add_utf16(buffer: *hb_buffer_t, text: *uint16_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_add_utf32(++buffer: *hb_buffer_t, ++text: *uint32_t, ++text_length: c_int, ++item_offset: c_uint, ++item_length: c_int);
+pub fn hb_buffer_add_utf32(buffer: *hb_buffer_t, text: *uint32_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_set_length(++buffer: *hb_buffer_t, ++length: c_uint) -> hb_bool_t;
+pub fn hb_buffer_set_length(buffer: *hb_buffer_t, length: c_uint) -> hb_bool_t;
 
-pub fn hb_buffer_get_length(++buffer: *hb_buffer_t) -> c_uint;
+pub fn hb_buffer_get_length(buffer: *hb_buffer_t) -> c_uint;
 
-pub fn hb_buffer_get_glyph_infos(++buffer: *hb_buffer_t, ++length: *c_uint) -> *hb_glyph_info_t;
+pub fn hb_buffer_get_glyph_infos(buffer: *hb_buffer_t, length: *c_uint) -> *hb_glyph_info_t;
 
-pub fn hb_buffer_get_glyph_positions(++buffer: *hb_buffer_t, ++length: *c_uint) -> *hb_glyph_position_t;
+pub fn hb_buffer_get_glyph_positions(buffer: *hb_buffer_t, length: *c_uint) -> *hb_glyph_position_t;
 
-pub fn hb_face_create(++blob: *hb_blob_t, ++index: c_uint) -> *hb_face_t;
+pub fn hb_face_create(blob: *hb_blob_t, index: c_uint) -> *hb_face_t;
 
-pub fn hb_face_create_for_tables(++reference_table: hb_reference_table_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t) -> *hb_face_t;
+pub fn hb_face_create_for_tables(reference_table: hb_reference_table_func_t, user_data: *c_void, destroy: hb_destroy_func_t) -> *hb_face_t;
 
 pub fn hb_face_get_empty() -> *hb_face_t;
 
-pub fn hb_face_reference(++face: *hb_face_t) -> *hb_face_t;
+pub fn hb_face_reference(face: *hb_face_t) -> *hb_face_t;
 
-pub fn hb_face_destroy(++face: *hb_face_t);
+pub fn hb_face_destroy(face: *hb_face_t);
 
-pub fn hb_face_set_user_data(++face: *hb_face_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_face_set_user_data(face: *hb_face_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_face_get_user_data(++face: *hb_face_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_face_get_user_data(face: *hb_face_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_face_make_immutable(++face: *hb_face_t);
+pub fn hb_face_make_immutable(face: *hb_face_t);
 
-pub fn hb_face_is_immutable(++face: *hb_face_t) -> hb_bool_t;
+pub fn hb_face_is_immutable(face: *hb_face_t) -> hb_bool_t;
 
-pub fn hb_face_reference_table(++face: *hb_face_t, ++tag: hb_tag_t) -> *hb_blob_t;
+pub fn hb_face_reference_table(face: *hb_face_t, tag: hb_tag_t) -> *hb_blob_t;
 
-pub fn hb_face_reference_blob(++face: *hb_face_t) -> *hb_blob_t;
+pub fn hb_face_reference_blob(face: *hb_face_t) -> *hb_blob_t;
 
-pub fn hb_face_set_index(++face: *hb_face_t, ++index: c_uint);
+pub fn hb_face_set_index(face: *hb_face_t, index: c_uint);
 
-pub fn hb_face_get_index(++face: *hb_face_t) -> c_uint;
+pub fn hb_face_get_index(face: *hb_face_t) -> c_uint;
 
-pub fn hb_face_set_upem(++face: *hb_face_t, ++upem: c_uint);
+pub fn hb_face_set_upem(face: *hb_face_t, upem: c_uint);
 
-pub fn hb_face_get_upem(++face: *hb_face_t) -> c_uint;
+pub fn hb_face_get_upem(face: *hb_face_t) -> c_uint;
 
 pub fn hb_font_funcs_create() -> *hb_font_funcs_t;
 
 pub fn hb_font_funcs_get_empty() -> *hb_font_funcs_t;
 
-pub fn hb_font_funcs_reference(++ffuncs: *hb_font_funcs_t) -> *hb_font_funcs_t;
+pub fn hb_font_funcs_reference(ffuncs: *hb_font_funcs_t) -> *hb_font_funcs_t;
 
-pub fn hb_font_funcs_destroy(++ffuncs: *hb_font_funcs_t);
+pub fn hb_font_funcs_destroy(ffuncs: *hb_font_funcs_t);
 
-pub fn hb_font_funcs_set_user_data(++ffuncs: *hb_font_funcs_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_font_funcs_set_user_data(ffuncs: *hb_font_funcs_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_font_funcs_get_user_data(++ffuncs: *hb_font_funcs_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_font_funcs_get_user_data(ffuncs: *hb_font_funcs_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_font_funcs_make_immutable(++ffuncs: *hb_font_funcs_t);
+pub fn hb_font_funcs_make_immutable(ffuncs: *hb_font_funcs_t);
 
-pub fn hb_font_funcs_is_immutable(++ffuncs: *hb_font_funcs_t) -> hb_bool_t;
+pub fn hb_font_funcs_is_immutable(ffuncs: *hb_font_funcs_t) -> hb_bool_t;
 
-pub fn hb_font_funcs_set_glyph_func(++ffuncs: *hb_font_funcs_t, ++glyph_func: hb_font_get_glyph_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_func(ffuncs: *hb_font_funcs_t, glyph_func: hb_font_get_glyph_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_advance_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_h_advance_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_h_advance_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_advance_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_v_advance_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_v_advance_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_v_advance_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_advance_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_origin_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_h_origin_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_h_origin_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_origin_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_v_origin_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_v_origin_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_v_origin_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_origin_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_kerning_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_h_kerning_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_h_kerning_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_kerning_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_v_kerning_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_v_kerning_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_v_kerning_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_kerning_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_extents_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_extents_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_extents_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_extents_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_contour_point_func(++ffuncs: *hb_font_funcs_t, ++func: hb_font_get_glyph_contour_point_func_t, ++user_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_contour_point_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_contour_point_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_get_glyph(++font: *hb_font_t, ++unicode: hb_codepoint_t, ++variation_selector: hb_codepoint_t, ++glyph: *hb_codepoint_t) -> hb_bool_t;
+pub fn hb_font_get_glyph(font: *hb_font_t, unicode: hb_codepoint_t, variation_selector: hb_codepoint_t, glyph: *hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_h_advance(++font: *hb_font_t, ++glyph: hb_codepoint_t) -> hb_position_t;
+pub fn hb_font_get_glyph_h_advance(font: *hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_v_advance(++font: *hb_font_t, ++glyph: hb_codepoint_t) -> hb_position_t;
+pub fn hb_font_get_glyph_v_advance(font: *hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_h_origin(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++x: *hb_position_t, ++y: *hb_position_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_h_origin(font: *hb_font_t, glyph: hb_codepoint_t, x: *hb_position_t, y: *hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_v_origin(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++x: *hb_position_t, ++y: *hb_position_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_v_origin(font: *hb_font_t, glyph: hb_codepoint_t, x: *hb_position_t, y: *hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_h_kerning(++font: *hb_font_t, ++left_glyph: hb_codepoint_t, ++right_glyph: hb_codepoint_t) -> hb_position_t;
+pub fn hb_font_get_glyph_h_kerning(font: *hb_font_t, left_glyph: hb_codepoint_t, right_glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_v_kerning(++font: *hb_font_t, ++top_glyph: hb_codepoint_t, ++bottom_glyph: hb_codepoint_t) -> hb_position_t;
+pub fn hb_font_get_glyph_v_kerning(font: *hb_font_t, top_glyph: hb_codepoint_t, bottom_glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_extents(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++extents: *hb_glyph_extents_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_extents(font: *hb_font_t, glyph: hb_codepoint_t, extents: *hb_glyph_extents_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_contour_point(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++point_index: c_uint, ++x: *hb_position_t, ++y: *hb_position_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_contour_point(font: *hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, x: *hb_position_t, y: *hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_advance_for_direction(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t);
+pub fn hb_font_get_glyph_advance_for_direction(font: *hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t);
 
-pub fn hb_font_get_glyph_origin_for_direction(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t);
+pub fn hb_font_get_glyph_origin_for_direction(font: *hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t);
 
-pub fn hb_font_add_glyph_origin_for_direction(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t);
+pub fn hb_font_add_glyph_origin_for_direction(font: *hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t);
 
-pub fn hb_font_subtract_glyph_origin_for_direction(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t);
+pub fn hb_font_subtract_glyph_origin_for_direction(font: *hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t);
 
-pub fn hb_font_get_glyph_kerning_for_direction(++font: *hb_font_t, ++first_glyph: hb_codepoint_t, ++second_glyph: hb_codepoint_t, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t);
+pub fn hb_font_get_glyph_kerning_for_direction(font: *hb_font_t, first_glyph: hb_codepoint_t, second_glyph: hb_codepoint_t, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t);
 
-pub fn hb_font_get_glyph_extents_for_origin(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++direction: hb_direction_t, ++extents: *hb_glyph_extents_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_extents_for_origin(font: *hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, extents: *hb_glyph_extents_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_contour_point_for_origin(++font: *hb_font_t, ++glyph: hb_codepoint_t, ++point_index: c_uint, ++direction: hb_direction_t, ++x: *hb_position_t, ++y: *hb_position_t) -> hb_bool_t;
+pub fn hb_font_get_glyph_contour_point_for_origin(font: *hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, direction: hb_direction_t, x: *hb_position_t, y: *hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_create(++face: *hb_face_t) -> *hb_font_t;
+pub fn hb_font_create(face: *hb_face_t) -> *hb_font_t;
 
-pub fn hb_font_create_sub_font(++parent: *hb_font_t) -> *hb_font_t;
+pub fn hb_font_create_sub_font(parent: *hb_font_t) -> *hb_font_t;
 
 pub fn hb_font_get_empty() -> *hb_font_t;
 
-pub fn hb_font_reference(++font: *hb_font_t) -> *hb_font_t;
+pub fn hb_font_reference(font: *hb_font_t) -> *hb_font_t;
 
-pub fn hb_font_destroy(++font: *hb_font_t);
+pub fn hb_font_destroy(font: *hb_font_t);
 
-pub fn hb_font_set_user_data(++font: *hb_font_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_font_set_user_data(font: *hb_font_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_font_get_user_data(++font: *hb_font_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_font_get_user_data(font: *hb_font_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_font_make_immutable(++font: *hb_font_t);
+pub fn hb_font_make_immutable(font: *hb_font_t);
 
-pub fn hb_font_is_immutable(++font: *hb_font_t) -> hb_bool_t;
+pub fn hb_font_is_immutable(font: *hb_font_t) -> hb_bool_t;
 
-pub fn hb_font_get_parent(++font: *hb_font_t) -> *hb_font_t;
+pub fn hb_font_get_parent(font: *hb_font_t) -> *hb_font_t;
 
-pub fn hb_font_get_face(++font: *hb_font_t) -> *hb_face_t;
+pub fn hb_font_get_face(font: *hb_font_t) -> *hb_face_t;
 
-pub fn hb_font_set_funcs(++font: *hb_font_t, ++klass: *hb_font_funcs_t, ++font_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_set_funcs(font: *hb_font_t, klass: *hb_font_funcs_t, font_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_set_funcs_data(++font: *hb_font_t, ++font_data: *c_void, ++destroy: hb_destroy_func_t);
+pub fn hb_font_set_funcs_data(font: *hb_font_t, font_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_set_scale(++font: *hb_font_t, ++x_scale: c_int, ++y_scale: c_int);
+pub fn hb_font_set_scale(font: *hb_font_t, x_scale: c_int, y_scale: c_int);
 
-pub fn hb_font_get_scale(++font: *hb_font_t, ++x_scale: *c_int, ++y_scale: *c_int);
+pub fn hb_font_get_scale(font: *hb_font_t, x_scale: *c_int, y_scale: *c_int);
 
-pub fn hb_font_set_ppem(++font: *hb_font_t, ++x_ppem: c_uint, ++y_ppem: c_uint);
+pub fn hb_font_set_ppem(font: *hb_font_t, x_ppem: c_uint, y_ppem: c_uint);
 
-pub fn hb_font_get_ppem(++font: *hb_font_t, ++x_ppem: *c_uint, ++y_ppem: *c_uint);
+pub fn hb_font_get_ppem(font: *hb_font_t, x_ppem: *c_uint, y_ppem: *c_uint);
 
 pub fn hb_set_create() -> *hb_set_t;
 
 pub fn hb_set_get_empty() -> *hb_set_t;
 
-pub fn hb_set_reference(++set: *hb_set_t) -> *hb_set_t;
+pub fn hb_set_reference(set: *hb_set_t) -> *hb_set_t;
 
-pub fn hb_set_destroy(++set: *hb_set_t);
+pub fn hb_set_destroy(set: *hb_set_t);
 
-pub fn hb_set_set_user_data(++set: *hb_set_t, ++key: *hb_user_data_key_t, ++data: *c_void, ++destroy: hb_destroy_func_t, ++replace: hb_bool_t) -> hb_bool_t;
+pub fn hb_set_set_user_data(set: *hb_set_t, key: *hb_user_data_key_t, data: *c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_set_get_user_data(++set: *hb_set_t, ++key: *hb_user_data_key_t) -> *c_void;
+pub fn hb_set_get_user_data(set: *hb_set_t, key: *hb_user_data_key_t) -> *c_void;
 
-pub fn hb_set_allocation_successful(++set: *hb_set_t) -> hb_bool_t;
+pub fn hb_set_allocation_successful(set: *hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_clear(++set: *hb_set_t);
+pub fn hb_set_clear(set: *hb_set_t);
 
-pub fn hb_set_empty(++set: *hb_set_t) -> hb_bool_t;
+pub fn hb_set_empty(set: *hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_has(++set: *hb_set_t, ++codepoint: hb_codepoint_t) -> hb_bool_t;
+pub fn hb_set_has(set: *hb_set_t, codepoint: hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_set_add(++set: *hb_set_t, ++codepoint: hb_codepoint_t);
+pub fn hb_set_add(set: *hb_set_t, codepoint: hb_codepoint_t);
 
-pub fn hb_set_del(++set: *hb_set_t, ++codepoint: hb_codepoint_t);
+pub fn hb_set_del(set: *hb_set_t, codepoint: hb_codepoint_t);
 
-pub fn hb_set_equal(++set: *hb_set_t, ++other: *hb_set_t) -> hb_bool_t;
+pub fn hb_set_equal(set: *hb_set_t, other: *hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_set(++set: *hb_set_t, ++other: *hb_set_t);
+pub fn hb_set_set(set: *hb_set_t, other: *hb_set_t);
 
-pub fn hb_set_union(++set: *hb_set_t, ++other: *hb_set_t);
+pub fn hb_set_union(set: *hb_set_t, other: *hb_set_t);
 
-pub fn hb_set_intersect(++set: *hb_set_t, ++other: *hb_set_t);
+pub fn hb_set_intersect(set: *hb_set_t, other: *hb_set_t);
 
-pub fn hb_set_subtract(++set: *hb_set_t, ++other: *hb_set_t);
+pub fn hb_set_subtract(set: *hb_set_t, other: *hb_set_t);
 
-pub fn hb_set_min(++set: *hb_set_t) -> hb_codepoint_t;
+pub fn hb_set_min(set: *hb_set_t) -> hb_codepoint_t;
 
-pub fn hb_set_max(++set: *hb_set_t) -> hb_codepoint_t;
+pub fn hb_set_max(set: *hb_set_t) -> hb_codepoint_t;
 
-pub fn hb_shape(++font: *hb_font_t, ++buffer: *hb_buffer_t, ++features: *hb_feature_t, ++num_features: c_uint);
+pub fn hb_shape(font: *hb_font_t, buffer: *hb_buffer_t, features: *hb_feature_t, num_features: c_uint);
 
-pub fn hb_shape_full(++font: *hb_font_t, ++buffer: *hb_buffer_t, ++features: *hb_feature_t, ++num_features: c_uint, ++shaper_list: **c_char) -> hb_bool_t;
+pub fn hb_shape_full(font: *hb_font_t, buffer: *hb_buffer_t, features: *hb_feature_t, num_features: c_uint, shaper_list: **c_char) -> hb_bool_t;
 
 pub fn hb_shape_list_shapers() -> **c_char;
 
-pub fn hb_version(++major: *c_uint, ++minor: *c_uint, ++micro: *c_uint);
+pub fn hb_version(major: *c_uint, minor: *c_uint, micro: *c_uint);
 
 pub fn hb_version_string() -> *c_char;
 
-pub fn hb_version_check(++major: c_uint, ++minor: c_uint, ++micro: c_uint) -> hb_bool_t;
+pub fn hb_version_check(major: c_uint, minor: c_uint, micro: c_uint) -> hb_bool_t;
 
 }
