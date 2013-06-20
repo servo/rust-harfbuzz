@@ -13,9 +13,9 @@
 
 extern mod std;
 
-use core::libc::types::common::c99::*;
+use std::libc::types::common::c99::*;
 
-use core::libc::*;
+use std::libc::*;
 
 pub mod linkhack;
 
@@ -307,7 +307,7 @@ pub struct struct__hb_feature_t {
 pub type hb_feature_t = struct__hb_feature_t;
 
 #[nolink]
-pub extern mod bindgen {
+extern {
 
 pub fn hb_tag_from_string(str: *c_char, len: c_int) -> hb_tag_t;
 
