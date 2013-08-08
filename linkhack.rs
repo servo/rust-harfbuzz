@@ -18,6 +18,7 @@
 extern { }
 
 #[cfg(target_os = "macos")]
+#[cfg(target_os = "android")]
 #[link_args = "-L. -lharfbuzz -lstdc++"]
 #[no_link]
 extern { }

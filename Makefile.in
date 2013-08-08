@@ -11,6 +11,9 @@ endif
 ifeq ($(UNAME),Linux)
     OSTYPE=linux
 endif
+ifeq ($(CFG_OSTYPE),linux-androideabi)
+    OSTYPE=android
+endif
 
 RUST_SRC = $(shell find $(VPATH)/. -type f -name '*.rs')
 
@@ -51,6 +54,9 @@ ifeq ($(OSTYPE),linux)
 		$(NULL)
 	CFLAGS += $(shell pkg-config --cflags glib-2.0 freetype2)
 	HBFLAGS += -DHAVE_GLIB
+endif
+
+ifeq ($(OSTYPE),android)
 endif
 
 C_OBJS = $(patsubst %.cc,%.o,$(C_SRC))
