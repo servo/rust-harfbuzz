@@ -1,14 +1,12 @@
 VPATH=%VPATH%
 
-RUSTC ?= rustc
-RUSTFLAGS ?=
-
-UNAME=$(shell uname)
-
-ifeq ($(UNAME),Darwin)
+ifeq ($(CFG_OSTYPE),apple-darwin)
     OSTYPE=darwin
 endif
-ifeq ($(UNAME),Linux)
+ifeq ($(CFG_OSTYPE),unknown-linux-gnu)
+    OSTYPE=linux
+endif
+ifeq ($(CFG_OSTYPE),linux-androideabi)
     OSTYPE=linux
 endif
 
@@ -44,6 +42,7 @@ ifeq ($(OSTYPE),darwin)
 endif
 
 ifeq ($(OSTYPE),linux)
+ifneq ($(CFG_TARGET_TRIPLE),arm-linux-androideabi)
 	C_SRC += \
 		harfbuzz/src/hb-ft.cc \
 		harfbuzz/src/hb-glib.cc \
@@ -51,6 +50,7 @@ ifeq ($(OSTYPE),linux)
 		$(NULL)
 	CFLAGS += $(shell pkg-config --cflags glib-2.0 freetype2)
 	HBFLAGS += -DHAVE_GLIB
+endif
 endif
 
 C_OBJS = $(patsubst %.cc,%.o,$(C_SRC))

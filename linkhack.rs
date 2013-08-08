@@ -21,3 +21,8 @@ extern { }
 #[link_args = "-L. -lharfbuzz -lstdc++"]
 #[no_link]
 extern { }
+
+#[cfg(target_os = "android")]
+#[link_args = "-L. -lharfbuzz"]
+#[no_link]
+extern { }
