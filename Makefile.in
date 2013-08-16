@@ -72,11 +72,11 @@ harfbuzz/src/%.o: harfbuzz/src/%.cc
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
-	$(RUSTC) $(RUSTFLAGS) $< -o $@
+	$(RUSTC) $(RUSTFLAGS) $< --out-dir .
 	touch $@
 
 harfbuzz-test: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
-	$(RUSTC) $(RUSTFLAGS) $< -o $@ --test
+	$(RUSTC) $(RUSTFLAGS) $< --out-dir . --test
 
 check: harfbuzz-test
 	./harfbuzz-test
