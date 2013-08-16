@@ -76,7 +76,7 @@ libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
 	touch $@
 
 harfbuzz-test: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
-	$(RUSTC) $(RUSTFLAGS) $< --out-dir . --test
+	$(RUSTC) $(RUSTFLAGS) $< -o $@ --test
 
 check: harfbuzz-test
 	./harfbuzz-test
