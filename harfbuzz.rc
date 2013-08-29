@@ -191,7 +191,7 @@ pub struct struct__hb_user_data_key_t {
 
 pub type hb_user_data_key_t = struct__hb_user_data_key_t;
 
-pub type hb_destroy_func_t = *u8;
+pub type hb_destroy_func_t = extern "C" fn(*c_void);
 
 
 pub type hb_memory_mode_t = c_uint;
@@ -254,7 +254,7 @@ pub type struct__hb_font_t = c_void;
 
 pub type hb_font_t = struct__hb_font_t;
 
-pub type hb_reference_table_func_t = *u8;
+pub type hb_reference_table_func_t = extern "C" fn(*hb_face_t, hb_tag_t, *c_void) -> *hb_blob_t;
 
 pub type struct__hb_font_funcs_t = c_void;
 
@@ -269,9 +269,9 @@ pub struct struct__hb_glyph_extents_t {
 
 pub type hb_glyph_extents_t = struct__hb_glyph_extents_t;
 
-pub type hb_font_get_glyph_func_t = *u8;
+pub type hb_font_get_glyph_func_t = extern "C" fn(*hb_font_t, *c_void, hb_codepoint_t, hb_codepoint_t, *mut hb_codepoint_t, *c_void) -> hb_bool_t;
 
-pub type hb_font_get_glyph_advance_func_t = *u8;
+pub type hb_font_get_glyph_advance_func_t = extern "C" fn(*hb_font_t, *c_void, hb_codepoint_t, *c_void) -> hb_position_t;
 
 pub type hb_font_get_glyph_h_advance_func_t = hb_font_get_glyph_advance_func_t;
 
@@ -459,7 +459,7 @@ pub fn hb_buffer_get_glyph_positions(buffer: *hb_buffer_t, length: *c_uint) -> *
 
 pub fn hb_face_create(blob: *hb_blob_t, index: c_uint) -> *hb_face_t;
 
-pub fn hb_face_create_for_tables(reference_table: hb_reference_table_func_t, user_data: *c_void, destroy: hb_destroy_func_t) -> *hb_face_t;
+pub fn hb_face_create_for_tables(reference_table: hb_reference_table_func_t, user_data: *c_void, destroy: Option<hb_destroy_func_t>) -> *hb_face_t;
 
 pub fn hb_face_get_empty() -> *hb_face_t;
 
@@ -503,9 +503,9 @@ pub fn hb_font_funcs_make_immutable(ffuncs: *hb_font_funcs_t);
 
 pub fn hb_font_funcs_is_immutable(ffuncs: *hb_font_funcs_t) -> hb_bool_t;
 
-pub fn hb_font_funcs_set_glyph_func(ffuncs: *hb_font_funcs_t, glyph_func: hb_font_get_glyph_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_func(ffuncs: *hb_font_funcs_t, glyph_func: hb_font_get_glyph_func_t, user_data: *c_void, destroy: Option<hb_destroy_func_t>);
 
-pub fn hb_font_funcs_set_glyph_h_advance_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_advance_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_h_advance_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_advance_func_t, user_data: *c_void, destroy: Option<hb_destroy_func_t>);
 
 pub fn hb_font_funcs_set_glyph_v_advance_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_advance_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
@@ -575,7 +575,7 @@ pub fn hb_font_get_parent(font: *hb_font_t) -> *hb_font_t;
 
 pub fn hb_font_get_face(font: *hb_font_t) -> *hb_face_t;
 
-pub fn hb_font_set_funcs(font: *hb_font_t, klass: *hb_font_funcs_t, font_data: *c_void, destroy: hb_destroy_func_t);
+pub fn hb_font_set_funcs(font: *hb_font_t, klass: *hb_font_funcs_t, font_data: *c_void, destroy: Option<hb_destroy_func_t>);
 
 pub fn hb_font_set_funcs_data(font: *hb_font_t, font_data: *c_void, destroy: hb_destroy_func_t);
 
