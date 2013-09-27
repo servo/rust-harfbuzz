@@ -13,8 +13,6 @@
 
 extern mod std;
 
-use std::libc::types::common::c99::*;
-
 use std::libc::*;
 
 pub mod linkhack;
