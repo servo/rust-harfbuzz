@@ -12,13 +12,13 @@
 // relevance to servo.
 
 #[cfg(target_os = "linux")]
-#[link_args = "-L. -lharfbuzz -lglib-2.0"]
-#[link_args = "-lstdc++"]
-#[no_link]
+#[link(name = "harfbuzz")]
+#[link(name = "glib-2.0")]
+#[link(name = "stdc++")]
 extern { }
 
 #[cfg(target_os = "macos")]
 #[cfg(target_os = "android")]
-#[link_args = "-L. -lharfbuzz -lstdc++"]
-#[no_link]
+#[link(name = "harfbuzz")]
+#[link(name = "stdc++")]
 extern { }
