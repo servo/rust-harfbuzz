@@ -83,4 +83,4 @@ check: harfbuzz-test
 
 .PHONY: clean
 clean:
-	rm -f harfbuzz-test *.so *.dylib *.dll *.dummy harfbuzz/src/*.o
+	rm -f harfbuzz-test *.so *.dylib *.rlib *.dll *.dummy harfbuzz/src/*.o
