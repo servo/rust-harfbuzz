@@ -15,9 +15,10 @@
 #![feature(globs)]
 #![allow(non_camel_case_types)]
 
+extern crate libc;
 extern crate std;
 
-use std::libc::*;
+use libc::*;
 
 pub mod linkhack;
 
