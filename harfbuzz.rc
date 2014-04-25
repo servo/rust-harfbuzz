@@ -230,9 +230,9 @@ pub type struct__hb_buffer_t = c_void;
 pub type hb_buffer_t = struct__hb_buffer_t;
 
 pub struct struct__hb_glyph_info_t {
-    codepoint: hb_codepoint_t,
-    mask: hb_mask_t,
-    cluster: uint32_t,
+    pub codepoint: hb_codepoint_t,
+    pub mask: hb_mask_t,
+    pub cluster: uint32_t,
     var1: hb_var_int_t,
     var2: hb_var_int_t,
 }
@@ -240,10 +240,10 @@ pub struct struct__hb_glyph_info_t {
 pub type hb_glyph_info_t = struct__hb_glyph_info_t;
 
 pub struct struct__hb_glyph_position_t {
-    x_advance: hb_position_t,
-    y_advance: hb_position_t,
-    x_offset: hb_position_t,
-    y_offset: hb_position_t,
+    pub x_advance: hb_position_t,
+    pub y_advance: hb_position_t,
+    pub x_offset: hb_position_t,
+    pub y_offset: hb_position_t,
     var: hb_var_int_t,
 }
 
