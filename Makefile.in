@@ -2,6 +2,7 @@ VPATH=%VPATH%
 
 RUSTC ?= rustc
 RUSTFLAGS ?=
+EXT_DEPS ?=
 
 UNAME=$(shell uname)
 
@@ -71,7 +72,7 @@ libharfbuzz.a: $(C_OBJS)
 harfbuzz/src/%.o: harfbuzz/src/%.cc
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
+libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a $(EXT_DEPS)
 	$(RUSTC) $(RUSTFLAGS) $< --out-dir .
 	touch $@
 
