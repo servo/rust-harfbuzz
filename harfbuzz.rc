@@ -309,7 +309,6 @@ pub struct struct__hb_feature_t {
 
 pub type hb_feature_t = struct__hb_feature_t;
 
-#[nolink]
 extern {
 
 pub fn hb_tag_from_string(str: *c_char, len: c_int) -> hb_tag_t;
