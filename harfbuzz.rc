@@ -286,7 +286,7 @@ pub type hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
 
 pub type hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
 
-pub type hb_font_get_glyph_kerning_func_t = *u8;
+pub type hb_font_get_glyph_kerning_func_t = extern "C" fn(*hb_font_t, *c_void, first_glyph: hb_codepoint_t, second_glyph: hb_codepoint_t, *c_void) -> hb_position_t;
 
 pub type hb_font_get_glyph_h_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 
@@ -301,10 +301,10 @@ pub type struct__hb_set_t = c_void;
 pub type hb_set_t = struct__hb_set_t;
 
 pub struct struct__hb_feature_t {
-    tag: hb_tag_t,
-    value: uint32_t,
-    start: c_uint,
-    end: c_uint,
+    pub tag: hb_tag_t,
+    pub value: uint32_t,
+    pub start: c_uint,
+    pub end: c_uint,
 }
 
 pub type hb_feature_t = struct__hb_feature_t;
@@ -515,7 +515,7 @@ pub fn hb_font_funcs_set_glyph_h_origin_func(ffuncs: *hb_font_funcs_t, func: hb_
 
 pub fn hb_font_funcs_set_glyph_v_origin_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_origin_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_kerning_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_kerning_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
+pub fn hb_font_funcs_set_glyph_h_kerning_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_h_kerning_func_t, user_data: *c_void, destroy: *c_void);
 
 pub fn hb_font_funcs_set_glyph_v_kerning_func(ffuncs: *hb_font_funcs_t, func: hb_font_get_glyph_v_kerning_func_t, user_data: *c_void, destroy: hb_destroy_func_t);
 
