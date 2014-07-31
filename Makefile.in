@@ -64,7 +64,7 @@ C_OBJS = $(patsubst %.cc,%.o,$(C_SRC))
 CFLAGS += -I$(VPATH)/harfbuzz/src $(HBFLAGS) -fPIC
 
 .PHONY: all
-all: libharfbuzz.dummy
+all: libharfbuzz-servo.dummy
 
 libharfbuzz.a: $(C_OBJS)
 	$(AR) rcs $@ $^
@@ -72,8 +72,8 @@ libharfbuzz.a: $(C_OBJS)
 harfbuzz/src/%.o: harfbuzz/src/%.cc
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-libharfbuzz.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a $(EXT_DEPS)
-	$(RUSTC) $(RUSTFLAGS) $< --out-dir .
+libharfbuzz-servo.dummy: harfbuzz.rc $(RUST_SRC) libharfbuzz.a $(EXT_DEPS)
+	$(RUSTC) $(RUSTFLAGS) $< --out-dir . -C extra-filename=-servo
 	touch $@
 
 harfbuzz-test: harfbuzz.rc $(RUST_SRC) libharfbuzz.a
