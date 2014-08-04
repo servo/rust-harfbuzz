@@ -7,3 +7,4 @@
 *.dSYM
 *.dll
 *.dummy
+/doc
