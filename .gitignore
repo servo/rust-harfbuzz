@@ -8,3 +8,6 @@
 *.dll
 *.dummy
 /doc
+/target
+/Cargo.lock
+

@@ -1,25 +1,12 @@
-VPATH=%VPATH%
-
-RUSTC ?= rustc
-RUSTFLAGS ?=
-EXT_DEPS ?=
-RUSTDOC ?= rustdoc
-RUSTDOC_FLAGS ?=
-RUSTDOC_TARGET ?= doc
-
-UNAME=$(shell uname)
-
-ifeq ($(UNAME),Darwin)
+ifeq (darwin,$(findstring darwin,$(TARGET)))
     OSTYPE=darwin
 endif
-ifeq ($(UNAME),Linux)
+ifeq (linux,$(findstring linux,$(TARGET)))
     OSTYPE=linux
 endif
-ifeq ($(CFG_OSTYPE),linux-androideabi)
+ifeq (androideabi,$(findstring androideabi,$(TARGET)))
     OSTYPE=android
 endif
-
-RUST_SRC = $(shell find $(VPATH)/src -type f -name '*.rs')
 
 C_SRC = \
 	harfbuzz/src/hb-blob.cc \
@@ -63,34 +50,14 @@ endif
 ifeq ($(OSTYPE),android)
 endif
 
-C_OBJS = $(patsubst %.cc,%.o,$(C_SRC))
-CFLAGS += -I$(VPATH)/harfbuzz/src $(HBFLAGS) -fPIC
+C_OBJS = $(patsubst %.cc,$(OUT_DIR)/%.o,$(C_SRC))
+CFLAGS += -Iharfbuzz/src $(HBFLAGS) -fPIC
 
 .PHONY: all
-all: libharfbuzz-servo.dummy
+all: $(OUT_DIR)/libharfbuzz.a
 
-libharfbuzz.a: $(C_OBJS)
+$(OUT_DIR)/libharfbuzz.a: $(C_OBJS)
 	$(AR) rcs $@ $^
 
-harfbuzz/src/%.o: harfbuzz/src/%.cc
-	$(CC) $(CFLAGS) -o $@ -c $<
-
-libharfbuzz-servo.dummy: src/lib.rs $(RUST_SRC) libharfbuzz.a $(EXT_DEPS)
-	$(RUSTC) $(RUSTFLAGS) $< --out-dir . -C extra-filename=-servo
-	touch $@
-
-harfbuzz-test: src/lib.rs $(RUST_SRC) libharfbuzz.a
-	$(RUSTC) $(RUSTFLAGS) $< -o $@ --test
-
-.PHONY: doc
-doc: $(RUSTDOC_TARGET)/harfbuzz/index.html
-
-$(RUSTDOC_TARGET)/harfbuzz/index.html: src/lib.rs $(RUST_SRC) libharfbuzz.a $(EXT_DEPS)
-	$(RUSTDOC) $(RUSTDOC_FLAGS) $< -o $(RUSTDOC_TARGET)
-
-check: harfbuzz-test
-	./harfbuzz-test
-
-.PHONY: clean
-clean:
-	rm -f harfbuzz-test *.a *.so *.dylib *.rlib *.dll *.dummy harfbuzz/src/*.o
+$(OUT_DIR)/harfbuzz/src/%.o: harfbuzz/src/%.cc
+	mkdir -p `dirname $@` && $(CC) $(CFLAGS) -o $@ -c $<
