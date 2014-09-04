@@ -1,3 +1,15 @@
+ifeq (androideabi,$(findstring androideabi,$(TARGET)))
+
+CC := $(TARGET)-gcc
+AR := $(TARGET)-ar
+
+else
+
+CC ?= gcc
+AR ?= ar
+
+endif
+
 ifeq (darwin,$(findstring darwin,$(TARGET)))
     OSTYPE=darwin
 endif
