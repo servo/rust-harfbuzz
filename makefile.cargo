@@ -63,7 +63,7 @@ ifeq ($(OSTYPE),android)
 endif
 
 C_OBJS = $(patsubst %.cc,$(OUT_DIR)/%.o,$(C_SRC))
-CFLAGS += -Iharfbuzz/src $(HBFLAGS) -fPIC
+CFLAGS += -Iharfbuzz/src $(HBFLAGS) -fPIC -O2
 
 .PHONY: all
 all: $(OUT_DIR)/libharfbuzz.a
