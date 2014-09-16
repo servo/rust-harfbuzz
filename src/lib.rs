@@ -14,7 +14,6 @@
 #![allow(non_camel_case_types)]
 
 extern crate libc;
-extern crate std;
 
 use libc::*;
 
