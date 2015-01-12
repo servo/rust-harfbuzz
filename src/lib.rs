@@ -313,332 +313,332 @@ pub type hb_feature_t = struct__hb_feature_t;
 
 extern {
 
-pub fn hb_tag_from_string(str: *mut c_char, len: c_int) -> hb_tag_t;
+pub fn RUST_hb_tag_from_string(str: *mut c_char, len: c_int) -> hb_tag_t;
 
-pub fn hb_direction_from_string(str: *mut c_char, len: c_int) -> hb_direction_t;
+pub fn RUST_hb_direction_from_string(str: *mut c_char, len: c_int) -> hb_direction_t;
 
-pub fn hb_direction_to_string(direction: hb_direction_t) -> *mut c_char;
+pub fn RUST_hb_direction_to_string(direction: hb_direction_t) -> *mut c_char;
 
-pub fn hb_language_from_string(str: *mut c_char, len: c_int) -> hb_language_t;
+pub fn RUST_hb_language_from_string(str: *mut c_char, len: c_int) -> hb_language_t;
 
-pub fn hb_language_to_string(language: hb_language_t) -> *mut c_char;
+pub fn RUST_hb_language_to_string(language: hb_language_t) -> *mut c_char;
 
-pub fn hb_language_get_default() -> hb_language_t;
+pub fn RUST_hb_language_get_default() -> hb_language_t;
 
-pub fn hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
+pub fn RUST_hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
 
-pub fn hb_script_from_string(s: *mut c_char, len: c_int) -> hb_script_t;
+pub fn RUST_hb_script_from_string(s: *mut c_char, len: c_int) -> hb_script_t;
 
-pub fn hb_script_to_iso15924_tag(script: hb_script_t) -> hb_tag_t;
+pub fn RUST_hb_script_to_iso15924_tag(script: hb_script_t) -> hb_tag_t;
 
-pub fn hb_script_get_horizontal_direction(script: hb_script_t) -> hb_direction_t;
+pub fn RUST_hb_script_get_horizontal_direction(script: hb_script_t) -> hb_direction_t;
 
-pub fn hb_blob_create(data: *const c_char, length: c_uint, mode: hb_memory_mode_t, user_data: *mut c_void, destroy: hb_destroy_func_t) -> *mut hb_blob_t;
+pub fn RUST_hb_blob_create(data: *const c_char, length: c_uint, mode: hb_memory_mode_t, user_data: *mut c_void, destroy: hb_destroy_func_t) -> *mut hb_blob_t;
 
-pub fn hb_blob_create_sub_blob(parent: *mut hb_blob_t, offset: c_uint, length: c_uint) -> *mut hb_blob_t;
+pub fn RUST_hb_blob_create_sub_blob(parent: *mut hb_blob_t, offset: c_uint, length: c_uint) -> *mut hb_blob_t;
 
-pub fn hb_blob_get_empty() -> *mut hb_blob_t;
+pub fn RUST_hb_blob_get_empty() -> *mut hb_blob_t;
 
-pub fn hb_blob_reference(blob: *mut hb_blob_t) -> *mut hb_blob_t;
+pub fn RUST_hb_blob_reference(blob: *mut hb_blob_t) -> *mut hb_blob_t;
 
-pub fn hb_blob_destroy(blob: *mut hb_blob_t);
+pub fn RUST_hb_blob_destroy(blob: *mut hb_blob_t);
 
-pub fn hb_blob_set_user_data(blob: *mut hb_blob_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_blob_set_user_data(blob: *mut hb_blob_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_blob_get_user_data(blob: *mut hb_blob_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_blob_get_user_data(blob: *mut hb_blob_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_blob_make_immutable(blob: *mut hb_blob_t);
+pub fn RUST_hb_blob_make_immutable(blob: *mut hb_blob_t);
 
-pub fn hb_blob_is_immutable(blob: *mut hb_blob_t) -> hb_bool_t;
+pub fn RUST_hb_blob_is_immutable(blob: *mut hb_blob_t) -> hb_bool_t;
 
-pub fn hb_blob_get_length(blob: *mut hb_blob_t) -> c_uint;
+pub fn RUST_hb_blob_get_length(blob: *mut hb_blob_t) -> c_uint;
 
-pub fn hb_blob_get_data(blob: *mut hb_blob_t, length: *mut c_uint) -> *mut c_char;
+pub fn RUST_hb_blob_get_data(blob: *mut hb_blob_t, length: *mut c_uint) -> *mut c_char;
 
-pub fn hb_blob_get_data_writable(blob: *mut hb_blob_t, length: *mut c_uint) -> *mut c_char;
+pub fn RUST_hb_blob_get_data_writable(blob: *mut hb_blob_t, length: *mut c_uint) -> *mut c_char;
 
-pub fn hb_unicode_funcs_get_default() -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_unicode_funcs_get_default() -> *mut hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_create(parent: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_unicode_funcs_create(parent: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_get_empty() -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_unicode_funcs_get_empty() -> *mut hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_reference(ufuncs: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_unicode_funcs_reference(ufuncs: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_destroy(ufuncs: *mut hb_unicode_funcs_t);
+pub fn RUST_hb_unicode_funcs_destroy(ufuncs: *mut hb_unicode_funcs_t);
 
-pub fn hb_unicode_funcs_set_user_data(ufuncs: *mut hb_unicode_funcs_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_unicode_funcs_set_user_data(ufuncs: *mut hb_unicode_funcs_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_unicode_funcs_get_user_data(ufuncs: *mut hb_unicode_funcs_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_unicode_funcs_get_user_data(ufuncs: *mut hb_unicode_funcs_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_unicode_funcs_make_immutable(ufuncs: *mut hb_unicode_funcs_t);
+pub fn RUST_hb_unicode_funcs_make_immutable(ufuncs: *mut hb_unicode_funcs_t);
 
-pub fn hb_unicode_funcs_is_immutable(ufuncs: *mut hb_unicode_funcs_t) -> hb_bool_t;
+pub fn RUST_hb_unicode_funcs_is_immutable(ufuncs: *mut hb_unicode_funcs_t) -> hb_bool_t;
 
-pub fn hb_unicode_funcs_get_parent(ufuncs: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_unicode_funcs_get_parent(ufuncs: *mut hb_unicode_funcs_t) -> *mut hb_unicode_funcs_t;
 
-pub fn hb_unicode_funcs_set_combining_class_func(ufuncs: *mut hb_unicode_funcs_t, combining_class_func: hb_unicode_combining_class_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_combining_class_func(ufuncs: *mut hb_unicode_funcs_t, combining_class_func: hb_unicode_combining_class_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_eastasian_width_func(ufuncs: *mut hb_unicode_funcs_t, eastasian_width_func: hb_unicode_eastasian_width_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_eastasian_width_func(ufuncs: *mut hb_unicode_funcs_t, eastasian_width_func: hb_unicode_eastasian_width_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_general_category_func(ufuncs: *mut hb_unicode_funcs_t, general_category_func: hb_unicode_general_category_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_general_category_func(ufuncs: *mut hb_unicode_funcs_t, general_category_func: hb_unicode_general_category_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_mirroring_func(ufuncs: *mut hb_unicode_funcs_t, mirroring_func: hb_unicode_mirroring_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_mirroring_func(ufuncs: *mut hb_unicode_funcs_t, mirroring_func: hb_unicode_mirroring_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_script_func(ufuncs: *mut hb_unicode_funcs_t, script_func: hb_unicode_script_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_script_func(ufuncs: *mut hb_unicode_funcs_t, script_func: hb_unicode_script_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_compose_func(ufuncs: *mut hb_unicode_funcs_t, compose_func: hb_unicode_compose_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_compose_func(ufuncs: *mut hb_unicode_funcs_t, compose_func: hb_unicode_compose_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_funcs_set_decompose_func(ufuncs: *mut hb_unicode_funcs_t, decompose_func: hb_unicode_decompose_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_unicode_funcs_set_decompose_func(ufuncs: *mut hb_unicode_funcs_t, decompose_func: hb_unicode_decompose_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_unicode_combining_class(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
+pub fn RUST_hb_unicode_combining_class(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
 
-pub fn hb_unicode_eastasian_width(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
+pub fn RUST_hb_unicode_eastasian_width(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> c_uint;
 
-pub fn hb_unicode_general_category(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_unicode_general_category_t;
+pub fn RUST_hb_unicode_general_category(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_unicode_general_category_t;
 
-pub fn hb_unicode_mirroring(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_codepoint_t;
+pub fn RUST_hb_unicode_mirroring(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_codepoint_t;
 
-pub fn hb_unicode_script(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_script_t;
+pub fn RUST_hb_unicode_script(ufuncs: *mut hb_unicode_funcs_t, unicode: hb_codepoint_t) -> hb_script_t;
 
-pub fn hb_unicode_compose(ufuncs: *mut hb_unicode_funcs_t, a: hb_codepoint_t, b: hb_codepoint_t, ab: *mut hb_codepoint_t) -> hb_bool_t;
+pub fn RUST_hb_unicode_compose(ufuncs: *mut hb_unicode_funcs_t, a: hb_codepoint_t, b: hb_codepoint_t, ab: *mut hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_unicode_decompose(ufuncs: *mut hb_unicode_funcs_t, ab: hb_codepoint_t, a: *mut hb_codepoint_t, b: *mut hb_codepoint_t) -> hb_bool_t;
+pub fn RUST_hb_unicode_decompose(ufuncs: *mut hb_unicode_funcs_t, ab: hb_codepoint_t, a: *mut hb_codepoint_t, b: *mut hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_buffer_create() -> *mut hb_buffer_t;
+pub fn RUST_hb_buffer_create() -> *mut hb_buffer_t;
 
-pub fn hb_buffer_get_empty() -> *mut hb_buffer_t;
+pub fn RUST_hb_buffer_get_empty() -> *mut hb_buffer_t;
 
-pub fn hb_buffer_reference(buffer: *mut hb_buffer_t) -> *mut hb_buffer_t;
+pub fn RUST_hb_buffer_reference(buffer: *mut hb_buffer_t) -> *mut hb_buffer_t;
 
-pub fn hb_buffer_destroy(buffer: *mut hb_buffer_t);
+pub fn RUST_hb_buffer_destroy(buffer: *mut hb_buffer_t);
 
-pub fn hb_buffer_set_user_data(buffer: *mut hb_buffer_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_buffer_set_user_data(buffer: *mut hb_buffer_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_buffer_get_user_data(buffer: *mut hb_buffer_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_buffer_get_user_data(buffer: *mut hb_buffer_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_buffer_set_unicode_funcs(buffer: *mut hb_buffer_t, unicode_funcs: *mut hb_unicode_funcs_t);
+pub fn RUST_hb_buffer_set_unicode_funcs(buffer: *mut hb_buffer_t, unicode_funcs: *mut hb_unicode_funcs_t);
 
-pub fn hb_buffer_get_unicode_funcs(buffer: *mut hb_buffer_t) -> *mut hb_unicode_funcs_t;
+pub fn RUST_hb_buffer_get_unicode_funcs(buffer: *mut hb_buffer_t) -> *mut hb_unicode_funcs_t;
 
-pub fn hb_buffer_set_direction(buffer: *mut hb_buffer_t, direction: hb_direction_t);
+pub fn RUST_hb_buffer_set_direction(buffer: *mut hb_buffer_t, direction: hb_direction_t);
 
-pub fn hb_buffer_get_direction(buffer: *mut hb_buffer_t) -> hb_direction_t;
+pub fn RUST_hb_buffer_get_direction(buffer: *mut hb_buffer_t) -> hb_direction_t;
 
-pub fn hb_buffer_set_script(buffer: *mut hb_buffer_t, script: hb_script_t);
+pub fn RUST_hb_buffer_set_script(buffer: *mut hb_buffer_t, script: hb_script_t);
 
-pub fn hb_buffer_get_script(buffer: *mut hb_buffer_t) -> hb_script_t;
+pub fn RUST_hb_buffer_get_script(buffer: *mut hb_buffer_t) -> hb_script_t;
 
-pub fn hb_buffer_set_language(buffer: *mut hb_buffer_t, language: hb_language_t);
+pub fn RUST_hb_buffer_set_language(buffer: *mut hb_buffer_t, language: hb_language_t);
 
-pub fn hb_buffer_get_language(buffer: *mut hb_buffer_t) -> hb_language_t;
+pub fn RUST_hb_buffer_get_language(buffer: *mut hb_buffer_t) -> hb_language_t;
 
-pub fn hb_buffer_reset(buffer: *mut hb_buffer_t);
+pub fn RUST_hb_buffer_reset(buffer: *mut hb_buffer_t);
 
-pub fn hb_buffer_pre_allocate(buffer: *mut hb_buffer_t, size: c_uint) -> hb_bool_t;
+pub fn RUST_hb_buffer_pre_allocate(buffer: *mut hb_buffer_t, size: c_uint) -> hb_bool_t;
 
-pub fn hb_buffer_allocation_successful(buffer: *mut hb_buffer_t) -> hb_bool_t;
+pub fn RUST_hb_buffer_allocation_successful(buffer: *mut hb_buffer_t) -> hb_bool_t;
 
-pub fn hb_buffer_reverse(buffer: *mut hb_buffer_t);
+pub fn RUST_hb_buffer_reverse(buffer: *mut hb_buffer_t);
 
-pub fn hb_buffer_reverse_clusters(buffer: *mut hb_buffer_t);
+pub fn RUST_hb_buffer_reverse_clusters(buffer: *mut hb_buffer_t);
 
-pub fn hb_buffer_guess_properties(buffer: *mut hb_buffer_t);
+pub fn RUST_hb_buffer_guess_properties(buffer: *mut hb_buffer_t);
 
-pub fn hb_buffer_add(buffer: *mut hb_buffer_t, codepoint: hb_codepoint_t, mask: hb_mask_t, cluster: c_uint);
+pub fn RUST_hb_buffer_add(buffer: *mut hb_buffer_t, codepoint: hb_codepoint_t, mask: hb_mask_t, cluster: c_uint);
 
-pub fn hb_buffer_add_utf8(buffer: *mut hb_buffer_t, text: *const c_char, text_length: c_int, item_offset: c_uint, item_length: c_int);
+pub fn RUST_hb_buffer_add_utf8(buffer: *mut hb_buffer_t, text: *const c_char, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_add_utf16(buffer: *mut hb_buffer_t, text: *const uint16_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
+pub fn RUST_hb_buffer_add_utf16(buffer: *mut hb_buffer_t, text: *const uint16_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_add_utf32(buffer: *mut hb_buffer_t, text: *const uint32_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
+pub fn RUST_hb_buffer_add_utf32(buffer: *mut hb_buffer_t, text: *const uint32_t, text_length: c_int, item_offset: c_uint, item_length: c_int);
 
-pub fn hb_buffer_set_length(buffer: *mut hb_buffer_t, length: c_uint) -> hb_bool_t;
+pub fn RUST_hb_buffer_set_length(buffer: *mut hb_buffer_t, length: c_uint) -> hb_bool_t;
 
-pub fn hb_buffer_get_length(buffer: *mut hb_buffer_t) -> c_uint;
+pub fn RUST_hb_buffer_get_length(buffer: *mut hb_buffer_t) -> c_uint;
 
-pub fn hb_buffer_get_glyph_infos(buffer: *mut hb_buffer_t, length: *mut c_uint) -> *mut hb_glyph_info_t;
+pub fn RUST_hb_buffer_get_glyph_infos(buffer: *mut hb_buffer_t, length: *mut c_uint) -> *mut hb_glyph_info_t;
 
-pub fn hb_buffer_get_glyph_positions(buffer: *mut hb_buffer_t, length: *mut c_uint) -> *mut hb_glyph_position_t;
+pub fn RUST_hb_buffer_get_glyph_positions(buffer: *mut hb_buffer_t, length: *mut c_uint) -> *mut hb_glyph_position_t;
 
-pub fn hb_face_create(blob: *mut hb_blob_t, index: c_uint) -> *mut hb_face_t;
+pub fn RUST_hb_face_create(blob: *mut hb_blob_t, index: c_uint) -> *mut hb_face_t;
 
-pub fn hb_face_create_for_tables(reference_table: hb_reference_table_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>) -> *mut hb_face_t;
+pub fn RUST_hb_face_create_for_tables(reference_table: hb_reference_table_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>) -> *mut hb_face_t;
 
-pub fn hb_face_get_empty() -> *mut hb_face_t;
+pub fn RUST_hb_face_get_empty() -> *mut hb_face_t;
 
-pub fn hb_face_reference(face: *mut hb_face_t) -> *mut hb_face_t;
+pub fn RUST_hb_face_reference(face: *mut hb_face_t) -> *mut hb_face_t;
 
-pub fn hb_face_destroy(face: *mut hb_face_t);
+pub fn RUST_hb_face_destroy(face: *mut hb_face_t);
 
-pub fn hb_face_set_user_data(face: *mut hb_face_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_face_set_user_data(face: *mut hb_face_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_face_get_user_data(face: *mut hb_face_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_face_get_user_data(face: *mut hb_face_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_face_make_immutable(face: *mut hb_face_t);
+pub fn RUST_hb_face_make_immutable(face: *mut hb_face_t);
 
-pub fn hb_face_is_immutable(face: *mut hb_face_t) -> hb_bool_t;
+pub fn RUST_hb_face_is_immutable(face: *mut hb_face_t) -> hb_bool_t;
 
-pub fn hb_face_reference_table(face: *mut hb_face_t, tag: hb_tag_t) -> *mut hb_blob_t;
+pub fn RUST_hb_face_reference_table(face: *mut hb_face_t, tag: hb_tag_t) -> *mut hb_blob_t;
 
-pub fn hb_face_reference_blob(face: *mut hb_face_t) -> *mut hb_blob_t;
+pub fn RUST_hb_face_reference_blob(face: *mut hb_face_t) -> *mut hb_blob_t;
 
-pub fn hb_face_set_index(face: *mut hb_face_t, index: c_uint);
+pub fn RUST_hb_face_set_index(face: *mut hb_face_t, index: c_uint);
 
-pub fn hb_face_get_index(face: *mut hb_face_t) -> c_uint;
+pub fn RUST_hb_face_get_index(face: *mut hb_face_t) -> c_uint;
 
-pub fn hb_face_set_upem(face: *mut hb_face_t, upem: c_uint);
+pub fn RUST_hb_face_set_upem(face: *mut hb_face_t, upem: c_uint);
 
-pub fn hb_face_get_upem(face: *mut hb_face_t) -> c_uint;
+pub fn RUST_hb_face_get_upem(face: *mut hb_face_t) -> c_uint;
 
-pub fn hb_font_funcs_create() -> *mut hb_font_funcs_t;
+pub fn RUST_hb_font_funcs_create() -> *mut hb_font_funcs_t;
 
-pub fn hb_font_funcs_get_empty() -> *mut hb_font_funcs_t;
+pub fn RUST_hb_font_funcs_get_empty() -> *mut hb_font_funcs_t;
 
-pub fn hb_font_funcs_reference(ffuncs: *mut hb_font_funcs_t) -> *mut hb_font_funcs_t;
+pub fn RUST_hb_font_funcs_reference(ffuncs: *mut hb_font_funcs_t) -> *mut hb_font_funcs_t;
 
-pub fn hb_font_funcs_destroy(ffuncs: *mut hb_font_funcs_t);
+pub fn RUST_hb_font_funcs_destroy(ffuncs: *mut hb_font_funcs_t);
 
-pub fn hb_font_funcs_set_user_data(ffuncs: *mut hb_font_funcs_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_font_funcs_set_user_data(ffuncs: *mut hb_font_funcs_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_font_funcs_get_user_data(ffuncs: *mut hb_font_funcs_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_font_funcs_get_user_data(ffuncs: *mut hb_font_funcs_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_font_funcs_make_immutable(ffuncs: *mut hb_font_funcs_t);
+pub fn RUST_hb_font_funcs_make_immutable(ffuncs: *mut hb_font_funcs_t);
 
-pub fn hb_font_funcs_is_immutable(ffuncs: *mut hb_font_funcs_t) -> hb_bool_t;
+pub fn RUST_hb_font_funcs_is_immutable(ffuncs: *mut hb_font_funcs_t) -> hb_bool_t;
 
-pub fn hb_font_funcs_set_glyph_func(ffuncs: *mut hb_font_funcs_t, glyph_func: hb_font_get_glyph_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
+pub fn RUST_hb_font_funcs_set_glyph_func(ffuncs: *mut hb_font_funcs_t, glyph_func: hb_font_get_glyph_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
 
-pub fn hb_font_funcs_set_glyph_h_advance_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_advance_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
+pub fn RUST_hb_font_funcs_set_glyph_h_advance_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_advance_func_t, user_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
 
-pub fn hb_font_funcs_set_glyph_v_advance_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_advance_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_v_advance_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_advance_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_origin_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_origin_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_h_origin_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_origin_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_v_origin_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_origin_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_v_origin_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_origin_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_h_kerning_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_kerning_func_t, user_data: *mut c_void, destroy: *mut c_void);
+pub fn RUST_hb_font_funcs_set_glyph_h_kerning_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_h_kerning_func_t, user_data: *mut c_void, destroy: *mut c_void);
 
-pub fn hb_font_funcs_set_glyph_v_kerning_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_kerning_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_v_kerning_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_v_kerning_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_extents_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_extents_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_extents_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_extents_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_funcs_set_glyph_contour_point_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_contour_point_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_funcs_set_glyph_contour_point_func(ffuncs: *mut hb_font_funcs_t, func: hb_font_get_glyph_contour_point_func_t, user_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_get_glyph(font: *mut hb_font_t, unicode: hb_codepoint_t, variation_selector: hb_codepoint_t, glyph: *mut hb_codepoint_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph(font: *mut hb_font_t, unicode: hb_codepoint_t, variation_selector: hb_codepoint_t, glyph: *mut hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_h_advance(font: *mut hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
+pub fn RUST_hb_font_get_glyph_h_advance(font: *mut hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_v_advance(font: *mut hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
+pub fn RUST_hb_font_get_glyph_v_advance(font: *mut hb_font_t, glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_h_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_h_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_v_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_v_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_h_kerning(font: *mut hb_font_t, left_glyph: hb_codepoint_t, right_glyph: hb_codepoint_t) -> hb_position_t;
+pub fn RUST_hb_font_get_glyph_h_kerning(font: *mut hb_font_t, left_glyph: hb_codepoint_t, right_glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_v_kerning(font: *mut hb_font_t, top_glyph: hb_codepoint_t, bottom_glyph: hb_codepoint_t) -> hb_position_t;
+pub fn RUST_hb_font_get_glyph_v_kerning(font: *mut hb_font_t, top_glyph: hb_codepoint_t, bottom_glyph: hb_codepoint_t) -> hb_position_t;
 
-pub fn hb_font_get_glyph_extents(font: *mut hb_font_t, glyph: hb_codepoint_t, extents: *mut hb_glyph_extents_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_extents(font: *mut hb_font_t, glyph: hb_codepoint_t, extents: *mut hb_glyph_extents_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_contour_point(font: *mut hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_contour_point(font: *mut hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_advance_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
+pub fn RUST_hb_font_get_glyph_advance_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
 
-pub fn hb_font_get_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
+pub fn RUST_hb_font_get_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
 
-pub fn hb_font_add_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
+pub fn RUST_hb_font_add_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
 
-pub fn hb_font_subtract_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
+pub fn RUST_hb_font_subtract_glyph_origin_for_direction(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
 
-pub fn hb_font_get_glyph_kerning_for_direction(font: *mut hb_font_t, first_glyph: hb_codepoint_t, second_glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
+pub fn RUST_hb_font_get_glyph_kerning_for_direction(font: *mut hb_font_t, first_glyph: hb_codepoint_t, second_glyph: hb_codepoint_t, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t);
 
-pub fn hb_font_get_glyph_extents_for_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, extents: *mut hb_glyph_extents_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_extents_for_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, direction: hb_direction_t, extents: *mut hb_glyph_extents_t) -> hb_bool_t;
 
-pub fn hb_font_get_glyph_contour_point_for_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
+pub fn RUST_hb_font_get_glyph_contour_point_for_origin(font: *mut hb_font_t, glyph: hb_codepoint_t, point_index: c_uint, direction: hb_direction_t, x: *mut hb_position_t, y: *mut hb_position_t) -> hb_bool_t;
 
-pub fn hb_font_create(face: *mut hb_face_t) -> *mut hb_font_t;
+pub fn RUST_hb_font_create(face: *mut hb_face_t) -> *mut hb_font_t;
 
-pub fn hb_font_create_sub_font(parent: *mut hb_font_t) -> *mut hb_font_t;
+pub fn RUST_hb_font_create_sub_font(parent: *mut hb_font_t) -> *mut hb_font_t;
 
-pub fn hb_font_get_empty() -> *mut hb_font_t;
+pub fn RUST_hb_font_get_empty() -> *mut hb_font_t;
 
-pub fn hb_font_reference(font: *mut hb_font_t) -> *mut hb_font_t;
+pub fn RUST_hb_font_reference(font: *mut hb_font_t) -> *mut hb_font_t;
 
-pub fn hb_font_destroy(font: *mut hb_font_t);
+pub fn RUST_hb_font_destroy(font: *mut hb_font_t);
 
-pub fn hb_font_set_user_data(font: *mut hb_font_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_font_set_user_data(font: *mut hb_font_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_font_get_user_data(font: *mut hb_font_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_font_get_user_data(font: *mut hb_font_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_font_make_immutable(font: *mut hb_font_t);
+pub fn RUST_hb_font_make_immutable(font: *mut hb_font_t);
 
-pub fn hb_font_is_immutable(font: *mut hb_font_t) -> hb_bool_t;
+pub fn RUST_hb_font_is_immutable(font: *mut hb_font_t) -> hb_bool_t;
 
-pub fn hb_font_get_parent(font: *mut hb_font_t) -> *mut hb_font_t;
+pub fn RUST_hb_font_get_parent(font: *mut hb_font_t) -> *mut hb_font_t;
 
-pub fn hb_font_get_face(font: *mut hb_font_t) -> *mut hb_face_t;
+pub fn RUST_hb_font_get_face(font: *mut hb_font_t) -> *mut hb_face_t;
 
-pub fn hb_font_set_funcs(font: *mut hb_font_t, klass: *mut hb_font_funcs_t, font_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
+pub fn RUST_hb_font_set_funcs(font: *mut hb_font_t, klass: *mut hb_font_funcs_t, font_data: *mut c_void, destroy: Option<hb_destroy_func_t>);
 
-pub fn hb_font_set_funcs_data(font: *mut hb_font_t, font_data: *mut c_void, destroy: hb_destroy_func_t);
+pub fn RUST_hb_font_set_funcs_data(font: *mut hb_font_t, font_data: *mut c_void, destroy: hb_destroy_func_t);
 
-pub fn hb_font_set_scale(font: *mut hb_font_t, x_scale: c_int, y_scale: c_int);
+pub fn RUST_hb_font_set_scale(font: *mut hb_font_t, x_scale: c_int, y_scale: c_int);
 
-pub fn hb_font_get_scale(font: *mut hb_font_t, x_scale: *mut c_int, y_scale: *mut c_int);
+pub fn RUST_hb_font_get_scale(font: *mut hb_font_t, x_scale: *mut c_int, y_scale: *mut c_int);
 
-pub fn hb_font_set_ppem(font: *mut hb_font_t, x_ppem: c_uint, y_ppem: c_uint);
+pub fn RUST_hb_font_set_ppem(font: *mut hb_font_t, x_ppem: c_uint, y_ppem: c_uint);
 
-pub fn hb_font_get_ppem(font: *mut hb_font_t, x_ppem: *mut c_uint, y_ppem: *mut c_uint);
+pub fn RUST_hb_font_get_ppem(font: *mut hb_font_t, x_ppem: *mut c_uint, y_ppem: *mut c_uint);
 
-pub fn hb_set_create() -> *mut hb_set_t;
+pub fn RUST_hb_set_create() -> *mut hb_set_t;
 
-pub fn hb_set_get_empty() -> *mut hb_set_t;
+pub fn RUST_hb_set_get_empty() -> *mut hb_set_t;
 
-pub fn hb_set_reference(set: *mut hb_set_t) -> *mut hb_set_t;
+pub fn RUST_hb_set_reference(set: *mut hb_set_t) -> *mut hb_set_t;
 
-pub fn hb_set_destroy(set: *mut hb_set_t);
+pub fn RUST_hb_set_destroy(set: *mut hb_set_t);
 
-pub fn hb_set_set_user_data(set: *mut hb_set_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
+pub fn RUST_hb_set_set_user_data(set: *mut hb_set_t, key: *mut hb_user_data_key_t, data: *mut c_void, destroy: hb_destroy_func_t, replace: hb_bool_t) -> hb_bool_t;
 
-pub fn hb_set_get_user_data(set: *mut hb_set_t, key: *mut hb_user_data_key_t) -> *mut c_void;
+pub fn RUST_hb_set_get_user_data(set: *mut hb_set_t, key: *mut hb_user_data_key_t) -> *mut c_void;
 
-pub fn hb_set_allocation_successful(set: *mut hb_set_t) -> hb_bool_t;
+pub fn RUST_hb_set_allocation_successful(set: *mut hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_clear(set: *mut hb_set_t);
+pub fn RUST_hb_set_clear(set: *mut hb_set_t);
 
-pub fn hb_set_empty(set: *mut hb_set_t) -> hb_bool_t;
+pub fn RUST_hb_set_empty(set: *mut hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_has(set: *mut hb_set_t, codepoint: hb_codepoint_t) -> hb_bool_t;
+pub fn RUST_hb_set_has(set: *mut hb_set_t, codepoint: hb_codepoint_t) -> hb_bool_t;
 
-pub fn hb_set_add(set: *mut hb_set_t, codepoint: hb_codepoint_t);
+pub fn RUST_hb_set_add(set: *mut hb_set_t, codepoint: hb_codepoint_t);
 
-pub fn hb_set_del(set: *mut hb_set_t, codepoint: hb_codepoint_t);
+pub fn RUST_hb_set_del(set: *mut hb_set_t, codepoint: hb_codepoint_t);
 
-pub fn hb_set_equal(set: *mut hb_set_t, other: *mut hb_set_t) -> hb_bool_t;
+pub fn RUST_hb_set_equal(set: *mut hb_set_t, other: *mut hb_set_t) -> hb_bool_t;
 
-pub fn hb_set_set(set: *mut hb_set_t, other: *mut hb_set_t);
+pub fn RUST_hb_set_set(set: *mut hb_set_t, other: *mut hb_set_t);
 
-pub fn hb_set_union(set: *mut hb_set_t, other: *mut hb_set_t);
+pub fn RUST_hb_set_union(set: *mut hb_set_t, other: *mut hb_set_t);
 
-pub fn hb_set_intersect(set: *mut hb_set_t, other: *mut hb_set_t);
+pub fn RUST_hb_set_intersect(set: *mut hb_set_t, other: *mut hb_set_t);
 
-pub fn hb_set_subtract(set: *mut hb_set_t, other: *mut hb_set_t);
+pub fn RUST_hb_set_subtract(set: *mut hb_set_t, other: *mut hb_set_t);
 
-pub fn hb_set_min(set: *mut hb_set_t) -> hb_codepoint_t;
+pub fn RUST_hb_set_min(set: *mut hb_set_t) -> hb_codepoint_t;
 
-pub fn hb_set_max(set: *mut hb_set_t) -> hb_codepoint_t;
+pub fn RUST_hb_set_max(set: *mut hb_set_t) -> hb_codepoint_t;
 
-pub fn hb_shape(font: *mut hb_font_t, buffer: *mut hb_buffer_t, features: *mut hb_feature_t, num_features: c_uint);
+pub fn RUST_hb_shape(font: *mut hb_font_t, buffer: *mut hb_buffer_t, features: *mut hb_feature_t, num_features: c_uint);
 
-pub fn hb_shape_full(font: *mut hb_font_t, buffer: *mut hb_buffer_t, features: *mut hb_feature_t, num_features: c_uint, shaper_list: *mut *mut c_char) -> hb_bool_t;
+pub fn RUST_hb_shape_full(font: *mut hb_font_t, buffer: *mut hb_buffer_t, features: *mut hb_feature_t, num_features: c_uint, shaper_list: *mut *mut c_char) -> hb_bool_t;
 
-pub fn hb_shape_list_shapers() -> *mut *mut c_char;
+pub fn RUST_hb_shape_list_shapers() -> *mut *mut c_char;
 
-pub fn hb_version(major: *mut c_uint, minor: *mut c_uint, micro: *mut c_uint);
+pub fn RUST_hb_version(major: *mut c_uint, minor: *mut c_uint, micro: *mut c_uint);
 
-pub fn hb_version_string() -> *mut c_char;
+pub fn RUST_hb_version_string() -> *mut c_char;
 
-pub fn hb_version_check(major: c_uint, minor: c_uint, micro: c_uint) -> hb_bool_t;
+pub fn RUST_hb_version_check(major: c_uint, minor: c_uint, micro: c_uint) -> hb_bool_t;
 
 }
