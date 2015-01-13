@@ -12,12 +12,12 @@
 // relevance to servo.
 
 #[cfg(target_os = "linux")]
-#[link(name = "harfbuzz_rust", kind = "static")]
+#[link(name = "harfbuzz", kind = "static")]
 #[link(name = "glib-2.0")]
 #[link(name = "stdc++")]
 extern { }
 
 #[cfg(any(target_os = "macos", target_os = "android"))]
-#[link(name = "harfbuzz_rust", kind = "static")]
+#[link(name = "harfbuzz", kind = "static")]
 #[link(name = "stdc++")]
 extern { }

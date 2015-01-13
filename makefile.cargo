@@ -2,13 +2,11 @@ ifeq (androideabi,$(findstring androideabi,$(TARGET)))
 
 CC := $(TARGET)-gcc
 AR := $(TARGET)-ar
-OBJCOPY := $(TARGET)-objcopy
 
 else
 
 CC ?= gcc
 AR ?= ar
-OBJCOPY ?= objcopy
 
 endif
 
@@ -68,13 +66,10 @@ C_OBJS = $(patsubst %.cc,$(OUT_DIR)/%.o,$(C_SRC))
 CFLAGS += -Iharfbuzz/src $(HBFLAGS) -fPIC -O2
 
 .PHONY: all
-all: $(OUT_DIR)/libharfbuzz_rust.a
+all: $(OUT_DIR)/libharfbuzz.a
 
-$(OUT_DIR)/libharfbuzz_rust.a: $(OUT_DIR)/libharfbuzz_default.a
-	$(OBJCOPY) --redefine-syms symbols.txt $(OUT_DIR)/libharfbuzz_default.a $(OUT_DIR)/libharfbuzz_rust.a
-
-$(OUT_DIR)/libharfbuzz_default.a: $(C_OBJS)
+$(OUT_DIR)/libharfbuzz.a: $(C_OBJS)
 	$(AR) rcs $@ $^
 
 $(OUT_DIR)/harfbuzz/src/%.o: harfbuzz/src/%.cc
-	mkdir -p `dirname $@` && $(CC) $(CFLAGS) -o $@ -c $<
+	mkdir -p `dirname $@` && $(CC) $(CFLAGS) -include symbols.txt -o $@ -c $<
