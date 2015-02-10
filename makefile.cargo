@@ -19,6 +19,15 @@ endif
 ifeq (androideabi,$(findstring androideabi,$(TARGET)))
     OSTYPE=android
 endif
+ifeq (windows,$(findstring windows,$(TARGET)))
+    OSTYPE=windows
+    # cargo sets `$(OUT_DIR)` as native windows path. msys requires cygpath.
+    OUT_DIR:=$(shell cygpath "$(OUT_DIR)")
+    # msys sets `CC=cc` but there's no `cc.exe`. so we change it here.
+    ifeq (cc,$(CC))
+        CC:=gcc
+    endif
+endif
 
 C_SRC = \
 	harfbuzz/src/hb-blob.cc \
@@ -60,6 +69,9 @@ ifeq ($(OSTYPE),linux)
 endif
 
 ifeq ($(OSTYPE),android)
+endif
+
+ifeq ($(OSTYPE),windows)
 endif
 
 C_OBJS = $(patsubst %.cc,$(OUT_DIR)/%.o,$(C_SRC))
