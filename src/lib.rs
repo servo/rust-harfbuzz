@@ -10,7 +10,7 @@
 #![crate_name = "harfbuzz"]
 #![crate_type = "rlib"]
 
-#![feature(globs)]
+#![feature(libc)]
 #![allow(non_camel_case_types)]
 
 extern crate libc;
@@ -185,6 +185,7 @@ pub const HB_SCRIPT_SORA_SOMPENG: u32 = 1399812705_u32;
 pub const HB_SCRIPT_TAKRI: u32 = 1415670642_u32;
 pub const HB_SCRIPT_INVALID: u32 = 0_u32;
 
+#[allow(missing_copy_implementations)]
 #[repr(C)]
 pub struct struct__hb_user_data_key_t {
     _unused: c_char,
@@ -227,6 +228,7 @@ pub type struct__hb_buffer_t = c_void;
 
 pub type hb_buffer_t = struct__hb_buffer_t;
 
+#[allow(missing_copy_implementations)]
 #[repr(C)]
 pub struct struct__hb_glyph_info_t {
     pub codepoint: hb_codepoint_t,
@@ -238,6 +240,7 @@ pub struct struct__hb_glyph_info_t {
 
 pub type hb_glyph_info_t = struct__hb_glyph_info_t;
 
+#[allow(missing_copy_implementations)]
 #[repr(C)]
 pub struct struct__hb_glyph_position_t {
     pub x_advance: hb_position_t,
@@ -263,6 +266,7 @@ pub type struct__hb_font_funcs_t = c_void;
 
 pub type hb_font_funcs_t = struct__hb_font_funcs_t;
 
+#[allow(missing_copy_implementations)]
 #[repr(C)]
 pub struct struct__hb_glyph_extents_t {
     _x_bearing: hb_position_t,
@@ -301,6 +305,7 @@ pub type struct__hb_set_t = c_void;
 
 pub type hb_set_t = struct__hb_set_t;
 
+#[allow(missing_copy_implementations)]
 #[repr(C)]
 pub struct struct__hb_feature_t {
     pub _tag: hb_tag_t,

@@ -4,4 +4,5 @@ name = "harfbuzz"
 version = "0.1.0"
 authors = ["The Servo Project Developers"]
 
-build = "make -f makefile.cargo"
+build = "build.rs"
+links = "harfbuzz"
