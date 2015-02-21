@@ -6,3 +6,6 @@ authors = ["The Servo Project Developers"]
 
 build = "build.rs"
 links = "harfbuzz"
+
+[dependencies]
+libc = "*"
