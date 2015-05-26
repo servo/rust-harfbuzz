@@ -3,9 +3,12 @@
 name = "harfbuzz"
 version = "0.1.0"
 authors = ["The Servo Project Developers"]
+license = "Apache-2.0 / MIT"
+repository = "https://github.com/servo/rust-harfbuzz"
+description = "Bindings to the Harfbuzz text shaping engine"
 
 build = "build.rs"
 links = "harfbuzz"
 
 [dependencies]
-libc = "*"
+libc = "0.1.8"
