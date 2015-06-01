@@ -21,6 +21,9 @@ ifeq (androideabi,$(findstring androideabi,$(TARGET)))
 endif
 ifeq (windows,$(findstring windows,$(TARGET)))
     OSTYPE=windows
+endif
+
+ifeq (windows,$(findstring windows,$(HOST)))
     # cargo sets `$(OUT_DIR)` as native windows path. msys requires cygpath.
     OUT_DIR:=$(shell cygpath "$(OUT_DIR)")
     # msys sets `CC=cc` but there's no `cc.exe`. so we change it here.
