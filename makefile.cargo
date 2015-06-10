@@ -1,4 +1,4 @@
-ifeq (androideabi,$(findstring androideabi,$(TARGET)))
+ifeq (eabi,$(findstring eabi,$(TARGET)))
 
 CC := $(TARGET)-gcc
 AR := $(TARGET)-ar
