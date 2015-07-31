@@ -209,19 +209,46 @@ pub type struct__hb_unicode_funcs_t = c_void;
 
 pub type hb_unicode_funcs_t = struct__hb_unicode_funcs_t;
 
-pub type hb_unicode_combining_class_func_t = *mut u8;
+pub type hb_unicode_combining_class_t = c_uint;
 
-pub type hb_unicode_eastasian_width_func_t = *mut u8;
+pub type hb_unicode_combining_class_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                           hb_codepoint_t,
+                                                           *mut c_void)
+                                                        -> hb_unicode_combining_class_t;
 
-pub type hb_unicode_general_category_func_t = *mut u8;
+pub type hb_unicode_eastasian_width_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                           hb_codepoint_t,
+                                                           *mut c_void)
+                                                        -> c_uint;
 
-pub type hb_unicode_mirroring_func_t = *mut u8;
+pub type hb_unicode_general_category_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                            hb_codepoint_t,
+                                                            *mut c_void)
+                                                         -> hb_unicode_general_category_t;
 
-pub type hb_unicode_script_func_t = *mut u8;
+pub type hb_unicode_mirroring_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                     hb_codepoint_t,
+                                                     *mut c_void)
+                                                  -> hb_unicode_general_category_t;
 
-pub type hb_unicode_compose_func_t = *mut u8;
+pub type hb_unicode_script_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                  hb_codepoint_t,
+                                                  *mut c_void)
+                                               -> hb_script_t;
 
-pub type hb_unicode_decompose_func_t = *mut u8;
+pub type hb_unicode_compose_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                   hb_codepoint_t,
+                                                   hb_codepoint_t,
+                                                   *mut hb_codepoint_t,
+                                                   *mut c_void)
+                                                -> hb_bool_t;
+
+pub type hb_unicode_decompose_func_t = extern "C" fn(*mut hb_unicode_funcs_t,
+                                                     hb_codepoint_t,
+                                                     *mut hb_codepoint_t,
+                                                     *mut hb_codepoint_t,
+                                                     *mut c_void)
+                                                  -> hb_bool_t;
 
 pub type struct__hb_buffer_t = c_void;
 
