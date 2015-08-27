@@ -1,7 +1,7 @@
 ifeq (eabi,$(findstring eabi,$(TARGET)))
 
-CC := $(TARGET)-gcc
-AR := $(TARGET)-ar
+CC ?= $(TARGET)-gcc
+AR ?= $(TARGET)-ar
 
 else
 
