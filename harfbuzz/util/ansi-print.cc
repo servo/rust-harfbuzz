@@ -41,6 +41,17 @@
 #include <unistd.h> /* for isatty() */
 #endif
 
+#ifdef _MSC_VER
+static inline long int
+lround (double x)
+{
+  if (x >= 0)
+    return floor (x + 0.5);
+  else
+    return ceil (x - 0.5);
+}
+#endif
+
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 #define CELL_W 8
@@ -146,6 +157,7 @@ struct biimage_t
   biimage_t (unsigned int width, unsigned int height) :
 		width (width),
 		height (height),
+		bg (0), fg (0), unicolor (true),
 		data ((uint8_t *) malloc (sizeof (data[0]) * width * height)) {}
   ~biimage_t (void)
   { free (data); }
@@ -210,11 +222,12 @@ struct biimage_t
 };
 
 const char *
-block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
+block_best (const biimage_t &bi, bool *inverse)
 {
   assert (bi.width  <= CELL_W);
   assert (bi.height <= CELL_H);
 
+  unsigned int score = (unsigned int) -1;
   unsigned int row_sum[CELL_H] = {0};
   unsigned int col_sum[CELL_W] = {0};
   unsigned int row_sum_i[CELL_H] = {0};
@@ -250,14 +263,14 @@ block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
   const char *best_c = " ";
 
   /* Maybe empty is better! */
-  if (total < *score) {
-    *score = total;
+  if (total < score) {
+    score = total;
     *inverse = false;
     best_c = " ";
   }
   /* Maybe full is better! */
-  if (total_i < *score) {
-    *score = total_i;
+  if (total_i < score) {
+    score = total_i;
     *inverse = true;
     best_c = " ";
   }
@@ -283,11 +296,11 @@ block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
 	best_inv = true;
       }
     }
-    if (best_s < *score) {
+    if (best_s < score) {
       static const char *lower[7] = {"▁", "▂", "▃", "▄", "▅", "▆", "▇"};
       unsigned int which = lround (((best_i + 1) * 8) / bi.height);
       if (1 <= which && which <= 7) {
-	*score = best_s;
+	score = best_s;
 	*inverse = best_inv;
 	best_c = lower[7 - which];
       }
@@ -315,11 +328,11 @@ block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
 	best_inv = false;
       }
     }
-    if (best_s < *score) {
+    if (best_s < score) {
       static const char *left [7] = {"▏", "▎", "▍", "▌", "▋", "▊", "▉"};
       unsigned int which = lround (((best_i + 1) * 8) / bi.width);
       if (1 <= which && which <= 7) {
-	*score = best_s;
+	score = best_s;
 	*inverse = best_inv;
 	best_c = left[which - 1];
       }
@@ -337,7 +350,7 @@ block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
 	  qs += quad_i[i][j];
 	} else
 	  qs += quad[i][j];
-    if (qs < *score) {
+    if (qs < score) {
       const char *c = NULL;
       bool inv = false;
       switch (q) {
@@ -353,7 +366,7 @@ block_best (const biimage_t &bi, unsigned int *score, bool *inverse)
 	case 14: c = "▟"; inv = true;  break;
       }
       if (c) {
-	*score = qs;
+	score = qs;
 	*inverse = inv;
 	best_c = c;
       }
@@ -388,9 +401,8 @@ ansi_print_image_rgb24 (const uint32_t *data,
 	printf (" ");
       } else {
         /* Figure out the closest character to the biimage */
-        unsigned int score = (unsigned int) -1;
 	bool inverse = false;
-        const char *c = block_best (bi, &score, &inverse);
+        const char *c = block_best (bi, &inverse);
 	if (inverse) {
 	  if (last_bg != bi.fg || last_fg != bi.bg) {
 	    printf ("\e[%d;%dm", 30 + bi.bg, 40 + bi.fg);

@@ -6,9 +6,13 @@ CLEANFILES =
 DISTCLEANFILES =
 MAINTAINERCLEANFILES =
 
+# Convenience targets:
+lib:
+	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src lib
+
 if HAVE_GLIB
-AM_CPPFLAGS = -DSRCDIR="\"$(srcdir)\"" -I$(top_srcdir)/src/ -I$(top_builddir)/src/ $(GLIB_CFLAGS) $(GTHREAD_CFLAGS)
-LDADD = $(top_builddir)/src/libharfbuzz.la $(GLIB_LIBS) $(GTHREAD_LIBS)
+AM_CPPFLAGS = -DSRCDIR="\"$(srcdir)\"" -I$(top_srcdir)/src/ -I$(top_builddir)/src/ $(GLIB_CFLAGS)
+LDADD = $(top_builddir)/src/libharfbuzz.la $(GLIB_LIBS)
 
 EXTRA_DIST += hb-test.h
 
@@ -21,10 +25,22 @@ TEST_PROGS = \
 	test-common \
 	test-font \
 	test-object \
+	test-set \
 	test-shape \
 	test-unicode \
 	test-version \
 	$(NULL)
+
+test_unicode_CPPFLAGS = $(AM_CPPFLAGS)
+test_unicode_LDADD = $(LDADD)
+if HAVE_GLIB
+test_unicode_CPPFLAGS += $(GLIB_CFLAGS)
+endif
+if HAVE_ICU
+test_unicode_CPPFLAGS += $(ICU_CFLAGS)
+test_unicode_LDADD += $(top_builddir)/src/libharfbuzz-icu.la $(ICU_LIBS)
+endif
+
 
 if HAVE_OT
 TEST_PROGS += \
@@ -49,7 +65,6 @@ test_c_CPPFLAGS += $(FREETYPE_CFLAGS)
 test_cplusplus_CPPFLAGS += $(FREETYPE_CFLAGS)
 endif
 
-
 # Default test running environment
 TESTS = $(TEST_PROGS)
 TESTS_ENVIRONMENT = \
@@ -58,7 +73,7 @@ TESTS_ENVIRONMENT = \
 	G_DEBUG=gc-friendly \
 	G_SLICE=always-malloc \
 	srcdir=$(srcdir) \
-	$(ENV)
+	$(NULL)
 
 
 # check-tool: Run tests under $(TOOL)
@@ -86,8 +101,8 @@ VALGRIND_FLAGS = \
 	$(EXTRA_VALGRIND_FLAGS)
 #	Can't do for now: --show-reachable=yes
 CLEANFILES +=  log-valgrind.txt
-valgrind_verbose = $(valgrind_verbose_$(V))
-valgrind_verbose_ = $(valgrind_verbose_$(AM_DEFAULT_VERBOSITY))
+valgrind_verbose = $(valgrind_verbose_@AM_V@)
+valgrind_verbose_ = $(valgrind_verbose_@AM_DEFAULT_V@)
 valgrind_verbose_0 = | \
 	grep '\(^[^=]\|ERROR SUMMARY\|definitely lost\|indirectly lost\)' | grep -v ': 0'
 # TODO: The following check does not fail if valgrind finds error.  It should.

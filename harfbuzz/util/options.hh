@@ -43,8 +43,8 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for isatty() */
 #endif
-#ifdef HAVE_IO_H
-#include <io.h> /* for _setmode() under Windows */
+#if defined(_WIN32) || defined(__CYGWIN__)
+#include <io.h> /* for setmode() under Windows */
 #endif
 
 #include <hb.h>
@@ -54,14 +54,37 @@
 #include <glib.h>
 #include <glib/gprintf.h>
 
+#if !GLIB_CHECK_VERSION (2, 22, 0)
+# define g_mapped_file_unref g_mapped_file_free
+#endif
+
+
+/* A few macros copied from hb-private.hh. */
+
+#if __GNUC__ >= 4
+#define HB_UNUSED	__attribute__((unused))
+#else
+#define HB_UNUSED
+#endif
+
 #undef MIN
 template <typename Type> static inline Type MIN (const Type &a, const Type &b) { return a < b ? a : b; }
 
 #undef MAX
 template <typename Type> static inline Type MAX (const Type &a, const Type &b) { return a > b ? a : b; }
 
+#undef  ARRAY_LENGTH
+template <typename Type, unsigned int n>
+static inline unsigned int ARRAY_LENGTH (const Type (&)[n]) { return n; }
+/* A const version, but does not detect erratically being called on pointers. */
+#define ARRAY_LENGTH_CONST(__array) ((signed int) (sizeof (__array) / sizeof (__array[0])))
 
-void fail (hb_bool_t suggest_help, const char *format, ...) G_GNUC_NORETURN;
+#define _ASSERT_STATIC1(_line, _cond)	HB_UNUSED typedef int _static_assert_on_line_##_line##_failed[(_cond)?1:-1]
+#define _ASSERT_STATIC0(_line, _cond)	_ASSERT_STATIC1 (_line, (_cond))
+#define ASSERT_STATIC(_cond)		_ASSERT_STATIC0 (__LINE__, (_cond))
+
+
+void fail (hb_bool_t suggest_help, const char *format, ...) G_GNUC_NORETURN G_GNUC_PRINTF (2, 3);
 
 
 extern hb_bool_t debug;
@@ -81,11 +104,14 @@ struct option_parser_t
     memset (this, 0, sizeof (*this));
     usage_str = usage;
     context = g_option_context_new (usage);
+    to_free = g_ptr_array_new ();
 
     add_main_options ();
   }
   ~option_parser_t (void) {
     g_option_context_free (context);
+    g_ptr_array_foreach (to_free, (GFunc) g_free, NULL);
+    g_ptr_array_free (to_free, TRUE);
   }
 
   void add_main_options (void);
@@ -96,6 +122,10 @@ struct option_parser_t
 		  const gchar    *help_description,
 		  option_group_t *option_group);
 
+  void free_later (char *p) {
+    g_ptr_array_add (to_free, p);
+  }
+
   void parse (int *argc, char ***argv);
 
   G_GNUC_NORETURN void usage (void) {
@@ -103,15 +133,18 @@ struct option_parser_t
     exit (1);
   }
 
+  private:
   const char *usage_str;
   GOptionContext *context;
+  GPtrArray *to_free;
 };
 
 
 #define DEFAULT_MARGIN 16
 #define DEFAULT_FORE "#000000"
 #define DEFAULT_BACK "#FFFFFF"
-#define DEFAULT_FONT_SIZE 256
+#define FONT_SIZE_UPEM 0x7FFFFFFF
+#define FONT_SIZE_NONE 0
 
 struct view_options_t : option_group_t
 {
@@ -121,7 +154,6 @@ struct view_options_t : option_group_t
     back = DEFAULT_BACK;
     line_space = 0;
     margin.t = margin.r = margin.b = margin.l = DEFAULT_MARGIN;
-    font_size = DEFAULT_FONT_SIZE;
 
     add_options (parser);
   }
@@ -135,7 +167,6 @@ struct view_options_t : option_group_t
   struct margin_t {
     double t, r, b, l;
   } margin;
-  double font_size;
 };
 
 
@@ -144,11 +175,14 @@ struct shape_options_t : option_group_t
   shape_options_t (option_parser_t *parser)
   {
     direction = language = script = NULL;
+    bot = eot = preserve_default_ignorables = false;
     features = NULL;
     num_features = 0;
     shapers = NULL;
     utf8_clusters = false;
+    cluster_level = HB_BUFFER_CLUSTER_LEVEL_DEFAULT;
     normalize_glyphs = false;
+    num_iterations = 1;
 
     add_options (parser);
   }
@@ -165,12 +199,26 @@ struct shape_options_t : option_group_t
     hb_buffer_set_direction (buffer, hb_direction_from_string (direction, -1));
     hb_buffer_set_script (buffer, hb_script_from_string (script, -1));
     hb_buffer_set_language (buffer, hb_language_from_string (language, -1));
+    hb_buffer_set_flags (buffer, (hb_buffer_flags_t) (HB_BUFFER_FLAG_DEFAULT |
+			 (bot ? HB_BUFFER_FLAG_BOT : 0) |
+			 (eot ? HB_BUFFER_FLAG_EOT : 0) |
+			 (preserve_default_ignorables ? HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES : 0)));
+    hb_buffer_set_cluster_level (buffer, cluster_level);
+    hb_buffer_guess_segment_properties (buffer);
   }
 
-  void populate_buffer (hb_buffer_t *buffer, const char *text, int text_len)
+  void populate_buffer (hb_buffer_t *buffer, const char *text, int text_len,
+			const char *text_before, const char *text_after)
   {
-    hb_buffer_reset (buffer);
+    hb_buffer_clear_contents (buffer);
+    if (text_before) {
+      unsigned int len = strlen (text_before);
+      hb_buffer_add_utf8 (buffer, text_before, len, len, 0);
+    }
     hb_buffer_add_utf8 (buffer, text, text_len, 0, text_len);
+    if (text_after) {
+      hb_buffer_add_utf8 (buffer, text_after, -1, 0, 0);
+    }
 
     if (!utf8_clusters) {
       /* Reset cluster values to refer to Unicode character index
@@ -205,22 +253,37 @@ struct shape_options_t : option_group_t
     hb_ot_shape_glyphs_closure (font, buffer, features, num_features, glyphs);
   }
 
+  /* Buffer properties */
   const char *direction;
   const char *language;
   const char *script;
+
+  /* Buffer flags */
+  hb_bool_t bot;
+  hb_bool_t eot;
+  hb_bool_t preserve_default_ignorables;
+
   hb_feature_t *features;
   unsigned int num_features;
   char **shapers;
   hb_bool_t utf8_clusters;
+  hb_buffer_cluster_level_t cluster_level;
   hb_bool_t normalize_glyphs;
+  unsigned int num_iterations;
 };
 
 
 struct font_options_t : option_group_t
 {
-  font_options_t (option_parser_t *parser) {
+  font_options_t (option_parser_t *parser,
+		  int default_font_size_,
+		  unsigned int subpixel_bits_) {
+    default_font_size = default_font_size_;
+    subpixel_bits = subpixel_bits_;
     font_file = NULL;
     face_index = 0;
+    font_size_x = font_size_y = default_font_size;
+    font_funcs = NULL;
 
     font = NULL;
 
@@ -236,6 +299,11 @@ struct font_options_t : option_group_t
 
   const char *font_file;
   int face_index;
+  int default_font_size;
+  unsigned int subpixel_bits;
+  mutable double font_size_x;
+  mutable double font_size_y;
+  const char *font_funcs;
 
   private:
   mutable hb_font_t *font;
@@ -245,6 +313,9 @@ struct font_options_t : option_group_t
 struct text_options_t : option_group_t
 {
   text_options_t (option_parser_t *parser) {
+    text_before = NULL;
+    text_after = NULL;
+
     text = NULL;
     text_file = NULL;
 
@@ -273,6 +344,9 @@ struct text_options_t : option_group_t
 
   const char *get_line (unsigned int *len);
 
+  const char *text_before;
+  const char *text_after;
+
   const char *text;
   const char *text_file;
 
@@ -284,9 +358,12 @@ struct text_options_t : option_group_t
 
 struct output_options_t : option_group_t
 {
-  output_options_t (option_parser_t *parser) {
+  output_options_t (option_parser_t *parser,
+		    const char **supported_formats_ = NULL) {
     output_file = NULL;
     output_format = NULL;
+    supported_formats = supported_formats_;
+    explicit_output_format = false;
 
     fp = NULL;
 
@@ -301,6 +378,9 @@ struct output_options_t : option_group_t
 
   void post_parse (GError **error G_GNUC_UNUSED)
   {
+    if (output_format)
+      explicit_output_format = true;
+
     if (output_file && !output_format) {
       output_format = strrchr (output_file, '.');
       if (output_format)
@@ -315,6 +395,8 @@ struct output_options_t : option_group_t
 
   const char *output_file;
   const char *output_format;
+  const char **supported_formats;
+  bool explicit_output_format;
 
   mutable FILE *fp;
 };
@@ -328,6 +410,7 @@ struct format_options_t : option_group_t
     show_text = false;
     show_unicode = false;
     show_line_num = false;
+    show_extents = false;
 
     add_options (parser);
   }
@@ -338,7 +421,8 @@ struct format_options_t : option_group_t
 			  GString      *gs);
   void serialize_glyphs (hb_buffer_t  *buffer,
 			 hb_font_t    *font,
-			 hb_bool_t    utf8_clusters,
+			 hb_buffer_serialize_format_t format,
+			 hb_buffer_serialize_flags_t flags,
 			 GString      *gs);
   void serialize_line_no (unsigned int  line_no,
 			  GString      *gs);
@@ -347,7 +431,6 @@ struct format_options_t : option_group_t
 				 const char   *text,
 				 unsigned int  text_len,
 				 hb_font_t    *font,
-				 hb_bool_t     utf8_clusters,
 				 GString      *gs);
   void serialize_message (unsigned int  line_no,
 			  const char   *msg,
@@ -357,7 +440,8 @@ struct format_options_t : option_group_t
 				   const char   *text,
 				   unsigned int  text_len,
 				   hb_font_t    *font,
-				   hb_bool_t     utf8_clusters,
+				   hb_buffer_serialize_format_t output_format,
+				   hb_buffer_serialize_flags_t format_flags,
 				   GString      *gs);
 
 
@@ -367,6 +451,7 @@ struct format_options_t : option_group_t
   hb_bool_t show_text;
   hb_bool_t show_unicode;
   hb_bool_t show_line_num;
+  hb_bool_t show_extents;
 };
 
 

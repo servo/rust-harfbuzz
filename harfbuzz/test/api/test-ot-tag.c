@@ -132,6 +132,7 @@ test_ot_tag_script_indic (void)
   test_indic_tags ("ory2", "orya", HB_SCRIPT_ORIYA);
   test_indic_tags ("tml2", "taml", HB_SCRIPT_TAMIL);
   test_indic_tags ("tel2", "telu", HB_SCRIPT_TELUGU);
+  test_indic_tags ("mym2", "mymr", HB_SCRIPT_MYANMAR);
 }
 
 
@@ -194,17 +195,21 @@ test_ot_tag_language (void)
 
   test_language_two_way ("ZHH", "zh-hk"); /* Chinese (Hong Kong) */
 
+  test_tag_from_language ("ZHS", "zh"); /* Chinese */
   test_tag_from_language ("ZHS", "zh-cn"); /* Chinese (China) */
   test_tag_from_language ("ZHS", "zh-sg"); /* Chinese (Singapore) */
   test_tag_from_language ("ZHT", "zh-mo"); /* Chinese (Macao) */
   test_tag_from_language ("ZHT", "zh-tw"); /* Chinese (Taiwan) */
+  test_tag_from_language ("ZHS", "zh-Hans"); /* Chinese (Simplified) */
+  test_tag_from_language ("ZHT", "zh-Hant"); /* Chinese (Traditional) */
+  test_tag_from_language ("ZHS", "zh-xx"); /* Chinese (Other) */
 
   test_tag_from_language ("ZHS", "zh"); /* Chinese */
   test_tag_from_language ("ZHS", "zh-xx");
 
-  test_tag_to_language ("ZHS", "zh-x-hbotzhs");
-  test_tag_to_language ("ZHT", "zh-x-hbotzht");
-  test_tag_to_language ("ZHP", "zh-x-hbotzhp");
+  test_tag_to_language ("ZHS", "zh-Hans");
+  test_tag_to_language ("ZHT", "zh-Hant");
+  test_tag_to_language ("ZHP", "x-hbotzhp");
 
   test_language_two_way ("ABC", "x-hbotabc");
   test_tag_from_language ("ABC", "asdf-asdf-wer-x-hbotabc-zxc");

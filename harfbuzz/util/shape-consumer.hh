@@ -34,8 +34,10 @@ template <typename output_t>
 struct shape_consumer_t
 {
   shape_consumer_t (option_parser_t *parser)
-		  : shaper (parser),
-		    output (parser) {}
+		  : failed (false),
+		    shaper (parser),
+		    output (parser),
+		    font (NULL) {}
 
   void init (const font_options_t *font_opts)
   {
@@ -45,18 +47,23 @@ struct shape_consumer_t
   }
   void consume_line (hb_buffer_t  *buffer,
 		     const char   *text,
-		     unsigned int  text_len)
+		     unsigned int  text_len,
+		     const char   *text_before,
+		     const char   *text_after)
   {
     output.new_line ();
 
-    shaper.populate_buffer (buffer, text, text_len);
-    output.consume_text (buffer, text, text_len, shaper.utf8_clusters);
-
-    if (!shaper.shape (font, buffer)) {
-      failed = true;
-      hb_buffer_set_length (buffer, 0);
-      output.shape_failed (buffer, text, text_len, shaper.utf8_clusters);
-      return;
+    for (unsigned int n = shaper.num_iterations; n; n--)
+    {
+      shaper.populate_buffer (buffer, text, text_len, text_before, text_after);
+      if (n == 1)
+	output.consume_text (buffer, text, text_len, shaper.utf8_clusters);
+      if (!shaper.shape (font, buffer)) {
+	failed = true;
+	hb_buffer_set_length (buffer, 0);
+	output.shape_failed (buffer, text, text_len, shaper.utf8_clusters);
+	return;
+      }
     }
 
     output.consume_glyphs (buffer, text, text_len, shaper.utf8_clusters);

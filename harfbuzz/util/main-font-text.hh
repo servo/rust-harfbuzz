@@ -31,12 +31,12 @@
 
 /* main() body for utilities taking font and processing text.*/
 
-template <typename consumer_t>
+template <typename consumer_t, int default_font_size, int subpixel_bits>
 struct main_font_text_t
 {
   main_font_text_t (void)
 		  : options ("[FONT-FILE] [TEXT]"),
-		    font_opts (&options),
+		    font_opts (&options, default_font_size, subpixel_bits),
 		    input (&options),
 		    consumer (&options) {}
 
@@ -61,7 +61,7 @@ struct main_font_text_t
     unsigned int text_len;
     const char *text;
     while ((text = input.get_line (&text_len)))
-      consumer.consume_line (buffer, text, text_len);
+      consumer.consume_line (buffer, text, text_len, input.text_before, input.text_after);
     hb_buffer_destroy (buffer);
 
     consumer.finish (&font_opts);

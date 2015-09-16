@@ -49,12 +49,15 @@ M    = 7;
 SM   = 8;
 VD   = 9;
 A    = 10;
-NBSP = 11;
+PLACEHOLDER = 11;
 DOTTEDCIRCLE = 12;
-RS   = 13;
+RS    = 13;
 Coeng = 14;
 Repha = 15;
 Ra    = 16;
+CM    = 17;
+Symbol= 18;
+CM2   = 31;
 
 c = (C | Ra);			# is_consonant
 n = ((ZWNJ?.RS)? (N.N?)?);	# is_consonant_modifier
@@ -62,46 +65,51 @@ z = ZWJ|ZWNJ;			# is_joiner
 h = H | Coeng;			# is_halant_or_coeng
 reph = (Ra H | Repha);		# possible reph
 
-cn = c.n?;
+cn = c.ZWJ?.n?;
 forced_rakar = ZWJ H ZWJ Ra;
+symbol = Symbol.N?;
 matra_group = z{0,3}.M.N?.(H | forced_rakar)?;
-syllable_tail = (SM.ZWNJ?)? (Coeng (cn|V))? (VD VD?)?;
-place_holder = NBSP | DOTTEDCIRCLE;
-halant_group = (z?.h.ZWJ?);
+syllable_tail = (z?.SM.SM?.ZWNJ?)? A{0,3}? VD{0,2};
+place_holder = PLACEHOLDER | DOTTEDCIRCLE;
+halant_group = (z?.h.(ZWJ.N?)?);
 final_halant_group = halant_group | h.ZWNJ;
-halant_or_matra_group = (final_halant_group | matra_group{0,4});
+medial_group = CM?.CM2?;
+halant_or_matra_group = (final_halant_group | (h.ZWJ)? matra_group{0,4}) (Coeng (cn|V))?;
 
 
-consonant_syllable =	Repha? (cn.halant_group){0,4} cn A? halant_or_matra_group? syllable_tail;
-vowel_syllable =	reph? V.n? (ZWJ | (halant_group.cn){0,4} halant_or_matra_group? syllable_tail);
-standalone_cluster =	reph? place_holder.n? (halant_group.cn){0,4} halant_or_matra_group? syllable_tail;
+consonant_syllable =	Repha? (cn.halant_group){0,4} cn medial_group halant_or_matra_group syllable_tail;
+vowel_syllable =	reph? V.n? (ZWJ | (halant_group.cn){0,4} medial_group halant_or_matra_group syllable_tail);
+standalone_cluster =	(Repha? PLACEHOLDER | reph? DOTTEDCIRCLE).n? (halant_group.cn){0,4} medial_group halant_or_matra_group syllable_tail;
+symbol_cluster = 	symbol syllable_tail;
+broken_cluster =	reph? n? (halant_group.cn){0,4} medial_group halant_or_matra_group syllable_tail;
 other =			any;
 
 main := |*
-	consonant_syllable	=> { process_syllable (consonant_syllable); };
-	vowel_syllable		=> { process_syllable (vowel_syllable); };
-	standalone_cluster	=> { process_syllable (standalone_cluster); };
-	other			=> { process_syllable (non_indic); };
+	consonant_syllable	=> { found_syllable (consonant_syllable); };
+	vowel_syllable		=> { found_syllable (vowel_syllable); };
+	standalone_cluster	=> { found_syllable (standalone_cluster); };
+	symbol_cluster		=> { found_syllable (symbol_cluster); };
+	broken_cluster		=> { found_syllable (broken_cluster); };
+	other			=> { found_syllable (non_indic_cluster); };
 *|;
 
 
 }%%
 
-#define process_syllable(func) \
+#define found_syllable(syllable_type) \
   HB_STMT_START { \
-    if (0) fprintf (stderr, "syllable %d..%d %s\n", last, p+1, #func); \
+    if (0) fprintf (stderr, "syllable %d..%d %s\n", last, p+1, #syllable_type); \
     for (unsigned int i = last; i < p+1; i++) \
-      info[i].syllable() = syllable_serial; \
-    PASTE (initial_reordering_, func) (plan, buffer, last, p+1); \
+      info[i].syllable() = (syllable_serial << 4) | syllable_type; \
     last = p+1; \
     syllable_serial++; \
-    if (unlikely (!syllable_serial)) syllable_serial++; \
+    if (unlikely (syllable_serial == 16)) syllable_serial = 1; \
   } HB_STMT_END
 
 static void
-find_syllables (const hb_ot_shape_plan_t *plan, hb_buffer_t *buffer)
+find_syllables (hb_buffer_t *buffer)
 {
-  unsigned int p, pe, eof, ts, te, act;
+  unsigned int p, pe, eof, ts HB_UNUSED, te HB_UNUSED, act HB_UNUSED;
   int cs;
   hb_glyph_info_t *info = buffer->info;
   %%{
@@ -113,7 +121,7 @@ find_syllables (const hb_ot_shape_plan_t *plan, hb_buffer_t *buffer)
   pe = eof = buffer->len;
 
   unsigned int last = 0;
-  uint8_t syllable_serial = 1;
+  unsigned int syllable_serial = 1;
   %%{
     write exec;
   }%%

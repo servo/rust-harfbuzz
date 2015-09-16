@@ -60,19 +60,43 @@ _cairo_eps_surface_create_for_stream (cairo_write_func_t  write_func,
 #  endif
 #endif
 
+
+static FT_Library ft_library;
+
+static inline
+void free_ft_library (void)
+{
+  FT_Done_FreeType (ft_library);
+}
+
 cairo_scaled_font_t *
-helper_cairo_create_scaled_font (const font_options_t *font_opts,
-				 double font_size)
+helper_cairo_create_scaled_font (const font_options_t *font_opts)
 {
   hb_font_t *font = hb_font_reference (font_opts->get_font ());
 
   cairo_font_face_t *cairo_face;
   FT_Face ft_face = hb_ft_font_get_face (font);
   if (!ft_face)
+  {
+    if (!ft_library)
+    {
+      FT_Init_FreeType (&ft_library);
+#ifdef HAVE_ATEXIT
+      atexit (free_ft_library);
+#endif
+    }
+    FT_New_Face (ft_library,
+		 font_opts->font_file,
+		 font_opts->face_index,
+		 &ft_face);
+  }
+  if (!ft_face)
+  {
     /* This allows us to get some boxes at least... */
     cairo_face = cairo_toy_font_face_create ("@cairo:sans",
 					     CAIRO_FONT_SLANT_NORMAL,
 					     CAIRO_FONT_WEIGHT_NORMAL);
+  }
   else
     cairo_face = cairo_ft_font_face_create_for_ft_face (ft_face, 0);
   cairo_matrix_t ctm, font_matrix;
@@ -80,7 +104,8 @@ helper_cairo_create_scaled_font (const font_options_t *font_opts,
 
   cairo_matrix_init_identity (&ctm);
   cairo_matrix_init_scale (&font_matrix,
-			   font_size, font_size);
+			   font_opts->font_size_x,
+			   font_opts->font_size_y);
   font_options = cairo_font_options_create ();
   cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
   cairo_font_options_set_hint_metrics (font_options, CAIRO_HINT_METRICS_OFF);
@@ -246,6 +271,27 @@ stdio_write_func (void                *closure,
   return CAIRO_STATUS_SUCCESS;
 }
 
+const char *helper_cairo_supported_formats[] =
+{
+  "ansi",
+  #ifdef CAIRO_HAS_PNG_FUNCTIONS
+  "png",
+  #endif
+  #ifdef CAIRO_HAS_SVG_SURFACE
+  "svg",
+  #endif
+  #ifdef CAIRO_HAS_PDF_SURFACE
+  "pdf",
+  #endif
+  #ifdef CAIRO_HAS_PS_SURFACE
+  "ps",
+   #ifdef HAS_EPS
+    "eps",
+   #endif
+  #endif
+  NULL
+};
+
 cairo_t *
 helper_cairo_create_context (double w, double h,
 			     view_options_t *view_opts,
@@ -268,7 +314,13 @@ helper_cairo_create_context (double w, double h,
       extension = "ansi";
     else
 #endif
+    {
+#ifdef CAIRO_HAS_PNG_FUNCTIONS
       extension = "png";
+#else
+      extension = "ansi";
+#endif
+    }
   }
   if (0)
     ;
@@ -317,7 +369,11 @@ helper_cairo_create_context (double w, double h,
   else if (constructor2)
     surface = constructor2 (stdio_write_func, f, w, h, content);
   else
-    fail (false, "Unknown output format `%s'", extension);
+    fail (false, "Unknown output format `%s'; supported formats are: %s%s",
+	  extension,
+	  g_strjoinv ("/", const_cast<char**> (helper_cairo_supported_formats)),
+	  out_opts->explicit_output_format ? "" :
+	  "\nTry setting format using --output-format");
 
   cairo_t *cr = cairo_create (surface);
   content = cairo_surface_get_content (surface);
@@ -367,7 +423,7 @@ helper_cairo_line_from_buffer (helper_cairo_line_t *l,
 			       hb_buffer_t         *buffer,
 			       const char          *text,
 			       unsigned int         text_len,
-			       double               scale,
+			       int                  scale_bits,
 			       hb_bool_t            utf8_clusters)
 {
   memset (l, 0, sizeof (*l));
@@ -400,16 +456,16 @@ helper_cairo_line_from_buffer (helper_cairo_line_t *l,
   for (i = 0; i < (int) l->num_glyphs; i++)
   {
     l->glyphs[i].index = hb_glyph[i].codepoint;
-    l->glyphs[i].x = ( hb_position->x_offset + x) * scale;
-    l->glyphs[i].y = (-hb_position->y_offset + y) * scale;
+    l->glyphs[i].x = scalbn ( hb_position->x_offset + x, scale_bits);
+    l->glyphs[i].y = scalbn (-hb_position->y_offset + y, scale_bits);
     x +=  hb_position->x_advance;
     y += -hb_position->y_advance;
 
     hb_position++;
   }
   l->glyphs[i].index = -1;
-  l->glyphs[i].x = x * scale;
-  l->glyphs[i].y = y * scale;
+  l->glyphs[i].x = scalbn (x, scale_bits);
+  l->glyphs[i].y = scalbn (y, scale_bits);
 
   if (l->num_clusters) {
     memset ((void *) l->clusters, 0, l->num_clusters * sizeof (l->clusters[0]));

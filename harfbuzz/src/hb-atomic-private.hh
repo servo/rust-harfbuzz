@@ -39,75 +39,126 @@
 
 /* We need external help for these */
 
-#if 0
+#if defined(hb_atomic_int_impl_add) \
+ && defined(hb_atomic_ptr_impl_get) \
+ && defined(hb_atomic_ptr_impl_cmpexch)
+
+/* Defined externally, i.e. in config.h; must have typedef'ed hb_atomic_int_impl_t as well. */
 
 
-#elif !defined(HB_NO_MT) && defined(_MSC_VER) && _MSC_VER >= 1600
+#elif !defined(HB_NO_MT) && (defined(_WIN32) || defined(__CYGWIN__))
 
-#include <intrin.h>
-/* On x86, _InterlockedCompareExchangePointer is a macro defined in concrt.h */
-#include <concrt.h>
+#include <windows.h>
 
-typedef long hb_atomic_int_t;
-#define hb_atomic_int_add(AI, V)	_InterlockedExchangeAdd (&(AI), (V))
+/* MinGW has a convoluted history of supporting MemoryBarrier
+ * properly.  As such, define a function to wrap the whole
+ * thing. */
+static inline void _HBMemoryBarrier (void) {
+#if !defined(MemoryBarrier)
+  long dummy = 0;
+  InterlockedExchange (&dummy, 1);
+#else
+  MemoryBarrier ();
+#endif
+}
 
-#define hb_atomic_ptr_get(P)		(MemoryBarrier (), (void *) *(P))
-#define hb_atomic_ptr_cmpexch(P,O,N)	(_InterlockedCompareExchangePointer ((void **) (P), (void *) (N), (void *) (O)) == (void *) (O))
+typedef LONG hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V) (V)
+#define hb_atomic_int_impl_add(AI, V)		InterlockedExchangeAdd (&(AI), (V))
+
+#define hb_atomic_ptr_impl_get(P)		(_HBMemoryBarrier (), (void *) *(P))
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	(InterlockedCompareExchangePointer ((void **) (P), (void *) (N), (void *) (O)) == (void *) (O))
 
 
 #elif !defined(HB_NO_MT) && defined(__APPLE__)
 
 #include <libkern/OSAtomic.h>
+#ifdef __MAC_OS_X_MIN_REQUIRED
+#include <AvailabilityMacros.h>
+#elif defined(__IPHONE_OS_MIN_REQUIRED)
+#include <Availability.h>
+#endif
 
-typedef int32_t hb_atomic_int_t;
-#define hb_atomic_int_add(AI, V)	(OSAtomicAdd32Barrier ((V), &(AI)) - (V))
 
-#define hb_atomic_ptr_get(P)		(OSMemoryBarrier (), (void *) *(P))
-#define hb_atomic_ptr_cmpexch(P,O,N)	OSAtomicCompareAndSwapPtrBarrier ((void *) (O), (void *) (N), (void **) (P))
+typedef int32_t hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V) (V)
+#define hb_atomic_int_impl_add(AI, V)		(OSAtomicAdd32Barrier ((V), &(AI)) - (V))
+
+#define hb_atomic_ptr_impl_get(P)		(OSMemoryBarrier (), (void *) *(P))
+#if (MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_4 || __IPHONE_VERSION_MIN_REQUIRED >= 20100)
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	OSAtomicCompareAndSwapPtrBarrier ((void *) (O), (void *) (N), (void **) (P))
+#else
+#if __ppc64__ || __x86_64__ || __aarch64__
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	OSAtomicCompareAndSwap64Barrier ((int64_t) (O), (int64_t) (N), (int64_t*) (P))
+#else
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	OSAtomicCompareAndSwap32Barrier ((int32_t) (O), (int32_t) (N), (int32_t*) (P))
+#endif
+#endif
 
 
 #elif !defined(HB_NO_MT) && defined(HAVE_INTEL_ATOMIC_PRIMITIVES)
 
-typedef int hb_atomic_int_t;
-#define hb_atomic_int_add(AI, V)	__sync_fetch_and_add (&(AI), (V))
+typedef int hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V) (V)
+#define hb_atomic_int_impl_add(AI, V)		__sync_fetch_and_add (&(AI), (V))
 
-#define hb_atomic_ptr_get(P)		(void *) (__sync_synchronize (), *(P))
-#define hb_atomic_ptr_cmpexch(P,O,N)	__sync_bool_compare_and_swap ((P), (O), (N))
+#define hb_atomic_ptr_impl_get(P)		(void *) (__sync_synchronize (), *(P))
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	__sync_bool_compare_and_swap ((P), (O), (N))
 
-#elif !defined(HB_NO_MT) && defined(HAVE_GLIB)
 
-#include <glib.h>
-typedef int hb_atomic_int_t;
-#if GLIB_CHECK_VERSION(2,29,5)
-#define hb_atomic_int_add(AI, V)	g_atomic_int_add (&(AI), (V))
-#else
-#define hb_atomic_int_add(AI, V)	g_atomic_int_exchange_and_add (&(AI), (V))
-#endif
+#elif !defined(HB_NO_MT) && defined(HAVE_SOLARIS_ATOMIC_OPS)
 
-#define hb_atomic_ptr_get(P)		g_atomic_pointer_get (P)
-#define hb_atomic_ptr_cmpexch(P,O,N)	g_atomic_pointer_compare_and_exchange ((void **) (P), (void *) (O), (void *) (N))
+#include <atomic.h>
+#include <mbarrier.h>
+
+typedef unsigned int hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V) (V)
+#define hb_atomic_int_impl_add(AI, V)		( ({__machine_rw_barrier ();}), atomic_add_int_nv (&(AI), (V)) - (V))
+
+#define hb_atomic_ptr_impl_get(P)		( ({__machine_rw_barrier ();}), (void *) *(P))
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	( ({__machine_rw_barrier ();}), atomic_cas_ptr ((void **) (P), (void *) (O), (void *) (N)) == (void *) (O) ? true : false)
 
 
 #elif !defined(HB_NO_MT)
 
 #define HB_ATOMIC_INT_NIL 1 /* Warn that fallback implementation is in use. */
-typedef volatile int hb_atomic_int_t;
-#define hb_atomic_int_add(AI, V)	(((AI) += (V)) - (V))
 
-#define hb_atomic_ptr_get(P)		((void *) *(P))
-#define hb_atomic_ptr_cmpexch(P,O,N)	(* (void * volatile *) (P) == (void *) (O) ? (* (void * volatile *) (P) = (void *) (N), true) : false)
+typedef volatile int hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V) (V)
+#define hb_atomic_int_impl_add(AI, V)		(((AI) += (V)) - (V))
+
+#define hb_atomic_ptr_impl_get(P)		((void *) *(P))
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	(* (void * volatile *) (P) == (void *) (O) ? (* (void * volatile *) (P) = (void *) (N), true) : false)
 
 
 #else /* HB_NO_MT */
 
-typedef int hb_atomic_int_t;
-#define hb_atomic_int_add(AI, V)	(((AI) += (V)) - (V))
+typedef int hb_atomic_int_impl_t;
+#define HB_ATOMIC_INT_IMPL_INIT(V)		(V)
+#define hb_atomic_int_impl_add(AI, V)		(((AI) += (V)) - (V))
 
-#define hb_atomic_ptr_get(P)		((void *) *(P))
-#define hb_atomic_ptr_cmpexch(P,O,N)	(* (void **) (P) == (void *) (O) ? (* (void **) (P) = (void *) (N), true) : false)
+#define hb_atomic_ptr_impl_get(P)		((void *) *(P))
+#define hb_atomic_ptr_impl_cmpexch(P,O,N)	(* (void **) (P) == (void *) (O) ? (* (void **) (P) = (void *) (N), true) : false)
+
 
 #endif
 
-/* TODO Add tracing. */
+
+#define HB_ATOMIC_INT_INIT(V)		{HB_ATOMIC_INT_IMPL_INIT(V)}
+
+struct hb_atomic_int_t
+{
+  hb_atomic_int_impl_t v;
+
+  inline void set_unsafe (int v_) { v = v_; }
+  inline int get_unsafe (void) const { return v; }
+  inline int inc (void) { return hb_atomic_int_impl_add (const_cast<hb_atomic_int_impl_t &> (v),  1); }
+  inline int dec (void) { return hb_atomic_int_impl_add (const_cast<hb_atomic_int_impl_t &> (v), -1); }
+};
+
+
+#define hb_atomic_ptr_get(P) hb_atomic_ptr_impl_get(P)
+#define hb_atomic_ptr_cmpexch(P,O,N) hb_atomic_ptr_impl_cmpexch((P),(O),(N))
+
 
 #endif /* HB_ATOMIC_PRIVATE_HH */

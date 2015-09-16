@@ -1,8 +1,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to 1 if you have the <ApplicationServices/ApplicationServices.h>
-   header file. */
-#undef HAVE_APPLICATIONSERVICES_APPLICATIONSERVICES_H
+/* The normal alignment of `struct{char;}', in bytes. */
+#undef ALIGNOF_STRUCT_CHAR__
 
 /* Define to 1 if you have the `atexit' function. */
 #undef HAVE_ATEXIT
@@ -19,11 +18,14 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* Have simple TrueType Layout backend */
+#undef HAVE_FALLBACK
+
+/* Have fontconfig library */
+#undef HAVE_FONTCONFIG
+
 /* Have FreeType 2 library */
 #undef HAVE_FREETYPE
-
-/* Define to 1 if you have the `FT_Face_GetCharVariantIndex' function. */
-#undef HAVE_FT_FACE_GETCHARVARIANTINDEX
 
 /* Define to 1 if you have the `getpagesize' function. */
 #undef HAVE_GETPAGESIZE
@@ -34,14 +36,8 @@
 /* Have gobject2 library */
 #undef HAVE_GOBJECT
 
-/* Have Graphite library */
+/* Have Graphite2 library */
 #undef HAVE_GRAPHITE2
-
-/* Have gthread2 library */
-#undef HAVE_GTHREAD
-
-/* Have Old HarfBuzz backend */
-#undef HAVE_HB_OLD
 
 /* Have ICU library */
 #undef HAVE_ICU
@@ -51,9 +47,6 @@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
-
-/* Define to 1 if you have the <io.h> header file. */
-#undef HAVE_IO_H
 
 /* Define to 1 if you have the `isatty' function. */
 #undef HAVE_ISATTY
@@ -70,11 +63,20 @@
 /* Have native OpenType Layout backend */
 #undef HAVE_OT
 
+/* Have POSIX threads */
+#undef HAVE_PTHREAD
+
+/* Have PTHREAD_PRIO_INHERIT. */
+#undef HAVE_PTHREAD_PRIO_INHERIT
+
 /* Define to 1 if you have the <sched.h> header file. */
 #undef HAVE_SCHED_H
 
-/* Define to 1 if you have the `sched_yield' function. */
+/* Have sched_yield */
 #undef HAVE_SCHED_YIELD
+
+/* Have Solaris __machine_*_barrier and atomic_* operations */
+#undef HAVE_SOLARIS_ATOMIC_OPS
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
@@ -100,10 +102,10 @@
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
-/* Define to 1 if you have the <unicode/uchar.h> header file. */
-#undef HAVE_UNICODE_UCHAR_H
+/* Have UCDN Unicode functions */
+#undef HAVE_UCDN
 
-/* Have Uniscribe backend */
+/* Have Uniscribe library */
 #undef HAVE_UNISCRIBE
 
 /* Define to 1 if you have the <unistd.h> header file. */
@@ -115,15 +117,9 @@
 /* Define to 1 if you have the <windows.h> header file. */
 #undef HAVE_WINDOWS_H
 
-/* Define to 1 if you have the `_setmode' function. */
-#undef HAVE__SETMODE
-
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #undef LT_OBJDIR
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#undef NO_MINUS_C_MINUS_O
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
@@ -142,6 +138,10 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
+
+/* Define to necessary symbol if this constant uses a non-standard name on
+   your system. */
+#undef PTHREAD_CREATE_JOINABLE
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS

@@ -1,5 +1,6 @@
 /*
  * Copyright © 2009  Red Hat, Inc.
+ * Copyright © 2012  Google, Inc.
  *
  *  This is part of HarfBuzz, a text shaping library.
  *
@@ -22,6 +23,7 @@
  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
  *
  * Red Hat Author(s): Behdad Esfahbod
+ * Google Author(s): Behdad Esfahbod
  */
 
 #ifndef HB_H_IN
@@ -44,6 +46,14 @@ typedef struct hb_feature_t {
   unsigned int  start;
   unsigned int  end;
 } hb_feature_t;
+
+hb_bool_t
+hb_feature_from_string (const char *str, int len,
+			hb_feature_t *feature);
+
+void
+hb_feature_to_string (hb_feature_t *feature,
+		      char *buf, unsigned int size);
 
 
 void

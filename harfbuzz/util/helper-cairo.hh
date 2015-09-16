@@ -33,9 +33,9 @@
 
 
 cairo_scaled_font_t *
-helper_cairo_create_scaled_font (const font_options_t *font_opts,
-				 double font_size);
+helper_cairo_create_scaled_font (const font_options_t *font_opts);
 
+extern const char *helper_cairo_supported_formats[];
 
 cairo_t *
 helper_cairo_create_context (double w, double h,
@@ -75,7 +75,7 @@ helper_cairo_line_from_buffer (helper_cairo_line_t *l,
 			       hb_buffer_t         *buffer,
 			       const char          *text,
 			       unsigned int         text_len,
-			       double               scale,
+			       int                  scale_bits,
 			       hb_bool_t            utf8_clusters);
 
 #endif
