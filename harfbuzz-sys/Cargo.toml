@@ -1,0 +1,27 @@
+[package]
+name = "harfbuzz-sys"
+version = "0.1.0"
+
+authors = ["The Servo Project Developers"]
+license = "MIT"
+
+description = "Rust bindings to the HarfBuzz text shaping engine"
+repository = "https://github.com/servo/rust-harfbuzz"
+documentation = "http://doc.servo.org/harfbuzz_sys/"
+keywords = ["opentype", "font", "text", "layout", "unicode"]
+
+links = "harfbuzz"
+build = "build.rs"
+
+[features]
+icu = ["icu-sys"]
+
+[dependencies]
+libc = "0.1"
+
+[dependencies.icu-sys]
+git="https://github.com/servo/rust-icu"
+optional = true
+
+[build-dependencies]
+pkg-config = "0.3"

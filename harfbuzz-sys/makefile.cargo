@@ -1,0 +1,41 @@
+ifneq ($(HOST),$(TARGET))
+  CXX ?= $(TARGET)-g++
+  CC ?= $(TARGET)-gcc
+  AR ?= $(TARGET)-ar
+else
+  CXX ?= g++
+  CC ?= gcc
+  AR ?= ar
+endif
+
+FLAGS = -fPIC
+
+ifeq ($(DEBUG),true)
+  FLAGS += -g
+else
+  FLAGS += -O2
+endif
+
+CFLAGS += $(FLAGS)
+CXXFLAGS += $(FLAGS)
+
+CONFIGURE_FLAGS = \
+	--prefix=$(OUT_DIR) \
+	--host=$(TARGET) \
+	--enable-static \
+	--without-freetype \
+	--without-glib
+
+ifdef $(CARGO_FEATURE_ICU)
+  PKG_CONFIG_PATH=$(DEP_ICU_INSTALL_DIR):$(PKG_CONFIG_PATH)
+else
+  CONFIGURE_FLAGS += --without-icu
+endif
+
+all:
+	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/../harfbuzz/configure $(CONFIGURE_FLAGS) \
+		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)"
+	cd $(OUT_DIR) && make -j$(NUM_JOBS)
+	cd $(OUT_DIR) && make install
+
+.PHONY: all
