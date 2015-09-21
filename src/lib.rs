@@ -16,8 +16,6 @@ extern crate libc;
 
 use libc::*;
 
-pub mod linkhack;
-
 pub type hb_bool_t = c_int;
 
 pub type hb_codepoint_t = uint32_t;

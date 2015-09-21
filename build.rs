@@ -12,5 +12,10 @@ fn main() {
         .status()
         .unwrap()
         .success());
-    println!("cargo:rustc-flags=-L native={}", env::var("OUT_DIR").unwrap());
+    println!("cargo:rustc-link-search=native={}", env::var("OUT_DIR").unwrap());
+    println!("cargo:rustc-link-lib=static=harfbuzz");
+    if env::var("TARGET").unwrap().contains("unknown-linux-gnu") {
+        println!("cargo:rustc-link-lib=glib-2.0");
+    }
+    println!("cargo:rustc-link-lib=stdc++");
 }
