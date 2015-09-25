@@ -33,7 +33,7 @@ else
 endif
 
 all:
-	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/../harfbuzz/configure $(CONFIGURE_FLAGS) \
+	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
 		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)"
 	cd $(OUT_DIR) && make -j$(NUM_JOBS)
 	cd $(OUT_DIR) && make install
