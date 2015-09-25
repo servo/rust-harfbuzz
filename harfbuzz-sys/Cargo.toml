@@ -13,15 +13,8 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 links = "harfbuzz"
 build = "build.rs"
 
-[features]
-icu = ["icu-sys"]
-
 [dependencies]
 libc = "0.1"
-
-[dependencies.icu-sys]
-git="https://github.com/servo/rust-icu"
-optional = true
 
 [build-dependencies]
 pkg-config = "0.3"

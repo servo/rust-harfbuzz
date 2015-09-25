@@ -23,14 +23,9 @@ CONFIGURE_FLAGS = \
 	--prefix=$(OUT_DIR) \
 	--host=$(TARGET) \
 	--enable-static \
+	--without-icu \
 	--without-freetype \
 	--without-glib
-
-ifdef $(CARGO_FEATURE_ICU)
-  PKG_CONFIG_PATH=$(DEP_ICU_INSTALL_DIR):$(PKG_CONFIG_PATH)
-else
-  CONFIGURE_FLAGS += --without-icu
-endif
 
 all:
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
