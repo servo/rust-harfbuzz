@@ -2,6 +2,16 @@
 name = "harfbuzz-sys"
 version = "0.1.2"
 
+# Ignore timestamps on automake-generated files. See comment in makefile.cargo.
+exclude = [
+    "harfbuzz/configure.ac",
+    "harfbuzz/aclocal.m4",
+    "harfbuzz/configure",
+    "harfbuzz/config.h.in",
+    "harfbuzz/Makefile.am",
+    "harfbuzz/Makefile.in",
+]
+
 authors = ["The Servo Project Developers"]
 license = "MIT"
 
