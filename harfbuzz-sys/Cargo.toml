@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.1.2"
+version = "0.1.3"
 
 # Ignore timestamps on automake-generated files. See comment in makefile.cargo.
 exclude = [
