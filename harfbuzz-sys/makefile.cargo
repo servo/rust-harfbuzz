@@ -28,21 +28,9 @@ CONFIGURE_FLAGS = \
 	--without-glib
 
 all:
-	touch $(AUTOMAKE_FILES)
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
 		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)"
 	cd $(OUT_DIR) && make -j$(NUM_JOBS)
 	cd $(OUT_DIR) && make install
-
-# If the timestamp on these files is incorrect (because git does not preserve timestamps)
-# then the configure script will incorrectly try to run automake commands to regenerate them.
-# We `touch` these files to prevent this.
-AUTOMAKE_FILES = \
-	harfbuzz/configure.ac \
-	harfbuzz/aclocal.m4 \
-	harfbuzz/configure \
-	harfbuzz/config.h.in \
-	harfbuzz/Makefile.am \
-	harfbuzz/Makefile.in
 
 .PHONY: all
