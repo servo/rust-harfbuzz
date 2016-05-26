@@ -27,6 +27,10 @@ CONFIGURE_FLAGS = \
 	--without-freetype \
 	--without-glib
 
+ifneq ("",$(findstring "apple-darwin",$(TARGET)))
+	CONFIGURE_FLAGS += --with-coretext
+endif
+
 all:
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
 		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)"
