@@ -19,7 +19,6 @@ set(HARFBUZZ_SOURCES
   src/hb-face.cc
   src/hb-font-private.hh
   src/hb-font.cc
-  src/hb-ft.cc
   src/hb-mutex-private.hh
   src/hb-object-private.hh
   src/hb-open-file-private.hh
@@ -54,7 +53,6 @@ set(HARFBUZZ_SOURCES
   src/hb-deprecated.h
   src/hb-face.h
   src/hb-font.h
-  src/hb-ft.h
   src/hb-set.h
   src/hb-shape.h
   src/hb-shape-plan.h
