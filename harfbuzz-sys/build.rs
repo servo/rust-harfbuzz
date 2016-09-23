@@ -30,6 +30,5 @@ fn main() {
         let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
         println!("cargo:rustc-link-search=native={}", out_dir.join("lib").to_str().unwrap());
         println!("cargo:rustc-link-lib=static=harfbuzz");
-        println!("cargo:rustc-link-lib=stdc++");
     }
 }
