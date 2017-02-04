@@ -15,7 +15,12 @@ build = "build.rs"
 
 [dependencies]
 libc = "0.2"
+freetype-sys = { version = "0.4", optional = true }
 
 [build-dependencies]
 pkg-config = "0.3"
 cmake = "0.1"
+
+[features]
+default = []
+ft = ["freetype-sys"]

@@ -1,0 +1,8 @@
+[package]
+name = "ft_example"
+version = "0.0.0"
+authors = ["critiqjo <john.ch.fr@gmail.com>"]
+
+[dependencies]
+harfbuzz-sys = { path = "../harfbuzz-sys", features = ["ft"] }
+freetype-rs = "0.11"
