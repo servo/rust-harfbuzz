@@ -1,7 +1,9 @@
 #![allow(non_camel_case_types)]
 
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
-extern crate freetype_sys;
+extern crate freetype;
+#[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
+use self::freetype::freetype as freetype_sys;
 
 extern crate libc;
 
