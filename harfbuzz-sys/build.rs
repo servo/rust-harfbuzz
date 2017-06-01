@@ -31,4 +31,7 @@ fn main() {
         println!("cargo:rustc-link-search=native={}", out_dir.join("lib").to_str().unwrap());
         println!("cargo:rustc-link-lib=static=harfbuzz");
     }
+
+    // Dependent crates that need to find hb.h can use DEP_HARFBUZZ_INCLUDE from their build.rs.
+    println!("cargo:include={}", env::current_dir().unwrap().join("harfbuzz/src").display());
 }
