@@ -5,10 +5,10 @@
 <title>hb-unicode: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
 <link rel="prev" href="harfbuzz-hb-common.html" title="hb-common">
-<link rel="next" href="harfbuzz-hb-buffer.html" title="hb-buffer">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<link rel="next" href="harfbuzz-Buffers.html" title="Buffers">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,9 +19,9 @@
                   <a href="#harfbuzz-hb-unicode.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-common.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="harfbuzz-hb-buffer.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="harfbuzz-Buffers.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-unicode"></a><div class="titlepage"></div>
@@ -349,6 +349,7 @@
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-combining-class-t" title="enum hb_unicode_combining_class_t"><span class="returnvalue">hb_unicode_combining_class_t</span></a>
 hb_unicode_combining_class (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> unicode</code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -367,7 +368,7 @@ hb_unicode_compose (<em class="parameter"><code><a class="link" href="harfbuzz-h
                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> b</code></em>,
                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *ab</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.5.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.5.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -389,7 +390,7 @@ hb_unicode_compose (<em class="parameter"><code><a class="link" href="harfbuzz-h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.5.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.5.5"></a><h4>Returns</h4>
 <p></p>
 </div>
 <p class="since">Since 0.9.2</p>
@@ -413,7 +414,7 @@ hb_unicode_decompose (<em class="parameter"><code><a class="link" href="harfbuzz
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *a</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *b</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.7.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.7.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -440,7 +441,7 @@ hb_unicode_decompose (<em class="parameter"><code><a class="link" href="harfbuzz
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.7.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.7.5"></a><h4>Returns</h4>
 <p></p>
 </div>
 <p class="since">Since 0.9.2</p>
@@ -453,7 +454,7 @@ hb_unicode_decompose_compatibility (<em class="parameter"><code><a class="link" 
                                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> u</code></em>,
                                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *decomposed</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.8.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.8.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -475,7 +476,7 @@ hb_unicode_decompose_compatibility (<em class="parameter"><code><a class="link" 
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.8.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.8.5"></a><h4>Returns</h4>
 <p></p>
 </div>
 <p class="since">Since 0.9.2</p>
@@ -496,6 +497,7 @@ hb_unicode_decompose_compatibility (<em class="parameter"><code><a class="link" 
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_unicode_eastasian_width (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> unicode</code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -509,7 +511,7 @@ hb_unicode_funcs_create (<em class="parameter"><code><a class="link" href="harfb
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_unicode_funcs_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.12.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.12.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -523,7 +525,7 @@ hb_unicode_funcs_destroy (<em class="parameter"><code><a class="link" href="harf
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -537,11 +539,11 @@ hb_unicode_funcs_get_default (<em class="parameter"><code><span class="type">voi
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="returnvalue">hb_unicode_funcs_t</span></a> *
 hb_unicode_funcs_get_empty (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.14.4"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.14.4"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -549,7 +551,7 @@ hb_unicode_funcs_get_empty (<em class="parameter"><code><span class="type">void<
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="returnvalue">hb_unicode_funcs_t</span></a> *
 hb_unicode_funcs_get_parent (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.15.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.15.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -564,10 +566,10 @@ hb_unicode_funcs_get_parent (<em class="parameter"><code><a class="link" href="h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.15.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.15.5"></a><h4>Returns</h4>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -576,7 +578,7 @@ hb_unicode_funcs_get_parent (<em class="parameter"><code><a class="link" href="h
 hb_unicode_funcs_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t"><span class="type">hb_user_data_key_t</span></a> *key</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.16.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.16.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -591,11 +593,11 @@ hb_unicode_funcs_get_user_data (<em class="parameter"><code><a class="link" href
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.16.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.16.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -603,7 +605,7 @@ hb_unicode_funcs_get_user_data (<em class="parameter"><code><a class="link" href
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_unicode_funcs_is_immutable (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.17.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.17.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -618,10 +620,10 @@ hb_unicode_funcs_is_immutable (<em class="parameter"><code><a class="link" href=
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.17.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.17.5"></a><h4>Returns</h4>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -629,7 +631,7 @@ hb_unicode_funcs_is_immutable (<em class="parameter"><code><a class="link" href=
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_unicode_funcs_make_immutable (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.18.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.18.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -643,7 +645,7 @@ hb_unicode_funcs_make_immutable (<em class="parameter"><code><a class="link" hre
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -651,7 +653,7 @@ hb_unicode_funcs_make_immutable (<em class="parameter"><code><a class="link" hre
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="returnvalue">hb_unicode_funcs_t</span></a> *
 hb_unicode_funcs_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.19.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.19.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -666,11 +668,11 @@ hb_unicode_funcs_reference (<em class="parameter"><code><a class="link" href="ha
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.19.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.19.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -682,7 +684,7 @@ hb_unicode_funcs_set_combining_class_func
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.20.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.20.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -703,7 +705,7 @@ hb_unicode_funcs_set_combining_class_func
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -714,7 +716,7 @@ hb_unicode_funcs_set_compose_func (<em class="parameter"><code><a class="link" h
                                    <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.21.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.21.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -747,7 +749,7 @@ hb_unicode_funcs_set_decompose_compatibility_func
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.22.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.22.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -779,7 +781,7 @@ hb_unicode_funcs_set_decompose_func (<em class="parameter"><code><a class="link"
                                      <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.23.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.23.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -812,7 +814,7 @@ hb_unicode_funcs_set_eastasian_width_func
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.24.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.24.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -833,7 +835,7 @@ hb_unicode_funcs_set_eastasian_width_func
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -845,7 +847,7 @@ hb_unicode_funcs_set_general_category_func
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.25.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.25.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -866,7 +868,7 @@ hb_unicode_funcs_set_general_category_func
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -877,7 +879,7 @@ hb_unicode_funcs_set_mirroring_func (<em class="parameter"><code><a class="link"
                                      <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.26.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.26.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -898,7 +900,7 @@ hb_unicode_funcs_set_mirroring_func (<em class="parameter"><code><a class="link"
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -909,7 +911,7 @@ hb_unicode_funcs_set_script_func (<em class="parameter"><code><a class="link" hr
                                   <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.27.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.27.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -930,7 +932,7 @@ hb_unicode_funcs_set_script_func (<em class="parameter"><code><a class="link" hr
 </tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -942,7 +944,7 @@ hb_unicode_funcs_set_user_data (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="type">hb_bool_t</span></a> replace</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.28.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.4.8.28.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -957,10 +959,10 @@ hb_unicode_funcs_set_user_data (<em class="parameter"><code><a class="link" href
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.4.8.28.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.4.8.28.5"></a><h4>Returns</h4>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -968,6 +970,7 @@ hb_unicode_funcs_set_user_data (<em class="parameter"><code><a class="link" href
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-general-category-t" title="enum hb_unicode_general_category_t"><span class="returnvalue">hb_unicode_general_category_t</span></a>
 hb_unicode_general_category (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> unicode</code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -983,6 +986,7 @@ hb_unicode_general_category (<em class="parameter"><code><a class="link" href="h
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="returnvalue">hb_codepoint_t</span></a>
 hb_unicode_mirroring (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> unicode</code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -998,6 +1002,7 @@ hb_unicode_mirroring (<em class="parameter"><code><a class="link" href="harfbuzz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="returnvalue">hb_script_t</span></a>
 hb_unicode_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-funcs-t"><span class="type">hb_unicode_funcs_t</span></a> *ufuncs</code></em>,
                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> unicode</code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1013,7 +1018,7 @@ hb_unicode_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 <div class="refsect2">
 <a name="hb-unicode-combining-class-t"></a><h3>enum hb_unicode_combining_class_t</h3>
 <div class="refsect3">
-<a name="id-1.3.2.4.9.2.3"></a><h4>Members</h4>
+<a name="id-1.3.3.4.9.2.3"></a><h4>Members</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
@@ -1320,7 +1325,7 @@ hb_unicode_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 <div class="refsect2">
 <a name="hb-unicode-general-category-t"></a><h3>enum hb_unicode_general_category_t</h3>
 <div class="refsect3">
-<a name="id-1.3.2.4.9.4.3"></a><h4>Members</h4>
+<a name="id-1.3.3.4.9.4.3"></a><h4>Members</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
@@ -1485,6 +1490,6 @@ hb_unicode_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

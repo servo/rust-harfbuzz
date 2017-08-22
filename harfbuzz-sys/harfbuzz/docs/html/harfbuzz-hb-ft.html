@@ -5,10 +5,10 @@
 <title>hb-ft: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
 <link rel="prev" href="harfbuzz-hb-icu.html" title="hb-icu">
 <link rel="next" href="harfbuzz-hb-graphite2.html" title="hb-graphite2">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
                   <a href="#harfbuzz-hb-ft.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-icu.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-graphite2.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -58,6 +58,14 @@
 </tr>
 <tr>
 <td class="function_type">
+<a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="returnvalue">hb_face_t</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ft.html#hb-ft-face-create-referenced" title="hb_ft_face_create_referenced ()">hb_ft_face_create_referenced</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
 <a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="returnvalue">hb_font_t</span></a> *
 </td>
 <td class="function_name">
@@ -66,10 +74,34 @@
 </tr>
 <tr>
 <td class="function_type">
+<a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="returnvalue">hb_font_t</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ft.html#hb-ft-font-create-referenced" title="hb_ft_font_create_referenced ()">hb_ft_font_create_referenced</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
 <span class="returnvalue">FT_Face</span>
 </td>
 <td class="function_name">
 <a class="link" href="harfbuzz-hb-ft.html#hb-ft-font-get-face" title="hb_ft_font_get_face ()">hb_ft_font_get_face</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ft.html#hb-ft-font-set-load-flags" title="hb_ft_font_set_load_flags ()">hb_ft_font_set_load_flags</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">int</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ft.html#hb-ft-font-get-load-flags" title="hb_ft_font_get_load_flags ()">hb_ft_font_get_load_flags</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
 <tr>
@@ -99,7 +131,7 @@
 hb_ft_face_create (<em class="parameter"><code><span class="type">FT_Face</span> ft_face</code></em>,
                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.19.6.2.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.22.6.2.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -114,11 +146,11 @@ hb_ft_face_create (<em class="parameter"><code><span class="type">FT_Face</span>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.19.6.2.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.22.6.2.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -126,11 +158,23 @@ hb_ft_face_create (<em class="parameter"><code><span class="type">FT_Face</span>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="returnvalue">hb_face_t</span></a> *
 hb_ft_face_create_cached (<em class="parameter"><code><span class="type">FT_Face</span> ft_face</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.19.6.3.4"></a><h4>Returns</h4>
+<a name="id-1.3.3.22.6.3.4"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-ft-face-create-referenced"></a><h3>hb_ft_face_create_referenced ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="returnvalue">hb_face_t</span></a> *
+hb_ft_face_create_referenced (<em class="parameter"><code><span class="type">FT_Face</span> ft_face</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.3.3.22.6.4.4"></a><h4>Returns</h4>
+<p>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+<p class="since">Since 0.9.38</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -139,7 +183,7 @@ hb_ft_face_create_cached (<em class="parameter"><code><span class="type">FT_Face
 hb_ft_font_create (<em class="parameter"><code><span class="type">FT_Face</span> ft_face</code></em>,
                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.19.6.4.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.22.6.5.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -154,17 +198,48 @@ hb_ft_font_create (<em class="parameter"><code><span class="type">FT_Face</span>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.19.6.4.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.22.6.5.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-ft-font-create-referenced"></a><h3>hb_ft_font_create_referenced ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="returnvalue">hb_font_t</span></a> *
+hb_ft_font_create_referenced (<em class="parameter"><code><span class="type">FT_Face</span> ft_face</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.3.3.22.6.6.4"></a><h4>Returns</h4>
+<p>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+<p class="since">Since 0.9.38</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-ft-font-get-face"></a><h3>hb_ft_font_get_face ()</h3>
 <pre class="programlisting"><span class="returnvalue">FT_Face</span>
 hb_ft_font_get_face (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-ft-font-set-load-flags"></a><h3>hb_ft_font_set_load_flags ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+hb_ft_font_set_load_flags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
+                           <em class="parameter"><code><span class="type">int</span> load_flags</code></em>);</pre>
+<p class="since">Since 1.0.5</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-ft-font-get-load-flags"></a><h3>hb_ft_font_get_load_flags ()</h3>
+<pre class="programlisting"><span class="returnvalue">int</span>
+hb_ft_font_get_load_flags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.3.3.22.6.9.4"></a><h4>Returns</h4>
+<p></p>
+</div>
+<p class="since">Since 1.0.5</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -178,6 +253,6 @@ hb_ft_font_set_funcs (<em class="parameter"><code><a class="link" href="harfbuzz
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

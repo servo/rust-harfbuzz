@@ -28,7 +28,8 @@ SCANGOBJ_OPTIONS=
 
 # Extra options to supply to gtkdoc-scan.
 # e.g. SCAN_OPTIONS=--deprecated-guards="GTK_DISABLE_DEPRECATED"
-SCAN_OPTIONS=--rebuild-types --deprecated-guards="HB_DISABLE_DEPRECATED"
+SCAN_OPTIONS=--rebuild-types --deprecated-guards="HB_DISABLE_DEPRECATED" \
+	--ignore-decorators="HB_EXTERN"
 
 # Header files or dirs to ignore when scanning. Use base file/dir names
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h private_code
@@ -65,17 +66,20 @@ EXTRA_HFILES=$(top_builddir)/src/hb-version.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
-HTML_IMAGES=
+HTML_IMAGES=  \
+	HarfBuzz.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
 # e.g. content_files=running.sgml building.sgml changes-2.0.sgml
 content_files=	\
-	usermanual-ch01.xml \
-	usermanual-ch02.xml \
-	usermanual-ch03.xml \
-	usermanual-ch04.xml \
-	usermanual-ch05.xml \
-	usermanual-ch06.xml \
+	usermanual-buffers-language-script-and-direction.xml \
+	usermanual-clusters.xml \
+	usermanual-fonts-and-faces.xml \
+	usermanual-glyph-information.xml \
+	usermanual-hello-harfbuzz.xml \
+	usermanual-install-harfbuzz.xml \
+	usermanual-opentype-features.xml \
+	usermanual-what-is-harfbuzz.xml \
 	version.xml
 
 # SGML files where gtk-doc abbrevations (#GtkWidget) are expanded

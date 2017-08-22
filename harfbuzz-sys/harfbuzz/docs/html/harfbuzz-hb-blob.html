@@ -5,10 +5,10 @@
 <title>hb-blob: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
-<link rel="prev" href="harfbuzz-hb-buffer.html" title="hb-buffer">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
+<link rel="prev" href="harfbuzz-Buffers.html" title="Buffers">
 <link rel="next" href="harfbuzz-hb-face.html" title="hb-face">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,8 +19,8 @@
                   <a href="#harfbuzz-hb-blob.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-buffer.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-Buffers.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-face.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
@@ -183,7 +183,7 @@ hb_blob_create (<em class="parameter"><code>const <span class="type">char</span>
 to negotiate ownership and lifecycle of <em class="parameter"><code>data</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.2.5"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.2.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -224,13 +224,13 @@ is not needed anymore.</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.2.6"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.2.6"></a><h4>Returns</h4>
 <p> New blob, or the empty blob if something failed or if <em class="parameter"><code>length</code></em>
 is
 zero.  Destroy with <a class="link" href="harfbuzz-hb-blob.html#hb-blob-destroy" title="hb_blob_destroy ()"><code class="function">hb_blob_destroy()</code></a>.</p>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -248,7 +248,7 @@ is.</p>
 <p>Makes <em class="parameter"><code>parent</code></em>
  immutable.</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.3.6"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.3.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -276,7 +276,7 @@ is.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.3.7"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.3.7"></a><h4>Returns</h4>
 <p> New blob, or the empty blob if something failed or if
 <em class="parameter"><code>length</code></em>
 is zero or <em class="parameter"><code>offset</code></em>
@@ -285,7 +285,7 @@ is beyond the end of <em class="parameter"><code>parent</code></em>
 with <a class="link" href="harfbuzz-hb-blob.html#hb-blob-destroy" title="hb_blob_destroy ()"><code class="function">hb_blob_destroy()</code></a>.</p>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -299,7 +299,7 @@ hb_blob_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-b
 was created for if it has not been called already.</p>
 <p>See TODO:link object types for more information.</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.4.6"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.4.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -313,7 +313,7 @@ was created for if it has not been called already.</p>
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -322,7 +322,7 @@ was created for if it has not been called already.</p>
 hb_blob_get_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>,
                   <em class="parameter"><code>unsigned <span class="type">int</span> *length</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.5.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.5.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -344,11 +344,11 @@ hb_blob_get_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.5.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.5.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -361,7 +361,7 @@ return pointer to data.</p>
 <p>Fails if blob has been made immutable, or if memory allocation
 fails.</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.6.6"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.6.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -383,12 +383,12 @@ fails.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.6.7"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.6.7"></a><h4>Returns</h4>
 <p> Writable blob data,
 or <code class="literal">NULL</code> if failed. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -398,11 +398,11 @@ hb_blob_get_empty (<em class="parameter"><code><span class="type">void</span></c
 <p>Returns the singleton empty blob.</p>
 <p>See TODO:link object types for more information.</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.7.6"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.7.6"></a><h4>Returns</h4>
 <p> the empty blob. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -410,7 +410,7 @@ hb_blob_get_empty (<em class="parameter"><code><span class="type">void</span></c
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_blob_get_length (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.8.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.8.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -425,11 +425,11 @@ hb_blob_get_length (<em class="parameter"><code><a class="link" href="harfbuzz-h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.8.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.8.5"></a><h4>Returns</h4>
 <p> the length of blob data in bytes.</p>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -438,7 +438,7 @@ hb_blob_get_length (<em class="parameter"><code><a class="link" href="harfbuzz-h
 hb_blob_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>,
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t"><span class="type">hb_user_data_key_t</span></a> *key</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.9.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.9.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -460,11 +460,11 @@ hb_blob_get_user_data (<em class="parameter"><code><a class="link" href="harfbuz
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.9.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.9.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -472,7 +472,7 @@ hb_blob_get_user_data (<em class="parameter"><code><a class="link" href="harfbuz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_blob_is_immutable (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.10.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.10.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -487,11 +487,11 @@ hb_blob_is_immutable (<em class="parameter"><code><a class="link" href="harfbuzz
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.10.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.10.5"></a><h4>Returns</h4>
 <p> TODO</p>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -499,7 +499,7 @@ hb_blob_is_immutable (<em class="parameter"><code><a class="link" href="harfbuzz
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_blob_make_immutable (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.11.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.11.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -513,7 +513,7 @@ hb_blob_make_immutable (<em class="parameter"><code><a class="link" href="harfbu
 </tr></tbody>
 </table></div>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -524,7 +524,7 @@ hb_blob_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 .</p>
 <p>See TODO:link object types for more information.</p>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.12.6"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.12.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -539,12 +539,12 @@ hb_blob_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.12.7"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.12.7"></a><h4>Returns</h4>
 <p> <em class="parameter"><code>blob</code></em>
 .</p>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -556,7 +556,7 @@ hb_blob_set_user_data (<em class="parameter"><code><a class="link" href="harfbuz
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>,
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="type">hb_bool_t</span></a> replace</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.13.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.6.8.13.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -594,10 +594,10 @@ is not needed anymore.</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.6.8.13.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.6.8.13.5"></a><h4>Returns</h4>
 <p></p>
 </div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 </div>
 <div class="refsect1">
@@ -611,7 +611,7 @@ is not needed anymore.</p></td>
 <div class="refsect2">
 <a name="hb-memory-mode-t"></a><h3>enum hb_memory_mode_t</h3>
 <div class="refsect3">
-<a name="id-1.3.2.6.9.3.3"></a><h4>Members</h4>
+<a name="id-1.3.3.6.9.3.3"></a><h4>Members</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
@@ -646,6 +646,6 @@ is not needed anymore.</p></td>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

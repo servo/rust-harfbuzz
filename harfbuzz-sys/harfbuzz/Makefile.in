@@ -224,6 +224,8 @@ CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIRECTWRITE_CXXFLAGS = @DIRECTWRITE_CXXFLAGS@
+DIRECTWRITE_LIBS = @DIRECTWRITE_LIBS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -371,12 +373,13 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = src util test docs
+SUBDIRS = src util test docs win32
 EXTRA_DIST = \
 	autogen.sh \
 	harfbuzz.doap \
-	Android.mk \
 	README.python \
+	BUILD.md \
+	CMakeLists.txt \
 	$(NULL)
 
 MAINTAINERCLEANFILES = \
@@ -386,6 +389,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \
 	$(srcdir)/ChangeLog \
 	$(srcdir)/gtk-doc.make \
+	$(srcdir)/m4/gtk-doc.m4 \
 	$(NULL)
 
 

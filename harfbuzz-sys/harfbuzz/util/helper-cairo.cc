@@ -28,6 +28,7 @@
 
 #include <cairo-ft.h>
 #include <hb-ft.h>
+#include FT_MULTIPLE_MASTERS_H
 
 #include "helper-cairo-ansi.hh"
 #ifdef CAIRO_HAS_SVG_SURFACE
@@ -75,7 +76,10 @@ helper_cairo_create_scaled_font (const font_options_t *font_opts)
   hb_font_t *font = hb_font_reference (font_opts->get_font ());
 
   cairo_font_face_t *cairo_face;
-  FT_Face ft_face = hb_ft_font_get_face (font);
+  /* We cannot use the FT_Face from hb_font_t, as doing so will confuse hb_font_t because
+   * cairo will reset the face size.  As such, create new face...
+   * TODO Perhaps add API to hb-ft to encapsulate this code. */
+  FT_Face ft_face = NULL;//hb_ft_font_get_face (font);
   if (!ft_face)
   {
     if (!ft_library)
@@ -98,7 +102,23 @@ helper_cairo_create_scaled_font (const font_options_t *font_opts)
 					     CAIRO_FONT_WEIGHT_NORMAL);
   }
   else
+  {
+    unsigned int num_coords;
+    const int *coords = hb_font_get_var_coords_normalized (font, &num_coords);
+    if (num_coords)
+    {
+      FT_Fixed *ft_coords = (FT_Fixed *) calloc (num_coords, sizeof (FT_Fixed));
+      if (ft_coords)
+      {
+	for (unsigned int i = 0; i < num_coords; i++)
+	  ft_coords[i] = coords[i] << 2;
+	FT_Set_Var_Blend_Coordinates (ft_face, num_coords, ft_coords);
+	free (ft_coords);
+      }
+    }
+
     cairo_face = cairo_ft_font_face_create_for_ft_face (ft_face, 0);
+  }
   cairo_matrix_t ctm, font_matrix;
   cairo_font_options_t *font_options;
 
@@ -126,6 +146,22 @@ helper_cairo_create_scaled_font (const font_options_t *font_opts)
     hb_font_destroy (font);
 
   return scaled_font;
+}
+
+bool
+helper_cairo_scaled_font_has_color (cairo_scaled_font_t *scaled_font)
+{
+  bool ret = false;
+#ifdef FT_HAS_COLOR
+  FT_Face ft_face = cairo_ft_scaled_font_lock_face (scaled_font);
+  if (ft_face)
+  {
+    if (FT_HAS_COLOR (ft_face))
+      ret = true;
+    cairo_ft_scaled_font_unlock_face (scaled_font);
+  }
+#endif
+  return ret;
 }
 
 
@@ -295,7 +331,8 @@ const char *helper_cairo_supported_formats[] =
 cairo_t *
 helper_cairo_create_context (double w, double h,
 			     view_options_t *view_opts,
-			     output_options_t *out_opts)
+			     output_options_t *out_opts,
+			     cairo_content_t content)
 {
   cairo_surface_t *(*constructor) (cairo_write_func_t write_func,
 				   void *closure,
@@ -324,42 +361,47 @@ helper_cairo_create_context (double w, double h,
   }
   if (0)
     ;
-    else if (0 == strcasecmp (extension, "ansi"))
+    else if (0 == g_ascii_strcasecmp (extension, "ansi"))
       constructor2 = _cairo_ansi_surface_create_for_stream;
   #ifdef CAIRO_HAS_PNG_FUNCTIONS
-    else if (0 == strcasecmp (extension, "png"))
+    else if (0 == g_ascii_strcasecmp (extension, "png"))
       constructor2 = _cairo_png_surface_create_for_stream;
   #endif
   #ifdef CAIRO_HAS_SVG_SURFACE
-    else if (0 == strcasecmp (extension, "svg"))
+    else if (0 == g_ascii_strcasecmp (extension, "svg"))
       constructor = cairo_svg_surface_create_for_stream;
   #endif
   #ifdef CAIRO_HAS_PDF_SURFACE
-    else if (0 == strcasecmp (extension, "pdf"))
+    else if (0 == g_ascii_strcasecmp (extension, "pdf"))
       constructor = cairo_pdf_surface_create_for_stream;
   #endif
   #ifdef CAIRO_HAS_PS_SURFACE
-    else if (0 == strcasecmp (extension, "ps"))
+    else if (0 == g_ascii_strcasecmp (extension, "ps"))
       constructor = cairo_ps_surface_create_for_stream;
    #ifdef HAS_EPS
-    else if (0 == strcasecmp (extension, "eps"))
+    else if (0 == g_ascii_strcasecmp (extension, "eps"))
       constructor = _cairo_eps_surface_create_for_stream;
    #endif
   #endif
 
 
   unsigned int fr, fg, fb, fa, br, bg, bb, ba;
+  const char *color;
   br = bg = bb = 0; ba = 255;
-  sscanf (view_opts->back + (*view_opts->back=='#'), "%2x%2x%2x%2x", &br, &bg, &bb, &ba);
+  color = view_opts->back ? view_opts->back : DEFAULT_BACK;
+  sscanf (color + (*color=='#'), "%2x%2x%2x%2x", &br, &bg, &bb, &ba);
   fr = fg = fb = 0; fa = 255;
-  sscanf (view_opts->fore + (*view_opts->fore=='#'), "%2x%2x%2x%2x", &fr, &fg, &fb, &fa);
+  color = view_opts->fore ? view_opts->fore : DEFAULT_FORE;
+  sscanf (color + (*color=='#'), "%2x%2x%2x%2x", &fr, &fg, &fb, &fa);
 
-  cairo_content_t content;
-  if (!view_opts->annotate && ba == 255 && br == bg && bg == bb && fr == fg && fg == fb)
-    content = CAIRO_CONTENT_ALPHA;
-  else if (ba == 255)
-    content = CAIRO_CONTENT_COLOR;
-  else
+  if (content == CAIRO_CONTENT_ALPHA)
+  {
+    if (view_opts->annotate ||
+	br != bg || bg != bb ||
+	fr != fg || fg != fb)
+      content = CAIRO_CONTENT_COLOR;
+  }
+  if (ba != 255)
     content = CAIRO_CONTENT_COLOR_ALPHA;
 
   cairo_surface_t *surface;
@@ -456,16 +498,16 @@ helper_cairo_line_from_buffer (helper_cairo_line_t *l,
   for (i = 0; i < (int) l->num_glyphs; i++)
   {
     l->glyphs[i].index = hb_glyph[i].codepoint;
-    l->glyphs[i].x = scalbn ( hb_position->x_offset + x, scale_bits);
-    l->glyphs[i].y = scalbn (-hb_position->y_offset + y, scale_bits);
+    l->glyphs[i].x = scalbn ((double)  hb_position->x_offset + x, scale_bits);
+    l->glyphs[i].y = scalbn ((double) -hb_position->y_offset + y, scale_bits);
     x +=  hb_position->x_advance;
     y += -hb_position->y_advance;
 
     hb_position++;
   }
   l->glyphs[i].index = -1;
-  l->glyphs[i].x = scalbn (x, scale_bits);
-  l->glyphs[i].y = scalbn (y, scale_bits);
+  l->glyphs[i].x = scalbn ((double) x, scale_bits);
+  l->glyphs[i].y = scalbn ((double) y, scale_bits);
 
   if (l->num_clusters) {
     memset ((void *) l->clusters, 0, l->num_clusters * sizeof (l->clusters[0]));

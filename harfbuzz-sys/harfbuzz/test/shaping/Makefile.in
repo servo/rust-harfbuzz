@@ -80,12 +80,22 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 TESTS = tests/arabic-fallback-shaping.tests \
-	tests/arabic-feature-order.tests tests/cluster.tests \
-	tests/context-matching.tests tests/cursive-positioning.tests \
-	tests/default-ignorables.tests tests/hangul-jamo.tests \
-	tests/indic-joiner-candrabindu.tests \
+	tests/arabic-feature-order.tests \
+	tests/arabic-like-joining.tests \
+	tests/automatic-fractions.tests tests/cluster.tests \
+	tests/color-fonts.tests tests/context-matching.tests \
+	tests/cursive-positioning.tests tests/default-ignorables.tests \
+	tests/emoji-flag-tags.tests tests/fallback-positioning.tests \
+	tests/fuzzed.tests tests/hangul-jamo.tests tests/hyphens.tests \
+	tests/indic-joiner-candrabindu.tests tests/indic-joiners.tests \
 	tests/indic-old-spec.tests tests/indic-pref-blocking.tests \
-	tests/mongolian-variation-selector.tests tests/vertical.tests \
+	tests/indic-syllable.tests tests/language-tags.tests \
+	tests/ligature-id.tests tests/mark-filtering-sets.tests \
+	tests/mongolian-variation-selector.tests tests/spaces.tests \
+	tests/simple.tests tests/tibetan-contractions-1.tests \
+	tests/tibetan-contractions-2.tests tests/tibetan-vowels.tests \
+	tests/use.tests tests/use-marchen.tests \
+	tests/use-syllable.tests tests/vertical.tests \
 	tests/zero-width-marks.tests $(am__EXEEXT_1)
 subdir = test/shaping
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
@@ -351,6 +361,8 @@ CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIRECTWRITE_CXXFLAGS = @DIRECTWRITE_CXXFLAGS@
+DIRECTWRITE_LIBS = @DIRECTWRITE_LIBS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -499,12 +511,12 @@ top_srcdir = @top_srcdir@
 NULL = 
 
 # TODO Figure out Python stuff
-EXTRA_DIST = hb-diff hb-diff-colorize hb-diff-filter-failures \
-	hb-diff-ngrams hb-diff-stat hb-manifest-read \
-	hb-manifest-update hb-unicode-decode hb-unicode-encode \
-	hb-unicode-prettyname record-test.sh run-tests.sh \
-	texts/in-tree fonts/sha1sum $(TESTS) $(NULL) hb_test_tools.py \
-	$(NULL)
+EXTRA_DIST = README.md hb-diff hb-diff-colorize \
+	hb-diff-filter-failures hb-diff-ngrams hb-diff-stat \
+	hb-manifest-read hb-manifest-update hb-unicode-decode \
+	hb-unicode-encode hb-unicode-prettyname record-test.sh \
+	run-tests.sh texts/in-tree fonts/sha1sum $(TESTS) $(NULL) \
+	hb_test_tools.py $(NULL)
 CLEANFILES = hb_test_tools.py[co] $(NULL)
 DISTCLEANFILES = 
 MAINTAINERCLEANFILES = 
