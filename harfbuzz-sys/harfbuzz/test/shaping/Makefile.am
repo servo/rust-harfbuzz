@@ -14,6 +14,7 @@ manifests:
 	@$(srcdir)/hb-manifest-update "$(srcdir)/texts" "$(srcdir)/fonts" "$(srcdir)/tests"
 
 EXTRA_DIST += \
+	README.md \
 	hb-diff \
 	hb-diff-colorize \
 	hb-diff-filter-failures \
@@ -42,15 +43,35 @@ CLEANFILES += \
 TESTS = \
 	tests/arabic-fallback-shaping.tests \
 	tests/arabic-feature-order.tests \
+	tests/arabic-like-joining.tests \
+	tests/automatic-fractions.tests \
 	tests/cluster.tests \
+	tests/color-fonts.tests \
 	tests/context-matching.tests \
 	tests/cursive-positioning.tests \
 	tests/default-ignorables.tests \
+	tests/emoji-flag-tags.tests \
+	tests/fallback-positioning.tests \
+	tests/fuzzed.tests \
 	tests/hangul-jamo.tests \
+	tests/hyphens.tests \
 	tests/indic-joiner-candrabindu.tests \
+	tests/indic-joiners.tests \
 	tests/indic-old-spec.tests \
 	tests/indic-pref-blocking.tests \
+	tests/indic-syllable.tests \
+	tests/language-tags.tests \
+	tests/ligature-id.tests \
+	tests/mark-filtering-sets.tests \
 	tests/mongolian-variation-selector.tests \
+	tests/spaces.tests \
+	tests/simple.tests \
+	tests/tibetan-contractions-1.tests \
+	tests/tibetan-contractions-2.tests \
+	tests/tibetan-vowels.tests \
+	tests/use.tests \
+	tests/use-marchen.tests \
+	tests/use-syllable.tests \
 	tests/vertical.tests \
 	tests/zero-width-marks.tests \
 	$(NULL)

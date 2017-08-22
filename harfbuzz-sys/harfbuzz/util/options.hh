@@ -150,19 +150,24 @@ struct view_options_t : option_group_t
 {
   view_options_t (option_parser_t *parser) {
     annotate = false;
-    fore = DEFAULT_FORE;
-    back = DEFAULT_BACK;
+    fore = NULL;
+    back = NULL;
     line_space = 0;
     margin.t = margin.r = margin.b = margin.l = DEFAULT_MARGIN;
 
     add_options (parser);
   }
+  ~view_options_t (void)
+  {
+    g_free (fore);
+    g_free (back);
+  }
 
   void add_options (option_parser_t *parser);
 
   hb_bool_t annotate;
-  const char *fore;
-  const char *back;
+  char *fore;
+  char *back;
   double line_space;
   struct margin_t {
     double t, r, b, l;
@@ -188,6 +193,9 @@ struct shape_options_t : option_group_t
   }
   ~shape_options_t (void)
   {
+    g_free (direction);
+    g_free (language);
+    g_free (script);
     free (features);
     g_strfreev (shapers);
   }
@@ -254,9 +262,9 @@ struct shape_options_t : option_group_t
   }
 
   /* Buffer properties */
-  const char *direction;
-  const char *language;
-  const char *script;
+  char *direction;
+  char *language;
+  char *script;
 
   /* Buffer flags */
   hb_bool_t bot;
@@ -277,7 +285,10 @@ struct font_options_t : option_group_t
 {
   font_options_t (option_parser_t *parser,
 		  int default_font_size_,
-		  unsigned int subpixel_bits_) {
+		  unsigned int subpixel_bits_)
+  {
+    variations = NULL;
+    num_variations = 0;
     default_font_size = default_font_size_;
     subpixel_bits = subpixel_bits_;
     font_file = NULL;
@@ -290,6 +301,9 @@ struct font_options_t : option_group_t
     add_options (parser);
   }
   ~font_options_t (void) {
+    g_free (font_file);
+    free (variations);
+    g_free (font_funcs);
     hb_font_destroy (font);
   }
 
@@ -297,13 +311,15 @@ struct font_options_t : option_group_t
 
   hb_font_t *get_font (void) const;
 
-  const char *font_file;
+  char *font_file;
   int face_index;
+  hb_variation_t *variations;
+  unsigned int num_variations;
   int default_font_size;
   unsigned int subpixel_bits;
   mutable double font_size_x;
   mutable double font_size_y;
-  const char *font_funcs;
+  char *font_funcs;
 
   private:
   mutable hb_font_t *font;
@@ -321,11 +337,16 @@ struct text_options_t : option_group_t
 
     fp = NULL;
     gs = NULL;
-    text_len = (unsigned int) -1;
+    line = NULL;
+    line_len = (unsigned int) -1;
 
     add_options (parser);
   }
   ~text_options_t (void) {
+    g_free (text_before);
+    g_free (text_after);
+    g_free (text);
+    g_free (text_file);
     if (gs)
       g_string_free (gs, true);
     if (fp)
@@ -339,21 +360,21 @@ struct text_options_t : option_group_t
       g_set_error (error,
 		   G_OPTION_ERROR, G_OPTION_ERROR_BAD_VALUE,
 		   "Only one of text and text-file can be set");
-
   };
 
   const char *get_line (unsigned int *len);
 
-  const char *text_before;
-  const char *text_after;
+  char *text_before;
+  char *text_after;
 
-  const char *text;
-  const char *text_file;
+  char *text;
+  char *text_file;
 
   private:
   FILE *fp;
   GString *gs;
-  unsigned int text_len;
+  char *line;
+  unsigned int line_len;
 };
 
 struct output_options_t : option_group_t
@@ -370,6 +391,8 @@ struct output_options_t : option_group_t
     add_options (parser);
   }
   ~output_options_t (void) {
+    g_free (output_file);
+    g_free (output_format);
     if (fp)
       fclose (fp);
   }
@@ -384,7 +407,10 @@ struct output_options_t : option_group_t
     if (output_file && !output_format) {
       output_format = strrchr (output_file, '.');
       if (output_format)
+      {
 	  output_format++; /* skip the dot */
+	  output_format = strdup (output_format);
+      }
     }
 
     if (output_file && 0 == strcmp (output_file, "-"))
@@ -393,8 +419,8 @@ struct output_options_t : option_group_t
 
   FILE *get_file_handle (void);
 
-  const char *output_file;
-  const char *output_format;
+  char *output_file;
+  char *output_format;
   const char **supported_formats;
   bool explicit_output_format;
 
@@ -411,6 +437,7 @@ struct format_options_t : option_group_t
     show_unicode = false;
     show_line_num = false;
     show_extents = false;
+    trace = false;
 
     add_options (parser);
   }
@@ -452,7 +479,25 @@ struct format_options_t : option_group_t
   hb_bool_t show_unicode;
   hb_bool_t show_line_num;
   hb_bool_t show_extents;
+  hb_bool_t trace;
 };
 
+/* fallback implementation for scalbn()/scalbnf() for pre-2013 MSVC */
+#if defined (_MSC_VER) && (_MSC_VER < 1800)
+
+#ifndef FLT_RADIX
+#define FLT_RADIX 2
+#endif
+
+__inline long double scalbn (long double x, int exp)
+{
+  return x * (pow ((long double) FLT_RADIX, exp));
+}
+
+__inline float scalbnf (float x, int exp)
+{
+  return x * (pow ((float) FLT_RADIX, exp));
+}
+#endif
 
 #endif

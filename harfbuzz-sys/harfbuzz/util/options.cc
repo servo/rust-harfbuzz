@@ -254,6 +254,47 @@ parse_features (const char *name G_GNUC_UNUSED,
   return true;
 }
 
+static gboolean
+parse_variations (const char *name G_GNUC_UNUSED,
+	        const char *arg,
+	        gpointer    data,
+	        GError    **error G_GNUC_UNUSED)
+{
+  font_options_t *font_opts = (font_options_t *) data;
+  char *s = (char *) arg;
+  char *p;
+
+  font_opts->num_variations = 0;
+  g_free (font_opts->variations);
+  font_opts->variations = NULL;
+
+  if (!*s)
+    return true;
+
+  /* count the variations first, so we can allocate memory */
+  p = s;
+  do {
+    font_opts->num_variations++;
+    p = strchr (p, ',');
+    if (p)
+      p++;
+  } while (p);
+
+  font_opts->variations = (hb_variation_t *) calloc (font_opts->num_variations, sizeof (*font_opts->variations));
+
+  /* now do the actual parsing */
+  p = s;
+  font_opts->num_variations = 0;
+  while (p && *p) {
+    char *end = strchr (p, ',');
+    if (hb_variation_from_string (p, end ? end - p : -1, &font_opts->variations[font_opts->num_variations]))
+      font_opts->num_variations++;
+    p = end ? end + 1 : NULL;
+  }
+
+  return true;
+}
+
 
 void
 view_options_t::add_options (option_parser_t *parser)
@@ -270,7 +311,7 @@ view_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries,
 		     "view",
 		     "View options:",
-		     "Options controlling output rendering",
+		     "Options for output rendering",
 		     this);
 }
 
@@ -299,7 +340,7 @@ shape_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries,
 		     "shape",
 		     "Shape options:",
-		     "Options controlling the shaping process",
+		     "Options for the shaping process",
 		     this);
 
   const gchar *features_help = "Comma-separated list of font features\n"
@@ -346,7 +387,7 @@ shape_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries2,
 		     "features",
 		     "Features options:",
-		     "Options controlling font features used",
+		     "Options for font features used",
 		     this);
 }
 
@@ -413,7 +454,30 @@ font_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries,
 		     "font",
 		     "Font options:",
-		     "Options controlling the font",
+		     "Options for the font",
+		     this);
+
+  const gchar *variations_help = "Comma-separated list of font variations\n"
+    "\n"
+    "    Variations are set globally. The format for specifying variation settings\n"
+    "    follows.  All valid CSS font-variation-settings values other than 'normal'\n"
+    "    and 'inherited' are also accepted, though, not documented below.\n"
+    "\n"
+    "    The format is a tag, optionally followed by an equals sign, followed by a\n"
+    "    number. For example:\n"
+    "\n"
+    "      \"wght=500\"\n"
+    "      \"slnt=-7.5\"\n";
+
+  GOptionEntry entries2[] =
+  {
+    {"variations",	0, 0, G_OPTION_ARG_CALLBACK,	(gpointer) &parse_variations,	variations_help,	"list"},
+    {NULL}
+  };
+  parser->add_group (entries2,
+		     "variations",
+		     "Varitions options:",
+		     "Options for font variations used",
 		     this);
 }
 
@@ -431,7 +495,7 @@ text_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries,
 		     "text",
 		     "Text options:",
-		     "Options controlling the input text",
+		     "Options for the input text",
 		     this);
 }
 
@@ -459,7 +523,7 @@ output_options_t::add_options (option_parser_t *parser)
   parser->add_group (entries,
 		     "output",
 		     "Output destination & format options:",
-		     "Options controlling the destination and form of the output",
+		     "Options for the destination & form of the output",
 		     this);
 }
 
@@ -490,7 +554,7 @@ font_options_t::get_font (void) const
       GString *gs = g_string_new (NULL);
       char buf[BUFSIZ];
 #if defined(_WIN32) || defined(__CYGWIN__)
-      setmode (fileno (stdin), _O_BINARY);
+      setmode (fileno (stdin), O_BINARY);
 #endif
       while (!feof (stdin)) {
 	size_t ret = fread (buf, 1, sizeof (buf), stdin);
@@ -538,6 +602,9 @@ font_options_t::get_font (void) const
       }
     }
 
+    if (debug)
+      mm = HB_MEMORY_MODE_DUPLICATE;
+
     blob = hb_blob_create (font_data, len, mm, user_data, destroy);
   }
 
@@ -558,6 +625,8 @@ font_options_t::get_font (void) const
   hb_font_set_scale (font, scale_x, scale_y);
   hb_face_destroy (face);
 
+  hb_font_set_variations (font, variations, num_variations);
+
   void (*set_font_funcs) (hb_font_t *) = NULL;
   if (!font_funcs)
   {
@@ -566,7 +635,7 @@ font_options_t::get_font (void) const
   else
   {
     for (unsigned int i = 0; i < ARRAY_LENGTH (supported_font_funcs); i++)
-      if (0 == strcasecmp (font_funcs, supported_font_funcs[i].name))
+      if (0 == g_ascii_strcasecmp (font_funcs, supported_font_funcs[i].name))
       {
 	set_font_funcs = supported_font_funcs[i].func;
 	break;
@@ -598,25 +667,26 @@ const char *
 text_options_t::get_line (unsigned int *len)
 {
   if (text) {
-    if (text_len == (unsigned int) -1)
-      text_len = strlen (text);
+    if (!line) line = text;
+    if (line_len == (unsigned int) -1)
+      line_len = strlen (line);
 
-    if (!text_len) {
+    if (!line_len) {
       *len = 0;
       return NULL;
     }
 
-    const char *ret = text;
-    const char *p = (const char *) memchr (text, '\n', text_len);
+    const char *ret = line;
+    const char *p = (const char *) memchr (line, '\n', line_len);
     unsigned int ret_len;
     if (!p) {
-      ret_len = text_len;
-      text += ret_len;
-      text_len = 0;
+      ret_len = line_len;
+      line += ret_len;
+      line_len = 0;
     } else {
       ret_len = p - ret;
-      text += ret_len + 1;
-      text_len -= ret_len + 1;
+      line += ret_len + 1;
+      line_len -= ret_len + 1;
     }
 
     *len = ret_len;
@@ -668,7 +738,7 @@ output_options_t::get_file_handle (void)
     fp = fopen (output_file, "wb");
   else {
 #if defined(_WIN32) || defined(__CYGWIN__)
-    setmode (fileno (stdout), _O_BINARY);
+    setmode (fileno (stdout), O_BINARY);
 #endif
     fp = stdout;
   }
@@ -707,6 +777,7 @@ format_options_t::add_options (option_parser_t *parser)
     {"no-clusters",	0, G_OPTION_FLAG_REVERSE,
 			      G_OPTION_ARG_NONE,	&this->show_clusters,		"Do not output cluster indices",					NULL},
     {"show-extents",	0, 0, G_OPTION_ARG_NONE,	&this->show_extents,		"Output glyph extents",							NULL},
+    {"trace",		0, 0, G_OPTION_ARG_NONE,	&this->trace,			"Output interim shaping results",					NULL},
     {NULL}
   };
   parser->add_group (entries,
@@ -715,7 +786,7 @@ format_options_t::add_options (option_parser_t *parser)
          "    text: [<glyph name or index>=<glyph cluster index within input>@<horizontal displacement>,<vertical displacement>+<horizontal advance>,<vertical advance>|...]\n"
          "    json: [{\"g\": <glyph name or index>, \"ax\": <horizontal advance>, \"ay\": <vertical advance>, \"dx\": <horizontal displacement>, \"dy\": <vertical displacement>, \"cl\": <glyph cluster index within input>}, ...]\n"
          "\nOutput syntax options:",
-		     "Options controlling the syntax of the output",
+		     "Options for the syntax of the output",
 		     this);
 }
 
@@ -748,7 +819,8 @@ format_options_t::serialize_glyphs (hb_buffer_t *buffer,
   unsigned int num_glyphs = hb_buffer_get_length (buffer);
   unsigned int start = 0;
 
-  while (start < num_glyphs) {
+  while (start < num_glyphs)
+  {
     char buf[1024];
     unsigned int consumed;
     start += hb_buffer_serialize_glyphs (buffer, start, num_glyphs,
@@ -775,7 +847,8 @@ format_options_t::serialize_buffer_of_text (hb_buffer_t  *buffer,
 					    hb_font_t    *font,
 					    GString      *gs)
 {
-  if (show_text) {
+  if (show_text)
+  {
     serialize_line_no (line_no, gs);
     g_string_append_c (gs, '(');
     g_string_append_len (gs, text, text_len);
@@ -783,7 +856,8 @@ format_options_t::serialize_buffer_of_text (hb_buffer_t  *buffer,
     g_string_append_c (gs, '\n');
   }
 
-  if (show_unicode) {
+  if (show_unicode)
+  {
     serialize_line_no (line_no, gs);
     serialize_unicode (buffer, gs);
     g_string_append_c (gs, '\n');

@@ -1,13 +1,13 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.1.12"
+version = "0.1.13"
 
 authors = ["The Servo Project Developers"]
 license = "MIT"
 
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
-documentation = "http://doc.servo.org/harfbuzz_sys/"
+documentation = "https://docs.rs/harfbuzz-sys/"
 keywords = ["opentype", "font", "text", "layout", "unicode"]
 
 links = "harfbuzz"

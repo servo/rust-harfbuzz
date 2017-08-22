@@ -54,7 +54,7 @@ struct CmapSubtableFormat0
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   protected:
@@ -69,68 +69,85 @@ struct CmapSubtableFormat0
 
 struct CmapSubtableFormat4
 {
-  inline bool get_glyph (hb_codepoint_t codepoint, hb_codepoint_t *glyph) const
+  struct accelerator_t
   {
-    unsigned int segCount;
+    inline void init (const CmapSubtableFormat4 *subtable)
+    {
+      segCount = subtable->segCountX2 / 2;
+      endCount = subtable->values;
+      startCount = endCount + segCount + 1;
+      idDelta = startCount + segCount;
+      idRangeOffset = idDelta + segCount;
+      glyphIdArray = idRangeOffset + segCount;
+      glyphIdArrayLength = (subtable->length - 16 - 8 * segCount) / 2;
+    }
+
+    static inline bool get_glyph_func (const void *obj, hb_codepoint_t codepoint, hb_codepoint_t *glyph)
+    {
+      const accelerator_t *thiz = (const accelerator_t *) obj;
+
+      /* Custom two-array bsearch. */
+      int min = 0, max = (int) thiz->segCount - 1;
+      const USHORT *startCount = thiz->startCount;
+      const USHORT *endCount = thiz->endCount;
+      unsigned int i;
+      while (min <= max)
+      {
+	int mid = (min + max) / 2;
+	if (codepoint < startCount[mid])
+	  max = mid - 1;
+	else if (codepoint > endCount[mid])
+	  min = mid + 1;
+	else
+	{
+	  i = mid;
+	  goto found;
+	}
+      }
+      return false;
+
+    found:
+      hb_codepoint_t gid;
+      unsigned int rangeOffset = thiz->idRangeOffset[i];
+      if (rangeOffset == 0)
+	gid = codepoint + thiz->idDelta[i];
+      else
+      {
+	/* Somebody has been smoking... */
+	unsigned int index = rangeOffset / 2 + (codepoint - thiz->startCount[i]) + i - thiz->segCount;
+	if (unlikely (index >= thiz->glyphIdArrayLength))
+	  return false;
+	gid = thiz->glyphIdArray[index];
+	if (unlikely (!gid))
+	  return false;
+	gid += thiz->idDelta[i];
+      }
+
+      *glyph = gid & 0xFFFFu;
+      return true;
+    }
+
     const USHORT *endCount;
     const USHORT *startCount;
     const USHORT *idDelta;
     const USHORT *idRangeOffset;
     const USHORT *glyphIdArray;
+    unsigned int segCount;
     unsigned int glyphIdArrayLength;
+  };
 
-    segCount = this->segCountX2 / 2;
-    endCount = this->values;
-    startCount = endCount + segCount + 1;
-    idDelta = startCount + segCount;
-    idRangeOffset = idDelta + segCount;
-    glyphIdArray = idRangeOffset + segCount;
-    glyphIdArrayLength = (this->length - 16 - 8 * segCount) / 2;
-
-    /* Custom two-array bsearch. */
-    int min = 0, max = (int) segCount - 1;
-    unsigned int i;
-    while (min <= max)
-    {
-      int mid = (min + max) / 2;
-      if (codepoint < startCount[mid])
-        max = mid - 1;
-      else if (codepoint > endCount[mid])
-        min = mid + 1;
-      else
-      {
-	i = mid;
-	goto found;
-      }
-    }
-    return false;
-
-  found:
-    hb_codepoint_t gid;
-    unsigned int rangeOffset = idRangeOffset[i];
-    if (rangeOffset == 0)
-      gid = codepoint + idDelta[i];
-    else
-    {
-      /* Somebody has been smoking... */
-      unsigned int index = rangeOffset / 2 + (codepoint - startCount[i]) + i - segCount;
-      if (unlikely (index >= glyphIdArrayLength))
-	return false;
-      gid = glyphIdArray[index];
-      if (unlikely (!gid))
-	return false;
-      gid += idDelta[i];
-    }
-
-    *glyph = gid & 0xFFFFu;
-    return true;
+  inline bool get_glyph (hb_codepoint_t codepoint, hb_codepoint_t *glyph) const
+  {
+    accelerator_t accel;
+    accel.init (this);
+    return accel.get_glyph_func (&accel, codepoint, glyph);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
     if (unlikely (!c->check_struct (this)))
-      return TRACE_RETURN (false);
+      return_trace (false);
 
     if (unlikely (!c->check_range (this, length)))
     {
@@ -141,10 +158,10 @@ struct CmapSubtableFormat4
 					    (uintptr_t) (c->end -
 							 (char *) this));
       if (!c->try_set (&length, new_length))
-	return TRACE_RETURN (false);
+	return_trace (false);
     }
 
-    return TRACE_RETURN (16 + 4 * (unsigned int) segCountX2 <= length);
+    return_trace (16 + 4 * (unsigned int) segCountX2 <= length);
   }
 
   protected:
@@ -187,7 +204,7 @@ struct CmapSubtableLongGroup
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   private:
@@ -215,7 +232,7 @@ struct CmapSubtableTrimmed
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && glyphIdArray.sanitize (c));
+    return_trace (c->check_struct (this) && glyphIdArray.sanitize (c));
   }
 
   protected:
@@ -248,7 +265,7 @@ struct CmapSubtableLongSegmented
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && groups.sanitize (c));
+    return_trace (c->check_struct (this) && groups.sanitize (c));
   }
 
   protected:
@@ -295,7 +312,7 @@ struct UnicodeValueRange
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   UINT24	startUnicodeValue;	/* First value in this range. */
@@ -317,7 +334,7 @@ struct UVSMapping
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   UINT24	unicodeValue;	/* Base Unicode value of the UVS */
@@ -357,15 +374,15 @@ struct VariationSelectorRecord
   inline bool sanitize (hb_sanitize_context_t *c, const void *base) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) &&
-			 defaultUVS.sanitize (c, base) &&
-			 nonDefaultUVS.sanitize (c, base));
+    return_trace (c->check_struct (this) &&
+		  defaultUVS.sanitize (c, base) &&
+		  nonDefaultUVS.sanitize (c, base));
   }
 
   UINT24	varSelector;	/* Variation selector. */
-  OffsetTo<DefaultUVS, ULONG>
+  LOffsetTo<DefaultUVS>
 		defaultUVS;	/* Offset to Default UVS Table. May be 0. */
-  OffsetTo<NonDefaultUVS, ULONG>
+  LOffsetTo<NonDefaultUVS>
 		nonDefaultUVS;	/* Offset to Non-Default UVS Table. May be 0. */
   public:
   DEFINE_SIZE_STATIC (11);
@@ -383,12 +400,12 @@ struct CmapSubtableFormat14
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) &&
-			 record.sanitize (c, this));
+    return_trace (c->check_struct (this) &&
+		  record.sanitize (c, this));
   }
 
   protected:
-  USHORT	format;		/* Format number is set to 0. */
+  USHORT	format;		/* Format number is set to 14. */
   ULONG		lengthZ;	/* Byte length of this subtable. */
   SortedArrayOf<VariationSelectorRecord, ULONG>
 		record;		/* Variation selector records; sorted
@@ -416,33 +433,23 @@ struct CmapSubtable
     }
   }
 
-  inline glyph_variant_t get_glyph_variant (hb_codepoint_t codepoint,
-					    hb_codepoint_t variation_selector,
-					    hb_codepoint_t *glyph) const
-  {
-    switch (u.format) {
-    case 14: return u.format14.get_glyph_variant(codepoint, variation_selector, glyph);
-    default: return GLYPH_VARIANT_NOT_FOUND;
-    }
-  }
-
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (!u.format.sanitize (c)) return TRACE_RETURN (false);
+    if (!u.format.sanitize (c)) return_trace (false);
     switch (u.format) {
-    case  0: return TRACE_RETURN (u.format0 .sanitize (c));
-    case  4: return TRACE_RETURN (u.format4 .sanitize (c));
-    case  6: return TRACE_RETURN (u.format6 .sanitize (c));
-    case 10: return TRACE_RETURN (u.format10.sanitize (c));
-    case 12: return TRACE_RETURN (u.format12.sanitize (c));
-    case 13: return TRACE_RETURN (u.format13.sanitize (c));
-    case 14: return TRACE_RETURN (u.format14.sanitize (c));
-    default:return TRACE_RETURN (true);
+    case  0: return_trace (u.format0 .sanitize (c));
+    case  4: return_trace (u.format4 .sanitize (c));
+    case  6: return_trace (u.format6 .sanitize (c));
+    case 10: return_trace (u.format10.sanitize (c));
+    case 12: return_trace (u.format12.sanitize (c));
+    case 13: return_trace (u.format13.sanitize (c));
+    case 14: return_trace (u.format14.sanitize (c));
+    default:return_trace (true);
     }
   }
 
-  protected:
+  public:
   union {
   USHORT		format;		/* Format identifier */
   CmapSubtableFormat0	format0;
@@ -473,13 +480,13 @@ struct EncodingRecord
   inline bool sanitize (hb_sanitize_context_t *c, const void *base) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) &&
-			 subtable.sanitize (c, base));
+    return_trace (c->check_struct (this) &&
+		  subtable.sanitize (c, base));
   }
 
   USHORT	platformID;	/* Platform ID. */
   USHORT	encodingID;	/* Platform-specific encoding ID. */
-  OffsetTo<CmapSubtable, ULONG>
+  LOffsetTo<CmapSubtable>
 		subtable;	/* Byte offset from beginning of table to the subtable for this encoding. */
   public:
   DEFINE_SIZE_STATIC (8);
@@ -509,9 +516,9 @@ struct cmap
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) &&
-			 likely (version == 0) &&
-			 encodingRecord.sanitize (c, this));
+    return_trace (c->check_struct (this) &&
+		  likely (version == 0) &&
+		  encodingRecord.sanitize (c, this));
   }
 
   USHORT		version;	/* Table version number (0). */

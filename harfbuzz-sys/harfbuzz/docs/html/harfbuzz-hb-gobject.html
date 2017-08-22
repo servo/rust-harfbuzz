@@ -5,10 +5,10 @@
 <title>hb-gobject: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
 <link rel="prev" href="harfbuzz-hb-coretext.html" title="hb-coretext">
 <link rel="next" href="object-tree.html" title="Object Hierarchy">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
                   <a href="#harfbuzz-hb-gobject.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-coretext.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="object-tree.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -90,6 +90,18 @@
 </tr>
 <tr>
 <td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-CONSTANT:CAPS" title="HB_GOBJECT_TYPE_OT_MATH_CONSTANT">HB_GOBJECT_TYPE_OT_MATH_CONSTANT</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-GLYPH-PART-FLAGS:CAPS" title="HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART_FLAGS">HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART_FLAGS</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-KERN:CAPS" title="HB_GOBJECT_TYPE_OT_MATH_KERN">HB_GOBJECT_TYPE_OT_MATH_KERN</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SCRIPT:CAPS" title="HB_GOBJECT_TYPE_SCRIPT">HB_GOBJECT_TYPE_SCRIPT</a></td>
 </tr>
 <tr>
@@ -107,6 +119,34 @@
 <tr>
 <td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-UNICODE-GENERAL-CATEGORY:CAPS" title="HB_GOBJECT_TYPE_UNICODE_GENERAL_CATEGORY">HB_GOBJECT_TYPE_UNICODE_GENERAL_CATEGORY</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-CLUSTER-LEVEL:CAPS" title="HB_GOBJECT_TYPE_BUFFER_CLUSTER_LEVEL">HB_GOBJECT_TYPE_BUFFER_CLUSTER_LEVEL</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-FEATURE:CAPS" title="HB_GOBJECT_TYPE_FEATURE">HB_GOBJECT_TYPE_FEATURE</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-GLYPH-INFO:CAPS" title="HB_GOBJECT_TYPE_GLYPH_INFO">HB_GOBJECT_TYPE_GLYPH_INFO</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-GLYPH-POSITION:CAPS" title="HB_GOBJECT_TYPE_GLYPH_POSITION">HB_GOBJECT_TYPE_GLYPH_POSITION</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SEGMENT-PROPERTIES:CAPS" title="HB_GOBJECT_TYPE_SEGMENT_PROPERTIES">HB_GOBJECT_TYPE_SEGMENT_PROPERTIES</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SET:CAPS" title="HB_GOBJECT_TYPE_SET">HB_GOBJECT_TYPE_SET</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-USER-DATA-KEY:CAPS" title="HB_GOBJECT_TYPE_USER_DATA_KEY">HB_GOBJECT_TYPE_USER_DATA_KEY</a></td>
 </tr>
 <tr>
 <td class="function_type">
@@ -209,6 +249,30 @@
 <span class="returnvalue">GType</span>
 </td>
 <td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-ot-math-constant-get-type" title="hb_gobject_ot_math_constant_get_type ()">hb_gobject_ot_math_constant_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-ot-math-glyph-part-flags-get-type" title="hb_gobject_ot_math_glyph_part_flags_get_type ()">hb_gobject_ot_math_glyph_part_flags_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-ot-math-kern-get-type" title="hb_gobject_ot_math_kern_get_type ()">hb_gobject_ot_math_kern_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
 <a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-script-get-type" title="hb_gobject_script_get_type ()">hb_gobject_script_get_type</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
@@ -242,6 +306,62 @@
 </td>
 <td class="function_name">
 <a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-unicode-general-category-get-type" title="hb_gobject_unicode_general_category_get_type ()">hb_gobject_unicode_general_category_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-buffer-cluster-level-get-type" title="hb_gobject_buffer_cluster_level_get_type ()">hb_gobject_buffer_cluster_level_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-feature-get-type" title="hb_gobject_feature_get_type ()">hb_gobject_feature_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-glyph-info-get-type" title="hb_gobject_glyph_info_get_type ()">hb_gobject_glyph_info_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-glyph-position-get-type" title="hb_gobject_glyph_position_get_type ()">hb_gobject_glyph_position_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-segment-properties-get-type" title="hb_gobject_segment_properties_get_type ()">hb_gobject_segment_properties_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-set-get-type" title="hb_gobject_set_get_type ()">hb_gobject_set_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GType</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-user-data-key-get-type" title="hb_gobject_user_data_key_get_type ()">hb_gobject_user_data_key_get_type</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
 </tbody>
@@ -330,6 +450,24 @@
 </div>
 <hr>
 <div class="refsect2">
+<a name="HB-GOBJECT-TYPE-OT-MATH-CONSTANT:CAPS"></a><h3>HB_GOBJECT_TYPE_OT_MATH_CONSTANT</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_OT_MATH_CONSTANT (hb_gobject_ot_math_constant_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-OT-MATH-GLYPH-PART-FLAGS:CAPS"></a><h3>HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART_FLAGS</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART_FLAGS (hb_gobject_ot_math_glyph_part_flags_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-OT-MATH-KERN:CAPS"></a><h3>HB_GOBJECT_TYPE_OT_MATH_KERN</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_OT_MATH_KERN (hb_gobject_ot_math_kern_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
 <a name="HB-GOBJECT-TYPE-SCRIPT:CAPS"></a><h3>HB_GOBJECT_TYPE_SCRIPT</h3>
 <pre class="programlisting">#define HB_GOBJECT_TYPE_SCRIPT (hb_gobject_script_get_type ())
 </pre>
@@ -360,9 +498,52 @@
 </div>
 <hr>
 <div class="refsect2">
+<a name="HB-GOBJECT-TYPE-BUFFER-CLUSTER-LEVEL:CAPS"></a><h3>HB_GOBJECT_TYPE_BUFFER_CLUSTER_LEVEL</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_BUFFER_CLUSTER_LEVEL (hb_gobject_buffer_cluster_level_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-FEATURE:CAPS"></a><h3>HB_GOBJECT_TYPE_FEATURE</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_FEATURE (hb_gobject_feature_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-GLYPH-INFO:CAPS"></a><h3>HB_GOBJECT_TYPE_GLYPH_INFO</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_GLYPH_INFO (hb_gobject_glyph_info_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-GLYPH-POSITION:CAPS"></a><h3>HB_GOBJECT_TYPE_GLYPH_POSITION</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_GLYPH_POSITION (hb_gobject_glyph_position_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-SEGMENT-PROPERTIES:CAPS"></a><h3>HB_GOBJECT_TYPE_SEGMENT_PROPERTIES</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_SEGMENT_PROPERTIES (hb_gobject_segment_properties_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-SET:CAPS"></a><h3>HB_GOBJECT_TYPE_SET</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_SET (hb_gobject_set_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-USER-DATA-KEY:CAPS"></a><h3>HB_GOBJECT_TYPE_USER_DATA_KEY</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_USER_DATA_KEY (hb_gobject_user_data_key_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
 <a name="hb-gobject-blob-get-type"></a><h3>hb_gobject_blob_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_blob_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -382,6 +563,7 @@ hb_gobject_buffer_flags_get_type (<em class="parameter"><code><span class="type"
 <a name="hb-gobject-buffer-get-type"></a><h3>hb_gobject_buffer_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_buffer_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -408,18 +590,21 @@ hb_gobject_direction_get_type (<em class="parameter"><code><span class="type">vo
 <a name="hb-gobject-face-get-type"></a><h3>hb_gobject_face_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_face_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-gobject-font-funcs-get-type"></a><h3>hb_gobject_font_funcs_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_font_funcs_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-gobject-font-get-type"></a><h3>hb_gobject_font_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_font_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -433,6 +618,25 @@ hb_gobject_memory_mode_get_type (<em class="parameter"><code><span class="type">
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_ot_layout_glyph_class_get_type
                                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-ot-math-constant-get-type"></a><h3>hb_gobject_ot_math_constant_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_ot_math_constant_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-ot-math-glyph-part-flags-get-type"></a><h3>hb_gobject_ot_math_glyph_part_flags_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_ot_math_glyph_part_flags_get_type
+                               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-ot-math-kern-get-type"></a><h3>hb_gobject_ot_math_kern_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_ot_math_kern_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -458,6 +662,7 @@ hb_gobject_unicode_combining_class_get_type
 <a name="hb-gobject-unicode-funcs-get-type"></a><h3>hb_gobject_unicode_funcs_get_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">GType</span>
 hb_gobject_unicode_funcs_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -466,12 +671,56 @@ hb_gobject_unicode_funcs_get_type (<em class="parameter"><code><span class="type
 hb_gobject_unicode_general_category_get_type
                                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 </div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-buffer-cluster-level-get-type"></a><h3>hb_gobject_buffer_cluster_level_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_buffer_cluster_level_get_type
+                               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-feature-get-type"></a><h3>hb_gobject_feature_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_feature_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-glyph-info-get-type"></a><h3>hb_gobject_glyph_info_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_glyph_info_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-glyph-position-get-type"></a><h3>hb_gobject_glyph_position_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_glyph_position_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-segment-properties-get-type"></a><h3>hb_gobject_segment_properties_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_segment_properties_get_type
+                               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-set-get-type"></a><h3>hb_gobject_set_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_set_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-user-data-key-get-type"></a><h3>hb_gobject_user_data_key_get_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">GType</span>
+hb_gobject_user_data_key_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-gobject.other_details"></a><h2>Types and Values</h2>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

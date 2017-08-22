@@ -5,10 +5,10 @@
 <title>Shaping: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
 <link rel="prev" href="harfbuzz-hb-font.html" title="hb-font">
 <link rel="next" href="harfbuzz-hb-version.html" title="hb-version">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
                   <a href="#harfbuzz-Shaping.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-font.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-version.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -121,12 +121,10 @@ contains the output glyphs and their positions.</p>
 hb_feature_from_string (<em class="parameter"><code>const <span class="type">char</span> *str</code></em>,
                         <em class="parameter"><code><span class="type">int</span> len</code></em>,
                         <em class="parameter"><code><a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *feature</code></em>);</pre>
-<p>Parses a string into a <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a>. If <em class="parameter"><code>len</code></em>
- is -1 then <em class="parameter"><code>str</code></em>
- is
-<code class="literal">NULL</code>-terminated.</p>
+<p>Parses a string into a <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a>.</p>
+<p>TODO: document the syntax here.</p>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.2.5"></a><h4>Parameters</h4>
+<a name="id-1.3.3.9.9.2.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -142,7 +140,7 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of <em class="parameter"><code>str</code></em>
-, or -1 if string is nul-terminated</p></td>
+, or -1 if string is <code class="literal">NULL</code> terminated</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -154,9 +152,9 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.2.6"></a><h4>Returns</h4>
-<p> <code class="literal">TRUE</code> if <em class="parameter"><code>str</code></em>
-is successfully parsed, <code class="literal">FALSE</code> otherwise</p>
+<a name="id-1.3.3.9.9.2.7"></a><h4>Returns</h4>
+<p><code class="literal">true</code> if <em class="parameter"><code>str</code></em>
+is successfully parsed, <code class="literal">false</code> otherwise.</p>
 <p></p>
 </div>
 <p class="since">Since 0.9.5</p>
@@ -173,7 +171,7 @@ understood by <a class="link" href="harfbuzz-Shaping.html#hb-feature-from-string
 allocating big enough size for <em class="parameter"><code>buf</code></em>
 , 128 bytes is more than enough.</p>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.3.5"></a><h4>Parameters</h4>
+<a name="id-1.3.3.9.9.3.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -207,7 +205,7 @@ allocating big enough size for <em class="parameter"><code>buf</code></em>
 <a name="hb-shape"></a><h3>hb_shape ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_shape (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-          <em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
+          <em class="parameter"><code><a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
           <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *features</code></em>,
           <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>);</pre>
 <p>Shapes <em class="parameter"><code>buffer</code></em>
@@ -217,7 +215,7 @@ positioned glyphs. If <em class="parameter"><code>features</code></em>
  is not <code class="literal">NULL</code>, it will be used to control the
 features applied during shaping.</p>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.4.5"></a><h4>Parameters</h4>
+<a name="id-1.3.3.9.9.4.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -232,7 +230,7 @@ features applied during shaping.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>buffer</p></td>
-<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> to shape</p></td>
+<td class="parameter_description"><p>an <a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> to shape</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -250,19 +248,14 @@ array</p></td>
 </tbody>
 </table></div>
 </div>
-<div class="refsect3">
-<a name="id-1.3.2.9.9.4.6"></a><h4>Returns</h4>
-<p> <code class="literal">FALSE</code> if all shapers failed, <code class="literal">TRUE</code> otherwise</p>
-<p></p>
-</div>
-<p class="since">Since 1.0</p>
+<p class="since">Since 0.9.2</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-shape-full"></a><h3>hb_shape_full ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_shape_full (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-               <em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
+               <em class="parameter"><code><a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
                <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *features</code></em>,
                <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>,
                <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
@@ -271,7 +264,7 @@ hb_shape_full (<em class="parameter"><code><a class="link" href="harfbuzz-hb-fon
 shapers will be used in the given order, otherwise the default shapers list
 will be used.</p>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.5.5"></a><h4>Parameters</h4>
+<a name="id-1.3.3.9.9.5.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -286,7 +279,7 @@ will be used.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>buffer</p></td>
-<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> to shape</p></td>
+<td class="parameter_description"><p>an <a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> to shape</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -311,8 +304,8 @@ array of shapers to use or <code class="literal">NULL</code>. </p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.5.6"></a><h4>Returns</h4>
-<p> <code class="literal">FALSE</code> if all shapers failed, <code class="literal">TRUE</code> otherwise</p>
+<a name="id-1.3.3.9.9.5.6"></a><h4>Returns</h4>
+<p> false if all shapers failed, true otherwise</p>
 <p></p>
 </div>
 <p class="since">Since 0.9.2</p>
@@ -324,7 +317,7 @@ array of shapers to use or <code class="literal">NULL</code>. </p></td>
 hb_shape_list_shapers (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Retrieves the list of shapers supported by HarfBuzz.</p>
 <div class="refsect3">
-<a name="id-1.3.2.9.9.6.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.9.9.6.5"></a><h4>Returns</h4>
 <p> an array of
 constant strings. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></p>
@@ -347,6 +340,6 @@ constant strings. </p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

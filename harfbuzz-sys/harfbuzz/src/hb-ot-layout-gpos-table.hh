@@ -36,8 +36,17 @@ namespace OT {
 
 
 /* buffer **position** var allocations */
-#define attach_lookback() var.u16[0] /* number of glyphs to go back to attach this glyph to its base */
-#define cursive_chain() var.i16[1] /* character to which this connects, may be positive or negative */
+#define attach_chain() var.i16[0] /* glyph to which this attaches to, relative to current glyphs; negative for going back, positive for forward. */
+#define attach_type() var.u8[2] /* attachment type */
+/* Note! if attach_chain() is zero, the value of attach_type() is irrelevant. */
+
+enum attach_type_t {
+  ATTACH_TYPE_NONE	= 0X00,
+
+  /* Each attachment should be either a mark or a cursive; can't be both. */
+  ATTACH_TYPE_MARK	= 0X01,
+  ATTACH_TYPE_CURSIVE	= 0X02,
+};
 
 
 /* Shared Tables: ValueRecord, Anchor Table, and MarkArray */
@@ -94,17 +103,16 @@ struct ValueFormat : USHORT
   inline unsigned int get_size (void) const
   { return get_len () * Value::static_size; }
 
-  void apply_value (hb_font_t            *font,
-		    hb_direction_t        direction,
+  void apply_value (hb_apply_context_t   *c,
 		    const void           *base,
 		    const Value          *values,
 		    hb_glyph_position_t  &glyph_pos) const
   {
-    unsigned int x_ppem, y_ppem;
     unsigned int format = *this;
-    hb_bool_t horizontal = HB_DIRECTION_IS_HORIZONTAL (direction);
-
     if (!format) return;
+
+    hb_font_t *font = c->font;
+    hb_bool_t horizontal = HB_DIRECTION_IS_HORIZONTAL (c->direction);
 
     if (format & xPlacement) glyph_pos.x_offset  += font->em_scale_x (get_short (values++));
     if (format & yPlacement) glyph_pos.y_offset  += font->em_scale_y (get_short (values++));
@@ -120,27 +128,29 @@ struct ValueFormat : USHORT
 
     if (!has_device ()) return;
 
-    x_ppem = font->x_ppem;
-    y_ppem = font->y_ppem;
+    bool use_x_device = font->x_ppem || font->num_coords;
+    bool use_y_device = font->y_ppem || font->num_coords;
 
-    if (!x_ppem && !y_ppem) return;
+    if (!use_x_device && !use_y_device) return;
+
+    const VariationStore &store = c->var_store;
 
     /* pixel -> fractional pixel */
     if (format & xPlaDevice) {
-      if (x_ppem) glyph_pos.x_offset  += (base + get_device (values)).get_x_delta (font);
+      if (use_x_device) glyph_pos.x_offset  += (base + get_device (values)).get_x_delta (font, store);
       values++;
     }
     if (format & yPlaDevice) {
-      if (y_ppem) glyph_pos.y_offset  += (base + get_device (values)).get_y_delta (font);
+      if (use_y_device) glyph_pos.y_offset  += (base + get_device (values)).get_y_delta (font, store);
       values++;
     }
     if (format & xAdvDevice) {
-      if (horizontal && x_ppem) glyph_pos.x_advance += (base + get_device (values)).get_x_delta (font);
+      if (horizontal && use_x_device) glyph_pos.x_advance += (base + get_device (values)).get_x_delta (font, store);
       values++;
     }
     if (format & yAdvDevice) {
       /* y_advance values grow downward but font-space grows upward, hence negation */
-      if (!horizontal && y_ppem) glyph_pos.y_advance -= (base + get_device (values)).get_y_delta (font);
+      if (!horizontal && use_y_device) glyph_pos.y_advance -= (base + get_device (values)).get_y_delta (font, store);
       values++;
     }
   }
@@ -181,7 +191,7 @@ struct ValueFormat : USHORT
   inline bool sanitize_value (hb_sanitize_context_t *c, const void *base, const Value *values) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_range (values, get_size ()) && (!has_device () || sanitize_value_devices (c, base, values)));
+    return_trace (c->check_range (values, get_size ()) && (!has_device () || sanitize_value_devices (c, base, values)));
   }
 
   inline bool sanitize_values (hb_sanitize_context_t *c, const void *base, const Value *values, unsigned int count) const
@@ -189,17 +199,17 @@ struct ValueFormat : USHORT
     TRACE_SANITIZE (this);
     unsigned int len = get_len ();
 
-    if (!c->check_array (values, get_size (), count)) return TRACE_RETURN (false);
+    if (!c->check_array (values, get_size (), count)) return_trace (false);
 
-    if (!has_device ()) return TRACE_RETURN (true);
+    if (!has_device ()) return_trace (true);
 
     for (unsigned int i = 0; i < count; i++) {
       if (!sanitize_value_devices (c, base, values))
-        return TRACE_RETURN (false);
+        return_trace (false);
       values += len;
     }
 
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   /* Just sanitize referenced Device tables.  Doesn't check the values themselves. */
@@ -207,32 +217,33 @@ struct ValueFormat : USHORT
   {
     TRACE_SANITIZE (this);
 
-    if (!has_device ()) return TRACE_RETURN (true);
+    if (!has_device ()) return_trace (true);
 
     for (unsigned int i = 0; i < count; i++) {
       if (!sanitize_value_devices (c, base, values))
-        return TRACE_RETURN (false);
+        return_trace (false);
       values += stride;
     }
 
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 };
 
 
 struct AnchorFormat1
 {
-  inline void get_anchor (hb_font_t *font, hb_codepoint_t glyph_id HB_UNUSED,
+  inline void get_anchor (hb_apply_context_t *c, hb_codepoint_t glyph_id HB_UNUSED,
 			  hb_position_t *x, hb_position_t *y) const
   {
-      *x = font->em_scale_x (xCoordinate);
-      *y = font->em_scale_y (yCoordinate);
+    hb_font_t *font = c->font;
+    *x = font->em_scale_x (xCoordinate);
+    *y = font->em_scale_y (yCoordinate);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   protected:
@@ -245,24 +256,25 @@ struct AnchorFormat1
 
 struct AnchorFormat2
 {
-  inline void get_anchor (hb_font_t *font, hb_codepoint_t glyph_id,
+  inline void get_anchor (hb_apply_context_t *c, hb_codepoint_t glyph_id,
 			  hb_position_t *x, hb_position_t *y) const
   {
-      unsigned int x_ppem = font->x_ppem;
-      unsigned int y_ppem = font->y_ppem;
-      hb_position_t cx, cy;
-      hb_bool_t ret;
+    hb_font_t *font = c->font;
+    unsigned int x_ppem = font->x_ppem;
+    unsigned int y_ppem = font->y_ppem;
+    hb_position_t cx, cy;
+    hb_bool_t ret;
 
-      ret = (x_ppem || y_ppem) &&
-             font->get_glyph_contour_point_for_origin (glyph_id, anchorPoint, HB_DIRECTION_LTR, &cx, &cy);
-      *x = ret && x_ppem ? cx : font->em_scale_x (xCoordinate);
-      *y = ret && y_ppem ? cy : font->em_scale_y (yCoordinate);
+    ret = (x_ppem || y_ppem) &&
+	   font->get_glyph_contour_point_for_origin (glyph_id, anchorPoint, HB_DIRECTION_LTR, &cx, &cy);
+    *x = ret && x_ppem ? cx : font->em_scale_x (xCoordinate);
+    *y = ret && y_ppem ? cy : font->em_scale_y (yCoordinate);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this));
+    return_trace (c->check_struct (this));
   }
 
   protected:
@@ -276,22 +288,23 @@ struct AnchorFormat2
 
 struct AnchorFormat3
 {
-  inline void get_anchor (hb_font_t *font, hb_codepoint_t glyph_id HB_UNUSED,
+  inline void get_anchor (hb_apply_context_t *c, hb_codepoint_t glyph_id HB_UNUSED,
 			  hb_position_t *x, hb_position_t *y) const
   {
-      *x = font->em_scale_x (xCoordinate);
-      *y = font->em_scale_y (yCoordinate);
+    hb_font_t *font = c->font;
+    *x = font->em_scale_x (xCoordinate);
+    *y = font->em_scale_y (yCoordinate);
 
-      if (font->x_ppem)
-	*x += (this+xDeviceTable).get_x_delta (font);
-      if (font->y_ppem)
-	*y += (this+yDeviceTable).get_x_delta (font);
+    if (font->x_ppem || font->num_coords)
+      *x += (this+xDeviceTable).get_x_delta (font, c->var_store);
+    if (font->y_ppem || font->num_coords)
+      *y += (this+yDeviceTable).get_y_delta (font, c->var_store);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && xDeviceTable.sanitize (c, this) && yDeviceTable.sanitize (c, this));
+    return_trace (c->check_struct (this) && xDeviceTable.sanitize (c, this) && yDeviceTable.sanitize (c, this));
   }
 
   protected:
@@ -312,14 +325,14 @@ struct AnchorFormat3
 
 struct Anchor
 {
-  inline void get_anchor (hb_font_t *font, hb_codepoint_t glyph_id,
+  inline void get_anchor (hb_apply_context_t *c, hb_codepoint_t glyph_id,
 			  hb_position_t *x, hb_position_t *y) const
   {
     *x = *y = 0;
     switch (u.format) {
-    case 1: u.format1.get_anchor (font, glyph_id, x, y); return;
-    case 2: u.format2.get_anchor (font, glyph_id, x, y); return;
-    case 3: u.format3.get_anchor (font, glyph_id, x, y); return;
+    case 1: u.format1.get_anchor (c, glyph_id, x, y); return;
+    case 2: u.format2.get_anchor (c, glyph_id, x, y); return;
+    case 3: u.format3.get_anchor (c, glyph_id, x, y); return;
     default:						 return;
     }
   }
@@ -327,12 +340,12 @@ struct Anchor
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (!u.format.sanitize (c)) return TRACE_RETURN (false);
+    if (!u.format.sanitize (c)) return_trace (false);
     switch (u.format) {
-    case 1: return TRACE_RETURN (u.format1.sanitize (c));
-    case 2: return TRACE_RETURN (u.format2.sanitize (c));
-    case 3: return TRACE_RETURN (u.format3.sanitize (c));
-    default:return TRACE_RETURN (true);
+    case 1: return_trace (u.format1.sanitize (c));
+    case 2: return_trace (u.format2.sanitize (c));
+    case 3: return_trace (u.format3.sanitize (c));
+    default:return_trace (true);
     }
   }
 
@@ -360,13 +373,13 @@ struct AnchorMatrix
   inline bool sanitize (hb_sanitize_context_t *c, unsigned int cols) const
   {
     TRACE_SANITIZE (this);
-    if (!c->check_struct (this)) return TRACE_RETURN (false);
-    if (unlikely (rows > 0 && cols >= ((unsigned int) -1) / rows)) return TRACE_RETURN (false);
+    if (!c->check_struct (this)) return_trace (false);
+    if (unlikely (_hb_unsigned_int_mul_overflows (rows, cols))) return_trace (false);
     unsigned int count = rows * cols;
-    if (!c->check_array (matrixZ, matrixZ[0].static_size, count)) return TRACE_RETURN (false);
+    if (!c->check_array (matrixZ, matrixZ[0].static_size, count)) return_trace (false);
     for (unsigned int i = 0; i < count; i++)
-      if (!matrixZ[i].sanitize (c, this)) return TRACE_RETURN (false);
-    return TRACE_RETURN (true);
+      if (!matrixZ[i].sanitize (c, this)) return_trace (false);
+    return_trace (true);
   }
 
   USHORT	rows;			/* Number of rows */
@@ -386,7 +399,7 @@ struct MarkRecord
   inline bool sanitize (hb_sanitize_context_t *c, const void *base) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && markAnchor.sanitize (c, base));
+    return_trace (c->check_struct (this) && markAnchor.sanitize (c, base));
   }
 
   protected:
@@ -415,26 +428,28 @@ struct MarkArray : ArrayOf<MarkRecord>	/* Array of MarkRecords--in Coverage orde
     const Anchor& glyph_anchor = anchors.get_anchor (glyph_index, mark_class, class_count, &found);
     /* If this subtable doesn't have an anchor for this base and this class,
      * return false such that the subsequent subtables have a chance at it. */
-    if (unlikely (!found)) return TRACE_RETURN (false);
+    if (unlikely (!found)) return_trace (false);
 
     hb_position_t mark_x, mark_y, base_x, base_y;
 
-    mark_anchor.get_anchor (c->font, buffer->cur().codepoint, &mark_x, &mark_y);
-    glyph_anchor.get_anchor (c->font, buffer->info[glyph_pos].codepoint, &base_x, &base_y);
+    mark_anchor.get_anchor (c, buffer->cur().codepoint, &mark_x, &mark_y);
+    glyph_anchor.get_anchor (c, buffer->info[glyph_pos].codepoint, &base_x, &base_y);
 
     hb_glyph_position_t &o = buffer->cur_pos();
     o.x_offset = base_x - mark_x;
     o.y_offset = base_y - mark_y;
-    o.attach_lookback() = buffer->idx - glyph_pos;
+    o.attach_type() = ATTACH_TYPE_MARK;
+    o.attach_chain() = (int) glyph_pos - (int) buffer->idx;
+    buffer->scratch_flags |= HB_BUFFER_SCRATCH_FLAG_HAS_GPOS_ATTACHMENT;
 
     buffer->idx++;
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (ArrayOf<MarkRecord>::sanitize (c, this));
+    return_trace (ArrayOf<MarkRecord>::sanitize (c, this));
   }
 };
 
@@ -459,21 +474,20 @@ struct SinglePosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int index = (this+coverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (index == NOT_COVERED)) return_trace (false);
 
-    valueFormat.apply_value (c->font, c->direction, this,
-			     values, buffer->cur_pos());
+    valueFormat.apply_value (c, this, values, buffer->cur_pos());
 
     buffer->idx++;
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this)
-        && coverage.sanitize (c, this)
-	&& valueFormat.sanitize_value (c, this, values));
+    return_trace (c->check_struct (this) &&
+		  coverage.sanitize (c, this) &&
+		  valueFormat.sanitize_value (c, this, values));
   }
 
   protected:
@@ -508,24 +522,24 @@ struct SinglePosFormat2
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int index = (this+coverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (index == NOT_COVERED)) return_trace (false);
 
-    if (likely (index >= valueCount)) return TRACE_RETURN (false);
+    if (likely (index >= valueCount)) return_trace (false);
 
-    valueFormat.apply_value (c->font, c->direction, this,
+    valueFormat.apply_value (c, this,
 			     &values[index * valueFormat.get_len ()],
 			     buffer->cur_pos());
 
     buffer->idx++;
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this)
-	&& coverage.sanitize (c, this)
-	&& valueFormat.sanitize_values (c, this, values, valueCount));
+    return_trace (c->check_struct (this) &&
+		  coverage.sanitize (c, this) &&
+		  valueFormat.sanitize_values (c, this, values, valueCount));
   }
 
   protected:
@@ -548,11 +562,11 @@ struct SinglePos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    case 2: return TRACE_RETURN (c->dispatch (u.format2));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    case 2: return_trace (c->dispatch (u.format2));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -615,7 +629,7 @@ struct PairSet
 
     /* Hand-coded bsearch. */
     if (unlikely (!count))
-      return TRACE_RETURN (false);
+      return_trace (false);
     hb_codepoint_t x = buffer->info[pos].codepoint;
     int min = 0, max = (int) count - 1;
     while (min <= max)
@@ -629,18 +643,16 @@ struct PairSet
         min = mid + 1;
       else
       {
-	valueFormats[0].apply_value (c->font, c->direction, this,
-				     &record->values[0], buffer->cur_pos());
-	valueFormats[1].apply_value (c->font, c->direction, this,
-				     &record->values[len1], buffer->pos[pos]);
+	valueFormats[0].apply_value (c, this, &record->values[0], buffer->cur_pos());
+	valueFormats[1].apply_value (c, this, &record->values[len1], buffer->pos[pos]);
 	if (len2)
 	  pos++;
 	buffer->idx = pos;
-	return TRACE_RETURN (true);
+	return_trace (true);
       }
     }
 
-    return TRACE_RETURN (false);
+    return_trace (false);
   }
 
   struct sanitize_closure_t {
@@ -654,12 +666,12 @@ struct PairSet
   {
     TRACE_SANITIZE (this);
     if (!(c->check_struct (this)
-       && c->check_array (arrayZ, USHORT::static_size * closure->stride, len))) return TRACE_RETURN (false);
+       && c->check_array (arrayZ, USHORT::static_size * closure->stride, len))) return_trace (false);
 
     unsigned int count = len;
     const PairValueRecord *record = CastP<PairValueRecord> (arrayZ);
-    return TRACE_RETURN (closure->valueFormats[0].sanitize_values_stride_unsafe (c, closure->base, &record->values[0], count, closure->stride)
-		      && closure->valueFormats[1].sanitize_values_stride_unsafe (c, closure->base, &record->values[closure->len1], count, closure->stride));
+    return_trace (closure->valueFormats[0].sanitize_values_stride_unsafe (c, closure->base, &record->values[0], count, closure->stride) &&
+		  closure->valueFormats[1].sanitize_values_stride_unsafe (c, closure->base, &record->values[closure->len1], count, closure->stride));
   }
 
   protected:
@@ -678,7 +690,7 @@ struct PairPosFormat1
     (this+coverage).add_coverage (c->input);
     unsigned int count = pairSet.len;
     for (unsigned int i = 0; i < count; i++)
-      (this+pairSet[i]).collect_glyphs (c, &valueFormat1);
+      (this+pairSet[i]).collect_glyphs (c, valueFormat);
   }
 
   inline const Coverage &get_coverage (void) const
@@ -691,29 +703,31 @@ struct PairPosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int index = (this+coverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (index == NOT_COVERED)) return_trace (false);
 
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
-    if (!skippy_iter.next ()) return TRACE_RETURN (false);
+    if (!skippy_iter.next ()) return_trace (false);
 
-    return TRACE_RETURN ((this+pairSet[index]).apply (c, &valueFormat1, skippy_iter.idx));
+    return_trace ((this+pairSet[index]).apply (c, valueFormat, skippy_iter.idx));
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
 
-    unsigned int len1 = valueFormat1.get_len ();
-    unsigned int len2 = valueFormat2.get_len ();
+    if (!c->check_struct (this)) return_trace (false);
+
+    unsigned int len1 = valueFormat[0].get_len ();
+    unsigned int len2 = valueFormat[1].get_len ();
     PairSet::sanitize_closure_t closure = {
       this,
-      &valueFormat1,
+      valueFormat,
       len1,
       1 + len1 + len2
     };
 
-    return TRACE_RETURN (c->check_struct (this) && coverage.sanitize (c, this) && pairSet.sanitize (c, this, &closure));
+    return_trace (coverage.sanitize (c, this) && pairSet.sanitize (c, this, &closure));
   }
 
   protected:
@@ -721,10 +735,10 @@ struct PairPosFormat1
   OffsetTo<Coverage>
 		coverage;		/* Offset to Coverage table--from
 					 * beginning of subtable */
-  ValueFormat	valueFormat1;		/* Defines the types of data in
+  ValueFormat	valueFormat[2];		/* [0] Defines the types of data in
 					 * ValueRecord1--for the first glyph
 					 * in the pair--may be zero (0) */
-  ValueFormat	valueFormat2;		/* Defines the types of data in
+					/* [1] Defines the types of data in
 					 * ValueRecord2--for the second glyph
 					 * in the pair--may be zero (0) */
   OffsetArrayOf<PairSet>
@@ -739,7 +753,7 @@ struct PairPosFormat2
   inline void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     TRACE_COLLECT_GLYPHS (this);
-    /* (this+coverage).add_coverage (c->input); // Don't need this. */
+    (this+coverage).add_coverage (c->input);
 
     unsigned int count1 = class1Count;
     const ClassDef &klass1 = this+classDef1;
@@ -762,11 +776,11 @@ struct PairPosFormat2
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int index = (this+coverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (index == NOT_COVERED)) return_trace (false);
 
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
-    if (!skippy_iter.next ()) return TRACE_RETURN (false);
+    if (!skippy_iter.next ()) return_trace (false);
 
     unsigned int len1 = valueFormat1.get_len ();
     unsigned int len2 = valueFormat2.get_len ();
@@ -774,19 +788,17 @@ struct PairPosFormat2
 
     unsigned int klass1 = (this+classDef1).get_class (buffer->cur().codepoint);
     unsigned int klass2 = (this+classDef2).get_class (buffer->info[skippy_iter.idx].codepoint);
-    if (unlikely (klass1 >= class1Count || klass2 >= class2Count)) return TRACE_RETURN (false);
+    if (unlikely (klass1 >= class1Count || klass2 >= class2Count)) return_trace (false);
 
     const Value *v = &values[record_len * (klass1 * class2Count + klass2)];
-    valueFormat1.apply_value (c->font, c->direction, this,
-			      v, buffer->cur_pos());
-    valueFormat2.apply_value (c->font, c->direction, this,
-			      v + len1, buffer->pos[skippy_iter.idx]);
+    valueFormat1.apply_value (c, this, v, buffer->cur_pos());
+    valueFormat2.apply_value (c, this, v + len1, buffer->pos[skippy_iter.idx]);
 
     buffer->idx = skippy_iter.idx;
     if (len2)
       buffer->idx++;
 
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
@@ -795,16 +807,16 @@ struct PairPosFormat2
     if (!(c->check_struct (this)
        && coverage.sanitize (c, this)
        && classDef1.sanitize (c, this)
-       && classDef2.sanitize (c, this))) return TRACE_RETURN (false);
+       && classDef2.sanitize (c, this))) return_trace (false);
 
     unsigned int len1 = valueFormat1.get_len ();
     unsigned int len2 = valueFormat2.get_len ();
     unsigned int stride = len1 + len2;
     unsigned int record_size = valueFormat1.get_size () + valueFormat2.get_size ();
     unsigned int count = (unsigned int) class1Count * (unsigned int) class2Count;
-    return TRACE_RETURN (c->check_array (values, record_size, count) &&
-			 valueFormat1.sanitize_values_stride_unsafe (c, this, &values[0], count, stride) &&
-			 valueFormat2.sanitize_values_stride_unsafe (c, this, &values[len1], count, stride));
+    return_trace (c->check_array (values, record_size, count) &&
+		  valueFormat1.sanitize_values_stride_unsafe (c, this, &values[0], count, stride) &&
+		  valueFormat2.sanitize_values_stride_unsafe (c, this, &values[len1], count, stride));
   }
 
   protected:
@@ -843,11 +855,11 @@ struct PairPos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    case 2: return TRACE_RETURN (c->dispatch (u.format2));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    case 2: return_trace (c->dispatch (u.format2));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -867,7 +879,7 @@ struct EntryExitRecord
   inline bool sanitize (hb_sanitize_context_t *c, const void *base) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (entryAnchor.sanitize (c, base) && exitAnchor.sanitize (c, base));
+    return_trace (entryAnchor.sanitize (c, base) && exitAnchor.sanitize (c, base));
   }
 
   protected:
@@ -904,25 +916,22 @@ struct CursivePosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
 
-    /* We don't handle mark glyphs here. */
-    if (unlikely (_hb_glyph_info_is_mark (&buffer->cur()))) return TRACE_RETURN (false);
-
     const EntryExitRecord &this_record = entryExitRecord[(this+coverage).get_coverage  (buffer->cur().codepoint)];
-    if (!this_record.exitAnchor) return TRACE_RETURN (false);
+    if (!this_record.exitAnchor) return_trace (false);
 
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
-    if (!skippy_iter.next ()) return TRACE_RETURN (false);
+    if (!skippy_iter.next ()) return_trace (false);
 
     const EntryExitRecord &next_record = entryExitRecord[(this+coverage).get_coverage  (buffer->info[skippy_iter.idx].codepoint)];
-    if (!next_record.entryAnchor) return TRACE_RETURN (false);
+    if (!next_record.entryAnchor) return_trace (false);
 
     unsigned int i = buffer->idx;
     unsigned int j = skippy_iter.idx;
 
     hb_position_t entry_x, entry_y, exit_x, exit_y;
-    (this+this_record.exitAnchor).get_anchor (c->font, buffer->info[i].codepoint, &exit_x, &exit_y);
-    (this+next_record.entryAnchor).get_anchor (c->font, buffer->info[j].codepoint, &entry_x, &entry_y);
+    (this+this_record.exitAnchor).get_anchor (c, buffer->info[i].codepoint, &exit_x, &exit_y);
+    (this+next_record.entryAnchor).get_anchor (c, buffer->info[j].codepoint, &entry_x, &entry_y);
 
     hb_glyph_position_t *pos = buffer->pos;
 
@@ -990,20 +999,22 @@ struct CursivePosFormat1
      */
     reverse_cursive_minor_offset (pos, child, c->direction, parent);
 
-    pos[child].cursive_chain() = parent - child;
+    pos[child].attach_type() = ATTACH_TYPE_CURSIVE;
+    pos[child].attach_chain() = (int) parent - (int) child;
+    buffer->scratch_flags |= HB_BUFFER_SCRATCH_FLAG_HAS_GPOS_ATTACHMENT;
     if (likely (HB_DIRECTION_IS_HORIZONTAL (c->direction)))
       pos[child].y_offset = y_offset;
     else
       pos[child].x_offset = x_offset;
 
     buffer->idx = j;
-    return TRACE_RETURN (true);
+    return_trace (true);
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (coverage.sanitize (c, this) && entryExitRecord.sanitize (c, this));
+    return_trace (coverage.sanitize (c, this) && entryExitRecord.sanitize (c, this));
   }
 
   protected:
@@ -1024,10 +1035,10 @@ struct CursivePos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -1063,33 +1074,36 @@ struct MarkBasePosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int mark_index = (this+markCoverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (mark_index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (mark_index == NOT_COVERED)) return_trace (false);
 
-    /* now we search backwards for a non-mark glyph */
+    /* Now we search backwards for a non-mark glyph */
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
     skippy_iter.set_lookup_props (LookupFlag::IgnoreMarks);
     do {
-      if (!skippy_iter.prev ()) return TRACE_RETURN (false);
+      if (!skippy_iter.prev ()) return_trace (false);
       /* We only want to attach to the first of a MultipleSubst sequence.  Reject others. */
       if (0 == _hb_glyph_info_get_lig_comp (&buffer->info[skippy_iter.idx])) break;
       skippy_iter.reject ();
     } while (1);
 
     /* Checking that matched glyph is actually a base glyph by GDEF is too strong; disabled */
-    if (!_hb_glyph_info_is_base_glyph (&buffer->info[skippy_iter.idx])) { /*return TRACE_RETURN (false);*/ }
+    //if (!_hb_glyph_info_is_base_glyph (&buffer->info[skippy_iter.idx])) { return_trace (false); }
 
     unsigned int base_index = (this+baseCoverage).get_coverage  (buffer->info[skippy_iter.idx].codepoint);
-    if (base_index == NOT_COVERED) return TRACE_RETURN (false);
+    if (base_index == NOT_COVERED) return_trace (false);
 
-    return TRACE_RETURN ((this+markArray).apply (c, mark_index, base_index, this+baseArray, classCount, skippy_iter.idx));
+    return_trace ((this+markArray).apply (c, mark_index, base_index, this+baseArray, classCount, skippy_iter.idx));
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && markCoverage.sanitize (c, this) && baseCoverage.sanitize (c, this) &&
-			 markArray.sanitize (c, this) && baseArray.sanitize (c, this, (unsigned int) classCount));
+    return_trace (c->check_struct (this) &&
+		  markCoverage.sanitize (c, this) &&
+		  baseCoverage.sanitize (c, this) &&
+		  markArray.sanitize (c, this) &&
+		  baseArray.sanitize (c, this, (unsigned int) classCount));
   }
 
   protected:
@@ -1117,10 +1131,10 @@ struct MarkBasePos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -1161,27 +1175,27 @@ struct MarkLigPosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int mark_index = (this+markCoverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (mark_index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (mark_index == NOT_COVERED)) return_trace (false);
 
-    /* now we search backwards for a non-mark glyph */
+    /* Now we search backwards for a non-mark glyph */
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
     skippy_iter.set_lookup_props (LookupFlag::IgnoreMarks);
-    if (!skippy_iter.prev ()) return TRACE_RETURN (false);
+    if (!skippy_iter.prev ()) return_trace (false);
 
     /* Checking that matched glyph is actually a ligature by GDEF is too strong; disabled */
-    if (!_hb_glyph_info_is_ligature (&buffer->info[skippy_iter.idx])) { /*return TRACE_RETURN (false);*/ }
+    //if (!_hb_glyph_info_is_ligature (&buffer->info[skippy_iter.idx])) { return_trace (false); }
 
     unsigned int j = skippy_iter.idx;
     unsigned int lig_index = (this+ligatureCoverage).get_coverage  (buffer->info[j].codepoint);
-    if (lig_index == NOT_COVERED) return TRACE_RETURN (false);
+    if (lig_index == NOT_COVERED) return_trace (false);
 
     const LigatureArray& lig_array = this+ligatureArray;
     const LigatureAttach& lig_attach = lig_array[lig_index];
 
     /* Find component to attach to */
     unsigned int comp_count = lig_attach.rows;
-    if (unlikely (!comp_count)) return TRACE_RETURN (false);
+    if (unlikely (!comp_count)) return_trace (false);
 
     /* We must now check whether the ligature ID of the current mark glyph
      * is identical to the ligature ID of the found ligature.  If yes, we
@@ -1196,14 +1210,17 @@ struct MarkLigPosFormat1
     else
       comp_index = comp_count - 1;
 
-    return TRACE_RETURN ((this+markArray).apply (c, mark_index, comp_index, lig_attach, classCount, j));
+    return_trace ((this+markArray).apply (c, mark_index, comp_index, lig_attach, classCount, j));
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && markCoverage.sanitize (c, this) && ligatureCoverage.sanitize (c, this) &&
-			 markArray.sanitize (c, this) && ligatureArray.sanitize (c, this, (unsigned int) classCount));
+    return_trace (c->check_struct (this) &&
+		  markCoverage.sanitize (c, this) &&
+		  ligatureCoverage.sanitize (c, this) &&
+		  markArray.sanitize (c, this) &&
+		  ligatureArray.sanitize (c, this, (unsigned int) classCount));
   }
 
   protected:
@@ -1232,10 +1249,10 @@ struct MarkLigPos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -1271,15 +1288,15 @@ struct MarkMarkPosFormat1
     TRACE_APPLY (this);
     hb_buffer_t *buffer = c->buffer;
     unsigned int mark1_index = (this+mark1Coverage).get_coverage  (buffer->cur().codepoint);
-    if (likely (mark1_index == NOT_COVERED)) return TRACE_RETURN (false);
+    if (likely (mark1_index == NOT_COVERED)) return_trace (false);
 
     /* now we search backwards for a suitable mark glyph until a non-mark glyph */
     hb_apply_context_t::skipping_iterator_t &skippy_iter = c->iter_input;
     skippy_iter.reset (buffer->idx, 1);
     skippy_iter.set_lookup_props (c->lookup_props & ~LookupFlag::IgnoreFlags);
-    if (!skippy_iter.prev ()) return TRACE_RETURN (false);
+    if (!skippy_iter.prev ()) return_trace (false);
 
-    if (!_hb_glyph_info_is_mark (&buffer->info[skippy_iter.idx])) { return TRACE_RETURN (false); }
+    if (!_hb_glyph_info_is_mark (&buffer->info[skippy_iter.idx])) { return_trace (false); }
 
     unsigned int j = skippy_iter.idx;
 
@@ -1301,21 +1318,23 @@ struct MarkMarkPosFormat1
     }
 
     /* Didn't match. */
-    return TRACE_RETURN (false);
+    return_trace (false);
 
     good:
     unsigned int mark2_index = (this+mark2Coverage).get_coverage  (buffer->info[j].codepoint);
-    if (mark2_index == NOT_COVERED) return TRACE_RETURN (false);
+    if (mark2_index == NOT_COVERED) return_trace (false);
 
-    return TRACE_RETURN ((this+mark1Array).apply (c, mark1_index, mark2_index, this+mark2Array, classCount, j));
+    return_trace ((this+mark1Array).apply (c, mark1_index, mark2_index, this+mark2Array, classCount, j));
   }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    return TRACE_RETURN (c->check_struct (this) && mark1Coverage.sanitize (c, this) &&
-			 mark2Coverage.sanitize (c, this) && mark1Array.sanitize (c, this)
-			 && mark2Array.sanitize (c, this, (unsigned int) classCount));
+    return_trace (c->check_struct (this) &&
+		  mark1Coverage.sanitize (c, this) &&
+		  mark2Coverage.sanitize (c, this) &&
+		  mark1Array.sanitize (c, this) &&
+		  mark2Array.sanitize (c, this, (unsigned int) classCount));
   }
 
   protected:
@@ -1345,10 +1364,10 @@ struct MarkMarkPos
   inline typename context_t::return_t dispatch (context_t *c) const
   {
     TRACE_DISPATCH (this, u.format);
-    if (unlikely (!c->may_dispatch (this, &u.format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.format))) return_trace (c->no_dispatch_return_value ());
     switch (u.format) {
-    case 1: return TRACE_RETURN (c->dispatch (u.format1));
-    default:return TRACE_RETURN (c->default_return_value ());
+    case 1: return_trace (c->dispatch (u.format1));
+    default:return_trace (c->default_return_value ());
     }
   }
 
@@ -1396,19 +1415,18 @@ struct PosLookupSubTable
   inline typename context_t::return_t dispatch (context_t *c, unsigned int lookup_type) const
   {
     TRACE_DISPATCH (this, lookup_type);
-    /* The sub_format passed to may_dispatch is unnecessary but harmless. */
-    if (unlikely (!c->may_dispatch (this, &u.sub_format))) TRACE_RETURN (c->default_return_value ());
+    if (unlikely (!c->may_dispatch (this, &u.sub_format))) return_trace (c->no_dispatch_return_value ());
     switch (lookup_type) {
-    case Single:		return TRACE_RETURN (u.single.dispatch (c));
-    case Pair:			return TRACE_RETURN (u.pair.dispatch (c));
-    case Cursive:		return TRACE_RETURN (u.cursive.dispatch (c));
-    case MarkBase:		return TRACE_RETURN (u.markBase.dispatch (c));
-    case MarkLig:		return TRACE_RETURN (u.markLig.dispatch (c));
-    case MarkMark:		return TRACE_RETURN (u.markMark.dispatch (c));
-    case Context:		return TRACE_RETURN (u.context.dispatch (c));
-    case ChainContext:		return TRACE_RETURN (u.chainContext.dispatch (c));
-    case Extension:		return TRACE_RETURN (u.extension.dispatch (c));
-    default:			return TRACE_RETURN (c->default_return_value ());
+    case Single:		return_trace (u.single.dispatch (c));
+    case Pair:			return_trace (u.pair.dispatch (c));
+    case Cursive:		return_trace (u.cursive.dispatch (c));
+    case MarkBase:		return_trace (u.markBase.dispatch (c));
+    case MarkLig:		return_trace (u.markLig.dispatch (c));
+    case MarkMark:		return_trace (u.markMark.dispatch (c));
+    case Context:		return_trace (u.context.dispatch (c));
+    case ChainContext:		return_trace (u.chainContext.dispatch (c));
+    case Extension:		return_trace (u.extension.dispatch (c));
+    default:			return_trace (c->default_return_value ());
     }
   }
 
@@ -1443,13 +1461,13 @@ struct PosLookup : Lookup
   inline bool apply (hb_apply_context_t *c) const
   {
     TRACE_APPLY (this);
-    return TRACE_RETURN (dispatch (c));
+    return_trace (dispatch (c));
   }
 
   inline hb_collect_glyphs_context_t::return_t collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     TRACE_COLLECT_GLYPHS (this);
-    return TRACE_RETURN (dispatch (c));
+    return_trace (dispatch (c));
   }
 
   template <typename set_t>
@@ -1471,8 +1489,8 @@ struct PosLookup : Lookup
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (unlikely (!Lookup::sanitize (c))) return TRACE_RETURN (false);
-    return TRACE_RETURN (dispatch (c));
+    if (unlikely (!Lookup::sanitize (c))) return_trace (false);
+    return_trace (dispatch (c));
   }
 };
 
@@ -1490,30 +1508,29 @@ struct GPOS : GSUBGPOS
   { return CastR<PosLookup> (GSUBGPOS::get_lookup (i)); }
 
   static inline void position_start (hb_font_t *font, hb_buffer_t *buffer);
-  static inline void position_finish (hb_font_t *font, hb_buffer_t *buffer);
+  static inline void position_finish_advances (hb_font_t *font, hb_buffer_t *buffer);
+  static inline void position_finish_offsets (hb_font_t *font, hb_buffer_t *buffer);
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
     TRACE_SANITIZE (this);
-    if (unlikely (!GSUBGPOS::sanitize (c))) return TRACE_RETURN (false);
+    if (unlikely (!GSUBGPOS::sanitize (c))) return_trace (false);
     const OffsetTo<PosLookupList> &list = CastR<OffsetTo<PosLookupList> > (lookupList);
-    return TRACE_RETURN (list.sanitize (c, this));
+    return_trace (list.sanitize (c, this));
   }
-  public:
-  DEFINE_SIZE_STATIC (10);
 };
 
 
 static void
 reverse_cursive_minor_offset (hb_glyph_position_t *pos, unsigned int i, hb_direction_t direction, unsigned int new_parent)
 {
-  unsigned int j = pos[i].cursive_chain();
-  if (likely (!j))
+  int chain = pos[i].attach_chain(), type = pos[i].attach_type();
+  if (likely (!chain || 0 == (type & ATTACH_TYPE_CURSIVE)))
     return;
 
-  j += i;
+  pos[i].attach_chain() = 0;
 
-  pos[i].cursive_chain() = 0;
+  unsigned int j = (int) i + chain;
 
   /* Stop if we see new parent in the chain. */
   if (j == new_parent)
@@ -1526,62 +1543,68 @@ reverse_cursive_minor_offset (hb_glyph_position_t *pos, unsigned int i, hb_direc
   else
     pos[j].x_offset = -pos[i].x_offset;
 
-  pos[j].cursive_chain() = i - j;
+  pos[j].attach_chain() = -chain;
+  pos[j].attach_type() = type;
 }
 static void
-fix_cursive_minor_offset (hb_glyph_position_t *pos, unsigned int i, hb_direction_t direction)
+propagate_attachment_offsets (hb_glyph_position_t *pos, unsigned int i, hb_direction_t direction)
 {
-  unsigned int j = pos[i].cursive_chain();
-  if (likely (!j))
+  /* Adjusts offsets of attached glyphs (both cursive and mark) to accumulate
+   * offset of glyph they are attached to. */
+  int chain = pos[i].attach_chain(), type = pos[i].attach_type();
+  if (likely (!chain))
     return;
 
-  j += i;
+  unsigned int j = (int) i + chain;
 
-  pos[i].cursive_chain() = 0;
+  pos[i].attach_chain() = 0;
 
-  fix_cursive_minor_offset (pos, j, direction);
+  propagate_attachment_offsets (pos, j, direction);
 
-  if (HB_DIRECTION_IS_HORIZONTAL (direction))
-    pos[i].y_offset += pos[j].y_offset;
-  else
+  assert (!!(type & ATTACH_TYPE_MARK) ^ !!(type & ATTACH_TYPE_CURSIVE));
+
+  if (type & ATTACH_TYPE_CURSIVE)
+  {
+    if (HB_DIRECTION_IS_HORIZONTAL (direction))
+      pos[i].y_offset += pos[j].y_offset;
+    else
+      pos[i].x_offset += pos[j].x_offset;
+  }
+  else /*if (type & ATTACH_TYPE_MARK)*/
+  {
     pos[i].x_offset += pos[j].x_offset;
-}
+    pos[i].y_offset += pos[j].y_offset;
 
-static void
-fix_mark_attachment (hb_glyph_position_t *pos, unsigned int i, hb_direction_t direction)
-{
-  if (likely (!(pos[i].attach_lookback())))
-    return;
-
-  unsigned int j = i - pos[i].attach_lookback();
-
-  pos[i].x_offset += pos[j].x_offset;
-  pos[i].y_offset += pos[j].y_offset;
-
-  if (HB_DIRECTION_IS_FORWARD (direction))
-    for (unsigned int k = j; k < i; k++) {
-      pos[i].x_offset -= pos[k].x_advance;
-      pos[i].y_offset -= pos[k].y_advance;
-    }
-  else
-    for (unsigned int k = j + 1; k < i + 1; k++) {
-      pos[i].x_offset += pos[k].x_advance;
-      pos[i].y_offset += pos[k].y_advance;
-    }
+    assert (j < i);
+    if (HB_DIRECTION_IS_FORWARD (direction))
+      for (unsigned int k = j; k < i; k++) {
+	pos[i].x_offset -= pos[k].x_advance;
+	pos[i].y_offset -= pos[k].y_advance;
+      }
+    else
+      for (unsigned int k = j + 1; k < i + 1; k++) {
+	pos[i].x_offset += pos[k].x_advance;
+	pos[i].y_offset += pos[k].y_advance;
+      }
+  }
 }
 
 void
 GPOS::position_start (hb_font_t *font HB_UNUSED, hb_buffer_t *buffer)
 {
-  buffer->clear_positions ();
-
   unsigned int count = buffer->len;
   for (unsigned int i = 0; i < count; i++)
-    buffer->pos[i].attach_lookback() = buffer->pos[i].cursive_chain() = 0;
+    buffer->pos[i].attach_chain() = buffer->pos[i].attach_type() = 0;
 }
 
 void
-GPOS::position_finish (hb_font_t *font HB_UNUSED, hb_buffer_t *buffer)
+GPOS::position_finish_advances (hb_font_t *font HB_UNUSED, hb_buffer_t *buffer)
+{
+  //_hb_buffer_assert_gsubgpos_vars (buffer);
+}
+
+void
+GPOS::position_finish_offsets (hb_font_t *font HB_UNUSED, hb_buffer_t *buffer)
 {
   _hb_buffer_assert_gsubgpos_vars (buffer);
 
@@ -1589,13 +1612,10 @@ GPOS::position_finish (hb_font_t *font HB_UNUSED, hb_buffer_t *buffer)
   hb_glyph_position_t *pos = hb_buffer_get_glyph_positions (buffer, &len);
   hb_direction_t direction = buffer->props.direction;
 
-  /* Handle cursive connections */
-  for (unsigned int i = 0; i < len; i++)
-    fix_cursive_minor_offset (pos, i, direction);
-
   /* Handle attachments */
-  for (unsigned int i = 0; i < len; i++)
-    fix_mark_attachment (pos, i, direction);
+  if (buffer->scratch_flags & HB_BUFFER_SCRATCH_FLAG_HAS_GPOS_ATTACHMENT)
+    for (unsigned int i = 0; i < len; i++)
+      propagate_attachment_offsets (pos, i, direction);
 }
 
 
@@ -1624,8 +1644,8 @@ template <typename context_t>
 }
 
 
-#undef attach_lookback
-#undef cursive_chain
+#undef attach_chain
+#undef attach_type
 
 
 } /* namespace OT */

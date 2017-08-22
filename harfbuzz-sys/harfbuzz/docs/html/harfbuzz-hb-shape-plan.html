@@ -5,10 +5,10 @@
 <title>hb-shape-plan: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch06.html" title="Harfbuzz API">
-<link rel="prev" href="harfbuzz-hb-ot-tag.html" title="hb-ot-tag">
+<link rel="up" href="ch08.html" title="Harfbuzz API">
+<link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
 <link rel="next" href="harfbuzz-hb-glib.html" title="hb-glib">
-<meta name="generator" content="GTK-Doc V1.24.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,8 +19,8 @@
                   <a href="#harfbuzz-hb-shape-plan.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch06.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-ot-tag.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-ot-math.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-glib.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
@@ -54,6 +54,22 @@
 </td>
 <td class="function_name">
 <a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached" title="hb_shape_plan_create_cached ()">hb_shape_plan_create_cached</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-create2" title="hb_shape_plan_create2 ()">hb_shape_plan_create2</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached2" title="hb_shape_plan_create_cached2 ()">hb_shape_plan_create_cached2</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
 <tr>
@@ -142,7 +158,7 @@
 <a name="hb-shape-plan-create"></a><h3>hb_shape_plan_create ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                      <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                      <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                       <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
@@ -152,12 +168,12 @@ hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz
 <a name="hb-shape-plan-create-cached"></a><h3>hb_shape_plan_create_cached ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                             <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                             <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
                              <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                              <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                              <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.3.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.3.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -179,7 +195,7 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.3.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.3.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
@@ -187,11 +203,35 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
 </div>
 <hr>
 <div class="refsect2">
+<a name="hb-shape-plan-create2"></a><h3>hb_shape_plan_create2 ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
+hb_shape_plan_create2 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                       <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
+                       <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
+                       <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
+                       <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-shape-plan-create-cached2"></a><h3>hb_shape_plan_create_cached2 ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
+hb_shape_plan_create_cached2 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                              <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
+                              <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
+                              <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
+                              <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
 <a name="hb-shape-plan-destroy"></a><h3>hb_shape_plan_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_shape_plan_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.4.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.6.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -213,11 +253,11 @@ hb_shape_plan_destroy (<em class="parameter"><code><a class="link" href="harfbuz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
+                       <em class="parameter"><code><a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
                        <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *features</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.5.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.7.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -249,7 +289,7 @@ hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuz
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.5.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.7.5"></a><h4>Returns</h4>
 <p></p>
 </div>
 <p class="since">Since 0.9.7</p>
@@ -260,7 +300,7 @@ hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_get_empty (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.6.4"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.8.4"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
@@ -272,7 +312,7 @@ hb_shape_plan_get_empty (<em class="parameter"><code><span class="type">void</sp
 <pre class="programlisting">const <span class="returnvalue">char</span> *
 hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.7.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.9.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -287,7 +327,7 @@ hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harf
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.7.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.9.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -300,7 +340,7 @@ hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harf
 hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t"><span class="type">hb_user_data_key_t</span></a> *key</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.8.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.10.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -315,7 +355,7 @@ hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.8.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.10.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -327,7 +367,7 @@ hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="h
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.9.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.11.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -342,7 +382,7 @@ hb_shape_plan_reference (<em class="parameter"><code><a class="link" href="harfb
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.9.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.11.5"></a><h4>Returns</h4>
 <p>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
@@ -358,7 +398,7 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="type">hb_bool_t</span></a> replace</code></em>);</pre>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.10.4"></a><h4>Parameters</h4>
+<a name="id-1.3.3.19.8.12.4"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -373,7 +413,7 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.3.2.16.8.10.5"></a><h4>Returns</h4>
+<a name="id-1.3.3.19.8.12.5"></a><h4>Returns</h4>
 <p></p>
 </div>
 <p class="since">Since 0.9.7</p>
@@ -389,6 +429,6 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.24.1</div>
+<hr>Generated by GTK-Doc V1.25.1</div>
 </body>
 </html>

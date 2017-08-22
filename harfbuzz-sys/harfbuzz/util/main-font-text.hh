@@ -31,6 +31,21 @@
 
 /* main() body for utilities taking font and processing text.*/
 
+static char *
+locale_to_utf8 (char *s)
+{
+  char *t;
+  GError *error = NULL;
+
+  t = g_locale_to_utf8 (s, -1, NULL, NULL, &error);
+  if (!t)
+  {
+     fail (true, "Failed converting text to UTF-8");
+  }
+
+  return t;
+}
+
 template <typename consumer_t, int default_font_size, int subpixel_bits>
 struct main_font_text_t
 {
@@ -46,23 +61,23 @@ struct main_font_text_t
     options.parse (&argc, &argv);
 
     argc--, argv++;
-    if (argc && !font_opts.font_file) font_opts.font_file = argv[0], argc--, argv++;
-    if (argc && !input.text && !input.text_file) input.text = argv[0], argc--, argv++;
+    if (argc && !font_opts.font_file) font_opts.font_file = locale_to_utf8 (argv[0]), argc--, argv++;
+    if (argc && !input.text && !input.text_file) input.text = locale_to_utf8 (argv[0]), argc--, argv++;
     if (argc)
       fail (true, "Too many arguments on the command line");
     if (!font_opts.font_file)
       options.usage ();
     if (!input.text && !input.text_file)
-      input.text_file = "-";
-
-    consumer.init (&font_opts);
+      input.text_file = g_strdup ("-");
 
     hb_buffer_t *buffer = hb_buffer_create ();
+    consumer.init (buffer, &font_opts);
+    hb_buffer_destroy (buffer);
+
     unsigned int text_len;
     const char *text;
     while ((text = input.get_line (&text_len)))
-      consumer.consume_line (buffer, text, text_len, input.text_before, input.text_after);
-    hb_buffer_destroy (buffer);
+      consumer.consume_line (text, text_len, input.text_before, input.text_after);
 
     consumer.finish (&font_opts);
 

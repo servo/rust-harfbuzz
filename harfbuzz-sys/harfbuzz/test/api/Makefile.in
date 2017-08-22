@@ -81,21 +81,35 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @HAVE_GLIB_TRUE@am__append_1 = hb-test.h
-@HAVE_GLIB_TRUE@check_PROGRAMS = $(am__EXEEXT_3)
-@HAVE_GLIB_TRUE@noinst_PROGRAMS = $(am__EXEEXT_3)
+@HAVE_GLIB_TRUE@check_PROGRAMS = $(am__EXEEXT_4)
+@HAVE_GLIB_TRUE@noinst_PROGRAMS = $(am__EXEEXT_4)
 @HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_2 = $(ICU_CFLAGS)
 @HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_3 = $(top_builddir)/src/libharfbuzz-icu.la $(ICU_LIBS)
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__append_4 = \
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	test-ot-tag \
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(NULL)
 
-@HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_5 = $(ICU_CFLAGS)
-@HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_6 = $(ICU_CFLAGS)
-@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_7 = $(FREETYPE_CFLAGS)
-@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_8 = $(FREETYPE_CFLAGS)
-@HAVE_GLIB_TRUE@TESTS = $(am__EXEEXT_3)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__append_5 = \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	test-ot-math \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(NULL)
+
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__append_6 = \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontEmpty.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontFull.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontNone.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontPartial1.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontPartial2.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontPartial3.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	fonts/MathTestFontPartial4.otf \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(NULL)
+
+@HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_7 = $(ICU_CFLAGS)
+@HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__append_8 = $(ICU_CFLAGS)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_9 = $(FREETYPE_CFLAGS)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_10 = $(FREETYPE_CFLAGS)
+@HAVE_GLIB_TRUE@TESTS = $(am__EXEEXT_4)
 #	Can't do for now: --show-reachable=yes
-@HAVE_GLIB_TRUE@am__append_9 = log-valgrind.txt symbols-tested.txt \
+@HAVE_GLIB_TRUE@am__append_11 = log-valgrind.txt symbols-tested.txt \
 @HAVE_GLIB_TRUE@	symbols-exported.txt symbols-untested.txt
 subdir = test/api
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
@@ -115,13 +129,16 @@ CONFIG_CLEAN_VPATH_FILES =
 am__EXEEXT_1 =
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__EXEEXT_2 = test-ot-tag$(EXEEXT) \
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(am__EXEEXT_1)
-@HAVE_GLIB_TRUE@am__EXEEXT_3 = test-blob$(EXEEXT) test-buffer$(EXEEXT) \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__EXEEXT_3 = test-ot-math$(EXEEXT) \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(am__EXEEXT_1)
+@HAVE_GLIB_TRUE@am__EXEEXT_4 = test-blob$(EXEEXT) test-buffer$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-common$(EXEEXT) test-font$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-object$(EXEEXT) test-set$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-shape$(EXEEXT) test-unicode$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-version$(EXEEXT) $(am__EXEEXT_1) \
-@HAVE_GLIB_TRUE@	$(am__EXEEXT_2) test-c$(EXEEXT) \
-@HAVE_GLIB_TRUE@	test-cplusplus$(EXEEXT) $(am__EXEEXT_1)
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_2) $(am__EXEEXT_3) \
+@HAVE_GLIB_TRUE@	test-c$(EXEEXT) test-cplusplus$(EXEEXT) \
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_1)
 PROGRAMS = $(noinst_PROGRAMS)
 test_blob_SOURCES = test-blob.c
 test_blob_OBJECTS = test-blob.$(OBJEXT)
@@ -172,6 +189,13 @@ test_object_LDADD = $(LDADD)
 @HAVE_GLIB_TRUE@test_object_DEPENDENCIES =  \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
+test_ot_math_SOURCES = test-ot-math.c
+test_ot_math_OBJECTS = test_ot_math-test-ot-math.$(OBJEXT)
+@HAVE_GLIB_TRUE@am__DEPENDENCIES_2 =  \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
+@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@test_ot_math_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	$(am__DEPENDENCIES_1)
 test_ot_tag_SOURCES = test-ot-tag.c
 test_ot_tag_OBJECTS = test-ot-tag.$(OBJEXT)
 test_ot_tag_LDADD = $(LDADD)
@@ -192,9 +216,6 @@ test_shape_LDADD = $(LDADD)
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 test_unicode_SOURCES = test-unicode.c
 test_unicode_OBJECTS = test_unicode-test-unicode.$(OBJEXT)
-@HAVE_GLIB_TRUE@am__DEPENDENCIES_2 =  \
-@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
-@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 @HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@am__DEPENDENCIES_3 = $(top_builddir)/src/libharfbuzz-icu.la \
 @HAVE_GLIB_TRUE@@HAVE_ICU_TRUE@	$(am__DEPENDENCIES_1)
 @HAVE_GLIB_TRUE@test_unicode_DEPENDENCIES = $(am__DEPENDENCIES_2) \
@@ -259,12 +280,12 @@ am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = test-blob.c test-buffer.c test-c.c test-common.c \
 	$(test_cplusplus_SOURCES) test-font.c test-object.c \
-	test-ot-tag.c test-set.c test-shape.c test-unicode.c \
-	test-version.c
+	test-ot-math.c test-ot-tag.c test-set.c test-shape.c \
+	test-unicode.c test-version.c
 DIST_SOURCES = test-blob.c test-buffer.c test-c.c test-common.c \
 	$(am__test_cplusplus_SOURCES_DIST) test-font.c test-object.c \
-	test-ot-tag.c test-set.c test-shape.c test-unicode.c \
-	test-version.c
+	test-ot-math.c test-ot-tag.c test-set.c test-shape.c \
+	test-unicode.c test-version.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -520,6 +541,8 @@ CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIRECTWRITE_CXXFLAGS = @DIRECTWRITE_CXXFLAGS@
+DIRECTWRITE_LIBS = @DIRECTWRITE_LIBS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -666,8 +689,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
-EXTRA_DIST = $(am__append_1)
-CLEANFILES = $(am__append_9)
+EXTRA_DIST = $(am__append_1) $(am__append_6)
+CLEANFILES = $(am__append_11)
 DISTCLEANFILES = 
 MAINTAINERCLEANFILES = 
 @HAVE_GLIB_TRUE@AM_CPPFLAGS = -DSRCDIR="\"$(srcdir)\"" -I$(top_srcdir)/src/ -I$(top_builddir)/src/ $(GLIB_CFLAGS)
@@ -677,21 +700,26 @@ MAINTAINERCLEANFILES =
 @HAVE_GLIB_TRUE@TEST_PROGS = test-blob test-buffer test-common \
 @HAVE_GLIB_TRUE@	test-font test-object test-set test-shape \
 @HAVE_GLIB_TRUE@	test-unicode test-version $(NULL) \
-@HAVE_GLIB_TRUE@	$(am__append_4) test-c test-cplusplus $(NULL)
+@HAVE_GLIB_TRUE@	$(am__append_4) $(am__append_5) test-c \
+@HAVE_GLIB_TRUE@	test-cplusplus $(NULL)
 @HAVE_GLIB_TRUE@test_unicode_CPPFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS) \
 @HAVE_GLIB_TRUE@	$(am__append_2)
 @HAVE_GLIB_TRUE@test_unicode_LDADD = $(LDADD) $(am__append_3)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@test_ot_math_LDADD = $(LDADD) $(FREETYPE_LIBS)
+@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@@HAVE_OT_TRUE@test_ot_math_CPPFLAGS = $(AM_CPPFLAGS) $(FREETYPE_CFLAGS)
 @HAVE_GLIB_TRUE@test_cplusplus_SOURCES = test-cplusplus.cc
-@HAVE_GLIB_TRUE@test_c_CPPFLAGS = $(AM_CPPFLAGS) $(am__append_5) \
-@HAVE_GLIB_TRUE@	$(am__append_7)
+@HAVE_GLIB_TRUE@test_c_CPPFLAGS = $(AM_CPPFLAGS) $(am__append_7) \
+@HAVE_GLIB_TRUE@	$(am__append_9)
 @HAVE_GLIB_TRUE@test_cplusplus_CPPFLAGS = $(AM_CPPFLAGS) \
-@HAVE_GLIB_TRUE@	$(am__append_6) $(am__append_8)
+@HAVE_GLIB_TRUE@	$(am__append_8) $(am__append_10)
 @HAVE_GLIB_TRUE@TESTS_ENVIRONMENT = \
 @HAVE_GLIB_TRUE@	MALLOC_CHECK_=2 \
 @HAVE_GLIB_TRUE@	MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) \
 @HAVE_GLIB_TRUE@	G_DEBUG=gc-friendly \
 @HAVE_GLIB_TRUE@	G_SLICE=always-malloc \
 @HAVE_GLIB_TRUE@	srcdir=$(srcdir) \
+@HAVE_GLIB_TRUE@	G_TEST_SRCDIR=$(abs_srcdir) \
+@HAVE_GLIB_TRUE@	G_TEST_BUILDDIR=$(abs_builddir) \
 @HAVE_GLIB_TRUE@	$(NULL)
 
 
@@ -790,6 +818,10 @@ test-object$(EXEEXT): $(test_object_OBJECTS) $(test_object_DEPENDENCIES) $(EXTRA
 	@rm -f test-object$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_object_OBJECTS) $(test_object_LDADD) $(LIBS)
 
+test-ot-math$(EXEEXT): $(test_ot_math_OBJECTS) $(test_ot_math_DEPENDENCIES) $(EXTRA_test_ot_math_DEPENDENCIES) 
+	@rm -f test-ot-math$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_ot_math_OBJECTS) $(test_ot_math_LDADD) $(LIBS)
+
 test-ot-tag$(EXEEXT): $(test_ot_tag_OBJECTS) $(test_ot_tag_DEPENDENCIES) $(EXTRA_test_ot_tag_DEPENDENCIES) 
 	@rm -f test-ot-tag$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_tag_OBJECTS) $(test_ot_tag_LDADD) $(LIBS)
@@ -827,6 +859,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-version.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_c-test-c.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_cplusplus-test-cplusplus.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_ot_math-test-ot-math.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_unicode-test-unicode.Po@am__quote@
 
 .c.o:
@@ -863,6 +896,20 @@ test_c-test-c.obj: test-c.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test-c.c' object='test_c-test-c.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_c_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_c-test-c.obj `if test -f 'test-c.c'; then $(CYGPATH_W) 'test-c.c'; else $(CYGPATH_W) '$(srcdir)/test-c.c'; fi`
+
+test_ot_math-test-ot-math.o: test-ot-math.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_ot_math_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_ot_math-test-ot-math.o -MD -MP -MF $(DEPDIR)/test_ot_math-test-ot-math.Tpo -c -o test_ot_math-test-ot-math.o `test -f 'test-ot-math.c' || echo '$(srcdir)/'`test-ot-math.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_ot_math-test-ot-math.Tpo $(DEPDIR)/test_ot_math-test-ot-math.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test-ot-math.c' object='test_ot_math-test-ot-math.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_ot_math_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_ot_math-test-ot-math.o `test -f 'test-ot-math.c' || echo '$(srcdir)/'`test-ot-math.c
+
+test_ot_math-test-ot-math.obj: test-ot-math.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_ot_math_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_ot_math-test-ot-math.obj -MD -MP -MF $(DEPDIR)/test_ot_math-test-ot-math.Tpo -c -o test_ot_math-test-ot-math.obj `if test -f 'test-ot-math.c'; then $(CYGPATH_W) 'test-ot-math.c'; else $(CYGPATH_W) '$(srcdir)/test-ot-math.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_ot_math-test-ot-math.Tpo $(DEPDIR)/test_ot_math-test-ot-math.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test-ot-math.c' object='test_ot_math-test-ot-math.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_ot_math_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_ot_math-test-ot-math.obj `if test -f 'test-ot-math.c'; then $(CYGPATH_W) 'test-ot-math.c'; else $(CYGPATH_W) '$(srcdir)/test-ot-math.c'; fi`
 
 test_unicode-test-unicode.o: test-unicode.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_unicode_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_unicode-test-unicode.o -MD -MP -MF $(DEPDIR)/test_unicode-test-unicode.Tpo -c -o test_unicode-test-unicode.o `test -f 'test-unicode.c' || echo '$(srcdir)/'`test-unicode.c
@@ -1178,6 +1225,13 @@ test-version.log: test-version$(EXEEXT)
 test-ot-tag.log: test-ot-tag$(EXEEXT)
 	@p='test-ot-tag$(EXEEXT)'; \
 	b='test-ot-tag'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-ot-math.log: test-ot-math$(EXEEXT)
+	@p='test-ot-math$(EXEEXT)'; \
+	b='test-ot-math'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
