@@ -22,7 +22,8 @@ fn main() {
         println!("cargo:rustc-link-lib=static=harfbuzz");
     } else {
         assert!(Command::new("make")
-            .args(&["-R", "-f", "makefile.cargo", &format!("-j{}", env::var("NUM_JOBS").unwrap())])
+            .env("MAKEFLAGS", env::var("CARGO_MAKEFLAGS").unwrap_or_default())
+            .args(&["-R", "-f", "makefile.cargo"])
             .status()
             .unwrap()
             .success());
