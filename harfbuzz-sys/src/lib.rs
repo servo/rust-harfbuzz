@@ -1946,18 +1946,18 @@ extern "C" {
  *             (after shaping).
  * @mask: 
  * @cluster: the index of the character in the original text that corresponds
- *           to this #hb_glyph_info_t, or whatever the client passes to
- *           hb_buffer_add(). More than one #hb_glyph_info_t can have the same
+ *           to this `hb_glyph_info_t`, or whatever the client passes to
+ *           hb_buffer_add(). More than one `hb_glyph_info_t` can have the same
  *           @cluster value, if they resulted from the same character (e.g. one
  *           to many glyph substitution), and when more than one character gets
  *           merged in the same glyph (e.g. many to one glyph substitution) the
- *           #hb_glyph_info_t will have the smallest cluster value of them.
+ *           `hb_glyph_info_t` will have the smallest cluster value of them.
  *           By default some characters are merged into the same cluster
  *           (e.g. combining marks have the same cluster as their bases)
  *           even if they are separate glyphs, hb_buffer_set_cluster_level()
  *           allow selecting more fine-grained cluster handling.
  *
- * The #hb_glyph_info_t is the structure that holds information about the
+ * The `hb_glyph_info_t` is the structure that holds information about the
  * glyphs and their relation to input text.
  *
  */
@@ -2016,9 +2016,9 @@ impl Clone for hb_glyph_info_t {
  * @y_offset: how much the glyph moves on the Y-axis before drawing it, this
  *            should not affect how much the line advances.
  *
- * The #hb_glyph_position_t is the structure that holds the positions of the
+ * The `hb_glyph_position_t` is the structure that holds the positions of the
  * glyph in both horizontal and vertical directions. All positions in
- * #hb_glyph_position_t are relative to the current point.
+ * `hb_glyph_position_t` are relative to the current point.
  *
  */
 #[repr(C)]
@@ -2068,11 +2068,11 @@ impl Clone for hb_glyph_position_t {
 }
 /**
  * hb_segment_properties_t:
- * @direction: the #hb_direction_t of the buffer, see hb_buffer_set_direction().
- * @script: the #hb_script_t of the buffer, see hb_buffer_set_script().
- * @language: the #hb_language_t of the buffer, see hb_buffer_set_language().
+ * @direction: the `hb_direction_t` of the buffer, see hb_buffer_set_direction().
+ * @script: the `hb_script_t` of the buffer, see hb_buffer_set_script().
+ * @language: the `hb_language_t` of the buffer, see hb_buffer_set_language().
  *
- * The structure that holds various text properties of an #hb_buffer_t. Can be
+ * The structure that holds various text properties of an `hb_buffer_t`. Can be
  * set and retrieved using hb_buffer_set_segment_properties() and
  * hb_buffer_get_segment_properties(), respectively.
  */
