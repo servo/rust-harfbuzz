@@ -3,8 +3,6 @@
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
 extern crate freetype;
 
-extern crate libc;
-
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
 extern "C" {
     pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
@@ -36,13 +34,13 @@ impl <T> ::std::fmt::Debug for __BindgenUnionField<T> {
         fmt.write_str("__BindgenUnionField")
     }
 }
-pub const HB_UNICODE_MAX_DECOMPOSITION_LEN: ::libc::c_uint = 19;
-pub const HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT: ::libc::c_uint = 65533;
-pub const HB_VERSION_MAJOR: ::libc::c_uint = 1;
-pub const HB_VERSION_MINOR: ::libc::c_uint = 4;
-pub const HB_VERSION_MICRO: ::libc::c_uint = 8;
+pub const HB_UNICODE_MAX_DECOMPOSITION_LEN: ::std::os::raw::c_uint = 19;
+pub const HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT: ::std::os::raw::c_uint = 65533;
+pub const HB_VERSION_MAJOR: ::std::os::raw::c_uint = 1;
+pub const HB_VERSION_MINOR: ::std::os::raw::c_uint = 4;
+pub const HB_VERSION_MICRO: ::std::os::raw::c_uint = 8;
 pub const HB_VERSION_STRING: &'static [u8; 6usize] = b"1.4.8\x00";
-pub type hb_bool_t = ::libc::c_int;
+pub type hb_bool_t = ::std::os::raw::c_int;
 pub type hb_codepoint_t = u32;
 pub type hb_position_t = i32;
 pub type hb_mask_t = u32;
@@ -101,11 +99,11 @@ impl Clone for _hb_var_int_t {
 pub type hb_var_int_t = _hb_var_int_t;
 pub type hb_tag_t = u32;
 extern "C" {
-    pub fn hb_tag_from_string(str: *const ::libc::c_char, len: ::libc::c_int)
+    pub fn hb_tag_from_string(str: *const ::std::os::raw::c_char, len: ::std::os::raw::c_int)
      -> hb_tag_t;
 }
 extern "C" {
-    pub fn hb_tag_to_string(tag: hb_tag_t, buf: *mut ::libc::c_char);
+    pub fn hb_tag_to_string(tag: hb_tag_t, buf: *mut ::std::os::raw::c_char);
 }
 pub const HB_DIRECTION_INVALID: hb_direction_t = 0;
 pub const HB_DIRECTION_LTR: hb_direction_t = 4;
@@ -120,14 +118,14 @@ pub const HB_DIRECTION_BTT: hb_direction_t = 7;
  * @HB_DIRECTION_TTB: Text is set vertically from top to bottom.
  * @HB_DIRECTION_BTT: Text is set vertically from bottom to top.
  */
-pub type hb_direction_t = ::libc::c_uint;
+pub type hb_direction_t = ::std::os::raw::c_uint;
 extern "C" {
-    pub fn hb_direction_from_string(str: *const ::libc::c_char,
-                                    len: ::libc::c_int) -> hb_direction_t;
+    pub fn hb_direction_from_string(str: *const ::std::os::raw::c_char,
+                                    len: ::std::os::raw::c_int) -> hb_direction_t;
 }
 extern "C" {
     pub fn hb_direction_to_string(direction: hb_direction_t)
-     -> *const ::libc::c_char;
+     -> *const ::std::os::raw::c_char;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -136,12 +134,12 @@ pub struct hb_language_impl_t {
 }
 pub type hb_language_t = *const hb_language_impl_t;
 extern "C" {
-    pub fn hb_language_from_string(str: *const ::libc::c_char,
-                                   len: ::libc::c_int) -> hb_language_t;
+    pub fn hb_language_from_string(str: *const ::std::os::raw::c_char,
+                                   len: ::std::os::raw::c_int) -> hb_language_t;
 }
 extern "C" {
     pub fn hb_language_to_string(language: hb_language_t)
-     -> *const ::libc::c_char;
+     -> *const ::std::os::raw::c_char;
 }
 extern "C" {
     pub fn hb_language_get_default() -> hb_language_t;
@@ -287,13 +285,13 @@ pub const HB_SCRIPT_NEWA: hb_script_t = 1315272545;
 pub const HB_SCRIPT_INVALID: hb_script_t = 0;
 pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 4294967295;
 pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
-pub type hb_script_t = ::libc::c_uint;
+pub type hb_script_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
 }
 extern "C" {
-    pub fn hb_script_from_string(str: *const ::libc::c_char,
-                                 len: ::libc::c_int) -> hb_script_t;
+    pub fn hb_script_from_string(str: *const ::std::os::raw::c_char,
+                                 len: ::std::os::raw::c_int) -> hb_script_t;
 }
 extern "C" {
     pub fn hb_script_to_iso15924_tag(script: hb_script_t) -> hb_tag_t;
@@ -305,7 +303,7 @@ extern "C" {
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct hb_user_data_key_t {
-    pub unused: ::libc::c_char,
+    pub unused: ::std::os::raw::c_char,
 }
 #[test]
 fn bindgen_test_layout_hb_user_data_key_t() {
@@ -324,14 +322,14 @@ impl Clone for hb_user_data_key_t {
 }
 pub type hb_destroy_func_t =
     ::std::option::Option<unsafe extern "C" fn(user_data:
-                                                   *mut ::libc::c_void)>;
+                                                   *mut ::std::os::raw::c_void)>;
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct hb_feature_t {
     pub tag: hb_tag_t,
     pub value: u32,
-    pub start: ::libc::c_uint,
-    pub end: ::libc::c_uint,
+    pub start: ::std::os::raw::c_uint,
+    pub end: ::std::os::raw::c_uint,
 }
 #[test]
 fn bindgen_test_layout_hb_feature_t() {
@@ -364,14 +362,14 @@ impl Clone for hb_feature_t {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    pub fn hb_feature_from_string(str: *const ::libc::c_char,
-                                  len: ::libc::c_int,
+    pub fn hb_feature_from_string(str: *const ::std::os::raw::c_char,
+                                  len: ::std::os::raw::c_int,
                                   feature: *mut hb_feature_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_feature_to_string(feature: *mut hb_feature_t,
-                                buf: *mut ::libc::c_char,
-                                size: ::libc::c_uint);
+                                buf: *mut ::std::os::raw::c_char,
+                                size: ::std::os::raw::c_uint);
 }
 /**
  * hb_variation_t:
@@ -405,36 +403,36 @@ impl Clone for hb_variation_t {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    pub fn hb_variation_from_string(str: *const ::libc::c_char,
-                                    len: ::libc::c_int,
+    pub fn hb_variation_from_string(str: *const ::std::os::raw::c_char,
+                                    len: ::std::os::raw::c_int,
                                     variation: *mut hb_variation_t)
      -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_variation_to_string(variation: *mut hb_variation_t,
-                                  buf: *mut ::libc::c_char,
-                                  size: ::libc::c_uint);
+                                  buf: *mut ::std::os::raw::c_char,
+                                  size: ::std::os::raw::c_uint);
 }
 pub const HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
 pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
 pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
 pub const HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: hb_memory_mode_t = 3;
-pub type hb_memory_mode_t = ::libc::c_uint;
+pub type hb_memory_mode_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_blob_t {
     _unused: [u8; 0],
 }
 extern "C" {
-    pub fn hb_blob_create(data: *const ::libc::c_char, length: ::libc::c_uint,
+    pub fn hb_blob_create(data: *const ::std::os::raw::c_char, length: ::std::os::raw::c_uint,
                           mode: hb_memory_mode_t,
-                          user_data: *mut ::libc::c_void,
+                          user_data: *mut ::std::os::raw::c_void,
                           destroy: hb_destroy_func_t) -> *mut hb_blob_t;
 }
 extern "C" {
     pub fn hb_blob_create_sub_blob(parent: *mut hb_blob_t,
-                                   offset: ::libc::c_uint,
-                                   length: ::libc::c_uint) -> *mut hb_blob_t;
+                                   offset: ::std::os::raw::c_uint,
+                                   length: ::std::os::raw::c_uint) -> *mut hb_blob_t;
 }
 extern "C" {
     pub fn hb_blob_get_empty() -> *mut hb_blob_t;
@@ -448,14 +446,14 @@ extern "C" {
 extern "C" {
     pub fn hb_blob_set_user_data(blob: *mut hb_blob_t,
                                  key: *mut hb_user_data_key_t,
-                                 data: *mut ::libc::c_void,
+                                 data: *mut ::std::os::raw::c_void,
                                  destroy: hb_destroy_func_t,
                                  replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_blob_get_user_data(blob: *mut hb_blob_t,
                                  key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_blob_make_immutable(blob: *mut hb_blob_t);
@@ -464,16 +462,16 @@ extern "C" {
     pub fn hb_blob_is_immutable(blob: *mut hb_blob_t) -> hb_bool_t;
 }
 extern "C" {
-    pub fn hb_blob_get_length(blob: *mut hb_blob_t) -> ::libc::c_uint;
+    pub fn hb_blob_get_length(blob: *mut hb_blob_t) -> ::std::os::raw::c_uint;
 }
 extern "C" {
-    pub fn hb_blob_get_data(blob: *mut hb_blob_t, length: *mut ::libc::c_uint)
-     -> *const ::libc::c_char;
+    pub fn hb_blob_get_data(blob: *mut hb_blob_t, length: *mut ::std::os::raw::c_uint)
+     -> *const ::std::os::raw::c_char;
 }
 extern "C" {
     pub fn hb_blob_get_data_writable(blob: *mut hb_blob_t,
-                                     length: *mut ::libc::c_uint)
-     -> *mut ::libc::c_char;
+                                     length: *mut ::std::os::raw::c_uint)
+     -> *mut ::std::os::raw::c_char;
 }
 pub const HB_UNICODE_GENERAL_CATEGORY_CONTROL: hb_unicode_general_category_t =
     0;
@@ -563,7 +561,7 @@ pub const HB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR:
 pub const HB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR:
           hb_unicode_general_category_t =
     29;
-pub type hb_unicode_general_category_t = ::libc::c_uint;
+pub type hb_unicode_general_category_t = ::std::os::raw::c_uint;
 pub const HB_UNICODE_COMBINING_CLASS_NOT_REORDERED:
           hb_unicode_combining_class_t =
     0;
@@ -659,7 +657,7 @@ pub const HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT:
     240;
 pub const HB_UNICODE_COMBINING_CLASS_INVALID: hb_unicode_combining_class_t =
     255;
-pub type hb_unicode_combining_class_t = ::libc::c_uint;
+pub type hb_unicode_combining_class_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_unicode_funcs_t {
@@ -685,14 +683,14 @@ extern "C" {
 extern "C" {
     pub fn hb_unicode_funcs_set_user_data(ufuncs: *mut hb_unicode_funcs_t,
                                           key: *mut hb_user_data_key_t,
-                                          data: *mut ::libc::c_void,
+                                          data: *mut ::std::os::raw::c_void,
                                           destroy: hb_destroy_func_t,
                                           replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_unicode_funcs_get_user_data(ufuncs: *mut hb_unicode_funcs_t,
                                           key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_unicode_funcs_make_immutable(ufuncs: *mut hb_unicode_funcs_t);
@@ -709,31 +707,31 @@ pub type hb_unicode_combining_class_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
                                                    *mut hb_unicode_funcs_t,
                                                unicode: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_unicode_combining_class_t>;
 pub type hb_unicode_eastasian_width_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
                                                    *mut hb_unicode_funcs_t,
                                                unicode: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
-                              -> ::libc::c_uint>;
+                                               user_data: *mut ::std::os::raw::c_void)
+                              -> ::std::os::raw::c_uint>;
 pub type hb_unicode_general_category_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
                                                    *mut hb_unicode_funcs_t,
                                                unicode: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_unicode_general_category_t>;
 pub type hb_unicode_mirroring_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
                                                    *mut hb_unicode_funcs_t,
                                                unicode: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_codepoint_t>;
 pub type hb_unicode_script_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
                                                    *mut hb_unicode_funcs_t,
                                                unicode: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_script_t>;
 pub type hb_unicode_compose_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
@@ -741,7 +739,7 @@ pub type hb_unicode_compose_func_t =
                                                a: hb_codepoint_t,
                                                b: hb_codepoint_t,
                                                ab: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_unicode_decompose_func_t =
     ::std::option::Option<unsafe extern "C" fn(ufuncs:
@@ -749,7 +747,7 @@ pub type hb_unicode_decompose_func_t =
                                                ab: hb_codepoint_t,
                                                a: *mut hb_codepoint_t,
                                                b: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 /**
  * hb_unicode_decompose_compatibility_func_t:
@@ -775,8 +773,8 @@ pub type hb_unicode_decompose_compatibility_func_t =
                                                u: hb_codepoint_t,
                                                decomposed:
                                                    *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
-                              -> ::libc::c_uint>;
+                                               user_data: *mut ::std::os::raw::c_void)
+                              -> ::std::os::raw::c_uint>;
 extern "C" {
     /**
  * hb_unicode_funcs_set_combining_class_func:
@@ -794,7 +792,7 @@ extern "C" {
                                                      func:
                                                          hb_unicode_combining_class_func_t,
                                                      user_data:
-                                                         *mut ::libc::c_void,
+                                                         *mut ::std::os::raw::c_void,
                                                      destroy:
                                                          hb_destroy_func_t);
 }
@@ -815,7 +813,7 @@ extern "C" {
                                                      func:
                                                          hb_unicode_eastasian_width_func_t,
                                                      user_data:
-                                                         *mut ::libc::c_void,
+                                                         *mut ::std::os::raw::c_void,
                                                      destroy:
                                                          hb_destroy_func_t);
 }
@@ -836,7 +834,7 @@ extern "C" {
                                                       func:
                                                           hb_unicode_general_category_func_t,
                                                       user_data:
-                                                          *mut ::libc::c_void,
+                                                          *mut ::std::os::raw::c_void,
                                                       destroy:
                                                           hb_destroy_func_t);
 }
@@ -856,7 +854,7 @@ extern "C" {
                                                    *mut hb_unicode_funcs_t,
                                                func:
                                                    hb_unicode_mirroring_func_t,
-                                               user_data: *mut ::libc::c_void,
+                                               user_data: *mut ::std::os::raw::c_void,
                                                destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -873,7 +871,7 @@ extern "C" {
  **/
     pub fn hb_unicode_funcs_set_script_func(ufuncs: *mut hb_unicode_funcs_t,
                                             func: hb_unicode_script_func_t,
-                                            user_data: *mut ::libc::c_void,
+                                            user_data: *mut ::std::os::raw::c_void,
                                             destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -890,7 +888,7 @@ extern "C" {
  **/
     pub fn hb_unicode_funcs_set_compose_func(ufuncs: *mut hb_unicode_funcs_t,
                                              func: hb_unicode_compose_func_t,
-                                             user_data: *mut ::libc::c_void,
+                                             user_data: *mut ::std::os::raw::c_void,
                                              destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -909,7 +907,7 @@ extern "C" {
                                                    *mut hb_unicode_funcs_t,
                                                func:
                                                    hb_unicode_decompose_func_t,
-                                               user_data: *mut ::libc::c_void,
+                                               user_data: *mut ::std::os::raw::c_void,
                                                destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -929,7 +927,7 @@ extern "C" {
                                                              func:
                                                                  hb_unicode_decompose_compatibility_func_t,
                                                              user_data:
-                                                                 *mut ::libc::c_void,
+                                                                 *mut ::std::os::raw::c_void,
                                                              destroy:
                                                                  hb_destroy_func_t);
 }
@@ -951,7 +949,7 @@ extern "C" {
  **/
     pub fn hb_unicode_eastasian_width(ufuncs: *mut hb_unicode_funcs_t,
                                       unicode: hb_codepoint_t)
-     -> ::libc::c_uint;
+     -> ::std::os::raw::c_uint;
 }
 extern "C" {
     /**
@@ -995,7 +993,7 @@ extern "C" {
     pub fn hb_unicode_decompose_compatibility(ufuncs: *mut hb_unicode_funcs_t,
                                               u: hb_codepoint_t,
                                               decomposed: *mut hb_codepoint_t)
-     -> ::libc::c_uint;
+     -> ::std::os::raw::c_uint;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1003,18 +1001,18 @@ pub struct hb_face_t {
     _unused: [u8; 0],
 }
 extern "C" {
-    pub fn hb_face_create(blob: *mut hb_blob_t, index: ::libc::c_uint)
+    pub fn hb_face_create(blob: *mut hb_blob_t, index: ::std::os::raw::c_uint)
      -> *mut hb_face_t;
 }
 pub type hb_reference_table_func_t =
     ::std::option::Option<unsafe extern "C" fn(face: *mut hb_face_t,
                                                tag: hb_tag_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> *mut hb_blob_t>;
 extern "C" {
     pub fn hb_face_create_for_tables(reference_table_func:
                                          hb_reference_table_func_t,
-                                     user_data: *mut ::libc::c_void,
+                                     user_data: *mut ::std::os::raw::c_void,
                                      destroy: hb_destroy_func_t)
      -> *mut hb_face_t;
 }
@@ -1030,14 +1028,14 @@ extern "C" {
 extern "C" {
     pub fn hb_face_set_user_data(face: *mut hb_face_t,
                                  key: *mut hb_user_data_key_t,
-                                 data: *mut ::libc::c_void,
+                                 data: *mut ::std::os::raw::c_void,
                                  destroy: hb_destroy_func_t,
                                  replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_face_get_user_data(face: *mut hb_face_t,
                                  key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_face_make_immutable(face: *mut hb_face_t);
@@ -1053,23 +1051,23 @@ extern "C" {
     pub fn hb_face_reference_blob(face: *mut hb_face_t) -> *mut hb_blob_t;
 }
 extern "C" {
-    pub fn hb_face_set_index(face: *mut hb_face_t, index: ::libc::c_uint);
+    pub fn hb_face_set_index(face: *mut hb_face_t, index: ::std::os::raw::c_uint);
 }
 extern "C" {
-    pub fn hb_face_get_index(face: *mut hb_face_t) -> ::libc::c_uint;
+    pub fn hb_face_get_index(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
 }
 extern "C" {
-    pub fn hb_face_set_upem(face: *mut hb_face_t, upem: ::libc::c_uint);
+    pub fn hb_face_set_upem(face: *mut hb_face_t, upem: ::std::os::raw::c_uint);
 }
 extern "C" {
-    pub fn hb_face_get_upem(face: *mut hb_face_t) -> ::libc::c_uint;
+    pub fn hb_face_get_upem(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
 }
 extern "C" {
     pub fn hb_face_set_glyph_count(face: *mut hb_face_t,
-                                   glyph_count: ::libc::c_uint);
+                                   glyph_count: ::std::os::raw::c_uint);
 }
 extern "C" {
-    pub fn hb_face_get_glyph_count(face: *mut hb_face_t) -> ::libc::c_uint;
+    pub fn hb_face_get_glyph_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1097,14 +1095,14 @@ extern "C" {
 extern "C" {
     pub fn hb_font_funcs_set_user_data(ffuncs: *mut hb_font_funcs_t,
                                        key: *mut hb_user_data_key_t,
-                                       data: *mut ::libc::c_void,
+                                       data: *mut ::std::os::raw::c_void,
                                        destroy: hb_destroy_func_t,
                                        replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_font_funcs_get_user_data(ffuncs: *mut hb_font_funcs_t,
                                        key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_font_funcs_make_immutable(ffuncs: *mut hb_font_funcs_t);
@@ -1239,34 +1237,34 @@ impl Clone for hb_glyph_extents_t {
 }
 pub type hb_font_get_font_extents_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                metrics:
                                                    *mut hb_font_extents_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_font_h_extents_func_t = hb_font_get_font_extents_func_t;
 pub type hb_font_get_font_v_extents_func_t = hb_font_get_font_extents_func_t;
 pub type hb_font_get_nominal_glyph_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                unicode: hb_codepoint_t,
                                                glyph: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_variation_glyph_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                unicode: hb_codepoint_t,
                                                variation_selector:
                                                    hb_codepoint_t,
                                                glyph: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_glyph_advance_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                glyph: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_position_t>;
 pub type hb_font_get_glyph_h_advance_func_t =
     hb_font_get_glyph_advance_func_t;
@@ -1274,20 +1272,20 @@ pub type hb_font_get_glyph_v_advance_func_t =
     hb_font_get_glyph_advance_func_t;
 pub type hb_font_get_glyph_origin_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                glyph: hb_codepoint_t,
                                                x: *mut hb_position_t,
                                                y: *mut hb_position_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
 pub type hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
 pub type hb_font_get_glyph_kerning_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                first_glyph: hb_codepoint_t,
                                                second_glyph: hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_position_t>;
 pub type hb_font_get_glyph_h_kerning_func_t =
     hb_font_get_glyph_kerning_func_t;
@@ -1295,36 +1293,36 @@ pub type hb_font_get_glyph_v_kerning_func_t =
     hb_font_get_glyph_kerning_func_t;
 pub type hb_font_get_glyph_extents_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                glyph: hb_codepoint_t,
                                                extents:
                                                    *mut hb_glyph_extents_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_glyph_contour_point_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                glyph: hb_codepoint_t,
-                                               point_index: ::libc::c_uint,
+                                               point_index: ::std::os::raw::c_uint,
                                                x: *mut hb_position_t,
                                                y: *mut hb_position_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_glyph_name_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                glyph: hb_codepoint_t,
-                                               name: *mut ::libc::c_char,
-                                               size: ::libc::c_uint,
-                                               user_data: *mut ::libc::c_void)
+                                               name: *mut ::std::os::raw::c_char,
+                                               size: ::std::os::raw::c_uint,
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 pub type hb_font_get_glyph_from_name_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
-                                               name: *const ::libc::c_char,
-                                               len: ::libc::c_int,
+                                               font_data: *mut ::std::os::raw::c_void,
+                                               name: *const ::std::os::raw::c_char,
+                                               len: ::std::os::raw::c_int,
                                                glyph: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 extern "C" {
     /**
@@ -1342,7 +1340,7 @@ extern "C" {
                                                  func:
                                                      hb_font_get_font_h_extents_func_t,
                                                  user_data:
-                                                     *mut ::libc::c_void,
+                                                     *mut ::std::os::raw::c_void,
                                                  destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1361,7 +1359,7 @@ extern "C" {
                                                  func:
                                                      hb_font_get_font_v_extents_func_t,
                                                  user_data:
-                                                     *mut ::libc::c_void,
+                                                     *mut ::std::os::raw::c_void,
                                                  destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1380,7 +1378,7 @@ extern "C" {
                                                 func:
                                                     hb_font_get_nominal_glyph_func_t,
                                                 user_data:
-                                                    *mut ::libc::c_void,
+                                                    *mut ::std::os::raw::c_void,
                                                 destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1400,7 +1398,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_variation_glyph_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1420,7 +1418,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_glyph_h_advance_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1440,7 +1438,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_glyph_v_advance_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1459,7 +1457,7 @@ extern "C" {
                                                  func:
                                                      hb_font_get_glyph_h_origin_func_t,
                                                  user_data:
-                                                     *mut ::libc::c_void,
+                                                     *mut ::std::os::raw::c_void,
                                                  destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1478,7 +1476,7 @@ extern "C" {
                                                  func:
                                                      hb_font_get_glyph_v_origin_func_t,
                                                  user_data:
-                                                     *mut ::libc::c_void,
+                                                     *mut ::std::os::raw::c_void,
                                                  destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1498,7 +1496,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_glyph_h_kerning_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1518,7 +1516,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_glyph_v_kerning_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1537,7 +1535,7 @@ extern "C" {
                                                 func:
                                                     hb_font_get_glyph_extents_func_t,
                                                 user_data:
-                                                    *mut ::libc::c_void,
+                                                    *mut ::std::os::raw::c_void,
                                                 destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1557,7 +1555,7 @@ extern "C" {
                                                       func:
                                                           hb_font_get_glyph_contour_point_func_t,
                                                       user_data:
-                                                          *mut ::libc::c_void,
+                                                          *mut ::std::os::raw::c_void,
                                                       destroy:
                                                           hb_destroy_func_t);
 }
@@ -1576,7 +1574,7 @@ extern "C" {
     pub fn hb_font_funcs_set_glyph_name_func(ffuncs: *mut hb_font_funcs_t,
                                              func:
                                                  hb_font_get_glyph_name_func_t,
-                                             user_data: *mut ::libc::c_void,
+                                             user_data: *mut ::std::os::raw::c_void,
                                              destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1596,7 +1594,7 @@ extern "C" {
                                                   func:
                                                       hb_font_get_glyph_from_name_func_t,
                                                   user_data:
-                                                      *mut ::libc::c_void,
+                                                      *mut ::std::os::raw::c_void,
                                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
@@ -1664,20 +1662,20 @@ extern "C" {
 extern "C" {
     pub fn hb_font_get_glyph_contour_point(font: *mut hb_font_t,
                                            glyph: hb_codepoint_t,
-                                           point_index: ::libc::c_uint,
+                                           point_index: ::std::os::raw::c_uint,
                                            x: *mut hb_position_t,
                                            y: *mut hb_position_t)
      -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_font_get_glyph_name(font: *mut hb_font_t, glyph: hb_codepoint_t,
-                                  name: *mut ::libc::c_char,
-                                  size: ::libc::c_uint) -> hb_bool_t;
+                                  name: *mut ::std::os::raw::c_char,
+                                  size: ::std::os::raw::c_uint) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_font_get_glyph_from_name(font: *mut hb_font_t,
-                                       name: *const ::libc::c_char,
-                                       len: ::libc::c_int,
+                                       name: *const ::std::os::raw::c_char,
+                                       len: ::std::os::raw::c_int,
                                        glyph: *mut hb_codepoint_t)
      -> hb_bool_t;
 }
@@ -1742,7 +1740,7 @@ extern "C" {
     pub fn hb_font_get_glyph_contour_point_for_origin(font: *mut hb_font_t,
                                                       glyph: hb_codepoint_t,
                                                       point_index:
-                                                          ::libc::c_uint,
+                                                          ::std::os::raw::c_uint,
                                                       direction:
                                                           hb_direction_t,
                                                       x: *mut hb_position_t,
@@ -1752,13 +1750,13 @@ extern "C" {
 extern "C" {
     pub fn hb_font_glyph_to_string(font: *mut hb_font_t,
                                    glyph: hb_codepoint_t,
-                                   s: *mut ::libc::c_char,
-                                   size: ::libc::c_uint);
+                                   s: *mut ::std::os::raw::c_char,
+                                   size: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_font_glyph_from_string(font: *mut hb_font_t,
-                                     s: *const ::libc::c_char,
-                                     len: ::libc::c_int,
+                                     s: *const ::std::os::raw::c_char,
+                                     len: ::std::os::raw::c_int,
                                      glyph: *mut hb_codepoint_t) -> hb_bool_t;
 }
 extern "C" {
@@ -1779,14 +1777,14 @@ extern "C" {
 extern "C" {
     pub fn hb_font_set_user_data(font: *mut hb_font_t,
                                  key: *mut hb_user_data_key_t,
-                                 data: *mut ::libc::c_void,
+                                 data: *mut ::std::os::raw::c_void,
                                  destroy: hb_destroy_func_t,
                                  replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_font_get_user_data(font: *mut hb_font_t,
                                  key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_font_make_immutable(font: *mut hb_font_t);
@@ -1809,50 +1807,50 @@ extern "C" {
 extern "C" {
     pub fn hb_font_set_funcs(font: *mut hb_font_t,
                              klass: *mut hb_font_funcs_t,
-                             font_data: *mut ::libc::c_void,
+                             font_data: *mut ::std::os::raw::c_void,
                              destroy: hb_destroy_func_t);
 }
 extern "C" {
     pub fn hb_font_set_funcs_data(font: *mut hb_font_t,
-                                  font_data: *mut ::libc::c_void,
+                                  font_data: *mut ::std::os::raw::c_void,
                                   destroy: hb_destroy_func_t);
 }
 extern "C" {
-    pub fn hb_font_set_scale(font: *mut hb_font_t, x_scale: ::libc::c_int,
-                             y_scale: ::libc::c_int);
+    pub fn hb_font_set_scale(font: *mut hb_font_t, x_scale: ::std::os::raw::c_int,
+                             y_scale: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_font_get_scale(font: *mut hb_font_t,
-                             x_scale: *mut ::libc::c_int,
-                             y_scale: *mut ::libc::c_int);
+                             x_scale: *mut ::std::os::raw::c_int,
+                             y_scale: *mut ::std::os::raw::c_int);
 }
 extern "C" {
-    pub fn hb_font_set_ppem(font: *mut hb_font_t, x_ppem: ::libc::c_uint,
-                            y_ppem: ::libc::c_uint);
+    pub fn hb_font_set_ppem(font: *mut hb_font_t, x_ppem: ::std::os::raw::c_uint,
+                            y_ppem: ::std::os::raw::c_uint);
 }
 extern "C" {
-    pub fn hb_font_get_ppem(font: *mut hb_font_t, x_ppem: *mut ::libc::c_uint,
-                            y_ppem: *mut ::libc::c_uint);
+    pub fn hb_font_get_ppem(font: *mut hb_font_t, x_ppem: *mut ::std::os::raw::c_uint,
+                            y_ppem: *mut ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_font_set_variations(font: *mut hb_font_t,
                                   variations: *const hb_variation_t,
-                                  variations_length: ::libc::c_uint);
+                                  variations_length: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_font_set_var_coords_design(font: *mut hb_font_t,
                                          coords: *const f32,
-                                         coords_length: ::libc::c_uint);
+                                         coords_length: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_font_set_var_coords_normalized(font: *mut hb_font_t,
-                                             coords: *const ::libc::c_int,
-                                             coords_length: ::libc::c_uint);
+                                             coords: *const ::std::os::raw::c_int,
+                                             coords_length: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_font_get_var_coords_normalized(font: *mut hb_font_t,
-                                             length: *mut ::libc::c_uint)
-     -> *const ::libc::c_int;
+                                             length: *mut ::std::os::raw::c_uint)
+     -> *const ::std::os::raw::c_int;
 }
 /**
  * hb_glyph_info_t:
@@ -1996,8 +1994,8 @@ pub struct hb_segment_properties_t {
     pub direction: hb_direction_t,
     pub script: hb_script_t,
     pub language: hb_language_t,
-    pub reserved1: *mut ::libc::c_void,
-    pub reserved2: *mut ::libc::c_void,
+    pub reserved1: *mut ::std::os::raw::c_void,
+    pub reserved2: *mut ::std::os::raw::c_void,
 }
 #[test]
 fn bindgen_test_layout_hb_segment_properties_t() {
@@ -2043,7 +2041,7 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_segment_properties_hash(p: *const hb_segment_properties_t)
-     -> ::libc::c_uint;
+     -> ::std::os::raw::c_uint;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2065,14 +2063,14 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_set_user_data(buffer: *mut hb_buffer_t,
                                    key: *mut hb_user_data_key_t,
-                                   data: *mut ::libc::c_void,
+                                   data: *mut ::std::os::raw::c_void,
                                    destroy: hb_destroy_func_t,
                                    replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_buffer_get_user_data(buffer: *mut hb_buffer_t,
                                    key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 pub const HB_BUFFER_CONTENT_TYPE_INVALID: hb_buffer_content_type_t = 0;
 pub const HB_BUFFER_CONTENT_TYPE_UNICODE: hb_buffer_content_type_t = 1;
@@ -2083,7 +2081,7 @@ pub const HB_BUFFER_CONTENT_TYPE_GLYPHS: hb_buffer_content_type_t = 2;
  * @HB_BUFFER_CONTENT_TYPE_UNICODE: The buffer contains input characters (before shaping).
  * @HB_BUFFER_CONTENT_TYPE_GLYPHS: The buffer contains output glyphs (after shaping).
  */
-pub type hb_buffer_content_type_t = ::libc::c_uint;
+pub type hb_buffer_content_type_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_buffer_set_content_type(buffer: *mut hb_buffer_t,
                                       content_type: hb_buffer_content_type_t);
@@ -2159,7 +2157,7 @@ pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
  *
  * Since: 0.9.20
  */
-pub type hb_buffer_flags_t = ::libc::c_uint;
+pub type hb_buffer_flags_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_buffer_set_flags(buffer: *mut hb_buffer_t,
                                flags: hb_buffer_flags_t);
@@ -2175,7 +2173,7 @@ pub const HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS:
     1;
 pub const HB_BUFFER_CLUSTER_LEVEL_CHARACTERS: hb_buffer_cluster_level_t = 2;
 pub const HB_BUFFER_CLUSTER_LEVEL_DEFAULT: hb_buffer_cluster_level_t = 0;
-pub type hb_buffer_cluster_level_t = ::libc::c_uint;
+pub type hb_buffer_cluster_level_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_buffer_set_cluster_level(buffer: *mut hb_buffer_t,
                                        cluster_level:
@@ -2201,7 +2199,7 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_buffer_pre_allocate(buffer: *mut hb_buffer_t,
-                                  size: ::libc::c_uint) -> hb_bool_t;
+                                  size: ::std::os::raw::c_uint) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_buffer_allocation_successful(buffer: *mut hb_buffer_t)
@@ -2212,63 +2210,63 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_buffer_reverse_range(buffer: *mut hb_buffer_t,
-                                   start: ::libc::c_uint,
-                                   end: ::libc::c_uint);
+                                   start: ::std::os::raw::c_uint,
+                                   end: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_buffer_reverse_clusters(buffer: *mut hb_buffer_t);
 }
 extern "C" {
     pub fn hb_buffer_add(buffer: *mut hb_buffer_t, codepoint: hb_codepoint_t,
-                         cluster: ::libc::c_uint);
+                         cluster: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_buffer_add_utf8(buffer: *mut hb_buffer_t,
-                              text: *const ::libc::c_char,
-                              text_length: ::libc::c_int,
-                              item_offset: ::libc::c_uint,
-                              item_length: ::libc::c_int);
+                              text: *const ::std::os::raw::c_char,
+                              text_length: ::std::os::raw::c_int,
+                              item_offset: ::std::os::raw::c_uint,
+                              item_length: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_buffer_add_utf16(buffer: *mut hb_buffer_t, text: *const u16,
-                               text_length: ::libc::c_int,
-                               item_offset: ::libc::c_uint,
-                               item_length: ::libc::c_int);
+                               text_length: ::std::os::raw::c_int,
+                               item_offset: ::std::os::raw::c_uint,
+                               item_length: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_buffer_add_utf32(buffer: *mut hb_buffer_t, text: *const u32,
-                               text_length: ::libc::c_int,
-                               item_offset: ::libc::c_uint,
-                               item_length: ::libc::c_int);
+                               text_length: ::std::os::raw::c_int,
+                               item_offset: ::std::os::raw::c_uint,
+                               item_length: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_buffer_add_latin1(buffer: *mut hb_buffer_t, text: *const u8,
-                                text_length: ::libc::c_int,
-                                item_offset: ::libc::c_uint,
-                                item_length: ::libc::c_int);
+                                text_length: ::std::os::raw::c_int,
+                                item_offset: ::std::os::raw::c_uint,
+                                item_length: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_buffer_add_codepoints(buffer: *mut hb_buffer_t,
                                     text: *const hb_codepoint_t,
-                                    text_length: ::libc::c_int,
-                                    item_offset: ::libc::c_uint,
-                                    item_length: ::libc::c_int);
+                                    text_length: ::std::os::raw::c_int,
+                                    item_offset: ::std::os::raw::c_uint,
+                                    item_length: ::std::os::raw::c_int);
 }
 extern "C" {
     pub fn hb_buffer_set_length(buffer: *mut hb_buffer_t,
-                                length: ::libc::c_uint) -> hb_bool_t;
+                                length: ::std::os::raw::c_uint) -> hb_bool_t;
 }
 extern "C" {
-    pub fn hb_buffer_get_length(buffer: *mut hb_buffer_t) -> ::libc::c_uint;
+    pub fn hb_buffer_get_length(buffer: *mut hb_buffer_t) -> ::std::os::raw::c_uint;
 }
 extern "C" {
     pub fn hb_buffer_get_glyph_infos(buffer: *mut hb_buffer_t,
-                                     length: *mut ::libc::c_uint)
+                                     length: *mut ::std::os::raw::c_uint)
      -> *mut hb_glyph_info_t;
 }
 extern "C" {
     pub fn hb_buffer_get_glyph_positions(buffer: *mut hb_buffer_t,
-                                         length: *mut ::libc::c_uint)
+                                         length: *mut ::std::os::raw::c_uint)
      -> *mut hb_glyph_position_t;
 }
 extern "C" {
@@ -2297,7 +2295,7 @@ pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS: hb_buffer_serialize_flags_t
  *
  * Since: 0.9.20
  */
-pub type hb_buffer_serialize_flags_t = ::libc::c_uint;
+pub type hb_buffer_serialize_flags_t = ::std::os::raw::c_uint;
 pub const HB_BUFFER_SERIALIZE_FORMAT_TEXT: hb_buffer_serialize_format_t =
     1413830740;
 pub const HB_BUFFER_SERIALIZE_FORMAT_JSON: hb_buffer_serialize_format_t =
@@ -2315,37 +2313,37 @@ pub const HB_BUFFER_SERIALIZE_FORMAT_INVALID: hb_buffer_serialize_format_t =
  *
  * Since: 0.9.2
  */
-pub type hb_buffer_serialize_format_t = ::libc::c_uint;
+pub type hb_buffer_serialize_format_t = ::std::os::raw::c_uint;
 extern "C" {
-    pub fn hb_buffer_serialize_format_from_string(str: *const ::libc::c_char,
-                                                  len: ::libc::c_int)
+    pub fn hb_buffer_serialize_format_from_string(str: *const ::std::os::raw::c_char,
+                                                  len: ::std::os::raw::c_int)
      -> hb_buffer_serialize_format_t;
 }
 extern "C" {
     pub fn hb_buffer_serialize_format_to_string(format:
                                                     hb_buffer_serialize_format_t)
-     -> *const ::libc::c_char;
+     -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-    pub fn hb_buffer_serialize_list_formats() -> *mut *const ::libc::c_char;
+    pub fn hb_buffer_serialize_list_formats() -> *mut *const ::std::os::raw::c_char;
 }
 extern "C" {
     pub fn hb_buffer_serialize_glyphs(buffer: *mut hb_buffer_t,
-                                      start: ::libc::c_uint,
-                                      end: ::libc::c_uint,
-                                      buf: *mut ::libc::c_char,
-                                      buf_size: ::libc::c_uint,
-                                      buf_consumed: *mut ::libc::c_uint,
+                                      start: ::std::os::raw::c_uint,
+                                      end: ::std::os::raw::c_uint,
+                                      buf: *mut ::std::os::raw::c_char,
+                                      buf_size: ::std::os::raw::c_uint,
+                                      buf_consumed: *mut ::std::os::raw::c_uint,
                                       font: *mut hb_font_t,
                                       format: hb_buffer_serialize_format_t,
                                       flags: hb_buffer_serialize_flags_t)
-     -> ::libc::c_uint;
+     -> ::std::os::raw::c_uint;
 }
 extern "C" {
     pub fn hb_buffer_deserialize_glyphs(buffer: *mut hb_buffer_t,
-                                        buf: *const ::libc::c_char,
-                                        buf_len: ::libc::c_int,
-                                        end_ptr: *mut *const ::libc::c_char,
+                                        buf: *const ::std::os::raw::c_char,
+                                        buf_len: ::std::os::raw::c_int,
+                                        end_ptr: *mut *const ::std::os::raw::c_char,
                                         font: *mut hb_font_t,
                                         format: hb_buffer_serialize_format_t)
      -> hb_bool_t;
@@ -2353,28 +2351,28 @@ extern "C" {
 pub type hb_buffer_message_func_t =
     ::std::option::Option<unsafe extern "C" fn(buffer: *mut hb_buffer_t,
                                                font: *mut hb_font_t,
-                                               message: *const ::libc::c_char,
-                                               user_data: *mut ::libc::c_void)
+                                               message: *const ::std::os::raw::c_char,
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 extern "C" {
     pub fn hb_buffer_set_message_func(buffer: *mut hb_buffer_t,
                                       func: hb_buffer_message_func_t,
-                                      user_data: *mut ::libc::c_void,
+                                      user_data: *mut ::std::os::raw::c_void,
                                       destroy: hb_destroy_func_t);
 }
 pub type hb_font_get_glyph_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
-                                               font_data: *mut ::libc::c_void,
+                                               font_data: *mut ::std::os::raw::c_void,
                                                unicode: hb_codepoint_t,
                                                variation_selector:
                                                    hb_codepoint_t,
                                                glyph: *mut hb_codepoint_t,
-                                               user_data: *mut ::libc::c_void)
+                                               user_data: *mut ::std::os::raw::c_void)
                               -> hb_bool_t>;
 extern "C" {
     pub fn hb_font_funcs_set_glyph_func(ffuncs: *mut hb_font_funcs_t,
                                         func: hb_font_get_glyph_func_t,
-                                        user_data: *mut ::libc::c_void,
+                                        user_data: *mut ::std::os::raw::c_void,
                                         destroy: hb_destroy_func_t);
 }
 #[repr(C)]
@@ -2397,14 +2395,14 @@ extern "C" {
 extern "C" {
     pub fn hb_set_set_user_data(set: *mut hb_set_t,
                                 key: *mut hb_user_data_key_t,
-                                data: *mut ::libc::c_void,
+                                data: *mut ::std::os::raw::c_void,
                                 destroy: hb_destroy_func_t,
                                 replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_set_get_user_data(set: *mut hb_set_t,
                                 key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_set_allocation_successful(set: *const hb_set_t) -> hb_bool_t;
@@ -2457,7 +2455,7 @@ extern "C" {
     pub fn hb_set_invert(set: *mut hb_set_t);
 }
 extern "C" {
-    pub fn hb_set_get_population(set: *const hb_set_t) -> ::libc::c_uint;
+    pub fn hb_set_get_population(set: *const hb_set_t) -> ::std::os::raw::c_uint;
 }
 extern "C" {
     pub fn hb_set_get_min(set: *const hb_set_t) -> hb_codepoint_t;
@@ -2476,17 +2474,17 @@ extern "C" {
 extern "C" {
     pub fn hb_shape(font: *mut hb_font_t, buffer: *mut hb_buffer_t,
                     features: *const hb_feature_t,
-                    num_features: ::libc::c_uint);
+                    num_features: ::std::os::raw::c_uint);
 }
 extern "C" {
     pub fn hb_shape_full(font: *mut hb_font_t, buffer: *mut hb_buffer_t,
                          features: *const hb_feature_t,
-                         num_features: ::libc::c_uint,
-                         shaper_list: *const *const ::libc::c_char)
+                         num_features: ::std::os::raw::c_uint,
+                         shaper_list: *const *const ::std::os::raw::c_char)
      -> hb_bool_t;
 }
 extern "C" {
-    pub fn hb_shape_list_shapers() -> *mut *const ::libc::c_char;
+    pub fn hb_shape_list_shapers() -> *mut *const ::std::os::raw::c_char;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2497,38 +2495,38 @@ extern "C" {
     pub fn hb_shape_plan_create(face: *mut hb_face_t,
                                 props: *const hb_segment_properties_t,
                                 user_features: *const hb_feature_t,
-                                num_user_features: ::libc::c_uint,
-                                shaper_list: *const *const ::libc::c_char)
+                                num_user_features: ::std::os::raw::c_uint,
+                                shaper_list: *const *const ::std::os::raw::c_char)
      -> *mut hb_shape_plan_t;
 }
 extern "C" {
     pub fn hb_shape_plan_create_cached(face: *mut hb_face_t,
                                        props: *const hb_segment_properties_t,
                                        user_features: *const hb_feature_t,
-                                       num_user_features: ::libc::c_uint,
+                                       num_user_features: ::std::os::raw::c_uint,
                                        shaper_list:
-                                           *const *const ::libc::c_char)
+                                           *const *const ::std::os::raw::c_char)
      -> *mut hb_shape_plan_t;
 }
 extern "C" {
     pub fn hb_shape_plan_create2(face: *mut hb_face_t,
                                  props: *const hb_segment_properties_t,
                                  user_features: *const hb_feature_t,
-                                 num_user_features: ::libc::c_uint,
-                                 coords: *const ::libc::c_int,
-                                 num_coords: ::libc::c_uint,
-                                 shaper_list: *const *const ::libc::c_char)
+                                 num_user_features: ::std::os::raw::c_uint,
+                                 coords: *const ::std::os::raw::c_int,
+                                 num_coords: ::std::os::raw::c_uint,
+                                 shaper_list: *const *const ::std::os::raw::c_char)
      -> *mut hb_shape_plan_t;
 }
 extern "C" {
     pub fn hb_shape_plan_create_cached2(face: *mut hb_face_t,
                                         props: *const hb_segment_properties_t,
                                         user_features: *const hb_feature_t,
-                                        num_user_features: ::libc::c_uint,
-                                        coords: *const ::libc::c_int,
-                                        num_coords: ::libc::c_uint,
+                                        num_user_features: ::std::os::raw::c_uint,
+                                        coords: *const ::std::os::raw::c_int,
+                                        num_coords: ::std::os::raw::c_uint,
                                         shaper_list:
-                                            *const *const ::libc::c_char)
+                                            *const *const ::std::os::raw::c_char)
      -> *mut hb_shape_plan_t;
 }
 extern "C" {
@@ -2544,34 +2542,34 @@ extern "C" {
 extern "C" {
     pub fn hb_shape_plan_set_user_data(shape_plan: *mut hb_shape_plan_t,
                                        key: *mut hb_user_data_key_t,
-                                       data: *mut ::libc::c_void,
+                                       data: *mut ::std::os::raw::c_void,
                                        destroy: hb_destroy_func_t,
                                        replace: hb_bool_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_shape_plan_get_user_data(shape_plan: *mut hb_shape_plan_t,
                                        key: *mut hb_user_data_key_t)
-     -> *mut ::libc::c_void;
+     -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
     pub fn hb_shape_plan_execute(shape_plan: *mut hb_shape_plan_t,
                                  font: *mut hb_font_t,
                                  buffer: *mut hb_buffer_t,
                                  features: *const hb_feature_t,
-                                 num_features: ::libc::c_uint) -> hb_bool_t;
+                                 num_features: ::std::os::raw::c_uint) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_shape_plan_get_shaper(shape_plan: *mut hb_shape_plan_t)
-     -> *const ::libc::c_char;
+     -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-    pub fn hb_version(major: *mut ::libc::c_uint, minor: *mut ::libc::c_uint,
-                      micro: *mut ::libc::c_uint);
+    pub fn hb_version(major: *mut ::std::os::raw::c_uint, minor: *mut ::std::os::raw::c_uint,
+                      micro: *mut ::std::os::raw::c_uint);
 }
 extern "C" {
-    pub fn hb_version_string() -> *const ::libc::c_char;
+    pub fn hb_version_string() -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-    pub fn hb_version_atleast(major: ::libc::c_uint, minor: ::libc::c_uint,
-                              micro: ::libc::c_uint) -> hb_bool_t;
+    pub fn hb_version_atleast(major: ::std::os::raw::c_uint, minor: ::std::os::raw::c_uint,
+                              micro: ::std::os::raw::c_uint) -> hb_bool_t;
 }
