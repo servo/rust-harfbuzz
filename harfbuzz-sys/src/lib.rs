@@ -57,6 +57,7 @@ pub struct _hb_var_int_t {
     pub i8: __BindgenUnionField<[i8; 4usize]>,
     pub bindgen_union_field: u32,
 }
+#[allow(non_snake_case)]
 #[test]
 fn bindgen_test_layout__hb_var_int_t() {
     assert_eq!(::std::mem::size_of::<_hb_var_int_t>() , 4usize , concat ! (
