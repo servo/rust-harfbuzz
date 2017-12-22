@@ -13,9 +13,6 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 links = "harfbuzz"
 build = "build.rs"
 
-[dependencies]
-libc = "0.2"
-
 [build-dependencies]
 pkg-config = "0.3"
 cmake = "0.1"
