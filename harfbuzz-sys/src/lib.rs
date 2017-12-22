@@ -45,7 +45,7 @@ pub type hb_codepoint_t = u32;
 pub type hb_position_t = i32;
 pub type hb_mask_t = u32;
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct _hb_var_int_t {
     pub u32: __BindgenUnionField<u32>,
     pub i32: __BindgenUnionField<i32>,
@@ -92,9 +92,6 @@ fn bindgen_test_layout__hb_var_int_t() {
                 usize } , 0usize , concat ! (
                 "Alignment of field: " , stringify ! ( _hb_var_int_t ) , "::"
                 , stringify ! ( i8 ) ));
-}
-impl Clone for _hb_var_int_t {
-    fn clone(&self) -> Self { *self }
 }
 pub type hb_var_int_t = _hb_var_int_t;
 pub type hb_tag_t = u32;
@@ -301,7 +298,7 @@ extern "C" {
      -> hb_direction_t;
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_user_data_key_t {
     pub unused: ::std::os::raw::c_char,
 }
@@ -317,14 +314,11 @@ fn bindgen_test_layout_hb_user_data_key_t() {
                 "Alignment of field: " , stringify ! ( hb_user_data_key_t ) ,
                 "::" , stringify ! ( unused ) ));
 }
-impl Clone for hb_user_data_key_t {
-    fn clone(&self) -> Self { *self }
-}
 pub type hb_destroy_func_t =
     ::std::option::Option<unsafe extern "C" fn(user_data:
                                                    *mut ::std::os::raw::c_void)>;
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_feature_t {
     pub tag: hb_tag_t,
     pub value: u32,
@@ -358,9 +352,6 @@ fn bindgen_test_layout_hb_feature_t() {
                 "Alignment of field: " , stringify ! ( hb_feature_t ) , "::" ,
                 stringify ! ( end ) ));
 }
-impl Clone for hb_feature_t {
-    fn clone(&self) -> Self { *self }
-}
 extern "C" {
     pub fn hb_feature_from_string(str: *const ::std::os::raw::c_char,
                                   len: ::std::os::raw::c_int,
@@ -377,7 +368,7 @@ extern "C" {
  * Since: 1.4.2
  */
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_variation_t {
     pub tag: hb_tag_t,
     pub value: f32,
@@ -398,9 +389,6 @@ fn bindgen_test_layout_hb_variation_t() {
                 as usize } , 4usize , concat ! (
                 "Alignment of field: " , stringify ! ( hb_variation_t ) , "::"
                 , stringify ! ( value ) ));
-}
-impl Clone for hb_variation_t {
-    fn clone(&self) -> Self { *self }
 }
 extern "C" {
     pub fn hb_variation_from_string(str: *const ::std::os::raw::c_char,
@@ -1112,7 +1100,7 @@ extern "C" {
      -> hb_bool_t;
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_font_extents_t {
     pub ascender: hb_position_t,
     pub descender: hb_position_t,
@@ -1194,11 +1182,8 @@ fn bindgen_test_layout_hb_font_extents_t() {
                 "Alignment of field: " , stringify ! ( hb_font_extents_t ) ,
                 "::" , stringify ! ( reserved1 ) ));
 }
-impl Clone for hb_font_extents_t {
-    fn clone(&self) -> Self { *self }
-}
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_glyph_extents_t {
     pub x_bearing: hb_position_t,
     pub y_bearing: hb_position_t,
@@ -1231,9 +1216,6 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
                 const _ as usize } , 12usize , concat ! (
                 "Alignment of field: " , stringify ! ( hb_glyph_extents_t ) ,
                 "::" , stringify ! ( height ) ));
-}
-impl Clone for hb_glyph_extents_t {
-    fn clone(&self) -> Self { *self }
 }
 pub type hb_font_get_font_extents_func_t =
     ::std::option::Option<unsafe extern "C" fn(font: *mut hb_font_t,
@@ -1874,7 +1856,7 @@ extern "C" {
  *
  */
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_glyph_info_t {
     pub codepoint: hb_codepoint_t,
     pub mask: hb_mask_t,
@@ -1914,9 +1896,6 @@ fn bindgen_test_layout_hb_glyph_info_t() {
                 "Alignment of field: " , stringify ! ( hb_glyph_info_t ) ,
                 "::" , stringify ! ( var2 ) ));
 }
-impl Clone for hb_glyph_info_t {
-    fn clone(&self) -> Self { *self }
-}
 /**
  * hb_glyph_position_t:
  * @x_advance: how much the line advances after drawing this glyph when setting
@@ -1934,7 +1913,7 @@ impl Clone for hb_glyph_info_t {
  *
  */
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_glyph_position_t {
     pub x_advance: hb_position_t,
     pub y_advance: hb_position_t,
@@ -1975,9 +1954,6 @@ fn bindgen_test_layout_hb_glyph_position_t() {
                 "Alignment of field: " , stringify ! ( hb_glyph_position_t ) ,
                 "::" , stringify ! ( var ) ));
 }
-impl Clone for hb_glyph_position_t {
-    fn clone(&self) -> Self { *self }
-}
 /**
  * hb_segment_properties_t:
  * @direction: the `hb_direction_t` of the buffer, see hb_buffer_set_direction().
@@ -1989,7 +1965,7 @@ impl Clone for hb_glyph_position_t {
  * hb_buffer_get_segment_properties(), respectively.
  */
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Copy, Clone)]
 pub struct hb_segment_properties_t {
     pub direction: hb_direction_t,
     pub script: hb_script_t,
@@ -2030,9 +2006,6 @@ fn bindgen_test_layout_hb_segment_properties_t() {
                 as * const _ as usize } , 24usize , concat ! (
                 "Alignment of field: " , stringify ! ( hb_segment_properties_t
                 ) , "::" , stringify ! ( reserved2 ) ));
-}
-impl Clone for hb_segment_properties_t {
-    fn clone(&self) -> Self { *self }
 }
 extern "C" {
     pub fn hb_segment_properties_equal(a: *const hb_segment_properties_t,
