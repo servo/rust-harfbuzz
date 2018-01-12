@@ -84,7 +84,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u32 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(u32)
@@ -94,7 +94,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i32 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(i32)
@@ -104,7 +104,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u16 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(u16)
@@ -114,7 +114,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i16 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(i16)
@@ -124,7 +124,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u8 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(u8)
@@ -134,7 +134,7 @@ fn bindgen_test_layout__hb_var_int_t() {
         unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i8 as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
             stringify!(i8)
@@ -370,7 +370,7 @@ fn bindgen_test_layout_hb_user_data_key_t() {
         unsafe { &(*(::std::ptr::null::<hb_user_data_key_t>())).unused as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_user_data_key_t),
             "::",
             stringify!(unused)
@@ -403,7 +403,7 @@ fn bindgen_test_layout_hb_feature_t() {
         unsafe { &(*(::std::ptr::null::<hb_feature_t>())).tag as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_feature_t),
             "::",
             stringify!(tag)
@@ -413,7 +413,7 @@ fn bindgen_test_layout_hb_feature_t() {
         unsafe { &(*(::std::ptr::null::<hb_feature_t>())).value as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_feature_t),
             "::",
             stringify!(value)
@@ -423,7 +423,7 @@ fn bindgen_test_layout_hb_feature_t() {
         unsafe { &(*(::std::ptr::null::<hb_feature_t>())).start as *const _ as usize },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_feature_t),
             "::",
             stringify!(start)
@@ -433,7 +433,7 @@ fn bindgen_test_layout_hb_feature_t() {
         unsafe { &(*(::std::ptr::null::<hb_feature_t>())).end as *const _ as usize },
         12usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_feature_t),
             "::",
             stringify!(end)
@@ -480,7 +480,7 @@ fn bindgen_test_layout_hb_variation_t() {
         unsafe { &(*(::std::ptr::null::<hb_variation_t>())).tag as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_variation_t),
             "::",
             stringify!(tag)
@@ -490,7 +490,7 @@ fn bindgen_test_layout_hb_variation_t() {
         unsafe { &(*(::std::ptr::null::<hb_variation_t>())).value as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_variation_t),
             "::",
             stringify!(value)
@@ -1148,7 +1148,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).ascender as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(ascender)
@@ -1158,7 +1158,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).descender as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(descender)
@@ -1168,7 +1168,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).line_gap as *const _ as usize },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(line_gap)
@@ -1178,7 +1178,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved9 as *const _ as usize },
         12usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved9)
@@ -1188,7 +1188,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved8 as *const _ as usize },
         16usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved8)
@@ -1198,7 +1198,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved7 as *const _ as usize },
         20usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved7)
@@ -1208,7 +1208,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved6 as *const _ as usize },
         24usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved6)
@@ -1218,7 +1218,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved5 as *const _ as usize },
         28usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved5)
@@ -1228,7 +1228,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved4 as *const _ as usize },
         32usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved4)
@@ -1238,7 +1238,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved3 as *const _ as usize },
         36usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved3)
@@ -1248,7 +1248,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved2 as *const _ as usize },
         40usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved2)
@@ -1258,7 +1258,7 @@ fn bindgen_test_layout_hb_font_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_font_extents_t>())).reserved1 as *const _ as usize },
         44usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_font_extents_t),
             "::",
             stringify!(reserved1)
@@ -1289,7 +1289,7 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_extents_t>())).x_bearing as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_extents_t),
             "::",
             stringify!(x_bearing)
@@ -1299,7 +1299,7 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_extents_t>())).y_bearing as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_extents_t),
             "::",
             stringify!(y_bearing)
@@ -1309,7 +1309,7 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_extents_t>())).width as *const _ as usize },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_extents_t),
             "::",
             stringify!(width)
@@ -1319,7 +1319,7 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_extents_t>())).height as *const _ as usize },
         12usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_extents_t),
             "::",
             stringify!(height)
@@ -2023,7 +2023,7 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_info_t>())).codepoint as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_info_t),
             "::",
             stringify!(codepoint)
@@ -2033,7 +2033,7 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_info_t>())).mask as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_info_t),
             "::",
             stringify!(mask)
@@ -2043,7 +2043,7 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_info_t>())).cluster as *const _ as usize },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_info_t),
             "::",
             stringify!(cluster)
@@ -2053,7 +2053,7 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_info_t>())).var1 as *const _ as usize },
         12usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_info_t),
             "::",
             stringify!(var1)
@@ -2063,7 +2063,7 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_info_t>())).var2 as *const _ as usize },
         16usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_info_t),
             "::",
             stringify!(var2)
@@ -2108,7 +2108,7 @@ fn bindgen_test_layout_hb_glyph_position_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_position_t>())).x_advance as *const _ as usize },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_position_t),
             "::",
             stringify!(x_advance)
@@ -2118,7 +2118,7 @@ fn bindgen_test_layout_hb_glyph_position_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_position_t>())).y_advance as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_position_t),
             "::",
             stringify!(y_advance)
@@ -2128,7 +2128,7 @@ fn bindgen_test_layout_hb_glyph_position_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_position_t>())).x_offset as *const _ as usize },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_position_t),
             "::",
             stringify!(x_offset)
@@ -2138,7 +2138,7 @@ fn bindgen_test_layout_hb_glyph_position_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_position_t>())).y_offset as *const _ as usize },
         12usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_position_t),
             "::",
             stringify!(y_offset)
@@ -2148,7 +2148,7 @@ fn bindgen_test_layout_hb_glyph_position_t() {
         unsafe { &(*(::std::ptr::null::<hb_glyph_position_t>())).var as *const _ as usize },
         16usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_glyph_position_t),
             "::",
             stringify!(var)
@@ -2190,7 +2190,7 @@ fn bindgen_test_layout_hb_segment_properties_t() {
         },
         0usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_segment_properties_t),
             "::",
             stringify!(direction)
@@ -2200,7 +2200,7 @@ fn bindgen_test_layout_hb_segment_properties_t() {
         unsafe { &(*(::std::ptr::null::<hb_segment_properties_t>())).script as *const _ as usize },
         4usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_segment_properties_t),
             "::",
             stringify!(script)
@@ -2212,7 +2212,7 @@ fn bindgen_test_layout_hb_segment_properties_t() {
         },
         8usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_segment_properties_t),
             "::",
             stringify!(language)
@@ -2224,7 +2224,7 @@ fn bindgen_test_layout_hb_segment_properties_t() {
         },
         16usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_segment_properties_t),
             "::",
             stringify!(reserved1)
@@ -2236,7 +2236,7 @@ fn bindgen_test_layout_hb_segment_properties_t() {
         },
         24usize,
         concat!(
-            "Alignment of field: ",
+            "Offset of field: ",
             stringify!(hb_segment_properties_t),
             "::",
             stringify!(reserved2)
