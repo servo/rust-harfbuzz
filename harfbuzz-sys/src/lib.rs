@@ -48,10 +48,6 @@ impl<T> ::std::fmt::Debug for __BindgenUnionField<T> {
 }
 pub const HB_UNICODE_MAX_DECOMPOSITION_LEN: ::std::os::raw::c_uint = 19;
 pub const HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT: ::std::os::raw::c_uint = 65533;
-pub const HB_VERSION_MAJOR: ::std::os::raw::c_uint = 1;
-pub const HB_VERSION_MINOR: ::std::os::raw::c_uint = 4;
-pub const HB_VERSION_MICRO: ::std::os::raw::c_uint = 8;
-pub const HB_VERSION_STRING: &'static [u8; 6usize] = b"1.4.8\x00";
 pub type hb_bool_t = ::std::os::raw::c_int;
 pub type hb_codepoint_t = u32;
 pub type hb_position_t = i32;
