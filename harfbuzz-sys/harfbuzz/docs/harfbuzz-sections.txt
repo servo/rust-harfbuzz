@@ -41,6 +41,7 @@ hb_buffer_add_utf32
 hb_buffer_add_utf16
 hb_buffer_add_utf8
 hb_buffer_add_latin1
+hb_buffer_append
 hb_buffer_set_content_type
 hb_buffer_get_content_type
 hb_buffer_set_direction
@@ -77,9 +78,12 @@ hb_buffer_serialize_format_to_string
 hb_buffer_serialize_list_formats
 hb_segment_properties_equal
 hb_segment_properties_hash
+hb_buffer_diff
 hb_buffer_set_message_func
 hb_buffer_t
+hb_glyph_info_get_glyph_flags
 hb_glyph_info_t
+hb_glyph_flags_t
 hb_glyph_position_t
 hb_buffer_content_type_t
 hb_buffer_flags_t
@@ -87,6 +91,7 @@ hb_buffer_cluster_level_t
 hb_segment_properties_t
 hb_buffer_serialize_format_t
 hb_buffer_serialize_flags_t
+hb_buffer_diff_flags_t
 hb_buffer_message_func_t
 </SECTION>
 
@@ -146,10 +151,12 @@ HB_BUFFER_SERIALIZE_FLAGS_DEFAULT
 HB_SCRIPT_CANADIAN_ABORIGINAL
 hb_font_funcs_set_glyph_func
 hb_font_get_glyph_func_t
+hb_set_invert
 </SECTION>
 
 <SECTION>
 <FILE>hb-coretext</FILE>
+HB_CORETEXT_TAG_KERX
 HB_CORETEXT_TAG_MORT
 HB_CORETEXT_TAG_MORX
 hb_coretext_face_create
@@ -163,6 +170,7 @@ hb_face_create
 hb_face_create_for_tables
 hb_face_destroy
 hb_face_get_empty
+hb_face_get_table_tags
 hb_face_get_glyph_count
 hb_face_get_index
 hb_face_get_upem
@@ -241,6 +249,7 @@ hb_font_get_nominal_glyph
 hb_font_get_nominal_glyph_func_t
 hb_font_get_parent
 hb_font_get_ppem
+hb_font_get_ptem
 hb_font_get_scale
 hb_font_get_user_data
 hb_font_get_variation_glyph
@@ -251,10 +260,12 @@ hb_font_glyph_to_string
 hb_font_is_immutable
 hb_font_make_immutable
 hb_font_reference
+hb_font_set_face
 hb_font_set_funcs
 hb_font_set_funcs_data
 hb_font_set_parent
 hb_font_set_ppem
+hb_font_set_ptem
 hb_font_set_scale
 hb_font_set_user_data
 hb_variation_t
@@ -283,6 +294,7 @@ hb_ft_face_create_cached
 hb_ft_face_create_referenced
 hb_ft_font_create
 hb_ft_font_create_referenced
+hb_ft_font_changed
 hb_ft_font_get_face
 hb_ft_font_set_load_flags
 hb_ft_font_get_load_flags
@@ -302,6 +314,7 @@ hb_glib_blob_create
 HB_GOBJECT_TYPE_BLOB
 HB_GOBJECT_TYPE_BUFFER
 HB_GOBJECT_TYPE_BUFFER_CONTENT_TYPE
+HB_GOBJECT_TYPE_BUFFER_DIFF_FLAGS
 HB_GOBJECT_TYPE_BUFFER_FLAGS
 HB_GOBJECT_TYPE_BUFFER_SERIALIZE_FLAGS
 HB_GOBJECT_TYPE_BUFFER_SERIALIZE_FORMAT
@@ -309,6 +322,7 @@ HB_GOBJECT_TYPE_DIRECTION
 HB_GOBJECT_TYPE_FACE
 HB_GOBJECT_TYPE_FONT
 HB_GOBJECT_TYPE_FONT_FUNCS
+HB_GOBJECT_TYPE_GLYPH_FLAGS
 HB_GOBJECT_TYPE_MEMORY_MODE
 HB_GOBJECT_TYPE_OT_LAYOUT_GLYPH_CLASS
 HB_GOBJECT_TYPE_OT_MATH_CONSTANT
@@ -328,6 +342,7 @@ HB_GOBJECT_TYPE_SET
 HB_GOBJECT_TYPE_USER_DATA_KEY
 hb_gobject_blob_get_type
 hb_gobject_buffer_content_type_get_type
+hb_gobject_buffer_diff_flags_get_type
 hb_gobject_buffer_flags_get_type
 hb_gobject_buffer_get_type
 hb_gobject_buffer_serialize_flags_get_type
@@ -336,6 +351,7 @@ hb_gobject_direction_get_type
 hb_gobject_face_get_type
 hb_gobject_font_funcs_get_type
 hb_gobject_font_get_type
+hb_gobject_glyph_flags_get_type
 hb_gobject_memory_mode_get_type
 hb_gobject_ot_layout_glyph_class_get_type
 hb_gobject_ot_math_constant_get_type
@@ -440,8 +456,11 @@ Xhb_ot_layout_lookup_substitute
 
 <SECTION>
 <FILE>hb-ot-var</FILE>
-HB_OT_TAG_avar
-HB_OT_TAG_fvar
+HB_OT_TAG_VAR_AXIS_ITALIC
+HB_OT_TAG_VAR_AXIS_OPTICAL_SIZE
+HB_OT_TAG_VAR_AXIS_SLANT
+HB_OT_TAG_VAR_AXIS_WEIGHT
+HB_OT_TAG_VAR_AXIS_WIDTH
 HB_OT_VAR_NO_AXIS_INDEX
 hb_ot_var_axis_t
 hb_ot_var_has_data
@@ -500,7 +519,6 @@ hb_set_get_population
 hb_set_get_user_data
 hb_set_has
 hb_set_intersect
-hb_set_invert
 hb_set_is_empty
 hb_set_is_equal
 hb_set_next
@@ -584,6 +602,8 @@ hb_unicode_script_func_t
 <FILE>hb-uniscribe</FILE>
 hb_uniscribe_font_get_hfont
 hb_uniscribe_font_get_logfontw
+<SUBSECTION Private>
+hb_directwrite_shape_experimental_width
 </SECTION>
 
 <SECTION>

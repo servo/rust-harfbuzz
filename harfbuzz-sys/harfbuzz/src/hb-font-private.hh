@@ -108,6 +108,8 @@ struct hb_font_t {
   unsigned int x_ppem;
   unsigned int y_ppem;
 
+  float ptem;
+
   /* Font variation coordinates. */
   unsigned int num_coords;
   int *coords;
@@ -115,16 +117,6 @@ struct hb_font_t {
   hb_font_funcs_t   *klass;
   void              *user_data;
   hb_destroy_func_t  destroy;
-
-  enum dirty_t {
-    NOTHING	= 0x0000,
-    FACE	= 0x0001,
-    PARENT	= 0x0002,
-    FUNCS	= 0x0004,
-    SCALE	= 0x0008,
-    PPEM	= 0x0010,
-    VARIATIONS	= 0x0020,
-  } dirty;
 
   struct hb_shaper_data_t shaper_data;
 
@@ -552,8 +544,6 @@ struct hb_font_t {
     return (hb_position_t) (v * scale / face->get_upem ());
   }
 };
-
-HB_MARK_AS_FLAG_T (hb_font_t::dirty_t);
 
 #define HB_SHAPER_DATA_CREATE_FUNC_EXTRA_ARGS
 #define HB_SHAPER_IMPLEMENT(shaper) HB_SHAPER_DATA_PROTOTYPE(shaper, font);
