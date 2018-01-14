@@ -302,6 +302,10 @@ pub const HB_SCRIPT_MARCHEN: hb_script_t = 1298231907;
 pub const HB_SCRIPT_OSAGE: hb_script_t = 1332963173;
 pub const HB_SCRIPT_TANGUT: hb_script_t = 1415671399;
 pub const HB_SCRIPT_NEWA: hb_script_t = 1315272545;
+pub const HB_SCRIPT_MASARAM_GONDI: hb_script_t = 1198485101;
+pub const HB_SCRIPT_NUSHU: hb_script_t = 1316186229;
+pub const HB_SCRIPT_SOYOMBO: hb_script_t = 1399814511;
+pub const HB_SCRIPT_ZANABAZAR_SQUARE: hb_script_t = 1516334690;
 pub const HB_SCRIPT_INVALID: hb_script_t = 0;
 pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 4294967295;
 pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
@@ -1044,6 +1048,14 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_face_get_glyph_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_face_get_table_tags(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        table_count: *mut ::std::os::raw::c_uint,
+        table_tags: *mut hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1926,6 +1938,12 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: f32);
+}
+extern "C" {
+    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> f32;
+}
+extern "C" {
     pub fn hb_font_set_variations(
         font: *mut hb_font_t,
         variations: *const hb_variation_t,
@@ -2041,6 +2059,12 @@ fn bindgen_test_layout_hb_glyph_info_t() {
             stringify!(var2)
         )
     );
+}
+pub const HB_GLYPH_FLAG_UNSAFE_TO_BREAK: hb_glyph_flags_t = 1;
+pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
+pub type hb_glyph_flags_t = ::std::os::raw::c_uint;
+extern "C" {
+    pub fn hb_glyph_info_get_glyph_flags(info: *const hb_glyph_info_t) -> hb_glyph_flags_t;
 }
 /// hb_glyph_position_t:
 /// @x_advance: how much the line advances after drawing this glyph when setting
@@ -2449,6 +2473,14 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn hb_buffer_append(
+        buffer: *mut hb_buffer_t,
+        source: *mut hb_buffer_t,
+        start: ::std::os::raw::c_uint,
+        end: ::std::os::raw::c_uint,
+    );
+}
+extern "C" {
     pub fn hb_buffer_set_length(
         buffer: *mut hb_buffer_t,
         length: ::std::os::raw::c_uint,
@@ -2477,6 +2509,7 @@ pub const HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS: hb_buffer_serialize_flags_t = 1;
 pub const HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS: hb_buffer_serialize_flags_t = 2;
 pub const HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES: hb_buffer_serialize_flags_t = 4;
 pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS: hb_buffer_serialize_flags_t = 8;
+pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS: hb_buffer_serialize_flags_t = 16;
 
 /// hb_buffer_serialize_flags_t:
 /// @HB_BUFFER_SERIALIZE_FLAG_DEFAULT: serialize glyph names, clusters and positions.
@@ -2539,6 +2572,24 @@ extern "C" {
         font: *mut hb_font_t,
         format: hb_buffer_serialize_format_t,
     ) -> hb_bool_t;
+}
+pub const HB_BUFFER_DIFF_FLAG_EQUAL: hb_buffer_diff_flags_t = 0;
+pub const HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH: hb_buffer_diff_flags_t = 1;
+pub const HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH: hb_buffer_diff_flags_t = 2;
+pub const HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT: hb_buffer_diff_flags_t = 4;
+pub const HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT: hb_buffer_diff_flags_t = 8;
+pub const HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: hb_buffer_diff_flags_t = 16;
+pub const HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: hb_buffer_diff_flags_t = 32;
+pub const HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: hb_buffer_diff_flags_t = 64;
+pub const HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: hb_buffer_diff_flags_t = 128;
+pub type hb_buffer_diff_flags_t = ::std::os::raw::c_uint;
+extern "C" {
+    pub fn hb_buffer_diff(
+        buffer: *mut hb_buffer_t,
+        reference: *mut hb_buffer_t,
+        dottedcircle_glyph: hb_codepoint_t,
+        position_fuzz: ::std::os::raw::c_uint,
+    ) -> hb_buffer_diff_flags_t;
 }
 pub type hb_buffer_message_func_t = ::std::option::Option<
     unsafe extern "C" fn(
