@@ -124,19 +124,24 @@ extern "C" {
 extern "C" {
     pub fn hb_tag_to_string(tag: hb_tag_t, buf: *mut ::std::os::raw::c_char);
 }
-pub const HB_DIRECTION_INVALID: hb_direction_t = 0;
-pub const HB_DIRECTION_LTR: hb_direction_t = 4;
-pub const HB_DIRECTION_RTL: hb_direction_t = 5;
-pub const HB_DIRECTION_TTB: hb_direction_t = 6;
-pub const HB_DIRECTION_BTT: hb_direction_t = 7;
 
-/// hb_direction_t:
-/// @HB_DIRECTION_INVALID: Initial, unset direction.
-/// @HB_DIRECTION_LTR: Text is set horizontally from left to right.
-/// @HB_DIRECTION_RTL: Text is set horizontally from right to left.
-/// @HB_DIRECTION_TTB: Text is set vertically from top to bottom.
-/// @HB_DIRECTION_BTT: Text is set vertically from bottom to top.
-pub type hb_direction_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum Direction {
+    /// Initial, unset direction.
+    Invalid = 0,
+    /// Text is set horizontally from left to right.
+    LTR = 4,
+    /// Text is set horizontally from right to left.
+    RTL = 5,
+    /// Text is set vertically from top to bottom.
+    TTB = 6,
+    /// Text is set vertically from bottom to top.
+    BTT = 7,
+}
+pub type hb_direction_t = Direction;
+
 extern "C" {
     pub fn hb_direction_from_string(
         str: *const ::std::os::raw::c_char,
@@ -164,152 +169,155 @@ extern "C" {
 extern "C" {
     pub fn hb_language_get_default() -> hb_language_t;
 }
-pub const HB_SCRIPT_COMMON: hb_script_t = 1517910393;
-pub const HB_SCRIPT_INHERITED: hb_script_t = 1516858984;
-pub const HB_SCRIPT_UNKNOWN: hb_script_t = 1517976186;
-pub const HB_SCRIPT_ARABIC: hb_script_t = 1098015074;
-pub const HB_SCRIPT_ARMENIAN: hb_script_t = 1098018158;
-pub const HB_SCRIPT_BENGALI: hb_script_t = 1113943655;
-pub const HB_SCRIPT_CYRILLIC: hb_script_t = 1132032620;
-pub const HB_SCRIPT_DEVANAGARI: hb_script_t = 1147500129;
-pub const HB_SCRIPT_GEORGIAN: hb_script_t = 1197830002;
-pub const HB_SCRIPT_GREEK: hb_script_t = 1198679403;
-pub const HB_SCRIPT_GUJARATI: hb_script_t = 1198877298;
-pub const HB_SCRIPT_GURMUKHI: hb_script_t = 1198879349;
-pub const HB_SCRIPT_HANGUL: hb_script_t = 1214344807;
-pub const HB_SCRIPT_HAN: hb_script_t = 1214344809;
-pub const HB_SCRIPT_HEBREW: hb_script_t = 1214603890;
-pub const HB_SCRIPT_HIRAGANA: hb_script_t = 1214870113;
-pub const HB_SCRIPT_KANNADA: hb_script_t = 1265525857;
-pub const HB_SCRIPT_KATAKANA: hb_script_t = 1264676449;
-pub const HB_SCRIPT_LAO: hb_script_t = 1281453935;
-pub const HB_SCRIPT_LATIN: hb_script_t = 1281455214;
-pub const HB_SCRIPT_MALAYALAM: hb_script_t = 1298954605;
-pub const HB_SCRIPT_ORIYA: hb_script_t = 1332902241;
-pub const HB_SCRIPT_TAMIL: hb_script_t = 1415671148;
-pub const HB_SCRIPT_TELUGU: hb_script_t = 1415933045;
-pub const HB_SCRIPT_THAI: hb_script_t = 1416126825;
-pub const HB_SCRIPT_TIBETAN: hb_script_t = 1416192628;
-pub const HB_SCRIPT_BOPOMOFO: hb_script_t = 1114599535;
-pub const HB_SCRIPT_BRAILLE: hb_script_t = 1114792297;
-pub const HB_SCRIPT_CANADIAN_SYLLABICS: hb_script_t = 1130458739;
-pub const HB_SCRIPT_CHEROKEE: hb_script_t = 1130915186;
-pub const HB_SCRIPT_ETHIOPIC: hb_script_t = 1165256809;
-pub const HB_SCRIPT_KHMER: hb_script_t = 1265134962;
-pub const HB_SCRIPT_MONGOLIAN: hb_script_t = 1299148391;
-pub const HB_SCRIPT_MYANMAR: hb_script_t = 1299803506;
-pub const HB_SCRIPT_OGHAM: hb_script_t = 1332175213;
-pub const HB_SCRIPT_RUNIC: hb_script_t = 1383427698;
-pub const HB_SCRIPT_SINHALA: hb_script_t = 1399418472;
-pub const HB_SCRIPT_SYRIAC: hb_script_t = 1400468067;
-pub const HB_SCRIPT_THAANA: hb_script_t = 1416126817;
-pub const HB_SCRIPT_YI: hb_script_t = 1500080489;
-pub const HB_SCRIPT_DESERET: hb_script_t = 1148416628;
-pub const HB_SCRIPT_GOTHIC: hb_script_t = 1198486632;
-pub const HB_SCRIPT_OLD_ITALIC: hb_script_t = 1232363884;
-pub const HB_SCRIPT_BUHID: hb_script_t = 1114990692;
-pub const HB_SCRIPT_HANUNOO: hb_script_t = 1214344815;
-pub const HB_SCRIPT_TAGALOG: hb_script_t = 1416064103;
-pub const HB_SCRIPT_TAGBANWA: hb_script_t = 1415669602;
-pub const HB_SCRIPT_CYPRIOT: hb_script_t = 1131442804;
-pub const HB_SCRIPT_LIMBU: hb_script_t = 1281977698;
-pub const HB_SCRIPT_LINEAR_B: hb_script_t = 1281977954;
-pub const HB_SCRIPT_OSMANYA: hb_script_t = 1332964705;
-pub const HB_SCRIPT_SHAVIAN: hb_script_t = 1399349623;
-pub const HB_SCRIPT_TAI_LE: hb_script_t = 1415670885;
-pub const HB_SCRIPT_UGARITIC: hb_script_t = 1432838514;
-pub const HB_SCRIPT_BUGINESE: hb_script_t = 1114990441;
-pub const HB_SCRIPT_COPTIC: hb_script_t = 1131376756;
-pub const HB_SCRIPT_GLAGOLITIC: hb_script_t = 1198285159;
-pub const HB_SCRIPT_KHAROSHTHI: hb_script_t = 1265131890;
-pub const HB_SCRIPT_NEW_TAI_LUE: hb_script_t = 1415670901;
-pub const HB_SCRIPT_OLD_PERSIAN: hb_script_t = 1483761007;
-pub const HB_SCRIPT_SYLOTI_NAGRI: hb_script_t = 1400466543;
-pub const HB_SCRIPT_TIFINAGH: hb_script_t = 1415999079;
-pub const HB_SCRIPT_BALINESE: hb_script_t = 1113681001;
-pub const HB_SCRIPT_CUNEIFORM: hb_script_t = 1483961720;
-pub const HB_SCRIPT_NKO: hb_script_t = 1315663727;
-pub const HB_SCRIPT_PHAGS_PA: hb_script_t = 1349017959;
-pub const HB_SCRIPT_PHOENICIAN: hb_script_t = 1349021304;
-pub const HB_SCRIPT_CARIAN: hb_script_t = 1130459753;
-pub const HB_SCRIPT_CHAM: hb_script_t = 1130914157;
-pub const HB_SCRIPT_KAYAH_LI: hb_script_t = 1264675945;
-pub const HB_SCRIPT_LEPCHA: hb_script_t = 1281716323;
-pub const HB_SCRIPT_LYCIAN: hb_script_t = 1283023721;
-pub const HB_SCRIPT_LYDIAN: hb_script_t = 1283023977;
-pub const HB_SCRIPT_OL_CHIKI: hb_script_t = 1332503403;
-pub const HB_SCRIPT_REJANG: hb_script_t = 1382706791;
-pub const HB_SCRIPT_SAURASHTRA: hb_script_t = 1398895986;
-pub const HB_SCRIPT_SUNDANESE: hb_script_t = 1400204900;
-pub const HB_SCRIPT_VAI: hb_script_t = 1449224553;
-pub const HB_SCRIPT_AVESTAN: hb_script_t = 1098281844;
-pub const HB_SCRIPT_BAMUM: hb_script_t = 1113681269;
-pub const HB_SCRIPT_EGYPTIAN_HIEROGLYPHS: hb_script_t = 1164409200;
-pub const HB_SCRIPT_IMPERIAL_ARAMAIC: hb_script_t = 1098018153;
-pub const HB_SCRIPT_INSCRIPTIONAL_PAHLAVI: hb_script_t = 1349020777;
-pub const HB_SCRIPT_INSCRIPTIONAL_PARTHIAN: hb_script_t = 1349678185;
-pub const HB_SCRIPT_JAVANESE: hb_script_t = 1247901281;
-pub const HB_SCRIPT_KAITHI: hb_script_t = 1265920105;
-pub const HB_SCRIPT_LISU: hb_script_t = 1281979253;
-pub const HB_SCRIPT_MEETEI_MAYEK: hb_script_t = 1299473769;
-pub const HB_SCRIPT_OLD_SOUTH_ARABIAN: hb_script_t = 1398895202;
-pub const HB_SCRIPT_OLD_TURKIC: hb_script_t = 1332898664;
-pub const HB_SCRIPT_SAMARITAN: hb_script_t = 1398893938;
-pub const HB_SCRIPT_TAI_THAM: hb_script_t = 1281453665;
-pub const HB_SCRIPT_TAI_VIET: hb_script_t = 1415673460;
-pub const HB_SCRIPT_BATAK: hb_script_t = 1113683051;
-pub const HB_SCRIPT_BRAHMI: hb_script_t = 1114792296;
-pub const HB_SCRIPT_MANDAIC: hb_script_t = 1298230884;
-pub const HB_SCRIPT_CHAKMA: hb_script_t = 1130457965;
-pub const HB_SCRIPT_MEROITIC_CURSIVE: hb_script_t = 1298494051;
-pub const HB_SCRIPT_MEROITIC_HIEROGLYPHS: hb_script_t = 1298494063;
-pub const HB_SCRIPT_MIAO: hb_script_t = 1349284452;
-pub const HB_SCRIPT_SHARADA: hb_script_t = 1399353956;
-pub const HB_SCRIPT_SORA_SOMPENG: hb_script_t = 1399812705;
-pub const HB_SCRIPT_TAKRI: hb_script_t = 1415670642;
-pub const HB_SCRIPT_BASSA_VAH: hb_script_t = 1113682803;
-pub const HB_SCRIPT_CAUCASIAN_ALBANIAN: hb_script_t = 1097295970;
-pub const HB_SCRIPT_DUPLOYAN: hb_script_t = 1148547180;
-pub const HB_SCRIPT_ELBASAN: hb_script_t = 1164730977;
-pub const HB_SCRIPT_GRANTHA: hb_script_t = 1198678382;
-pub const HB_SCRIPT_KHOJKI: hb_script_t = 1265135466;
-pub const HB_SCRIPT_KHUDAWADI: hb_script_t = 1399418468;
-pub const HB_SCRIPT_LINEAR_A: hb_script_t = 1281977953;
-pub const HB_SCRIPT_MAHAJANI: hb_script_t = 1298229354;
-pub const HB_SCRIPT_MANICHAEAN: hb_script_t = 1298230889;
-pub const HB_SCRIPT_MENDE_KIKAKUI: hb_script_t = 1298493028;
-pub const HB_SCRIPT_MODI: hb_script_t = 1299145833;
-pub const HB_SCRIPT_MRO: hb_script_t = 1299345263;
-pub const HB_SCRIPT_NABATAEAN: hb_script_t = 1315070324;
-pub const HB_SCRIPT_OLD_NORTH_ARABIAN: hb_script_t = 1315009122;
-pub const HB_SCRIPT_OLD_PERMIC: hb_script_t = 1348825709;
-pub const HB_SCRIPT_PAHAWH_HMONG: hb_script_t = 1215131239;
-pub const HB_SCRIPT_PALMYRENE: hb_script_t = 1348562029;
-pub const HB_SCRIPT_PAU_CIN_HAU: hb_script_t = 1348564323;
-pub const HB_SCRIPT_PSALTER_PAHLAVI: hb_script_t = 1349020784;
-pub const HB_SCRIPT_SIDDHAM: hb_script_t = 1399415908;
-pub const HB_SCRIPT_TIRHUTA: hb_script_t = 1416196712;
-pub const HB_SCRIPT_WARANG_CITI: hb_script_t = 1466004065;
-pub const HB_SCRIPT_AHOM: hb_script_t = 1097363309;
-pub const HB_SCRIPT_ANATOLIAN_HIEROGLYPHS: hb_script_t = 1215067511;
-pub const HB_SCRIPT_HATRAN: hb_script_t = 1214346354;
-pub const HB_SCRIPT_MULTANI: hb_script_t = 1299541108;
-pub const HB_SCRIPT_OLD_HUNGARIAN: hb_script_t = 1215655527;
-pub const HB_SCRIPT_SIGNWRITING: hb_script_t = 1399287415;
-pub const HB_SCRIPT_ADLAM: hb_script_t = 1097100397;
-pub const HB_SCRIPT_BHAIKSUKI: hb_script_t = 1114139507;
-pub const HB_SCRIPT_MARCHEN: hb_script_t = 1298231907;
-pub const HB_SCRIPT_OSAGE: hb_script_t = 1332963173;
-pub const HB_SCRIPT_TANGUT: hb_script_t = 1415671399;
-pub const HB_SCRIPT_NEWA: hb_script_t = 1315272545;
-pub const HB_SCRIPT_MASARAM_GONDI: hb_script_t = 1198485101;
-pub const HB_SCRIPT_NUSHU: hb_script_t = 1316186229;
-pub const HB_SCRIPT_SOYOMBO: hb_script_t = 1399814511;
-pub const HB_SCRIPT_ZANABAZAR_SQUARE: hb_script_t = 1516334690;
-pub const HB_SCRIPT_INVALID: hb_script_t = 0;
-pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 4294967295;
-pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
-pub type hb_script_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum Script {
+    Common = 1517910393,
+    Inherited = 1516858984,
+    Unknown = 1517976186,
+    Arabic = 1098015074,
+    Armenian = 1098018158,
+    Bengali = 1113943655,
+    Cyrillic = 1132032620,
+    Devanagari = 1147500129,
+    Georgian = 1197830002,
+    Greek = 1198679403,
+    Gujarati = 1198877298,
+    Gurmukhi = 1198879349,
+    Hangul = 1214344807,
+    Han = 1214344809,
+    Hebrew = 1214603890,
+    Hiragana = 1214870113,
+    Kannada = 1265525857,
+    Katakana = 1264676449,
+    LAO = 1281453935,
+    Latin = 1281455214,
+    Malayalam = 1298954605,
+    Oriya = 1332902241,
+    Tamil = 1415671148,
+    Telugu = 1415933045,
+    Thai = 1416126825,
+    Tibetan = 1416192628,
+    Bopomofo = 1114599535,
+    Braille = 1114792297,
+    CanadianSyllabics = 1130458739,
+    Cherokee = 1130915186,
+    Ethiopic = 1165256809,
+    Khmer = 1265134962,
+    Mongolian = 1299148391,
+    Myanmar = 1299803506,
+    Ogham = 1332175213,
+    Runic = 1383427698,
+    Sinhala = 1399418472,
+    Syriac = 1400468067,
+    Thaana = 1416126817,
+    Yi = 1500080489,
+    Deseret = 1148416628,
+    Gothic = 1198486632,
+    OldItalic = 1232363884,
+    Buhid = 1114990692,
+    Hanunoo = 1214344815,
+    Tagalog = 1416064103,
+    Tagbanwa = 1415669602,
+    Cypriot = 1131442804,
+    Limbu = 1281977698,
+    LinearB = 1281977954,
+    Osmanya = 1332964705,
+    Shavian = 1399349623,
+    TaiLe = 1415670885,
+    Ugaritic = 1432838514,
+    Buginese = 1114990441,
+    Coptic = 1131376756,
+    Glagolitic = 1198285159,
+    Kharoshthi = 1265131890,
+    NewTaiLue = 1415670901,
+    OldPersian = 1483761007,
+    SylotiNagri = 1400466543,
+    Tifinagh = 1415999079,
+    Balinese = 1113681001,
+    Cuneiform = 1483961720,
+    Nko = 1315663727,
+    PhagsPa = 1349017959,
+    Phoenician = 1349021304,
+    Carian = 1130459753,
+    Cham = 1130914157,
+    KayahLi = 1264675945,
+    Lepcha = 1281716323,
+    Lycian = 1283023721,
+    Lydian = 1283023977,
+    OlChiki = 1332503403,
+    Rejang = 1382706791,
+    Saurashtra = 1398895986,
+    Sundanese = 1400204900,
+    Vai = 1449224553,
+    Avestan = 1098281844,
+    Bamum = 1113681269,
+    EgyptianHieroglyphs = 1164409200,
+    ImperialAramaic = 1098018153,
+    InscriptionalPahlavi = 1349020777,
+    InscriptionalParthian = 1349678185,
+    Javanese = 1247901281,
+    Kaithi = 1265920105,
+    Lisu = 1281979253,
+    MeeteiMayek = 1299473769,
+    OldSouthArabian = 1398895202,
+    OldTurkic = 1332898664,
+    Samaritan = 1398893938,
+    TaiTham = 1281453665,
+    TaiViet = 1415673460,
+    Batak = 1113683051,
+    Brahmi = 1114792296,
+    Mandaic = 1298230884,
+    Chakma = 1130457965,
+    MeroiticCursive = 1298494051,
+    MeroiticHieroglyphs = 1298494063,
+    Miao = 1349284452,
+    Sharada = 1399353956,
+    SoraSompeng = 1399812705,
+    Takri = 1415670642,
+    BassaVah = 1113682803,
+    CaucasianAlbanian = 1097295970,
+    Duployan = 1148547180,
+    Elbasan = 1164730977,
+    Grantha = 1198678382,
+    Khojki = 1265135466,
+    Khudawadi = 1399418468,
+    LinearA = 1281977953,
+    Mahajani = 1298229354,
+    Manichaean = 1298230889,
+    MendeKikakui = 1298493028,
+    Modi = 1299145833,
+    Mro = 1299345263,
+    Nabataean = 1315070324,
+    OldNorthArabian = 1315009122,
+    OldPermic = 1348825709,
+    PahawhHmong = 1215131239,
+    Palmyrene = 1348562029,
+    PauCinHau = 1348564323,
+    PsalterPahlavi = 1349020784,
+    Siddham = 1399415908,
+    Tirhuta = 1416196712,
+    WarangCiti = 1466004065,
+    Ahom = 1097363309,
+    AnatolianHieroglyphs = 1215067511,
+    Hatran = 1214346354,
+    Multani = 1299541108,
+    OldHungarian = 1215655527,
+    Signwriting = 1399287415,
+    Adlam = 1097100397,
+    Bhaiksuki = 1114139507,
+    Marchen = 1298231907,
+    Osage = 1332963173,
+    Tangut = 1415671399,
+    Newa = 1315272545,
+    MasaramGondi = 1198485101,
+    Nushu = 1316186229,
+    Soyombo = 1399814511,
+    ZanabazarSquare = 1516334690,
+    Invalid = 0,
+}
+pub type hb_script_t = Script;
 extern "C" {
     pub fn hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
 }
@@ -487,11 +495,16 @@ extern "C" {
         size: ::std::os::raw::c_uint,
     );
 }
-pub const HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
-pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
-pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
-pub const HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: hb_memory_mode_t = 3;
-pub type hb_memory_mode_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum MemoryMode {
+    Duplicate = 0,
+    ReadOnly = 1,
+    Writable = 2,
+    ReadOnlyMayMakeWritable = 3,
+}
+pub type hb_memory_mode_t = MemoryMode;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_blob_t {
@@ -558,95 +571,105 @@ extern "C" {
         length: *mut ::std::os::raw::c_uint,
     ) -> *mut ::std::os::raw::c_char;
 }
-pub const HB_UNICODE_GENERAL_CATEGORY_CONTROL: hb_unicode_general_category_t = 0;
-pub const HB_UNICODE_GENERAL_CATEGORY_FORMAT: hb_unicode_general_category_t = 1;
-pub const HB_UNICODE_GENERAL_CATEGORY_UNASSIGNED: hb_unicode_general_category_t = 2;
-pub const HB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE: hb_unicode_general_category_t = 3;
-pub const HB_UNICODE_GENERAL_CATEGORY_SURROGATE: hb_unicode_general_category_t = 4;
-pub const HB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER: hb_unicode_general_category_t = 5;
-pub const HB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER: hb_unicode_general_category_t = 6;
-pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER: hb_unicode_general_category_t = 7;
-pub const HB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER: hb_unicode_general_category_t = 8;
-pub const HB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER: hb_unicode_general_category_t = 9;
-pub const HB_UNICODE_GENERAL_CATEGORY_SPACING_MARK: hb_unicode_general_category_t = 10;
-pub const HB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK: hb_unicode_general_category_t = 11;
-pub const HB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK: hb_unicode_general_category_t = 12;
-pub const HB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER: hb_unicode_general_category_t = 13;
-pub const HB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER: hb_unicode_general_category_t = 14;
-pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER: hb_unicode_general_category_t = 15;
-pub const HB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION: hb_unicode_general_category_t = 16;
-pub const HB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION: hb_unicode_general_category_t = 17;
-pub const HB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION: hb_unicode_general_category_t = 18;
-pub const HB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION: hb_unicode_general_category_t = 19;
-pub const HB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION: hb_unicode_general_category_t = 20;
-pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION: hb_unicode_general_category_t = 21;
-pub const HB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION: hb_unicode_general_category_t = 22;
-pub const HB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL: hb_unicode_general_category_t = 23;
-pub const HB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL: hb_unicode_general_category_t = 24;
-pub const HB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL: hb_unicode_general_category_t = 25;
-pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL: hb_unicode_general_category_t = 26;
-pub const HB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR: hb_unicode_general_category_t = 27;
-pub const HB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR: hb_unicode_general_category_t = 28;
-pub const HB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR: hb_unicode_general_category_t = 29;
-pub type hb_unicode_general_category_t = ::std::os::raw::c_uint;
-pub const HB_UNICODE_COMBINING_CLASS_NOT_REORDERED: hb_unicode_combining_class_t = 0;
-pub const HB_UNICODE_COMBINING_CLASS_OVERLAY: hb_unicode_combining_class_t = 1;
-pub const HB_UNICODE_COMBINING_CLASS_NUKTA: hb_unicode_combining_class_t = 7;
-pub const HB_UNICODE_COMBINING_CLASS_KANA_VOICING: hb_unicode_combining_class_t = 8;
-pub const HB_UNICODE_COMBINING_CLASS_VIRAMA: hb_unicode_combining_class_t = 9;
-pub const HB_UNICODE_COMBINING_CLASS_CCC10: hb_unicode_combining_class_t = 10;
-pub const HB_UNICODE_COMBINING_CLASS_CCC11: hb_unicode_combining_class_t = 11;
-pub const HB_UNICODE_COMBINING_CLASS_CCC12: hb_unicode_combining_class_t = 12;
-pub const HB_UNICODE_COMBINING_CLASS_CCC13: hb_unicode_combining_class_t = 13;
-pub const HB_UNICODE_COMBINING_CLASS_CCC14: hb_unicode_combining_class_t = 14;
-pub const HB_UNICODE_COMBINING_CLASS_CCC15: hb_unicode_combining_class_t = 15;
-pub const HB_UNICODE_COMBINING_CLASS_CCC16: hb_unicode_combining_class_t = 16;
-pub const HB_UNICODE_COMBINING_CLASS_CCC17: hb_unicode_combining_class_t = 17;
-pub const HB_UNICODE_COMBINING_CLASS_CCC18: hb_unicode_combining_class_t = 18;
-pub const HB_UNICODE_COMBINING_CLASS_CCC19: hb_unicode_combining_class_t = 19;
-pub const HB_UNICODE_COMBINING_CLASS_CCC20: hb_unicode_combining_class_t = 20;
-pub const HB_UNICODE_COMBINING_CLASS_CCC21: hb_unicode_combining_class_t = 21;
-pub const HB_UNICODE_COMBINING_CLASS_CCC22: hb_unicode_combining_class_t = 22;
-pub const HB_UNICODE_COMBINING_CLASS_CCC23: hb_unicode_combining_class_t = 23;
-pub const HB_UNICODE_COMBINING_CLASS_CCC24: hb_unicode_combining_class_t = 24;
-pub const HB_UNICODE_COMBINING_CLASS_CCC25: hb_unicode_combining_class_t = 25;
-pub const HB_UNICODE_COMBINING_CLASS_CCC26: hb_unicode_combining_class_t = 26;
-pub const HB_UNICODE_COMBINING_CLASS_CCC27: hb_unicode_combining_class_t = 27;
-pub const HB_UNICODE_COMBINING_CLASS_CCC28: hb_unicode_combining_class_t = 28;
-pub const HB_UNICODE_COMBINING_CLASS_CCC29: hb_unicode_combining_class_t = 29;
-pub const HB_UNICODE_COMBINING_CLASS_CCC30: hb_unicode_combining_class_t = 30;
-pub const HB_UNICODE_COMBINING_CLASS_CCC31: hb_unicode_combining_class_t = 31;
-pub const HB_UNICODE_COMBINING_CLASS_CCC32: hb_unicode_combining_class_t = 32;
-pub const HB_UNICODE_COMBINING_CLASS_CCC33: hb_unicode_combining_class_t = 33;
-pub const HB_UNICODE_COMBINING_CLASS_CCC34: hb_unicode_combining_class_t = 34;
-pub const HB_UNICODE_COMBINING_CLASS_CCC35: hb_unicode_combining_class_t = 35;
-pub const HB_UNICODE_COMBINING_CLASS_CCC36: hb_unicode_combining_class_t = 36;
-pub const HB_UNICODE_COMBINING_CLASS_CCC84: hb_unicode_combining_class_t = 84;
-pub const HB_UNICODE_COMBINING_CLASS_CCC91: hb_unicode_combining_class_t = 91;
-pub const HB_UNICODE_COMBINING_CLASS_CCC103: hb_unicode_combining_class_t = 103;
-pub const HB_UNICODE_COMBINING_CLASS_CCC107: hb_unicode_combining_class_t = 107;
-pub const HB_UNICODE_COMBINING_CLASS_CCC118: hb_unicode_combining_class_t = 118;
-pub const HB_UNICODE_COMBINING_CLASS_CCC122: hb_unicode_combining_class_t = 122;
-pub const HB_UNICODE_COMBINING_CLASS_CCC129: hb_unicode_combining_class_t = 129;
-pub const HB_UNICODE_COMBINING_CLASS_CCC130: hb_unicode_combining_class_t = 130;
-pub const HB_UNICODE_COMBINING_CLASS_CCC133: hb_unicode_combining_class_t = 132;
-pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT: hb_unicode_combining_class_t = 200;
-pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW: hb_unicode_combining_class_t = 202;
-pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE: hb_unicode_combining_class_t = 214;
-pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE_RIGHT: hb_unicode_combining_class_t = 216;
-pub const HB_UNICODE_COMBINING_CLASS_BELOW_LEFT: hb_unicode_combining_class_t = 218;
-pub const HB_UNICODE_COMBINING_CLASS_BELOW: hb_unicode_combining_class_t = 220;
-pub const HB_UNICODE_COMBINING_CLASS_BELOW_RIGHT: hb_unicode_combining_class_t = 222;
-pub const HB_UNICODE_COMBINING_CLASS_LEFT: hb_unicode_combining_class_t = 224;
-pub const HB_UNICODE_COMBINING_CLASS_RIGHT: hb_unicode_combining_class_t = 226;
-pub const HB_UNICODE_COMBINING_CLASS_ABOVE_LEFT: hb_unicode_combining_class_t = 228;
-pub const HB_UNICODE_COMBINING_CLASS_ABOVE: hb_unicode_combining_class_t = 230;
-pub const HB_UNICODE_COMBINING_CLASS_ABOVE_RIGHT: hb_unicode_combining_class_t = 232;
-pub const HB_UNICODE_COMBINING_CLASS_DOUBLE_BELOW: hb_unicode_combining_class_t = 233;
-pub const HB_UNICODE_COMBINING_CLASS_DOUBLE_ABOVE: hb_unicode_combining_class_t = 234;
-pub const HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT: hb_unicode_combining_class_t = 240;
-pub const HB_UNICODE_COMBINING_CLASS_INVALID: hb_unicode_combining_class_t = 255;
-pub type hb_unicode_combining_class_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum UnicodeGeneralCategory {
+    Control = 0,
+    Format = 1,
+    Unassigned = 2,
+    PrivateUse = 3,
+    Surrogate = 4,
+    LowercaseLetter = 5,
+    ModifierLetter = 6,
+    OtherLetter = 7,
+    TitlecaseLetter = 8,
+    UppercaseLetter = 9,
+    SpacingMark = 10,
+    EnclosingMark = 11,
+    NonSpacingMark = 12,
+    DecimalNumber = 13,
+    LetterNumber = 14,
+    OtherNumber = 15,
+    ConnectPunctuation = 16,
+    DashPunctuation = 17,
+    ClosePunctuation = 18,
+    FinalPunctuation = 19,
+    InitialPunctuation = 20,
+    OtherPunctuation = 21,
+    OpenPunctuation = 22,
+    CurrencySymbol = 23,
+    ModifierSymbol = 24,
+    MathSymbol = 25,
+    OtherSymbol = 26,
+    LineSeparator = 27,
+    ParagraphSeparator = 28,
+    SpaceSeparator = 29,
+}
+pub type hb_unicode_general_category_t = UnicodeGeneralCategory;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum UnicodeCombiningClass {
+    NotReordered = 0,
+    Overlay = 1,
+    Nukta = 7,
+    KanaVoicing = 8,
+    Virama = 9,
+    CCC10 = 10,
+    CCC11 = 11,
+    CCC12 = 12,
+    CCC13 = 13,
+    CCC14 = 14,
+    CCC15 = 15,
+    CCC16 = 16,
+    CCC17 = 17,
+    CCC18 = 18,
+    CCC19 = 19,
+    CCC20 = 20,
+    CCC21 = 21,
+    CCC22 = 22,
+    CCC23 = 23,
+    CCC24 = 24,
+    CCC25 = 25,
+    CCC26 = 26,
+    CCC27 = 27,
+    CCC28 = 28,
+    CCC29 = 29,
+    CCC30 = 30,
+    CCC31 = 31,
+    CCC32 = 32,
+    CCC33 = 33,
+    CCC34 = 34,
+    CCC35 = 35,
+    CCC36 = 36,
+    CCC84 = 84,
+    CCC91 = 91,
+    CCC103 = 103,
+    CCC107 = 107,
+    CCC118 = 118,
+    CCC122 = 122,
+    CCC129 = 129,
+    CCC130 = 130,
+    CCC133 = 132,
+    AttachedBelowLeft = 200,
+    AttachedBelow = 202,
+    AttachedAbove = 214,
+    AttachedAboveRight = 216,
+    BelowLeft = 218,
+    Below = 220,
+    BelowRight = 222,
+    Left = 224,
+    Right = 226,
+    AboveLeft = 228,
+    Above = 230,
+    AboveRight = 232,
+    DoubleBelow = 233,
+    DoubleAbove = 234,
+    IotaSubscript = 240,
+    Invalid = 255,
+}
+pub type hb_unicode_combining_class_t = UnicodeCombiningClass;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_unicode_funcs_t {
@@ -2060,9 +2083,13 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         )
     );
 }
-pub const HB_GLYPH_FLAG_UNSAFE_TO_BREAK: hb_glyph_flags_t = 1;
-pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
-pub type hb_glyph_flags_t = ::std::os::raw::c_uint;
+pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = hb_glyph_flags_t::HB_GLYPH_FLAG_UNSAFE_TO_BREAK;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum hb_glyph_flags_t {
+    HB_GLYPH_FLAG_UNSAFE_TO_BREAK = 1,
+}
 extern "C" {
     pub fn hb_glyph_info_get_glyph_flags(info: *const hb_glyph_info_t) -> hb_glyph_flags_t;
 }
@@ -2280,15 +2307,19 @@ extern "C" {
         key: *mut hb_user_data_key_t,
     ) -> *mut ::std::os::raw::c_void;
 }
-pub const HB_BUFFER_CONTENT_TYPE_INVALID: hb_buffer_content_type_t = 0;
-pub const HB_BUFFER_CONTENT_TYPE_UNICODE: hb_buffer_content_type_t = 1;
-pub const HB_BUFFER_CONTENT_TYPE_GLYPHS: hb_buffer_content_type_t = 2;
-
+#[repr(u32)]
+#[repr(C)]
 /// hb_buffer_content_type_t:
-/// @HB_BUFFER_CONTENT_TYPE_INVALID: Initial value for new buffer.
-/// @HB_BUFFER_CONTENT_TYPE_UNICODE: The buffer contains input characters (before shaping).
-/// @HB_BUFFER_CONTENT_TYPE_GLYPHS: The buffer contains output glyphs (after shaping).
-pub type hb_buffer_content_type_t = ::std::os::raw::c_uint;
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum BufferContentType {
+    /// Initial value for new buffer.
+    Invalid = 0,
+    /// The buffer contains input characters (before shaping).
+    Unicode = 1,
+    /// The buffer contains output glyphs (after shaping).
+    Glyphs = 2,
+}
+pub type hb_buffer_content_type_t = BufferContentType;
 extern "C" {
     pub fn hb_buffer_set_content_type(
         buffer: *mut hb_buffer_t,
@@ -2340,11 +2371,8 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_guess_segment_properties(buffer: *mut hb_buffer_t);
 }
-pub const HB_BUFFER_FLAG_DEFAULT: hb_buffer_flags_t = 0;
-pub const HB_BUFFER_FLAG_BOT: hb_buffer_flags_t = 1;
-pub const HB_BUFFER_FLAG_EOT: hb_buffer_flags_t = 2;
-pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
-
+#[repr(u32)]
+#[repr(C)]
 /// hb_buffer_flags_t:
 /// @HB_BUFFER_FLAG_DEFAULT: the default buffer flag.
 /// @HB_BUFFER_FLAG_BOT: flag indicating that special handling of the beginning
@@ -2362,18 +2390,30 @@ pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
 ///                      advance width.)
 ///
 /// Since: 0.9.20
-pub type hb_buffer_flags_t = ::std::os::raw::c_uint;
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum hb_buffer_flags_t {
+    HB_BUFFER_FLAG_DEFAULT = 0,
+    HB_BUFFER_FLAG_BOT = 1,
+    HB_BUFFER_FLAG_EOT = 2,
+    HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES = 4,
+}
 extern "C" {
     pub fn hb_buffer_set_flags(buffer: *mut hb_buffer_t, flags: hb_buffer_flags_t);
 }
 extern "C" {
     pub fn hb_buffer_get_flags(buffer: *mut hb_buffer_t) -> hb_buffer_flags_t;
 }
-pub const HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES: hb_buffer_cluster_level_t = 0;
-pub const HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS: hb_buffer_cluster_level_t = 1;
-pub const HB_BUFFER_CLUSTER_LEVEL_CHARACTERS: hb_buffer_cluster_level_t = 2;
-pub const HB_BUFFER_CLUSTER_LEVEL_DEFAULT: hb_buffer_cluster_level_t = 0;
-pub type hb_buffer_cluster_level_t = ::std::os::raw::c_uint;
+pub const HB_BUFFER_CLUSTER_LEVEL_DEFAULT: BufferClusterLevel =
+    BufferClusterLevel::MonotoneGraphemes;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum BufferClusterLevel {
+    MonotoneGraphemes = 0,
+    MonotoneCharacters = 1,
+    Characters = 2,
+}
+pub type hb_buffer_cluster_level_t = BufferClusterLevel;
 extern "C" {
     pub fn hb_buffer_set_cluster_level(
         buffer: *mut hb_buffer_t,
@@ -2504,13 +2544,8 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_normalize_glyphs(buffer: *mut hb_buffer_t);
 }
-pub const HB_BUFFER_SERIALIZE_FLAG_DEFAULT: hb_buffer_serialize_flags_t = 0;
-pub const HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS: hb_buffer_serialize_flags_t = 1;
-pub const HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS: hb_buffer_serialize_flags_t = 2;
-pub const HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES: hb_buffer_serialize_flags_t = 4;
-pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS: hb_buffer_serialize_flags_t = 8;
-pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS: hb_buffer_serialize_flags_t = 16;
-
+#[repr(u32)]
+#[repr(C)]
 /// hb_buffer_serialize_flags_t:
 /// @HB_BUFFER_SERIALIZE_FLAG_DEFAULT: serialize glyph names, clusters and positions.
 /// @HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS: do not serialize glyph cluster.
@@ -2521,21 +2556,32 @@ pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS: hb_buffer_serialize_flags_t = 16
 /// Flags that control what glyph information are serialized in hb_buffer_serialize_glyphs().
 ///
 /// Since: 0.9.20
-pub type hb_buffer_serialize_flags_t = ::std::os::raw::c_uint;
-pub const HB_BUFFER_SERIALIZE_FORMAT_TEXT: hb_buffer_serialize_format_t = 1413830740;
-pub const HB_BUFFER_SERIALIZE_FORMAT_JSON: hb_buffer_serialize_format_t = 1246973774;
-pub const HB_BUFFER_SERIALIZE_FORMAT_INVALID: hb_buffer_serialize_format_t = 0;
-
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum hb_buffer_serialize_flags_t {
+    HB_BUFFER_SERIALIZE_FLAG_DEFAULT = 0,
+    HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS = 1,
+    HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS = 2,
+    HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES = 4,
+    HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS = 8,
+    HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS = 16,
+}
+#[repr(u32)]
+#[repr(C)]
 /// hb_buffer_serialize_format_t:
-/// @HB_BUFFER_SERIALIZE_FORMAT_TEXT: a human-readable, plain text format.
-/// @HB_BUFFER_SERIALIZE_FORMAT_JSON: a machine-readable JSON format.
-/// @HB_BUFFER_SERIALIZE_FORMAT_INVALID: invalid format.
-///
 /// The buffer serialization and de-serialization format used in
 /// hb_buffer_serialize_glyphs() and hb_buffer_deserialize_glyphs().
 ///
 /// Since: 0.9.2
-pub type hb_buffer_serialize_format_t = ::std::os::raw::c_uint;
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum BufferSerializeFormat {
+    /// A human-readable, plain text format.
+    Text = 1413830740,
+    /// A machine-readable JSON format.
+    JSON = 1246973774,
+    /// Invalid format
+    Invalid = 0,
+}
+pub type hb_buffer_serialize_format_t = BufferSerializeFormat;
 extern "C" {
     pub fn hb_buffer_serialize_format_from_string(
         str: *const ::std::os::raw::c_char,
@@ -2573,16 +2619,20 @@ extern "C" {
         format: hb_buffer_serialize_format_t,
     ) -> hb_bool_t;
 }
-pub const HB_BUFFER_DIFF_FLAG_EQUAL: hb_buffer_diff_flags_t = 0;
-pub const HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH: hb_buffer_diff_flags_t = 1;
-pub const HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH: hb_buffer_diff_flags_t = 2;
-pub const HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT: hb_buffer_diff_flags_t = 4;
-pub const HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT: hb_buffer_diff_flags_t = 8;
-pub const HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: hb_buffer_diff_flags_t = 16;
-pub const HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: hb_buffer_diff_flags_t = 32;
-pub const HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: hb_buffer_diff_flags_t = 64;
-pub const HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: hb_buffer_diff_flags_t = 128;
-pub type hb_buffer_diff_flags_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum hb_buffer_diff_flags_t {
+    HB_BUFFER_DIFF_FLAG_EQUAL = 0,
+    HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH = 1,
+    HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH = 2,
+    HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT = 4,
+    HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT = 8,
+    HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH = 16,
+    HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH = 32,
+    HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH = 64,
+    HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH = 128,
+}
 extern "C" {
     pub fn hb_buffer_diff(
         buffer: *mut hb_buffer_t,
@@ -2842,12 +2892,17 @@ extern "C" {
 extern "C" {
     pub fn hb_ot_layout_has_glyph_classes(face: *mut hb_face_t) -> hb_bool_t;
 }
-pub const HB_OT_LAYOUT_GLYPH_CLASS_UNCLASSIFIED: hb_ot_layout_glyph_class_t = 0;
-pub const HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH: hb_ot_layout_glyph_class_t = 1;
-pub const HB_OT_LAYOUT_GLYPH_CLASS_LIGATURE: hb_ot_layout_glyph_class_t = 2;
-pub const HB_OT_LAYOUT_GLYPH_CLASS_MARK: hb_ot_layout_glyph_class_t = 3;
-pub const HB_OT_LAYOUT_GLYPH_CLASS_COMPONENT: hb_ot_layout_glyph_class_t = 4;
-pub type hb_ot_layout_glyph_class_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum OTLayoutGlyphClass {
+    Unclassified = 0,
+    BaseGlyph = 1,
+    Ligature = 2,
+    Mark = 3,
+    Component = 4,
+}
+pub type hb_ot_layout_glyph_class_t = OTLayoutGlyphClass;
 extern "C" {
     pub fn hb_ot_layout_get_glyph_class(
         face: *mut hb_face_t,
@@ -3074,69 +3129,84 @@ extern "C" {
         range_end: *mut ::std::os::raw::c_uint,
     ) -> hb_bool_t;
 }
-pub const HB_OT_MATH_CONSTANT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 0;
-pub const HB_OT_MATH_CONSTANT_SCRIPT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 1;
-pub const HB_OT_MATH_CONSTANT_DELIMITED_SUB_FORMULA_MIN_HEIGHT: hb_ot_math_constant_t = 2;
-pub const HB_OT_MATH_CONSTANT_DISPLAY_OPERATOR_MIN_HEIGHT: hb_ot_math_constant_t = 3;
-pub const HB_OT_MATH_CONSTANT_MATH_LEADING: hb_ot_math_constant_t = 4;
-pub const HB_OT_MATH_CONSTANT_AXIS_HEIGHT: hb_ot_math_constant_t = 5;
-pub const HB_OT_MATH_CONSTANT_ACCENT_BASE_HEIGHT: hb_ot_math_constant_t = 6;
-pub const HB_OT_MATH_CONSTANT_FLATTENED_ACCENT_BASE_HEIGHT: hb_ot_math_constant_t = 7;
-pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_SHIFT_DOWN: hb_ot_math_constant_t = 8;
-pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_TOP_MAX: hb_ot_math_constant_t = 9;
-pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_BASELINE_DROP_MIN: hb_ot_math_constant_t = 10;
-pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP: hb_ot_math_constant_t = 11;
-pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP_CRAMPED: hb_ot_math_constant_t = 12;
-pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MIN: hb_ot_math_constant_t = 13;
-pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BASELINE_DROP_MAX: hb_ot_math_constant_t = 14;
-pub const HB_OT_MATH_CONSTANT_SUB_SUPERSCRIPT_GAP_MIN: hb_ot_math_constant_t = 15;
-pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MAX_WITH_SUBSCRIPT: hb_ot_math_constant_t = 16;
-pub const HB_OT_MATH_CONSTANT_SPACE_AFTER_SCRIPT: hb_ot_math_constant_t = 17;
-pub const HB_OT_MATH_CONSTANT_UPPER_LIMIT_GAP_MIN: hb_ot_math_constant_t = 18;
-pub const HB_OT_MATH_CONSTANT_UPPER_LIMIT_BASELINE_RISE_MIN: hb_ot_math_constant_t = 19;
-pub const HB_OT_MATH_CONSTANT_LOWER_LIMIT_GAP_MIN: hb_ot_math_constant_t = 20;
-pub const HB_OT_MATH_CONSTANT_LOWER_LIMIT_BASELINE_DROP_MIN: hb_ot_math_constant_t = 21;
-pub const HB_OT_MATH_CONSTANT_STACK_TOP_SHIFT_UP: hb_ot_math_constant_t = 22;
-pub const HB_OT_MATH_CONSTANT_STACK_TOP_DISPLAY_STYLE_SHIFT_UP: hb_ot_math_constant_t = 23;
-pub const HB_OT_MATH_CONSTANT_STACK_BOTTOM_SHIFT_DOWN: hb_ot_math_constant_t = 24;
-pub const HB_OT_MATH_CONSTANT_STACK_BOTTOM_DISPLAY_STYLE_SHIFT_DOWN: hb_ot_math_constant_t = 25;
-pub const HB_OT_MATH_CONSTANT_STACK_GAP_MIN: hb_ot_math_constant_t = 26;
-pub const HB_OT_MATH_CONSTANT_STACK_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 27;
-pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_TOP_SHIFT_UP: hb_ot_math_constant_t = 28;
-pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_BOTTOM_SHIFT_DOWN: hb_ot_math_constant_t = 29;
-pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_ABOVE_MIN: hb_ot_math_constant_t = 30;
-pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_BELOW_MIN: hb_ot_math_constant_t = 31;
-pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_SHIFT_UP: hb_ot_math_constant_t = 32;
-pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_DISPLAY_STYLE_SHIFT_UP: hb_ot_math_constant_t = 33;
-pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_SHIFT_DOWN: hb_ot_math_constant_t = 34;
-pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_DISPLAY_STYLE_SHIFT_DOWN: hb_ot_math_constant_t =
-    35;
-pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_GAP_MIN: hb_ot_math_constant_t = 36;
-pub const HB_OT_MATH_CONSTANT_FRACTION_NUM_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 37;
-pub const HB_OT_MATH_CONSTANT_FRACTION_RULE_THICKNESS: hb_ot_math_constant_t = 38;
-pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_GAP_MIN: hb_ot_math_constant_t = 39;
-pub const HB_OT_MATH_CONSTANT_FRACTION_DENOM_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 40;
-pub const HB_OT_MATH_CONSTANT_SKEWED_FRACTION_HORIZONTAL_GAP: hb_ot_math_constant_t = 41;
-pub const HB_OT_MATH_CONSTANT_SKEWED_FRACTION_VERTICAL_GAP: hb_ot_math_constant_t = 42;
-pub const HB_OT_MATH_CONSTANT_OVERBAR_VERTICAL_GAP: hb_ot_math_constant_t = 43;
-pub const HB_OT_MATH_CONSTANT_OVERBAR_RULE_THICKNESS: hb_ot_math_constant_t = 44;
-pub const HB_OT_MATH_CONSTANT_OVERBAR_EXTRA_ASCENDER: hb_ot_math_constant_t = 45;
-pub const HB_OT_MATH_CONSTANT_UNDERBAR_VERTICAL_GAP: hb_ot_math_constant_t = 46;
-pub const HB_OT_MATH_CONSTANT_UNDERBAR_RULE_THICKNESS: hb_ot_math_constant_t = 47;
-pub const HB_OT_MATH_CONSTANT_UNDERBAR_EXTRA_DESCENDER: hb_ot_math_constant_t = 48;
-pub const HB_OT_MATH_CONSTANT_RADICAL_VERTICAL_GAP: hb_ot_math_constant_t = 49;
-pub const HB_OT_MATH_CONSTANT_RADICAL_DISPLAY_STYLE_VERTICAL_GAP: hb_ot_math_constant_t = 50;
-pub const HB_OT_MATH_CONSTANT_RADICAL_RULE_THICKNESS: hb_ot_math_constant_t = 51;
-pub const HB_OT_MATH_CONSTANT_RADICAL_EXTRA_ASCENDER: hb_ot_math_constant_t = 52;
-pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_BEFORE_DEGREE: hb_ot_math_constant_t = 53;
-pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_AFTER_DEGREE: hb_ot_math_constant_t = 54;
-pub const HB_OT_MATH_CONSTANT_RADICAL_DEGREE_BOTTOM_RAISE_PERCENT: hb_ot_math_constant_t = 55;
-pub type hb_ot_math_constant_t = ::std::os::raw::c_uint;
-pub const HB_OT_MATH_KERN_TOP_RIGHT: hb_ot_math_kern_t = 0;
-pub const HB_OT_MATH_KERN_TOP_LEFT: hb_ot_math_kern_t = 1;
-pub const HB_OT_MATH_KERN_BOTTOM_RIGHT: hb_ot_math_kern_t = 2;
-pub const HB_OT_MATH_KERN_BOTTOM_LEFT: hb_ot_math_kern_t = 3;
-pub type hb_ot_math_kern_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+/// hb_ot_math_constant_t:
+///
+/// Since: 1.3.3
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum OTMathConstant {
+    ScriptPercentScaleDown = 0,
+    ScriptScriptPercentScaleDown = 1,
+    DelimitedSubFormulaMinHeight = 2,
+    DisplayOperatorMinHeight = 3,
+    MathLeading = 4,
+    AxisHeight = 5,
+    AccentBaseHeight = 6,
+    FlattenedAccentBaseHeight = 7,
+    SubscriptShiftDown = 8,
+    SubscriptTopMax = 9,
+    SubscriptBaselineDropMin = 10,
+    SuperscriptShiftUp = 11,
+    SuperscriptShiftUpCramped = 12,
+    SuperscriptBottomMin = 13,
+    SuperscriptBaselineDropMax = 14,
+    SubSuperscriptGapMin = 15,
+    SuperscriptBottomMaxWithSubscript = 16,
+    SpaceAfterScript = 17,
+    UpperLimitGapMin = 18,
+    UpperLimitBaselineRiseMin = 19,
+    LowerLimitGapMin = 20,
+    LowerLimitBaselineDropMin = 21,
+    StackTopShiftUp = 22,
+    StackTopDisplayStyleShiftUp = 23,
+    StackBottomShiftDown = 24,
+    StackBottomDisplayStyleShiftDown = 25,
+    StackGapMin = 26,
+    StackDisplayStyleGapMin = 27,
+    StretchStackTopShiftUp = 28,
+    StretchStackBottomShiftDown = 29,
+    StretchStackGapAboveMin = 30,
+    StretchStackGapBelowMin = 31,
+    FractionNumeratorShiftUp = 32,
+    FractionNumeratorDisplayStyleShiftUp = 33,
+    FractionDenominatorShiftDown = 34,
+    FractionDenominatorDisplayStyleShiftDown = 35,
+    FractionNumeratorGapMin = 36,
+    FractionNumDisplayStyleGapMin = 37,
+    FractionRuleThickness = 38,
+    FractionDenominatorGapMin = 39,
+    FractionDenomDisplayStyleGapMin = 40,
+    SkewedFractionHorizontalGap = 41,
+    SkewedFractionVerticalGap = 42,
+    OverbarVerticalGap = 43,
+    OverbarRuleThickness = 44,
+    OverbarExtraAscender = 45,
+    UnderbarVerticalGap = 46,
+    UnderbarRuleThickness = 47,
+    UnderbarExtraDescender = 48,
+    RadicalVerticalGap = 49,
+    RadicalDisplayStyleVerticalGap = 50,
+    RadicalRuleThickness = 51,
+    RadicalExtraAscender = 52,
+    RadicalKernBeforeDegree = 53,
+    RadicalKernAfterDegree = 54,
+    RadicalDegreeBottomRaisePercent = 55,
+}
+pub type hb_ot_math_constant_t = OTMathConstant;
+#[repr(u32)]
+#[repr(C)]
+/// hb_ot_math_kern_t:
+///
+/// Since: 1.3.3
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum OTMathKern {
+    TopRight = 0,
+    TopLeft = 1,
+    BottomRight = 2,
+    BottomLeft = 3,
+}
+pub type hb_ot_math_kern_t = OTMathKern;
 /// hb_ot_math_glyph_variant_t:
 ///
 /// Since: 1.3.3
@@ -3183,8 +3253,16 @@ fn bindgen_test_layout_hb_ot_math_glyph_variant_t() {
         )
     );
 }
-pub const HB_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
-pub type hb_ot_math_glyph_part_flags_t = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[repr(C)]
+/// hb_ot_math_glyph_part_flags_t:
+///
+/// Since: 1.3.3
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+pub enum OTMathGlyphPartFlags {
+    Extender = 1,
+}
+pub type hb_ot_math_glyph_part_flags_t = OTMathGlyphPartFlags;
 /// hb_ot_math_glyph_part_t:
 ///
 /// Since: 1.3.3
