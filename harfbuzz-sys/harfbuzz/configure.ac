@@ -1,7 +1,7 @@
 AC_PREREQ([2.64])
 AC_INIT([HarfBuzz],
-        [1.4.8],
-        [https://github.com/behdad/harfbuzz/issues/new],
+        [1.7.4],
+        [https://github.com/harfbuzz/harfbuzz/issues/new],
         [harfbuzz],
         [http://harfbuzz.org/])
 
@@ -23,6 +23,7 @@ AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_CXX
+AX_CXX_COMPILE_STDCXX(11, noext, optional)
 AC_SYS_LARGEFILE
 PKG_PROG_PKG_CONFIG([0.20])
 AM_MISSING_PROG([RAGEL], [ragel])
@@ -69,8 +70,8 @@ GTK_DOC_CHECK([1.15],[--flavour no-tmpl])
 ])
 
 # Functions and headers
-AC_CHECK_FUNCS(atexit mprotect sysconf getpagesize mmap isatty)
-AC_CHECK_HEADERS(unistd.h sys/mman.h)
+AC_CHECK_FUNCS(atexit mprotect sysconf getpagesize mmap isatty newlocale strtod_l)
+AC_CHECK_HEADERS(unistd.h sys/mman.h xlocale.h)
 
 # Compiler flags
 AC_CANONICAL_HOST
@@ -164,7 +165,7 @@ dnl ===========================================================================
 
 AC_ARG_WITH(gobject,
 	[AS_HELP_STRING([--with-gobject=@<:@yes/no/auto@:>@],
-			[Use gobject @<:@default=auto@:>@])],,
+			[Use gobject @<:@default=no@:>@])],,
 	[with_gobject=no])
 have_gobject=false
 if test "x$with_gobject" = "xyes" -o "x$with_gobject" = "xauto"; then
@@ -353,6 +354,7 @@ if $have_freetype; then
 	save_libs=$LIBS
 	LIBS="$LIBS $FREETYPE_LIBS"
 	AC_CHECK_FUNCS(FT_Get_Var_Blend_Coordinates)
+	AC_CHECK_FUNCS(FT_Set_Var_Blend_Coordinates)
 	LIBS=$save_libs
 fi
 AM_CONDITIONAL(HAVE_FREETYPE, $have_freetype)
@@ -494,8 +496,6 @@ test/fuzzing/Makefile
 test/shaping/Makefile
 docs/Makefile
 docs/version.xml
-win32/Makefile
-win32/config.h.win32
 ])
 
 AC_OUTPUT

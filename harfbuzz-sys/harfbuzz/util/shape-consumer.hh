@@ -24,10 +24,11 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "options.hh"
-
 #ifndef HB_SHAPE_CONSUMER_HH
 #define HB_SHAPE_CONSUMER_HH
+
+#include "hb-private.hh"
+#include "options.hh"
 
 
 template <typename output_t>
@@ -37,7 +38,8 @@ struct shape_consumer_t
 		  : failed (false),
 		    shaper (parser),
 		    output (parser),
-		    font (NULL) {}
+		    font (nullptr),
+		    buffer (nullptr) {}
 
   void init (hb_buffer_t  *buffer_,
 	     const font_options_t *font_opts)
@@ -57,15 +59,19 @@ struct shape_consumer_t
 
     for (unsigned int n = shaper.num_iterations; n; n--)
     {
+      const char *error = nullptr;
+
       shaper.populate_buffer (buffer, text, text_len, text_before, text_after);
       if (n == 1)
 	output.consume_text (buffer, text, text_len, shaper.utf8_clusters);
-      if (!shaper.shape (font, buffer))
+      if (!shaper.shape (font, buffer, &error))
       {
 	failed = true;
-	hb_buffer_set_length (buffer, 0);
-	output.shape_failed (buffer, text, text_len, shaper.utf8_clusters);
-	return;
+	output.error (error);
+	if (hb_buffer_get_content_type (buffer) == HB_BUFFER_CONTENT_TYPE_GLYPHS)
+	  break;
+	else
+	  return;
       }
     }
 
@@ -75,9 +81,9 @@ struct shape_consumer_t
   {
     output.finish (buffer, font_opts);
     hb_font_destroy (font);
-    font = NULL;
+    font = nullptr;
     hb_buffer_destroy (buffer);
-    buffer = NULL;
+    buffer = nullptr;
   }
 
   public:

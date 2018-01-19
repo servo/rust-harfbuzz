@@ -26,7 +26,7 @@ EXTRA_DIST += \
 	hb-unicode-encode \
 	hb-unicode-prettyname \
 	record-test.sh \
-	run-tests.sh \
+	run-tests.py \
 	texts/in-tree \
 	fonts/sha1sum \
 	$(TESTS) \
@@ -44,6 +44,8 @@ TESTS = \
 	tests/arabic-fallback-shaping.tests \
 	tests/arabic-feature-order.tests \
 	tests/arabic-like-joining.tests \
+	tests/arabic-mark-order.tests \
+	tests/arabic-stch.tests \
 	tests/automatic-fractions.tests \
 	tests/cluster.tests \
 	tests/color-fonts.tests \
@@ -55,13 +57,18 @@ TESTS = \
 	tests/fuzzed.tests \
 	tests/hangul-jamo.tests \
 	tests/hyphens.tests \
+	tests/indic-consonant-with-stacker.tests \
+	tests/indic-init.tests \
 	tests/indic-joiner-candrabindu.tests \
 	tests/indic-joiners.tests \
 	tests/indic-old-spec.tests \
 	tests/indic-pref-blocking.tests \
+	tests/indic-script-extensions.tests \
+	tests/indic-special-cases.tests \
 	tests/indic-syllable.tests \
 	tests/language-tags.tests \
 	tests/ligature-id.tests \
+	tests/mark-attachment.tests \
 	tests/mark-filtering-sets.tests \
 	tests/mongolian-variation-selector.tests \
 	tests/spaces.tests \
@@ -72,6 +79,7 @@ TESTS = \
 	tests/use.tests \
 	tests/use-marchen.tests \
 	tests/use-syllable.tests \
+	tests/variations-rvrn.tests \
 	tests/vertical.tests \
 	tests/zero-width-marks.tests \
 	$(NULL)
@@ -96,7 +104,7 @@ TESTS_ENVIRONMENT = \
 	$(NULL)
 endif
 
-TESTS_LOG_COMPILER = sh $(srcdir)/run-tests.sh
+TESTS_LOG_COMPILER = python $(srcdir)/run-tests.py
 
 .PHONY: manifests
 
