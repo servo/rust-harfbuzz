@@ -2607,24 +2607,6 @@ extern "C" {
         destroy: hb_destroy_func_t,
     );
 }
-pub type hb_font_get_glyph_func_t = ::std::option::Option<
-    unsafe extern "C" fn(
-        font: *mut hb_font_t,
-        font_data: *mut ::std::os::raw::c_void,
-        unicode: hb_codepoint_t,
-        variation_selector: hb_codepoint_t,
-        glyph: *mut hb_codepoint_t,
-        user_data: *mut ::std::os::raw::c_void,
-    ) -> hb_bool_t,
->;
-extern "C" {
-    pub fn hb_font_funcs_set_glyph_func(
-        ffuncs: *mut hb_font_funcs_t,
-        func: hb_font_get_glyph_func_t,
-        user_data: *mut ::std::os::raw::c_void,
-        destroy: hb_destroy_func_t,
-    );
-}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_set_t {
@@ -2698,9 +2680,6 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_set_symmetric_difference(set: *mut hb_set_t, other: *const hb_set_t);
-}
-extern "C" {
-    pub fn hb_set_invert(set: *mut hb_set_t);
 }
 extern "C" {
     pub fn hb_set_get_population(set: *const hb_set_t) -> ::std::os::raw::c_uint;
