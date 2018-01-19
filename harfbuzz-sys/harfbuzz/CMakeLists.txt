@@ -687,4 +687,5 @@ endif ()
 
 # Needs to come last so that variables defined above are passed to
 # subdirectories.
-add_subdirectory(test)
+# Rust: Disable this in our import of 1.7.4 as it is broken in this release.
+# add_subdirectory(test)
