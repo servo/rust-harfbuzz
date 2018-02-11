@@ -8,6 +8,6 @@
 *.dll
 *.dummy
 /doc
-/harfbuzz-sys/target
-/harfbuzz-sys/Cargo.lock
+/target
+/Cargo.lock
 
