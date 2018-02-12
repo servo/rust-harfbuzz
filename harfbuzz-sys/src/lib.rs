@@ -1,5 +1,4 @@
 #![allow(non_camel_case_types)]
-
 #![cfg_attr(feature = "cargo-clippy", allow(unreadable_literal))]
 
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
