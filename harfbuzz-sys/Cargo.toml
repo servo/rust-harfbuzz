@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.1.15"
+version = "0.2.0"
 
 authors = ["The Servo Project Developers"]
 license = "MIT"
@@ -18,4 +18,4 @@ pkg-config = "0.3"
 cmake = "0.1"
 
 [target.'cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))'.dependencies]
-freetype = "0.3"
+freetype = "0.4"
