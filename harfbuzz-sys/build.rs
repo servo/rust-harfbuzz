@@ -6,6 +6,7 @@ use std::process::Command;
 use std::path::PathBuf;
 
 fn main() {
+    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
     if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
         if pkg_config::find_library("harfbuzz").is_ok() {
             return;
