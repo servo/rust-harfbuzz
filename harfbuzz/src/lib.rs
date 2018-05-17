@@ -29,3 +29,6 @@ pub use self::blob::Blob;
 
 mod glyph;
 pub use self::glyph::{Glyph, Glyphs};
+
+mod font;
+pub use self::font::Font;
