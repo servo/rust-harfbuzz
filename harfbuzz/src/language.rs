@@ -18,7 +18,7 @@ pub struct Language {
     /// This isn't commonly needed unless interfacing directly with
     /// functions from the `harfbuzz-sys` crate that haven't been
     /// safely exposed.
-    pub raw: sys::hb_language_t,
+    raw: sys::hb_language_t,
 }
 
 impl Language {
@@ -37,6 +37,14 @@ impl Language {
         unsafe { std::ffi::CStr::from_ptr(sys::hb_language_to_string(self.raw)) }
             .to_str()
             .unwrap()
+    }
+
+    pub unsafe fn from_raw(raw: sys::hb_language_t) -> Self {
+        Language { raw }
+    }
+
+    pub fn as_raw(&self) -> sys::hb_language_t {
+        self.raw
     }
 
     pub fn get_process_default() -> Self {

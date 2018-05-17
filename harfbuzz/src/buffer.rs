@@ -74,7 +74,7 @@ pub struct Buffer {
     /// This isn't commonly needed unless interfacing directly with
     /// functions from the `harfbuzz-sys` crate that haven't been
     /// safely exposed.
-    pub raw: *mut sys::hb_buffer_t,
+    raw: *mut sys::hb_buffer_t,
 }
 
 impl Buffer {
@@ -87,6 +87,23 @@ impl Buffer {
     /// ```
     pub fn new() -> Self {
         Buffer::default()
+    }
+
+    /// Construct a `Buffer` from a raw pointer. Takes ownership of the buffer.
+    pub unsafe fn from_raw(raw: *mut sys::hb_buffer_t) -> Self {
+        Buffer { raw }
+    }
+
+    /// Borrows a raw pointer to the buffer.
+    pub fn as_ptr(&self) -> *mut sys::hb_buffer_t {
+        self.raw
+    }
+
+    /// Gives up ownership and returns a raw pointer to the buffer.
+    pub fn into_raw(self) -> *mut sys::hb_buffer_t {
+        let raw = self.raw;
+        std::mem::forget(self);
+        raw
     }
 
     /// Create a new buffer with the given text.
@@ -270,7 +287,7 @@ impl Buffer {
     /// * [`get_language`](#method.get_language)
     /// * [`guess_segment_properties`](#method.guess_segment_properties)
     pub fn set_language(&mut self, language: Language) {
-        unsafe { sys::hb_buffer_set_language(self.raw, language.raw) };
+        unsafe { sys::hb_buffer_set_language(self.raw, language.as_raw()) };
     }
 
     /// Get the language for the buffer.
@@ -279,9 +296,7 @@ impl Buffer {
     ///
     /// * [`set_language`](#method.set_language)
     pub fn get_language(&self) -> Language {
-        Language {
-            raw: unsafe { sys::hb_buffer_get_language(self.raw) },
-        }
+        unsafe { Language::from_raw(sys::hb_buffer_get_language(self.raw)) }
     }
 }
 
