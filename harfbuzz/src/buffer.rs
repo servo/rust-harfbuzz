@@ -304,6 +304,15 @@ impl Default for Buffer {
     }
 }
 
+impl Clone for Buffer {
+    /// Increment the reference count and return a new reference to the same buffer.
+    fn clone(&self) -> Self {
+        Buffer {
+            raw: unsafe { sys::hb_buffer_reference(self.raw) },
+        }
+    }
+}
+
 impl Drop for Buffer {
     fn drop(&mut self) {
         unsafe { sys::hb_buffer_destroy(self.raw) }
