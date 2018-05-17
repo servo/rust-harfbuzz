@@ -26,3 +26,6 @@ pub use self::language::Language;
 
 mod blob;
 pub use self::blob::Blob;
+
+mod glyph;
+pub use self::glyph::{Glyph, Glyphs};
