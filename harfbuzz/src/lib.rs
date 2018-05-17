@@ -32,3 +32,6 @@ pub use self::glyph::{Glyph, Glyphs};
 
 mod font;
 pub use self::font::Font;
+
+mod feature;
+pub use self::feature::Features;
