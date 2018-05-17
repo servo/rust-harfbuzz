@@ -10,7 +10,7 @@
 use std;
 use sys;
 
-use {Direction, Language};
+use {Direction, Features, Font, Glyphs, Language};
 
 /// A series of Unicode characters.
 ///
@@ -297,6 +297,26 @@ impl Buffer {
     /// * [`set_language`](#method.set_language)
     pub fn get_language(&self) -> Language {
         unsafe { Language::from_raw(sys::hb_buffer_get_language(self.raw)) }
+    }
+
+    /// Shape the buffer with the provided font and features.
+    pub fn shape<'a>(&'a self, font: &Font, features: &Features) -> Glyphs<'a> {
+        unsafe {
+            let features = features.raw_features();
+
+            sys::hb_shape(
+                font.as_raw(),
+                self.raw,
+                features.as_ptr(),
+                features.len() as std::os::raw::c_uint,
+            );
+
+            let mut len = 0;
+            let infos = sys::hb_buffer_get_glyph_infos(self.raw, &mut len);
+            let positions = sys::hb_buffer_get_glyph_positions(self.raw, std::ptr::null_mut());
+
+            Glyphs::from_raw(infos, positions, len)
+        }
     }
 }
 
