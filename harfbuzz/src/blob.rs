@@ -93,15 +93,6 @@ impl ops::DerefMut for Blob {
     }
 }
 
-impl Clone for Blob {
-    /// Increment the reference count and return a new reference to the same blob.
-    fn clone(&self) -> Self {
-        unsafe {
-            Blob::from_raw(sys::hb_blob_reference(self.raw))
-        }
-    }
-}
-
 impl Drop for Blob {
     /// Decrement the reference count, and destroy the blob if the reference count is zero.
     fn drop(&mut self) {
