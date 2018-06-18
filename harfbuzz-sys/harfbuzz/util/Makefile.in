@@ -92,11 +92,12 @@ build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3)
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__append_1 = hb-view
-@HAVE_GLIB_TRUE@am__append_2 = hb-shape
+@HAVE_GLIB_TRUE@am__append_2 = hb-shape hb-subset
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__append_3 = hb-ot-shape-closure
 subdir = util
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/ax_cxx_compile_stdcxx.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_link_flag.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/m4/ax_pthread.m4 $(top_srcdir)/m4/gtk-doc.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
@@ -110,7 +111,7 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__EXEEXT_1 = hb-view$(EXEEXT)
-@HAVE_GLIB_TRUE@am__EXEEXT_2 = hb-shape$(EXEEXT)
+@HAVE_GLIB_TRUE@am__EXEEXT_2 = hb-shape$(EXEEXT) hb-subset$(EXEEXT)
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@am__EXEEXT_3 =  \
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@	hb-ot-shape-closure$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(bindir)"
@@ -141,20 +142,27 @@ hb_shape_LDADD = $(LDADD)
 hb_shape_DEPENDENCIES = $(top_builddir)/src/libharfbuzz.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+am__hb_subset_SOURCES_DIST = hb-subset.cc options.cc options.hh \
+	main-font-text.hh
+am__objects_4 = hb-subset.$(OBJEXT) options.$(OBJEXT) $(am__objects_1)
+@HAVE_GLIB_TRUE@am_hb_subset_OBJECTS = $(am__objects_4)
+hb_subset_OBJECTS = $(am_hb_subset_OBJECTS)
+am__DEPENDENCIES_2 = $(top_builddir)/src/libharfbuzz.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
+@HAVE_GLIB_TRUE@hb_subset_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz-subset.la
 am__hb_view_SOURCES_DIST = hb-view.cc options.cc options.hh \
 	main-font-text.hh shape-consumer.hh ansi-print.cc \
 	ansi-print.hh helper-cairo.cc helper-cairo.hh \
 	helper-cairo-ansi.cc helper-cairo-ansi.hh view-cairo.cc \
 	view-cairo.hh
-am__objects_4 = hb-view.$(OBJEXT) options.$(OBJEXT) \
+am__objects_5 = hb-view.$(OBJEXT) options.$(OBJEXT) \
 	ansi-print.$(OBJEXT) helper-cairo.$(OBJEXT) \
 	helper-cairo-ansi.$(OBJEXT) view-cairo.$(OBJEXT) \
 	$(am__objects_1)
-@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am_hb_view_OBJECTS = $(am__objects_4)
+@HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am_hb_view_OBJECTS = $(am__objects_5)
 hb_view_OBJECTS = $(am_hb_view_OBJECTS)
-am__DEPENDENCIES_2 = $(top_builddir)/src/libharfbuzz.la \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@hb_view_DEPENDENCIES = $(am__DEPENDENCIES_2) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1) \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1) \
@@ -212,9 +220,10 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(hb_ot_shape_closure_SOURCES) $(hb_shape_SOURCES) \
-	$(hb_view_SOURCES)
+	$(hb_subset_SOURCES) $(hb_view_SOURCES)
 DIST_SOURCES = $(am__hb_ot_shape_closure_SOURCES_DIST) \
-	$(am__hb_shape_SOURCES_DIST) $(am__hb_view_SOURCES_DIST)
+	$(am__hb_shape_SOURCES_DIST) $(am__hb_subset_SOURCES_DIST) \
+	$(am__hb_view_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -257,6 +266,12 @@ CAIRO_LIBS = @CAIRO_LIBS@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CORETEXT_CFLAGS = @CORETEXT_CFLAGS@
 CORETEXT_LIBS = @CORETEXT_LIBS@
 CPP = @CPP@
@@ -284,6 +299,8 @@ FONTCONFIG_LIBS = @FONTCONFIG_LIBS@
 FREETYPE_CFLAGS = @FREETYPE_CFLAGS@
 FREETYPE_DEPS = @FREETYPE_DEPS@
 FREETYPE_LIBS = @FREETYPE_LIBS@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GIT = @GIT@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_DEPS = @GLIB_DEPS@
@@ -301,7 +318,6 @@ GTKDOC_DEPS_CFLAGS = @GTKDOC_DEPS_CFLAGS@
 GTKDOC_DEPS_LIBS = @GTKDOC_DEPS_LIBS@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
-HAVE_CXX11 = @HAVE_CXX11@
 HB_LIBTOOL_VERSION_INFO = @HB_LIBTOOL_VERSION_INFO@
 HB_VERSION = @HB_VERSION@
 HB_VERSION_MAJOR = @HB_VERSION_MAJOR@
@@ -324,6 +340,7 @@ INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
 INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
@@ -389,6 +406,7 @@ datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+have_gobject = @have_gobject@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -418,11 +436,11 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+NULL = 
 EXTRA_DIST = 
 CLEANFILES = 
 DISTCLEANFILES = 
 MAINTAINERCLEANFILES = 
-NULL = 
 HB_VIEW_sources = \
 	hb-view.cc \
 	options.cc \
@@ -454,6 +472,13 @@ HB_OT_SHAPE_CLOSURE_sources = \
 	main-font-text.hh \
 	$(NULL)
 
+HB_SUBSET_CLI_sources = \
+	hb-subset.cc \
+	options.cc \
+	options.hh \
+	main-font-text.hh \
+	$(NULL)
+
 AM_CPPFLAGS = \
 	-DHB_DISABLE_DEPRECATED \
 	-I$(top_srcdir)/src/ \
@@ -478,6 +503,8 @@ LDADD = \
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(NULL)
 
 @HAVE_GLIB_TRUE@hb_shape_SOURCES = $(HB_SHAPE_sources)
+@HAVE_GLIB_TRUE@hb_subset_SOURCES = $(HB_SUBSET_CLI_sources)
+@HAVE_GLIB_TRUE@hb_subset_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@@HAVE_OT_TRUE@hb_ot_shape_closure_SOURCES = $(HB_OT_SHAPE_CLOSURE_sources)
 all: all-am
 
@@ -587,6 +614,10 @@ hb-shape$(EXEEXT): $(hb_shape_OBJECTS) $(hb_shape_DEPENDENCIES) $(EXTRA_hb_shape
 	@rm -f hb-shape$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(hb_shape_OBJECTS) $(hb_shape_LDADD) $(LIBS)
 
+hb-subset$(EXEEXT): $(hb_subset_OBJECTS) $(hb_subset_DEPENDENCIES) $(EXTRA_hb_subset_DEPENDENCIES) 
+	@rm -f hb-subset$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(hb_subset_OBJECTS) $(hb_subset_LDADD) $(LIBS)
+
 hb-view$(EXEEXT): $(hb_view_OBJECTS) $(hb_view_DEPENDENCIES) $(EXTRA_hb_view_DEPENDENCIES) 
 	@rm -f hb-view$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(hb_view_OBJECTS) $(hb_view_LDADD) $(LIBS)
@@ -600,6 +631,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ansi-print.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-ot-shape-closure.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-shape.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-subset.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb-view.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/helper-cairo-ansi.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/helper-cairo.Po@am__quote@

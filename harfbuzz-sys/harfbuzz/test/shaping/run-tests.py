@@ -1,34 +1,27 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
+from __future__ import print_function, division, absolute_import
+
 import sys, os, subprocess
-
-
-try:
-	input = raw_input
-except NameError:
-	pass
 
 
 def cmd(command):
 	p = subprocess.Popen (
 		command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	p.wait ()
-	print (p.stderr.read (), file=sys.stderr)
-	return p.stdout.read ().decode ("utf-8"), p.returncode
+	print (p.stderr.read (), end="") # file=sys.stderr
+	return p.stdout.read ().decode ("utf-8").strip (), p.returncode
 
 
-srcdir = os.environ.get ("srcdir", ".")
-builddir = os.environ.get ("builddir", ".")
-top_builddir = os.environ.get ("top_builddir",
-	os.path.normpath (os.path.join (os.getcwd (), "..", "..")))
-EXEEXT = os.environ.get ("EXEEXT", "")
+args = sys.argv[1:]
+if not args or sys.argv[1].find('hb-shape') == -1 or not os.path.exists (sys.argv[1]):
+	print ("""First argument does not seem to point to usable hb-shape.""")
+	sys.exit (1)
+hb_shape, args = args[0], args[1:]
 
 extra_options = "--verify"
-hb_shape = os.path.join (top_builddir, "util", "hb-shape" + EXEEXT)
 
 fails = 0
-args = sys.argv[1:]
 
 reference = False
 if len (args) and args[0] == "--reference":
@@ -36,64 +29,55 @@ if len (args) and args[0] == "--reference":
 	args = args[1:]
 
 if not len (args):
-	args = [sys.stdin]
+	args = ['-']
 
-for f in args:
+for filename in args:
 	if not reference:
-		if f == sys.stdin:
+		if filename == '-':
 			print ("Running tests from standard input")
 		else:
-			print ("Running tests in " + f)
+			print ("Running tests in " + filename)
 
-	if f == sys.stdin:
-		def f():
-			while True:
-				try:
-					line = input ()
-				except EOFError:
-					break
-
-				if len (line):
-					yield line
-				else:
-					break
-		f = f()
+	if filename == '-':
+		f = sys.stdin
 	else:
-		f = open (f)
+		f = open (filename)
 
 	for line in f:
 		fontfile, options, unicodes, glyphs_expected = line.split (":")
+		cwd = os.path.dirname(filename)
+		fontfile = os.path.normpath (os.path.join (cwd, fontfile))
 
 		if line.startswith ("#"):
 			if not reference:
-				print ("# hb-shape %s --unicodes %s" % (fontfile, unicodes))
+				print ("# %s %s --unicodes %s" % (hb_shape, fontfile, unicodes))
 			continue
 
 		if not reference:
-			print ("hb-shape %s %s %s --unicodes %s" %
-					 (fontfile, extra_options, options, unicodes))
+			print ("%s %s %s %s --unicodes %s" %
+					 (hb_shape, fontfile, extra_options, options, unicodes))
 
 		glyphs1, returncode = cmd ([hb_shape, "--font-funcs=ft",
-			os.path.join (srcdir, fontfile), extra_options, "--unicodes",
-			unicodes] + (options.split (' ') if len(options) else []))
+			fontfile, extra_options, "--unicodes",
+			unicodes] + (options.split (' ') if options else []))
 
 		if returncode:
-			print ("hb-shape --font-funcs=ft failed.", file=sys.stderr)
+			print ("hb-shape --font-funcs=ft failed.") # file=sys.stderr
 			fails = fails + 1
 			#continue
 
 		glyphs2, returncode = cmd ([hb_shape, "--font-funcs=ot",
-			os.path.join (srcdir, fontfile), extra_options, "--unicodes",
-			unicodes] + (options.split (' ') if len(options) else []))
+			fontfile, extra_options, "--unicodes",
+			unicodes] + (options.split (' ') if options else []))
 
 		if returncode:
-			print ("hb-shape --font-funcs=ot failed.", file=sys.stderr)
+			print ("ERROR: hb-shape --font-funcs=ot failed.") # file=sys.stderr
 			fails = fails + 1
 			#continue
 
 		if glyphs1 != glyphs2:
-			print ("FT funcs: " + glyphs1, file=sys.stderr)
-			print ("OT funcs: " + glyphs2, file=sys.stderr)
+			print ("FT funcs: " + glyphs1) # file=sys.stderr
+			print ("OT funcs: " + glyphs2) # file=sys.stderr
 			fails = fails + 1
 
 		if reference:
@@ -101,13 +85,13 @@ for f in args:
 			continue
 
 		if glyphs1.strip() != glyphs_expected.strip():
-			print ("Actual:   " + glyphs1, file=sys.stderr)
-			print ("Expected: " + glyphs_expected, file=sys.stderr)
+			print ("Actual:   " + glyphs1) # file=sys.stderr
+			print ("Expected: " + glyphs_expected) # file=sys.stderr
 			fails = fails + 1
 
 if fails != 0:
 	if not reference:
-		print (str (fails) + " tests failed.")
+		print (str (fails) + " tests failed.") # file=sys.stderr
 	sys.exit (1)
 
 else:
