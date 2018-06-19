@@ -89,10 +89,12 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-check_PROGRAMS = hb-fuzzer$(EXEEXT) $(am__EXEEXT_1)
+check_PROGRAMS = hb-shape-fuzzer$(EXEEXT) hb-subset-fuzzer$(EXEEXT) \
+	hb-subset-get-codepoints-fuzzer$(EXEEXT) $(am__EXEEXT_1)
 subdir = test/fuzzing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/ax_cxx_compile_stdcxx.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_link_flag.m4 \
+	$(top_srcdir)/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/m4/ax_pthread.m4 $(top_srcdir)/m4/gtk-doc.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
@@ -107,9 +109,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__EXEEXT_1 =
 am__objects_1 =
-am_hb_fuzzer_OBJECTS = hb_fuzzer-hb-fuzzer.$(OBJEXT) \
-	hb_fuzzer-main.$(OBJEXT) $(am__objects_1)
-hb_fuzzer_OBJECTS = $(am_hb_fuzzer_OBJECTS)
+am_hb_shape_fuzzer_OBJECTS =  \
+	hb_shape_fuzzer-hb-shape-fuzzer.$(OBJEXT) \
+	hb_shape_fuzzer-main.$(OBJEXT) $(am__objects_1)
+hb_shape_fuzzer_OBJECTS = $(am_hb_shape_fuzzer_OBJECTS)
 am__DEPENDENCIES_1 =
 am__DEPENDENCIES_2 = $(top_builddir)/src/libharfbuzz-fuzzing.la \
 	$(am__DEPENDENCIES_1)
@@ -117,6 +120,15 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+am_hb_subset_fuzzer_OBJECTS =  \
+	hb_subset_fuzzer-hb-subset-fuzzer.$(OBJEXT) \
+	hb_subset_fuzzer-main.$(OBJEXT) $(am__objects_1)
+hb_subset_fuzzer_OBJECTS = $(am_hb_subset_fuzzer_OBJECTS)
+am_hb_subset_get_codepoints_fuzzer_OBJECTS = hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.$(OBJEXT) \
+	hb_subset_get_codepoints_fuzzer-main.$(OBJEXT) \
+	$(am__objects_1)
+hb_subset_get_codepoints_fuzzer_OBJECTS =  \
+	$(am_hb_subset_get_codepoints_fuzzer_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -169,8 +181,10 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(hb_fuzzer_SOURCES)
-DIST_SOURCES = $(hb_fuzzer_SOURCES)
+SOURCES = $(hb_shape_fuzzer_SOURCES) $(hb_subset_fuzzer_SOURCES) \
+	$(hb_subset_get_codepoints_fuzzer_SOURCES)
+DIST_SOURCES = $(hb_shape_fuzzer_SOURCES) $(hb_subset_fuzzer_SOURCES) \
+	$(hb_subset_get_codepoints_fuzzer_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -212,6 +226,12 @@ CAIRO_LIBS = @CAIRO_LIBS@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
+CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
+CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
+CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
+CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
+CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CORETEXT_CFLAGS = @CORETEXT_CFLAGS@
 CORETEXT_LIBS = @CORETEXT_LIBS@
 CPP = @CPP@
@@ -239,6 +259,8 @@ FONTCONFIG_LIBS = @FONTCONFIG_LIBS@
 FREETYPE_CFLAGS = @FREETYPE_CFLAGS@
 FREETYPE_DEPS = @FREETYPE_DEPS@
 FREETYPE_LIBS = @FREETYPE_LIBS@
+GCOV = @GCOV@
+GENHTML = @GENHTML@
 GIT = @GIT@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_DEPS = @GLIB_DEPS@
@@ -256,7 +278,6 @@ GTKDOC_DEPS_CFLAGS = @GTKDOC_DEPS_CFLAGS@
 GTKDOC_DEPS_LIBS = @GTKDOC_DEPS_LIBS@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
-HAVE_CXX11 = @HAVE_CXX11@
 HB_LIBTOOL_VERSION_INFO = @HB_LIBTOOL_VERSION_INFO@
 HB_VERSION = @HB_VERSION@
 HB_VERSION_MAJOR = @HB_VERSION_MAJOR@
@@ -279,6 +300,7 @@ INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
 INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
+LCOV = @LCOV@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
@@ -344,6 +366,7 @@ datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+have_gobject = @have_gobject@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -374,7 +397,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
-EXTRA_DIST = README $(NULL)
+EXTRA_DIST = README run-shape-fuzzer-tests.py \
+	run-subset-fuzzer-tests.py CMakeLists.txt $(NULL)
 CLEANFILES = 
 DISTCLEANFILES = 
 MAINTAINERCLEANFILES = 
@@ -388,21 +412,57 @@ LDADD = \
 	$(top_builddir)/src/libharfbuzz-fuzzing.la \
 	$(NULL)
 
-hb_fuzzer_SOURCES = \
+hb_shape_fuzzer_SOURCES = \
 	hb-fuzzer.hh \
-	hb-fuzzer.cc \
+	hb-shape-fuzzer.cc \
 	main.cc \
 	$(NULL)
 
-hb_fuzzer_LDADD = \
+hb_shape_fuzzer_LDADD = \
 	$(LDADD) \
 	$(NULL)
 
-hb_fuzzer_CPPFLAGS = \
+hb_shape_fuzzer_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
 	$(NULL)
 
-hb_fuzzer_DEPENDENCIES = \
+hb_shape_fuzzer_DEPENDENCIES = \
+	lib \
+	$(NULL)
+
+hb_subset_fuzzer_SOURCES = \
+	hb-fuzzer.hh \
+	hb-subset-fuzzer.cc \
+	main.cc \
+	$(NULL)
+
+hb_subset_fuzzer_LDADD = \
+	$(top_builddir)/src/libharfbuzz-subset-fuzzing.la \
+	$(NULL)
+
+hb_subset_fuzzer_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	$(NULL)
+
+hb_subset_fuzzer_DEPENDENCIES = \
+	lib \
+	$(NULL)
+
+hb_subset_get_codepoints_fuzzer_SOURCES = \
+	hb-fuzzer.hh \
+	hb-subset-get-codepoints-fuzzer.cc \
+	main.cc \
+	$(NULL)
+
+hb_subset_get_codepoints_fuzzer_LDADD = \
+	$(top_builddir)/src/libharfbuzz-subset-fuzzing.la \
+	$(NULL)
+
+hb_subset_get_codepoints_fuzzer_CPPFLAGS = \
+	$(AM_CPPFLAGS) \
+	$(NULL)
+
+hb_subset_get_codepoints_fuzzer_DEPENDENCIES = \
 	lib \
 	$(NULL)
 
@@ -449,9 +509,17 @@ clean-checkPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-hb-fuzzer$(EXEEXT): $(hb_fuzzer_OBJECTS) $(hb_fuzzer_DEPENDENCIES) $(EXTRA_hb_fuzzer_DEPENDENCIES) 
-	@rm -f hb-fuzzer$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(hb_fuzzer_OBJECTS) $(hb_fuzzer_LDADD) $(LIBS)
+hb-shape-fuzzer$(EXEEXT): $(hb_shape_fuzzer_OBJECTS) $(hb_shape_fuzzer_DEPENDENCIES) $(EXTRA_hb_shape_fuzzer_DEPENDENCIES) 
+	@rm -f hb-shape-fuzzer$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(hb_shape_fuzzer_OBJECTS) $(hb_shape_fuzzer_LDADD) $(LIBS)
+
+hb-subset-fuzzer$(EXEEXT): $(hb_subset_fuzzer_OBJECTS) $(hb_subset_fuzzer_DEPENDENCIES) $(EXTRA_hb_subset_fuzzer_DEPENDENCIES) 
+	@rm -f hb-subset-fuzzer$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(hb_subset_fuzzer_OBJECTS) $(hb_subset_fuzzer_LDADD) $(LIBS)
+
+hb-subset-get-codepoints-fuzzer$(EXEEXT): $(hb_subset_get_codepoints_fuzzer_OBJECTS) $(hb_subset_get_codepoints_fuzzer_DEPENDENCIES) $(EXTRA_hb_subset_get_codepoints_fuzzer_DEPENDENCIES) 
+	@rm -f hb-subset-get-codepoints-fuzzer$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(hb_subset_get_codepoints_fuzzer_OBJECTS) $(hb_subset_get_codepoints_fuzzer_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -459,8 +527,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_fuzzer-hb-fuzzer.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_fuzzer-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_shape_fuzzer-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_subset_fuzzer-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -483,33 +555,89 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
-hb_fuzzer-hb-fuzzer.o: hb-fuzzer.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_fuzzer-hb-fuzzer.o -MD -MP -MF $(DEPDIR)/hb_fuzzer-hb-fuzzer.Tpo -c -o hb_fuzzer-hb-fuzzer.o `test -f 'hb-fuzzer.cc' || echo '$(srcdir)/'`hb-fuzzer.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_fuzzer-hb-fuzzer.Tpo $(DEPDIR)/hb_fuzzer-hb-fuzzer.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-fuzzer.cc' object='hb_fuzzer-hb-fuzzer.o' libtool=no @AMDEPBACKSLASH@
+hb_shape_fuzzer-hb-shape-fuzzer.o: hb-shape-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_shape_fuzzer-hb-shape-fuzzer.o -MD -MP -MF $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Tpo -c -o hb_shape_fuzzer-hb-shape-fuzzer.o `test -f 'hb-shape-fuzzer.cc' || echo '$(srcdir)/'`hb-shape-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Tpo $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-shape-fuzzer.cc' object='hb_shape_fuzzer-hb-shape-fuzzer.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_fuzzer-hb-fuzzer.o `test -f 'hb-fuzzer.cc' || echo '$(srcdir)/'`hb-fuzzer.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_shape_fuzzer-hb-shape-fuzzer.o `test -f 'hb-shape-fuzzer.cc' || echo '$(srcdir)/'`hb-shape-fuzzer.cc
 
-hb_fuzzer-hb-fuzzer.obj: hb-fuzzer.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_fuzzer-hb-fuzzer.obj -MD -MP -MF $(DEPDIR)/hb_fuzzer-hb-fuzzer.Tpo -c -o hb_fuzzer-hb-fuzzer.obj `if test -f 'hb-fuzzer.cc'; then $(CYGPATH_W) 'hb-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-fuzzer.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_fuzzer-hb-fuzzer.Tpo $(DEPDIR)/hb_fuzzer-hb-fuzzer.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-fuzzer.cc' object='hb_fuzzer-hb-fuzzer.obj' libtool=no @AMDEPBACKSLASH@
+hb_shape_fuzzer-hb-shape-fuzzer.obj: hb-shape-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_shape_fuzzer-hb-shape-fuzzer.obj -MD -MP -MF $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Tpo -c -o hb_shape_fuzzer-hb-shape-fuzzer.obj `if test -f 'hb-shape-fuzzer.cc'; then $(CYGPATH_W) 'hb-shape-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-shape-fuzzer.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Tpo $(DEPDIR)/hb_shape_fuzzer-hb-shape-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-shape-fuzzer.cc' object='hb_shape_fuzzer-hb-shape-fuzzer.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_fuzzer-hb-fuzzer.obj `if test -f 'hb-fuzzer.cc'; then $(CYGPATH_W) 'hb-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-fuzzer.cc'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_shape_fuzzer-hb-shape-fuzzer.obj `if test -f 'hb-shape-fuzzer.cc'; then $(CYGPATH_W) 'hb-shape-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-shape-fuzzer.cc'; fi`
 
-hb_fuzzer-main.o: main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_fuzzer-main.o -MD -MP -MF $(DEPDIR)/hb_fuzzer-main.Tpo -c -o hb_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_fuzzer-main.Tpo $(DEPDIR)/hb_fuzzer-main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_fuzzer-main.o' libtool=no @AMDEPBACKSLASH@
+hb_shape_fuzzer-main.o: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_shape_fuzzer-main.o -MD -MP -MF $(DEPDIR)/hb_shape_fuzzer-main.Tpo -c -o hb_shape_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_shape_fuzzer-main.Tpo $(DEPDIR)/hb_shape_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_shape_fuzzer-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_shape_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
 
-hb_fuzzer-main.obj: main.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_fuzzer-main.obj -MD -MP -MF $(DEPDIR)/hb_fuzzer-main.Tpo -c -o hb_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_fuzzer-main.Tpo $(DEPDIR)/hb_fuzzer-main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_fuzzer-main.obj' libtool=no @AMDEPBACKSLASH@
+hb_shape_fuzzer-main.obj: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_shape_fuzzer-main.obj -MD -MP -MF $(DEPDIR)/hb_shape_fuzzer-main.Tpo -c -o hb_shape_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_shape_fuzzer-main.Tpo $(DEPDIR)/hb_shape_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_shape_fuzzer-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_shape_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_shape_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+
+hb_subset_fuzzer-hb-subset-fuzzer.o: hb-subset-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_fuzzer-hb-subset-fuzzer.o -MD -MP -MF $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Tpo -c -o hb_subset_fuzzer-hb-subset-fuzzer.o `test -f 'hb-subset-fuzzer.cc' || echo '$(srcdir)/'`hb-subset-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Tpo $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-subset-fuzzer.cc' object='hb_subset_fuzzer-hb-subset-fuzzer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_fuzzer-hb-subset-fuzzer.o `test -f 'hb-subset-fuzzer.cc' || echo '$(srcdir)/'`hb-subset-fuzzer.cc
+
+hb_subset_fuzzer-hb-subset-fuzzer.obj: hb-subset-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_fuzzer-hb-subset-fuzzer.obj -MD -MP -MF $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Tpo -c -o hb_subset_fuzzer-hb-subset-fuzzer.obj `if test -f 'hb-subset-fuzzer.cc'; then $(CYGPATH_W) 'hb-subset-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-subset-fuzzer.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Tpo $(DEPDIR)/hb_subset_fuzzer-hb-subset-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-subset-fuzzer.cc' object='hb_subset_fuzzer-hb-subset-fuzzer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_fuzzer-hb-subset-fuzzer.obj `if test -f 'hb-subset-fuzzer.cc'; then $(CYGPATH_W) 'hb-subset-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-subset-fuzzer.cc'; fi`
+
+hb_subset_fuzzer-main.o: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_fuzzer-main.o -MD -MP -MF $(DEPDIR)/hb_subset_fuzzer-main.Tpo -c -o hb_subset_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_fuzzer-main.Tpo $(DEPDIR)/hb_subset_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_subset_fuzzer-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+
+hb_subset_fuzzer-main.obj: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_fuzzer-main.obj -MD -MP -MF $(DEPDIR)/hb_subset_fuzzer-main.Tpo -c -o hb_subset_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_fuzzer-main.Tpo $(DEPDIR)/hb_subset_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_subset_fuzzer-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+
+hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.o: hb-subset-get-codepoints-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.o -MD -MP -MF $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Tpo -c -o hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.o `test -f 'hb-subset-get-codepoints-fuzzer.cc' || echo '$(srcdir)/'`hb-subset-get-codepoints-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Tpo $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-subset-get-codepoints-fuzzer.cc' object='hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.o `test -f 'hb-subset-get-codepoints-fuzzer.cc' || echo '$(srcdir)/'`hb-subset-get-codepoints-fuzzer.cc
+
+hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.obj: hb-subset-get-codepoints-fuzzer.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.obj -MD -MP -MF $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Tpo -c -o hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.obj `if test -f 'hb-subset-get-codepoints-fuzzer.cc'; then $(CYGPATH_W) 'hb-subset-get-codepoints-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-subset-get-codepoints-fuzzer.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Tpo $(DEPDIR)/hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-subset-get-codepoints-fuzzer.cc' object='hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_get_codepoints_fuzzer-hb-subset-get-codepoints-fuzzer.obj `if test -f 'hb-subset-get-codepoints-fuzzer.cc'; then $(CYGPATH_W) 'hb-subset-get-codepoints-fuzzer.cc'; else $(CYGPATH_W) '$(srcdir)/hb-subset-get-codepoints-fuzzer.cc'; fi`
+
+hb_subset_get_codepoints_fuzzer-main.o: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_get_codepoints_fuzzer-main.o -MD -MP -MF $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Tpo -c -o hb_subset_get_codepoints_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Tpo $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_subset_get_codepoints_fuzzer-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_get_codepoints_fuzzer-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+
+hb_subset_get_codepoints_fuzzer-main.obj: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hb_subset_get_codepoints_fuzzer-main.obj -MD -MP -MF $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Tpo -c -o hb_subset_get_codepoints_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Tpo $(DEPDIR)/hb_subset_get_codepoints_fuzzer-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='hb_subset_get_codepoints_fuzzer-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hb_subset_get_codepoints_fuzzer_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hb_subset_get_codepoints_fuzzer-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -732,12 +860,11 @@ lib:
 	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src fuzzing
 
 $(top_builddir)/src/libharfbuzz-fuzzing.la: lib
+$(top_builddir)/src/libharfbuzz-subset-fuzzing.la: lib
 
 check:
-	cat $(srcdir)/../shaping/tests/fuzzed.tests | \
-	cut -d: -f1 | while read x; do \
-		./hb-fuzzer $(srcdir)/../shaping/$$x; \
-	done
+	EXEEXT="$(EXEEXT)" srcdir="$(srcdir)" builddir="$(builddir)" $(srcdir)/run-shape-fuzzer-tests.py
+	EXEEXT="$(EXEEXT)" srcdir="$(srcdir)" builddir="$(builddir)" $(srcdir)/run-subset-fuzzer-tests.py
 
 -include $(top_srcdir)/git.mk
 

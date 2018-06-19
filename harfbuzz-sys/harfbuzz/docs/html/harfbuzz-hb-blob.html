@@ -5,10 +5,10 @@
 <title>hb-blob: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="HarfBuzz API">
 <link rel="prev" href="harfbuzz-Buffers.html" title="Buffers">
 <link rel="next" href="harfbuzz-hb-face.html" title="hb-face">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -53,7 +53,23 @@
 <a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
 </td>
 <td class="function_name">
+<a class="link" href="harfbuzz-hb-blob.html#hb-blob-create-from-file" title="hb_blob_create_from_file ()">hb_blob_create_from_file</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
+</td>
+<td class="function_name">
 <a class="link" href="harfbuzz-hb-blob.html#hb-blob-create-sub-blob" title="hb_blob_create_sub_blob ()">hb_blob_create_sub_blob</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-blob.html#hb-blob-copy-writable-or-fail" title="hb_blob_copy_writable_or_fail ()">hb_blob_copy_writable_or_fail</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
 <tr>
@@ -234,6 +250,32 @@ zero.  Destroy with <a class="link" href="harfbuzz-hb-blob.html#hb-blob-destroy"
 </div>
 <hr>
 <div class="refsect2">
+<a name="hb-blob-create-from-file"></a><h3>hb_blob_create_from_file ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
+hb_blob_create_from_file (<em class="parameter"><code>const <span class="type">char</span> *file_name</code></em>);</pre>
+<div class="refsect3">
+<a name="hb-blob-create-from-file.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>file_name</p></td>
+<td class="parameter_description"><p>font filename.</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-blob-create-from-file.returns"></a><h4>Returns</h4>
+<p> A hb_blob_t pointer with the content of the file</p>
+</div>
+<p class="since">Since: 1.7.7</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="hb-blob-create-sub-blob"></a><h3>hb_blob_create_sub_blob ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
 hb_blob_create_sub_blob (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *parent</code></em>,
@@ -288,10 +330,38 @@ with <a class="link" href="harfbuzz-hb-blob.html#hb-blob-destroy" title="hb_blob
 </div>
 <hr>
 <div class="refsect2">
+<a name="hb-blob-copy-writable-or-fail"></a><h3>hb_blob_copy_writable_or_fail ()</h3>
+<pre class="programlisting"><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="returnvalue">hb_blob_t</span></a> *
+hb_blob_copy_writable_or_fail (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>);</pre>
+<p>Makes a writable copy of <em class="parameter"><code>blob</code></em>
+.</p>
+<div class="refsect3">
+<a name="hb-blob-copy-writable-or-fail.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>blob</p></td>
+<td class="parameter_description"><p>A blob.</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-blob-copy-writable-or-fail.returns"></a><h4>Returns</h4>
+<p> New blob, or nullptr if allocation failed.</p>
+</div>
+<p class="since">Since: 1.8.0</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="hb-blob-destroy"></a><h3>hb_blob_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_blob_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blob.html#hb-blob-t"><span class="type">hb_blob_t</span></a> *blob</code></em>);</pre>
-<p>Descreases the reference count on <em class="parameter"><code>blob</code></em>
+<p>Decreases the reference count on <em class="parameter"><code>blob</code></em>
 , and if it reaches zero, destroys
 <em class="parameter"><code>blob</code></em>
 , freeing all memory, possibly calling the destroy-callback the blob
@@ -376,7 +446,7 @@ fails.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>length</p></td>
-<td class="parameter_description"><p> output length of the writable data. </p></td>
+<td class="parameter_description"><p>output length of the writable data. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -384,7 +454,7 @@ fails.</p>
 </div>
 <div class="refsect3">
 <a name="hb-blob-get-data-writable.returns"></a><h4>Returns</h4>
-<p> Writable blob data,
+<p>Writable blob data,
 or <code class="literal">NULL</code> if failed. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length]</span></p>
 </div>
@@ -399,7 +469,7 @@ hb_blob_get_empty (<em class="parameter"><code><span class="type">void</span></c
 <p>See TODO:link object types for more information.</p>
 <div class="refsect3">
 <a name="hb-blob-get-empty.returns"></a><h4>Returns</h4>
-<p> the empty blob. </p>
+<p>the empty blob. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
@@ -642,6 +712,6 @@ is not needed anymore.</p></td>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.27.1</div>
 </body>
 </html>

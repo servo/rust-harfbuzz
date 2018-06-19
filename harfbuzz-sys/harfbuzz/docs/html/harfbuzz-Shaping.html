@@ -5,10 +5,10 @@
 <title>Shaping: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="Harfbuzz API">
+<link rel="up" href="ch08.html" title="HarfBuzz API">
 <link rel="prev" href="harfbuzz-hb-font.html" title="hb-font">
 <link rel="next" href="harfbuzz-hb-version.html" title="hb-version">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -134,7 +134,7 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 <tbody>
 <tr>
 <td class="parameter_name"><p>str</p></td>
-<td class="parameter_description"><p> a string to parse. </p></td>
+<td class="parameter_description"><p>a string to parse. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
 <tr>
@@ -145,7 +145,7 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 </tr>
 <tr>
 <td class="parameter_name"><p>feature</p></td>
-<td class="parameter_description"><p> the <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
+<td class="parameter_description"><p>the <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -185,7 +185,7 @@ allocating big enough size for <em class="parameter"><code>buf</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>buf</p></td>
-<td class="parameter_description"><p> output string. </p></td>
+<td class="parameter_description"><p>output string. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -234,7 +234,7 @@ features applied during shaping.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p> an array of user
+<td class="parameter_description"><p>an array of user
 specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
@@ -283,7 +283,7 @@ will be used.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p> an array of user
+<td class="parameter_description"><p>an array of user
 specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
@@ -295,7 +295,7 @@ array</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p> a <code class="literal">NULL</code>-terminated
+<td class="parameter_description"><p>a <code class="literal">NULL</code>-terminated
 array of shapers to use or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
@@ -316,7 +316,7 @@ hb_shape_list_shapers (<em class="parameter"><code><span class="type">void</span
 <p>Retrieves the list of shapers supported by HarfBuzz.</p>
 <div class="refsect3">
 <a name="hb-shape-list-shapers.returns"></a><h4>Returns</h4>
-<p> an array of
+<p>an array of
 constant strings. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></p>
 </div>
@@ -338,6 +338,6 @@ constant strings. </p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.27.1</div>
 </body>
 </html>
