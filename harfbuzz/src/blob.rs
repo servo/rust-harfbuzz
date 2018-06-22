@@ -41,7 +41,7 @@ impl Blob {
         unsafe { sys::hb_blob_get_length(self.raw) as usize }
     }
 
-    /// Returns true if the lengeth is zero.
+    /// Returns true if the length is zero.
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
