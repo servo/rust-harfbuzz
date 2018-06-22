@@ -52,7 +52,7 @@ impl Blob {
     }
 
     /// Returns true if the blob is immutable.
-    pub fn is_immutable(&mut self) -> bool {
+    pub fn is_immutable(&self) -> bool {
         unsafe { sys::hb_blob_is_immutable(self.raw) != 0 }
     }
 
