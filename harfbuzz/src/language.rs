@@ -12,6 +12,7 @@
 use std;
 use sys;
 
+#[derive(PartialEq, PartialOrd)]
 pub struct Language {
     /// The underlying `hb_language_t` from the `harfbuzz-sys` crate.
     ///
