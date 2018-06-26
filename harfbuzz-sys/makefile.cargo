@@ -4,7 +4,8 @@ ifeq (armv7-linux-androideabi,$(TARGET))
 	# Reset TARGET variable because armv7 target name used by Rust is not 
 	# the same as the target name needed for the CXX toolchain.
 	TARGET = arm-linux-androideabi
-	FLAGS += -march=armv7a -mfpu=neon
+	#FLAGS += -mcpu=armv7 -mfpu=neon -v
+        FLAGS += --target=$(TARGET)
 endif
 
 ifneq ($(HOST),$(TARGET))
