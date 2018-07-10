@@ -21,6 +21,9 @@ fn main() {
         let dst = cmake::Config::new("harfbuzz").build();
         println!("cargo:rustc-link-search=native={}/lib", dst.display());
         println!("cargo:rustc-link-lib=static=harfbuzz");
+        if target.contains("gnu") {
+            println!("cargo:rustc-link-lib=stdc++");
+        }
     } else {
         assert!(
             Command::new("make")
