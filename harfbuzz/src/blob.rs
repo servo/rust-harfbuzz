@@ -41,7 +41,7 @@ impl Blob {
         unsafe { sys::hb_blob_get_length(self.raw) as usize }
     }
 
-    /// Returns true if the lengeth is zero.
+    /// Returns true if the length is zero.
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -52,7 +52,7 @@ impl Blob {
     }
 
     /// Returns true if the blob is immutable.
-    pub fn is_immutable(&mut self) -> bool {
+    pub fn is_immutable(&self) -> bool {
         unsafe { sys::hb_blob_is_immutable(self.raw) != 0 }
     }
 
