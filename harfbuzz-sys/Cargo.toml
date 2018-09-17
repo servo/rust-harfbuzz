@@ -9,6 +9,7 @@ description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz-sys/"
 keywords = ["opentype", "font", "text", "layout", "unicode"]
+categories = ["external-ffi-bindings", "internationalization"]
 
 links = "harfbuzz"
 build = "build.rs"
