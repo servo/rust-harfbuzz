@@ -27,7 +27,7 @@
 #ifndef HB_OT_COLOR_CBDT_TABLE_HH
 #define HB_OT_COLOR_CBDT_TABLE_HH
 
-#include "hb-open-type-private.hh"
+#include "hb-open-type.hh"
 
 /*
  * CBLC -- Color Bitmap Location
@@ -394,8 +394,8 @@ struct CBDT
     {
       upem = hb_face_get_upem (face);
 
-      cblc_blob = Sanitizer<CBLC>().sanitize (face->reference_table (HB_OT_TAG_CBLC));
-      cbdt_blob = Sanitizer<CBDT>().sanitize (face->reference_table (HB_OT_TAG_CBDT));
+      cblc_blob = hb_sanitize_context_t().reference_table<CBLC> (face);
+      cbdt_blob = hb_sanitize_context_t().reference_table<CBDT> (face);
       cbdt_len = hb_blob_get_length (cbdt_blob);
 
       if (hb_blob_get_length (cblc_blob) == 0) {
@@ -532,6 +532,8 @@ struct CBDT
   public:
   DEFINE_SIZE_ARRAY(4, dataZ);
 };
+
+struct CBDT_accelerator_t : CBDT::accelerator_t {};
 
 } /* namespace OT */
 

@@ -27,8 +27,8 @@
 #ifndef HB_OT_MATH_TABLE_HH
 #define HB_OT_MATH_TABLE_HH
 
-#include "hb-open-type-private.hh"
-#include "hb-ot-layout-common-private.hh"
+#include "hb-open-type.hh"
+#include "hb-ot-layout-common.hh"
 #include "hb-ot-math.h"
 
 namespace OT {
@@ -685,6 +685,8 @@ struct MathVariants
 struct MATH
 {
   static const hb_tag_t tableTag	= HB_OT_TAG_MATH;
+
+  inline bool has_data (void) const { return version.to_int () != 0; }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {

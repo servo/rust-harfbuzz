@@ -27,7 +27,7 @@
 #ifndef HB_OT_VAR_FVAR_TABLE_HH
 #define HB_OT_VAR_FVAR_TABLE_HH
 
-#include "hb-open-type-private.hh"
+#include "hb-open-type.hh"
 
 /*
  * fvar -- Font Variations
@@ -86,6 +86,8 @@ struct AxisRecord
 struct fvar
 {
   static const hb_tag_t tableTag	= HB_OT_TAG_fvar;
+
+  inline bool has_data (void) const { return version.to_int () != 0; }
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {

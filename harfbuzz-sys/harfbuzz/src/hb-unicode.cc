@@ -28,9 +28,9 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb-private.hh"
+#include "hb.hh"
 
-#include "hb-unicode-private.hh"
+#include "hb-unicode.hh"
 
 
 
@@ -185,7 +185,8 @@ hb_unicode_funcs_create (hb_unicode_funcs_t *parent)
 }
 
 
-const hb_unicode_funcs_t _hb_unicode_funcs_nil = {
+DEFINE_NULL_INSTANCE (hb_unicode_funcs_t) =
+{
   HB_OBJECT_HEADER_STATIC,
 
   nullptr, /* parent */
@@ -209,7 +210,7 @@ const hb_unicode_funcs_t _hb_unicode_funcs_nil = {
 hb_unicode_funcs_t *
 hb_unicode_funcs_get_empty (void)
 {
-  return const_cast<hb_unicode_funcs_t *> (&_hb_unicode_funcs_nil);
+  return const_cast<hb_unicode_funcs_t *> (&Null(hb_unicode_funcs_t));
 }
 
 /**
@@ -449,7 +450,7 @@ hb_unicode_decompose_compatibility (hb_unicode_funcs_t *ufuncs,
 }
 
 
-/* See hb-unicode-private.hh for details. */
+/* See hb-unicode.hh for details. */
 const uint8_t
 _hb_modified_combining_class[256] =
 {
