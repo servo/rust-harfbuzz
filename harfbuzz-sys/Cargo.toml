@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.2.1"
+version = "0.3.0"
 
 authors = ["The Servo Project Developers"]
 license = "MIT"
@@ -9,6 +9,7 @@ description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz-sys/"
 keywords = ["opentype", "font", "text", "layout", "unicode"]
+categories = ["external-ffi-bindings", "internationalization"]
 
 links = "harfbuzz"
 build = "build.rs"

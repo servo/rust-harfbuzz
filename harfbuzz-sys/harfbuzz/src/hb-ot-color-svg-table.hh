@@ -25,7 +25,7 @@
 #ifndef HB_OT_COLOR_SVG_TABLE_HH
 #define HB_OT_COLOR_SVG_TABLE_HH
 
-#include "hb-open-type-private.hh"
+#include "hb-open-type.hh"
 
 /*
  * SVG -- SVG (Scalable Vector Graphics)
@@ -96,11 +96,9 @@ struct SVG
   {
     inline void init (hb_face_t *face)
     {
-      OT::Sanitizer<OT::SVG> sanitizer;
-      svg_blob = sanitizer.sanitize (face->reference_table (HB_OT_TAG_SVG));
+      svg_blob = hb_sanitize_context_t().reference_table<SVG> (face);
       svg_len = hb_blob_get_length (svg_blob);
-      svg = svg_blob->as<OT::SVG> ();
-
+      svg = svg_blob->as<SVG> ();
     }
 
     inline void fini (void)

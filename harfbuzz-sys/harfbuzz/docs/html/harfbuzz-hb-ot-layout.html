@@ -49,6 +49,14 @@
 </td>
 </tr>
 <tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ot-layout.html#hb-ot-layout-collect-features" title="hb_ot_layout_collect_features ()">hb_ot_layout_collect_features</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
 <td class="function_type">unsigned <span class="returnvalue">int</span>
 </td>
 <td class="function_name">
@@ -341,6 +349,18 @@ hb_ot_layout_collect_lookups (<em class="parameter"><code><a class="link" href="
                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *features</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
 <p class="since">Since: <a class="link" href="api-index-0-9-8.html#api-index-0.9.8">0.9.8</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-ot-layout-collect-features"></a><h3>hb_ot_layout_collect_features ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+hb_ot_layout_collect_features (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
+                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *scripts</code></em>,
+                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *languages</code></em>,
+                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *features</code></em>,
+                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *feature_indexes</code></em>);</pre>
+<p class="since">Since: 1.8.5</p>
 </div>
 <hr>
 <div class="refsect2">

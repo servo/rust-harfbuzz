@@ -12,4 +12,4 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
-version = "0.2.1"
+version = "0.3.0"

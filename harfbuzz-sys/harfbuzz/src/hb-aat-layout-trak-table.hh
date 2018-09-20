@@ -28,9 +28,9 @@
 #ifndef HB_AAT_LAYOUT_TRAK_TABLE_HH
 #define HB_AAT_LAYOUT_TRAK_TABLE_HH
 
-#include "hb-aat-layout-common-private.hh"
-#include "hb-ot-layout-private.hh"
-#include "hb-open-type-private.hh"
+#include "hb-aat-layout-common.hh"
+#include "hb-ot-layout.hh"
+#include "hb-open-type.hh"
 
 /*
  * trak -- Tracking
@@ -172,7 +172,7 @@ struct trak
       hb_position_t advance_to_add = c->font->em_scalef_x (tracking / 2);
       foreach_grapheme (buffer, start, end)
       {
-	/* TODO This is wrong. */
+	buffer->pos[start].x_offset += advance_to_add;
 	buffer->pos[start].x_advance += advance_to_add;
 	buffer->pos[end].x_advance += advance_to_add;
       }
@@ -184,7 +184,7 @@ struct trak
       hb_position_t advance_to_add = c->font->em_scalef_y (tracking / 2);
       foreach_grapheme (buffer, start, end)
       {
-	/* TODO This is wrong. */
+	buffer->pos[start].y_offset += advance_to_add;
 	buffer->pos[start].y_advance += advance_to_add;
 	buffer->pos[end].y_advance += advance_to_add;
       }
