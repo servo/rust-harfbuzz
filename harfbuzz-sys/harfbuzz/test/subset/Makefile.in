@@ -692,7 +692,7 @@ uninstall-am:
 
 # Convenience targets:
 lib:
-	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src lib
+	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src libs
 
 -include $(top_srcdir)/git.mk
 

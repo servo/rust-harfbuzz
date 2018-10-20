@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="HarfBuzz API">
 <link rel="prev" href="harfbuzz-hb-font.html" title="hb-font">
 <link rel="next" href="harfbuzz-hb-version.html" title="hb-version">
-<meta name="generator" content="GTK-Doc V1.27.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -89,15 +89,25 @@
 <col width="150px" class="name">
 <col class="description">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-Shaping.html#HB-FEATURE-GLOBAL-END:CAPS" title="HB_FEATURE_GLOBAL_END">HB_FEATURE_GLOBAL_END</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-Shaping.html#HB-FEATURE-GLOBAL-START:CAPS" title="HB_FEATURE_GLOBAL_START">HB_FEATURE_GLOBAL_START</a></td>
+</tr>
+<tr>
 <td class="datatype_keyword"> </td>
 <td class="function_name"><a class="link" href="harfbuzz-Shaping.html#hb-feature-t-struct" title="hb_feature_t">hb_feature_t</a></td>
-</tr></tbody>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-Shaping.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/home/behdad/.local/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
     <span class="lineart">╰──</span> hb_feature_t
 </pre>
 </div>
@@ -134,18 +144,18 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 <tbody>
 <tr>
 <td class="parameter_name"><p>str</p></td>
-<td class="parameter_description"><p>a string to parse. </p></td>
+<td class="parameter_description"><p> a string to parse. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of <em class="parameter"><code>str</code></em>
-, or -1 if string is <code class="literal">NULL</code> terminated</p></td>
+, or -1 if string is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>feature</p></td>
-<td class="parameter_description"><p>the <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
+<td class="parameter_description"><p> the <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -165,7 +175,7 @@ is successfully parsed, <code class="literal">false</code> otherwise.</p>
 hb_feature_to_string (<em class="parameter"><code><a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *feature</code></em>,
                       <em class="parameter"><code><span class="type">char</span> *buf</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> size</code></em>);</pre>
-<p>Converts a <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> into a <code class="literal">NULL</code>-terminated string in the format
+<p>Converts a <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> into a <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated string in the format
 understood by <a class="link" href="harfbuzz-Shaping.html#hb-feature-from-string" title="hb_feature_from_string ()"><code class="function">hb_feature_from_string()</code></a>. The client in responsible for
 allocating big enough size for <em class="parameter"><code>buf</code></em>
 , 128 bytes is more than enough.</p>
@@ -185,7 +195,7 @@ allocating big enough size for <em class="parameter"><code>buf</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>buf</p></td>
-<td class="parameter_description"><p>output string. </p></td>
+<td class="parameter_description"><p> output string. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -211,7 +221,7 @@ hb_shape (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.htm
  using <em class="parameter"><code>font</code></em>
  turning its Unicode characters content to
 positioned glyphs. If <em class="parameter"><code>features</code></em>
- is not <code class="literal">NULL</code>, it will be used to control the
+ is not <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it will be used to control the
 features applied during shaping.</p>
 <div class="refsect3">
 <a name="hb-shape.parameters"></a><h4>Parameters</h4>
@@ -234,8 +244,8 @@ features applied during shaping.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p>an array of user
-specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
+<td class="parameter_description"><p> an array of user
+specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -259,7 +269,7 @@ hb_shape_full (<em class="parameter"><code><a class="link" href="harfbuzz-hb-fon
                <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>,
                <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <p>See <a class="link" href="harfbuzz-Shaping.html#hb-shape" title="hb_shape ()"><code class="function">hb_shape()</code></a> for details. If <em class="parameter"><code>shaper_list</code></em>
- is not <code class="literal">NULL</code>, the specified
+ is not <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the specified
 shapers will be used in the given order, otherwise the default shapers list
 will be used.</p>
 <div class="refsect3">
@@ -283,8 +293,8 @@ will be used.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p>an array of user
-specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
+<td class="parameter_description"><p> an array of user
+specified <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -295,8 +305,8 @@ array</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p>a <code class="literal">NULL</code>-terminated
-array of shapers to use or <code class="literal">NULL</code>. </p></td>
+<td class="parameter_description"><p> a <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated
+array of shapers to use or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -316,7 +326,7 @@ hb_shape_list_shapers (<em class="parameter"><code><span class="type">void</span
 <p>Retrieves the list of shapers supported by HarfBuzz.</p>
 <div class="refsect3">
 <a name="hb-shape-list-shapers.returns"></a><h4>Returns</h4>
-<p>an array of
+<p> an array of
 constant strings. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></p>
 </div>
@@ -325,6 +335,20 @@ constant strings. </p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-Shaping.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="HB-FEATURE-GLOBAL-END:CAPS"></a><h3>HB_FEATURE_GLOBAL_END</h3>
+<pre class="programlisting">#define HB_FEATURE_GLOBAL_END ((unsigned int) -1)
+</pre>
+<p class="since">Since: 2.0.0</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-FEATURE-GLOBAL-START:CAPS"></a><h3>HB_FEATURE_GLOBAL_START</h3>
+<pre class="programlisting">#define HB_FEATURE_GLOBAL_START 0
+</pre>
+<p class="since">Since: 2.0.0</p>
+</div>
+<hr>
 <div class="refsect2">
 <a name="hb-feature-t-struct"></a><h3>hb_feature_t</h3>
 <pre class="programlisting">typedef struct {
@@ -338,6 +362,6 @@ constant strings. </p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.27.1</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

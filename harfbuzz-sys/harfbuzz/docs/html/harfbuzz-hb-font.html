@@ -8,7 +8,7 @@
 <link rel="up" href="ch08.html" title="HarfBuzz API">
 <link rel="prev" href="harfbuzz-hb-face.html" title="hb-face">
 <link rel="next" href="harfbuzz-Shaping.html" title="Shaping">
-<meta name="generator" content="GTK-Doc V1.27.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -835,7 +835,7 @@
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-font.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/home/behdad/.local/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
     <span class="lineart">├──</span> hb_font_funcs_t
     <span class="lineart">╰──</span> hb_font_t
 </pre>
@@ -1278,6 +1278,7 @@ hb_font_funcs_set_glyph_h_kerning_func
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-get-glyph-h-kerning-func-t" title="hb_font_get_glyph_h_kerning_func_t"><span class="type">hb_font_get_glyph_h_kerning_func_t</span></a> func</code></em>,
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_funcs_set_glyph_h_kerning_func</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
 <div class="refsect3">
 <a name="hb-font-funcs-set-glyph-h-kerning-func.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1441,6 +1442,7 @@ hb_font_funcs_set_glyph_v_kerning_func
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-get-glyph-v-kerning-func-t" title="hb_font_get_glyph_v_kerning_func_t"><span class="type">hb_font_get_glyph_v_kerning_func_t</span></a> func</code></em>,
                                 <em class="parameter"><code><span class="type">void</span> *user_data</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_funcs_set_glyph_v_kerning_func</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
 <div class="refsect3">
 <a name="hb-font-funcs-set-glyph-v-kerning-func.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1714,8 +1716,8 @@ hb_font_get_glyph_advance_for_direction
 hb_font_get_glyph_advances_for_direction
                                (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-direction-t" title="enum hb_direction_t"><span class="type">hb_direction_t</span></a> direction</code></em>,
-                                <em class="parameter"><code><span class="type">unsigned </span> count</code></em>,
-                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
+                                <em class="parameter"><code>unsigned <span class="type">int</span> count</code></em>,
+                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
                                 <em class="parameter"><code><span class="type">unsigned </span> glyph_stride</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *first_advance</code></em>,
                                 <em class="parameter"><code><span class="type">unsigned </span> advance_stride</code></em>);</pre>
@@ -1742,8 +1744,8 @@ hb_font_get_glyph_advances_for_direction
 <pre class="programlisting"><span class="returnvalue">void</span>
 <span class="c_punctuation">(</span>*hb_font_get_glyph_advances_func_t<span class="c_punctuation">)</span> (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
                                       <em class="parameter"><code><span class="type">void</span> *font_data</code></em>,
-                                      <em class="parameter"><code><span class="type">unsigned </span> count</code></em>,
-                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
+                                      <em class="parameter"><code>unsigned <span class="type">int</span> count</code></em>,
+                                      <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
                                       <em class="parameter"><code><span class="type">unsigned </span> glyph_stride</code></em>,
                                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *first_advance</code></em>,
                                       <em class="parameter"><code><span class="type">unsigned </span> advance_stride</code></em>,
@@ -1987,8 +1989,8 @@ hb_font_get_glyph_h_advance (<em class="parameter"><code><a class="link" href="h
 <a name="hb-font-get-glyph-h-advances"></a><h3>hb_font_get_glyph_h_advances ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_font_get_glyph_h_advances (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-                              <em class="parameter"><code><span class="type">unsigned </span> count</code></em>,
-                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
+                              <em class="parameter"><code>unsigned <span class="type">int</span> count</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
                               <em class="parameter"><code><span class="type">unsigned </span> glyph_stride</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *first_advance</code></em>,
                               <em class="parameter"><code><span class="type">unsigned </span> advance_stride</code></em>);</pre>
@@ -2016,6 +2018,7 @@ hb_font_get_glyph_h_advances (<em class="parameter"><code><a class="link" href="
 hb_font_get_glyph_h_kerning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> left_glyph</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> right_glyph</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_h_kerning</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
 <div class="refsect3">
 <a name="hb-font-get-glyph-h-kerning.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2081,6 +2084,7 @@ hb_font_get_glyph_kerning_for_direction
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-direction-t" title="enum hb_direction_t"><span class="type">hb_direction_t</span></a> direction</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *x</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *y</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_kerning_for_direction</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
 <div class="refsect3">
 <a name="hb-font-get-glyph-kerning-for-direction.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2119,6 +2123,7 @@ hb_font_get_glyph_kerning_for_direction
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> first_glyph</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> second_glyph</code></em>,
                                      <em class="parameter"><code><span class="type">void</span> *user_data</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_kerning_func_t</code> is deprecated and should not be used in newly-written code.</p></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -2241,8 +2246,8 @@ hb_font_get_glyph_v_advance (<em class="parameter"><code><a class="link" href="h
 <a name="hb-font-get-glyph-v-advances"></a><h3>hb_font_get_glyph_v_advances ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_font_get_glyph_v_advances (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-                              <em class="parameter"><code><span class="type">unsigned </span> count</code></em>,
-                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
+                              <em class="parameter"><code>unsigned <span class="type">int</span> count</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *first_glyph</code></em>,
                               <em class="parameter"><code><span class="type">unsigned </span> glyph_stride</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-position-t" title="hb_position_t"><span class="type">hb_position_t</span></a> *first_advance</code></em>,
                               <em class="parameter"><code><span class="type">unsigned </span> advance_stride</code></em>);</pre>
@@ -2270,6 +2275,7 @@ hb_font_get_glyph_v_advances (<em class="parameter"><code><a class="link" href="
 hb_font_get_glyph_v_kerning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> top_glyph</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> bottom_glyph</code></em>);</pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_v_kerning</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
 <div class="refsect3">
 <a name="hb-font-get-glyph-v-kerning.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2871,7 +2877,8 @@ hb_font_set_ppem (<em class="parameter"><code><a class="link" href="harfbuzz-hb-
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_font_set_ptem (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
                   <em class="parameter"><code><span class="type">float</span> ptem</code></em>);</pre>
-<p>Sets "point size" of the font.</p>
+<p>Sets "point size" of the font.  Set to 0 to unset.</p>
+<p>There are 72 points in an inch.</p>
 <div class="refsect3">
 <a name="hb-font-set-ptem.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2880,11 +2887,18 @@ hb_font_set_ptem (<em class="parameter"><code><a class="link" href="harfbuzz-hb-
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>font</p></td>
 <td class="parameter_description"><p>a font.</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>ptem</p></td>
+<td class="parameter_description"><p>font size in points.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-6-0.html#api-index-1.6.0">1.6.0</a></p>
@@ -3111,11 +3125,18 @@ hb_font_get_extents_for_direction (<em class="parameter"><code><a class="link" h
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>font</p></td>
 <td class="parameter_description"><p>a font.</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>extents</p></td>
+<td class="parameter_description"><p>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-1-3.html#api-index-1.1.3">1.1.3</a></p>
@@ -3214,6 +3235,7 @@ hb_font_get_v_extents (<em class="parameter"><code><a class="link" href="harfbuz
 <a name="hb-font-get-glyph-h-kerning-func-t"></a><h3>hb_font_get_glyph_h_kerning_func_t</h3>
 <pre class="programlisting">typedef hb_font_get_glyph_kerning_func_t hb_font_get_glyph_h_kerning_func_t;
 </pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_h_kerning_func_t</code> is deprecated and should not be used in newly-written code.</p></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -3238,6 +3260,7 @@ hb_font_get_v_extents (<em class="parameter"><code><a class="link" href="harfbuz
 <a name="hb-font-get-glyph-v-kerning-func-t"></a><h3>hb_font_get_glyph_v_kerning_func_t</h3>
 <pre class="programlisting">typedef hb_font_get_glyph_kerning_func_t hb_font_get_glyph_v_kerning_func_t;
 </pre>
+<div class="warning"><p><code class="literal">hb_font_get_glyph_v_kerning_func_t</code> is deprecated and should not be used in newly-written code.</p></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -3276,6 +3299,6 @@ hb_font_get_v_extents (<em class="parameter"><code><a class="link" href="harfbuz
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.27.1</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>
