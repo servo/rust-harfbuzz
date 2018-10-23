@@ -189,8 +189,11 @@ hb_face_set_glyph_count
 hb_face_set_index
 hb_face_set_upem
 hb_face_set_user_data
-hb_face_builder_add_table
+hb_face_collect_unicodes
+hb_face_collect_variation_selectors
+hb_face_collect_variation_unicodes
 hb_face_builder_create
+hb_face_builder_add_table
 </SECTION>
 
 <SECTION>
@@ -579,6 +582,8 @@ hb_set_union
 
 <SECTION>
 <FILE>hb-shape</FILE>
+HB_FEATURE_GLOBAL_END
+HB_FEATURE_GLOBAL_START
 hb_feature_t
 hb_feature_from_string
 hb_feature_to_string
@@ -605,6 +610,7 @@ hb_shape_plan_t
 
 <SECTION>
 <FILE>hb-unicode</FILE>
+HB_UNICODE_MAX
 HB_UNICODE_MAX_DECOMPOSITION_LEN
 hb_unicode_combining_class
 hb_unicode_combining_class_func_t

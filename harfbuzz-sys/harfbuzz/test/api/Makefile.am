@@ -16,6 +16,8 @@ EXTRA_DIST += CMakeLists.txt
 
 EXTRA_DIST += fonts
 
+LINK = $(CXXLINK)
+
 if HAVE_GLIB
 AM_CPPFLAGS = -DSRCDIR="\"$(srcdir)\"" -I$(top_srcdir)/src/ -I$(top_builddir)/src/ $(GLIB_CFLAGS)
 LDADD = $(top_builddir)/src/libharfbuzz.la $(GLIB_LIBS)
@@ -28,13 +30,14 @@ noinst_PROGRAMS = $(TEST_PROGS)
 TEST_PROGS = \
 	test-blob \
 	test-buffer \
+	test-collect-unicodes \
 	test-common \
 	test-font \
+	test-map \
 	test-object \
 	test-set \
 	test-shape \
 	test-subset \
-	test-subset-codepoints \
 	test-subset-cmap \
 	test-subset-glyf \
 	test-subset-hdmx \
@@ -67,12 +70,23 @@ test_unicode_LDADD += $(top_builddir)/src/libharfbuzz-icu.la $(ICU_LIBS)
 endif
 
 
-if HAVE_OT
-
 TEST_PROGS += \
 	test-ot-color \
+	test-ot-name \
 	test-ot-tag \
 	$(NULL)
+
+
+if HAVE_PTHREAD
+if HAVE_FREETYPE
+TEST_PROGS += test-multithread
+test_multithread_CFLAGS = $(CFLAGS) $(PTHREAD_CFLAGS) $(FREETYPE_CFLAGS)
+test_multithread_LDADD = $(LDADD) $(PTHREAD_LIBS) $(FREETYPE_LIBS)
+# The auto-generated link rule somehow includes CFLAGS as well.  Without
+# it, pthread link fails, because, who knows why, $PTHREAD_LIBS is empty.
+test_multithread_LINK = $(LINK) $(PTHREAD_CFLAGS)
+endif
+endif
 
 if HAVE_FREETYPE
 TEST_PROGS += \
@@ -82,7 +96,6 @@ test_ot_math_LDADD = $(LDADD) $(FREETYPE_LIBS)
 test_ot_math_CPPFLAGS = $(AM_CPPFLAGS) $(FREETYPE_CFLAGS)
 endif # HAVE_FREETYPE
 
-endif # HAVE_OT
 
 # Tests for header compilation
 TEST_PROGS += \
@@ -154,13 +167,18 @@ symbols-tested.txt: $(TEST_PROGS)
 	$(AM_V_GEN)$(top_builddir)/libtool --mode=execute nm $^ \
 	| grep ' U hb_' | sed 's/.* U hb_/hb_/' \
 	| sort | uniq > $@.tmp && mv $@.tmp $@
+symbols-tested-or-deprecated.txt: symbols-tested.txt $(top_builddir)/src/harfbuzz-deprecated.def
+	$(AM_V_GEN)cat $^ | sort | uniq > $@.tmp; mv $@.tmp $@
 symbols-exported.txt: $(top_builddir)/src/.libs/libharfbuzz.so
 	$(AM_V_GEN)$(top_builddir)/libtool --mode=execute nm $^ \
 	| grep ' T ' | sed 's/.* T //' | grep -v '^\(_init\|_fini\)$$' \
 	| sort | uniq > $@.tmp && mv $@.tmp $@
-symbols-untested.txt: symbols-tested.txt symbols-exported.txt
+symbols-untested.txt: symbols-tested-or-deprecated.txt symbols-exported.txt
 	$(AM_V_GEN)diff $^ > $@.tmp; mv $@.tmp $@
-CLEANFILES += symbols-tested.txt symbols-exported.txt symbols-untested.txt
+CLEANFILES += symbols-tested.txt \
+	symbols-exported.txt \
+	symbols-untested.txt \
+	symbols-tested-or-deprecated.txt
 check-symbols: symbols-untested.txt
 	@! cat $^ | grep .
 
