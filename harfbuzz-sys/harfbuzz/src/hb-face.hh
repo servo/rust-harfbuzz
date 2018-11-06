@@ -42,9 +42,6 @@
 struct hb_face_t
 {
   hb_object_header_t header;
-  ASSERT_POD ();
-
-  hb_bool_t immutable;
 
   hb_reference_table_func_t  reference_table_func;
   void                      *user_data;

@@ -13,11 +13,9 @@ extern "C" {
 
 pub const HB_FEATURE_GLOBAL_START: u32 = 0;
 pub const HB_UNICODE_MAX: u32 = 1114111;
-pub const HB_UNICODE_MAX_DECOMPOSITION_LEN: u32 = 19;
 pub const HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT: u32 = 65533;
 pub const HB_OT_MAX_TAGS_PER_SCRIPT: u32 = 3;
 pub const HB_OT_MAX_TAGS_PER_LANGUAGE: u32 = 3;
-pub const HB_NAME_ID_INVALID: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_SCRIPT_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_FEATURE_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_DEFAULT_LANGUAGE_INDEX: u32 = 65535;
@@ -496,6 +494,12 @@ extern "C" {
         size: ::std::os::raw::c_uint,
     );
 }
+/// hb_color_t:
+///
+/// Data type for holding color values.
+///
+/// Since: 2.1.0
+pub type hb_color_t = u32;
 pub const HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
 pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
 pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
@@ -1379,7 +1383,7 @@ pub type hb_font_get_font_extents_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         font: *mut hb_font_t,
         font_data: *mut ::std::os::raw::c_void,
-        metrics: *mut hb_font_extents_t,
+        extents: *mut hb_font_extents_t,
         user_data: *mut ::std::os::raw::c_void,
     ) -> hb_bool_t,
 >;
@@ -2182,6 +2186,7 @@ pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
 /// of each line after line-breaking, or limiting
 /// the reshaping to a small piece around the
 /// breaking point only.
+/// @HB_GLYPH_FLAG_DEFINED: All the currently defined flags.
 pub type hb_glyph_flags_t = u32;
 extern "C" {
     pub fn hb_glyph_info_get_glyph_flags(info: *const hb_glyph_info_t) -> hb_glyph_flags_t;
@@ -2927,6 +2932,252 @@ extern "C" {
         micro: ::std::os::raw::c_uint,
     ) -> hb_bool_t;
 }
+pub const HB_OT_NAME_ID_COPYRIGHT: _bindgen_ty_1 = 0;
+pub const HB_OT_NAME_ID_FONT_FAMILY: _bindgen_ty_1 = 1;
+pub const HB_OT_NAME_ID_FONT_SUBFAMILY: _bindgen_ty_1 = 2;
+pub const HB_OT_NAME_ID_UNIQUE_ID: _bindgen_ty_1 = 3;
+pub const HB_OT_NAME_ID_FULL_NAME: _bindgen_ty_1 = 4;
+pub const HB_OT_NAME_ID_VERSION_STRING: _bindgen_ty_1 = 5;
+pub const HB_OT_NAME_ID_POSTSCRIPT_NAME: _bindgen_ty_1 = 6;
+pub const HB_OT_NAME_ID_TRADEMARK: _bindgen_ty_1 = 7;
+pub const HB_OT_NAME_ID_MANUFACTURER: _bindgen_ty_1 = 8;
+pub const HB_OT_NAME_ID_DESIGNER: _bindgen_ty_1 = 9;
+pub const HB_OT_NAME_ID_DESCRIPTION: _bindgen_ty_1 = 10;
+pub const HB_OT_NAME_ID_VENDOR_URL: _bindgen_ty_1 = 11;
+pub const HB_OT_NAME_ID_DESIGNER_URL: _bindgen_ty_1 = 12;
+pub const HB_OT_NAME_ID_LICENSE: _bindgen_ty_1 = 13;
+pub const HB_OT_NAME_ID_LICENSE_URL: _bindgen_ty_1 = 14;
+pub const HB_OT_NAME_ID_TYPOGRAPHIC_FAMILY: _bindgen_ty_1 = 16;
+pub const HB_OT_NAME_ID_TYPOGRAPHIC_SUBFAMILY: _bindgen_ty_1 = 17;
+pub const HB_OT_NAME_ID_MAC_FULL_NAME: _bindgen_ty_1 = 18;
+pub const HB_OT_NAME_ID_SAMPLE_TEXT: _bindgen_ty_1 = 19;
+pub const HB_OT_NAME_ID_CID_FINDFONT_NAME: _bindgen_ty_1 = 20;
+pub const HB_OT_NAME_ID_WWS_FAMILY: _bindgen_ty_1 = 21;
+pub const HB_OT_NAME_ID_WWS_SUBFAMILY: _bindgen_ty_1 = 22;
+pub const HB_OT_NAME_ID_LIGHT_BACKGROUND: _bindgen_ty_1 = 23;
+pub const HB_OT_NAME_ID_DARK_BACKGROUND: _bindgen_ty_1 = 24;
+pub const HB_OT_NAME_ID_VARIATIONS_PS_PREFIX: _bindgen_ty_1 = 25;
+pub const HB_OT_NAME_ID_INVALID: _bindgen_ty_1 = 65535;
+/// hb_ot_name_id_t:
+/// @HB_OT_NAME_ID_INVALID: Value to represent a nonexistent name ID.
+///
+/// An integral type representing an OpenType 'name' table name identifier.
+/// There are predefined name IDs, as well as name IDs return from other
+/// API.  These can be used to fetch name strings from a font face.
+///
+/// Since: 2.0.0
+pub type _bindgen_ty_1 = u32;
+pub type hb_ot_name_id_t = ::std::os::raw::c_uint;
+/// hb_ot_name_entry_t:
+/// @name_id: name ID
+/// @language: language
+///
+/// Structure representing a name ID in a particular language.
+///
+/// Since: 2.1.0
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hb_ot_name_entry_t {
+    pub name_id: hb_ot_name_id_t,
+    pub var: hb_var_int_t,
+    pub language: hb_language_t,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_name_entry_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_name_entry_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(hb_ot_name_entry_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_name_entry_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(hb_ot_name_entry_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).name_id as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).var as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(var)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).language as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(language)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_name_list_names(
+        face: *mut hb_face_t,
+        num_entries: *mut ::std::os::raw::c_uint,
+    ) -> *const hb_ot_name_entry_t;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf8(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf16(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut u16,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf32(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut u32,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_palettes(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_name_id(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_color_get_name_id(
+        face: *mut hb_face_t,
+        color_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+pub const HB_OT_COLOR_PALETTE_FLAG_DEFAULT: hb_ot_color_palette_flags_t = 0;
+pub const HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_LIGHT_BACKGROUND: hb_ot_color_palette_flags_t = 1;
+pub const HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: hb_ot_color_palette_flags_t = 2;
+/// hb_ot_color_palette_flags_t:
+/// @HB_OT_COLOR_PALETTE_FLAG_DEFAULT: default indicating that there is nothing special
+/// to note about a color palette.
+/// @HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_LIGHT_BACKGROUND: flag indicating that the color
+/// palette is appropriate to use when displaying the font on a light background such as white.
+/// @HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: flag indicating that the color
+/// palette is appropriate to use when displaying the font on a dark background such as black.
+///
+/// Since: 2.1.0
+pub type hb_ot_color_palette_flags_t = u32;
+extern "C" {
+    pub fn hb_ot_color_palette_get_flags(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_color_palette_flags_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_colors(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        color_count: *mut ::std::os::raw::c_uint,
+        colors: *mut hb_color_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_layers(face: *mut hb_face_t) -> hb_bool_t;
+}
+/// hb_ot_color_layer_t:
+///
+/// Pairs of glyph and color index.
+///
+/// Since: 2.1.0
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_color_layer_t {
+    pub glyph: hb_codepoint_t,
+    pub color_index: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_color_layer_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_color_layer_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(hb_ot_color_layer_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_color_layer_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_color_layer_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_color_layer_t>())).glyph as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_color_layer_t),
+            "::",
+            stringify!(glyph)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_color_layer_t>())).color_index as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_color_layer_t),
+            "::",
+            stringify!(color_index)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_get_layers(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+        start_offset: ::std::os::raw::c_uint,
+        count: *mut ::std::os::raw::c_uint,
+        layers: *mut hb_ot_color_layer_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_svg(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_reference_svg(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+    ) -> *mut hb_blob_t;
+}
+extern "C" {
+    pub fn hb_ot_color_has_png(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_reference_png(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+    ) -> *mut hb_blob_t;
+}
 extern "C" {
     pub fn hb_ot_font_set_funcs(font: *mut hb_font_t);
 }
@@ -2954,10 +3205,6 @@ extern "C" {
         language: *mut hb_language_t,
     );
 }
-/// hb_name_id_t:
-///
-/// Since: 2.0.0
-pub type hb_name_id_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_ot_layout_has_glyph_classes(face: *mut hb_face_t) -> hb_bool_t;
 }
@@ -3207,7 +3454,7 @@ extern "C" {
         face: *mut hb_face_t,
         design_size: *mut ::std::os::raw::c_uint,
         subfamily_id: *mut ::std::os::raw::c_uint,
-        subfamily_name_id: *mut hb_name_id_t,
+        subfamily_name_id: *mut hb_ot_name_id_t,
         range_start: *mut ::std::os::raw::c_uint,
         range_end: *mut ::std::os::raw::c_uint,
     ) -> hb_bool_t;
@@ -3217,11 +3464,11 @@ extern "C" {
         face: *mut hb_face_t,
         table_tag: hb_tag_t,
         feature_index: ::std::os::raw::c_uint,
-        label_id: *mut hb_name_id_t,
-        tooltip_id: *mut hb_name_id_t,
-        sample_id: *mut hb_name_id_t,
+        label_id: *mut hb_ot_name_id_t,
+        tooltip_id: *mut hb_ot_name_id_t,
+        sample_id: *mut hb_ot_name_id_t,
         num_named_parameters: *mut ::std::os::raw::c_uint,
-        first_param_id: *mut hb_name_id_t,
+        first_param_id: *mut hb_ot_name_id_t,
     ) -> hb_bool_t;
 }
 extern "C" {

@@ -553,8 +553,8 @@ EXTRA_DIST = \
 TEST_EXTENSIONS = .tests
 TESTS_LOG_COMPILER = $(srcdir)/../../run-tests.py $(top_builddir)/util/hb-shape$(EXEEXT)
 DISBALED_TESTS = \
-	tests/MORX-41.tests \
 	tests/CMAP-3.tests \
+	tests/MORX-41.tests \
 	tests/SHARAN-1.tests \
 	tests/SHBALI-1.tests \
 	tests/SHBALI-2.tests \

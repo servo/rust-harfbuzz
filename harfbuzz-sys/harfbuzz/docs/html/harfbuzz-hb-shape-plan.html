@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-shape-plan: HarfBuzz Manual</title>
+<title>hb-shape-plan: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
-<link rel="next" href="harfbuzz-hb-glib.html" title="hb-glib">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-shape.html" title="hb-shape">
+<link rel="next" href="harfbuzz-hb-unicode.html" title="hb-unicode">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -19,16 +19,16 @@
                   <a href="#harfbuzz-hb-shape-plan.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-ot-math.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="harfbuzz-hb-glib.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-shape.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-hb-unicode.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-shape-plan"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-shape-plan.top_of_page"></a>hb-shape-plan</span></h2>
-<p>hb-shape-plan</p>
+<p>hb-shape-plan — Object representing a shaping plan</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -150,7 +150,16 @@
 </pre>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-shape-plan.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-shape-plan.description"></a><h2>Description</h2>
+<p>Shape plans are not used for shaping directly, but can be access to query
+certain information about how shaping will perform given a set of input
+parameters (script, language, direction, features, etc.)
+Most client would not need to deal with shape plans directly.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-shape-plan.functions_details"></a><h2>Functions</h2>
@@ -158,8 +167,8 @@
 <a name="hb-shape-plan-create"></a><h3>hb_shape_plan_create ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                      <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
-                      <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                      <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                      <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                       <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <p><span class="annotation">[Xconstructor]</span></p>
@@ -197,8 +206,8 @@ hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz
 <a name="hb-shape-plan-create-cached"></a><h3>hb_shape_plan_create_cached ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                             <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
-                             <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                             <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                             <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                              <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                              <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <div class="refsect3">
@@ -235,8 +244,8 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
 <a name="hb-shape-plan-create2"></a><h3>hb_shape_plan_create2 ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create2 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
-                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                       <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                       <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                        <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
@@ -247,8 +256,8 @@ hb_shape_plan_create2 (<em class="parameter"><code><a class="link" href="harfbuz
 <a name="hb-shape-plan-create-cached2"></a><h3>hb_shape_plan_create_cached2 ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_create_cached2 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                              <em class="parameter"><code>const <a class="link" href="harfbuzz-Buffers.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
-                              <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a> *props</code></em>,
+                              <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                               <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
@@ -283,8 +292,8 @@ hb_shape_plan_destroy (<em class="parameter"><code><a class="link" href="harfbuz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
-                       <em class="parameter"><code><a class="link" href="harfbuzz-Buffers.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
-                       <em class="parameter"><code>const <a class="link" href="harfbuzz-Shaping.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *features</code></em>,
+                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
+                       <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *features</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>);</pre>
 <div class="refsect3">
 <a name="hb-shape-plan-execute.parameters"></a><h4>Parameters</h4>

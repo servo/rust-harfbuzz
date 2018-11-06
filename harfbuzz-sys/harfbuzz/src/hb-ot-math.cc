@@ -29,12 +29,23 @@
 #include "hb-ot-face.hh"
 #include "hb-ot-math-table.hh"
 
+
+/**
+ * SECTION:hb-ot-math
+ * @title: hb-ot-math
+ * @short_description: OpenType Math information
+ * @include: hb-ot.h
+ *
+ * Functions for fetching mathematics layout data from OpenType fonts.
+ **/
+
+
 static inline const OT::MATH&
 _get_math (hb_face_t *face)
 {
   if (unlikely (!hb_ot_shaper_face_data_ensure (face))) return Null(OT::MATH);
   hb_ot_face_data_t * data = hb_ot_face_data (face);
-  return *(data->MATH.get ());
+  return *(data->MATH);
 }
 
 /*

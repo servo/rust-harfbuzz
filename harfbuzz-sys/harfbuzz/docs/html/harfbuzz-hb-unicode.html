@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-unicode: HarfBuzz Manual</title>
+<title>hb-unicode: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb-common.html" title="hb-common">
-<link rel="next" href="harfbuzz-Buffers.html" title="Buffers">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-shape-plan.html" title="hb-shape-plan">
+<link rel="next" href="harfbuzz-hb-uniscribe.html" title="hb-uniscribe">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -19,16 +19,16 @@
                   <a href="#harfbuzz-hb-unicode.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-common.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="harfbuzz-Buffers.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-shape-plan.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-hb-uniscribe.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-unicode"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-unicode.top_of_page"></a>hb-unicode</span></h2>
-<p>hb-unicode</p>
+<p>hb-unicode — Unicode character property access</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -280,10 +280,6 @@
 <td class="function_name"><a class="link" href="harfbuzz-hb-unicode.html#HB-UNICODE-MAX:CAPS" title="HB_UNICODE_MAX">HB_UNICODE_MAX</a></td>
 </tr>
 <tr>
-<td class="define_keyword">#define</td>
-<td class="function_name"><a class="link" href="harfbuzz-hb-unicode.html#HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS" title="HB_UNICODE_MAX_DECOMPOSITION_LEN">HB_UNICODE_MAX_DECOMPOSITION_LEN</a></td>
-</tr>
-<tr>
 <td class="datatype_keyword">enum</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-unicode.html#hb-unicode-combining-class-t" title="enum hb_unicode_combining_class_t">hb_unicode_combining_class_t</a></td>
 </tr>
@@ -308,7 +304,17 @@
 </pre>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-unicode.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-unicode.description"></a><h2>Description</h2>
+<p>Unicode functions are used to access Unicode character properties.
+Client can pass its own Unicode functions to HarfBuzz, or access
+the built-in Unicode functions that come with HarfBuzz.</p>
+<p>With the Unicode functions, one can query variour Unicode character
+properties, such as General Category, Script, Combining Class, etc.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-unicode.functions_details"></a><h2>Functions</h2>
@@ -884,15 +890,7 @@ hb_unicode_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb
 <a name="HB-UNICODE-MAX:CAPS"></a><h3>HB_UNICODE_MAX</h3>
 <pre class="programlisting">#define HB_UNICODE_MAX 0x10FFFFu
 </pre>
-<p class="since">Since: 1.9.0</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS"></a><h3>HB_UNICODE_MAX_DECOMPOSITION_LEN</h3>
-<pre class="programlisting">#define HB_UNICODE_MAX_DECOMPOSITION_LEN (18+1) /* codepoints */
-</pre>
-<div class="warning"><p><code class="literal">HB_UNICODE_MAX_DECOMPOSITION_LEN</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
-<p>See Unicode 6.1 for details on the maximum decomposition length.</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 <hr>
 <div class="refsect2">

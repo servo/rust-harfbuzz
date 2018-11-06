@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[Insert title here]: HarfBuzz Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="prev" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="next" href="harfbuzz-.html" title="">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><img src="up-insensitive.png" width="16" height="16" border="0"></td>
+<td><a accesskey="p" href="index.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="chapter">
+<div class="titlepage"><div><div><h1 class="title">
+<a name="id-1.2"></a>[Insert title here]</h1></div></div></div>
+<div class="toc"><dl class="toc">
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-.html"></a></span><span class="refpurpose"></span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-blob.html">hb-blob</a></span><span class="refpurpose"> — Binary data containers</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-buffer.html">hb-buffer</a></span><span class="refpurpose"> — Input and output buffers</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-common.html">hb-common</a></span><span class="refpurpose"> — Common data types</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-deprecated.html">hb-deprecated</a></span><span class="refpurpose"> — Deprecated API</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-coretext.html">hb-coretext</a></span><span class="refpurpose"> — CoreText integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-face.html">hb-face</a></span><span class="refpurpose"> — Font face objects</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-font.html">hb-font</a></span><span class="refpurpose"> — Font objects</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ft.html">hb-ft</a></span><span class="refpurpose"> — FreeType integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-glib.html">hb-glib</a></span><span class="refpurpose"> — GLib integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-gobject.html">hb-gobject</a></span><span class="refpurpose"> — GObject integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-graphite2.html">hb-graphite2</a></span><span class="refpurpose"> — Graphite2 integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-icu.html">hb-icu</a></span><span class="refpurpose"> — ICU integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-map.html">hb-map</a></span><span class="refpurpose"> — Object representing integer to integer mapping</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-color.html">hb-ot-color</a></span><span class="refpurpose"> — OpenType Color Fonts</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-font.html">hb-ot-font</a></span><span class="refpurpose"> — OpenType font implementation</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-name.html">hb-ot-name</a></span><span class="refpurpose"> — OpenType font name information</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-layout.html">hb-ot-layout</a></span><span class="refpurpose"> — OpenType Layout</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-math.html">hb-ot-math</a></span><span class="refpurpose"> — OpenType Math information</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-shape.html">hb-ot-shape</a></span><span class="refpurpose"> — OpenType shaping support</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-var.html">hb-ot-var</a></span><span class="refpurpose"> — OpenType Font Variations</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-set.html">hb-set</a></span><span class="refpurpose"> — Object representing a set of integers</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-shape.html">hb-shape</a></span><span class="refpurpose"> — Conversion of text strings into positioned glyphs</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-shape-plan.html">hb-shape-plan</a></span><span class="refpurpose"> — Object representing a shaping plan</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-unicode.html">hb-unicode</a></span><span class="refpurpose"> — Unicode character property access</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-uniscribe.html">hb-uniscribe</a></span><span class="refpurpose"> — Windows integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-version.html">hb-version</a></span><span class="refpurpose"> — Information about the version of HarfBuzz in use</span>
+</dt>
+</dl></div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.25</div>
+</body>
+</html>

@@ -68,7 +68,7 @@ _subset2 (hb_subset_plan_t *plan)
   hb_bool_t result = false;
   if (source_blob->data)
   {
-    hb_auto_t<hb_vector_t<char> > buf;
+    hb_vector_t<char> buf;
     unsigned int buf_size = _plan_estimate_subset_table_size (plan, source_blob->length);
     DEBUG_MSG(SUBSET, nullptr, "OT::%c%c%c%c initial estimated table size: %u bytes.", HB_UNTAG(tag), buf_size);
     if (unlikely (!buf.alloc (buf_size)))
@@ -77,7 +77,7 @@ _subset2 (hb_subset_plan_t *plan)
       return false;
     }
   retry:
-    hb_serialize_context_t serializer (buf.arrayZ(), buf_size);
+    hb_serialize_context_t serializer (buf, buf_size);
     hb_subset_context_t c (plan, &serializer);
     result = table->subset (&c);
     if (serializer.ran_out_of_room)
@@ -171,8 +171,8 @@ _subset_table (hb_subset_plan_t *plan,
     case HB_OT_TAG_cmap:
       result = _subset<const OT::cmap> (plan);
       break;
-    case HB_OT_TAG_os2:
-      result = _subset<const OT::os2> (plan);
+    case HB_OT_TAG_OS2:
+      result = _subset<const OT::OS2> (plan);
       break;
     case HB_OT_TAG_post:
       result = _subset<const OT::post> (plan);

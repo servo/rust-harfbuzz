@@ -33,7 +33,17 @@
 
 #include <graphite2/Segment.h>
 
-#include "hb-ot-tag.h"
+#include "hb-ot-layout.h"
+
+
+/**
+ * SECTION:hb-graphite2
+ * @title: hb-graphite2
+ * @short_description: Graphite2 integration
+ * @include: hb-graphite2.h
+ *
+ * Functions for using HarfBuzz with the Graphite2 fonts.
+ **/
 
 
 HB_SHAPER_DATA_ENSURE_DEFINE(graphite2, face)
@@ -61,7 +71,7 @@ struct hb_graphite2_face_data_t
 static const void *hb_graphite2_get_table (const void *data, unsigned int tag, size_t *len)
 {
   hb_graphite2_face_data_t *face_data = (hb_graphite2_face_data_t *) data;
-  hb_graphite2_tablelist_t *tlist = face_data->tlist.get ();
+  hb_graphite2_tablelist_t *tlist = face_data->tlist;
 
   hb_blob_t *blob = nullptr;
 
@@ -84,7 +94,7 @@ static const void *hb_graphite2_get_table (const void *data, unsigned int tag, s
     p->tag = tag;
 
 retry:
-    hb_graphite2_tablelist_t *tlist = face_data->tlist.get ();
+    hb_graphite2_tablelist_t *tlist = face_data->tlist;
     p->next = tlist;
 
     if (unlikely (!face_data->tlist.cmpexch (tlist, p)))
@@ -100,7 +110,7 @@ retry:
 static void hb_graphite2_release_table(const void *data, const void *table_buffer)
 {
   hb_graphite2_face_data_t *face_data = (hb_graphite2_face_data_t *) data;
-  hb_graphite2_tablelist_t *tlist = face_data->tlist.get();
+  hb_graphite2_tablelist_t *tlist = face_data->tlist;
 
   hb_graphite2_tablelist_t *prev = nullptr;
   hb_graphite2_tablelist_t *curr = tlist;
@@ -154,7 +164,7 @@ _hb_graphite2_shaper_face_data_create (hb_face_t *face)
 void
 _hb_graphite2_shaper_face_data_destroy (hb_graphite2_face_data_t *data)
 {
-  hb_graphite2_tablelist_t *tlist = data->tlist.get ();
+  hb_graphite2_tablelist_t *tlist = data->tlist;
 
   while (tlist)
   {
@@ -197,11 +207,14 @@ _hb_graphite2_shaper_font_data_destroy (hb_graphite2_font_data_t *data HB_UNUSED
 {
 }
 
-/*
+/**
+ * hb_graphite2_font_get_gr_font:
+ *
  * Since: 0.9.10
+ * Deprecated: 1.4.2
  */
 gr_font *
-hb_graphite2_font_get_gr_font (hb_font_t *font)
+hb_graphite2_font_get_gr_font (hb_font_t *font HB_UNUSED)
 {
   return nullptr;
 }
@@ -243,7 +256,7 @@ struct hb_graphite2_cluster_t {
 };
 
 hb_bool_t
-_hb_graphite2_shape (hb_shape_plan_t    *shape_plan,
+_hb_graphite2_shape (hb_shape_plan_t    *shape_plan HB_UNUSED,
 		     hb_font_t          *font,
 		     hb_buffer_t        *buffer,
 		     const hb_feature_t *features,

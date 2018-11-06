@@ -47,7 +47,7 @@ struct loca
 
   static const hb_tag_t tableTag = HB_OT_TAG_loca;
 
-  inline bool sanitize (hb_sanitize_context_t *c) const
+  inline bool sanitize (hb_sanitize_context_t *c HB_UNUSED) const
   {
     TRACE_SANITIZE (this);
     return_trace (true);
@@ -55,6 +55,7 @@ struct loca
 
   protected:
   UnsizedArrayOf<HBUINT8>	dataZ;		/* Location data. */
+  public:
   DEFINE_SIZE_ARRAY (0, dataZ);
 };
 
@@ -70,7 +71,7 @@ struct glyf
 {
   static const hb_tag_t tableTag = HB_OT_TAG_glyf;
 
-  inline bool sanitize (hb_sanitize_context_t *c) const
+  inline bool sanitize (hb_sanitize_context_t *c HB_UNUSED) const
   {
     TRACE_SANITIZE (this);
     /* We don't check for anything specific here.  The users of the
@@ -275,7 +276,7 @@ struct glyf
       if (!get_offsets (glyph, &start_offset, &end_offset))
         return false; /* glyph not found */
 
-      return CompositeGlyphHeader::get_iterator ((const char*) this->glyf_table + start_offset,
+      return CompositeGlyphHeader::get_iterator ((const char *) this->glyf_table + start_offset,
 						 end_offset - start_offset,
 						 composite);
     }
@@ -475,8 +476,8 @@ struct glyf
     private:
     bool short_offset;
     unsigned int num_glyphs;
-    const loca *loca_table;
-    const glyf *glyf_table;
+    hb_nonnull_ptr_t<const loca> loca_table;
+    hb_nonnull_ptr_t<const glyf> glyf_table;
     hb_blob_t *loca_blob;
     hb_blob_t *glyf_blob;
     unsigned int glyf_len;
@@ -484,7 +485,7 @@ struct glyf
 
   protected:
   UnsizedArrayOf<HBUINT8>	dataZ;		/* Glyphs data. */
-
+  public:
   DEFINE_SIZE_ARRAY (0, dataZ);
 };
 

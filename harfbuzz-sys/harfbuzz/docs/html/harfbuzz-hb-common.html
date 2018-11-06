@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-common: HarfBuzz Manual</title>
+<title>hb-common: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb.html" title="hb">
-<link rel="next" href="harfbuzz-hb-unicode.html" title="hb-unicode">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-buffer.html" title="hb-buffer">
+<link rel="next" href="harfbuzz-hb-deprecated.html" title="hb-deprecated">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -19,16 +19,16 @@
                   <a href="#harfbuzz-hb-common.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="harfbuzz-hb-unicode.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-buffer.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-hb-deprecated.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-common"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-common.top_of_page"></a>hb-common</span></h2>
-<p>hb-common</p>
+<p>hb-common — Common data types</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -262,7 +262,13 @@
 </pre>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-common.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-common.description"></a><h2>Description</h2>
+<p>Common data types used across HarfBuzz are defined here.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-common.functions_details"></a><h2>Functions</h2>
@@ -527,7 +533,7 @@ hb_language_get_default (<em class="parameter"><code><span class="type">void</sp
 "setlocale (LC_CTYPE, nullptr)" to fetch current locale.  The underlying
 setlocale function is, in many implementations, NOT threadsafe.  To avoid
 problems, call this function once before multiple threads can call it.
-This function is only used from <a class="link" href="harfbuzz-Buffers.html#hb-buffer-guess-segment-properties" title="hb_buffer_guess_segment_properties ()"><code class="function">hb_buffer_guess_segment_properties()</code></a> by
+This function is only used from <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-guess-segment-properties" title="hb_buffer_guess_segment_properties ()"><code class="function">hb_buffer_guess_segment_properties()</code></a> by
 HarfBuzz itself.</p>
 <div class="refsect3">
 <a name="hb-language-get-default.returns"></a><h4>Returns</h4>
