@@ -89,7 +89,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-TESTS = tests/aat-trak.tests tests/arabic-fallback-shaping.tests \
+TESTS = tests/aat-trak.tests tests/aat-morx.tests \
+	tests/arabic-fallback-shaping.tests \
 	tests/arabic-feature-order.tests \
 	tests/arabic-like-joining.tests tests/arabic-mark-attach.tests \
 	tests/arabic-mark-order.tests tests/arabic-stch.tests \

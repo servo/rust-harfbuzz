@@ -36,6 +36,16 @@
 #endif
 
 
+/**
+ * SECTION:hb-common
+ * @title: hb-common
+ * @short_description: Common data types
+ * @include: hb.h
+ *
+ * Common data types used across HarfBuzz are defined here.
+ **/
+
+
 /* hb_options_t */
 
 hb_atomic_int_t _hb_options;
@@ -271,7 +281,7 @@ static void
 free_langs (void)
 {
 retry:
-  hb_language_item_t *first_lang = langs.get ();
+  hb_language_item_t *first_lang = langs;
   if (unlikely (!langs.cmpexch (first_lang, nullptr)))
     goto retry;
 
@@ -288,7 +298,7 @@ static hb_language_item_t *
 lang_find_or_insert (const char *key)
 {
 retry:
-  hb_language_item_t *first_lang = langs.get ();
+  hb_language_item_t *first_lang = langs;
 
   for (hb_language_item_t *lang = first_lang; lang; lang = lang->next)
     if (*lang == key)
@@ -398,7 +408,7 @@ hb_language_get_default (void)
 {
   static hb_atomic_ptr_t <hb_language_t> default_language;
 
-  hb_language_t language = default_language.get ();
+  hb_language_t language = default_language;
   if (unlikely (language == HB_LANGUAGE_INVALID))
   {
     language = hb_language_from_string (setlocale (LC_CTYPE, nullptr), -1);
@@ -615,6 +625,19 @@ hb_user_data_array_t::get (hb_user_data_key_t *key)
 
 /* hb_version */
 
+
+/**
+ * SECTION:hb-version
+ * @title: hb-version
+ * @short_description: Information about the version of HarfBuzz in use
+ * @include: hb.h
+ *
+ * These functions and macros allow accessing version of the HarfBuzz
+ * library used at compile- as well as run-time, and to direct code
+ * conditionally based on those versions, again, at compile- or run-time.
+ **/
+
+
 /**
  * hb_version:
  * @major: (out): Library major version component.
@@ -761,7 +784,7 @@ parse_uint32 (const char **pp, const char *end, uint32_t *pv)
 static void free_static_C_locale (void);
 #endif
 
-static struct hb_C_locale_lazy_loader_t : hb_lazy_loader_t<hb_remove_ptr_t<HB_LOCALE_T>::value,
+static struct hb_C_locale_lazy_loader_t : hb_lazy_loader_t<hb_remove_pointer<HB_LOCALE_T>::value,
 							  hb_C_locale_lazy_loader_t>
 {
   static inline HB_LOCALE_T create (void)
@@ -911,7 +934,7 @@ parse_feature_indices (const char **pp, const char *end, hb_feature_t *feature)
 
   has_start = parse_uint (pp, end, &feature->start);
 
-  if (parse_char (pp, end, ':')) {
+  if (parse_char (pp, end, ':') || parse_char (pp, end, ';')) {
     parse_uint (pp, end, &feature->end);
   } else {
     if (has_start)

@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-gobject: HarfBuzz Manual</title>
+<title>hb-gobject: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb-coretext.html" title="hb-coretext">
-<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-glib.html" title="hb-glib">
+<link rel="next" href="harfbuzz-hb-graphite2.html" title="hb-graphite2">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,16 +18,16 @@
                   <a href="#harfbuzz-hb-gobject.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-coretext.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-glib.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-hb-graphite2.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-gobject"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-gobject.top_of_page"></a>hb-gobject</span></h2>
-<p>hb-gobject</p>
+<p>hb-gobject — GObject integration</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -149,6 +149,14 @@
 </td>
 <td class="function_name">
 <a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-memory-mode-get-type" title="hb_gobject_memory_mode_get_type ()">hb_gobject_memory_mode_get_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/gobjectgobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-gobject.html#hb-gobject-ot-color-palette-flags-get-type" title="hb_gobject_ot_color_palette_flags_get_type ()">hb_gobject_ot_color_palette_flags_get_type</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
 <tr>
@@ -364,6 +372,10 @@
 </tr>
 <tr>
 <td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-COLOR-PALETTE-FLAGS:CAPS" title="HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS">HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-LAYOUT-GLYPH-CLASS:CAPS" title="HB_GOBJECT_TYPE_OT_LAYOUT_GLYPH_CLASS">HB_GOBJECT_TYPE_OT_LAYOUT_GLYPH_CLASS</a></td>
 </tr>
 <tr>
@@ -438,7 +450,14 @@
 </table></div>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-gobject.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb-gobject.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-gobject.description"></a><h2>Description</h2>
+<p>Functions for using HarfBuzz with the GObject library to provide
+type data.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-gobject.functions_details"></a><h2>Functions</h2>
@@ -532,6 +551,13 @@ hb_gobject_map_get_type (<em class="parameter"><code><span class="type">void</sp
 <a name="hb-gobject-memory-mode-get-type"></a><h3>hb_gobject_memory_mode_get_type ()</h3>
 <pre class="programlisting"><a href="/usr/share/gtk-doc/html/gobjectgobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>
 hb_gobject_memory_mode_get_type (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="hb-gobject-ot-color-palette-flags-get-type"></a><h3>hb_gobject_ot_color_palette_flags_get_type ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/gobjectgobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>
+hb_gobject_ot_color_palette_flags_get_type
+                               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -734,6 +760,12 @@ hb_gobject_user_data_key_get_type (<em class="parameter"><code><span class="type
 <div class="refsect2">
 <a name="HB-GOBJECT-TYPE-MEMORY-MODE:CAPS"></a><h3>HB_GOBJECT_TYPE_MEMORY_MODE</h3>
 <pre class="programlisting">#define HB_GOBJECT_TYPE_MEMORY_MODE (hb_gobject_memory_mode_get_type ())
+</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="HB-GOBJECT-TYPE-OT-COLOR-PALETTE-FLAGS:CAPS"></a><h3>HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS</h3>
+<pre class="programlisting">#define HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS (hb_gobject_ot_color_palette_flags_get_type ())
 </pre>
 </div>
 <hr>

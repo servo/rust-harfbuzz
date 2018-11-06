@@ -40,6 +40,17 @@
 #include FT_TRUETYPE_TABLES_H
 
 
+/**
+ * SECTION:hb-ft
+ * @title: hb-ft
+ * @short_description: FreeType integration
+ * @include: hb-ft.h
+ *
+ * Functions for using HarfBuzz with the FreeType library to provide face and
+ * font data.
+ **/
+
+
 /* TODO:
  *
  * In general, this file does a fine job of what it's supposed to do.
@@ -124,7 +135,7 @@ _hb_ft_font_destroy (void *data)
 void
 hb_ft_font_set_load_flags (hb_font_t *font, int load_flags)
 {
-  if (font->immutable)
+  if (hb_object_is_immutable (font))
     return;
 
   if (font->destroy != (hb_destroy_func_t) _hb_ft_font_destroy)
@@ -737,7 +748,7 @@ hb_ft_font_create_referenced (FT_Face ft_face)
 static void free_static_ft_library (void);
 #endif
 
-static struct hb_ft_library_lazy_loader_t : hb_lazy_loader_t<hb_remove_ptr_t<FT_Library>::value,
+static struct hb_ft_library_lazy_loader_t : hb_lazy_loader_t<hb_remove_pointer<FT_Library>::value,
 							     hb_ft_library_lazy_loader_t>
 {
   static inline FT_Library create (void)

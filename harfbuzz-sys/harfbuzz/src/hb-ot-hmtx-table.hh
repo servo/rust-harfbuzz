@@ -56,7 +56,7 @@ struct LongMetric
 template <typename T, typename H>
 struct hmtxvmtx
 {
-  inline bool sanitize (hb_sanitize_context_t *c) const
+  inline bool sanitize (hb_sanitize_context_t *c HB_UNUSED) const
   {
     TRACE_SANITIZE (this);
     /* We don't check for anything specific here.  The users of the
@@ -194,13 +194,13 @@ struct hmtxvmtx
       bool got_font_extents = false;
       if (T::os2Tag)
       {
-	hb_blob_t *os2_blob = hb_sanitize_context_t().reference_table<os2> (face);
-	const os2 *os2_table = os2_blob->as<os2> ();
+	hb_blob_t *os2_blob = hb_sanitize_context_t().reference_table<OS2> (face);
+	const OS2 *os2_table = os2_blob->as<OS2> ();
 #define USE_TYPO_METRICS (1u<<7)
 	if (0 != (os2_table->fsSelection & USE_TYPO_METRICS))
 	{
-	  ascender = os2_table->sTypoAscender;
-	  descender = os2_table->sTypoDescender;
+	  ascender = abs (os2_table->sTypoAscender);
+	  descender = -abs (os2_table->sTypoDescender);
 	  line_gap = os2_table->sTypoLineGap;
 	  got_font_extents = (ascender | descender) != 0;
 	}
@@ -212,8 +212,8 @@ struct hmtxvmtx
       num_advances = _hea_table->numberOfLongMetrics;
       if (!got_font_extents)
       {
-	ascender = _hea_table->ascender;
-	descender = _hea_table->descender;
+	ascender = abs (_hea_table->ascender);
+	descender = -abs (_hea_table->descender);
 	line_gap = _hea_table->lineGap;
 	got_font_extents = (ascender | descender) != 0;
       }
@@ -255,7 +255,7 @@ struct hmtxvmtx
       if (glyph < num_advances)
         return table->longMetricZ[glyph].sb;
 
-      if (unlikely (glyph > num_metrics))
+      if (unlikely (glyph >= num_metrics))
         return 0;
 
       const FWORD *bearings = (const FWORD *) &table->longMetricZ[num_advances];
@@ -336,7 +336,7 @@ struct hmtxvmtx
 struct hmtx : hmtxvmtx<hmtx, hhea> {
   static const hb_tag_t tableTag	= HB_OT_TAG_hmtx;
   static const hb_tag_t variationsTag	= HB_OT_TAG_HVAR;
-  static const hb_tag_t os2Tag		= HB_OT_TAG_os2;
+  static const hb_tag_t os2Tag		= HB_OT_TAG_OS2;
 };
 struct vmtx : hmtxvmtx<vmtx, vhea> {
   static const hb_tag_t tableTag	= HB_OT_TAG_vmtx;

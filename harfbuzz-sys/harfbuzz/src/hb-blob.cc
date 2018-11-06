@@ -40,11 +40,22 @@
 #include <stdlib.h>
 
 
+/**
+ * SECTION: hb-blob
+ * @title: hb-blob
+ * @short_description: Binary data containers
+ * @include: hb.h
+ *
+ * Blobs wrap a chunk of binary data to handle lifecycle management of data
+ * while it is passed between client and HarfBuzz.  Blobs are primarily used
+ * to create font faces, but also to access font face tables, as well as
+ * pass around other binary data.
+ **/
+
+
 DEFINE_NULL_INSTANCE (hb_blob_t) =
 {
   HB_OBJECT_HEADER_STATIC,
-
-  true, /* immutable */
 
   nullptr, /* data */
   0, /* length */
@@ -138,7 +149,7 @@ hb_blob_create_sub_blob (hb_blob_t    *parent,
 {
   hb_blob_t *blob;
 
-  if (!length || offset >= parent->length)
+  if (!length || !parent || offset >= parent->length)
     return hb_blob_get_empty ();
 
   hb_blob_make_immutable (parent);
@@ -286,12 +297,10 @@ hb_blob_get_user_data (hb_blob_t          *blob,
 void
 hb_blob_make_immutable (hb_blob_t *blob)
 {
-  if (hb_object_is_inert (blob))
-    return;
-  if (blob->immutable)
+  if (hb_object_is_immutable (blob))
     return;
 
-  blob->immutable = true;
+  hb_object_make_immutable (blob);
 }
 
 /**
@@ -307,7 +316,7 @@ hb_blob_make_immutable (hb_blob_t *blob)
 hb_bool_t
 hb_blob_is_immutable (hb_blob_t *blob)
 {
-  return blob->immutable;
+  return hb_object_is_immutable (blob);
 }
 
 
@@ -441,7 +450,7 @@ hb_blob_t::try_make_writable_inplace (void)
 bool
 hb_blob_t::try_make_writable (void)
 {
-  if (this->immutable)
+  if (hb_object_is_immutable (this))
     return false;
 
   if (this->mode == HB_MEMORY_MODE_WRITABLE)

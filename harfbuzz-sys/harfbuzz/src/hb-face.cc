@@ -36,6 +36,19 @@
 
 
 /**
+ * SECTION:hb-face
+ * @title: hb-face
+ * @short_description: Font face objects
+ * @include: hb.h
+ *
+ * Font face is objects represent a single face in a font family.
+ * More exactly, a font face represents a single face in a binary font file.
+ * Font faces are typically built from a binary blob and a face index.
+ * Font faces are used to create fonts.
+ **/
+
+
+/**
  * hb_face_count:
  * @blob: a blob.
  *
@@ -68,8 +81,6 @@ hb_face_count (hb_blob_t *blob)
 DEFINE_NULL_INSTANCE (hb_face_t) =
 {
   HB_OBJECT_HEADER_STATIC,
-
-  true, /* immutable */
 
   nullptr, /* reference_table_func */
   nullptr, /* user_data */
@@ -252,7 +263,7 @@ hb_face_destroy (hb_face_t *face)
 {
   if (!hb_object_destroy (face)) return;
 
-  for (hb_face_t::plan_node_t *node = face->shape_plans.get (); node; )
+  for (hb_face_t::plan_node_t *node = face->shape_plans; node; )
   {
     hb_face_t::plan_node_t *next = node->next;
     hb_shape_plan_destroy (node->shape_plan);
@@ -323,12 +334,10 @@ hb_face_get_user_data (const hb_face_t    *face,
 void
 hb_face_make_immutable (hb_face_t *face)
 {
-  if (unlikely (hb_object_is_inert (face)))
-    return;
-  if (face->immutable)
+  if (hb_object_is_immutable (face))
     return;
 
-  face->immutable = true;
+  hb_object_make_immutable (face);
 }
 
 /**
@@ -344,7 +353,7 @@ hb_face_make_immutable (hb_face_t *face)
 hb_bool_t
 hb_face_is_immutable (const hb_face_t *face)
 {
-  return face->immutable;
+  return hb_object_is_immutable (face);
 }
 
 
@@ -395,7 +404,7 @@ void
 hb_face_set_index (hb_face_t    *face,
 		   unsigned int  index)
 {
-  if (face->immutable)
+  if (hb_object_is_immutable (face))
     return;
 
   face->index = index;
@@ -430,7 +439,7 @@ void
 hb_face_set_upem (hb_face_t    *face,
 		  unsigned int  upem)
 {
-  if (face->immutable)
+  if (hb_object_is_immutable (face))
     return;
 
   face->upem = upem;
@@ -465,7 +474,7 @@ void
 hb_face_set_glyph_count (hb_face_t    *face,
 			 unsigned int  glyph_count)
 {
-  if (face->immutable)
+  if (hb_object_is_immutable (face))
     return;
 
   face->num_glyphs = glyph_count;
@@ -666,7 +675,7 @@ _hb_face_builder_data_reference_blob (hb_face_builder_data_t *data)
 }
 
 static hb_blob_t *
-_hb_face_builder_reference_table (hb_face_t *face, hb_tag_t tag, void *user_data)
+_hb_face_builder_reference_table (hb_face_t *face HB_UNUSED, hb_tag_t tag, void *user_data)
 {
   hb_face_builder_data_t *data = (hb_face_builder_data_t *) user_data;
 

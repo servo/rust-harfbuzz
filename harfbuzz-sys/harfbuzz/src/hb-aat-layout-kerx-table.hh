@@ -78,12 +78,14 @@ struct KerxSubTableHeader
 
 struct KerxSubTableFormat0
 {
-  inline int get_kerning (hb_codepoint_t left, hb_codepoint_t right) const
+  inline int get_kerning (hb_codepoint_t left, hb_codepoint_t right,
+			  hb_aat_apply_context_t *c) const
   {
-    if (header.tupleCount) return 0; /* TODO kerxTupleKern */
     hb_glyph_pair_t pair = {left, right};
     int i = pairs.bsearch (pair);
-    return i == -1 ? 0 : pairs[i].get_kerning ();
+    if (i == -1) return 0;
+    int v = pairs[i].get_kerning ();
+    return kerxTupleKern (v, header.tupleCount, this, c);
   }
 
   inline bool apply (hb_aat_apply_context_t *c) const
@@ -93,12 +95,26 @@ struct KerxSubTableFormat0
     if (!c->plan->requested_kerning)
       return false;
 
-    hb_kern_machine_t<KerxSubTableFormat0> machine (*this);
-
+    accelerator_t accel (*this, c);
+    hb_kern_machine_t<accelerator_t> machine (accel);
     machine.kern (c->font, c->buffer, c->plan->kern_mask);
 
     return_trace (true);
   }
+
+  struct accelerator_t
+  {
+    const KerxSubTableFormat0 &table;
+    hb_aat_apply_context_t *c;
+
+    inline accelerator_t (const KerxSubTableFormat0 &table_,
+			  hb_aat_apply_context_t *c_) :
+			    table (table_), c (c_) {}
+
+    inline int get_kerning (hb_codepoint_t left, hb_codepoint_t right) const
+    { return table.get_kerning (left, right, c); }
+  };
+
 
   inline bool sanitize (hb_sanitize_context_t *c) const
   {
@@ -147,12 +163,12 @@ struct KerxSubTableFormat1
 	kernAction (&table->machine + table->kernAction),
 	depth (0) {}
 
-    inline bool is_actionable (StateTableDriver<EntryData> *driver,
+    inline bool is_actionable (StateTableDriver<MorxTypes, EntryData> *driver HB_UNUSED,
 			       const Entry<EntryData> *entry)
     {
       return entry->data.kernActionIndex != 0xFFFF;
     }
-    inline bool transition (StateTableDriver<EntryData> *driver,
+    inline bool transition (StateTableDriver<MorxTypes, EntryData> *driver,
 			    const Entry<EntryData> *entry)
     {
       hb_buffer_t *buffer = driver->buffer;
@@ -191,11 +207,18 @@ struct KerxSubTableFormat1
 	  int v = *actions++;
 	  if (idx < buffer->len && buffer->info[idx].mask & kern_mask)
 	  {
-	    /* XXX Non-forward direction... */
 	    if (HB_DIRECTION_IS_HORIZONTAL (buffer->props.direction))
+	    {
 	      buffer->pos[idx].x_advance += c->font->em_scale_x (v);
+	      if (HB_DIRECTION_IS_BACKWARD (buffer->props.direction))
+		buffer->pos[idx].x_offset += c->font->em_scale_x (v);
+	    }
 	    else
+	    {
 	      buffer->pos[idx].y_advance += c->font->em_scale_y (v);
+	      if (HB_DIRECTION_IS_BACKWARD (buffer->props.direction))
+		buffer->pos[idx].y_offset += c->font->em_scale_y (v);
+	    }
 	  }
 	}
 	depth = 0;
@@ -223,7 +246,7 @@ struct KerxSubTableFormat1
 
     driver_context_t dc (this, c);
 
-    StateTableDriver<EntryData> driver (machine, c->buffer, c->font->face);
+    StateTableDriver<MorxTypes, EntryData> driver (machine, c->buffer, c->font->face);
     driver.drive (&dc);
 
     return_trace (true);
@@ -239,7 +262,7 @@ struct KerxSubTableFormat1
 
   protected:
   KerxSubTableHeader				header;
-  StateTable<EntryData>				machine;
+  StateTable<MorxTypes, EntryData>		machine;
   LOffsetTo<UnsizedArrayOf<FWORD>, false>	kernAction;
   public:
   DEFINE_SIZE_STATIC (32);
@@ -273,15 +296,6 @@ struct KerxSubTableFormat2
     return_trace (true);
   }
 
-  inline bool sanitize (hb_sanitize_context_t *c) const
-  {
-    TRACE_SANITIZE (this);
-    return_trace (likely (c->check_struct (this) &&
-			  leftClassTable.sanitize (c, this) &&
-			  rightClassTable.sanitize (c, this) &&
-			  c->check_range (this, array)));
-  }
-
   struct accelerator_t
   {
     const KerxSubTableFormat2 &table;
@@ -294,6 +308,15 @@ struct KerxSubTableFormat2
     inline int get_kerning (hb_codepoint_t left, hb_codepoint_t right) const
     { return table.get_kerning (left, right, c); }
   };
+
+  inline bool sanitize (hb_sanitize_context_t *c) const
+  {
+    TRACE_SANITIZE (this);
+    return_trace (likely (c->check_struct (this) &&
+			  leftClassTable.sanitize (c, this) &&
+			  rightClassTable.sanitize (c, this) &&
+			  c->check_range (this, array)));
+  }
 
   protected:
   KerxSubTableHeader	header;
@@ -349,12 +372,12 @@ struct KerxSubTableFormat4
 	mark_set (false),
 	mark (0) {}
 
-    inline bool is_actionable (StateTableDriver<EntryData> *driver,
+    inline bool is_actionable (StateTableDriver<MorxTypes, EntryData> *driver HB_UNUSED,
 			       const Entry<EntryData> *entry)
     {
       return entry->data.ankrActionIndex != 0xFFFF;
     }
-    inline bool transition (StateTableDriver<EntryData> *driver,
+    inline bool transition (StateTableDriver<MorxTypes, EntryData> *driver,
 			    const Entry<EntryData> *entry)
     {
       hb_buffer_t *buffer = driver->buffer;
@@ -400,14 +423,14 @@ struct KerxSubTableFormat4
 	      return false;
 	    unsigned int markAnchorPoint = *data++;
 	    unsigned int currAnchorPoint = *data++;
-	    const Anchor markAnchor = c->ankr_table.get_anchor (c->buffer->info[mark].codepoint,
-								markAnchorPoint,
-								c->sanitizer.get_num_glyphs (),
-								c->ankr_end);
-	    const Anchor currAnchor = c->ankr_table.get_anchor (c->buffer->cur ().codepoint,
-								currAnchorPoint,
-								c->sanitizer.get_num_glyphs (),
-								c->ankr_end);
+	    const Anchor markAnchor = c->ankr_table->get_anchor (c->buffer->info[mark].codepoint,
+								 markAnchorPoint,
+								 c->sanitizer.get_num_glyphs (),
+								 c->ankr_end);
+	    const Anchor currAnchor = c->ankr_table->get_anchor (c->buffer->cur ().codepoint,
+								 currAnchorPoint,
+								 c->sanitizer.get_num_glyphs (),
+								 c->ankr_end);
 
 	    o.x_offset = c->font->em_scale_x (markAnchor.xCoordinate) - c->font->em_scale_x (currAnchor.xCoordinate);
 	    o.y_offset = c->font->em_scale_y (markAnchor.yCoordinate) - c->font->em_scale_y (currAnchor.yCoordinate);
@@ -457,7 +480,7 @@ struct KerxSubTableFormat4
 
     driver_context_t dc (this, c);
 
-    StateTableDriver<EntryData> driver (machine, c->buffer, c->font->face);
+    StateTableDriver<MorxTypes, EntryData> driver (machine, c->buffer, c->font->face);
     driver.drive (&dc);
 
     return_trace (true);
@@ -473,7 +496,8 @@ struct KerxSubTableFormat4
 
   protected:
   KerxSubTableHeader	header;
-  StateTable<EntryData>	machine;
+  StateTable<MorxTypes, EntryData>
+			machine;
   HBUINT32		flags;
   public:
   DEFINE_SIZE_STATIC (32);

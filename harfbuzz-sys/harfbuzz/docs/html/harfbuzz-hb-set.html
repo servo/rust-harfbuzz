@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-set: HarfBuzz Manual</title>
+<title>hb-set: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb-deprecated.html" title="hb-deprecated">
-<link rel="next" href="harfbuzz-hb-ot.html" title="hb-ot">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-ot-var.html" title="hb-ot-var">
+<link rel="next" href="harfbuzz-hb-shape.html" title="hb-shape">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -19,16 +19,16 @@
                   <a href="#harfbuzz-hb-set.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-deprecated.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="harfbuzz-hb-ot.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-ot-var.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="harfbuzz-hb-shape.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-set"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-set.top_of_page"></a>hb-set</span></h2>
-<p>hb-set</p>
+<p>hb-set — Object representing a set of integers</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -292,7 +292,15 @@
 </pre>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-set.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-set.description"></a><h2>Description</h2>
+<p>Set objects represent a mathematical set of integer values.  They are
+used in non-shaping API to query certain set of characters or glyphs,
+or other integer values.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-set.functions_details"></a><h2>Functions</h2>
@@ -727,7 +735,7 @@ hb_set_is_subset (<em class="parameter"><code>const <a class="link" href="harfbu
 is a subset of (or equal to) <em class="parameter"><code>larger_set</code></em>
 , <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.</p>
 </div>
-<p class="since">Since: 1.8.1</p>
+<p class="since">Since: <a class="link" href="api-index-1-8-1.html#api-index-1.8.1">1.8.1</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -851,7 +859,7 @@ hb_set_previous (<em class="parameter"><code>const <a class="link" href="harfbuz
 <a name="hb-set-previous.returns"></a><h4>Returns</h4>
 <p> whether there was a previous value.</p>
 </div>
-<p class="since">Since: 1.8.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-8-0.html#api-index-1.8.0">1.8.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -897,7 +905,7 @@ are greater than current value of <em class="parameter"><code>last</code></em>
 <a name="hb-set-previous-range.returns"></a><h4>Returns</h4>
 <p> whether there was a previous range.</p>
 </div>
-<p class="since">Since: 1.8.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-8-0.html#api-index-1.8.0">1.8.0</a></p>
 </div>
 <hr>
 <div class="refsect2">

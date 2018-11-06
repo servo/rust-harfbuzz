@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-face: HarfBuzz Manual</title>
+<title>hb-face: HarfBuzz Reference Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch08.html" title="HarfBuzz API">
-<link rel="prev" href="harfbuzz-hb-blob.html" title="hb-blob">
+<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="harfbuzz-hb-coretext.html" title="hb-coretext">
 <link rel="next" href="harfbuzz-hb-font.html" title="hb-font">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -19,8 +19,8 @@
                   <a href="#harfbuzz-hb-face.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch08.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-blob.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-coretext.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-font.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
@@ -28,7 +28,7 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="harfbuzz-hb-face.top_of_page"></a>hb-face</span></h2>
-<p>hb-face</p>
+<p>hb-face — Font face objects</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -250,7 +250,16 @@
 </pre>
 </div>
 <div class="refsect1">
+<a name="harfbuzz-hb-face.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;hb.h&gt;
+</pre>
+</div>
+<div class="refsect1">
 <a name="harfbuzz-hb-face.description"></a><h2>Description</h2>
+<p>Font face is objects represent a single face in a font family.
+More exactly, a font face represents a single face in a binary font file.
+Font faces are typically built from a binary blob and a face index.
+Font faces are used to create fonts.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-face.functions_details"></a><h2>Functions</h2>
@@ -279,7 +288,7 @@ hb_face_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-blo
 <p> Number of faces in <em class="parameter"><code>blob</code></em>
 </p>
 </div>
-<p class="since">Since: 1.7.7</p>
+<p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -747,7 +756,7 @@ to.</p></td>
 </tbody>
 </table></div>
 </div>
-<p class="since">Since: 1.9.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -778,7 +787,7 @@ to.</p></td>
 </tbody>
 </table></div>
 </div>
-<p class="since">Since: 1.9.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -811,7 +820,7 @@ to.</p></td>
 </tbody>
 </table></div>
 </div>
-<p class="since">Since: 1.9.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -826,7 +835,7 @@ font file by calling <a class="link" href="harfbuzz-hb-face.html#hb-face-referen
 <p> New face. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<p class="since">Since: 1.9.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -840,7 +849,7 @@ hb_face_builder_add_table (<em class="parameter"><code><a class="link" href="har
  to the face.  <em class="parameter"><code>face</code></em>
  must
 be created using <a class="link" href="harfbuzz-hb-face.html#hb-face-builder-create" title="hb_face_builder_create ()"><code class="function">hb_face_builder_create()</code></a>.</p>
-<p class="since">Since: 1.9.0</p>
+<p class="since">Since: <a class="link" href="api-index-1-9-0.html#api-index-1.9.0">1.9.0</a></p>
 </div>
 </div>
 <div class="refsect1">
