@@ -12,7 +12,7 @@
 use std;
 use sys;
 
-#[derive(PartialEq, PartialOrd)]
+#[derive(Copy, Clone, PartialEq, PartialOrd)]
 pub struct Language {
     /// The underlying `hb_language_t` from the `harfbuzz-sys` crate.
     ///
@@ -44,7 +44,7 @@ impl Language {
         Language { raw }
     }
 
-    pub fn as_raw(&self) -> sys::hb_language_t {
+    pub fn as_raw(self) -> sys::hb_language_t {
         self.raw
     }
 
@@ -54,7 +54,7 @@ impl Language {
         }
     }
 
-    pub fn is_valid(&self) -> bool {
+    pub fn is_valid(self) -> bool {
         !self.raw.is_null()
     }
 }
