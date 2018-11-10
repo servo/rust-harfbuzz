@@ -6,5 +6,3 @@ rust:
 script:
  - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
  - cargo build --verbose --manifest-path=harfbuzz-sys/Cargo.toml
-notifications:
-  webhooks: http://build.servo.org:54856/travis
