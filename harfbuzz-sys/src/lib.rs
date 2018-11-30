@@ -20,6 +20,7 @@ pub const HB_OT_LAYOUT_NO_SCRIPT_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_FEATURE_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_DEFAULT_LANGUAGE_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_VARIATIONS_INDEX: u32 = 4294967295;
+pub const HB_AAT_LAYOUT_NO_SELECTOR_INDEX: u32 = 65535;
 pub type hb_bool_t = ::std::os::raw::c_int;
 pub type hb_codepoint_t = u32;
 pub type hb_position_t = i32;
@@ -3942,4 +3943,540 @@ extern "C" {
         design_coords: *const f32,
         normalized_coords: *mut ::std::os::raw::c_int,
     );
+}
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_INVALID: hb_aat_layout_feature_type_t = 65535;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC: hb_aat_layout_feature_type_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LIGATURES: hb_aat_layout_feature_type_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CURISVE_CONNECTION: hb_aat_layout_feature_type_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LETTER_CASE: hb_aat_layout_feature_type_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_SUBSTITUTION: hb_aat_layout_feature_type_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LINGUISTIC_REARRANGEMENT: hb_aat_layout_feature_type_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_SPACING: hb_aat_layout_feature_type_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE: hb_aat_layout_feature_type_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_DIACRITICS_TYPE: hb_aat_layout_feature_type_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_POSITION: hb_aat_layout_feature_type_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_FRACTIONS: hb_aat_layout_feature_type_t = 11;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE: hb_aat_layout_feature_type_t = 13;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TYPOGRAPHIC_EXTRAS: hb_aat_layout_feature_type_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_MATHEMATICAL_EXTRAS: hb_aat_layout_feature_type_t = 15;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ORNAMENT_SETS_TYPE: hb_aat_layout_feature_type_t = 16;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_ALTERNATIVES: hb_aat_layout_feature_type_t = 17;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_DESIGN_COMPLEXITY_TYPE: hb_aat_layout_feature_type_t = 18;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_STYLE_OPTIONS: hb_aat_layout_feature_type_t = 19;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_SHAPE: hb_aat_layout_feature_type_t = 20;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_CASE: hb_aat_layout_feature_type_t = 21;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TEXT_SPACING: hb_aat_layout_feature_type_t = 22;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TRANSLITERATION: hb_aat_layout_feature_type_t = 23;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ANNOTATION_TYPE: hb_aat_layout_feature_type_t = 24;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_KANA_SPACING_TYPE: hb_aat_layout_feature_type_t = 25;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_SPACING_TYPE: hb_aat_layout_feature_type_t = 26;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_UNICODE_DECOMPOSITION_TYPE: hb_aat_layout_feature_type_t = 27;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_RUBY_KANA: hb_aat_layout_feature_type_t = 28;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_SYMBOL_ALTERNATIVES_TYPE: hb_aat_layout_feature_type_t =
+    29;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_ALTERNATIVES_TYPE: hb_aat_layout_feature_type_t =
+    30;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_VERTICAL_ROMAN_PLACEMENT_TYPE:
+    hb_aat_layout_feature_type_t = 31;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ITALIC_CJK_ROMAN: hb_aat_layout_feature_type_t = 32;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CASE_SENSITIVE_LAYOUT: hb_aat_layout_feature_type_t = 33;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ALTERNATE_KANA: hb_aat_layout_feature_type_t = 34;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_STYLISTIC_ALTERNATIVES: hb_aat_layout_feature_type_t = 35;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CONTEXTUAL_ALTERNATIVES: hb_aat_layout_feature_type_t = 36;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LOWER_CASE: hb_aat_layout_feature_type_t = 37;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_UPPER_CASE: hb_aat_layout_feature_type_t = 38;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE: hb_aat_layout_feature_type_t = 39;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE: hb_aat_layout_feature_type_t = 103;
+pub const _HB_AAT_LAYOUT_FEATURE_TYPE_MAX_VALUE: hb_aat_layout_feature_type_t = 2147483647;
+/// hb_aat_layout_feature_type_t:
+///
+///
+/// Since: 2.2.0
+pub type hb_aat_layout_feature_type_t = u32;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVALID: hb_aat_layout_feature_selector_t = 65535;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RARE_LIGATURES_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RARE_LIGATURES_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOGOS_ON: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOGOS_OFF: hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REBUS_PICTURES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REBUS_PICTURES_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIPHTHONG_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIPHTHONG_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SQUARED_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SQUARED_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ABBREV_SQUARED_LIGATURES_ON:
+    hb_aat_layout_feature_selector_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ABBREV_SQUARED_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 15;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SYMBOL_LIGATURES_ON: hb_aat_layout_feature_selector_t = 16;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SYMBOL_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    17;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    18;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 19;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    20;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 21;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UNCONNECTED: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PARTIALLY_CONNECTED: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CURSIVE: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_AND_LOWER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_CAPS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_LOWER_CASE: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMALL_CAPS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS_AND_SMALL_CAPS:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MONOSPACED_NUMBERS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_NUMBERS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_NUMBERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_QUARTER_WIDTH_NUMBERS: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_INITIAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_INITIAL_SWASHES_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SHOW_DIACRITICS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HIDE_DIACRITICS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DECOMPOSE_DIACRITICS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NORMAL_POSITION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUPERIORS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INFERIORS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ORDINALS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SCIENTIFIC_INFERIORS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_FRACTIONS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_VERTICAL_FRACTIONS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIAGONAL_FRACTIONS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_OFF: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASHED_ZERO_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASHED_ZERO_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FORM_INTERROBANG_ON: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FORM_INTERROBANG_OFF: hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMART_QUOTES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMART_QUOTES_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_OFF: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASH_TO_DIVIDE_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASH_TO_DIVIDE_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INEQUALITY_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INEQUALITY_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPONENTS_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPONENTS_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ORNAMENTS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DINGBATS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PI_CHARACTERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FLEURONS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DECORATIVE_BORDERS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INTERNATIONAL_SYMBOLS: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATH_SYMBOLS: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ALTERNATES: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL1: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL2: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL3: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL4: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL5: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_STYLE_OPTIONS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DISPLAY_TEXT: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ENGRAVED_TEXT: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ILLUMINATED_CAPS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TITLING_CAPS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TALL_CAPS: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_CHARACTERS: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SIMPLIFIED_CHARACTERS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1978_CHARACTERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1983_CHARACTERS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1990_CHARACTERS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_ONE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_TWO: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_THREE: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_FOUR: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_FIVE: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPERT_CHARACTERS: hb_aat_layout_feature_selector_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS2004_CHARACTERS: hb_aat_layout_feature_selector_t = 11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HOJO_CHARACTERS: hb_aat_layout_feature_selector_t = 12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NLCCHARACTERS: hb_aat_layout_feature_selector_t = 13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_NAMES_CHARACTERS:
+    hb_aat_layout_feature_selector_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_NUMBERS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_NUMBERS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_TEXT: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MONOSPACED_TEXT: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_QUARTER_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALT_PROPORTIONAL_TEXT: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALT_HALF_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_TRANSLITERATION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HIRAGANA_TO_KATAKANA: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_KATAKANA_TO_HIRAGANA: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_KANA_TO_ROMANIZATION: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMANIZATION_TO_HIRAGANA:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMANIZATION_TO_KATAKANA:
+    hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_ONE: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_TWO: hb_aat_layout_feature_selector_t =
+    8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_THREE:
+    hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ANNOTATION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_BOX_ANNOTATION: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROUNDED_BOX_ANNOTATION: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CIRCLE_ANNOTATION: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_CIRCLE_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PARENTHESIS_ANNOTATION: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIOD_ANNOTATION: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMAN_NUMERAL_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIAMOND_ANNOTATION: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_BOX_ANNOTATION: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_ROUNDED_BOX_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_KANA: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_KANA: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_RUBY_KANA: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_CJK_SYMBOL_ALTERNATIVES:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_ONE: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_TWO: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_THREE: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FOUR: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FIVE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_IDEOGRAPHIC_ALTERNATIVES:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_ONE: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_TWO: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_THREE: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FOUR: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FIVE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_CENTERED:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_HBASELINE:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_CJK_ITALIC_ROMAN: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_ON:
+    hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_STYLISTIC_ALTERNATES: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_OFF: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THREE_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THREE_OFF: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOUR_ON: hb_aat_layout_feature_selector_t =
+    8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOUR_OFF: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIVE_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIVE_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIX_ON: hb_aat_layout_feature_selector_t =
+    12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIX_OFF: hb_aat_layout_feature_selector_t =
+    13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVEN_ON: hb_aat_layout_feature_selector_t =
+    14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVEN_OFF: hb_aat_layout_feature_selector_t =
+    15;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHT_ON: hb_aat_layout_feature_selector_t =
+    16;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHT_OFF: hb_aat_layout_feature_selector_t =
+    17;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINE_ON: hb_aat_layout_feature_selector_t =
+    18;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINE_OFF: hb_aat_layout_feature_selector_t =
+    19;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TEN_ON: hb_aat_layout_feature_selector_t =
+    20;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TEN_OFF: hb_aat_layout_feature_selector_t =
+    21;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ELEVEN_ON: hb_aat_layout_feature_selector_t =
+    22;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ELEVEN_OFF:
+    hb_aat_layout_feature_selector_t = 23;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWELVE_ON: hb_aat_layout_feature_selector_t =
+    24;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWELVE_OFF:
+    hb_aat_layout_feature_selector_t = 25;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THIRTEEN_ON:
+    hb_aat_layout_feature_selector_t = 26;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THIRTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 27;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOURTEEN_ON:
+    hb_aat_layout_feature_selector_t = 28;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOURTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 29;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIFTEEN_ON:
+    hb_aat_layout_feature_selector_t = 30;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIFTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 31;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIXTEEN_ON:
+    hb_aat_layout_feature_selector_t = 32;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIXTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 33;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVENTEEN_ON:
+    hb_aat_layout_feature_selector_t = 34;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVENTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 35;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHTEEN_ON:
+    hb_aat_layout_feature_selector_t = 36;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 37;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINETEEN_ON:
+    hb_aat_layout_feature_selector_t = 38;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINETEEN_OFF:
+    hb_aat_layout_feature_selector_t = 39;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_ON: hb_aat_layout_feature_selector_t =
+    40;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_OFF:
+    hb_aat_layout_feature_selector_t = 41;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_ON:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_LOWER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_SMALL_CAPS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_PETITE_CAPS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_UPPER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_SMALL_CAPS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_PETITE_CAPS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_CJK_ROMAN: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_CJK_ROMAN: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_CJK_ROMAN: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_CJK_ROMAN: hb_aat_layout_feature_selector_t = 3;
+pub const _HB_AAT_LAYOUT_FEATURE_SELECTOR_MAX_VALUE: hb_aat_layout_feature_selector_t = 2147483647;
+/// hb_aat_layout_feature_selector_t:
+///
+///
+/// Since: 2.2.0
+pub type hb_aat_layout_feature_selector_t = u32;
+extern "C" {
+    pub fn hb_aat_layout_get_feature_types(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        feature_count: *mut ::std::os::raw::c_uint,
+        features: *mut hb_aat_layout_feature_type_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_aat_layout_feature_type_get_name_id(
+        face: *mut hb_face_t,
+        feature_type: hb_aat_layout_feature_type_t,
+    ) -> hb_ot_name_id_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_aat_layout_feature_selector_info_t {
+    pub name_id: hb_ot_name_id_t,
+    pub enable: hb_aat_layout_feature_selector_t,
+    pub disable: hb_aat_layout_feature_selector_t,
+    pub reserved: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_aat_layout_feature_selector_info_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_aat_layout_feature_selector_info_t>(),
+        16usize,
+        concat!(
+            "Size of: ",
+            stringify!(hb_aat_layout_feature_selector_info_t)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_aat_layout_feature_selector_info_t>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(hb_aat_layout_feature_selector_info_t)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).name_id as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).enable as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(enable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).disable as *const _
+                as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(disable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).reserved as *const _
+                as usize
+        },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_aat_layout_feature_type_get_selector_infos(
+        face: *mut hb_face_t,
+        feature_type: hb_aat_layout_feature_type_t,
+        start_offset: ::std::os::raw::c_uint,
+        selector_count: *mut ::std::os::raw::c_uint,
+        selectors: *mut hb_aat_layout_feature_selector_info_t,
+        default_index: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
 }
