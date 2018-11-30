@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>hb-ot-layout: HarfBuzz Reference Manual</title>
+<title>hb-ot-layout: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-<link rel="home" href="index.html" title="HarfBuzz Reference Manual">
-<link rel="up" href="ch01.html" title="[Insert title here]">
-<link rel="prev" href="harfbuzz-hb-ot-name.html" title="hb-ot-name">
+<link rel="home" href="index.html" title="HarfBuzz Manual">
+<link rel="up" href="ch10.html" title="OpenType API">
+<link rel="prev" href="harfbuzz-hb-ot-font.html" title="hb-ot-font">
 <link rel="next" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -19,8 +19,8 @@
                   <a href="#harfbuzz-hb-ot-layout.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-ot-name.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch10.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-ot-font.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-ot-math.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
@@ -639,11 +639,11 @@ hb_ot_layout_feature_get_lookups (<em class="parameter"><code><a class="link" hr
 hb_ot_layout_feature_get_name_ids (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                    <em class="parameter"><code>unsigned <span class="type">int</span> feature_index</code></em>,
-                                   <em class="parameter"><code><span class="type">hb_ot_name_id_t</span> *label_id</code></em>,
-                                   <em class="parameter"><code><span class="type">hb_ot_name_id_t</span> *tooltip_id</code></em>,
-                                   <em class="parameter"><code><span class="type">hb_ot_name_id_t</span> *sample_id</code></em>,
+                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *label_id</code></em>,
+                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *tooltip_id</code></em>,
+                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *sample_id</code></em>,
                                    <em class="parameter"><code>unsigned <span class="type">int</span> *num_named_parameters</code></em>,
-                                   <em class="parameter"><code><span class="type">hb_ot_name_id_t</span> *first_param_id</code></em>);</pre>
+                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *first_param_id</code></em>);</pre>
 <p>Fetches name indices from feature parameters for "Stylistic Set" ('ssXX') or
 "Character Variant" ('cvXX') features.</p>
 <div class="refsect3">
@@ -768,7 +768,7 @@ hb_ot_layout_get_ligature_carets (<em class="parameter"><code><a class="link" hr
 hb_ot_layout_get_size_params (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *design_size</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *subfamily_id</code></em>,
-                              <em class="parameter"><code><span class="type">hb_ot_name_id_t</span> *subfamily_name_id</code></em>,
+                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *subfamily_name_id</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *range_start</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *range_end</code></em>);</pre>
 <p class="since">Since: <a class="link" href="api-index-0-9-10.html#api-index-0.9.10">0.9.10</a></p>

@@ -57,8 +57,8 @@ struct hb_ot_map_t
     unsigned int auto_zwj : 1;
     unsigned int random : 1;
 
-    inline int cmp (const hb_tag_t *tag_) const
-    { return *tag_ < tag ? -1 : *tag_ > tag ? 1 : 0; }
+    inline int cmp (const hb_tag_t tag_) const
+    { return tag_ < tag ? -1 : tag_ > tag ? 1 : 0; }
   };
 
   struct lookup_map_t {
@@ -188,6 +188,7 @@ struct hb_ot_map_feature_t
   hb_ot_map_feature_flags_t flags;
 };
 
+struct hb_ot_shape_plan_key_t;
 
 struct hb_ot_map_builder_t
 {
@@ -218,9 +219,8 @@ struct hb_ot_map_builder_t
   inline void add_gpos_pause (hb_ot_map_t::pause_func_t pause_func)
   { add_pause (1, pause_func); }
 
-  HB_INTERNAL void compile (hb_ot_map_t  &m,
-			    const int    *coords,
-			    unsigned int  num_coords);
+  HB_INTERNAL void compile (hb_ot_map_t                  &m,
+			    const hb_ot_shape_plan_key_t &key);
 
   private:
 

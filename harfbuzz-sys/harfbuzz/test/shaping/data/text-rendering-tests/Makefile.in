@@ -106,13 +106,13 @@ TESTS = tests/AVAR-1.tests tests/CFF-1.tests tests/CFF2-1.tests \
 	tests/MORX-22.tests tests/MORX-23.tests tests/MORX-24.tests \
 	tests/MORX-25.tests tests/MORX-26.tests tests/MORX-27.tests \
 	tests/MORX-28.tests tests/MORX-29.tests tests/MORX-2.tests \
-	tests/MORX-30.tests tests/MORX-31.tests tests/MORX-32.tests \
-	tests/MORX-33.tests tests/MORX-34.tests tests/MORX-35.tests \
-	tests/MORX-36.tests tests/MORX-37.tests tests/MORX-38.tests \
-	tests/MORX-39.tests tests/MORX-3.tests tests/MORX-40.tests \
-	tests/MORX-4.tests tests/MORX-5.tests tests/MORX-6.tests \
-	tests/MORX-7.tests tests/MORX-8.tests tests/MORX-9.tests \
-	tests/SHBALI-3.tests tests/SHKNDA-1.tests $(am__EXEEXT_1)
+	tests/MORX-30.tests tests/MORX-32.tests tests/MORX-33.tests \
+	tests/MORX-34.tests tests/MORX-35.tests tests/MORX-36.tests \
+	tests/MORX-37.tests tests/MORX-38.tests tests/MORX-39.tests \
+	tests/MORX-3.tests tests/MORX-40.tests tests/MORX-4.tests \
+	tests/MORX-5.tests tests/MORX-6.tests tests/MORX-7.tests \
+	tests/MORX-8.tests tests/MORX-9.tests tests/SHBALI-3.tests \
+	tests/SHKNDA-1.tests $(am__EXEEXT_1)
 subdir = test/shaping/data/text-rendering-tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_check_link_flag.m4 \
@@ -554,6 +554,7 @@ TEST_EXTENSIONS = .tests
 TESTS_LOG_COMPILER = $(srcdir)/../../run-tests.py $(top_builddir)/util/hb-shape$(EXEEXT)
 DISBALED_TESTS = \
 	tests/CMAP-3.tests \
+	tests/MORX-31.tests \
 	tests/MORX-41.tests \
 	tests/SHARAN-1.tests \
 	tests/SHBALI-1.tests \
