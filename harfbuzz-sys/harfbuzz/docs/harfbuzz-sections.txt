@@ -161,6 +161,10 @@ hb_ot_layout_table_choose_script
 hb_ot_layout_table_find_script
 hb_ot_tag_from_language
 hb_ot_tags_from_script
+HB_OT_VAR_NO_AXIS_INDEX
+hb_ot_var_axis_t
+hb_ot_var_find_axis
+hb_ot_var_get_axes
 hb_set_invert
 hb_unicode_eastasian_width_func_t
 hb_unicode_eastasian_width
@@ -360,7 +364,6 @@ HB_GOBJECT_TYPE_FONT_FUNCS
 HB_GOBJECT_TYPE_GLYPH_FLAGS
 HB_GOBJECT_TYPE_MAP
 HB_GOBJECT_TYPE_MEMORY_MODE
-HB_GOBJECT_TYPE_NAME_ID
 HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS
 HB_GOBJECT_TYPE_OT_LAYOUT_GLYPH_CLASS
 HB_GOBJECT_TYPE_OT_MATH_CONSTANT
@@ -394,7 +397,6 @@ hb_gobject_font_get_type
 hb_gobject_glyph_flags_get_type
 hb_gobject_map_get_type
 hb_gobject_memory_mode_get_type
-hb_gobject_name_id_get_type
 hb_gobject_ot_color_palette_flags_get_type
 hb_gobject_ot_layout_glyph_class_get_type
 hb_gobject_ot_math_constant_get_type
@@ -461,8 +463,12 @@ hb_color_get_blue
 hb_color_get_green
 hb_color_get_red
 hb_ot_color_glyph_get_layers
+hb_ot_color_glyph_reference_png
+hb_ot_color_glyph_reference_svg
 hb_ot_color_has_layers
 hb_ot_color_has_palettes
+hb_ot_color_has_png
+hb_ot_color_has_svg
 hb_ot_color_layer_t
 hb_ot_color_palette_color_get_name_id
 hb_ot_color_palette_flags_t
@@ -479,7 +485,8 @@ hb_ot_font_set_funcs
 
 <SECTION>
 <FILE>hb-ot-name</FILE>
-hb_name_id_t
+hb_ot_name_id_t
+HB_OT_NAME_ID_INVALID
 hb_ot_name_entry_t
 hb_ot_name_list_names
 hb_ot_name_get_utf16
@@ -578,12 +585,16 @@ HB_OT_TAG_VAR_AXIS_OPTICAL_SIZE
 HB_OT_TAG_VAR_AXIS_SLANT
 HB_OT_TAG_VAR_AXIS_WEIGHT
 HB_OT_TAG_VAR_AXIS_WIDTH
-HB_OT_VAR_NO_AXIS_INDEX
-hb_ot_var_axis_t
 hb_ot_var_has_data
-hb_ot_var_find_axis
+hb_ot_var_axis_flags_t
+hb_ot_var_axis_info_t
+hb_ot_var_find_axis_info
 hb_ot_var_get_axis_count
-hb_ot_var_get_axes
+hb_ot_var_get_axis_infos
+hb_ot_var_get_named_instance_count
+hb_ot_var_named_instance_get_subfamily_name_id
+hb_ot_var_named_instance_get_postscript_name_id
+hb_ot_var_named_instance_get_design_coords
 hb_ot_var_normalize_variations
 hb_ot_var_normalize_coords
 </SECTION>

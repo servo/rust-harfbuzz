@@ -377,6 +377,7 @@ NULL =
 SUBDIRS = \
 	in-house \
 	text-rendering-tests \
+	aots \
 	$(NULL)
 
 all: all-recursive

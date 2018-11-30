@@ -129,8 +129,9 @@ am__EXEEXT_1 =
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@am__EXEEXT_3 =  \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	test-ot-math$(EXEEXT) \
 @HAVE_FREETYPE_TRUE@@HAVE_GLIB_TRUE@	$(am__EXEEXT_1)
-@HAVE_GLIB_TRUE@am__EXEEXT_4 = test-baseline$(EXEEXT) \
-@HAVE_GLIB_TRUE@	test-blob$(EXEEXT) test-buffer$(EXEEXT) \
+@HAVE_GLIB_TRUE@am__EXEEXT_4 = test-aat-layout$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-baseline$(EXEEXT) test-blob$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-buffer$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-collect-unicodes$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-common$(EXEEXT) test-font$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-map$(EXEEXT) test-object$(EXEEXT) \
@@ -145,22 +146,29 @@ am__EXEEXT_1 =
 @HAVE_GLIB_TRUE@	test-subset-vmtx$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-unicode$(EXEEXT) test-version$(EXEEXT) \
 @HAVE_GLIB_TRUE@	$(am__EXEEXT_1) test-ot-color$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-ot-ligature-carets$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-ot-name$(EXEEXT) test-ot-tag$(EXEEXT) \
 @HAVE_GLIB_TRUE@	$(am__EXEEXT_1) $(am__EXEEXT_2) \
 @HAVE_GLIB_TRUE@	$(am__EXEEXT_3) test-c$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-cplusplus$(EXEEXT) $(am__EXEEXT_1)
 PROGRAMS = $(noinst_PROGRAMS)
-test_baseline_SOURCES = test-baseline.c
-test_baseline_OBJECTS = test-baseline.$(OBJEXT)
-test_baseline_LDADD = $(LDADD)
+test_aat_layout_SOURCES = test-aat-layout.c
+test_aat_layout_OBJECTS = test-aat-layout.$(OBJEXT)
+test_aat_layout_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
-@HAVE_GLIB_TRUE@test_baseline_DEPENDENCIES =  \
+@HAVE_GLIB_TRUE@test_aat_layout_DEPENDENCIES =  \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+test_baseline_SOURCES = test-baseline.c
+test_baseline_OBJECTS = test-baseline.$(OBJEXT)
+test_baseline_LDADD = $(LDADD)
+@HAVE_GLIB_TRUE@test_baseline_DEPENDENCIES =  \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
+@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 test_blob_SOURCES = test-blob.c
 test_blob_OBJECTS = test-blob.$(OBJEXT)
 test_blob_LDADD = $(LDADD)
@@ -236,6 +244,12 @@ test_ot_face_SOURCES = test-ot-face.c
 test_ot_face_OBJECTS = test-ot-face.$(OBJEXT)
 test_ot_face_LDADD = $(LDADD)
 @HAVE_GLIB_TRUE@test_ot_face_DEPENDENCIES =  \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
+@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
+test_ot_ligature_carets_SOURCES = test-ot-ligature-carets.c
+test_ot_ligature_carets_OBJECTS = test-ot-ligature-carets.$(OBJEXT)
+test_ot_ligature_carets_LDADD = $(LDADD)
+@HAVE_GLIB_TRUE@test_ot_ligature_carets_DEPENDENCIES =  \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 test_ot_math_SOURCES = test-ot-math.c
@@ -360,24 +374,26 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = test-baseline.c test-blob.c test-buffer.c test-c.c \
-	test-collect-unicodes.c test-common.c \
+SOURCES = test-aat-layout.c test-baseline.c test-blob.c test-buffer.c \
+	test-c.c test-collect-unicodes.c test-common.c \
 	$(test_cplusplus_SOURCES) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
-	test-ot-face.c test-ot-math.c test-ot-name.c test-ot-tag.c \
-	test-set.c test-shape.c test-subset.c test-subset-cmap.c \
-	test-subset-glyf.c test-subset-hdmx.c test-subset-hmtx.c \
-	test-subset-os2.c test-subset-post.c test-subset-vmtx.c \
-	test-unicode.c test-version.c
-DIST_SOURCES = test-baseline.c test-blob.c test-buffer.c test-c.c \
-	test-collect-unicodes.c test-common.c \
+	test-ot-face.c test-ot-ligature-carets.c test-ot-math.c \
+	test-ot-name.c test-ot-tag.c test-set.c test-shape.c \
+	test-subset.c test-subset-cmap.c test-subset-glyf.c \
+	test-subset-hdmx.c test-subset-hmtx.c test-subset-os2.c \
+	test-subset-post.c test-subset-vmtx.c test-unicode.c \
+	test-version.c
+DIST_SOURCES = test-aat-layout.c test-baseline.c test-blob.c \
+	test-buffer.c test-c.c test-collect-unicodes.c test-common.c \
 	$(am__test_cplusplus_SOURCES_DIST) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
-	test-ot-face.c test-ot-math.c test-ot-name.c test-ot-tag.c \
-	test-set.c test-shape.c test-subset.c test-subset-cmap.c \
-	test-subset-glyf.c test-subset-hdmx.c test-subset-hmtx.c \
-	test-subset-os2.c test-subset-post.c test-subset-vmtx.c \
-	test-unicode.c test-version.c
+	test-ot-face.c test-ot-ligature-carets.c test-ot-math.c \
+	test-ot-name.c test-ot-tag.c test-set.c test-shape.c \
+	test-subset.c test-subset-cmap.c test-subset-glyf.c \
+	test-subset-hdmx.c test-subset-hmtx.c test-subset-os2.c \
+	test-subset-post.c test-subset-vmtx.c test-unicode.c \
+	test-version.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -806,14 +822,15 @@ LINK = $(CXXLINK)
 @HAVE_GLIB_TRUE@LDADD = $(top_builddir)/src/libharfbuzz.la $(GLIB_LIBS)
 
 # Tests for header compilation
-@HAVE_GLIB_TRUE@TEST_PROGS = test-baseline test-blob test-buffer \
-@HAVE_GLIB_TRUE@	test-collect-unicodes test-common test-font \
-@HAVE_GLIB_TRUE@	test-map test-object test-ot-face test-set \
-@HAVE_GLIB_TRUE@	test-shape test-subset test-subset-cmap \
-@HAVE_GLIB_TRUE@	test-subset-glyf test-subset-hdmx \
-@HAVE_GLIB_TRUE@	test-subset-hmtx test-subset-os2 \
-@HAVE_GLIB_TRUE@	test-subset-post test-subset-vmtx test-unicode \
-@HAVE_GLIB_TRUE@	test-version $(NULL) test-ot-color \
+@HAVE_GLIB_TRUE@TEST_PROGS = test-aat-layout test-baseline test-blob \
+@HAVE_GLIB_TRUE@	test-buffer test-collect-unicodes test-common \
+@HAVE_GLIB_TRUE@	test-font test-map test-object test-ot-face \
+@HAVE_GLIB_TRUE@	test-set test-shape test-subset \
+@HAVE_GLIB_TRUE@	test-subset-cmap test-subset-glyf \
+@HAVE_GLIB_TRUE@	test-subset-hdmx test-subset-hmtx \
+@HAVE_GLIB_TRUE@	test-subset-os2 test-subset-post \
+@HAVE_GLIB_TRUE@	test-subset-vmtx test-unicode test-version \
+@HAVE_GLIB_TRUE@	$(NULL) test-ot-color test-ot-ligature-carets \
 @HAVE_GLIB_TRUE@	test-ot-name test-ot-tag $(NULL) \
 @HAVE_GLIB_TRUE@	$(am__append_4) $(am__append_5) test-c \
 @HAVE_GLIB_TRUE@	test-cplusplus $(NULL)
@@ -857,9 +874,10 @@ LINK = $(CXXLINK)
 
 # Check tests under valgrind.  Saves log to log-valgrind.txt
 @HAVE_GLIB_TRUE@VALGRIND_FLAGS = \
-@HAVE_GLIB_TRUE@	--tool=memcheck --suppressions=$(srcdir)/.valgrind-suppressions \
+@HAVE_GLIB_TRUE@	--tool=memcheck \
 @HAVE_GLIB_TRUE@	--track-origins=yes \
-@HAVE_GLIB_TRUE@	--leak-check=yes
+@HAVE_GLIB_TRUE@	--leak-check=yes \
+@HAVE_GLIB_TRUE@	$(EXTRA_VALGRIND_FLAGS)
 
 @HAVE_GLIB_TRUE@valgrind_verbose = $(valgrind_verbose_@AM_V@)
 @HAVE_GLIB_TRUE@valgrind_verbose_ = $(valgrind_verbose_@AM_DEFAULT_V@)
@@ -918,6 +936,10 @@ clean-noinstPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
+test-aat-layout$(EXEEXT): $(test_aat_layout_OBJECTS) $(test_aat_layout_DEPENDENCIES) $(EXTRA_test_aat_layout_DEPENDENCIES) 
+	@rm -f test-aat-layout$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_aat_layout_OBJECTS) $(test_aat_layout_LDADD) $(LIBS)
+
 test-baseline$(EXEEXT): $(test_baseline_OBJECTS) $(test_baseline_DEPENDENCIES) $(EXTRA_test_baseline_DEPENDENCIES) 
 	@rm -f test-baseline$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_baseline_OBJECTS) $(test_baseline_LDADD) $(LIBS)
@@ -969,6 +991,10 @@ test-ot-color$(EXEEXT): $(test_ot_color_OBJECTS) $(test_ot_color_DEPENDENCIES) $
 test-ot-face$(EXEEXT): $(test_ot_face_OBJECTS) $(test_ot_face_DEPENDENCIES) $(EXTRA_test_ot_face_DEPENDENCIES) 
 	@rm -f test-ot-face$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_face_OBJECTS) $(test_ot_face_LDADD) $(LIBS)
+
+test-ot-ligature-carets$(EXEEXT): $(test_ot_ligature_carets_OBJECTS) $(test_ot_ligature_carets_DEPENDENCIES) $(EXTRA_test_ot_ligature_carets_DEPENDENCIES) 
+	@rm -f test-ot-ligature-carets$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_ot_ligature_carets_OBJECTS) $(test_ot_ligature_carets_LDADD) $(LIBS)
 
 test-ot-math$(EXEEXT): $(test_ot_math_OBJECTS) $(test_ot_math_DEPENDENCIES) $(EXTRA_test_ot_math_DEPENDENCIES) 
 	@rm -f test-ot-math$(EXEEXT)
@@ -1036,6 +1062,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-aat-layout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-baseline.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-blob.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-buffer.Po@am__quote@
@@ -1046,6 +1073,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-object.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-color.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-face.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-ligature-carets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-name.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-tag.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-set.Po@am__quote@
@@ -1376,6 +1404,13 @@ recheck: all $(check_PROGRAMS)
 	        am__force_recheck=am--force-recheck \
 	        TEST_LOGS="$$log_list"; \
 	exit $$?
+test-aat-layout.log: test-aat-layout$(EXEEXT)
+	@p='test-aat-layout$(EXEEXT)'; \
+	b='test-aat-layout'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-baseline.log: test-baseline$(EXEEXT)
 	@p='test-baseline$(EXEEXT)'; \
 	b='test-baseline'; \
@@ -1526,6 +1561,13 @@ test-version.log: test-version$(EXEEXT)
 test-ot-color.log: test-ot-color$(EXEEXT)
 	@p='test-ot-color$(EXEEXT)'; \
 	b='test-ot-color'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-ot-ligature-carets.log: test-ot-ligature-carets$(EXEEXT)
+	@p='test-ot-ligature-carets$(EXEEXT)'; \
+	b='test-ot-ligature-carets'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1768,7 +1810,6 @@ libs:
 @HAVE_GLIB_TRUE@	env $(TOOL)'
 @HAVE_GLIB_TRUE@check-gtester:
 @HAVE_GLIB_TRUE@	$(AM_V_at)$(MAKE) $(AM_MAKEFLGS) check-tool-raw TOOL="$(GTESTER) --verbose --keep-going"
-@HAVE_GLIB_TRUE@	$(EXTRA_VALGRIND_FLAGS)
 # TODO: The following check does not fail if valgrind finds error.  It should.
 @HAVE_GLIB_TRUE@check-valgrind:
 @HAVE_GLIB_TRUE@	$(AM_V_at)$(MAKE) $(AM_MAKEFLGS) check-tool TOOL="valgrind $(VALGRIND_FLAGS)" \

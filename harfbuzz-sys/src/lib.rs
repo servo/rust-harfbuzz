@@ -20,7 +20,6 @@ pub const HB_OT_LAYOUT_NO_SCRIPT_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_FEATURE_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_DEFAULT_LANGUAGE_INDEX: u32 = 65535;
 pub const HB_OT_LAYOUT_NO_VARIATIONS_INDEX: u32 = 4294967295;
-pub const HB_OT_VAR_NO_AXIS_INDEX: u32 = 4294967295;
 pub type hb_bool_t = ::std::os::raw::c_int;
 pub type hb_codepoint_t = u32;
 pub type hb_position_t = i32;
@@ -2187,6 +2186,8 @@ pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
 /// the reshaping to a small piece around the
 /// breaking point only.
 /// @HB_GLYPH_FLAG_DEFINED: All the currently defined flags.
+///
+/// Since: 1.5.0
 pub type hb_glyph_flags_t = u32;
 extern "C" {
     pub fn hb_glyph_info_get_glyph_flags(info: *const hb_glyph_info_t) -> hb_glyph_flags_t;
@@ -3762,102 +3763,168 @@ extern "C" {
         lookup_indexes: *mut hb_set_t,
     );
 }
-/// hb_ot_var_axis_t:
-///
-/// Since: 1.4.2
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct hb_ot_var_axis_t {
-    pub tag: hb_tag_t,
-    pub name_id: ::std::os::raw::c_uint,
-    pub min_value: f32,
-    pub default_value: f32,
-    pub max_value: f32,
-}
-#[test]
-fn bindgen_test_layout_hb_ot_var_axis_t() {
-    assert_eq!(
-        ::std::mem::size_of::<hb_ot_var_axis_t>(),
-        20usize,
-        concat!("Size of: ", stringify!(hb_ot_var_axis_t))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<hb_ot_var_axis_t>(),
-        4usize,
-        concat!("Alignment of ", stringify!(hb_ot_var_axis_t))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).tag as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(hb_ot_var_axis_t),
-            "::",
-            stringify!(tag)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).name_id as *const _ as usize },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(hb_ot_var_axis_t),
-            "::",
-            stringify!(name_id)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).min_value as *const _ as usize },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(hb_ot_var_axis_t),
-            "::",
-            stringify!(min_value)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).default_value as *const _ as usize },
-        12usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(hb_ot_var_axis_t),
-            "::",
-            stringify!(default_value)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).max_value as *const _ as usize },
-        16usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(hb_ot_var_axis_t),
-            "::",
-            stringify!(max_value)
-        )
-    );
-}
 extern "C" {
     pub fn hb_ot_var_has_data(face: *mut hb_face_t) -> hb_bool_t;
 }
 extern "C" {
     pub fn hb_ot_var_get_axis_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
 }
+pub const HB_OT_VAR_AXIS_FLAG_HIDDEN: hb_ot_var_axis_flags_t = 1;
+pub const _HB_OT_VAR_AXIS_FLAG_MAX_VALUE: hb_ot_var_axis_flags_t = 2147483647;
+/// hb_ot_var_axis_flags_t:
+/// @HB_OT_VAR_AXIS_FLAG_HIDDEN: The axis should not be exposed directly in user interfaces.
+///
+/// Since: 2.2.0
+pub type hb_ot_var_axis_flags_t = u32;
+/// hb_ot_var_axis_info_t:
+///
+/// Since: 2.2.0
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_var_axis_info_t {
+    pub axis_index: ::std::os::raw::c_uint,
+    pub tag: hb_tag_t,
+    pub name_id: hb_ot_name_id_t,
+    pub flags: hb_ot_var_axis_flags_t,
+    pub min_value: f32,
+    pub default_value: f32,
+    pub max_value: f32,
+    pub reserved: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_var_axis_info_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_var_axis_info_t>(),
+        32usize,
+        concat!("Size of: ", stringify!(hb_ot_var_axis_info_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_var_axis_info_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_var_axis_info_t))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).axis_index as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(axis_index)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).tag as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(tag)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).name_id as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).flags as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(flags)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).min_value as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(min_value)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).default_value as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(default_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).max_value as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(max_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).reserved as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
 extern "C" {
-    pub fn hb_ot_var_get_axes(
+    pub fn hb_ot_var_get_axis_infos(
         face: *mut hb_face_t,
         start_offset: ::std::os::raw::c_uint,
         axes_count: *mut ::std::os::raw::c_uint,
-        axes_array: *mut hb_ot_var_axis_t,
+        axes_array: *mut hb_ot_var_axis_info_t,
     ) -> ::std::os::raw::c_uint;
 }
 extern "C" {
-    pub fn hb_ot_var_find_axis(
+    pub fn hb_ot_var_find_axis_info(
         face: *mut hb_face_t,
         axis_tag: hb_tag_t,
-        axis_index: *mut ::std::os::raw::c_uint,
-        axis_info: *mut hb_ot_var_axis_t,
+        axis_info: *mut hb_ot_var_axis_info_t,
     ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_var_get_named_instance_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_subfamily_name_id(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_postscript_name_id(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_design_coords(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+        coords_length: *mut ::std::os::raw::c_uint,
+        coords: *mut f32,
+    ) -> ::std::os::raw::c_uint;
 }
 extern "C" {
     pub fn hb_ot_var_normalize_variations(

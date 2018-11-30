@@ -106,8 +106,9 @@ TESTS = tests/aat-trak.tests tests/aat-morx.tests \
 	tests/indic-script-extensions.tests \
 	tests/indic-special-cases.tests tests/indic-syllable.tests \
 	tests/indic-vowel-letter-spoofing.tests \
-	tests/khmer-mark-order.tests tests/khmer-misc.tests \
-	tests/language-tags.tests tests/ligature-id.tests \
+	tests/kern-format2.tests tests/khmer-mark-order.tests \
+	tests/khmer-misc.tests tests/language-tags.tests \
+	tests/ligature-id.tests tests/macos.tests \
 	tests/mark-attachment.tests tests/mark-filtering-sets.tests \
 	tests/mongolian-variation-selector.tests \
 	tests/myanmar-syllable.tests tests/myanmar-zawgyi.tests \
