@@ -33,11 +33,8 @@ CONFIGURE_FLAGS = \
 	--disable-shared \
 	--without-icu \
 	--without-freetype \
-	--without-glib
-
-ifeq ("apple-darwin",$(findstring "apple-darwin",$(TARGET)))
-	CONFIGURE_FLAGS += --with-coretext
-endif
+	--without-glib \
+	--with-coretext=auto
 
 all:
 	touch -r harfbuzz/configure $(AUTOMAKE_FILES)
