@@ -13,3 +13,8 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
 version = "0.3.0"
+default-features = false
+
+[features]
+default = ["build-native-harfbuzz", "build-native-freetype"]
+build-native-harfbuzz = ["harfbuzz-sys/build-native-harfbuzz", "harfbuzz-sys/build-native-freetype"]
