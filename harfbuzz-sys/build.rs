@@ -1,11 +1,14 @@
+#[cfg(feature = "build-native-harfbuzz")]
 extern crate cmake;
+#[cfg(feature = "build-native-harfbuzz")]
 extern crate pkg_config;
 
-use std::env;
-use std::process::Command;
-use std::path::PathBuf;
-
+#[cfg(feature = "build-native-harfbuzz")]
 fn main() {
+    use std::env;
+    use std::process::Command;
+    use std::path::PathBuf;
+
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
     if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
         if pkg_config::find_library("harfbuzz").is_ok() {
@@ -48,3 +51,6 @@ fn main() {
         env::current_dir().unwrap().join("harfbuzz/src").display()
     );
 }
+
+#[cfg(not(feature = "build-native-harfbuzz"))]
+fn main() {}
