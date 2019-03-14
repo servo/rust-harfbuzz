@@ -7,18 +7,35 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::{mem, ops, ptr, slice};
+use std::marker::PhantomData;
 use std::os::raw::{c_char, c_uint};
+use std::{mem, ops, ptr, slice};
 use sys;
 
-/// Wrapper type that owns an `hb_blob_t`.
-pub struct Blob {
+/// Blobs wrap a chunk of binary data to handle lifecycle management of data
+/// while it is passed between client and HarfBuzz.
+///
+/// Blobs are primarily used to create font faces, but also to access font face
+/// tables, as well as pass around other binary data.
+pub struct Blob<'a> {
     raw: *mut sys::hb_blob_t,
+    phantom: PhantomData<&'a [u8]>,
 }
 
-impl Blob {
+impl<'a> Blob<'a> {
     /// Create a new read-only blob.
-    pub fn new_read_only(data: &[u8]) -> Self {
+    ///
+    /// The data is not copied, so it must outlive the
+    /// `Blob`.
+    ///
+    /// ```
+    /// # use harfbuzz::Blob;
+    /// let data = vec![1; 256];
+    /// let blob = Blob::new_read_only(&data);
+    /// assert_eq!(blob.len(), 256);
+    /// assert!(!blob.is_empty());
+    /// ```
+    pub fn new_read_only(data: &'a [u8]) -> Blob<'a> {
         assert!(data.len() <= c_uint::max_value() as usize);
         unsafe {
             Blob::from_raw(sys::hb_blob_create(
@@ -33,7 +50,10 @@ impl Blob {
 
     /// Construct a `Blob` from a raw pointer. Takes ownership of the blob.
     pub unsafe fn from_raw(raw: *mut sys::hb_blob_t) -> Self {
-        Blob { raw }
+        Blob {
+            raw,
+            phantom: PhantomData,
+        }
     }
 
     /// Returns the size of the blob in bytes.
@@ -69,7 +89,7 @@ impl Blob {
     }
 }
 
-impl ops::Deref for Blob {
+impl<'a> ops::Deref for Blob<'a> {
     type Target = [u8];
 
     fn deref(&self) -> &[u8] {
@@ -82,7 +102,7 @@ impl ops::Deref for Blob {
     }
 }
 
-impl ops::DerefMut for Blob {
+impl<'a> ops::DerefMut for Blob<'a> {
     fn deref_mut(&mut self) -> &mut [u8] {
         unsafe {
             let mut len = 0;
@@ -93,7 +113,7 @@ impl ops::DerefMut for Blob {
     }
 }
 
-impl Drop for Blob {
+impl<'a> Drop for Blob<'a> {
     /// Decrement the reference count, and destroy the blob if the reference count is zero.
     fn drop(&mut self) {
         unsafe { sys::hb_blob_destroy(self.raw); }
