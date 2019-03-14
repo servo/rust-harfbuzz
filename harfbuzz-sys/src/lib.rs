@@ -4,6 +4,9 @@
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
 extern crate freetype;
 
+#[cfg(target_os = "macos")]
+pub mod coretext;
+
 #[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
 extern "C" {
     pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
