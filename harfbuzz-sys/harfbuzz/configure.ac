@@ -1,6 +1,6 @@
 AC_PREREQ([2.64])
 AC_INIT([HarfBuzz],
-        [2.2.0],
+        [2.3.1],
         [https://github.com/harfbuzz/harfbuzz/issues/new],
         [harfbuzz],
         [http://harfbuzz.org/])
@@ -12,7 +12,6 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.13.0 gnits tar-ustar dist-bzip2 no-dist-gzip -Wall no-define color-tests -Wno-portability])
 AM_SILENT_RULES([yes])
 AX_CODE_COVERAGE
-AC_USE_SYSTEM_EXTENSIONS
 
 # Initialize libtool
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
@@ -102,9 +101,6 @@ if test "x$GCC" = "xyes"; then
 	# Put -fno-rtti before $CXXFLAGS such that users can re-enable it
 	# by overriding CXXFLAGS.
 	CXXFLAGS="-fno-rtti $CXXFLAGS -fno-exceptions -fno-threadsafe-statics"
-
-	# Assorted warnings
-	CXXFLAGS="$CXXFLAGS -Wcast-align"
 
 	case "$host" in
 		*-*-mingw*)

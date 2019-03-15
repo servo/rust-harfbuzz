@@ -4483,3 +4483,12 @@ extern "C" {
         default_index: *mut ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_uint;
 }
+extern "C" {
+    pub fn hb_aat_layout_has_substitution(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_aat_layout_has_positioning(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_aat_layout_has_tracking(face: *mut hb_face_t) -> hb_bool_t;
+}

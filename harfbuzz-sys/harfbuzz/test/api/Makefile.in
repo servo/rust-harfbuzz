@@ -144,13 +144,16 @@ am__EXEEXT_1 =
 @HAVE_GLIB_TRUE@	test-subset-os2$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-subset-post$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-subset-vmtx$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-subset-cff1$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-subset-cff2$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-unicode$(EXEEXT) test-version$(EXEEXT) \
 @HAVE_GLIB_TRUE@	$(am__EXEEXT_1) test-ot-color$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-ot-ligature-carets$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-ot-name$(EXEEXT) test-ot-tag$(EXEEXT) \
-@HAVE_GLIB_TRUE@	$(am__EXEEXT_1) $(am__EXEEXT_2) \
-@HAVE_GLIB_TRUE@	$(am__EXEEXT_3) test-c$(EXEEXT) \
-@HAVE_GLIB_TRUE@	test-cplusplus$(EXEEXT) $(am__EXEEXT_1)
+@HAVE_GLIB_TRUE@	test-ot-extents-cff$(EXEEXT) $(am__EXEEXT_1) \
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_2) $(am__EXEEXT_3) \
+@HAVE_GLIB_TRUE@	test-c$(EXEEXT) test-cplusplus$(EXEEXT) \
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_1)
 PROGRAMS = $(noinst_PROGRAMS)
 test_aat_layout_SOURCES = test-aat-layout.c
 test_aat_layout_OBJECTS = test-aat-layout.$(OBJEXT)
@@ -240,6 +243,12 @@ test_ot_color_LDADD = $(LDADD)
 @HAVE_GLIB_TRUE@test_ot_color_DEPENDENCIES =  \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
+test_ot_extents_cff_SOURCES = test-ot-extents-cff.c
+test_ot_extents_cff_OBJECTS = test-ot-extents-cff.$(OBJEXT)
+test_ot_extents_cff_LDADD = $(LDADD)
+@HAVE_GLIB_TRUE@test_ot_extents_cff_DEPENDENCIES =  \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
+@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 test_ot_face_SOURCES = test-ot-face.c
 test_ot_face_OBJECTS = test-ot-face.$(OBJEXT)
 test_ot_face_LDADD = $(LDADD)
@@ -284,6 +293,14 @@ test_shape_LDADD = $(LDADD)
 test_subset_SOURCES = test-subset.c
 test_subset_OBJECTS = test-subset.$(OBJEXT)
 @HAVE_GLIB_TRUE@test_subset_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz-subset.la
+test_subset_cff1_SOURCES = test-subset-cff1.c
+test_subset_cff1_OBJECTS = test-subset-cff1.$(OBJEXT)
+@HAVE_GLIB_TRUE@test_subset_cff1_DEPENDENCIES = $(am__DEPENDENCIES_2) \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz-subset.la
+test_subset_cff2_SOURCES = test-subset-cff2.c
+test_subset_cff2_OBJECTS = test-subset-cff2.$(OBJEXT)
+@HAVE_GLIB_TRUE@test_subset_cff2_DEPENDENCIES = $(am__DEPENDENCIES_2) \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz-subset.la
 test_subset_cmap_SOURCES = test-subset-cmap.c
 test_subset_cmap_OBJECTS = test-subset-cmap.$(OBJEXT)
@@ -378,9 +395,10 @@ SOURCES = test-aat-layout.c test-baseline.c test-blob.c test-buffer.c \
 	test-c.c test-collect-unicodes.c test-common.c \
 	$(test_cplusplus_SOURCES) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
-	test-ot-face.c test-ot-ligature-carets.c test-ot-math.c \
-	test-ot-name.c test-ot-tag.c test-set.c test-shape.c \
-	test-subset.c test-subset-cmap.c test-subset-glyf.c \
+	test-ot-extents-cff.c test-ot-face.c test-ot-ligature-carets.c \
+	test-ot-math.c test-ot-name.c test-ot-tag.c test-set.c \
+	test-shape.c test-subset.c test-subset-cff1.c \
+	test-subset-cff2.c test-subset-cmap.c test-subset-glyf.c \
 	test-subset-hdmx.c test-subset-hmtx.c test-subset-os2.c \
 	test-subset-post.c test-subset-vmtx.c test-unicode.c \
 	test-version.c
@@ -388,9 +406,10 @@ DIST_SOURCES = test-aat-layout.c test-baseline.c test-blob.c \
 	test-buffer.c test-c.c test-collect-unicodes.c test-common.c \
 	$(am__test_cplusplus_SOURCES_DIST) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
-	test-ot-face.c test-ot-ligature-carets.c test-ot-math.c \
-	test-ot-name.c test-ot-tag.c test-set.c test-shape.c \
-	test-subset.c test-subset-cmap.c test-subset-glyf.c \
+	test-ot-extents-cff.c test-ot-face.c test-ot-ligature-carets.c \
+	test-ot-math.c test-ot-name.c test-ot-tag.c test-set.c \
+	test-shape.c test-subset.c test-subset-cff1.c \
+	test-subset-cff2.c test-subset-cmap.c test-subset-glyf.c \
 	test-subset-hdmx.c test-subset-hmtx.c test-subset-os2.c \
 	test-subset-post.c test-subset-vmtx.c test-unicode.c \
 	test-version.c
@@ -829,13 +848,13 @@ LINK = $(CXXLINK)
 @HAVE_GLIB_TRUE@	test-subset-cmap test-subset-glyf \
 @HAVE_GLIB_TRUE@	test-subset-hdmx test-subset-hmtx \
 @HAVE_GLIB_TRUE@	test-subset-os2 test-subset-post \
-@HAVE_GLIB_TRUE@	test-subset-vmtx test-unicode test-version \
+@HAVE_GLIB_TRUE@	test-subset-vmtx test-subset-cff1 \
+@HAVE_GLIB_TRUE@	test-subset-cff2 test-unicode test-version \
 @HAVE_GLIB_TRUE@	$(NULL) test-ot-color test-ot-ligature-carets \
-@HAVE_GLIB_TRUE@	test-ot-name test-ot-tag $(NULL) \
-@HAVE_GLIB_TRUE@	$(am__append_4) $(am__append_5) test-c \
+@HAVE_GLIB_TRUE@	test-ot-name test-ot-tag test-ot-extents-cff \
+@HAVE_GLIB_TRUE@	$(NULL) $(am__append_4) $(am__append_5) test-c \
 @HAVE_GLIB_TRUE@	test-cplusplus $(NULL)
 @HAVE_GLIB_TRUE@test_subset_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
-@HAVE_GLIB_TRUE@test_subset_codepoints_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_cmap_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_glyf_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_hdmx_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
@@ -843,6 +862,8 @@ LINK = $(CXXLINK)
 @HAVE_GLIB_TRUE@test_subset_os2_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_post_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_vmtx_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
+@HAVE_GLIB_TRUE@test_subset_cff1_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
+@HAVE_GLIB_TRUE@test_subset_cff2_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_unicode_CPPFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS) \
 @HAVE_GLIB_TRUE@	$(NULL) $(am__append_2)
 @HAVE_GLIB_TRUE@test_unicode_LDADD = $(LDADD) $(am__append_3)
@@ -988,6 +1009,10 @@ test-ot-color$(EXEEXT): $(test_ot_color_OBJECTS) $(test_ot_color_DEPENDENCIES) $
 	@rm -f test-ot-color$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_color_OBJECTS) $(test_ot_color_LDADD) $(LIBS)
 
+test-ot-extents-cff$(EXEEXT): $(test_ot_extents_cff_OBJECTS) $(test_ot_extents_cff_DEPENDENCIES) $(EXTRA_test_ot_extents_cff_DEPENDENCIES) 
+	@rm -f test-ot-extents-cff$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_ot_extents_cff_OBJECTS) $(test_ot_extents_cff_LDADD) $(LIBS)
+
 test-ot-face$(EXEEXT): $(test_ot_face_OBJECTS) $(test_ot_face_DEPENDENCIES) $(EXTRA_test_ot_face_DEPENDENCIES) 
 	@rm -f test-ot-face$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_face_OBJECTS) $(test_ot_face_LDADD) $(LIBS)
@@ -1019,6 +1044,14 @@ test-shape$(EXEEXT): $(test_shape_OBJECTS) $(test_shape_DEPENDENCIES) $(EXTRA_te
 test-subset$(EXEEXT): $(test_subset_OBJECTS) $(test_subset_DEPENDENCIES) $(EXTRA_test_subset_DEPENDENCIES) 
 	@rm -f test-subset$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_subset_OBJECTS) $(test_subset_LDADD) $(LIBS)
+
+test-subset-cff1$(EXEEXT): $(test_subset_cff1_OBJECTS) $(test_subset_cff1_DEPENDENCIES) $(EXTRA_test_subset_cff1_DEPENDENCIES) 
+	@rm -f test-subset-cff1$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_subset_cff1_OBJECTS) $(test_subset_cff1_LDADD) $(LIBS)
+
+test-subset-cff2$(EXEEXT): $(test_subset_cff2_OBJECTS) $(test_subset_cff2_DEPENDENCIES) $(EXTRA_test_subset_cff2_DEPENDENCIES) 
+	@rm -f test-subset-cff2$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_subset_cff2_OBJECTS) $(test_subset_cff2_LDADD) $(LIBS)
 
 test-subset-cmap$(EXEEXT): $(test_subset_cmap_OBJECTS) $(test_subset_cmap_DEPENDENCIES) $(EXTRA_test_subset_cmap_DEPENDENCIES) 
 	@rm -f test-subset-cmap$(EXEEXT)
@@ -1072,12 +1105,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-map.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-object.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-color.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-extents-cff.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-face.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-ligature-carets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-name.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-tag.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-set.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-shape.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-subset-cff1.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-subset-cff2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-subset-cmap.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-subset-glyf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-subset-hdmx.Po@am__quote@
@@ -1544,6 +1580,20 @@ test-subset-vmtx.log: test-subset-vmtx$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-subset-cff1.log: test-subset-cff1$(EXEEXT)
+	@p='test-subset-cff1$(EXEEXT)'; \
+	b='test-subset-cff1'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-subset-cff2.log: test-subset-cff2$(EXEEXT)
+	@p='test-subset-cff2$(EXEEXT)'; \
+	b='test-subset-cff2'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-unicode.log: test-unicode$(EXEEXT)
 	@p='test-unicode$(EXEEXT)'; \
 	b='test-unicode'; \
@@ -1582,6 +1632,13 @@ test-ot-name.log: test-ot-name$(EXEEXT)
 test-ot-tag.log: test-ot-tag$(EXEEXT)
 	@p='test-ot-tag$(EXEEXT)'; \
 	b='test-ot-tag'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-ot-extents-cff.log: test-ot-extents-cff$(EXEEXT)
+	@p='test-ot-extents-cff$(EXEEXT)'; \
+	b='test-ot-extents-cff'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

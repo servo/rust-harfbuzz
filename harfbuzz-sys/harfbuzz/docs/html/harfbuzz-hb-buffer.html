@@ -592,7 +592,7 @@ hb_buffer_create (<em class="parameter"><code><span class="type">void</span></co
 <a name="hb-buffer-create.returns"></a><h4>Returns</h4>
 <p>A newly allocated <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> with a reference count of 1. The initial
 reference count should be released with <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-destroy" title="hb_buffer_destroy ()"><code class="function">hb_buffer_destroy()</code></a> when you are done
-using the <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a>. This function never returns <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. If memory cannot
+using the <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a>. This function never returns <code class="literal">NULL</code>. If memory cannot
 be allocated, a special <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t"><span class="type">hb_buffer_t</span></a> object will be returned on which
 <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-allocation-successful" title="hb_buffer_allocation_successful ()"><code class="function">hb_buffer_allocation_successful()</code></a> returns <code class="literal">false</code>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
@@ -884,7 +884,7 @@ to ensure it contains a valid Unicode code points.</p>
 <tr>
 <td class="parameter_name"><p>text_length</p></td>
 <td class="parameter_description"><p>the length of the <em class="parameter"><code>text</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code> terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -898,7 +898,7 @@ to ensure it contains a valid Unicode code points.</p>
 <td class="parameter_description"><p>the number of code points to add to the <em class="parameter"><code>buffer</code></em>
 , or -1 for the
 end of <em class="parameter"><code>text</code></em>
-(assuming it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated).</p></td>
+(assuming it is <code class="literal">NULL</code> terminated).</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -941,7 +941,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 <tr>
 <td class="parameter_name"><p>text_length</p></td>
 <td class="parameter_description"><p>the length of the <em class="parameter"><code>text</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code> terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -955,7 +955,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 <td class="parameter_description"><p>the number of characters to add to the <em class="parameter"><code>buffer</code></em>
 , or -1 for the
 end of <em class="parameter"><code>text</code></em>
-(assuming it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated).</p></td>
+(assuming it is <code class="literal">NULL</code> terminated).</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -998,7 +998,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 <tr>
 <td class="parameter_name"><p>text_length</p></td>
 <td class="parameter_description"><p>the length of the <em class="parameter"><code>text</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code> terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1012,7 +1012,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 <td class="parameter_description"><p>the number of characters to add to the <em class="parameter"><code>buffer</code></em>
 , or -1 for the
 end of <em class="parameter"><code>text</code></em>
-(assuming it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated).</p></td>
+(assuming it is <code class="literal">NULL</code> terminated).</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -1056,7 +1056,7 @@ characters to append. </p></td>
 <tr>
 <td class="parameter_name"><p>text_length</p></td>
 <td class="parameter_description"><p>the length of the <em class="parameter"><code>text</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code> terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1070,7 +1070,7 @@ characters to append. </p></td>
 <td class="parameter_description"><p>the number of characters to add to the <em class="parameter"><code>buffer</code></em>
 , or -1 for the
 end of <em class="parameter"><code>text</code></em>
-(assuming it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated).</p></td>
+(assuming it is <code class="literal">NULL</code> terminated).</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -1113,7 +1113,7 @@ characters to append. </p></td>
 <tr>
 <td class="parameter_name"><p>text_length</p></td>
 <td class="parameter_description"><p>the length of the <em class="parameter"><code>text</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code> terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1127,7 +1127,7 @@ characters to append. </p></td>
 <td class="parameter_description"><p>the number of characters to add to the <em class="parameter"><code>buffer</code></em>
 , or -1 for the
 end of <em class="parameter"><code>text</code></em>
-(assuming it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated).</p></td>
+(assuming it is <code class="literal">NULL</code> terminated).</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -2221,14 +2221,14 @@ write serialized buffer into. </p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>buf_consumed</p></td>
-<td class="parameter_description"><p> if not <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, will be set to the number of byes written into <em class="parameter"><code>buf</code></em>
+<td class="parameter_description"><p> if not <code class="literal">NULL</code>, will be set to the number of byes written into <em class="parameter"><code>buf</code></em>
 . </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>font</p></td>
 <td class="parameter_description"><p> the <a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> used to shape this buffer, needed to
-read glyph names and extents. If <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, and empty font will be used. </p></td>
+read glyph names and extents. If <code class="literal">NULL</code>, and empty font will be used. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -2318,7 +2318,7 @@ hb_buffer_serialize_format_from_string
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of <em class="parameter"><code>str</code></em>
-, or -1 if string is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated</p></td>
+, or -1 if string is <code class="literal">NULL</code> terminated</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -2336,7 +2336,7 @@ hb_buffer_serialize_format_from_string
 <pre class="programlisting">const <span class="returnvalue">char</span> *
 hb_buffer_serialize_format_to_string (<em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-serialize-format-t" title="enum hb_buffer_serialize_format_t"><span class="type">hb_buffer_serialize_format_t</span></a> format</code></em>);</pre>
 <p>Converts <em class="parameter"><code>format</code></em>
- to the string corresponding it, or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if it is not a valid
+ to the string corresponding it, or <code class="literal">NULL</code> if it is not a valid
 <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-serialize-format-t" title="enum hb_buffer_serialize_format_t"><span class="type">hb_buffer_serialize_format_t</span></a>.</p>
 <div class="refsect3">
 <a name="hb-buffer-serialize-format-to-string.parameters"></a><h4>Parameters</h4>
@@ -2355,7 +2355,7 @@ hb_buffer_serialize_format_to_string (<em class="parameter"><code><a class="link
 </div>
 <div class="refsect3">
 <a name="hb-buffer-serialize-format-to-string.returns"></a><h4>Returns</h4>
-<p>A <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated string corresponding to <em class="parameter"><code>format</code></em>
+<p>A <code class="literal">NULL</code> terminated string corresponding to <em class="parameter"><code>format</code></em>
 . Should not be freed. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>

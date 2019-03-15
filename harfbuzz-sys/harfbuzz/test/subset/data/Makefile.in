@@ -579,15 +579,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
-EXTRA_DIST = \
-	$(TESTS) \
-	expected/basics \
-	expected/full-font \
-	expected/japanese \
-	fonts \
-	profiles \
-	$(NULL)
-
+EXTRA_DIST = $(TESTS) expected/basics expected/full-font \
+	expected/japanese fonts profiles $(NULL)
 CLEANFILES = 
 SUBDIRS = 
 TEST_EXTENSIONS = .tests

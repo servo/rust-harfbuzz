@@ -47,7 +47,8 @@
 	</p></li></ol></div>
 <pre class="programlisting">
       #include &lt;hb-ft.h&gt;
-      FT_New_Face(ft_library, font_path, index, &amp;face)
+      FT_New_Face(ft_library, font_path, index, &amp;face);
+      FT_Set_Char_Size(face, 0, 1000, 0, 0);
       hb_font_t *font = hb_ft_font_create(face);
     </pre>
 <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem" value="4"><p>

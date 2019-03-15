@@ -39,14 +39,15 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="creating-and-destroying-buffers"></a>Creating and destroying buffers</h2></div></div></div>
 <p>
-      As we saw in our initial example, a buffer is created and
+      As we saw in our <span class="emphasis"><em>Getting Started</em></span> example, a
+      buffer is created and 
       initialized with <code class="literal">hb_buffer_create()</code>. This
       produces a new, empty buffer object, instantiated with some
       default values and ready to accept your Unicode strings.
     </p>
 <p>
-      HarfBuzz manages the memory of objects that it creates (such as
-      buffers), so you don't have to. When you have finished working on
+      HarfBuzz manages the memory of objects (such as buffers) that it
+      creates, so you don't have to. When you have finished working on 
       a buffer, you can call <code class="literal">hb_buffer_destroy()</code>:
     </p>
 <pre class="programlisting">

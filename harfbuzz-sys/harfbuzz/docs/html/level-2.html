@@ -32,16 +32,35 @@
       performs no merging of clusters whatsoever.
     </p>
 <p>
-      When glyphs form a ligature (or when some other feature
-      substitutes multiple glyphs with one glyph), the cluster value
-      of the first glyph is retained as the cluster value for the
-      ligature. However, no subsequent clusters — including
-      marks and modifiers — are affected.
+      This means that there is no initial base-and-mark merging step
+      (as is done in level 0), and it means that reordering moves and
+      ligature substitutions do not trigger a cluster merge.
     </p>
 <p>
-      Level 2 cluster behavior is less complex than level 0 or level
-      1, but there are a few cases in which processing cluster values
-      produced at level 2 may be tricky. 
+      Only one shaping operation directly affects clusters when using
+      level 2:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+	  When a cluster <span class="emphasis"><em>decomposes</em></span>, all of the
+	  resulting child clusters inherit as their cluster value the
+	  cluster value of the parent cluster.
+	</p></li></ul></div>
+<p>
+      When glyphs do form a ligature (or when some other feature
+      substitutes multiple glyphs with one glyph) the cluster value
+      of the first glyph is retained as the cluster value for the
+      resulting ligature.
+    </p>
+<p>
+      This occurrence sounds similar to a cluster merge, but it is
+      different. In particular, no subsequent characters —
+      including marks and modifiers — are affected. They retain
+      their previous cluster values. 
+    </p>
+<p>
+      Level 2 cluster behavior is ultimately less complex than level 0
+      or level 1, but there are several cases for which processing
+      cluster values produced at level 2 may be tricky. 
     </p>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
@@ -152,10 +171,11 @@
 <p>
 	There may be other problems encountered with ligatures under
 	level 2, such as if the direction of the text is forced to
-	opposite of its natural direction (for example, left-to-right
-	Arabic). But, generally speaking, these other scenarios are
-	minor corner cases that are too obscure for most client
-	programs to need to worry about.
+	opposite of its natural direction (for example, Arabic text
+	that is forced into left-to-right directionality). But,
+	generally speaking, these other scenarios are minor corner
+	cases that are too obscure for most client programs to need to
+	worry about.
       </p>
 </div>
 </div>

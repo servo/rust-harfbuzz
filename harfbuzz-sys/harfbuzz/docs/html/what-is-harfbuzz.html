@@ -41,7 +41,7 @@
 <p>
     HarfBuzz can properly shape all of the world's major writing
     systems. It runs on all major operating systems and software
-    platforms and it supports the modern font formats in use
+    platforms and it supports the major font formats in use
     today.
   </p>
 <div class="section">
@@ -71,7 +71,8 @@
 <p>The dominant format is <a class="ulink" href="http://www.microsoft.com/typography/otspec/" target="_top">OpenType</a>. The
     OpenType specification defines a series of <a class="ulink" href="https://github.com/n8willis/opentype-shaping-documents" target="_top">shaping models</a> for
     various scripts from around the world. These shaping models depend on
-    the font including certain features in its <code class="literal">GSUB</code>
+    the font incorporating certain features as
+    <span class="emphasis"><em>lookups</em></span> in its <code class="literal">GSUB</code> 
     and <code class="literal">GPOS</code> tables.
     </p>
 <p>
@@ -87,7 +88,7 @@
 <p>
       Text strings will usually be tagged with a script and language
       tag that provide the context needed to perform text shaping
-      correctly.  The necessary <a class="ulink" href="https://docs.microsoft.com/en-us/typography/opentype/spec/scripttags" target="_top">Script</a> 
+      correctly.  The necessary <a class="ulink" href="https://docs.microsoft.com/en-us/typography/opentype/spec/scripttags" target="_top">script</a> 
       and <a class="ulink" href="https://docs.microsoft.com/en-us/typography/opentype/spec/languagetags" target="_top">language</a>
       tags are defined by OpenType.
     </p>

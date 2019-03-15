@@ -881,6 +881,8 @@ uninstall-am: uninstall-binPROGRAMS
 # Convenience targets:
 lib:
 	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src lib
+libs:
+	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src libs
 
 #if HAVE_FONTCONFIG
 #hb_fc_list_SOURCES = \
