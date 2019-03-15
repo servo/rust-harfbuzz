@@ -8,7 +8,8 @@
 // except according to those terms.
 
 use std::marker::PhantomData;
-use std::os::raw::{c_char, c_uint};
+use std::os::raw::{c_char, c_uint, c_void};
+use std::sync::Arc;
 use std::{mem, ops, ptr, slice};
 use sys;
 
@@ -45,6 +46,43 @@ impl<'a> Blob<'a> {
                 ptr::null_mut(), // user data
                 None, // destroy callback
             ))
+        }
+    }
+
+    /// Create a blob wrapping an `Arc<Vec<u8>>`.
+    ///
+    /// This method allows creation of a blob without copying, where the
+    /// data may be shared by Rust code and the blob. The `Vec` is freed
+    /// when all references are dropped.
+    ///
+    /// ```
+    /// # use std::sync::Arc;
+    /// # use harfbuzz::Blob;
+    /// let data = vec![1; 256];
+    /// let blob = Blob::new_from_arc_vec(Arc::new(data));
+    /// assert_eq!(blob.len(), 256);
+    /// assert!(!blob.is_empty());
+    /// ```
+    pub fn new_from_arc_vec(data: Arc<Vec<u8>>) -> Blob<'static> {
+        let len = data.len();
+        assert!(len <= c_uint::max_value() as usize);
+        unsafe {
+            let data_ptr = data.as_ptr();
+            let ptr = Arc::into_raw(data);
+
+            // This has type hb_destroy_func_t
+            unsafe extern "C" fn arc_vec_blob_destroy(user_data: *mut c_void) {
+                drop(Arc::from_raw(user_data as *const Vec<u8>))
+            }
+
+            let hb_blob = sys::hb_blob_create(
+                data_ptr as *const c_char,
+                len as c_uint,
+                sys::HB_MEMORY_MODE_READONLY,
+                ptr as *mut c_void,
+                Some(arc_vec_blob_destroy),
+            );
+            Blob::from_raw(hb_blob)
         }
     }
 
