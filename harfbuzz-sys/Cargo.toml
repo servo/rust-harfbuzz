@@ -11,6 +11,10 @@ documentation = "https://docs.rs/harfbuzz-sys/"
 keywords = ["opentype", "font", "text", "layout", "unicode"]
 categories = ["external-ffi-bindings", "internationalization"]
 
+exclude = [
+    "harfbuzz/test/*"
+]
+
 links = "harfbuzz"
 build = "build.rs"
 
