@@ -37,18 +37,24 @@
       0,1,2,3,4
     </pre>
 <p>
-      If <code class="literal">D</code> is reordered to before <code class="literal">B</code>,
-      then HarfBuzz merges the <code class="literal">B</code>,
-      <code class="literal">C</code>, and <code class="literal">D</code> clusters, and we
-      get:
+      If <code class="literal">D</code> is reordered to the position immediately
+      before <code class="literal">B</code>, then HarfBuzz merges the
+      <code class="literal">B</code>, <code class="literal">C</code>, and
+      <code class="literal">D</code> clusters — all the clusters between
+      the final position of the reordered glyph and its original
+      position. This means that we get:
     </p>
 <pre class="programlisting">
       A,D,B,C,E
       0,1,1,1,4
     </pre>
 <p>
-      This is clearly not ideal, but it is the only sensible way to
-      maintain a monotonic sequence of cluster values and retain the
+      as the final cluster sequence.
+    </p>
+<p>
+      Merging this many clusters is not ideal, but it is the only
+      sensible way for HarfBuzz to maintain the guarantee that the
+      sequence of cluster values remains monotonic and to retain the
       true relationship between glyphs and characters.
     </p>
 </div>

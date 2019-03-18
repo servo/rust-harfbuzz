@@ -35,8 +35,7 @@
       For example, on an Ubuntu or Debian system, you would run:
       </p>
 <pre class="programlisting">
-	<span class="command"><strong>sudo apt install</strong></span> <span class="package">gcc g++
-	libfreetype6-dev libglib2.0-dev libcairo2-dev</span>
+	<span class="command"><strong>sudo apt install</strong></span> <span class="package">gcc g++ libfreetype6-dev libglib2.0-dev libcairo2-dev</span>
       </pre>
 <p>
       On Fedora, RHEL, CentOS, or other Red-Hat–based systems, you would run:
@@ -107,7 +106,7 @@
       </p>
 <p>
 	If you need to build HarfBuzz from source, first put the
-	<span style="color: red">&lt;program&gt;ragel&lt;/program&gt;</span> binary on your
+	<span class="package">ragel</span> binary on your
 	<code class="literal">PATH</code>, then follow the appveyor CI cmake
 	<a class="ulink" href="https://github.com/harfbuzz/harfbuzz/blob/master/appveyor.yml" target="_top">build
 	instructions</a>. 
@@ -171,8 +170,7 @@
 	using MacPorts, you should run:
       </p>
 <pre class="programlisting">
-	<span class="command"><strong>sudo port install</strong></span> <span class="package">autoconf
-	automake libtool pkgconfig ragel gtk-doc</span> 
+	<span class="command"><strong>sudo port install</strong></span> <span class="package">autoconf automake libtool pkgconfig ragel gtk-doc</span> 
       </pre>
 <p>
       to install the build dependencies.
@@ -228,7 +226,7 @@
 </colgroup>
 <tbody>
 <tr>
-<td><p><span class="term">--with-libstdc++</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-libstdc++</strong></span></span></p></td>
 <td>
 <p>
 	      Allow linking with libstdc++. <span class="emphasis"><em>(Default = no)</em></span>
@@ -240,7 +238,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-glib</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-glib</strong></span></span></p></td>
 <td>
 <p>
 	     Use <a class="ulink" href="https://developer.gnome.org/glib/" target="_top">GLib</a>. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -255,7 +253,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-gobject</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-gobject</strong></span></span></p></td>
 <td>
 <p>
 	      Use <a class="ulink" href="https://developer.gnome.org/gobject/stable/" target="_top">GObject</a>. <span class="emphasis"><em>(Default = no)</em></span>
@@ -270,7 +268,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-cairo</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-cairo</strong></span></span></p></td>
 <td>
 <p>
 	      Use <a class="ulink" href="https://cairographics.org/" target="_top">Cairo</a>. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -288,7 +286,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-fontconfig</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-fontconfig</strong></span></span></p></td>
 <td>
 <p>
 	      Use <a class="ulink" href="https://www.freedesktop.org/wiki/Software/fontconfig/" target="_top">Fontconfig</a>. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -307,7 +305,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-icu</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-icu</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="http://site.icu-project.org/home" target="_top">ICU</a> library. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -324,7 +322,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-ucdn</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-ucdn</strong></span></span></p></td>
 <td>
 <p>
 	      Use HarfBuzz's <a class="ulink" href="https://github.com/harfbuzz/harfbuzz/tree/master/src/hb-ucdn" target="_top">built-in UCDN library</a>. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -341,7 +339,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-graphite2</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-graphite2</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="http://graphite.sil.org/" target="_top">Graphite2</a> library. <span class="emphasis"><em>(Default = no)</em></span>
@@ -354,7 +352,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-freetype</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-freetype</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="https://www.freetype.org/" target="_top">FreeType</a> library. <span class="emphasis"><em>(Default = auto)</em></span>
@@ -368,7 +366,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-uniscribe</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-uniscribe</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="https://docs.microsoft.com/en-us/windows/desktop/intl/uniscribe" target="_top">Uniscribe</a>
@@ -384,7 +382,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-directwrite</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-directwrite</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="https://docs.microsoft.com/en-us/windows/desktop/directwrite/direct-write-portal" target="_top">DirectWrite</a> library (experimental). <span class="emphasis"><em>(Default = no)</em></span>
@@ -399,7 +397,7 @@
 </td>
 </tr>
 <tr>
-<td><p><span class="term">--with-coretext</span></p></td>
+<td><p><span class="term"><span class="command"><strong>--with-coretext</strong></span></span></p></td>
 <td>
 <p>
 	      Use the <a class="ulink" href="https://developer.apple.com/documentation/coretext" target="_top">CoreText</a> library. <span class="emphasis"><em>(Default = no)</em></span>

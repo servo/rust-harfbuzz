@@ -381,6 +381,8 @@ EXTRA_DIST = README.md CMakeLists.txt hb-diff hb-diff-colorize \
 	hb-unicode-encode hb-unicode-prettyname record-test.sh \
 	run-tests.py texts/in-house $(NULL) hb_test_tools.py $(NULL)
 CLEANFILES = hb_test_tools.py[co] $(NULL)
+DISTCLEANFILES = 
+MAINTAINERCLEANFILES = 
 SUBDIRS = data
 all: all-recursive
 
@@ -607,10 +609,12 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-recursive
 
 clean-am: clean-generic clean-libtool mostlyclean-am

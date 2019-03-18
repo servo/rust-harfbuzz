@@ -150,7 +150,7 @@ hb_feature_from_string (<em class="parameter"><code>const <span class="type">cha
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of <em class="parameter"><code>str</code></em>
-, or -1 if string is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated</p></td>
+, or -1 if string is <code class="literal">NULL</code> terminated</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -175,7 +175,7 @@ is successfully parsed, <code class="literal">false</code> otherwise.</p>
 hb_feature_to_string (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *feature</code></em>,
                       <em class="parameter"><code><span class="type">char</span> *buf</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> size</code></em>);</pre>
-<p>Converts a <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> into a <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated string in the format
+<p>Converts a <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> into a <code class="literal">NULL</code>-terminated string in the format
 understood by <a class="link" href="harfbuzz-hb-shape.html#hb-feature-from-string" title="hb_feature_from_string ()"><code class="function">hb_feature_from_string()</code></a>. The client in responsible for
 allocating big enough size for <em class="parameter"><code>buf</code></em>
 , 128 bytes is more than enough.</p>
@@ -221,7 +221,7 @@ hb_shape (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.htm
  using <em class="parameter"><code>font</code></em>
  turning its Unicode characters content to
 positioned glyphs. If <em class="parameter"><code>features</code></em>
- is not <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it will be used to control the
+ is not <code class="literal">NULL</code>, it will be used to control the
 features applied during shaping.</p>
 <div class="refsect3">
 <a name="hb-shape.parameters"></a><h4>Parameters</h4>
@@ -245,7 +245,7 @@ features applied during shaping.</p>
 <tr>
 <td class="parameter_name"><p>features</p></td>
 <td class="parameter_description"><p> an array of user
-specified <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+specified <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -269,7 +269,7 @@ hb_shape_full (<em class="parameter"><code><a class="link" href="harfbuzz-hb-fon
                <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>,
                <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <p>See <a class="link" href="harfbuzz-hb-shape.html#hb-shape" title="hb_shape ()"><code class="function">hb_shape()</code></a> for details. If <em class="parameter"><code>shaper_list</code></em>
- is not <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the specified
+ is not <code class="literal">NULL</code>, the specified
 shapers will be used in the given order, otherwise the default shapers list
 will be used.</p>
 <div class="refsect3">
@@ -294,7 +294,7 @@ will be used.</p>
 <tr>
 <td class="parameter_name"><p>features</p></td>
 <td class="parameter_description"><p> an array of user
-specified <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+specified <a class="link" href="harfbuzz-hb-shape.html#hb-feature-t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -305,8 +305,8 @@ array</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p> a <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated
-array of shapers to use or <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p> a <code class="literal">NULL</code>-terminated
+array of shapers to use or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>

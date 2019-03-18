@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="pt01.html" title="Part I. User's manual">
 <link rel="prev" href="using-your-own-font-functions.html" title="Using your own font functions">
-<link rel="next" href="a-clustering-example-for-levels-0-and-1.html" title="A clustering example for levels 0 and 1">
+<link rel="next" href="working-with-harfbuzz-clusters.html" title="Working with HarfBuzz clusters">
 <meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -17,13 +17,14 @@
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="pt01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="using-your-own-font-functions.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="a-clustering-example-for-levels-0-and-1.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="working-with-harfbuzz-clusters.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="chapter">
 <div class="titlepage"><div><div><h2 class="title">
 <a name="clusters"></a>Clusters</h2></div></div></div>
 <div class="toc"><dl class="toc">
-<dt><span class="section"><a href="clusters.html#clusters">Clusters</a></span></dt>
+<dt><span class="section"><a href="clusters.html#clusters-and-shaping">Clusters and shaping</a></span></dt>
+<dt><span class="section"><a href="working-with-harfbuzz-clusters.html">Working with HarfBuzz clusters</a></span></dt>
 <dt><span class="section"><a href="a-clustering-example-for-levels-0-and-1.html">A clustering example for levels 0 and 1</a></span></dt>
 <dt><span class="section"><a href="reordering-in-levels-0-and-1.html">Reordering in levels 0 and 1</a></span></dt>
 <dt><span class="section"><a href="the-distinction-between-levels-0-and-1.html">The distinction between levels 0 and 1</a></span></dt>
@@ -36,24 +37,40 @@
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="clusters"></a>Clusters</h2></div></div></div>
+<a name="clusters-and-shaping"></a>Clusters and shaping</h2></div></div></div>
 <p>
       In text shaping, a <span class="emphasis"><em>cluster</em></span> is a sequence of
       characters that needs to be treated as a single, indivisible
-      unit.
+      unit. A single letter or symbol can be a cluster of its
+      own. Other clusters correspond to longer subsequences of the
+      input code points — such as a ligature or conjunct form
+      — and require the shaper to ensure that the cluster is not
+      broken during the shaping process.
     </p>
 <p>
       A cluster is distinct from a <span class="emphasis"><em>grapheme</em></span>,
-      which is the smallest unit of a writing system or script,
-      because clusters are only relevant for script shaping and the
-      layout of glyphs.
+      which is the smallest unit of meaning in a writing system or
+      script.
     </p>
 <p>
-      For example, a grapheme may be a letter, a number, a logogram,
-      or a symbol. When two letters form a ligature, however, they
-      combine into a single glyph. They are therefore part of the same
-      cluster and are treated as a unit — even though the two
-      original, underlying letters are separate graphemes.
+      The definitions of the two terms are similar. However, clusters
+      are only relevant for script shaping and glyph layout. In
+      contrast, graphemes are a property of the underlying script, and
+      are of interest when client programs implement orthographic 
+      or linguistic functionality.
+    </p>
+<p>
+      For example, two individual letters are often two separate
+      graphemes. When two letters form a ligature, however, they
+      combine into a single glyph. They are then part of the same
+      cluster and are treated as a unit by the shaping engine —
+      even though the two original, underlying letters remain separate
+      graphemes.
+    </p>
+<p>
+      HarfBuzz is concerned with clusters, <span class="emphasis"><em>not</em></span>
+      with graphemes — although client programs using HarfBuzz
+      may still care about graphemes for other reasons from time to time.
     </p>
 <p>
       During the shaping process, there are several shaping operations
@@ -61,14 +78,15 @@
       points form a ligature or a conjunct form and are replaced by a
       single glyph) or split one character into several (for example,
       when decomposing a code point through the
-      <code class="literal">ccmp</code> feature).
+      <code class="literal">ccmp</code> feature). Operations like these alter
+      clusters; HarfBuzz tracks the changes to ensure that no clusters
+      get lost or broken during shaping. 
     </p>
 <p>
-      HarfBuzz tracks clusters independently from how these
-      shaping operations affect the individual glyphs that comprise the
-      output HarfBuzz returns in a buffer. Consequently,
-      a client program using HarfBuzz can utilize the cluster
-      information to implement features such as:
+      HarfBuzz records cluster information independently from how
+      shaping operations affect the individual glyphs returned in an
+      output buffer. Consequently, a client program using HarfBuzz can
+      utilize the cluster information to implement features such as:
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
@@ -95,148 +113,8 @@
 <li class="listitem"><p>
 	  Performing line-breaking, justification, and other
 	  line-level or paragraph-level operations that must be done
-	  after shaping is complete, but which require character-level
-	  properties.
-	</p></li>
-</ul></div>
-<p>
-      When you add text to a HarfBuzz buffer, each code point must be
-      assigned a <span class="emphasis"><em>cluster value</em></span>.
-    </p>
-<p>
-      This cluster value is an arbitrary number; HarfBuzz uses it only
-      to distinguish between clusters. Many client programs will use
-      the index of each code point in the input text stream as the
-      cluster value. This is for the sake of convenience; the actual
-      value does not matter.
-    </p>
-<p>
-      Client programs can choose how HarfBuzz handles clusters during
-      shaping by setting the
-      <code class="literal">cluster_level</code> of the
-      buffer. HarfBuzz offers three <span class="emphasis"><em>levels</em></span> of
-      clustering support for this property:
-    </p>
-<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
-<li class="listitem">
-<p><span class="emphasis"><em>Level 0</em></span> is the default and
-	reproduces the behavior of the old HarfBuzz library.
-	</p>
-<p>
-	  The distinguishing feature of level 0 behavior is that, at
-	  the beginning of processing the buffer, all code points that
-	  are categorized as <span class="emphasis"><em>marks</em></span>,
-	  <span class="emphasis"><em>modifier symbols</em></span>, or
-	  <span class="emphasis"><em>Emoji extended pictographic</em></span> modifiers,
-	  as well as the <span class="emphasis"><em>Zero Width Joiner</em></span> and
-	  <span class="emphasis"><em>Zero Width Non-Joiner</em></span> code points, are
-	  assigned the cluster value of the closest preceding code
-	  point from <span class="emphasis"><em>different</em></span> category. 
-	</p>
-<p>
-	  In essence, whenever a base character is followed by a mark
-	  character or a sequence of mark characters, those marks are
-	  reassigned to the same initial cluster value as the base
-	  character. This reassignment is referred to as
-	  "merging" the affected clusters. This behavior is based on
-	  the Grapheme Cluster Boundary specification in <a class="ulink" href="https://www.unicode.org/reports/tr29/#Regex_Definitions" target="_top">Unicode
-	  Technical Report 29</a>.
-	</p>
-<p>
-	  Client programs can specify level 0 behavior for a buffer by
-	  setting its <code class="literal">cluster_level</code> to
-	  <code class="literal">HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES</code>. 
-	</p>
-</li>
-<li class="listitem">
-<p>
-	  <span class="emphasis"><em>Level 1</em></span> tweaks the old behavior
-	  slightly to produce better results. Therefore, level 1
-	  clustering is recommended for code that is not required to
-	  implement backward compatibility with the old HarfBuzz.
-	</p>
-<p>
-	  Level 1 differs from level 0 by not merging the 
-	  clusters of marks and other modifier code points with the
-	  preceding "base" code point's cluster. By preserving the
-	  separate cluster values of these marks and modifier code
-	  points, script shapers can perform additional operations
-	  that might lead to improved results (for example, reordering
-	  a sequence of marks).
-	</p>
-<p>
-	  Client programs can specify level 1 behavior for a buffer by
-	  setting its <code class="literal">cluster_level</code> to
-	  <code class="literal">HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS</code>. 
-	</p>
-</li>
-<li class="listitem">
-<p>
-	  <span class="emphasis"><em>Level 2</em></span> differs significantly in how it
-	  treats cluster values. In level 2, HarfBuzz never merges
-	  clusters.
-	</p>
-<p>
-	  This difference can be seen most clearly when HarfBuzz processes
-	  ligature substitutions and glyph decompositions. In level 0 
-	  and level 1, ligatures and glyph decomposition both involve
-	  merging clusters; in level 2, neither of these operations
-	  triggers a merge.
-	</p>
-<p>
-	  Client programs can specify level 2 behavior for a buffer by
-	  setting its <code class="literal">cluster_level</code> to
-	  <code class="literal">HB_BUFFER_CLUSTER_LEVEL_CHARACTERS</code>. 
-	</p>
-</li>
-</ul></div>
-<p>
-      As mentioned earlier, client programs using HarfBuzz often
-      assign initial cluster values in a buffer by reusing the indices
-      of the code points in the input text. This gives a sequence of
-      cluster values that is monotonically increasing (for example,
-      0,1,2,3,4,5). 
-    </p>
-<p>
-      It is not <span class="emphasis"><em>required</em></span> that the cluster values
-      in a buffer be monotonically increasing. However, if the initial
-      cluster values in a buffer are monotonic and the buffer is
-      configured to use cluster level 0 or 1, then HarfBuzz
-      guarantees that the final cluster values in the shaped buffer
-      will also be monotonic. No such guarantee is made for cluster
-      level 2.
-    </p>
-<p>
-      In levels 0 and 1, HarfBuzz implements the following conceptual
-      model for cluster values:
-    </p>
-<div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; ">
-<li class="listitem"><p>
-          If the sequence of input cluster values is monotonic, the
-	  sequence of cluster values will remain monotonic.
-	</p></li>
-<li class="listitem"><p>
-          Each cluster value represents a single cluster.
-	</p></li>
-<li class="listitem"><p>
-          Each cluster contains one or more glyphs and one or more
-          characters.
-	</p></li>
-</ul></div>
-<p>
-      In practice, this model offers several benefits. Assuming that
-      the initial cluster values were monotonically increasing
-      and distinct before shaping began, then, in the final output:
-    </p>
-<div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; ">
-<li class="listitem"><p>
-	  All adjacent glyphs having the same final cluster
-	  value belong to the same cluster.
-	</p></li>
-<li class="listitem"><p>
-          Each character belongs to the cluster that has the highest
-	  cluster value <span class="emphasis"><em>not larger than</em></span> its
-	  initial cluster value.
+	  after shaping is complete, but which require examining
+	  character-level properties.
 	</p></li>
 </ul></div>
 </div>

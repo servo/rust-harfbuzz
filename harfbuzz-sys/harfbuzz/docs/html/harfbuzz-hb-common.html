@@ -407,7 +407,7 @@ ISO 15924 tag. </p></td>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of the <em class="parameter"><code>str</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code>-terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -480,7 +480,7 @@ a BCP 47 language tag. </p></td>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of the <em class="parameter"><code>str</code></em>
-, or -1 if it is <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated.</p></td>
+, or -1 if it is <code class="literal">NULL</code>-terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -516,7 +516,7 @@ hb_language_to_string (<em class="parameter"><code><a class="link" href="harfbuz
 </div>
 <div class="refsect3">
 <a name="hb-language-to-string.returns"></a><h4>Returns</h4>
-<p>A <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated string representing the <em class="parameter"><code>language</code></em>
+<p>A <code class="literal">NULL</code>-terminated string representing the <em class="parameter"><code>language</code></em>
 . Must not be freed by
 the caller. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
@@ -557,7 +557,7 @@ HarfBuzz itself.</p>
 <hr>
 <div class="refsect2">
 <a name="HB-UNTAG:CAPS"></a><h3>HB_UNTAG()</h3>
-<pre class="programlisting">#define HB_UNTAG(tag)   (((tag)&gt;&gt;24)&amp;0xFF), (((tag)&gt;&gt;16)&amp;0xFF), (((tag)&gt;&gt;8)&amp;0xFF), ((tag)&amp;0xFF)
+<pre class="programlisting">#define HB_UNTAG(tag)   (uint8_t)(((tag)&gt;&gt;24)&amp;0xFF), (uint8_t)(((tag)&gt;&gt;16)&amp;0xFF), (uint8_t)(((tag)&gt;&gt;8)&amp;0xFF), (uint8_t)((tag)&amp;0xFF)
 </pre>
 </div>
 <hr>
