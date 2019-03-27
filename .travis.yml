@@ -3,7 +3,10 @@ sudo: false
 rust:
  - stable
  - nightly
+env:
+ - HARFBUZZ_SYS_NO_PKG_CONFIG: 1
 script:
  - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
  - cargo build --verbose --manifest-path=harfbuzz-sys/Cargo.toml
+ - cargo package --manifest-path=harfbuzz-sys/Cargo.toml
  - cargo build --verbose --manifestpath=harfbuzz/Cargo.toml
