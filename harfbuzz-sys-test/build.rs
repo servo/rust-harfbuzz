@@ -1,19 +1,22 @@
 extern crate ctest;
+extern crate pkg_config;
 
 use std::env;
 
 fn main() {
     let mut cfg = ctest::TestGenerator::new();
 
-    // Get the include paths from the environment variable exported by harfbuzz-sys. If the
-    // variables is not found, fail with a meaningful error.
-    match &env::var_os("DEP_HARFBUZZ_INCLUDE") {
-        Some(include_paths) => {
-            for path in env::split_paths(include_paths) {
-                cfg.include(path);
-            }
+    // Get the include paths from harfbuzz-sys or pkg-config.
+    if let Some(include_paths) = &env::var_os("DEP_HARFBUZZ_INCLUDE") {
+        // These come from a static build in harfbuzz-sys.
+        for path in env::split_paths(include_paths) {
+            cfg.include(path);
         }
-        None => panic!("$DEP_HARFBUZZ_INCLUDE not found."),
+    } else if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
+        // These come from pkg-config.
+        for path in lib.include_paths {
+            cfg.include(path);
+        }
     }
 
     // Include the header files where the C APIs are defined.
