@@ -1,10 +1,23 @@
 language: rust
 sudo: false
-rust:
- - stable
- - nightly
+
+matrix:
+  include:
+  - os: linux
+    rust: stable
+    env: HARFBUZZ_SYS_NO_PKG_CONFIG="0"
+  - os: linux
+    rust: stable
+    env: HARFBUZZ_SYS_NO_PKG_CONFIG="1"
+  - os: linux
+    rust: nightly
+  - os: osx
+    rust: stable
+
 script:
- - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
- - cargo build --verbose --manifest-path=harfbuzz-sys/Cargo.toml
- - cd harfbuzz-sys-test
- - env HARFBUZZ_SYS_NO_PKG_CONFIG=1 cargo run
+- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
+- cargo build --verbose --all
+# Test that the harfbuzz-sys package builds correctly since test files are excluded.
+- cargo package --manifest-path=harfbuzz-sys/Cargo.toml
+# Run the ctest-generated tests
+- cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
