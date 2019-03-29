@@ -2,6 +2,7 @@
 
 extern crate harfbuzz_sys;
 
+#[cfg(target_os = "macos")]
 use harfbuzz_sys::coretext::*;
 use harfbuzz_sys::*;
 
