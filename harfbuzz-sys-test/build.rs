@@ -17,10 +17,10 @@ fn main() {
     }
 
     // Include the header files where the C APIs are defined.
-    cfg.header("hb.h")
-        .header("hb-coretext.h")
-        .header("hb-ot.h")
-        .header("hb-aat.h");
+    cfg.header("hb.h").header("hb-ot.h").header("hb-aat.h");
+
+    #[cfg(target_os = "macos")]
+    cfg.header("hb-coretext.h");
 
     // Skip structs that are empty on the Rust side.
     cfg.skip_struct(|s| {
