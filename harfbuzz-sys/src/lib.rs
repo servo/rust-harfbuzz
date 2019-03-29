@@ -448,7 +448,7 @@ extern "C" {
 #[derive(Debug, Copy, Clone)]
 pub struct hb_variation_t {
     pub tag: hb_tag_t,
-    pub value: f32,
+    pub value: ::std::os::raw::c_float,
 }
 #[test]
 fn bindgen_test_layout_hb_variation_t() {
@@ -2049,10 +2049,10 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: f32);
+    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: ::std::os::raw::c_float);
 }
 extern "C" {
-    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> f32;
+    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> ::std::os::raw::c_float;
 }
 extern "C" {
     pub fn hb_font_set_variations(
@@ -2064,7 +2064,7 @@ extern "C" {
 extern "C" {
     pub fn hb_font_set_var_coords_design(
         font: *mut hb_font_t,
-        coords: *const f32,
+        coords: *const ::std::os::raw::c_float,
         coords_length: ::std::os::raw::c_uint,
     );
 }
@@ -2937,32 +2937,32 @@ extern "C" {
         micro: ::std::os::raw::c_uint,
     ) -> hb_bool_t;
 }
-pub const HB_OT_NAME_ID_COPYRIGHT: _bindgen_ty_1 = 0;
-pub const HB_OT_NAME_ID_FONT_FAMILY: _bindgen_ty_1 = 1;
-pub const HB_OT_NAME_ID_FONT_SUBFAMILY: _bindgen_ty_1 = 2;
-pub const HB_OT_NAME_ID_UNIQUE_ID: _bindgen_ty_1 = 3;
-pub const HB_OT_NAME_ID_FULL_NAME: _bindgen_ty_1 = 4;
-pub const HB_OT_NAME_ID_VERSION_STRING: _bindgen_ty_1 = 5;
-pub const HB_OT_NAME_ID_POSTSCRIPT_NAME: _bindgen_ty_1 = 6;
-pub const HB_OT_NAME_ID_TRADEMARK: _bindgen_ty_1 = 7;
-pub const HB_OT_NAME_ID_MANUFACTURER: _bindgen_ty_1 = 8;
-pub const HB_OT_NAME_ID_DESIGNER: _bindgen_ty_1 = 9;
-pub const HB_OT_NAME_ID_DESCRIPTION: _bindgen_ty_1 = 10;
-pub const HB_OT_NAME_ID_VENDOR_URL: _bindgen_ty_1 = 11;
-pub const HB_OT_NAME_ID_DESIGNER_URL: _bindgen_ty_1 = 12;
-pub const HB_OT_NAME_ID_LICENSE: _bindgen_ty_1 = 13;
-pub const HB_OT_NAME_ID_LICENSE_URL: _bindgen_ty_1 = 14;
-pub const HB_OT_NAME_ID_TYPOGRAPHIC_FAMILY: _bindgen_ty_1 = 16;
-pub const HB_OT_NAME_ID_TYPOGRAPHIC_SUBFAMILY: _bindgen_ty_1 = 17;
-pub const HB_OT_NAME_ID_MAC_FULL_NAME: _bindgen_ty_1 = 18;
-pub const HB_OT_NAME_ID_SAMPLE_TEXT: _bindgen_ty_1 = 19;
-pub const HB_OT_NAME_ID_CID_FINDFONT_NAME: _bindgen_ty_1 = 20;
-pub const HB_OT_NAME_ID_WWS_FAMILY: _bindgen_ty_1 = 21;
-pub const HB_OT_NAME_ID_WWS_SUBFAMILY: _bindgen_ty_1 = 22;
-pub const HB_OT_NAME_ID_LIGHT_BACKGROUND: _bindgen_ty_1 = 23;
-pub const HB_OT_NAME_ID_DARK_BACKGROUND: _bindgen_ty_1 = 24;
-pub const HB_OT_NAME_ID_VARIATIONS_PS_PREFIX: _bindgen_ty_1 = 25;
-pub const HB_OT_NAME_ID_INVALID: _bindgen_ty_1 = 65535;
+pub const HB_OT_NAME_ID_COPYRIGHT: hb_ot_name_id_t = 0;
+pub const HB_OT_NAME_ID_FONT_FAMILY: hb_ot_name_id_t = 1;
+pub const HB_OT_NAME_ID_FONT_SUBFAMILY: hb_ot_name_id_t = 2;
+pub const HB_OT_NAME_ID_UNIQUE_ID: hb_ot_name_id_t = 3;
+pub const HB_OT_NAME_ID_FULL_NAME: hb_ot_name_id_t = 4;
+pub const HB_OT_NAME_ID_VERSION_STRING: hb_ot_name_id_t = 5;
+pub const HB_OT_NAME_ID_POSTSCRIPT_NAME: hb_ot_name_id_t = 6;
+pub const HB_OT_NAME_ID_TRADEMARK: hb_ot_name_id_t = 7;
+pub const HB_OT_NAME_ID_MANUFACTURER: hb_ot_name_id_t = 8;
+pub const HB_OT_NAME_ID_DESIGNER: hb_ot_name_id_t = 9;
+pub const HB_OT_NAME_ID_DESCRIPTION: hb_ot_name_id_t = 10;
+pub const HB_OT_NAME_ID_VENDOR_URL: hb_ot_name_id_t = 11;
+pub const HB_OT_NAME_ID_DESIGNER_URL: hb_ot_name_id_t = 12;
+pub const HB_OT_NAME_ID_LICENSE: hb_ot_name_id_t = 13;
+pub const HB_OT_NAME_ID_LICENSE_URL: hb_ot_name_id_t = 14;
+pub const HB_OT_NAME_ID_TYPOGRAPHIC_FAMILY: hb_ot_name_id_t = 16;
+pub const HB_OT_NAME_ID_TYPOGRAPHIC_SUBFAMILY: hb_ot_name_id_t = 17;
+pub const HB_OT_NAME_ID_MAC_FULL_NAME: hb_ot_name_id_t = 18;
+pub const HB_OT_NAME_ID_SAMPLE_TEXT: hb_ot_name_id_t = 19;
+pub const HB_OT_NAME_ID_CID_FINDFONT_NAME: hb_ot_name_id_t = 20;
+pub const HB_OT_NAME_ID_WWS_FAMILY: hb_ot_name_id_t = 21;
+pub const HB_OT_NAME_ID_WWS_SUBFAMILY: hb_ot_name_id_t = 22;
+pub const HB_OT_NAME_ID_LIGHT_BACKGROUND: hb_ot_name_id_t = 23;
+pub const HB_OT_NAME_ID_DARK_BACKGROUND: hb_ot_name_id_t = 24;
+pub const HB_OT_NAME_ID_VARIATIONS_PS_PREFIX: hb_ot_name_id_t = 25;
+pub const HB_OT_NAME_ID_INVALID: hb_ot_name_id_t = 65535;
 /// hb_ot_name_id_t:
 /// @HB_OT_NAME_ID_INVALID: Value to represent a nonexistent name ID.
 ///
@@ -2971,7 +2971,6 @@ pub const HB_OT_NAME_ID_INVALID: _bindgen_ty_1 = 65535;
 /// API.  These can be used to fetch name strings from a font face.
 ///
 /// Since: 2.0.0
-pub type _bindgen_ty_1 = u32;
 pub type hb_ot_name_id_t = ::std::os::raw::c_uint;
 /// hb_ot_name_entry_t:
 /// @name_id: name ID
@@ -3790,9 +3789,9 @@ pub struct hb_ot_var_axis_info_t {
     pub tag: hb_tag_t,
     pub name_id: hb_ot_name_id_t,
     pub flags: hb_ot_var_axis_flags_t,
-    pub min_value: f32,
-    pub default_value: f32,
-    pub max_value: f32,
+    pub min_value: ::std::os::raw::c_float,
+    pub default_value: ::std::os::raw::c_float,
+    pub max_value: ::std::os::raw::c_float,
     pub reserved: ::std::os::raw::c_uint,
 }
 #[test]
@@ -3927,7 +3926,7 @@ extern "C" {
         face: *mut hb_face_t,
         instance_index: ::std::os::raw::c_uint,
         coords_length: *mut ::std::os::raw::c_uint,
-        coords: *mut f32,
+        coords: *mut ::std::os::raw::c_float,
     ) -> ::std::os::raw::c_uint;
 }
 extern "C" {
@@ -3943,7 +3942,7 @@ extern "C" {
     pub fn hb_ot_var_normalize_coords(
         face: *mut hb_face_t,
         coords_length: ::std::os::raw::c_uint,
-        design_coords: *const f32,
+        design_coords: *const ::std::os::raw::c_float,
         normalized_coords: *mut ::std::os::raw::c_int,
     );
 }

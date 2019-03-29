@@ -1,2 +1,2 @@
 [workspace]
-members = ["harfbuzz", "harfbuzz-sys"]
+members = ["harfbuzz", "harfbuzz-sys", "harfbuzz-sys-test"]
