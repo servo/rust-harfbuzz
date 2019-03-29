@@ -11,10 +11,23 @@ fn main() {
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
     if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        if pkg_config::find_library("harfbuzz").is_ok() {
+        if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
+            // Avoid printing an empty value
+            if !lib.include_paths.is_empty() {
+                // DEP_HARFBUZZ_INCLUDE has the paths of harfbuzz and dependencies.
+                println!(
+                    "cargo:include={}",
+                    env::join_paths(lib.include_paths)
+                        .unwrap()
+                        .to_str()
+                        .unwrap()
+                );
+            }
             return;
         }
     }
+
+    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
 
     // On Windows, HarfBuzz configures atomics directly; otherwise,
     // it needs assistance from configure to do so.  Just use the makefile
@@ -37,18 +50,17 @@ fn main() {
                 .success()
         );
 
-        let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
         println!(
             "cargo:rustc-link-search=native={}",
-            out_dir.join("lib").to_str().unwrap()
+            out_dir.join("lib").display()
         );
         println!("cargo:rustc-link-lib=static=harfbuzz");
     }
 
-    // Dependent crates that need to find hb.h can use DEP_HARFBUZZ_INCLUDE from their build.rs.
+    // DEP_HARFBUZZ_INCLUDE has the path of the vendored harfbuzz.
     println!(
         "cargo:include={}",
-        env::current_dir().unwrap().join("harfbuzz/src").display()
+        out_dir.join("include").join("harfbuzz").display()
     );
 }
 
