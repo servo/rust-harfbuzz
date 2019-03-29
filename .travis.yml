@@ -6,3 +6,5 @@ rust:
 script:
  - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
  - cargo build --verbose --manifest-path=harfbuzz-sys/Cargo.toml
+ - cd harfbuzz-sys-test
+ - env HARFBUZZ_SYS_NO_PKG_CONFIG=1 cargo run
