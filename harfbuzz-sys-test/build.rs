@@ -37,7 +37,11 @@ fn main() {
     });
 
     // FIXME: I'm not sure why these functions must be skipped.
-    cfg.skip_fn(|s| s == "hb_coretext_face_create" || s == "hb_coretext_face_get_cg_font");
+    cfg.skip_fn(|s| {
+        s == "hb_coretext_face_create"
+            || s == "hb_coretext_face_get_cg_font"
+            || s == "hb_ft_font_create_referenced"
+    });
 
     // Generate the tests, passing the path to the `*-sys` library as well as
     // the module to generate.
