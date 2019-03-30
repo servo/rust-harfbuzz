@@ -36,7 +36,7 @@ namespace OT {
 
 
 static inline void SingleSubst_serialize (hb_serialize_context_t *c,
-					  hb_array_t<const GlyphID> glyphs,
+					  hb_sorted_array_t<const GlyphID> glyphs,
 					  hb_array_t<const GlyphID> substitutes);
 
 struct SingleSubstFormat1
@@ -46,26 +46,16 @@ struct SingleSubstFormat1
 
   void closure (hb_closure_context_t *c) const
   {
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      /* TODO Switch to range-based API to work around malicious fonts.
-       * https://github.com/harfbuzz/harfbuzz/issues/363 */
-      hb_codepoint_t glyph_id = iter.get_glyph ();
-      if (c->glyphs->has (glyph_id))
-	c->out->add ((glyph_id + deltaGlyphID) & 0xFFFFu);
-    }
+    for (auto it = hb_iter (this+coverage)
+		 | hb_filter (*c->glyphs); it; ++it)
+      c->output->add ((*it + deltaGlyphID) & 0xFFFFu);
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     if (unlikely (!(this+coverage).add_coverage (c->input))) return;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      /* TODO Switch to range-based API to work around malicious fonts.
-       * https://github.com/harfbuzz/harfbuzz/issues/363 */
-      hb_codepoint_t glyph_id = iter.get_glyph ();
-      c->output->add ((glyph_id + deltaGlyphID) & 0xFFFFu);
-    }
+    for (auto it = hb_iter (this+coverage); it; ++it)
+      c->output->add ((*it + deltaGlyphID) & 0xFFFFu);
   }
 
   const Coverage &get_coverage () const { return this+coverage; }
@@ -92,7 +82,7 @@ struct SingleSubstFormat1
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  int delta)
   {
     TRACE_SERIALIZE (this);
@@ -105,16 +95,16 @@ struct SingleSubstFormat1
   bool subset (hb_subset_context_t *c) const
   {
     TRACE_SUBSET (this);
-    const hb_set_t &glyphset = *c->plan->glyphset;
+    const hb_set_t &glyphset = *c->plan->glyphset ();
     const hb_map_t &glyph_map = *c->plan->glyph_map;
-    hb_vector_t<GlyphID> from;
+    hb_sorted_vector_t<GlyphID> from;
     hb_vector_t<GlyphID> to;
     hb_codepoint_t delta = deltaGlyphID;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
+    for (auto it = hb_iter (this+coverage)
+		 | hb_filter (glyphset); it; ++it)
     {
-      if (!glyphset.has (iter.get_glyph ())) continue;
-      from.push ()->set (glyph_map[iter.get_glyph ()]);
-      to.push ()->set (glyph_map[(iter.get_glyph () + delta) & 0xFFFF]);
+      from.push ()->set (glyph_map[*it]);
+      to.push ()->set (glyph_map[(*it + delta) & 0xFFFF]);
     }
     c->serializer->propagate_error (from, to);
     SingleSubst_serialize (c->serializer, from, to);
@@ -145,26 +135,20 @@ struct SingleSubstFormat2
 
   void closure (hb_closure_context_t *c) const
   {
-    unsigned int count = substitute.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (c->glyphs->has (iter.get_glyph ()))
-	c->out->add (substitute[iter.get_coverage ()]);
-    }
+    + hb_zip (this+coverage, substitute)
+    | hb_filter (*c->glyphs, hb_first)
+    | hb_map (hb_second)
+    | hb_sink (c->output)
+    ;
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     if (unlikely (!(this+coverage).add_coverage (c->input))) return;
-    unsigned int count = substitute.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      c->output->add (substitute[iter.get_coverage ()]);
-    }
+    + hb_zip (this+coverage, substitute)
+    | hb_map (hb_second)
+    | hb_sink (c->output)
+    ;
   }
 
   const Coverage &get_coverage () const { return this+coverage; }
@@ -189,7 +173,7 @@ struct SingleSubstFormat2
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const GlyphID> substitutes)
   {
     TRACE_SERIALIZE (this);
@@ -202,15 +186,15 @@ struct SingleSubstFormat2
   bool subset (hb_subset_context_t *c) const
   {
     TRACE_SUBSET (this);
-    const hb_set_t &glyphset = *c->plan->glyphset;
+    const hb_set_t &glyphset = *c->plan->glyphset ();
     const hb_map_t &glyph_map = *c->plan->glyph_map;
-    hb_vector_t<GlyphID> from;
+    hb_sorted_vector_t<GlyphID> from;
     hb_vector_t<GlyphID> to;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
+    for (auto it = hb_zip (this+coverage, substitute)
+		 | hb_filter (glyphset, hb_first); it; ++it)
     {
-      if (!glyphset.has (iter.get_glyph ())) continue;
-      from.push ()->set (glyph_map[iter.get_glyph ()]);
-      to.push ()->set (glyph_map[substitute[iter.get_coverage ()]]);
+      from.push ()->set (glyph_map[(*it).first]);
+      to.push ()->set (glyph_map[(*it).second]);
     }
     c->serializer->propagate_error (from, to);
     SingleSubst_serialize (c->serializer, from, to);
@@ -238,7 +222,7 @@ struct SingleSubstFormat2
 struct SingleSubst
 {
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const GlyphID> substitutes)
   {
     TRACE_SERIALIZE (this);
@@ -286,7 +270,7 @@ struct SingleSubst
 
 static inline void
 SingleSubst_serialize (hb_serialize_context_t *c,
-		       hb_array_t<const GlyphID> glyphs,
+		       hb_sorted_array_t<const GlyphID> glyphs,
 		       hb_array_t<const GlyphID> substitutes)
 { c->start_embed<SingleSubst> ()->serialize (c, glyphs, substitutes); }
 
@@ -296,7 +280,7 @@ struct Sequence
   {
     unsigned int count = substitute.len;
     for (unsigned int i = 0; i < count; i++)
-      c->out->add (substitute[i]);
+      c->output->add (substitute[i]);
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
@@ -335,10 +319,10 @@ struct Sequence
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs)
+		  hb_array_t<const GlyphID> subst)
   {
     TRACE_SERIALIZE (this);
-    return_trace (substitute.serialize (c, glyphs));
+    return_trace (substitute.serialize (c, subst));
   }
 
   bool sanitize (hb_sanitize_context_t *c) const
@@ -361,22 +345,20 @@ struct MultipleSubstFormat1
 
   void closure (hb_closure_context_t *c) const
   {
-    unsigned int count = sequence.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (c->glyphs->has (iter.get_glyph ()))
-	(this+sequence[iter.get_coverage ()]).closure (c);
-    }
+    + hb_zip (this+coverage, sequence)
+    | hb_filter (*c->glyphs, hb_first)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<Sequence> &_) { (this+_).closure (c); })
+    ;
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     if (unlikely (!(this+coverage).add_coverage (c->input))) return;
-    unsigned int count = sequence.len;
-    for (unsigned int i = 0; i < count; i++)
-      (this+sequence[i]).collect_glyphs (c);
+    + hb_zip (this+coverage, sequence)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<Sequence> &_) { (this+_).collect_glyphs (c); })
+    ;
   }
 
   const Coverage &get_coverage () const { return this+coverage; }
@@ -398,7 +380,7 @@ struct MultipleSubstFormat1
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const unsigned int> substitute_len_list,
 		  hb_array_t<const GlyphID> substitute_glyphs_list)
   {
@@ -444,7 +426,7 @@ struct MultipleSubstFormat1
 struct MultipleSubst
 {
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const unsigned int> substitute_len_list,
 		  hb_array_t<const GlyphID> substitute_glyphs_list)
   {
@@ -482,7 +464,7 @@ struct AlternateSet
   {
     unsigned int count = alternates.len;
     for (unsigned int i = 0; i < count; i++)
-      c->out->add (alternates[i]);
+      c->output->add (alternates[i]);
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
@@ -514,10 +496,10 @@ struct AlternateSet
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs)
+		  hb_array_t<const GlyphID> alts)
   {
     TRACE_SERIALIZE (this);
-    return_trace (alternates.serialize (c, glyphs));
+    return_trace (alternates.serialize (c, alts));
   }
 
   bool sanitize (hb_sanitize_context_t *c) const
@@ -541,26 +523,19 @@ struct AlternateSubstFormat1
 
   void closure (hb_closure_context_t *c) const
   {
-    unsigned int count = alternateSet.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-	break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (c->glyphs->has (iter.get_glyph ()))
-	(this+alternateSet[iter.get_coverage ()]).closure (c);
-    }
+    + hb_zip (this+coverage, alternateSet)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<AlternateSet> &_) { (this+_).closure (c); })
+    ;
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     if (unlikely (!(this+coverage).add_coverage (c->input))) return;
-    unsigned int count = alternateSet.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-	break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      (this+alternateSet[iter.get_coverage ()]).collect_glyphs (c);
-    }
+    + hb_zip (this+coverage, alternateSet)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<AlternateSet> &_) { (this+_).collect_glyphs (c); })
+    ;
   }
 
   const Coverage &get_coverage () const { return this+coverage; }
@@ -582,7 +557,7 @@ struct AlternateSubstFormat1
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const unsigned int> alternate_len_list,
 		  hb_array_t<const GlyphID> alternate_glyphs_list)
   {
@@ -628,7 +603,7 @@ struct AlternateSubstFormat1
 struct AlternateSubst
 {
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> glyphs,
+		  hb_sorted_array_t<const GlyphID> glyphs,
 		  hb_array_t<const unsigned int> alternate_len_list,
 		  hb_array_t<const GlyphID> alternate_glyphs_list)
   {
@@ -678,7 +653,7 @@ struct Ligature
     for (unsigned int i = 1; i < count; i++)
       if (!c->glyphs->has (component[i]))
         return;
-    c->out->add (ligGlyph);
+    c->output->add (ligGlyph);
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
@@ -857,40 +832,30 @@ struct LigatureSubstFormat1
 {
   bool intersects (const hb_set_t *glyphs) const
   {
-    unsigned int count = ligatureSet.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (glyphs->has (iter.get_glyph ()) &&
-	  (this+ligatureSet[iter.get_coverage ()]).intersects (glyphs))
-        return true;
-    }
+    for (auto it = hb_zip (this+coverage, ligatureSet)
+		 | hb_filter (*glyphs, hb_first)
+		 | hb_map (hb_second); it; ++it)
+      if ((this+*it).intersects (glyphs))
+	return true;
     return false;
   }
 
   void closure (hb_closure_context_t *c) const
   {
-    unsigned int count = ligatureSet.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (c->glyphs->has (iter.get_glyph ()))
-	(this+ligatureSet[iter.get_coverage ()]).closure (c);
-    }
+    + hb_zip (this+coverage, ligatureSet)
+    | hb_filter (*c->glyphs, hb_first)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<LigatureSet> &_) { (this+_).closure (c); })
+    ;
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
   {
     if (unlikely (!(this+coverage).add_coverage (c->input))) return;
-    unsigned int count = ligatureSet.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      (this+ligatureSet[iter.get_coverage ()]).collect_glyphs (c);
-    }
+    + hb_zip (this+coverage, ligatureSet)
+    | hb_map (hb_second)
+    | hb_apply ([&](const OffsetTo<LigatureSet> &_) { (this+_).collect_glyphs (c); })
+    ;
   }
 
   const Coverage &get_coverage () const { return this+coverage; }
@@ -917,7 +882,7 @@ struct LigatureSubstFormat1
   }
 
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> first_glyphs,
+		  hb_sorted_array_t<const GlyphID> first_glyphs,
 		  hb_array_t<const unsigned int> ligature_per_first_glyph_count_list,
 		  hb_array_t<const GlyphID> ligatures_list,
 		  hb_array_t<const unsigned int> component_count_list,
@@ -968,7 +933,7 @@ struct LigatureSubstFormat1
 struct LigatureSubst
 {
   bool serialize (hb_serialize_context_t *c,
-		  hb_array_t<const GlyphID> first_glyphs,
+		  hb_sorted_array_t<const GlyphID> first_glyphs,
 		  hb_array_t<const unsigned int> ligature_per_first_glyph_count_list,
 		  hb_array_t<const GlyphID> ligatures_list,
 		  hb_array_t<const unsigned int> component_count_list,
@@ -1061,14 +1026,11 @@ struct ReverseChainSingleSubstFormat1
         return;
 
     const ArrayOf<GlyphID> &substitute = StructAfter<ArrayOf<GlyphID> > (lookahead);
-    count = substitute.len;
-    for (Coverage::Iter iter (this+coverage); iter.more (); iter.next ())
-    {
-      if (unlikely (iter.get_coverage () >= count))
-        break; /* Work around malicious fonts. https://github.com/harfbuzz/harfbuzz/issues/363 */
-      if (c->glyphs->has (iter.get_glyph ()))
-	c->out->add (substitute[iter.get_coverage ()]);
-    }
+    + hb_zip (this+coverage, substitute)
+    | hb_filter (*c->glyphs, hb_first)
+    | hb_map (hb_second)
+    | hb_sink (c->output)
+    ;
   }
 
   void collect_glyphs (hb_collect_glyphs_context_t *c) const
@@ -1320,7 +1282,7 @@ struct SubstLookup : Lookup
 
   bool serialize_single (hb_serialize_context_t *c,
 			 uint32_t lookup_props,
-		         hb_array_t<const GlyphID> glyphs,
+		         hb_sorted_array_t<const GlyphID> glyphs,
 		         hb_array_t<const GlyphID> substitutes)
   {
     TRACE_SERIALIZE (this);
@@ -1330,7 +1292,7 @@ struct SubstLookup : Lookup
 
   bool serialize_multiple (hb_serialize_context_t *c,
 			   uint32_t lookup_props,
-			   hb_array_t<const GlyphID> glyphs,
+			   hb_sorted_array_t<const GlyphID> glyphs,
 			   hb_array_t<const unsigned int> substitute_len_list,
 			   hb_array_t<const GlyphID> substitute_glyphs_list)
   {
@@ -1344,7 +1306,7 @@ struct SubstLookup : Lookup
 
   bool serialize_alternate (hb_serialize_context_t *c,
 			    uint32_t lookup_props,
-			    hb_array_t<const GlyphID> glyphs,
+			    hb_sorted_array_t<const GlyphID> glyphs,
 			    hb_array_t<const unsigned int> alternate_len_list,
 			    hb_array_t<const GlyphID> alternate_glyphs_list)
   {
@@ -1358,7 +1320,7 @@ struct SubstLookup : Lookup
 
   bool serialize_ligature (hb_serialize_context_t *c,
 			   uint32_t lookup_props,
-			   hb_array_t<const GlyphID> first_glyphs,
+			   hb_sorted_array_t<const GlyphID> first_glyphs,
 			   hb_array_t<const unsigned int> ligature_per_first_glyph_count_list,
 			   hb_array_t<const GlyphID> ligatures_list,
 			   hb_array_t<const unsigned int> component_count_list,
@@ -1380,7 +1342,7 @@ struct SubstLookup : Lookup
   static hb_closure_context_t::return_t dispatch_closure_recurse_func (hb_closure_context_t *c, unsigned int lookup_index)
   {
     if (!c->should_visit_lookup (lookup_index))
-      return HB_VOID;
+      return hb_void_t ();
 
     hb_closure_context_t::return_t ret = dispatch_recurse_func (c, lookup_index);
 

@@ -432,7 +432,8 @@ shape_options_t::add_options (option_parser_t *parser)
     "    Features can be enabled or disabled, either globally or limited to\n"
     "    specific character ranges.  The format for specifying feature settings\n"
     "    follows.  All valid CSS font-feature-settings values other than 'normal'\n"
-    "    and 'inherited' are also accepted, though, not documented below.\n"
+    "    and the global values are also accepted, though not documented below.\n"
+    "    CSS string escapes are not supported."
     "\n"
     "    The range indices refer to the positions between Unicode characters,\n"
     "    unless the --utf8-clusters is provided, in which case range indices\n"
@@ -977,6 +978,7 @@ subset_options_t::add_options (option_parser_t *parser)
   {
     {"layout", 0, 0, G_OPTION_ARG_NONE,  &this->keep_layout,   "Keep OpenType Layout tables",   nullptr},
     {"no-hinting", 0, 0, G_OPTION_ARG_NONE,  &this->drop_hints,   "Whether to drop hints",   nullptr},
+    {"retain-gids", 0, 0, G_OPTION_ARG_NONE,  &this->retain_gids,   "If set don't renumber glyph ids in the subset.",   nullptr},
     {"desubroutinize", 0, 0, G_OPTION_ARG_NONE,  &this->desubroutinize,   "Remove CFF/CFF2 use of subroutines",   nullptr},
 
     {nullptr}

@@ -3,20 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-aat-layout: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch11.html" title="Apple Advanced Typography API">
 <link rel="prev" href="ch11.html" title="Apple Advanced Typography API">
 <link rel="next" href="ch12.html" title="Integration API">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
 <a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-aat-layout.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-aat-layout.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+                  <a href="#harfbuzz-hb-aat-layout.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="ch11.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
@@ -113,13 +112,6 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="harfbuzz-hb-aat-layout.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Enumeration-and-Flag-Types.html">GEnum</a>
-    <span class="lineart">├──</span> hb_aat_layout_feature_selector_t
-    <span class="lineart">╰──</span> hb_aat_layout_feature_type_t
-</pre>
-</div>
-<div class="refsect1">
 <a name="harfbuzz-hb-aat-layout.includes"></a><h2>Includes</h2>
 <pre class="synopsis">#include &lt;hb-aat.h&gt;
 </pre>
@@ -134,7 +126,7 @@
 <a name="hb-aat-layout-feature-type-get-name-id"></a><h3>hb_aat_layout_feature_type_get_name_id ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="returnvalue">hb_ot_name_id_t</span></a>
 hb_aat_layout_feature_type_get_name_id
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-t" title="enum hb_aat_layout_feature_type_t"><span class="type">hb_aat_layout_feature_type_t</span></a> feature_type</code></em>);</pre>
 <div class="refsect3">
 <a name="hb-aat-layout-feature-type-get-name-id.parameters"></a><h4>Parameters</h4>
@@ -162,14 +154,14 @@ hb_aat_layout_feature_type_get_name_id
 <a name="hb-aat-layout-feature-type-get-name-id.returns"></a><h4>Returns</h4>
 <p> Name ID index</p>
 </div>
-<p class="since">Since: 2.2.0</p>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-aat-layout-feature-type-get-selector-infos"></a><h3>hb_aat_layout_feature_type_get_selector_infos ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_aat_layout_feature_type_get_selector_infos
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-t" title="enum hb_aat_layout_feature_type_t"><span class="type">hb_aat_layout_feature_type_t</span></a> feature_type</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> *selector_count</code></em>,
@@ -180,7 +172,7 @@ hb_aat_layout_feature_type_get_selector_infos
 <div class="refsect2">
 <a name="hb-aat-layout-get-feature-types"></a><h3>hb_aat_layout_get_feature_types ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_aat_layout_get_feature_types (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_aat_layout_get_feature_types (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                  <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                                  <em class="parameter"><code>unsigned <span class="type">int</span> *feature_count</code></em>,
                                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-t" title="enum hb_aat_layout_feature_type_t"><span class="type">hb_aat_layout_feature_type_t</span></a> *features</code></em>);</pre>
@@ -205,12 +197,12 @@ hb_aat_layout_get_feature_types (<em class="parameter"><code><a class="link" hre
 </tr>
 <tr>
 <td class="parameter_name"><p>feature_count</p></td>
-<td class="parameter_description"><p> buffer size as input, filled size as output. </p></td>
+<td class="parameter_description"><p>buffer size as input, filled size as output. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p> features buffer. </p></td>
+<td class="parameter_description"><p>features buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=feature_count]</span></td>
 </tr>
 </tbody>
@@ -220,25 +212,25 @@ hb_aat_layout_get_feature_types (<em class="parameter"><code><a class="link" hre
 <a name="hb-aat-layout-get-feature-types.returns"></a><h4>Returns</h4>
 <p> Number of all available feature types.</p>
 </div>
-<p class="since">Since: 2.2.0</p>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-aat-layout-has-positioning"></a><h3>hb_aat_layout_has_positioning ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_aat_layout_has_positioning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_aat_layout_has_positioning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-aat-layout-has-substitution"></a><h3>hb_aat_layout_has_substitution ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_aat_layout_has_substitution (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_aat_layout_has_substitution (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-aat-layout-has-tracking"></a><h3>hb_aat_layout_has_tracking ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_aat_layout_has_tracking (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_aat_layout_has_tracking (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 </div>
 </div>
 <div class="refsect1">
@@ -468,7 +460,7 @@ hb_aat_layout_has_tracking (<em class="parameter"><code><a class="link" href="ha
 </tbody>
 </table></div>
 </div>
-<p class="since">Since: 2.2.0</p>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1745,11 +1737,11 @@ hb_aat_layout_has_tracking (<em class="parameter"><code><a class="link" href="ha
 </tbody>
 </table></div>
 </div>
-<p class="since">Since: 2.2.0</p>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.29</div>
 </body>
 </html>

@@ -52,17 +52,14 @@ namespace OT {
  * Int types
  */
 
-template <bool is_signed> struct hb_signedness_int;
-template <> struct hb_signedness_int<false> { typedef unsigned int value; };
-template <> struct hb_signedness_int<true>  { typedef   signed int value; };
-
 /* Integer types in big-endian order and no alignment requirement */
 template <typename Type, unsigned int Size>
 struct IntType
 {
   typedef Type type;
-  typedef typename hb_signedness_int<hb_is_signed<Type>::value>::value wide_type;
+  typedef typename hb_signedness_int (hb_is_signed (Type)) wide_type;
 
+  //TODO(C++11)IntType<Type, Size>& operator = (wide_type v) { set (v); return *this; }
   void set (wide_type i) { v.set (i); }
   operator wide_type () const { return v; }
   bool operator == (const IntType<Type,Size> &o) const { return (Type) v == (Type) o.v; }
@@ -155,7 +152,7 @@ struct Tag : HBUINT32
 };
 
 /* Glyph index number, same as uint16 (length = 16 bits) */
-typedef HBUINT16 GlyphID;
+struct GlyphID : HBUINT16 {};
 
 /* Script/language-system/feature index */
 struct Index : HBUINT16 {
@@ -532,12 +529,18 @@ struct ArrayOf
   unsigned int get_size () const
   { return len.static_size + len * Type::static_size; }
 
-  hb_array_t<Type> as_array ()
-  { return hb_array (arrayZ, len); }
-  hb_array_t<const Type> as_array () const
-  { return hb_array (arrayZ, len); }
-  operator hb_array_t<Type> (void)             { return as_array (); }
-  operator hb_array_t<const Type> (void) const { return as_array (); }
+  explicit operator bool () const { return len; }
+
+  hb_array_t<      Type> as_array ()       { return hb_array (arrayZ, len); }
+  hb_array_t<const Type> as_array () const { return hb_array (arrayZ, len); }
+
+  /* Iterator. */
+  typedef hb_array_t<const Type>   iter_t;
+  typedef hb_array_t<      Type> writer_t;
+    iter_t   iter () const { return as_array (); }
+  writer_t writer ()       { return as_array (); }
+  operator   iter_t () const { return   iter (); }
+  operator writer_t ()       { return writer (); }
 
   hb_array_t<const Type> sub_array (unsigned int start_offset, unsigned int count) const
   { return as_array ().sub_array (start_offset, count);}
@@ -556,13 +559,17 @@ struct ArrayOf
     if (unlikely (!c->extend (*this))) return_trace (false);
     return_trace (true);
   }
-  template <typename T>
-  bool serialize (hb_serialize_context_t *c, hb_array_t<const T> items)
+  template <typename Iterator,
+	    hb_enable_if (hb_is_iterator_of (Iterator, const Type))>
+  bool serialize (hb_serialize_context_t *c, Iterator items)
   {
     TRACE_SERIALIZE (this);
-    if (unlikely (!serialize (c, items.length))) return_trace (false);
-    for (unsigned int i = 0; i < items.length; i++)
-      hb_assign (arrayZ[i], items[i]);
+    unsigned count = items.len ();
+    if (unlikely (!serialize (c, count))) return_trace (false);
+    /* TODO Umm. Just exhaust the iterator instead?  Being extra
+     * cautious right now.. */
+    for (unsigned i = 0; i < count; i++, items++)
+      hb_assign (arrayZ[i], *items);
     return_trace (true);
   }
 
@@ -797,21 +804,41 @@ struct ArrayOfM1
 template <typename Type, typename LenType=HBUINT16>
 struct SortedArrayOf : ArrayOf<Type, LenType>
 {
-  hb_sorted_array_t<Type> as_array ()
-  { return hb_sorted_array (this->arrayZ, this->len); }
-  hb_sorted_array_t<const Type> as_array () const
-  { return hb_sorted_array (this->arrayZ, this->len); }
-  operator hb_sorted_array_t<Type> ()             { return as_array (); }
-  operator hb_sorted_array_t<const Type> () const { return as_array (); }
+  hb_sorted_array_t<      Type> as_array ()       { return hb_sorted_array (this->arrayZ, this->len); }
+  hb_sorted_array_t<const Type> as_array () const { return hb_sorted_array (this->arrayZ, this->len); }
 
-  hb_array_t<const Type> sub_array (unsigned int start_offset, unsigned int count) const
+  /* Iterator. */
+  typedef hb_sorted_array_t<const Type>   iter_t;
+  typedef hb_sorted_array_t<      Type> writer_t;
+    iter_t   iter () const { return as_array (); }
+  writer_t writer ()       { return as_array (); }
+  operator   iter_t () const { return   iter (); }
+  operator writer_t ()       { return writer (); }
+
+  hb_sorted_array_t<const Type> sub_array (unsigned int start_offset, unsigned int count) const
   { return as_array ().sub_array (start_offset, count);}
-  hb_array_t<const Type> sub_array (unsigned int start_offset, unsigned int *count = nullptr /* IN/OUT */) const
+  hb_sorted_array_t<const Type> sub_array (unsigned int start_offset, unsigned int *count = nullptr /* IN/OUT */) const
   { return as_array ().sub_array (start_offset, count);}
-  hb_array_t<Type> sub_array (unsigned int start_offset, unsigned int count)
+  hb_sorted_array_t<Type> sub_array (unsigned int start_offset, unsigned int count)
   { return as_array ().sub_array (start_offset, count);}
-  hb_array_t<Type> sub_array (unsigned int start_offset, unsigned int *count = nullptr /* IN/OUT */)
+  hb_sorted_array_t<Type> sub_array (unsigned int start_offset, unsigned int *count = nullptr /* IN/OUT */)
   { return as_array ().sub_array (start_offset, count);}
+
+  bool serialize (hb_serialize_context_t *c, unsigned int items_len)
+  {
+    TRACE_SERIALIZE (this);
+    bool ret = ArrayOf<Type, LenType>::serialize (c, items_len);
+    return_trace (ret);
+  }
+  template <typename Iterator,
+	    hb_enable_if (hb_is_sorted_iterator_of (Iterator, const Type))>
+  bool serialize (hb_serialize_context_t *c, Iterator items)
+  {
+    TRACE_SERIALIZE (this);
+    bool ret = ArrayOf<Type, LenType>::serialize (c, items);
+    return_trace (ret);
+  }
+
 
   template <typename T>
   Type &bsearch (const T &x, Type &not_found = Crap (Type))

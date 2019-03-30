@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-ot-name: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch10.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
 <link rel="next" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -97,7 +97,7 @@
 <div class="refsect2">
 <a name="hb-ot-name-list-names"></a><h3>hb_ot_name_list_names ()</h3>
 <pre class="programlisting">const <span class="returnvalue">hb_ot_name_entry_t</span> *
-hb_ot_name_list_names (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_list_names (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> *num_entries</code></em>);</pre>
 <p>Enumerates all available name IDs and language combinations. Returned
 array is owned by the <em class="parameter"><code>face</code></em>
@@ -120,7 +120,7 @@ used as long as <em class="parameter"><code>face</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>num_entries</p></td>
-<td class="parameter_description"><p> number of returned entries. </p></td>
+<td class="parameter_description"><p>number of returned entries. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -128,7 +128,7 @@ used as long as <em class="parameter"><code>face</code></em>
 </div>
 <div class="refsect3">
 <a name="hb-ot-name-list-names.returns"></a><h4>Returns</h4>
-<p> Array of available name entries. </p>
+<p>Array of available name entries. </p>
 <p><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_entries]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-1-0.html#api-index-2.1.0">2.1.0</a></p>
@@ -137,7 +137,7 @@ used as long as <em class="parameter"><code>face</code></em>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf16"></a><h3>hb_ot_name_get_utf16 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf16 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf16 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -172,14 +172,14 @@ Returns string in UTF-16 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -195,7 +195,7 @@ text written to buffer. </p></td>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf32"></a><h3>hb_ot_name_get_utf32 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf32 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf32 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -230,14 +230,14 @@ Returns string in UTF-32 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -253,7 +253,7 @@ text written to buffer. </p></td>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf8"></a><h3>hb_ot_name_get_utf8 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf8 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf8 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                      <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -288,14 +288,14 @@ Returns string in UTF-8 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -322,6 +322,6 @@ API.  These can be used to fetch name strings from a font face.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.29</div>
 </body>
 </html>

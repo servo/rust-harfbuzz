@@ -101,6 +101,7 @@
       </sub>
       <sub name="API Index" link="api-index-full.html"/>
       <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+      <sub name="Index of new symbols in 2.2.0" link="api-index-2-2-0.html"/>
       <sub name="Index of new symbols in 2.1.0" link="api-index-2-1-0.html"/>
       <sub name="Index of new symbols in 2.0.0" link="api-index-2-0-0.html"/>
       <sub name="Index of new symbols in 1.9.0" link="api-index-1-9-0.html"/>
@@ -114,7 +115,6 @@
       <sub name="Index of new symbols in 1.5.0" link="api-index-1-5-0.html"/>
       <sub name="Index of new symbols in 1.4.3" link="api-index-1-4-3.html"/>
       <sub name="Index of new symbols in 1.4.2" link="api-index-1-4-2.html"/>
-      <sub name="Index of new symbols in 1.4.0" link="api-index-1-4-0.html"/>
       <sub name="Index of new symbols in 1.3.3" link="api-index-1-3-3.html"/>
       <sub name="Index of new symbols in 1.2.3" link="api-index-1-2-3.html"/>
       <sub name="Index of new symbols in 1.1.3" link="api-index-1-1-3.html"/>
@@ -216,11 +216,11 @@
     <keyword type="macro" name="HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT" link="harfbuzz-hb-buffer.html#HB-BUFFER-REPLACEMENT-CODEPOINT-DEFAULT:CAPS" since="0.9.31"/>
     <keyword type="typedef" name="hb_buffer_t" link="harfbuzz-hb-buffer.html#hb-buffer-t"/>
     <keyword type="enum" name="enum hb_glyph_flags_t" link="harfbuzz-hb-buffer.html#hb-glyph-flags-t" since="1.5.0"/>
-    <keyword type="struct" name="hb_glyph_position_t" link="harfbuzz-hb-buffer.html#hb-glyph-position-t-struct"/>
+    <keyword type="struct" name="hb_glyph_position_t" link="harfbuzz-hb-buffer.html#hb-glyph-position-t"/>
     <keyword type="enum" name="enum hb_buffer_content_type_t" link="harfbuzz-hb-buffer.html#hb-buffer-content-type-t"/>
     <keyword type="enum" name="enum hb_buffer_flags_t" link="harfbuzz-hb-buffer.html#hb-buffer-flags-t" since="0.9.20"/>
     <keyword type="enum" name="enum hb_buffer_cluster_level_t" link="harfbuzz-hb-buffer.html#hb-buffer-cluster-level-t" since="0.9.42"/>
-    <keyword type="struct" name="hb_segment_properties_t" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct"/>
+    <keyword type="struct" name="hb_segment_properties_t" link="harfbuzz-hb-buffer.html#hb-segment-properties-t"/>
     <keyword type="enum" name="enum hb_buffer_serialize_format_t" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-format-t" since="0.9.2"/>
     <keyword type="enum" name="enum hb_buffer_serialize_flags_t" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-flags-t" since="0.9.20"/>
     <keyword type="enum" name="enum hb_buffer_diff_flags_t" link="harfbuzz-hb-buffer.html#hb-buffer-diff-flags-t"/>
@@ -235,6 +235,10 @@
     <keyword type="function" name="hb_language_from_string ()" link="harfbuzz-hb-common.html#hb-language-from-string" since="0.9.2"/>
     <keyword type="function" name="hb_language_to_string ()" link="harfbuzz-hb-common.html#hb-language-to-string" since="0.9.2"/>
     <keyword type="function" name="hb_language_get_default ()" link="harfbuzz-hb-common.html#hb-language-get-default" since="0.9.2"/>
+    <keyword type="function" name="hb_feature_from_string ()" link="harfbuzz-hb-common.html#hb-feature-from-string" since="0.9.5"/>
+    <keyword type="function" name="hb_feature_to_string ()" link="harfbuzz-hb-common.html#hb-feature-to-string" since="0.9.5"/>
+    <keyword type="function" name="hb_variation_from_string ()" link="harfbuzz-hb-common.html#hb-variation-from-string" since="1.4.2"/>
+    <keyword type="function" name="hb_variation_to_string ()" link="harfbuzz-hb-common.html#hb-variation-to-string" since="1.4.2"/>
     <keyword type="function" name="hb_destroy_func_t ()" link="harfbuzz-hb-common.html#hb-destroy-func-t"/>
     <keyword type="macro" name="HB_TAG()" link="harfbuzz-hb-common.html#HB-TAG:CAPS"/>
     <keyword type="macro" name="HB_UNTAG()" link="harfbuzz-hb-common.html#HB-UNTAG:CAPS"/>
@@ -248,16 +252,20 @@
     <keyword type="typedef" name="hb_codepoint_t" link="harfbuzz-hb-common.html#hb-codepoint-t"/>
     <keyword type="enum" name="enum hb_direction_t" link="harfbuzz-hb-common.html#hb-direction-t"/>
     <keyword type="typedef" name="hb_language_t" link="harfbuzz-hb-common.html#hb-language-t"/>
+    <keyword type="struct" name="hb_feature_t" link="harfbuzz-hb-common.html#hb-feature-t"/>
+    <keyword type="struct" name="hb_variation_t" link="harfbuzz-hb-common.html#hb-variation-t" since="1.4.2"/>
     <keyword type="typedef" name="hb_mask_t" link="harfbuzz-hb-common.html#hb-mask-t"/>
     <keyword type="typedef" name="hb_position_t" link="harfbuzz-hb-common.html#hb-position-t"/>
     <keyword type="typedef" name="hb_tag_t" link="harfbuzz-hb-common.html#hb-tag-t"/>
     <keyword type="enum" name="enum hb_script_t" link="harfbuzz-hb-common.html#hb-script-t"/>
-    <keyword type="struct" name="hb_user_data_key_t" link="harfbuzz-hb-common.html#hb-user-data-key-t-struct"/>
+    <keyword type="struct" name="hb_user_data_key_t" link="harfbuzz-hb-common.html#hb-user-data-key-t"/>
     <keyword type="union" name="hb_var_int_t" link="harfbuzz-hb-common.html#hb-var-int-t"/>
     <keyword type="macro" name="HB_TAG_NONE" link="harfbuzz-hb-common.html#HB-TAG-NONE:CAPS"/>
     <keyword type="macro" name="HB_TAG_MAX" link="harfbuzz-hb-common.html#HB-TAG-MAX:CAPS"/>
     <keyword type="macro" name="HB_TAG_MAX_SIGNED" link="harfbuzz-hb-common.html#HB-TAG-MAX-SIGNED:CAPS"/>
     <keyword type="macro" name="HB_LANGUAGE_INVALID" link="harfbuzz-hb-common.html#HB-LANGUAGE-INVALID:CAPS"/>
+    <keyword type="macro" name="HB_FEATURE_GLOBAL_END" link="harfbuzz-hb-common.html#HB-FEATURE-GLOBAL-END:CAPS" since="2.0.0"/>
+    <keyword type="macro" name="HB_FEATURE_GLOBAL_START" link="harfbuzz-hb-common.html#HB-FEATURE-GLOBAL-START:CAPS" since="2.0.0"/>
     <keyword type="function" name="hb_font_get_glyph_func_t ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-func-t" deprecated=""/>
     <keyword type="function" name="hb_ot_layout_table_find_script ()" link="harfbuzz-hb-deprecated.html#hb-ot-layout-table-find-script"/>
     <keyword type="function" name="hb_font_funcs_set_glyph_h_kerning_func ()" link="harfbuzz-hb-deprecated.html#hb-font-funcs-set-glyph-h-kerning-func" deprecated="2.0.0" since="0.9.2"/>
@@ -371,8 +379,6 @@
     <keyword type="function" name="hb_font_set_ptem ()" link="harfbuzz-hb-font.html#hb-font-set-ptem" since="1.6.0"/>
     <keyword type="function" name="hb_font_set_scale ()" link="harfbuzz-hb-font.html#hb-font-set-scale" since="0.9.2"/>
     <keyword type="function" name="hb_font_set_user_data ()" link="harfbuzz-hb-font.html#hb-font-set-user-data" since="0.9.2"/>
-    <keyword type="function" name="hb_variation_from_string ()" link="harfbuzz-hb-font.html#hb-variation-from-string" since="1.4.2"/>
-    <keyword type="function" name="hb_variation_to_string ()" link="harfbuzz-hb-font.html#hb-variation-to-string" since="1.4.2"/>
     <keyword type="function" name="hb_font_set_variations ()" link="harfbuzz-hb-font.html#hb-font-set-variations" since="1.4.2"/>
     <keyword type="function" name="hb_font_set_var_coords_design ()" link="harfbuzz-hb-font.html#hb-font-set-var-coords-design" since="1.4.2"/>
     <keyword type="function" name="hb_font_set_var_coords_normalized ()" link="harfbuzz-hb-font.html#hb-font-set-var-coords-normalized" since="1.4.2"/>
@@ -391,7 +397,6 @@
     <keyword type="typedef" name="hb_font_get_glyph_v_advance_func_t" link="harfbuzz-hb-font.html#hb-font-get-glyph-v-advance-func-t"/>
     <keyword type="typedef" name="hb_font_get_glyph_v_advances_func_t" link="harfbuzz-hb-font.html#hb-font-get-glyph-v-advances-func-t"/>
     <keyword type="typedef" name="hb_font_get_glyph_v_origin_func_t" link="harfbuzz-hb-font.html#hb-font-get-glyph-v-origin-func-t"/>
-    <keyword type="struct" name="hb_variation_t" link="harfbuzz-hb-font.html#hb-variation-t" since="1.4.2"/>
     <keyword type="typedef" name="hb_font_t" link="harfbuzz-hb-font.html#hb-font-t"/>
     <keyword type="typedef" name="hb_font_get_font_h_extents_func_t" link="harfbuzz-hb-font.html#hb-font-get-font-h-extents-func-t"/>
     <keyword type="typedef" name="hb_font_get_font_v_extents_func_t" link="harfbuzz-hb-font.html#hb-font-get-font-v-extents-func-t"/>
@@ -453,14 +458,9 @@
     <keyword type="function" name="hb_shape_plan_reference ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-reference" since="0.9.7"/>
     <keyword type="function" name="hb_shape_plan_set_user_data ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-set-user-data" since="0.9.7"/>
     <keyword type="typedef" name="hb_shape_plan_t" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"/>
-    <keyword type="function" name="hb_feature_from_string ()" link="harfbuzz-hb-shape.html#hb-feature-from-string" since="0.9.5"/>
-    <keyword type="function" name="hb_feature_to_string ()" link="harfbuzz-hb-shape.html#hb-feature-to-string" since="0.9.5"/>
     <keyword type="function" name="hb_shape ()" link="harfbuzz-hb-shape.html#hb-shape" since="0.9.2"/>
     <keyword type="function" name="hb_shape_full ()" link="harfbuzz-hb-shape.html#hb-shape-full" since="0.9.2"/>
     <keyword type="function" name="hb_shape_list_shapers ()" link="harfbuzz-hb-shape.html#hb-shape-list-shapers" since="0.9.2"/>
-    <keyword type="macro" name="HB_FEATURE_GLOBAL_END" link="harfbuzz-hb-shape.html#HB-FEATURE-GLOBAL-END:CAPS" since="2.0.0"/>
-    <keyword type="macro" name="HB_FEATURE_GLOBAL_START" link="harfbuzz-hb-shape.html#HB-FEATURE-GLOBAL-START:CAPS" since="2.0.0"/>
-    <keyword type="struct" name="hb_feature_t" link="harfbuzz-hb-shape.html#hb-feature-t-struct"/>
     <keyword type="function" name="hb_unicode_combining_class ()" link="harfbuzz-hb-unicode.html#hb-unicode-combining-class" since="0.9.2"/>
     <keyword type="function" name="hb_unicode_combining_class_func_t ()" link="harfbuzz-hb-unicode.html#hb-unicode-combining-class-func-t"/>
     <keyword type="function" name="hb_unicode_compose ()" link="harfbuzz-hb-unicode.html#hb-unicode-compose" since="0.9.2"/>
@@ -584,9 +584,9 @@
     <keyword type="macro" name="HB_OT_MATH_SCRIPT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-SCRIPT:CAPS"/>
     <keyword type="enum" name="enum hb_ot_math_constant_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-constant-t" since="1.3.3"/>
     <keyword type="enum" name="enum hb_ot_math_kern_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-kern-t" since="1.3.3"/>
-    <keyword type="struct" name="hb_ot_math_glyph_variant_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t-struct"/>
+    <keyword type="struct" name="hb_ot_math_glyph_variant_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t" since="1.3.3"/>
     <keyword type="enum" name="enum hb_ot_math_glyph_part_flags_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-flags-t" since="1.3.3"/>
-    <keyword type="struct" name="hb_ot_math_glyph_part_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t-struct"/>
+    <keyword type="struct" name="hb_ot_math_glyph_part_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t" since="1.3.3"/>
     <keyword type="function" name="hb_ot_name_list_names ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-list-names" since="2.1.0"/>
     <keyword type="function" name="hb_ot_name_get_utf16 ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-get-utf16" since="2.1.0"/>
     <keyword type="function" name="hb_ot_name_get_utf32 ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-get-utf32" since="2.1.0"/>
@@ -639,72 +639,6 @@
     <keyword type="function" name="hb_glib_script_from_script ()" link="harfbuzz-hb-glib.html#hb-glib-script-from-script"/>
     <keyword type="function" name="hb_glib_script_to_script ()" link="harfbuzz-hb-glib.html#hb-glib-script-to-script"/>
     <keyword type="function" name="hb_glib_blob_create ()" link="harfbuzz-hb-glib.html#hb-glib-blob-create" since="0.9.38"/>
-    <keyword type="function" name="hb_gobject_blob_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-blob-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_buffer_content_type_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-content-type-get-type"/>
-    <keyword type="function" name="hb_gobject_buffer_diff_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-diff-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_buffer_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_buffer_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_buffer_serialize_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-serialize-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_buffer_serialize_format_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-serialize-format-get-type"/>
-    <keyword type="function" name="hb_gobject_direction_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-direction-get-type"/>
-    <keyword type="function" name="hb_gobject_face_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-face-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_font_funcs_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-font-funcs-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_font_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-font-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_glyph_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-glyph-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_map_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-map-get-type"/>
-    <keyword type="function" name="hb_gobject_memory_mode_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-memory-mode-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_color_palette_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-color-palette-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_layout_glyph_class_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-layout-glyph-class-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_math_constant_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-math-constant-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_math_glyph_part_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-math-glyph-part-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_math_glyph_part_flags_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-math-glyph-part-flags-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_math_glyph_variant_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-math-glyph-variant-get-type"/>
-    <keyword type="function" name="hb_gobject_ot_math_kern_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-ot-math-kern-get-type"/>
-    <keyword type="function" name="hb_gobject_script_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-script-get-type"/>
-    <keyword type="function" name="hb_gobject_shape_plan_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-shape-plan-get-type"/>
-    <keyword type="function" name="hb_gobject_unicode_combining_class_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-unicode-combining-class-get-type"/>
-    <keyword type="function" name="hb_gobject_unicode_funcs_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-unicode-funcs-get-type" since="0.9.2"/>
-    <keyword type="function" name="hb_gobject_unicode_general_category_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-unicode-general-category-get-type"/>
-    <keyword type="function" name="hb_gobject_buffer_cluster_level_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-buffer-cluster-level-get-type"/>
-    <keyword type="function" name="hb_gobject_feature_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-feature-get-type"/>
-    <keyword type="function" name="hb_gobject_glyph_info_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-glyph-info-get-type"/>
-    <keyword type="function" name="hb_gobject_glyph_position_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-glyph-position-get-type"/>
-    <keyword type="function" name="hb_gobject_segment_properties_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-segment-properties-get-type"/>
-    <keyword type="function" name="hb_gobject_set_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-set-get-type"/>
-    <keyword type="function" name="hb_gobject_user_data_key_get_type ()" link="harfbuzz-hb-gobject.html#hb-gobject-user-data-key-get-type"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BLOB" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BLOB:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_CONTENT_TYPE" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-CONTENT-TYPE:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_DIFF_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-DIFF-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_SERIALIZE_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-SERIALIZE-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_SERIALIZE_FORMAT" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-SERIALIZE-FORMAT:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_DIRECTION" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-DIRECTION:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_FACE" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-FACE:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_FONT" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-FONT:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_FONT_FUNCS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-FONT-FUNCS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_GLYPH_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-GLYPH-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_MAP" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-MAP:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_MEMORY_MODE" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-MEMORY-MODE:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_COLOR_PALETTE_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-COLOR-PALETTE-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_LAYOUT_GLYPH_CLASS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-LAYOUT-GLYPH-CLASS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_MATH_CONSTANT" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-CONSTANT:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-GLYPH-PART:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_MATH_GLYPH_PART_FLAGS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-GLYPH-PART-FLAGS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_MATH_GLYPH_VARIANT" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-GLYPH-VARIANT:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_OT_MATH_KERN" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-OT-MATH-KERN:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_SCRIPT" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SCRIPT:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_SHAPE_PLAN" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SHAPE-PLAN:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_UNICODE_COMBINING_CLASS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-UNICODE-COMBINING-CLASS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_UNICODE_FUNCS" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-UNICODE-FUNCS:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_UNICODE_GENERAL_CATEGORY" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-UNICODE-GENERAL-CATEGORY:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_BUFFER_CLUSTER_LEVEL" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-BUFFER-CLUSTER-LEVEL:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_FEATURE" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-FEATURE:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_GLYPH_INFO" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-GLYPH-INFO:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_GLYPH_POSITION" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-GLYPH-POSITION:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_SEGMENT_PROPERTIES" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SEGMENT-PROPERTIES:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_SET" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-SET:CAPS"/>
-    <keyword type="macro" name="HB_GOBJECT_TYPE_USER_DATA_KEY" link="harfbuzz-hb-gobject.html#HB-GOBJECT-TYPE-USER-DATA-KEY:CAPS"/>
     <keyword type="function" name="hb_graphite2_face_get_gr_face ()" link="harfbuzz-hb-graphite2.html#hb-graphite2-face-get-gr-face"/>
     <keyword type="macro" name="HB_GRAPHITE2_TAG_SILF" link="harfbuzz-hb-graphite2.html#HB-GRAPHITE2-TAG-SILF:CAPS"/>
     <keyword type="function" name="hb_icu_get_unicode_funcs ()" link="harfbuzz-hb-icu.html#hb-icu-get-unicode-funcs"/>
@@ -726,6 +660,7 @@
     <keyword type="constant" name="HB_BUFFER_FLAG_EOT" link="harfbuzz-hb-buffer.html#HB-BUFFER-FLAG-EOT:CAPS"/>
     <keyword type="constant" name="HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES" link="harfbuzz-hb-buffer.html#HB-BUFFER-FLAG-PRESERVE-DEFAULT-IGNORABLES:CAPS"/>
     <keyword type="constant" name="HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES" link="harfbuzz-hb-buffer.html#HB-BUFFER-FLAG-REMOVE-DEFAULT-IGNORABLES:CAPS"/>
+    <keyword type="constant" name="HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE" link="harfbuzz-hb-buffer.html#HB-BUFFER-FLAG-DO-NOT-INSERT-DOTTED-CIRCLE:CAPS"/>
     <keyword type="constant" name="HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES" link="harfbuzz-hb-buffer.html#HB-BUFFER-CLUSTER-LEVEL-MONOTONE-GRAPHEMES:CAPS"/>
     <keyword type="constant" name="HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS" link="harfbuzz-hb-buffer.html#HB-BUFFER-CLUSTER-LEVEL-MONOTONE-CHARACTERS:CAPS"/>
     <keyword type="constant" name="HB_BUFFER_CLUSTER_LEVEL_CHARACTERS" link="harfbuzz-hb-buffer.html#HB-BUFFER-CLUSTER-LEVEL-CHARACTERS:CAPS"/>
@@ -754,155 +689,11 @@
     <keyword type="constant" name="HB_DIRECTION_RTL" link="harfbuzz-hb-common.html#HB-DIRECTION-RTL:CAPS"/>
     <keyword type="constant" name="HB_DIRECTION_TTB" link="harfbuzz-hb-common.html#HB-DIRECTION-TTB:CAPS"/>
     <keyword type="constant" name="HB_DIRECTION_BTT" link="harfbuzz-hb-common.html#HB-DIRECTION-BTT:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_COMMON" link="harfbuzz-hb-common.html#HB-SCRIPT-COMMON:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_INHERITED" link="harfbuzz-hb-common.html#HB-SCRIPT-INHERITED:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_UNKNOWN" link="harfbuzz-hb-common.html#HB-SCRIPT-UNKNOWN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ARABIC" link="harfbuzz-hb-common.html#HB-SCRIPT-ARABIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ARMENIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-ARMENIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BENGALI" link="harfbuzz-hb-common.html#HB-SCRIPT-BENGALI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CYRILLIC" link="harfbuzz-hb-common.html#HB-SCRIPT-CYRILLIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_DEVANAGARI" link="harfbuzz-hb-common.html#HB-SCRIPT-DEVANAGARI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GEORGIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-GEORGIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GREEK" link="harfbuzz-hb-common.html#HB-SCRIPT-GREEK:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GUJARATI" link="harfbuzz-hb-common.html#HB-SCRIPT-GUJARATI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GURMUKHI" link="harfbuzz-hb-common.html#HB-SCRIPT-GURMUKHI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HANGUL" link="harfbuzz-hb-common.html#HB-SCRIPT-HANGUL:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HAN" link="harfbuzz-hb-common.html#HB-SCRIPT-HAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HEBREW" link="harfbuzz-hb-common.html#HB-SCRIPT-HEBREW:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HIRAGANA" link="harfbuzz-hb-common.html#HB-SCRIPT-HIRAGANA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KANNADA" link="harfbuzz-hb-common.html#HB-SCRIPT-KANNADA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KATAKANA" link="harfbuzz-hb-common.html#HB-SCRIPT-KATAKANA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LAO" link="harfbuzz-hb-common.html#HB-SCRIPT-LAO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LATIN" link="harfbuzz-hb-common.html#HB-SCRIPT-LATIN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MALAYALAM" link="harfbuzz-hb-common.html#HB-SCRIPT-MALAYALAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ORIYA" link="harfbuzz-hb-common.html#HB-SCRIPT-ORIYA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAMIL" link="harfbuzz-hb-common.html#HB-SCRIPT-TAMIL:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TELUGU" link="harfbuzz-hb-common.html#HB-SCRIPT-TELUGU:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_THAI" link="harfbuzz-hb-common.html#HB-SCRIPT-THAI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TIBETAN" link="harfbuzz-hb-common.html#HB-SCRIPT-TIBETAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BOPOMOFO" link="harfbuzz-hb-common.html#HB-SCRIPT-BOPOMOFO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BRAILLE" link="harfbuzz-hb-common.html#HB-SCRIPT-BRAILLE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CANADIAN_SYLLABICS" link="harfbuzz-hb-common.html#HB-SCRIPT-CANADIAN-SYLLABICS:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CHEROKEE" link="harfbuzz-hb-common.html#HB-SCRIPT-CHEROKEE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ETHIOPIC" link="harfbuzz-hb-common.html#HB-SCRIPT-ETHIOPIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KHMER" link="harfbuzz-hb-common.html#HB-SCRIPT-KHMER:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MONGOLIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-MONGOLIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MYANMAR" link="harfbuzz-hb-common.html#HB-SCRIPT-MYANMAR:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OGHAM" link="harfbuzz-hb-common.html#HB-SCRIPT-OGHAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_RUNIC" link="harfbuzz-hb-common.html#HB-SCRIPT-RUNIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SINHALA" link="harfbuzz-hb-common.html#HB-SCRIPT-SINHALA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SYRIAC" link="harfbuzz-hb-common.html#HB-SCRIPT-SYRIAC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_THAANA" link="harfbuzz-hb-common.html#HB-SCRIPT-THAANA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_YI" link="harfbuzz-hb-common.html#HB-SCRIPT-YI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_DESERET" link="harfbuzz-hb-common.html#HB-SCRIPT-DESERET:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GOTHIC" link="harfbuzz-hb-common.html#HB-SCRIPT-GOTHIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_ITALIC" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-ITALIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BUHID" link="harfbuzz-hb-common.html#HB-SCRIPT-BUHID:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HANUNOO" link="harfbuzz-hb-common.html#HB-SCRIPT-HANUNOO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAGALOG" link="harfbuzz-hb-common.html#HB-SCRIPT-TAGALOG:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAGBANWA" link="harfbuzz-hb-common.html#HB-SCRIPT-TAGBANWA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CYPRIOT" link="harfbuzz-hb-common.html#HB-SCRIPT-CYPRIOT:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LIMBU" link="harfbuzz-hb-common.html#HB-SCRIPT-LIMBU:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LINEAR_B" link="harfbuzz-hb-common.html#HB-SCRIPT-LINEAR-B:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OSMANYA" link="harfbuzz-hb-common.html#HB-SCRIPT-OSMANYA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SHAVIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-SHAVIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAI_LE" link="harfbuzz-hb-common.html#HB-SCRIPT-TAI-LE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_UGARITIC" link="harfbuzz-hb-common.html#HB-SCRIPT-UGARITIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BUGINESE" link="harfbuzz-hb-common.html#HB-SCRIPT-BUGINESE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_COPTIC" link="harfbuzz-hb-common.html#HB-SCRIPT-COPTIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GLAGOLITIC" link="harfbuzz-hb-common.html#HB-SCRIPT-GLAGOLITIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KHAROSHTHI" link="harfbuzz-hb-common.html#HB-SCRIPT-KHAROSHTHI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_NEW_TAI_LUE" link="harfbuzz-hb-common.html#HB-SCRIPT-NEW-TAI-LUE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_PERSIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-PERSIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SYLOTI_NAGRI" link="harfbuzz-hb-common.html#HB-SCRIPT-SYLOTI-NAGRI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TIFINAGH" link="harfbuzz-hb-common.html#HB-SCRIPT-TIFINAGH:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BALINESE" link="harfbuzz-hb-common.html#HB-SCRIPT-BALINESE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CUNEIFORM" link="harfbuzz-hb-common.html#HB-SCRIPT-CUNEIFORM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_NKO" link="harfbuzz-hb-common.html#HB-SCRIPT-NKO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PHAGS_PA" link="harfbuzz-hb-common.html#HB-SCRIPT-PHAGS-PA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PHOENICIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-PHOENICIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CARIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-CARIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CHAM" link="harfbuzz-hb-common.html#HB-SCRIPT-CHAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KAYAH_LI" link="harfbuzz-hb-common.html#HB-SCRIPT-KAYAH-LI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LEPCHA" link="harfbuzz-hb-common.html#HB-SCRIPT-LEPCHA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LYCIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-LYCIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LYDIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-LYDIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OL_CHIKI" link="harfbuzz-hb-common.html#HB-SCRIPT-OL-CHIKI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_REJANG" link="harfbuzz-hb-common.html#HB-SCRIPT-REJANG:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SAURASHTRA" link="harfbuzz-hb-common.html#HB-SCRIPT-SAURASHTRA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SUNDANESE" link="harfbuzz-hb-common.html#HB-SCRIPT-SUNDANESE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_VAI" link="harfbuzz-hb-common.html#HB-SCRIPT-VAI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_AVESTAN" link="harfbuzz-hb-common.html#HB-SCRIPT-AVESTAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BAMUM" link="harfbuzz-hb-common.html#HB-SCRIPT-BAMUM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_EGYPTIAN_HIEROGLYPHS" link="harfbuzz-hb-common.html#HB-SCRIPT-EGYPTIAN-HIEROGLYPHS:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_IMPERIAL_ARAMAIC" link="harfbuzz-hb-common.html#HB-SCRIPT-IMPERIAL-ARAMAIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_INSCRIPTIONAL_PAHLAVI" link="harfbuzz-hb-common.html#HB-SCRIPT-INSCRIPTIONAL-PAHLAVI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_INSCRIPTIONAL_PARTHIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-INSCRIPTIONAL-PARTHIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_JAVANESE" link="harfbuzz-hb-common.html#HB-SCRIPT-JAVANESE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KAITHI" link="harfbuzz-hb-common.html#HB-SCRIPT-KAITHI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LISU" link="harfbuzz-hb-common.html#HB-SCRIPT-LISU:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MEETEI_MAYEK" link="harfbuzz-hb-common.html#HB-SCRIPT-MEETEI-MAYEK:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_SOUTH_ARABIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-SOUTH-ARABIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_TURKIC" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-TURKIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SAMARITAN" link="harfbuzz-hb-common.html#HB-SCRIPT-SAMARITAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAI_THAM" link="harfbuzz-hb-common.html#HB-SCRIPT-TAI-THAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAI_VIET" link="harfbuzz-hb-common.html#HB-SCRIPT-TAI-VIET:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BATAK" link="harfbuzz-hb-common.html#HB-SCRIPT-BATAK:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BRAHMI" link="harfbuzz-hb-common.html#HB-SCRIPT-BRAHMI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MANDAIC" link="harfbuzz-hb-common.html#HB-SCRIPT-MANDAIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CHAKMA" link="harfbuzz-hb-common.html#HB-SCRIPT-CHAKMA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MEROITIC_CURSIVE" link="harfbuzz-hb-common.html#HB-SCRIPT-MEROITIC-CURSIVE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MEROITIC_HIEROGLYPHS" link="harfbuzz-hb-common.html#HB-SCRIPT-MEROITIC-HIEROGLYPHS:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MIAO" link="harfbuzz-hb-common.html#HB-SCRIPT-MIAO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SHARADA" link="harfbuzz-hb-common.html#HB-SCRIPT-SHARADA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SORA_SOMPENG" link="harfbuzz-hb-common.html#HB-SCRIPT-SORA-SOMPENG:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TAKRI" link="harfbuzz-hb-common.html#HB-SCRIPT-TAKRI:CAPS"/>
     <keyword type="constant" name="HB_SCRIPT_BASSA_VAH" link="harfbuzz-hb-common.html#HB-SCRIPT-BASSA-VAH:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_CAUCASIAN_ALBANIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-CAUCASIAN-ALBANIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_DUPLOYAN" link="harfbuzz-hb-common.html#HB-SCRIPT-DUPLOYAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ELBASAN" link="harfbuzz-hb-common.html#HB-SCRIPT-ELBASAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GRANTHA" link="harfbuzz-hb-common.html#HB-SCRIPT-GRANTHA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KHOJKI" link="harfbuzz-hb-common.html#HB-SCRIPT-KHOJKI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_KHUDAWADI" link="harfbuzz-hb-common.html#HB-SCRIPT-KHUDAWADI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_LINEAR_A" link="harfbuzz-hb-common.html#HB-SCRIPT-LINEAR-A:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MAHAJANI" link="harfbuzz-hb-common.html#HB-SCRIPT-MAHAJANI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MANICHAEAN" link="harfbuzz-hb-common.html#HB-SCRIPT-MANICHAEAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MENDE_KIKAKUI" link="harfbuzz-hb-common.html#HB-SCRIPT-MENDE-KIKAKUI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MODI" link="harfbuzz-hb-common.html#HB-SCRIPT-MODI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MRO" link="harfbuzz-hb-common.html#HB-SCRIPT-MRO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_NABATAEAN" link="harfbuzz-hb-common.html#HB-SCRIPT-NABATAEAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_NORTH_ARABIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-NORTH-ARABIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_PERMIC" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-PERMIC:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PAHAWH_HMONG" link="harfbuzz-hb-common.html#HB-SCRIPT-PAHAWH-HMONG:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PALMYRENE" link="harfbuzz-hb-common.html#HB-SCRIPT-PALMYRENE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PAU_CIN_HAU" link="harfbuzz-hb-common.html#HB-SCRIPT-PAU-CIN-HAU:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_PSALTER_PAHLAVI" link="harfbuzz-hb-common.html#HB-SCRIPT-PSALTER-PAHLAVI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SIDDHAM" link="harfbuzz-hb-common.html#HB-SCRIPT-SIDDHAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TIRHUTA" link="harfbuzz-hb-common.html#HB-SCRIPT-TIRHUTA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_WARANG_CITI" link="harfbuzz-hb-common.html#HB-SCRIPT-WARANG-CITI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_AHOM" link="harfbuzz-hb-common.html#HB-SCRIPT-AHOM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ANATOLIAN_HIEROGLYPHS" link="harfbuzz-hb-common.html#HB-SCRIPT-ANATOLIAN-HIEROGLYPHS:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HATRAN" link="harfbuzz-hb-common.html#HB-SCRIPT-HATRAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MULTANI" link="harfbuzz-hb-common.html#HB-SCRIPT-MULTANI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_HUNGARIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-HUNGARIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SIGNWRITING" link="harfbuzz-hb-common.html#HB-SCRIPT-SIGNWRITING:CAPS"/>
     <keyword type="constant" name="HB_SCRIPT_ADLAM" link="harfbuzz-hb-common.html#HB-SCRIPT-ADLAM:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_BHAIKSUKI" link="harfbuzz-hb-common.html#HB-SCRIPT-BHAIKSUKI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MARCHEN" link="harfbuzz-hb-common.html#HB-SCRIPT-MARCHEN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OSAGE" link="harfbuzz-hb-common.html#HB-SCRIPT-OSAGE:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_TANGUT" link="harfbuzz-hb-common.html#HB-SCRIPT-TANGUT:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_NEWA" link="harfbuzz-hb-common.html#HB-SCRIPT-NEWA:CAPS"/>
     <keyword type="constant" name="HB_SCRIPT_MASARAM_GONDI" link="harfbuzz-hb-common.html#HB-SCRIPT-MASARAM-GONDI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_NUSHU" link="harfbuzz-hb-common.html#HB-SCRIPT-NUSHU:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SOYOMBO" link="harfbuzz-hb-common.html#HB-SCRIPT-SOYOMBO:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_ZANABAZAR_SQUARE" link="harfbuzz-hb-common.html#HB-SCRIPT-ZANABAZAR-SQUARE:CAPS"/>
     <keyword type="constant" name="HB_SCRIPT_DOGRA" link="harfbuzz-hb-common.html#HB-SCRIPT-DOGRA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_GUNJALA_GONDI" link="harfbuzz-hb-common.html#HB-SCRIPT-GUNJALA-GONDI:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_HANIFI_ROHINGYA" link="harfbuzz-hb-common.html#HB-SCRIPT-HANIFI-ROHINGYA:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MAKASAR" link="harfbuzz-hb-common.html#HB-SCRIPT-MAKASAR:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_MEDEFAIDRIN" link="harfbuzz-hb-common.html#HB-SCRIPT-MEDEFAIDRIN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_OLD_SOGDIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-OLD-SOGDIAN:CAPS"/>
-    <keyword type="constant" name="HB_SCRIPT_SOGDIAN" link="harfbuzz-hb-common.html#HB-SCRIPT-SOGDIAN:CAPS"/>
+    <keyword type="constant" name="HB_SCRIPT_ELYMAIC" link="harfbuzz-hb-common.html#HB-SCRIPT-ELYMAIC:CAPS"/>
     <keyword type="constant" name="HB_SCRIPT_INVALID" link="harfbuzz-hb-common.html#HB-SCRIPT-INVALID:CAPS"/>
     <keyword type="constant" name="_HB_SCRIPT_MAX_VALUE" link="harfbuzz-hb-common.html#HB-SCRIPT-MAX-VALUE:CAPS"/>
     <keyword type="constant" name="_HB_SCRIPT_MAX_VALUE_SIGNED" link="harfbuzz-hb-common.html#HB-SCRIPT-MAX-VALUE-SIGNED:CAPS"/>
@@ -1357,12 +1148,12 @@
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_CJK_ROMAN" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-DEFAULT-CJK-ROMAN:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_CJK_ROMAN" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-FULL-WIDTH-CJK-ROMAN:CAPS"/>
     <keyword type="constant" name="_HB_AAT_LAYOUT_FEATURE_SELECTOR_MAX_VALUE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-MAX-VALUE:CAPS"/>
-    <keyword type="member" name="hb-glyph-position-t-struct.x-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t-struct.x-advance"/>
-    <keyword type="member" name="hb-glyph-position-t-struct.y-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t-struct.y-advance"/>
-    <keyword type="member" name="hb-glyph-position-t-struct.x-offset" link="harfbuzz-hb-buffer.html#hb-glyph-position-t-struct.x-offset"/>
-    <keyword type="member" name="hb-glyph-position-t-struct.y-offset" link="harfbuzz-hb-buffer.html#hb-glyph-position-t-struct.y-offset"/>
-    <keyword type="member" name="hb-segment-properties-t-struct.direction" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.direction"/>
-    <keyword type="member" name="hb-segment-properties-t-struct.script" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.script"/>
-    <keyword type="member" name="hb-segment-properties-t-struct.language" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.language"/>
+    <keyword type="member" name="hb-glyph-position-t.x-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.x-advance"/>
+    <keyword type="member" name="hb-glyph-position-t.y-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.y-advance"/>
+    <keyword type="member" name="hb-glyph-position-t.x-offset" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.x-offset"/>
+    <keyword type="member" name="hb-glyph-position-t.y-offset" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.y-offset"/>
+    <keyword type="member" name="hb-segment-properties-t.direction" link="harfbuzz-hb-buffer.html#hb-segment-properties-t.direction"/>
+    <keyword type="member" name="hb-segment-properties-t.script" link="harfbuzz-hb-buffer.html#hb-segment-properties-t.script"/>
+    <keyword type="member" name="hb-segment-properties-t.language" link="harfbuzz-hb-buffer.html#hb-segment-properties-t.language"/>
   </functions>
 </book>
