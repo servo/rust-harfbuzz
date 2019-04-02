@@ -10,7 +10,18 @@ fn main() {
     use std::path::PathBuf;
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
+
+    let try_pkg_config = match &env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG") {
+        Some(s) if s == "1" => false,
+        Some(s) if s == "0" => true,
+        None => true,
+        Some(s) => panic!(
+            "Expected $HARFBUZZ_SYS_NO_PKG_CONFIG to be 1 or 0. Got: {}",
+            s.to_string_lossy()
+        ),
+    };
+
+    if try_pkg_config {
         if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
             // Avoid printing an empty value
             if !lib.include_paths.is_empty() {
