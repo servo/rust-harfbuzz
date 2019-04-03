@@ -6,8 +6,12 @@ extern crate pkg_config;
 #[cfg(feature = "build-native-harfbuzz")]
 fn main() {
     use std::env;
+    use std::io::*;
     use std::process::Command;
     use std::path::PathBuf;
+
+    let output = Command::new("ls").args(&["-l", "--full-time", "harfbuzz/src"]).output().expect("failed");
+    stderr().write_all(&output.stdout).unwrap();
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
 
@@ -73,6 +77,9 @@ fn main() {
         "cargo:include={}",
         out_dir.join("include").join("harfbuzz").display()
     );
+
+    let output = Command::new("ls").args(&["-l", "--full-time", &format!("{}", out_dir.join("include/harfbuzz").display())]).output().expect("failed");
+    stderr().write_all(&output.stdout).unwrap();
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
