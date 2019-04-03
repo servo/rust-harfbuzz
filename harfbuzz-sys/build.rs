@@ -38,8 +38,6 @@ fn main() {
         ),
     };
 
-    ls("harfbuzz/src");
-
     if try_pkg_config {
         if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
             // Avoid printing an empty value
