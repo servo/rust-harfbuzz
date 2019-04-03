@@ -10,8 +10,21 @@ fn main() {
     use std::process::Command;
     use std::path::PathBuf;
 
-    let output = Command::new("ls").args(&["-l", "--full-time", "harfbuzz/src"]).output().expect("failed");
-    stderr().write_all(&output.stdout).unwrap();
+
+    fn ls(path: &str) {
+        let mut cmd = Command::new("ls");
+        cmd.arg("-l");
+        #[cfg(not(target_os = "macos"))]
+        cmd.arg("--full-time");
+        #[cfg(target_os = "macos")]
+        cmd.arg("-T");
+        cmd.arg(path);
+        let cwd = env::current_dir().expect("no cwd");
+        eprintln!("{:?} (PWD={})", cmd, cwd.display());
+        stderr().write_all(&cmd.output().expect("failed").stdout).unwrap();
+    };
+
+    ls("harfbuzz/src");
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
 
@@ -25,7 +38,7 @@ fn main() {
         ),
     };
 
-    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    ls("harfbuzz/src");
 
     if try_pkg_config {
         if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
@@ -41,12 +54,13 @@ fn main() {
                 );
             }
 
-            let output = Command::new("ls").args(&["-l", "--full-time", &format!("{}", out_dir.join("include/harfbuzz").display())]).output().expect("failed");
-            stderr().write_all(&output.stdout).unwrap();
+            ls("harfbuzz/src");
 
             return;
         }
     }
+
+    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
 
     // On Windows, HarfBuzz configures atomics directly; otherwise,
     // it needs assistance from configure to do so.  Just use the makefile
@@ -82,8 +96,7 @@ fn main() {
         out_dir.join("include").join("harfbuzz").display()
     );
 
-    let output = Command::new("ls").args(&["-l", "--full-time", &format!("{}", out_dir.join("include/harfbuzz").display())]).output().expect("failed");
-    stderr().write_all(&output.stdout).unwrap();
+    ls("harfbuzz/src");
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
