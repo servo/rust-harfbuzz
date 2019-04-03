@@ -25,6 +25,7 @@ fn main() {
     };
 
     ls("harfbuzz/src");
+    ls("harfbuzz/util");
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
 
@@ -53,6 +54,7 @@ fn main() {
             }
 
             ls("harfbuzz/src");
+            ls("harfbuzz/util");
 
             return;
         }
@@ -95,6 +97,7 @@ fn main() {
     );
 
     ls("harfbuzz/src");
+    ls("harfbuzz/util");
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
