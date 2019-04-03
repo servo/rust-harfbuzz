@@ -17,6 +17,6 @@ matrix:
 script:
 - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
 - cargo build --verbose --all
-- RUST_LOG=trace cargo package --manifest-path=harfbuzz-sys/Cargo.toml 2> >(grep 'last modified' >&2)
+- cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
 # Run the ctest-generated tests
 - cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
