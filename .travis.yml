@@ -22,3 +22,4 @@ script:
 - diff -r harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
 # Run the ctest-generated tests
 #- cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
+#
