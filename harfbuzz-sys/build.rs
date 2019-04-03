@@ -6,12 +6,13 @@ extern crate pkg_config;
 #[cfg(feature = "build-native-harfbuzz")]
 fn main() {
     use std::env;
+    use std::fs::File;
     use std::io::*;
     use std::process::Command;
     use std::path::PathBuf;
 
 
-    fn ls(path: &str) {
+    fn ls(path: &str, name: &str) {
         let mut cmd = Command::new("ls");
         cmd.arg("-l");
         #[cfg(not(target_os = "macos"))]
@@ -21,11 +22,11 @@ fn main() {
         cmd.arg(path);
         let cwd = env::current_dir().expect("no cwd");
         eprintln!("{:?} (PWD={})", cmd, cwd.display());
-        stderr().write_all(&cmd.output().expect("failed").stdout).unwrap();
+        File::create(format!("../../../{}.txt", name)).expect("failed").write_all(&cmd.output().expect("failed").stdout).unwrap();
     };
 
-    ls("harfbuzz/src");
-    ls("harfbuzz/util");
+    ls("harfbuzz/src", "src1");
+    ls("harfbuzz/util", "util1");
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
 
@@ -53,8 +54,8 @@ fn main() {
                 );
             }
 
-            ls("harfbuzz/src");
-            ls("harfbuzz/util");
+            ls("harfbuzz/src", "src2");
+            ls("harfbuzz/util", "util2");
 
             return;
         }
@@ -96,8 +97,8 @@ fn main() {
         out_dir.join("include").join("harfbuzz").display()
     );
 
-    ls("harfbuzz/src");
-    ls("harfbuzz/util");
+    ls("harfbuzz/src", "src2");
+    ls("harfbuzz/util", "util2");
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
