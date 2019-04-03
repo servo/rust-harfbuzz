@@ -25,6 +25,8 @@ fn main() {
         ),
     };
 
+    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
+
     if try_pkg_config {
         if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
             // Avoid printing an empty value
@@ -38,11 +40,13 @@ fn main() {
                         .unwrap()
                 );
             }
+
+            let output = Command::new("ls").args(&["-l", "--full-time", &format!("{}", out_dir.join("include/harfbuzz").display())]).output().expect("failed");
+            stderr().write_all(&output.stdout).unwrap();
+
             return;
         }
     }
-
-    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
 
     // On Windows, HarfBuzz configures atomics directly; otherwise,
     // it needs assistance from configure to do so.  Just use the makefile
