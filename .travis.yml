@@ -19,7 +19,6 @@ script:
 - cargo build --verbose --all
 # Test that the harfbuzz-sys package builds correctly since test files are excluded.
 - ls -l harfbuzz-sys/harfbuzz/src
-- git status
-- cargo package --manifest-path=harfbuzz-sys/Cargo.toml
+- RUST_LOG=trace cargo package --manifest-path=harfbuzz-sys/Cargo.toml
 # Run the ctest-generated tests
 - cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
