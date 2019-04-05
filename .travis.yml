@@ -1,6 +1,10 @@
 language: rust
 sudo: false
 
+env:
+  global:
+  - PATH=$HOME/.cargo/bin:$PATH
+
 matrix:
   include:
   - os: linux
@@ -13,6 +17,11 @@ matrix:
     rust: nightly
   - os: osx
     rust: stable
+
+before_script:
+- git clone --depth 1 https://github.com/rust-lang/cargo.git
+- cd cargo
+- cargo install
 
 script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
