@@ -37,9 +37,27 @@ CONFIGURE_FLAGS = \
 	--with-coretext=auto
 
 all:
+	touch -r harfbuzz/configure $(AUTOMAKE_FILES)
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
 		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)"
 	cd $(OUT_DIR) && make -j$(NUM_JOBS)
 	cd $(OUT_DIR) && make install
+
+# If the timestamp on these files is incorrect (because git does not preserve timestamps)
+# then the configure script will incorrectly try to run automake commands to regenerate them.
+# We `touch` these files to prevent this.
+AUTOMAKE_FILES = $(wildcard \
+	harfbuzz/configure.ac \
+	harfbuzz/m4/*.m4 \
+	harfbuzz/aclocal.m4 \
+	harfbuzz/configure \
+	harfbuzz/config.h.in \
+	harfbuzz/Makefile.* \
+	harfbuzz/*/Makefile.* \
+	harfbuzz/*/*/Makefile.* \
+	harfbuzz/*/*/*/Makefile.* \
+	harfbuzz/*/*/*/*/Makefile.* \
+	harfbuzz/gtk-doc.make \
+	)
 
 .PHONY: all
