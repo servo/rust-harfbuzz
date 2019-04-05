@@ -19,8 +19,8 @@ matrix:
     rust: stable
 
 before_script:
-- git clone --depth 1 https://github.com/rust-lang/cargo.git
-- cd cargo
+- git clone --depth 1 https://github.com/rust-lang/cargo.git /tmp/cargo
+- cd /tmp/cargo
 - cargo install
 
 script:
