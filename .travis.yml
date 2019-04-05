@@ -15,12 +15,12 @@ matrix:
     rust: stable
 
 script:
-#- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
+- sh harfbuzz-sys/touch.sh
 #- cargo build --verbose --all
 - git status
 - cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
 - diff src*.txt || true
 - diff util*.txt || true
-- diff -r harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
+- diff -ur harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
 # Run the ctest-generated tests
 #- cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
