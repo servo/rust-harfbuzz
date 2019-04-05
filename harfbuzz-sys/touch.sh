@@ -7,7 +7,6 @@ AUTOMAKE_FILES="configure \
                 configure.ac \
                 m4/*.m4 \
                 aclocal.m4 \
-                configure \
                 config.h.in \
                 Makefile.* \
                 */Makefile.* \
