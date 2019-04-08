@@ -36,6 +36,8 @@ CONFIGURE_FLAGS = \
 	--without-glib \
 	--with-coretext=auto
 
+export RAGEL = /bin/true
+
 all:
 	touch -r harfbuzz/configure $(AUTOMAKE_FILES)
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
