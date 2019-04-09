@@ -26,8 +26,8 @@ matrix:
   #  rust: stable
 
 install:
-  - pip3 install --upgrade pip setuptools wheel
-  - pip3 install sendclient
+  - sudo pip3 install --upgrade pip setuptools
+  - sudo pip3 install sendclient
 
 before_script:
   - which ragel && ragel -v || true
