@@ -24,9 +24,8 @@ matrix:
   #  rust: stable
 
 install:
-  - export PATH=$HOME/.local/bin:$PATH
   - sudo pip install --upgrade pip setuptools wheel
-  - pip install sendclient
+  - sudo pip install sendclient
 
 before_script:
   - which ragel && ragel -v || true
