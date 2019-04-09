@@ -14,6 +14,12 @@ matrix:
   - os: osx
     rust: stable
 
+before_script:
+  - mkdir -p $HOME/bin
+  - echo '#!/bin/true' > $HOME/bin/ragel
+  - chmod u+x $HOME/bin/ragel
+  - which ragel
+
 script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
 #- cargo build --verbose --all
