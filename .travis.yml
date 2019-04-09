@@ -5,6 +5,11 @@ env:
   global:
     - RAGEL_PATH=$HOME/bin/ragel
 
+addons:
+  apt:
+    packages:
+      - strace
+
 matrix:
   include:
   - os: linux
@@ -28,7 +33,8 @@ script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
 #- cargo build --verbose --all
 - git status
-- cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
+- strace -f -t -o strace.out -e trace=file cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
+- grep open strace.out
 - diff src*.txt || true
 - diff util*.txt || true
 - diff -r harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
