@@ -26,6 +26,7 @@ matrix:
 install:
   - export PATH=$HOME/.local/bin:$PATH
   - pip install --user --upgrade pip setuptools wheel
+  - which pip
   - pip install --user sendclient
 
 before_script:
