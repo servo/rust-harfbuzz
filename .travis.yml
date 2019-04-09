@@ -9,6 +9,8 @@ addons:
   apt:
     packages:
       - strace
+      - python3
+      - python3-pip
 
 matrix:
   include:
@@ -24,8 +26,8 @@ matrix:
   #  rust: stable
 
 install:
-  - sudo pip install --upgrade pip setuptools wheel
-  - sudo pip install sendclient
+  - pip3 install --upgrade pip setuptools wheel
+  - pip3 install sendclient
 
 before_script:
   - which ragel && ragel -v || true
@@ -37,7 +39,7 @@ script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
 #- cargo build --verbose --all
 - git status
-- strace -f -t -o strace.out -e trace=file cargo package --manifest-path=harfbuzz-sys/Cargo.toml || (c=$?; sudo send-cli strace.out; (exit $c))
+- strace -f -t -o strace.out -e trace=file cargo package --manifest-path=harfbuzz-sys/Cargo.toml || (c=$?; send-cli strace.out; (exit $c))
 - diff src*.txt || true
 - diff util*.txt || true
 - diff -r harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
