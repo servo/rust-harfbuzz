@@ -20,8 +20,8 @@ matrix:
     env: HARFBUZZ_SYS_NO_PKG_CONFIG="1"
   - os: linux
     rust: nightly
-  - os: osx
-    rust: stable
+  #- os: osx
+  #  rust: stable
 
 before_script:
   - which ragel && ragel -v || true
