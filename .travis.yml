@@ -33,8 +33,9 @@ script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
 #- cargo build --verbose --all
 - git status
-- strace -f -t -o strace.out -e trace=file cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
-- grep "src/" strace.out
+- strace -f -t -o strace.out1 -e trace=file cargo package -vv --manifest-path=harfbuzz-sys/Cargo.toml
+- grep "/home/travis/build/spl/rust-harfbuzz/target/package/harfbuzz-sys-0.3.1/harfbuzz" strace.out1 > strace.out2
+- grep "WR" strace.out2
 - diff src*.txt || true
 - diff util*.txt || true
 - diff -r harfbuzz-sys/harfbuzz target/package/harfbuzz-sys-0.3.1/harfbuzz || true
