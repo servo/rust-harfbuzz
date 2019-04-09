@@ -28,7 +28,7 @@ before_script:
   - mkdir -p $HOME/bin
   - echo '#!/bin/true' > $RAGEL_PATH
   - chmod u+x $RAGEL_PATH && [[ "$(which ragel)" == "$RAGEL_PATH" ]]
-  - pip install --upgrade pip
+  - pip install --upgrade pip setuptools wheel
   - pip install sendclient
 
 script:
