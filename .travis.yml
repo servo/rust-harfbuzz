@@ -25,9 +25,8 @@ matrix:
 
 install:
   - export PATH=$HOME/.local/bin:$PATH
-  - pip install --user --upgrade pip setuptools wheel
-  - which pip
-  - pip install --user sendclient
+  - sudo pip install --upgrade pip setuptools wheel
+  - pip install sendclient
 
 before_script:
   - which ragel && ragel -v || true
