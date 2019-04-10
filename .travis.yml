@@ -5,7 +5,6 @@ dist: xenial
 env:
   global:
     - RAGEL_PATH=$HOME/bin/ragel
-    - SED_PATH=$HOME/bin/sed
 
 addons:
   apt:
@@ -28,16 +27,10 @@ matrix:
   #  rust: stable
 
 before_script:
-
   - which ragel && ragel -v || true
   - mkdir -p $HOME/bin
   - echo '#!/bin/true' > $RAGEL_PATH
   - chmod u+x $RAGEL_PATH && [[ "$(which ragel)" == "$RAGEL_PATH" ]]
-
-  - which sed
-  - mkdir -p $HOME/bin
-  - echo '#!/bin/true' > $SED_PATH
-  - chmod u+x $SED_PATH && [[ "$(which sed)" == "$SED_PATH" ]]
 
 script:
 #- touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
