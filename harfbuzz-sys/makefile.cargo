@@ -49,6 +49,7 @@ all:
 AUTOMAKE_FILES = $(wildcard \
 	harfbuzz/configure \
 	harfbuzz/config.h.in \
+	harfbuzz/aclocal.m4 \
 	harfbuzz/Makefile.in \
 	harfbuzz/*/Makefile.in \
 	harfbuzz/*/*/Makefile.in \
