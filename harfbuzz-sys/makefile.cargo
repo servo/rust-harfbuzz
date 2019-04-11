@@ -47,6 +47,7 @@ all:
 # then the configure script will incorrectly try to run automake commands to regenerate them.
 # We `touch` these files to prevent this.
 AUTOMAKE_FILES = $(wildcard \
+	harfbuzz/configure.ac \
 	harfbuzz/configure \
 	harfbuzz/config.h.in \
 	harfbuzz/aclocal.m4 \
