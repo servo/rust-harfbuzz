@@ -37,7 +37,7 @@ CONFIGURE_FLAGS = \
 	--with-coretext=auto
 
 all:
-	touch -r configure $(AUTOMAKE_FILES)
+	touch -r harfbuzz/configure $(AUTOMAKE_FILES)
 	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
 		CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)"
 	cd $(OUT_DIR) && make -j$(NUM_JOBS)
