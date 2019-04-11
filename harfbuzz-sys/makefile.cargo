@@ -48,6 +48,7 @@ all:
 # We `touch` these files to prevent this.
 AUTOMAKE_FILES = $(wildcard \
 	harfbuzz/configure \
+	harfbuzz/config.h.in \
 	harfbuzz/Makefile.in \
 	harfbuzz/*/Makefile.in \
 	harfbuzz/*/*/Makefile.in \
