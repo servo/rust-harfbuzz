@@ -56,6 +56,7 @@ AUTOMAKE_FILES = $(wildcard \
 	harfbuzz/*/*/Makefile.in \
 	harfbuzz/*/*/*/Makefile.in \
 	harfbuzz/*/*/*/*/Makefile.in \
+	harfbuzz/src/hb-version.h \
 	)
 
 .PHONY: all
