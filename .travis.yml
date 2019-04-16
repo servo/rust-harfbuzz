@@ -1,10 +1,71 @@
 language: rust
-sudo: false
-rust:
- - stable
- - nightly
+
+cache: cargo
+
+matrix:
+  include:
+
+    - name: stable, Linux, shared library
+      os: linux
+      rust: stable
+      env: PREFIX=/usr/local
+      install:
+        # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
+        # build to avoid contaminating the source tree.
+        - make -f $TRAVIS_BUILD_DIR/harfbuzz-sys/makefile.touch touch
+            HARFBUZZ=$TRAVIS_BUILD_DIR/harfbuzz-sys/harfbuzz
+        - pushd $(mktemp -d)
+        - $TRAVIS_BUILD_DIR/harfbuzz-sys/harfbuzz/configure --prefix=$PREFIX
+            --without-icu --without-freetype --without-glib
+        - make
+        - sudo make install
+        # Make harfbuzz  available for linking and confirm expected location
+        - export LD_LIBRARY_PATH="$(pkg-config --variable=libdir harfbuzz)" &&
+            [[ "$LD_LIBRARY_PATH" == "$PREFIX/lib" ]]
+        - popd
+
+    - name: stable, Linux, static linking, no pkg-config
+      os: linux
+      rust: stable
+      env: HARFBUZZ_SYS_NO_PKG_CONFIG=1
+      before_script:
+        # Test the harfbuzz-sys package build to check the 'exclude's. We should
+        # do this where the embedded harfbuzz is statically linked, but we don't
+        # need to do it for every environment.
+        #
+        # FIXME: We use --no-verify to disable strange errors about build
+        # scripts modifying files that don't seem to affect the resulting crate.
+        # Try again when cargo 1.35 is released, since it uses a different
+        # fingerprinting mechanism.
+        - cargo package --manifest-path=harfbuzz-sys/Cargo.toml --no-verify
+
+    - name: stable, macOS, shared library
+      os: osx
+      # Use this image to get harfbuzz > 2. Older images have an older version
+      # of harfbuzz.
+      osx_image: xcode10.2
+      rust: stable
+      addons:
+        homebrew:
+          packages:
+            - harfbuzz
+
+    - name: stable, macOS, static linking
+      os: osx
+      rust: stable
+
+    - name: nightly, Linux, static linking
+      os: linux
+      rust: nightly
+
+before_script:
+  # Download all dependencies to speed up the other stages.
+  - cargo fetch
+
 script:
- - touch harfbuzz-sys/harfbuzz/{configure.ac,aclocal.m4,configure,Makefile.am,Makefile.in}
- - cargo build --verbose --manifest-path=harfbuzz-sys/Cargo.toml
- - cd harfbuzz-sys-test
- - env HARFBUZZ_SYS_NO_PKG_CONFIG=1 cargo run
+  # Build all crates in the workspace
+  - cargo build --all
+  # Test all crates in the workspace
+  - cargo test --all
+  # Run the ctest-generated tests
+  - cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml

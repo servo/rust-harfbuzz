@@ -9,4 +9,5 @@ build = "build.rs"
 harfbuzz-sys = { path = "../harfbuzz-sys" }
 
 [build-dependencies]
+pkg-config = "0.3"
 ctest = "0.2"
