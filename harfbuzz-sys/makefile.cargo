@@ -52,12 +52,12 @@ AUTOMAKE_FILES = $(wildcard \
 	harfbuzz/config.h.in \
 	harfbuzz/aclocal.m4 \
 	harfbuzz/m4/*.m4 \
-	harfbuzz/Makefile.in \
-	harfbuzz/*/Makefile.in \
-	harfbuzz/*/*/Makefile.in \
-	harfbuzz/*/*/*/Makefile.in \
-	harfbuzz/*/*/*/*/Makefile.in \
-	harfbuzz/src/hb-version.h \
+	harfbuzz/Makefile.* \
+	harfbuzz/*/Makefile.* \
+	harfbuzz/*/*/Makefile.* \
+	harfbuzz/*/*/*/Makefile.* \
+	harfbuzz/*/*/*/*/Makefile.* \
+	harfbuzz/src/hb-version.* \
 	)
 
 .PHONY: all
