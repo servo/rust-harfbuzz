@@ -32,12 +32,7 @@ matrix:
         # Test the harfbuzz-sys package build to check the 'exclude's. We should
         # do this where the embedded harfbuzz is statically linked, but we don't
         # need to do it for every environment.
-        #
-        # FIXME: We use --no-verify to disable strange errors about build
-        # scripts modifying files that don't seem to affect the resulting crate.
-        # Try again when cargo 1.35 is released, since it uses a different
-        # fingerprinting mechanism.
-        - cargo package --manifest-path=harfbuzz-sys/Cargo.toml --no-verify
+        - cargo package --manifest-path=harfbuzz-sys/Cargo.toml
 
     - name: stable, macOS, shared library
       os: osx
