@@ -36,12 +36,20 @@ CONFIGURE_FLAGS = \
 	--without-glib \
 	--with-coretext=auto
 
+# Create a unique temporary build directory
+BUILD_DIR := $(shell mktemp -d $(OUT_DIR)/rust_build.XXXXX)
+
 all:
-	$(MAKE) -f $(CARGO_MANIFEST_DIR)/makefile.touch touch \
-	  HARFBUZZ=$(CARGO_MANIFEST_DIR)/harfbuzz
-	cd $(OUT_DIR) && $(CARGO_MANIFEST_DIR)/harfbuzz/configure $(CONFIGURE_FLAGS) \
-	  CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)"
-	cd $(OUT_DIR) && make -j$(NUM_JOBS)
-	cd $(OUT_DIR) && make install
+	# Copy source files to BUILD_DIR to avoid changing originals.
+	cp -a $(CARGO_MANIFEST_DIR)/harfbuzz/* $(BUILD_DIR)
+	# Touch in BUILD_DIR avoid regenerating files.
+	$(MAKE) -f $(CARGO_MANIFEST_DIR)/makefile.touch touch HARFBUZZ="$(BUILD_DIR)"
+	# Configure and build in BUILD_DIR, install from BUILD_DIR into OUT_DIR.
+	cd $(BUILD_DIR) && \
+	  ./configure $(CONFIGURE_FLAGS) CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)" && \
+	  make -j$(NUM_JOBS) && \
+	  make install
+	# Remove the no-longer-needed BUILD_DIR to save space.
+	rm -rf $(BUILD_DIR)
 
 .PHONY: all
