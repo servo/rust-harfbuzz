@@ -7,11 +7,9 @@ fn main() {
     let mut cfg = ctest::TestGenerator::new();
 
     // Get the include paths from harfbuzz-sys or pkg-config.
-    if let Some(include_paths) = &env::var_os("DEP_HARFBUZZ_INCLUDE") {
-        // These come from a static build in harfbuzz-sys.
-        for path in env::split_paths(include_paths) {
-            cfg.include(path);
-        }
+    if let Some(path) = &env::var_os("DEP_HARFBUZZ_INCLUDE") {
+        // This comes from a static build in harfbuzz-sys.
+        cfg.include(path);
     } else if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
         // These come from pkg-config.
         for path in lib.include_paths {
