@@ -11,18 +11,7 @@ fn main() {
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
     if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        if let Ok(lib) = pkg_config::probe_library("harfbuzz") {
-            // Avoid printing an empty value
-            if !lib.include_paths.is_empty() {
-                // DEP_HARFBUZZ_INCLUDE has the paths of harfbuzz and dependencies.
-                println!(
-                    "cargo:include={}",
-                    env::join_paths(lib.include_paths)
-                        .unwrap()
-                        .to_str()
-                        .unwrap()
-                );
-            }
+        if pkg_config::probe_library("harfbuzz").is_ok() {
             return;
         }
     }
