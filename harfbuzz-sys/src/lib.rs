@@ -317,6 +317,10 @@ pub const HB_SCRIPT_MAKASAR: hb_script_t = 1298230113;
 pub const HB_SCRIPT_MEDEFAIDRIN: hb_script_t = 1298490470;
 pub const HB_SCRIPT_OLD_SOGDIAN: hb_script_t = 1399809903;
 pub const HB_SCRIPT_SOGDIAN: hb_script_t = 1399809892;
+pub const HB_SCRIPT_ELYMAIC: hb_script_t = 1164736877;
+pub const HB_SCRIPT_NANDINAGARI: hb_script_t = 1315008100;
+pub const HB_SCRIPT_NYIAKENG_PUACHUE_HMONG: hb_script_t = 1215131248;
+pub const HB_SCRIPT_WANCHO: hb_script_t = 1466132591;
 pub const HB_SCRIPT_INVALID: hb_script_t = 0;
 pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 2147483647;
 pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
@@ -2474,6 +2478,7 @@ pub const HB_BUFFER_FLAG_BOT: hb_buffer_flags_t = 1;
 pub const HB_BUFFER_FLAG_EOT: hb_buffer_flags_t = 2;
 pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
 pub const HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 8;
+pub const HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
 /// hb_buffer_flags_t:
 /// @HB_BUFFER_FLAG_DEFAULT: the default buffer flag.
 /// @HB_BUFFER_FLAG_BOT: flag indicating that special handling of the beginning
@@ -2497,6 +2502,10 @@ pub const HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 8;
 /// space glyph and zeroing the advance width.)
 /// @HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES takes
 /// precedence over this flag. Since: 1.8.0
+/// @HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE:
+///    flag indicating that a dotted circle should"]
+///    not be inserted in the rendering of incorrect"]
+///    character sequences (such at <0905 093E>). Since: 2.4"]
 ///
 /// Since: 0.9.20
 pub type hb_buffer_flags_t = u32;
@@ -3160,7 +3169,7 @@ extern "C" {
         face: *mut hb_face_t,
         glyph: hb_codepoint_t,
         start_offset: ::std::os::raw::c_uint,
-        count: *mut ::std::os::raw::c_uint,
+        layer_count: *mut ::std::os::raw::c_uint,
         layers: *mut hb_ot_color_layer_t,
     ) -> ::std::os::raw::c_uint;
 }
