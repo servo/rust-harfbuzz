@@ -1,12 +1,5 @@
 FLAGS = -fPIC
 
-ifeq (armv7-linux-androideabi,$(TARGET))
-	# Reset TARGET variable because armv7 target name used by Rust is not 
-	# the same as the target name needed for the CXX toolchain.
-	TARGET = arm-linux-androideabi
-	FLAGS += -march=armv7-a -mfpu=neon --target=$(TARGET)
-endif
-
 ifneq ($(HOST),$(TARGET))
   CXX ?= $(TARGET)-g++
   CC ?= $(TARGET)-gcc
@@ -33,8 +26,23 @@ CONFIGURE_FLAGS = \
 	--disable-shared \
 	--without-icu \
 	--without-freetype \
-	--without-glib \
-	--with-coretext=auto
+	--without-glib
+
+ifeq (armv7-linux-androideabi,$(TARGET))
+	# Reset TARGET variable because armv7 target name used by Rust is not
+	# the same as the target name needed for the CXX toolchain.
+	TARGET = arm-linux-androideabi
+	FLAGS += -march=armv7-a -mfpu=neon --target=$(TARGET)
+endif
+
+ifeq (wasm32-unknown-unknown,$(TARGET))
+	# Reset TARGET variable because unknown system name used by Rust is not
+	# the same as the target name needed for the CXX toolchain.
+	TARGET = wasm32-unknown-none
+  CONFIGURE_FLAGS += --with-coretext=no
+else
+  CONFIGURE_FLAGS += --with-coretext=auto
+endif
 
 # Create a unique temporary build directory
 BUILD_DIR := $(shell mktemp -d $(OUT_DIR)/rust_build.XXXXX)
