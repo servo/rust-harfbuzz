@@ -3226,6 +3226,15 @@ pub const HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH: hb_ot_layout_glyph_class_t = 1;
 pub const HB_OT_LAYOUT_GLYPH_CLASS_LIGATURE: hb_ot_layout_glyph_class_t = 2;
 pub const HB_OT_LAYOUT_GLYPH_CLASS_MARK: hb_ot_layout_glyph_class_t = 3;
 pub const HB_OT_LAYOUT_GLYPH_CLASS_COMPONENT: hb_ot_layout_glyph_class_t = 4;
+/// hb_ot_layout_glyph_class_t:
+/// @HB_OT_LAYOUT_GLYPH_CLASS_UNCLASSIFIED: Glyphs not matching the other classifications
+/// @HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH: Spacing, single characters, capable of accepting marks
+/// @HB_OT_LAYOUT_GLYPH_CLASS_LIGATURE: Glyphs that represent ligation of multiple characters
+/// @HB_OT_LAYOUT_GLYPH_CLASS_MARK: Non-spacing, combining glyphs that represent marks
+/// @HB_OT_LAYOUT_GLYPH_CLASS_COMPONENT: Spacing glyphs that represent part of a single character
+///
+/// The GDEF classes defined for glyphs.
+///
 pub type hb_ot_layout_glyph_class_t = u32;
 extern "C" {
     pub fn hb_ot_layout_get_glyph_class(
@@ -3553,6 +3562,9 @@ pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_AFTER_DEGREE: hb_ot_math_constant_t =
 pub const HB_OT_MATH_CONSTANT_RADICAL_DEGREE_BOTTOM_RAISE_PERCENT: hb_ot_math_constant_t = 55;
 /// hb_ot_math_constant_t:
 ///
+/// The 'MATH' table constants specified at
+/// https://docs.microsoft.com/en-us/typography/opentype/spec/math
+///
 /// Since: 1.3.3
 pub type hb_ot_math_constant_t = u32;
 pub const HB_OT_MATH_KERN_TOP_RIGHT: hb_ot_math_kern_t = 0;
@@ -3561,9 +3573,16 @@ pub const HB_OT_MATH_KERN_BOTTOM_RIGHT: hb_ot_math_kern_t = 2;
 pub const HB_OT_MATH_KERN_BOTTOM_LEFT: hb_ot_math_kern_t = 3;
 /// hb_ot_math_kern_t:
 ///
+/// The math kerning-table types defined for the four corners
+/// of a glyph.
+///
 /// Since: 1.3.3
 pub type hb_ot_math_kern_t = u32;
 /// hb_ot_math_glyph_variant_t:
+/// @glyph: The glyph index of the variant
+/// @advance: The advance width of the variant
+///
+/// Data type to hold math-variant information for a glyph.
 ///
 /// Since: 1.3.3
 #[repr(C)]
@@ -3612,9 +3631,20 @@ fn bindgen_test_layout_hb_ot_math_glyph_variant_t() {
 pub const HB_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
 /// hb_ot_math_glyph_part_flags_t:
 ///
+/// Flags for math glyph parts.
+///
 /// Since: 1.3.3
 pub type hb_ot_math_glyph_part_flags_t = u32;
 /// hb_ot_math_glyph_part_t:
+/// @glyph: The glyph index of the variant part
+/// @start_connector_length: The length of the connector on the starting side of the variant part
+/// @end_connection_length: The length of the connector on the ending side of the variant part
+/// @full_advance: The total advance of the part
+/// @flags: `hb_ot_math_glyph_part_flags_t` flags for the part
+///
+/// Data type to hold information for a "part" component of a math-variant glyph.
+/// Large variants for stretchable math glyphs (such as parentheses) can be constructed
+/// on the fly from parts.
 ///
 /// Since: 1.3.3
 #[repr(C)]
