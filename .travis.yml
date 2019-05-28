@@ -8,7 +8,16 @@ matrix:
     - name: stable, Linux, shared library
       os: linux
       rust: stable
-      env: PREFIX=/usr/local
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env:
+         - PREFIX=/usr/local
+         - CC=gcc-5
+         - CXX=g++-5
       install:
         # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
         # build to avoid contaminating the source tree.
@@ -27,7 +36,16 @@ matrix:
     - name: stable, Linux, static linking, no pkg-config
       os: linux
       rust: stable
-      env: HARFBUZZ_SYS_NO_PKG_CONFIG=1
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env:
+         - HARFBUZZ_SYS_NO_PKG_CONFIG=1
+         - CC=gcc-5
+         - CXX=g++-5
       before_script:
         # Test the harfbuzz-sys package build to check the 'exclude's. We should
         # do this where the embedded harfbuzz is statically linked, but we don't
@@ -52,6 +70,15 @@ matrix:
     - name: nightly, Linux, static linking
       os: linux
       rust: nightly
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env:
+         - CC=gcc-5
+         - CXX=g++-5
 
 before_script:
   # Download all dependencies to speed up the other stages.

@@ -55,13 +55,13 @@ coretext_font_size_from_ptem (float ptem)
    * https://developer.apple.com/library/content/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html
    */
   ptem *= 96.f / 72.f;
-  return ptem <= 0.f ? HB_CORETEXT_DEFAULT_FONT_SIZE : ptem;
+  return (CGFloat) (ptem <= 0.f ? HB_CORETEXT_DEFAULT_FONT_SIZE : ptem);
 }
 static float
 coretext_font_size_to_ptem (CGFloat size)
 {
-  size *= 72.f / 96.f;
-  return size <= 0.f ? 0 : size;
+  size *= 72. / 96.;
+  return size <= 0 ? 0 : size;
 }
 
 static void
@@ -171,7 +171,7 @@ create_ct_font (CGFontRef cg_font, CGFloat font_size)
   if (CFStringHasPrefix (cg_postscript_name, CFSTR (".SFNSText")) ||
       CFStringHasPrefix (cg_postscript_name, CFSTR (".SFNSDisplay")))
   {
-#if MAC_OS_X_VERSION_MIN_REQUIRED < 1080
+#if !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) && MAC_OS_X_VERSION_MIN_REQUIRED < 1080
 # define kCTFontUIFontSystem kCTFontSystemFontType
 # define kCTFontUIFontEmphasizedSystem kCTFontEmphasizedSystemFontType
 #endif
@@ -214,7 +214,7 @@ create_ct_font (CGFontRef cg_font, CGFloat font_size)
   }
 
   CFURLRef original_url = nullptr;
-#if TARGET_OS_OSX && MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+#if !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) && MAC_OS_X_VERSION_MIN_REQUIRED < 1060
   ATSFontRef atsFont;
   FSRef fsref;
   OSStatus status;
@@ -244,7 +244,7 @@ create_ct_font (CGFontRef cg_font, CGFloat font_size)
        * process in Blink. This can be detected by the new file URL location
        * that the newly found font points to. */
       CFURLRef new_url = nullptr;
-#if TARGET_OS_OSX && MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+#if !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) && MAC_OS_X_VERSION_MIN_REQUIRED < 1060
       atsFont = CTFontGetPlatformFont (new_ct_font, NULL);
       status = ATSFontGetFileReference (atsFont, &fsref);
       if (status == noErr)
@@ -410,7 +410,7 @@ struct active_feature_t {
   feature_record_t rec;
   unsigned int order;
 
-  static int cmp (const void *pa, const void *pb) {
+  HB_INTERNAL static int cmp (const void *pa, const void *pb) {
     const active_feature_t *a = (const active_feature_t *) pa;
     const active_feature_t *b = (const active_feature_t *) pb;
     return a->rec.feature < b->rec.feature ? -1 : a->rec.feature > b->rec.feature ? 1 :
@@ -428,7 +428,7 @@ struct feature_event_t {
   bool start;
   active_feature_t feature;
 
-  static int cmp (const void *pa, const void *pb) {
+  HB_INTERNAL static int cmp (const void *pa, const void *pb) {
     const feature_event_t *a = (const feature_event_t *) pa;
     const feature_event_t *b = (const feature_event_t *) pb;
     return a->index < b->index ? -1 : a->index > b->index ? 1 :
@@ -598,7 +598,7 @@ _hb_coretext_shape (hb_shape_plan_t    *shape_plan,
       } else {
         active_feature_t *feature = active_features.find (&event->feature);
 	if (feature)
-	  active_features.remove (feature - active_features.arrayZ ());
+	  active_features.remove (feature - active_features.arrayZ);
       }
     }
   }
@@ -608,7 +608,7 @@ _hb_coretext_shape (hb_shape_plan_t    *shape_plan,
 
 #define ALLOCATE_ARRAY(Type, name, len, on_no_room) \
   Type *name = (Type *) scratch; \
-  { \
+  do { \
     unsigned int _consumed = DIV_CEIL ((len) * sizeof (Type), sizeof (*scratch)); \
     if (unlikely (_consumed > scratch_size)) \
     { \
@@ -617,7 +617,7 @@ _hb_coretext_shape (hb_shape_plan_t    *shape_plan,
     } \
     scratch += _consumed; \
     scratch_size -= _consumed; \
-  }
+  } while (0)
 
   ALLOCATE_ARRAY (UniChar, pchars, buffer->len * 2, /*nothing*/);
   unsigned int chars_len = 0;
@@ -711,7 +711,7 @@ resize_and_retry:
 /* What's the iOS equivalent of this check?
  * The symbols was introduced in iOS 7.0.
  * At any rate, our fallback is safe and works fine. */
-#if MAC_OS_X_VERSION_MIN_REQUIRED < 1090
+#if !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) && MAC_OS_X_VERSION_MIN_REQUIRED < 1090
 #  define kCTLanguageAttributeName CFSTR ("NSLanguage")
 #endif
         CFStringRef lang = CFStringCreateWithCStringNoCopy (kCFAllocatorDefault,
@@ -771,7 +771,7 @@ resize_and_retry:
 	      feature.start < chars_len && feature.start < feature.end)
 	  {
 	    CFRange feature_range = CFRangeMake (feature.start,
-	                                         MIN (feature.end, chars_len) - feature.start);
+	                                         hb_min (feature.end, chars_len) - feature.start);
 	    if (feature.value)
 	      CFAttributedStringRemoveAttribute (attr_string, feature_range, kCTKernAttributeName);
 	    else
@@ -783,7 +783,7 @@ resize_and_retry:
 
       int level = HB_DIRECTION_IS_FORWARD (buffer->props.direction) ? 0 : 1;
       CFNumberRef level_number = CFNumberCreate (kCFAllocatorDefault, kCFNumberIntType, &level);
-#if MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+#if !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE) && MAC_OS_X_VERSION_MIN_REQUIRED < 1060
       extern const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel;
 #endif
       CFDictionaryRef options = CFDictionaryCreate (kCFAllocatorDefault,
@@ -1069,7 +1069,7 @@ resize_and_retry:
     if (false)
     {
       /* Make sure all runs had the expected direction. */
-      bool backward = HB_DIRECTION_IS_BACKWARD (buffer->props.direction);
+      HB_UNUSED bool backward = HB_DIRECTION_IS_BACKWARD (buffer->props.direction);
       assert (bool (status_and & kCTRunStatusRightToLeft) == backward);
       assert (bool (status_or  & kCTRunStatusRightToLeft) == backward);
     }
@@ -1116,7 +1116,7 @@ resize_and_retry:
 	unsigned int cluster = info[count - 1].cluster;
 	for (unsigned int i = count - 1; i > 0; i--)
 	{
-	  cluster = MIN (cluster, info[i - 1].cluster);
+	  cluster = hb_min (cluster, info[i - 1].cluster);
 	  info[i - 1].cluster = cluster;
 	}
       }
@@ -1125,7 +1125,7 @@ resize_and_retry:
 	unsigned int cluster = info[0].cluster;
 	for (unsigned int i = 1; i < count; i++)
 	{
-	  cluster = MIN (cluster, info[i].cluster);
+	  cluster = hb_min (cluster, info[i].cluster);
 	  info[i].cluster = cluster;
 	}
       }
@@ -1147,60 +1147,4 @@ fail:
       CFRelease (range_records[i].font);
 
   return ret;
-}
-
-
-/*
- * AAT shaper
- */
-
-/*
- * shaper face data
- */
-
-struct hb_coretext_aat_face_data_t {};
-
-hb_coretext_aat_face_data_t *
-_hb_coretext_aat_shaper_face_data_create (hb_face_t *face)
-{
-  return hb_aat_layout_has_substitution (face) || hb_aat_layout_has_positioning (face) ?
-	 (hb_coretext_aat_face_data_t *) HB_SHAPER_DATA_SUCCEEDED : nullptr;
-}
-
-void
-_hb_coretext_aat_shaper_face_data_destroy (hb_coretext_aat_face_data_t *data HB_UNUSED)
-{
-}
-
-
-/*
- * shaper font data
- */
-
-struct hb_coretext_aat_font_data_t {};
-
-hb_coretext_aat_font_data_t *
-_hb_coretext_aat_shaper_font_data_create (hb_font_t *font)
-{
-  return font->data.coretext ? (hb_coretext_aat_font_data_t *) HB_SHAPER_DATA_SUCCEEDED : nullptr;
-}
-
-void
-_hb_coretext_aat_shaper_font_data_destroy (hb_coretext_aat_font_data_t *data HB_UNUSED)
-{
-}
-
-
-/*
- * shaper
- */
-
-hb_bool_t
-_hb_coretext_aat_shape (hb_shape_plan_t    *shape_plan,
-			hb_font_t          *font,
-			hb_buffer_t        *buffer,
-			const hb_feature_t *features,
-			unsigned int        num_features)
-{
-  return _hb_coretext_shape (shape_plan, font, buffer, features, num_features);
 }

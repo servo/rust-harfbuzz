@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-buffer: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch09.html" title="Core API">
+<link rel="up" href="ch10.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-blob.html" title="hb-blob">
 <link rel="next" href="harfbuzz-hb-common.html" title="hb-common">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
                   <a href="#harfbuzz-hb-buffer.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch09.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch10.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-blob.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-common.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -878,7 +878,7 @@ to ensure it contains a valid Unicode code points.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> an array of Unicode code points to append. </p></td>
+<td class="parameter_description"><p>an array of Unicode code points to append. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_length]</span></td>
 </tr>
 <tr>
@@ -935,7 +935,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> an array of UTF-32 characters to append. </p></td>
+<td class="parameter_description"><p>an array of UTF-32 characters to append. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_length]</span></td>
 </tr>
 <tr>
@@ -992,7 +992,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> an array of UTF-16 characters to append. </p></td>
+<td class="parameter_description"><p>an array of UTF-16 characters to append. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_length]</span></td>
 </tr>
 <tr>
@@ -1049,7 +1049,7 @@ see <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-code
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> an array of UTF-8
+<td class="parameter_description"><p>an array of UTF-8
 characters to append. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_length][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
@@ -1106,7 +1106,7 @@ Unicode code points that can fit in 8-bit strings.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> an array of UTF-8
+<td class="parameter_description"><p>an array of UTF-8
 characters to append. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_length][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
@@ -1671,7 +1671,7 @@ hb_buffer_get_segment_properties (<em class="parameter"><code><a class="link" hr
 </tr>
 <tr>
 <td class="parameter_name"><p>props</p></td>
-<td class="parameter_description"><p> the output <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a>. </p></td>
+<td class="parameter_description"><p>the output <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t"><span class="type">hb_segment_properties_t</span></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -1689,8 +1689,8 @@ contents.  If buffer is not empty, it must have content type
 <a class="link" href="harfbuzz-hb-buffer.html#HB-BUFFER-CONTENT-TYPE-UNICODE:CAPS"><code class="literal">HB_BUFFER_CONTENT_TYPE_UNICODE</code></a>.</p>
 <p>If buffer script is not set (ie. is <a class="link" href="harfbuzz-hb-common.html#HB-SCRIPT-INVALID:CAPS"><code class="literal">HB_SCRIPT_INVALID</code></a>), it
 will be set to the Unicode script of the first character in
-the buffer that has a script other than <a class="link" href="harfbuzz-hb-common.html#HB-SCRIPT-COMMON:CAPS"><code class="literal">HB_SCRIPT_COMMON</code></a>,
-<a class="link" href="harfbuzz-hb-common.html#HB-SCRIPT-INHERITED:CAPS"><code class="literal">HB_SCRIPT_INHERITED</code></a>, and <a class="link" href="harfbuzz-hb-common.html#HB-SCRIPT-UNKNOWN:CAPS"><code class="literal">HB_SCRIPT_UNKNOWN</code></a>.</p>
+the buffer that has a script other than <code class="literal">HB_SCRIPT_COMMON</code>,
+<code class="literal">HB_SCRIPT_INHERITED</code>, and <code class="literal">HB_SCRIPT_UNKNOWN</code>.</p>
 <p>Next, if buffer direction is not set (ie. is <a class="link" href="harfbuzz-hb-common.html#HB-DIRECTION-INVALID:CAPS"><code class="literal">HB_DIRECTION_INVALID</code></a>),
 it will be set to the natural horizontal direction of the
 buffer script as returned by <a class="link" href="harfbuzz-hb-common.html#hb-script-get-horizontal-direction" title="hb_script_get_horizontal_direction ()"><code class="function">hb_script_get_horizontal_direction()</code></a>.
@@ -1841,7 +1841,7 @@ is valid as long as <em class="parameter"><code>buffer</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>length</p></td>
-<td class="parameter_description"><p> output array length. </p></td>
+<td class="parameter_description"><p>output array length. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -1882,7 +1882,7 @@ is valid as long as <em class="parameter"><code>buffer</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>length</p></td>
-<td class="parameter_description"><p> output length. </p></td>
+<td class="parameter_description"><p>output length. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -2172,7 +2172,7 @@ The serialized glyphs will look something like:</p>
 </li>
 <li class="listitem"><p>If <a class="link" href="harfbuzz-hb-buffer.html#HB-BUFFER-SERIALIZE-FLAG-GLYPH-EXTENTS:CAPS"><span class="type">HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS</span></a> is set, the
 <span class="type">hb_glyph_extents_t</span> in the format
-<code class="literal">&lt;x_bearing,y_bearing,width,height&gt;</code></p></li>
+<code class="literal">&amp;lt;x_bearing,y_bearing,width,height&amp;gt;</code></p></li>
 </ul></div>
 </li>
 </ul></div>
@@ -2209,7 +2209,7 @@ to serialize.</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>buf</p></td>
-<td class="parameter_description"><p> output string to
+<td class="parameter_description"><p>output string to
 write serialized buffer into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=buf_size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
@@ -2221,13 +2221,13 @@ write serialized buffer into. </p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>buf_consumed</p></td>
-<td class="parameter_description"><p> if not <code class="literal">NULL</code>, will be set to the number of byes written into <em class="parameter"><code>buf</code></em>
+<td class="parameter_description"><p>if not <code class="literal">NULL</code>, will be set to the number of byes written into <em class="parameter"><code>buf</code></em>
 . </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>font</p></td>
-<td class="parameter_description"><p> the <a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> used to shape this buffer, needed to
+<td class="parameter_description"><p>the <a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> used to shape this buffer, needed to
 read glyph names and extents. If <code class="literal">NULL</code>, and empty font will be used. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
@@ -2312,7 +2312,7 @@ hb_buffer_serialize_format_from_string
 <tbody>
 <tr>
 <td class="parameter_name"><p>str</p></td>
-<td class="parameter_description"><p> a string to parse. </p></td>
+<td class="parameter_description"><p>a string to parse. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
 <tr>
@@ -2775,6 +2775,15 @@ should not affect how much the line advances.</p></td>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>
+<tr>
+<td class="enum_member_name"><p><a name="HB-BUFFER-FLAG-DO-NOT-INSERT-DOTTED-CIRCLE:CAPS"></a>HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE</p></td>
+<td class="enum_member_description">
+<p>                     flag indicating that a dotted circle should
+                     not be inserted in the rendering of incorrect
+                     character sequences (such at &lt;0905 093E&gt;). Since: 2.4</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -3040,6 +3049,6 @@ set and retrieved using <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.29</div>
 </body>
 </html>

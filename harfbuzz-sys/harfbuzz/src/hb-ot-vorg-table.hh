@@ -81,11 +81,11 @@ struct VORG
     if (unlikely (!c.extend_min (*subset_table)))
       return false;
 
-    subset_table->version.major.set (1);
-    subset_table->version.minor.set (0);
+    subset_table->version.major = 1;
+    subset_table->version.minor = 0;
 
-    subset_table->defaultVertOriginY.set (vorg_table->defaultVertOriginY);
-    subset_table->vertYOrigins.len.set (subset_metrics.length);
+    subset_table->defaultVertOriginY = vorg_table->defaultVertOriginY;
+    subset_table->vertYOrigins.len = subset_metrics.length;
 
     bool success = true;
     if (subset_metrics.length > 0)
@@ -110,21 +110,29 @@ struct VORG
     /* count the number of glyphs to be included in the subset table */
     hb_vector_t<VertOriginMetric> subset_metrics;
     subset_metrics.init ();
-    unsigned int glyph = 0;
+
+
+    hb_codepoint_t old_glyph = HB_SET_VALUE_INVALID;
     unsigned int i = 0;
-    while ((glyph < plan->glyphs.length) && (i < vertYOrigins.len))
+    while (i < vertYOrigins.len
+           && plan->glyphset ()->next (&old_glyph))
     {
-      if (plan->glyphs[glyph] > vertYOrigins[i].glyph)
-        i++;
-      else if (plan->glyphs[glyph] < vertYOrigins[i].glyph)
-        glyph++;
-      else
+      while (old_glyph > vertYOrigins[i].glyph)
       {
-        VertOriginMetric *metrics = subset_metrics.push ();
-        metrics->glyph.set (glyph);
-        metrics->vertOriginY.set (vertYOrigins[i].vertOriginY);
-        glyph++;
         i++;
+        if (i >= vertYOrigins.len)
+          break;
+      }
+
+      if (old_glyph == vertYOrigins[i].glyph)
+      {
+        hb_codepoint_t new_glyph;
+        if (plan->new_gid_for_old_gid (old_glyph, &new_glyph))
+        {
+          VertOriginMetric *metrics = subset_metrics.push ();
+          metrics->glyph = new_glyph;
+          metrics->vertOriginY = vertYOrigins[i].vertOriginY;
+        }
       }
     }
 

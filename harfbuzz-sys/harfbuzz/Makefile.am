@@ -36,7 +36,7 @@ ChangeLog: $(srcdir)/ChangeLog
 $(srcdir)/ChangeLog:
 	$(AM_V_GEN) if test -d "$(top_srcdir)/.git"; then \
 	  (GIT_DIR=$(top_srcdir)/.git \
-	   $(GIT) log $(CHANGELOG_RANGE) --stat) | fmt --split-only > $@.tmp \
+	   $(GIT) log $(CHANGELOG_RANGE) --stat) > $@.tmp \
 	  && mv -f $@.tmp "$(srcdir)/ChangeLog" \
 	  || ($(RM) $@.tmp; \
 	      echo Failed to generate ChangeLog, your ChangeLog may be outdated >&2; \
@@ -71,7 +71,7 @@ dist-clear-sticky-bits:
 	chmod -R a-s $(distdir)
 
 
-tar_file = $(PACKAGE_TARNAME)-$(VERSION).tar.bz2
+tar_file = $(PACKAGE_TARNAME)-$(VERSION).tar.xz
 sha256_file = $(tar_file).sha256
 gpg_file = $(sha256_file).asc
 $(sha256_file): $(tar_file)

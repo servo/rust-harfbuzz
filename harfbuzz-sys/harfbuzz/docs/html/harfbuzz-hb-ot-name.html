@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-ot-name: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch10.html" title="OpenType API">
+<link rel="up" href="ch11.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
 <link rel="next" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
                   <a href="#harfbuzz-hb-ot-name.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch10.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch11.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-ot-math.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-ot-shape.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -120,7 +120,7 @@ used as long as <em class="parameter"><code>face</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>num_entries</p></td>
-<td class="parameter_description"><p> number of returned entries. </p></td>
+<td class="parameter_description"><p>number of returned entries. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -128,7 +128,7 @@ used as long as <em class="parameter"><code>face</code></em>
 </div>
 <div class="refsect3">
 <a name="hb-ot-name-list-names.returns"></a><h4>Returns</h4>
-<p> Array of available name entries. </p>
+<p>Array of available name entries. </p>
 <p><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_entries]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-1-0.html#api-index-2.1.0">2.1.0</a></p>
@@ -172,14 +172,14 @@ Returns string in UTF-16 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -230,14 +230,14 @@ Returns string in UTF-32 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -288,14 +288,14 @@ Returns string in UTF-8 encoding.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>text_size</p></td>
-<td class="parameter_description"><p> input size of <em class="parameter"><code>text</code></em>
+<td class="parameter_description"><p>input size of <em class="parameter"><code>text</code></em>
 buffer, and output size of
 text written to buffer. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>text</p></td>
-<td class="parameter_description"><p> buffer to write fetched name into. </p></td>
+<td class="parameter_description"><p>buffer to write fetched name into. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=text_size]</span></td>
 </tr>
 </tbody>
@@ -322,6 +322,6 @@ API.  These can be used to fetch name strings from a font face.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.29</div>
 </body>
 </html>

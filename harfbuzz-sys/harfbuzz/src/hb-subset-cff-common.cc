@@ -43,7 +43,7 @@ using namespace CFF;
  **/
 
 bool
-hb_plan_subset_cff_fdselect (const hb_vector_t<hb_codepoint_t> &glyphs,
+hb_plan_subset_cff_fdselect (const hb_subset_plan_t *plan,
 			    unsigned int fdCount,
 			    const FDSelect &src, /* IN */
 			    unsigned int &subset_fd_count /* OUT */,
@@ -57,7 +57,7 @@ hb_plan_subset_cff_fdselect (const hb_vector_t<hb_codepoint_t> &glyphs,
   subset_fdselect_format = 0;
   unsigned int  num_ranges = 0;
 
-  unsigned int subset_num_glyphs = glyphs.length;
+  unsigned int subset_num_glyphs = plan->num_output_glyphs ();
   if (subset_num_glyphs == 0)
     return true;
 
@@ -69,7 +69,14 @@ hb_plan_subset_cff_fdselect (const hb_vector_t<hb_codepoint_t> &glyphs,
     hb_codepoint_t  prev_fd = CFF_UNDEF_CODE;
     for (hb_codepoint_t i = 0; i < subset_num_glyphs; i++)
     {
-      hb_codepoint_t  fd = src.get_fd (glyphs[i]);
+      hb_codepoint_t	glyph;
+      hb_codepoint_t  	fd;
+      if (!plan->old_gid_for_new_gid (i, &glyph))
+      {
+	/* fonttools retains FDSelect & font dicts for missing glyphs. do the same */
+	glyph = i;
+      }
+      fd = src.get_fd (glyph);
       set->add (fd);
 
       if (fd != prev_fd)
@@ -153,13 +160,13 @@ serialize_fdselect_3_4 (hb_serialize_context_t *c,
   TRACE_SERIALIZE (this);
   FDSELECT3_4 *p = c->allocate_size<FDSELECT3_4> (size);
   if (unlikely (p == nullptr)) return_trace (false);
-  p->nRanges ().set (fdselect_ranges.length);
+  p->nRanges () = fdselect_ranges.length;
   for (unsigned int i = 0; i < fdselect_ranges.length; i++)
   {
-    p->ranges[i].first.set (fdselect_ranges[i].glyph);
-    p->ranges[i].fd.set (fdselect_ranges[i].code);
+    p->ranges[i].first = fdselect_ranges[i].glyph;
+    p->ranges[i].fd = fdselect_ranges[i].code;
   }
-  p->sentinel().set (num_glyphs);
+  p->sentinel() = num_glyphs;
   return_trace (true);
 }
 
@@ -179,7 +186,7 @@ hb_serialize_cff_fdselect (hb_serialize_context_t *c,
   TRACE_SERIALIZE (this);
   FDSelect  *p = c->allocate_min<FDSelect> ();
   if (unlikely (p == nullptr)) return_trace (false);
-  p->format.set (fdselect_format);
+  p->format = fdselect_format;
   size -= FDSelect::min_size;
 
   switch (fdselect_format)
@@ -198,7 +205,7 @@ hb_serialize_cff_fdselect (hb_serialize_context_t *c,
 	{
 	  fd = fdselect_ranges[range_index++].code;
 	}
-	p->fds[i].set (fd);
+	p->fds[i] = fd;
       }
       break;
     }
