@@ -452,7 +452,7 @@ extern "C" {
 #[derive(Debug, Copy, Clone)]
 pub struct hb_variation_t {
     pub tag: hb_tag_t,
-    pub value: ::std::os::raw::c_float,
+    pub value: f32,
 }
 #[test]
 fn bindgen_test_layout_hb_variation_t() {
@@ -2053,10 +2053,10 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: ::std::os::raw::c_float);
+    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: f32);
 }
 extern "C" {
-    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> ::std::os::raw::c_float;
+    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> f32;
 }
 extern "C" {
     pub fn hb_font_set_variations(
@@ -2068,7 +2068,7 @@ extern "C" {
 extern "C" {
     pub fn hb_font_set_var_coords_design(
         font: *mut hb_font_t,
-        coords: *const ::std::os::raw::c_float,
+        coords: *const f32,
         coords_length: ::std::os::raw::c_uint,
     );
 }
@@ -3798,9 +3798,9 @@ pub struct hb_ot_var_axis_info_t {
     pub tag: hb_tag_t,
     pub name_id: hb_ot_name_id_t,
     pub flags: hb_ot_var_axis_flags_t,
-    pub min_value: ::std::os::raw::c_float,
-    pub default_value: ::std::os::raw::c_float,
-    pub max_value: ::std::os::raw::c_float,
+    pub min_value: f32,
+    pub default_value: f32,
+    pub max_value: f32,
     pub reserved: ::std::os::raw::c_uint,
 }
 #[test]
@@ -3935,7 +3935,7 @@ extern "C" {
         face: *mut hb_face_t,
         instance_index: ::std::os::raw::c_uint,
         coords_length: *mut ::std::os::raw::c_uint,
-        coords: *mut ::std::os::raw::c_float,
+        coords: *mut f32,
     ) -> ::std::os::raw::c_uint;
 }
 extern "C" {
@@ -3951,7 +3951,7 @@ extern "C" {
     pub fn hb_ot_var_normalize_coords(
         face: *mut hb_face_t,
         coords_length: ::std::os::raw::c_uint,
-        design_coords: *const ::std::os::raw::c_float,
+        design_coords: *const f32,
         normalized_coords: *mut ::std::os::raw::c_int,
     );
 }
