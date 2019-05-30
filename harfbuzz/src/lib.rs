@@ -11,7 +11,12 @@
 //! and positioning glyphs from a font given a Unicode string.
 
 #![warn(missing_docs)]
-#![deny(trivial_numeric_casts, unstable_features, unused_import_braces, unused_qualifications)]
+#![deny(
+    trivial_numeric_casts,
+    unstable_features,
+    unused_import_braces,
+    unused_qualifications
+)]
 
 pub extern crate harfbuzz_sys as sys;
 

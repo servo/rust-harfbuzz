@@ -4,9 +4,9 @@ extern crate foreign_types;
 
 use {hb_face_t, hb_font_t};
 
+use self::core_graphics::font::CGFont;
 use self::core_text::font::CTFontRef;
 use self::foreign_types::ForeignType;
-use self::core_graphics::font::CGFont;
 
 type CGFontRef = *mut <CGFont as ForeignType>::CType;
 

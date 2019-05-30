@@ -6,8 +6,8 @@ extern crate pkg_config;
 #[cfg(feature = "build-native-harfbuzz")]
 fn main() {
     use std::env;
-    use std::process::Command;
     use std::path::PathBuf;
+    use std::process::Command;
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
     if env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
@@ -30,14 +30,12 @@ fn main() {
             println!("cargo:rustc-link-lib=stdc++");
         }
     } else {
-        assert!(
-            Command::new("make")
-                .env("MAKEFLAGS", env::var("CARGO_MAKEFLAGS").unwrap_or_default())
-                .args(&["-R", "-f", "makefile.cargo"])
-                .status()
-                .unwrap()
-                .success()
-        );
+        assert!(Command::new("make")
+            .env("MAKEFLAGS", env::var("CARGO_MAKEFLAGS").unwrap_or_default())
+            .args(&["-R", "-f", "makefile.cargo"])
+            .status()
+            .unwrap()
+            .success());
 
         println!(
             "cargo:rustc-link-search=native={}",
