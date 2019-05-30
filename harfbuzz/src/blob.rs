@@ -44,7 +44,7 @@ impl<'a> Blob<'a> {
                 data.len() as c_uint,
                 sys::HB_MEMORY_MODE_READONLY,
                 ptr::null_mut(), // user data
-                None, // destroy callback
+                None,            // destroy callback
             ))
         }
     }
@@ -106,7 +106,9 @@ impl<'a> Blob<'a> {
 
     /// Make this blob immutable.
     pub fn make_immutable(&mut self) {
-        unsafe { sys::hb_blob_make_immutable(self.raw); }
+        unsafe {
+            sys::hb_blob_make_immutable(self.raw);
+        }
     }
 
     /// Returns true if the blob is immutable.
@@ -154,6 +156,8 @@ impl<'a> ops::DerefMut for Blob<'a> {
 impl<'a> Drop for Blob<'a> {
     /// Decrement the reference count, and destroy the blob if the reference count is zero.
     fn drop(&mut self) {
-        unsafe { sys::hb_blob_destroy(self.raw); }
+        unsafe {
+            sys::hb_blob_destroy(self.raw);
+        }
     }
 }
