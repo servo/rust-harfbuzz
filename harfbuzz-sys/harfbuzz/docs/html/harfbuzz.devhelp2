@@ -275,18 +275,18 @@
     <keyword type="macro" name="HB_FEATURE_GLOBAL_START" link="harfbuzz-hb-common.html#HB-FEATURE-GLOBAL-START:CAPS" since="2.0.0"/>
     <keyword type="function" name="hb_font_get_glyph_func_t ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-func-t" deprecated=""/>
     <keyword type="function" name="hb_ot_layout_table_find_script ()" link="harfbuzz-hb-deprecated.html#hb-ot-layout-table-find-script"/>
-    <keyword type="function" name="hb_font_funcs_set_glyph_h_kerning_func ()" link="harfbuzz-hb-deprecated.html#hb-font-funcs-set-glyph-h-kerning-func" deprecated="2.0.0" since="0.9.2"/>
+    <keyword type="function" name="hb_font_funcs_set_glyph_h_kerning_func ()" link="harfbuzz-hb-deprecated.html#hb-font-funcs-set-glyph-h-kerning-func" since="0.9.2"/>
     <keyword type="function" name="hb_font_funcs_set_glyph_v_kerning_func ()" link="harfbuzz-hb-deprecated.html#hb-font-funcs-set-glyph-v-kerning-func" deprecated="2.0.0" since="0.9.2"/>
-    <keyword type="function" name="hb_font_get_glyph_h_kerning ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-h-kerning" deprecated="2.0.0" since="0.9.2"/>
-    <keyword type="function" name="hb_font_get_glyph_kerning_for_direction ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-kerning-for-direction" deprecated="2.0.0" since="0.9.2"/>
-    <keyword type="function" name="hb_font_get_glyph_kerning_func_t ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-kerning-func-t" deprecated=""/>
+    <keyword type="function" name="hb_font_get_glyph_h_kerning ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-h-kerning" since="0.9.2"/>
+    <keyword type="function" name="hb_font_get_glyph_kerning_for_direction ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-kerning-for-direction" since="0.9.2"/>
+    <keyword type="function" name="hb_font_get_glyph_kerning_func_t ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-kerning-func-t"/>
     <keyword type="function" name="hb_font_get_glyph_v_kerning ()" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-v-kerning" deprecated="2.0.0" since="0.9.2"/>
     <keyword type="macro" name="HB_BUFFER_FLAGS_DEFAULT" link="harfbuzz-hb-deprecated.html#HB-BUFFER-FLAGS-DEFAULT:CAPS" deprecated=""/>
     <keyword type="macro" name="HB_BUFFER_SERIALIZE_FLAGS_DEFAULT" link="harfbuzz-hb-deprecated.html#HB-BUFFER-SERIALIZE-FLAGS-DEFAULT:CAPS" deprecated=""/>
     <keyword type="macro" name="HB_SCRIPT_CANADIAN_ABORIGINAL" link="harfbuzz-hb-deprecated.html#HB-SCRIPT-CANADIAN-ABORIGINAL:CAPS" deprecated=""/>
     <keyword type="macro" name="HB_OT_VAR_NO_AXIS_INDEX" link="harfbuzz-hb-deprecated.html#HB-OT-VAR-NO-AXIS-INDEX:CAPS" deprecated="2.2.0" since="1.4.2"/>
     <keyword type="macro" name="HB_UNICODE_MAX_DECOMPOSITION_LEN" link="harfbuzz-hb-deprecated.html#HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS" deprecated="2.0.0"/>
-    <keyword type="typedef" name="hb_font_get_glyph_h_kerning_func_t" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-h-kerning-func-t" deprecated=""/>
+    <keyword type="typedef" name="hb_font_get_glyph_h_kerning_func_t" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-h-kerning-func-t"/>
     <keyword type="typedef" name="hb_font_get_glyph_v_kerning_func_t" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-v-kerning-func-t" deprecated=""/>
     <keyword type="function" name="hb_face_count ()" link="harfbuzz-hb-face.html#hb-face-count" since="1.7.7"/>
     <keyword type="function" name="hb_face_create ()" link="harfbuzz-hb-face.html#hb-face-create" since="0.9.2"/>
@@ -925,7 +925,7 @@
     <keyword type="constant" name="HB_OT_MATH_KERN_TOP_LEFT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-KERN-TOP-LEFT:CAPS"/>
     <keyword type="constant" name="HB_OT_MATH_KERN_BOTTOM_RIGHT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-KERN-BOTTOM-RIGHT:CAPS"/>
     <keyword type="constant" name="HB_OT_MATH_KERN_BOTTOM_LEFT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-KERN-BOTTOM-LEFT:CAPS"/>
-    <keyword type="constant" name="HB_MATH_GLYPH_PART_FLAG_EXTENDER" link="harfbuzz-hb-ot-math.html#HB-MATH-GLYPH-PART-FLAG-EXTENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-GLYPH-PART-FLAG-EXTENDER:CAPS"/>
     <keyword type="constant" name="HB_OT_VAR_AXIS_FLAG_HIDDEN" link="harfbuzz-hb-ot-var.html#HB-OT-VAR-AXIS-FLAG-HIDDEN:CAPS"/>
     <keyword type="constant" name="_HB_OT_VAR_AXIS_FLAG_MAX_VALUE" link="harfbuzz-hb-ot-var.html#HB-OT-VAR-AXIS-FLAG-MAX-VALUE:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_TYPE_INVALID" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-INVALID:CAPS"/>

@@ -527,6 +527,9 @@ extern "C" {
     ) -> *mut hb_blob_t;
 }
 extern "C" {
+    pub fn hb_blob_create_from_file(file_name: *const ::std::os::raw::c_char) -> *mut hb_blob_t;
+}
+extern "C" {
     pub fn hb_blob_create_sub_blob(
         parent: *mut hb_blob_t,
         offset: ::std::os::raw::c_uint,
@@ -580,9 +583,6 @@ extern "C" {
         blob: *mut hb_blob_t,
         length: *mut ::std::os::raw::c_uint,
     ) -> *mut ::std::os::raw::c_char;
-}
-extern "C" {
-    pub fn hb_blob_create_from_file(file_name: *const ::std::os::raw::c_char) -> *mut hb_blob_t;
 }
 pub const HB_UNICODE_GENERAL_CATEGORY_CONTROL: hb_unicode_general_category_t = 0;
 pub const HB_UNICODE_GENERAL_CATEGORY_FORMAT: hb_unicode_general_category_t = 1;
@@ -1463,6 +1463,16 @@ pub type hb_font_get_glyph_origin_func_t = ::std::option::Option<
 >;
 pub type hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
 pub type hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
+pub type hb_font_get_glyph_kerning_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        font: *mut hb_font_t,
+        font_data: *mut ::std::os::raw::c_void,
+        first_glyph: hb_codepoint_t,
+        second_glyph: hb_codepoint_t,
+        user_data: *mut ::std::os::raw::c_void,
+    ) -> hb_position_t,
+>;
+pub type hb_font_get_glyph_h_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 pub type hb_font_get_glyph_extents_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         font: *mut hb_font_t,
@@ -1691,6 +1701,23 @@ extern "C" {
     );
 }
 extern "C" {
+    /// hb_font_funcs_set_glyph_h_kerning_func:
+    /// @ffuncs: font functions.
+    /// @func: (closure user_data) (destroy destroy) (scope notified):
+    /// @user_data:
+    /// @destroy:
+    ///
+    ///
+    ///
+    /// Since: 0.9.2
+    pub fn hb_font_funcs_set_glyph_h_kerning_func(
+        ffuncs: *mut hb_font_funcs_t,
+        func: hb_font_get_glyph_h_kerning_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
     /// hb_font_funcs_set_glyph_extents_func:
     /// @ffuncs: font functions.
     /// @func: (closure user_data) (destroy destroy) (scope notified):
@@ -1834,6 +1861,13 @@ extern "C" {
     ) -> hb_bool_t;
 }
 extern "C" {
+    pub fn hb_font_get_glyph_h_kerning(
+        font: *mut hb_font_t,
+        left_glyph: hb_codepoint_t,
+        right_glyph: hb_codepoint_t,
+    ) -> hb_position_t;
+}
+extern "C" {
     pub fn hb_font_get_glyph_extents(
         font: *mut hb_font_t,
         glyph: hb_codepoint_t,
@@ -1922,6 +1956,16 @@ extern "C" {
     pub fn hb_font_subtract_glyph_origin_for_direction(
         font: *mut hb_font_t,
         glyph: hb_codepoint_t,
+        direction: hb_direction_t,
+        x: *mut hb_position_t,
+        y: *mut hb_position_t,
+    );
+}
+extern "C" {
+    pub fn hb_font_get_glyph_kerning_for_direction(
+        font: *mut hb_font_t,
+        first_glyph: hb_codepoint_t,
+        second_glyph: hb_codepoint_t,
         direction: hb_direction_t,
         x: *mut hb_position_t,
         y: *mut hb_position_t,
@@ -2503,9 +2547,9 @@ pub const HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
 /// @HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES takes
 /// precedence over this flag. Since: 1.8.0
 /// @HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE:
-///    flag indicating that a dotted circle should"]
-///    not be inserted in the rendering of incorrect"]
-///    character sequences (such at <0905 093E>). Since: 2.4"]
+///    flag indicating that a dotted circle should
+///    not be inserted in the rendering of incorrect
+///    character sequences (such at <0905 093E>). Since: 2.4
 ///
 /// Since: 0.9.20
 pub type hb_buffer_flags_t = u32;
