@@ -15,6 +15,7 @@ install:
   - ps: $env:PATH="$env:PATH;C:\rust\bin"
 
 build_script:
+  - .\bootstrap-vcpkg.bat
   - 'vcpkg install glib:%triplet% freetype:%triplet% cairo:%triplet%'
   - 'set PATH=%PATH%;C:\Program Files (x86)\MSBuild\14.0\Bin;c:\msys64\mingw64\bin' # msys2 is added just for having "ragel" on PATH
   - 'cd %APPVEYOR_BUILD_FOLDER%\harfbuzz-sys && cargo build --verbose --verbose'
