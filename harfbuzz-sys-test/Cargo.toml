@@ -7,6 +7,7 @@ build = "build.rs"
 
 [dependencies]
 harfbuzz-sys = { path = "../harfbuzz-sys" }
+libc = "0.2"
 
 [build-dependencies]
 pkg-config = "0.3"

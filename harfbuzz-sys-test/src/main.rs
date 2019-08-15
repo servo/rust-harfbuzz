@@ -1,6 +1,7 @@
 #![allow(bad_style, improper_ctypes)]
 
 extern crate harfbuzz_sys;
+extern crate libc;
 
 #[cfg(target_os = "macos")]
 use harfbuzz_sys::coretext::*;
