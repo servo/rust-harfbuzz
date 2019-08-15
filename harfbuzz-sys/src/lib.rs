@@ -3547,6 +3547,51 @@ extern "C" {
         characters: *mut hb_codepoint_t,
     ) -> ::std::os::raw::c_uint;
 }
+pub const HB_OT_LAYOUT_BASELINE_TAG_ROMAN: hb_ot_layout_baseline_tag_t = 1919905134;
+pub const HB_OT_LAYOUT_BASELINE_TAG_HANGING: hb_ot_layout_baseline_tag_t = 1751215719;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_BOTTOM_OR_LEFT: hb_ot_layout_baseline_tag_t =
+    1768121954;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
+    1768121972;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: hb_ot_layout_baseline_tag_t =
+    1768187247;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
+    1768191088;
+pub const HB_OT_LAYOUT_BASELINE_TAG_MATH: hb_ot_layout_baseline_tag_t = 1835103336;
+pub const _HB_OT_LAYOUT_BASELINE_TAG_MAX_VALUE: hb_ot_layout_baseline_tag_t = 2147483647;
+/// hb_ot_layout_baseline_tag_t:
+/// @HB_OT_LAYOUT_BASELINE_TAG_ROMAN: The baseline used by alphabetic scripts such as Latin, Cyrillic and Greek.
+/// In vertical writing mode, the alphabetic baseline for characters rotated 90 degrees clockwise.
+/// (This would not apply to alphabetic characters that remain upright in vertical writing mode, since these
+/// characters are not rotated.)
+/// @HB_OT_LAYOUT_BASELINE_TAG_HANGING: The hanging baseline. In horizontal direction, this is the horizontal
+/// line from which syllables seem, to hang in Tibetan and other similar scripts. In vertical writing mode,
+/// for Tibetan (or some other similar script) characters rotated 90 degrees clockwise.
+/// @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_BOTTOM_OR_LEFT: Ideographic character face bottom or left edge,
+/// if the direction is horizontal or vertical, respectively.
+/// @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: Ideographic character face top or right edge,
+/// if the direction is horizontal or vertical, respectively.
+/// @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: Ideographic em-box bottom or left edge,
+/// if the direction is horizontal or vertical, respectively.
+/// @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: Ideographic em-box top or right edge baseline,
+/// if the direction is horizontal or vertical, respectively.
+/// @HB_OT_LAYOUT_BASELINE_TAG_MATH: The baseline about which mathematical characters are centered.
+/// In vertical writing mode when mathematical characters rotated 90 degrees clockwise, are centered.
+///
+/// Baseline tags from https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags
+///
+/// Since: 2.6.0
+pub type hb_ot_layout_baseline_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_layout_get_baseline(
+        font: *mut hb_font_t,
+        baseline_tag: hb_ot_layout_baseline_tag_t,
+        direction: hb_direction_t,
+        script_tag: hb_tag_t,
+        language_tag: hb_tag_t,
+        coord: *mut hb_position_t,
+    ) -> hb_bool_t;
+}
 pub const HB_OT_MATH_CONSTANT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 0;
 pub const HB_OT_MATH_CONSTANT_SCRIPT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 1;
 pub const HB_OT_MATH_CONSTANT_DELIMITED_SUB_FORMULA_MIN_HEIGHT: hb_ot_math_constant_t = 2;
@@ -3672,7 +3717,7 @@ fn bindgen_test_layout_hb_ot_math_glyph_variant_t() {
         )
     );
 }
-pub const HB_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
+pub const HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
 /// hb_ot_math_glyph_part_flags_t:
 ///
 /// Flags for math glyph parts.
@@ -3682,7 +3727,7 @@ pub type hb_ot_math_glyph_part_flags_t = u32;
 /// hb_ot_math_glyph_part_t:
 /// @glyph: The glyph index of the variant part
 /// @start_connector_length: The length of the connector on the starting side of the variant part
-/// @end_connection_length: The length of the connector on the ending side of the variant part
+/// @end_connector_length: The length of the connector on the ending side of the variant part
 /// @full_advance: The total advance of the part
 /// @flags: `hb_ot_math_glyph_part_flags_t` flags for the part
 ///
@@ -3832,6 +3877,123 @@ extern "C" {
         parts: *mut hb_ot_math_glyph_part_t,
         italics_correction: *mut hb_position_t,
     ) -> ::std::os::raw::c_uint;
+}
+pub const HB_OT_META_TAG_DESIGN_LANGUAGES: hb_ot_meta_tag_t = 1684827751;
+pub const HB_OT_META_TAG_SUPPORTED_LANGUAGES: hb_ot_meta_tag_t = 1936485991;
+pub const _HB_OT_META_TAG_MAX_VALUE: hb_ot_meta_tag_t = 2147483647;
+/// hb_ot_meta_tag_t:
+/// @HB_OT_META_TAG_DESIGN_LANGUAGES: Design languages. Text, using only
+/// Basic Latin (ASCII) characters. Indicates languages and/or scripts
+/// for the user audiences that the font was primarily designed for.
+/// @HB_OT_META_TAG_SUPPORTED_LANGUAGES: Supported languages. Text, using
+/// only Basic Latin (ASCII) characters. Indicates languages and/or scripts
+/// that the font is declared to be capable of supporting.
+///
+/// Known metadata tags from https://docs.microsoft.com/en-us/typography/opentype/spec/meta
+///
+/// Since: 2.6.0
+pub type hb_ot_meta_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_meta_get_entry_tags(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        entries_count: *mut ::std::os::raw::c_uint,
+        entries: *mut hb_ot_meta_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_meta_reference_entry(
+        face: *mut hb_face_t,
+        meta_tag: hb_ot_meta_tag_t,
+    ) -> *mut hb_blob_t;
+}
+pub const HB_OT_METRICS_TAG_HORIZONTAL_ASCENDER: hb_ot_metrics_tag_t = 1751216995;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_DESCENDER: hb_ot_metrics_tag_t = 1751413603;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_LINE_GAP: hb_ot_metrics_tag_t = 1751934832;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_ASCENT: hb_ot_metrics_tag_t = 1751346273;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_DESCENT: hb_ot_metrics_tag_t = 1751346276;
+pub const HB_OT_METRICS_TAG_VERTICAL_ASCENDER: hb_ot_metrics_tag_t = 1986098019;
+pub const HB_OT_METRICS_TAG_VERTICAL_DESCENDER: hb_ot_metrics_tag_t = 1986294627;
+pub const HB_OT_METRICS_TAG_VERTICAL_LINE_GAP: hb_ot_metrics_tag_t = 1986815856;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_RISE: hb_ot_metrics_tag_t = 1751347827;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_RUN: hb_ot_metrics_tag_t = 1751347822;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_OFFSET: hb_ot_metrics_tag_t = 1751347046;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_RISE: hb_ot_metrics_tag_t = 1986228851;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_RUN: hb_ot_metrics_tag_t = 1986228846;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_OFFSET: hb_ot_metrics_tag_t = 1986228070;
+pub const HB_OT_METRICS_TAG_X_HEIGHT: hb_ot_metrics_tag_t = 2020108148;
+pub const HB_OT_METRICS_TAG_CAP_HEIGHT: hb_ot_metrics_tag_t = 1668311156;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_SIZE: hb_ot_metrics_tag_t = 1935833203;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_SIZE: hb_ot_metrics_tag_t = 1935833459;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_OFFSET: hb_ot_metrics_tag_t = 1935833199;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_OFFSET: hb_ot_metrics_tag_t = 1935833455;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_SIZE: hb_ot_metrics_tag_t = 1936750707;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_SIZE: hb_ot_metrics_tag_t = 1936750963;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_OFFSET: hb_ot_metrics_tag_t = 1936750703;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_OFFSET: hb_ot_metrics_tag_t = 1936750959;
+pub const HB_OT_METRICS_TAG_STRIKEOUT_SIZE: hb_ot_metrics_tag_t = 1937011315;
+pub const HB_OT_METRICS_TAG_STRIKEOUT_OFFSET: hb_ot_metrics_tag_t = 1937011311;
+pub const HB_OT_METRICS_TAG_UNDERLINE_SIZE: hb_ot_metrics_tag_t = 1970168947;
+pub const HB_OT_METRICS_TAG_UNDERLINE_OFFSET: hb_ot_metrics_tag_t = 1970168943;
+pub const _HB_OT_METRICS_TAG_MAX_VALUE: hb_ot_metrics_tag_t = 2147483647;
+/// hb_ot_metrics_tag_t:
+/// @HB_OT_METRICS_TAG_HORIZONTAL_ASCENDER: horizontal ascender.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_DESCENDER: horizontal descender.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_LINE_GAP: horizontal line gap.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_ASCENT: horizontal clipping ascent.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_DESCENT: horizontal clipping descent.
+/// @HB_OT_METRICS_TAG_VERTICAL_ASCENDER: vertical ascender.
+/// @HB_OT_METRICS_TAG_VERTICAL_DESCENDER: vertical descender.
+/// @HB_OT_METRICS_TAG_VERTICAL_LINE_GAP: vertical line gap.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_CARET_RISE: horizontal caret rise.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_CARET_RUN: horizontal caret run.
+/// @HB_OT_METRICS_TAG_HORIZONTAL_CARET_OFFSET: horizontal caret offset.
+/// @HB_OT_METRICS_TAG_VERTICAL_CARET_RISE: vertical caret rise.
+/// @HB_OT_METRICS_TAG_VERTICAL_CARET_RUN: vertical caret run.
+/// @HB_OT_METRICS_TAG_VERTICAL_CARET_OFFSET: vertical caret offset.
+/// @HB_OT_METRICS_TAG_X_HEIGHT: x height.
+/// @HB_OT_METRICS_TAG_CAP_HEIGHT: cap height.
+/// @HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_SIZE: subscript em x size.
+/// @HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_SIZE: subscript em y size.
+/// @HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_OFFSET: subscript em x offset.
+/// @HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_OFFSET: subscript em y offset.
+/// @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_SIZE: superscript em x size.
+/// @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_SIZE: superscript em y size.
+/// @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_OFFSET: superscript em x offset.
+/// @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_OFFSET: superscript em y offset.
+/// @HB_OT_METRICS_TAG_STRIKEOUT_SIZE: strikeout size.
+/// @HB_OT_METRICS_TAG_STRIKEOUT_OFFSET: strikeout offset.
+/// @HB_OT_METRICS_TAG_UNDERLINE_SIZE: underline size.
+/// @HB_OT_METRICS_TAG_UNDERLINE_OFFSET: underline offset.
+///
+/// From https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags
+///
+/// Since: 2.6.0
+pub type hb_ot_metrics_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_metrics_get_position(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+        position: *mut hb_position_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> ::std::os::raw::c_float;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_x_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_y_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> hb_position_t;
 }
 extern "C" {
     pub fn hb_ot_shape_glyphs_closure(

@@ -40,7 +40,11 @@ Finally, if you are making a static library build or otherwise linking the
 library into your app, make sure your linker removes unused functions.  This
 can be tricky and differ from environment to environment, but you definitely
 want to make sure this happens.  Otherwise, every unused public function will
-be adding unneeded bytes to your binary.
+be adding unneeded bytes to your binary.  The following pointers might come
+handy:
+
+ * https://lwn.net/Articles/741494/ (all of the four-part series)
+ * https://elinux.org/images/2/2d/ELC2010-gc-sections_Denys_Vlasenko.pdf
 
 Combining the above three build options should already shrink your library a lot.
 The rest of this file shows you ways to shrink the library even further at the
@@ -86,6 +90,20 @@ In that case, or if you otherwise provide those functions by calling
 without loss of functionality by defining `HB_NO_OT_FONT`.
 
 
+## Shapers
+
+Most HarfBuzz clients use it for the main shaper, called "ot".  However, it
+is legitimate to want to compile HarfBuzz with only another backend, eg.
+CoreText, for example for an iOS app.  For that, you want `HB_NO_OT_SHAPE`.
+If you are going down that route, check if you want `HB_NO_OT`.
+
+This is very rarely what you need.  Make sure you understand exactly what you
+are doing.
+
+Defining `HB_NO_FALLBACK_SHAPE` however is pretty harmless.  That removes the
+(unused) "fallback" shaper.
+
+
 ## Thread-safety
 
 By default HarfBuzz builds as a thread-safe library.  The exception is that
@@ -109,7 +127,8 @@ The pre-defined configurations are:
     as esoteric or rarely-used shaping features.  See the definition for details.
 
   * `HB_TINY`: Enables both `HB_MINI` and `HB_LEAN` configurations, as well as
-    disabling thread-safety and debugging, and use size-optimized data tables.
+    disabling thread-safety and debugging, and use even more size-optimized data
+    tables.
 
 
 ## Tailoring configuration
