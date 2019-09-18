@@ -58,6 +58,9 @@ matrix:
       # of harfbuzz.
       osx_image: xcode10.2
       rust: stable
+      # Use the embedded harfbuzz for ctest.
+      env:
+        - DEP_HARFBUZZ_INCLUDE=${TRAVIS_BUILD_DIR}/harfbuzz-sys/harfbuzz/src
       addons:
         homebrew:
           packages:
