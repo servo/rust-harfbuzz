@@ -52,17 +52,6 @@ matrix:
         # need to do it for every environment.
         - cargo package --manifest-path=harfbuzz-sys/Cargo.toml
 
-    - name: stable, macOS, shared library
-      os: osx
-      # Use this image to get harfbuzz > 2. Older images have an older version
-      # of harfbuzz.
-      osx_image: xcode10.2
-      rust: stable
-      addons:
-        homebrew:
-          packages:
-            - harfbuzz
-
     - name: stable, macOS, static linking
       os: osx
       rust: stable
