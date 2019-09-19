@@ -5,7 +5,7 @@
 <title>hb-set: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch10.html" title="Core API">
+<link rel="up" href="ch11.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-map.html" title="hb-map">
 <link rel="next" href="harfbuzz-hb-shape-plan.html" title="hb-shape-plan">
 <meta name="generator" content="GTK-Doc V1.29 (XML mode)">
@@ -19,7 +19,7 @@
                   <a href="#harfbuzz-hb-set.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch10.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch11.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-map.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-shape-plan.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -829,7 +829,7 @@ are greater than current value of <em class="parameter"><code>last</code></em>
 hb_set_previous (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *set</code></em>,
                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *codepoint</code></em>);</pre>
 <p>Gets the previous number in <em class="parameter"><code>set</code></em>
- that is slower than current value of <em class="parameter"><code>codepoint</code></em>
+ that is lower than current value of <em class="parameter"><code>codepoint</code></em>
 .</p>
 <p>Set <em class="parameter"><code>codepoint</code></em>
  to <a class="link" href="harfbuzz-hb-set.html#HB-SET-VALUE-INVALID:CAPS" title="HB_SET_VALUE_INVALID"><code class="literal">HB_SET_VALUE_INVALID</code></a> to get started.</p>
@@ -870,7 +870,7 @@ hb_set_previous_range (<em class="parameter"><code>const <a class="link" href="h
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *last</code></em>);</pre>
 <p>Gets the previous consecutive range of numbers in <em class="parameter"><code>set</code></em>
  that
-are greater than current value of <em class="parameter"><code>last</code></em>
+are less than current value of <em class="parameter"><code>first</code></em>
 .</p>
 <p>Set <em class="parameter"><code>first</code></em>
  to <a class="link" href="harfbuzz-hb-set.html#HB-SET-VALUE-INVALID:CAPS" title="HB_SET_VALUE_INVALID"><code class="literal">HB_SET_VALUE_INVALID</code></a> to get started.</p>

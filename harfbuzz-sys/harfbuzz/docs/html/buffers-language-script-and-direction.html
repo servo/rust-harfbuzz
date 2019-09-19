@@ -26,14 +26,21 @@
 <dt><span class="section"><a href="buffers-language-script-and-direction.html#creating-and-destroying-buffers">Creating and destroying buffers</a></span></dt>
 <dt><span class="section"><a href="adding-text-to-the-buffer.html">Adding text to the buffer</a></span></dt>
 <dt><span class="section"><a href="setting-buffer-properties.html">Setting buffer properties</a></span></dt>
-<dt><span class="section"><a href="what-about-the-other-scripts.html">What about the other scripts?</a></span></dt>
 <dt><span class="section"><a href="customizing-unicode-functions.html">Customizing Unicode functions</a></span></dt>
 </dl></div>
 <p>
-    The input to HarfBuzz is a series of Unicode characters, stored in a
+    The input to the HarfBuzz shaper is a series of Unicode characters, stored in a
     buffer. In this chapter, we'll look at how to set up a buffer with
-    the text that we want and then customize the properties of the
-    buffer.
+    the text that we want and how to customize the properties of the
+    buffer. We'll also look at a piece of lower-level machinery that
+    you will need to understand before proceeding: the functions that
+    HarfBuzz uses to retrieve Unicode information.
+  </p>
+<p>
+    After shaping is complete, HarfBuzz puts its output back
+    into the buffer. But getting that output requires setting up a
+    face and a font first, so we will look at that in the next chapter
+    instead of here.
   </p>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -41,20 +48,20 @@
 <p>
       As we saw in our <span class="emphasis"><em>Getting Started</em></span> example, a
       buffer is created and 
-      initialized with <code class="literal">hb_buffer_create()</code>. This
+      initialized with <code class="function">hb_buffer_create()</code>. This
       produces a new, empty buffer object, instantiated with some
       default values and ready to accept your Unicode strings.
     </p>
 <p>
       HarfBuzz manages the memory of objects (such as buffers) that it
       creates, so you don't have to. When you have finished working on 
-      a buffer, you can call <code class="literal">hb_buffer_destroy()</code>:
+      a buffer, you can call <code class="function">hb_buffer_destroy()</code>:
     </p>
 <pre class="programlisting">
-  hb_buffer_t *buffer = hb_buffer_create();
-  ...
-  hb_buffer_destroy(buffer);
-</pre>
+      hb_buffer_t *buf = hb_buffer_create();
+      ...
+      hb_buffer_destroy(buf);
+    </pre>
 <p>
       This will destroy the object and free its associated memory -
       unless some other part of the program holds a reference to this
@@ -63,22 +70,27 @@
       else destroying it, you should increase its reference count:
     </p>
 <pre class="programlisting">
-void somefunc(hb_buffer_t *buffer) {
-  buffer = hb_buffer_reference(buffer);
-  ...
-</pre>
+      void somefunc(hb_buffer_t *buf) {
+      buf = hb_buffer_reference(buf);
+      ...
+    </pre>
 <p>
       And then decrease it once you're done with it:
     </p>
 <pre class="programlisting">
-  hb_buffer_destroy(buffer);
-}
-</pre>
+      hb_buffer_destroy(buf);
+      }
+    </pre>
+<p>
+      While we are on the subject of reference-counting buffers, it is
+      worth noting that an individual buffer can only meaningfully be
+      used by one thread at a time.
+    </p>
 <p>
       To throw away all the data in your buffer and start from scratch,
-      call <code class="literal">hb_buffer_reset(buffer)</code>. If you want to
+      call <code class="function">hb_buffer_reset(buf)</code>. If you want to
       throw away the string in the buffer but keep the options, you can
-      instead call <code class="literal">hb_buffer_clear_contents(buffer)</code>.
+      instead call <code class="function">hb_buffer_clear_contents(buf)</code>.
     </p>
 </div>
 </div>
