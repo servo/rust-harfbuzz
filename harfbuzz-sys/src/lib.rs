@@ -507,6 +507,18 @@ extern "C" {
 ///
 /// Since: 2.1.0
 pub type hb_color_t = u32;
+extern "C" {
+    pub fn hb_color_get_alpha(color: hb_color_t) -> u8;
+}
+extern "C" {
+    pub fn hb_color_get_red(color: hb_color_t) -> u8;
+}
+extern "C" {
+    pub fn hb_color_get_green(color: hb_color_t) -> u8;
+}
+extern "C" {
+    pub fn hb_color_get_blue(color: hb_color_t) -> u8;
+}
 pub const HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
 pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
 pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
