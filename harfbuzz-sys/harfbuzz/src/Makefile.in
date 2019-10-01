@@ -194,7 +194,7 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(pkgincludedir)" "$(DESTDIR)$(pkgincludedir)"
 am__EXEEXT_1 =
 am__EXEEXT_2 = test-algs$(EXEEXT) test-iter$(EXEEXT) \
-	test-meta$(EXEEXT) test-ot-tag$(EXEEXT) \
+	test-meta$(EXEEXT) test-number$(EXEEXT) test-ot-tag$(EXEEXT) \
 	test-unicode-ranges$(EXEEXT) test-bimap$(EXEEXT)
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@am__EXEEXT_3 = test-ot-color$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
@@ -260,7 +260,8 @@ libharfbuzz_icu_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 @HAVE_ICU_BUILTIN_FALSE@@HAVE_ICU_TRUE@	-rpath $(libdir)
 libharfbuzz_subset_la_DEPENDENCIES = libharfbuzz.la
 am__objects_5 =
-am__objects_6 = libharfbuzz_subset_la-hb-ot-cff1-table.lo \
+am__objects_6 = libharfbuzz_subset_la-hb-number.lo \
+	libharfbuzz_subset_la-hb-ot-cff1-table.lo \
 	libharfbuzz_subset_la-hb-ot-cff2-table.lo \
 	libharfbuzz_subset_la-hb-static.lo \
 	libharfbuzz_subset_la-hb-subset-cff-common.lo \
@@ -307,27 +308,28 @@ am__libharfbuzz_la_SOURCES_DIST = hb-aat-fdsc-table.hh \
 	hb-config.hh hb-debug.hh hb-dispatch.hh hb-face.cc hb-face.hh \
 	hb-fallback-shape.cc hb-font.cc hb-font.hh hb-iter.hh \
 	hb-kern.hh hb-machinery.hh hb-map.cc hb-map.hh hb-bimap.hh \
-	hb-meta.hh hb-mutex.hh hb-null.hh hb-object.hh hb-open-file.hh \
-	hb-open-type.hh hb-ot-cff-common.hh hb-ot-cff1-table.cc \
-	hb-ot-cff1-table.hh hb-ot-cff2-table.cc hb-ot-cff2-table.hh \
-	hb-ot-cmap-table.hh hb-ot-color-cbdt-table.hh \
-	hb-ot-color-colr-table.hh hb-ot-color-cpal-table.hh \
-	hb-ot-color-sbix-table.hh hb-ot-color-svg-table.hh \
-	hb-ot-color.cc hb-ot-face.cc hb-ot-face.hh \
-	hb-ot-face-table-list.hh hb-ot-font.cc hb-ot-gasp-table.hh \
-	hb-ot-glyf-table.hh hb-ot-hdmx-table.hh hb-ot-head-table.hh \
-	hb-ot-hhea-table.hh hb-ot-hmtx-table.hh hb-ot-kern-table.hh \
-	hb-ot-layout-base-table.hh hb-ot-layout-common.hh \
-	hb-ot-layout-gdef-table.hh hb-ot-layout-gpos-table.hh \
-	hb-ot-layout-gsub-table.hh hb-ot-layout-gsubgpos.hh \
-	hb-ot-layout-jstf-table.hh hb-ot-layout.cc hb-ot-layout.hh \
-	hb-ot-map.cc hb-ot-map.hh hb-ot-math-table.hh hb-ot-math.cc \
-	hb-ot-maxp-table.hh hb-ot-meta-table.hh hb-ot-meta.cc \
-	hb-ot-metrics.cc hb-ot-metrics.hh \
-	hb-ot-name-language-static.hh hb-ot-name-language.hh \
-	hb-ot-name-table.hh hb-ot-name.cc hb-ot-os2-table.hh \
-	hb-ot-os2-unicode-ranges.hh hb-ot-post-macroman.hh \
-	hb-ot-post-table.hh hb-ot-shape-complex-arabic-fallback.hh \
+	hb-meta.hh hb-mutex.hh hb-null.hh hb-number.cc hb-number.hh \
+	hb-object.hh hb-open-file.hh hb-open-type.hh \
+	hb-ot-cff-common.hh hb-ot-cff1-table.cc hb-ot-cff1-table.hh \
+	hb-ot-cff2-table.cc hb-ot-cff2-table.hh hb-ot-cmap-table.hh \
+	hb-ot-color-cbdt-table.hh hb-ot-color-colr-table.hh \
+	hb-ot-color-cpal-table.hh hb-ot-color-sbix-table.hh \
+	hb-ot-color-svg-table.hh hb-ot-color.cc hb-ot-face.cc \
+	hb-ot-face.hh hb-ot-face-table-list.hh hb-ot-font.cc \
+	hb-ot-gasp-table.hh hb-ot-glyf-table.hh hb-ot-hdmx-table.hh \
+	hb-ot-head-table.hh hb-ot-hhea-table.hh hb-ot-hmtx-table.hh \
+	hb-ot-kern-table.hh hb-ot-layout-base-table.hh \
+	hb-ot-layout-common.hh hb-ot-layout-gdef-table.hh \
+	hb-ot-layout-gpos-table.hh hb-ot-layout-gsub-table.hh \
+	hb-ot-layout-gsubgpos.hh hb-ot-layout-jstf-table.hh \
+	hb-ot-layout.cc hb-ot-layout.hh hb-ot-map.cc hb-ot-map.hh \
+	hb-ot-math-table.hh hb-ot-math.cc hb-ot-maxp-table.hh \
+	hb-ot-meta-table.hh hb-ot-meta.cc hb-ot-metrics.cc \
+	hb-ot-metrics.hh hb-ot-name-language-static.hh \
+	hb-ot-name-language.hh hb-ot-name-table.hh hb-ot-name.cc \
+	hb-ot-os2-table.hh hb-ot-os2-unicode-ranges.hh \
+	hb-ot-post-macroman.hh hb-ot-post-table.hh \
+	hb-ot-shape-complex-arabic-fallback.hh \
 	hb-ot-shape-complex-arabic-table.hh \
 	hb-ot-shape-complex-arabic-win1256.hh \
 	hb-ot-shape-complex-arabic.cc hb-ot-shape-complex-arabic.hh \
@@ -355,7 +357,7 @@ am__libharfbuzz_la_SOURCES_DIST = hb-aat-fdsc-table.hh \
 	hb-unicode-emoji-table.hh hb-unicode.cc hb-unicode.hh \
 	hb-utf.hh hb-vector.hh hb-warning.cc hb.hh \
 	hb-buffer-deserialize-json.hh hb-buffer-deserialize-text.hh \
-	hb-ot-shape-complex-indic-machine.hh \
+	hb-number-parser.hh hb-ot-shape-complex-indic-machine.hh \
 	hb-ot-shape-complex-khmer-machine.hh \
 	hb-ot-shape-complex-myanmar-machine.hh \
 	hb-ot-shape-complex-use-machine.hh hb-glib.cc hb-ft.cc \
@@ -374,7 +376,7 @@ am__objects_7 = libharfbuzz_la-hb-aat-layout.lo \
 	libharfbuzz_la-hb-buffer.lo libharfbuzz_la-hb-common.lo \
 	libharfbuzz_la-hb-face.lo libharfbuzz_la-hb-fallback-shape.lo \
 	libharfbuzz_la-hb-font.lo libharfbuzz_la-hb-map.lo \
-	libharfbuzz_la-hb-ot-cff1-table.lo \
+	libharfbuzz_la-hb-number.lo libharfbuzz_la-hb-ot-cff1-table.lo \
 	libharfbuzz_la-hb-ot-cff2-table.lo \
 	libharfbuzz_la-hb-ot-color.lo libharfbuzz_la-hb-ot-face.lo \
 	libharfbuzz_la-hb-ot-font.lo libharfbuzz_la-hb-ot-layout.lo \
@@ -495,6 +497,10 @@ am_test_meta_OBJECTS = test_meta-test-meta.$(OBJEXT) \
 	test_meta-hb-static.$(OBJEXT)
 test_meta_OBJECTS = $(am_test_meta_OBJECTS)
 test_meta_DEPENDENCIES = $(am__DEPENDENCIES_13)
+am_test_number_OBJECTS = test_number-test-number.$(OBJEXT) \
+	test_number-hb-number.$(OBJEXT)
+test_number_OBJECTS = $(am_test_number_OBJECTS)
+test_number_DEPENDENCIES = $(am__DEPENDENCIES_13)
 am__test_ot_color_SOURCES_DIST = test-ot-color.cc
 @HAVE_CAIRO_FT_TRUE@@HAVE_FREETYPE_TRUE@am_test_ot_color_OBJECTS = test_ot_color-test-ot-color.$(OBJEXT)
 test_ot_color_OBJECTS = $(am_test_ot_color_OBJECTS)
@@ -563,6 +569,7 @@ am__depfiles_remade = ./$(DEPDIR)/dump_indic_data-dump-indic-data.Po \
 	./$(DEPDIR)/libharfbuzz_la-hb-graphite2.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-icu.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-map.Plo \
+	./$(DEPDIR)/libharfbuzz_la-hb-number.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-ot-cff1-table.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-ot-cff2-table.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-ot-color.Plo \
@@ -600,6 +607,7 @@ am__depfiles_remade = ./$(DEPDIR)/dump_indic_data-dump-indic-data.Po \
 	./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo \
+	./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-static.Plo \
@@ -621,6 +629,8 @@ am__depfiles_remade = ./$(DEPDIR)/dump_indic_data-dump-indic-data.Po \
 	./$(DEPDIR)/test_iter-test-iter.Po \
 	./$(DEPDIR)/test_meta-hb-static.Po \
 	./$(DEPDIR)/test_meta-test-meta.Po \
+	./$(DEPDIR)/test_number-hb-number.Po \
+	./$(DEPDIR)/test_number-test-number.Po \
 	./$(DEPDIR)/test_ot_color-test-ot-color.Po \
 	./$(DEPDIR)/test_ot_meta-test-ot-meta.Po \
 	./$(DEPDIR)/test_ot_name-test-ot-name.Po \
@@ -673,9 +683,10 @@ SOURCES = $(libharfbuzz_gobject_la_SOURCES) \
 	$(test_buffer_serialize_SOURCES) \
 	$(test_gpos_size_params_SOURCES) \
 	$(test_gsub_would_substitute_SOURCES) $(test_iter_SOURCES) \
-	$(test_meta_SOURCES) $(test_ot_color_SOURCES) \
-	$(test_ot_meta_SOURCES) $(test_ot_name_SOURCES) \
-	$(test_ot_tag_SOURCES) $(test_unicode_ranges_SOURCES)
+	$(test_meta_SOURCES) $(test_number_SOURCES) \
+	$(test_ot_color_SOURCES) $(test_ot_meta_SOURCES) \
+	$(test_ot_name_SOURCES) $(test_ot_tag_SOURCES) \
+	$(test_unicode_ranges_SOURCES)
 DIST_SOURCES = $(am__libharfbuzz_gobject_la_SOURCES_DIST) \
 	$(am__libharfbuzz_icu_la_SOURCES_DIST) \
 	$(libharfbuzz_subset_la_SOURCES) \
@@ -686,9 +697,10 @@ DIST_SOURCES = $(am__libharfbuzz_gobject_la_SOURCES_DIST) \
 	$(test_buffer_serialize_SOURCES) \
 	$(test_gpos_size_params_SOURCES) \
 	$(test_gsub_would_substitute_SOURCES) $(test_iter_SOURCES) \
-	$(test_meta_SOURCES) $(am__test_ot_color_SOURCES_DIST) \
-	$(test_ot_meta_SOURCES) $(test_ot_name_SOURCES) \
-	$(test_ot_tag_SOURCES) $(test_unicode_ranges_SOURCES)
+	$(test_meta_SOURCES) $(test_number_SOURCES) \
+	$(am__test_ot_color_SOURCES_DIST) $(test_ot_meta_SOURCES) \
+	$(test_ot_name_SOURCES) $(test_ot_tag_SOURCES) \
+	$(test_unicode_ranges_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -1204,6 +1216,8 @@ HB_BASE_sources = \
 	hb-meta.hh \
 	hb-mutex.hh \
 	hb-null.hh \
+	hb-number.cc \
+	hb-number.hh \
 	hb-object.hh \
 	hb-open-file.hh \
 	hb-open-type.hh \
@@ -1322,6 +1336,7 @@ HB_BASE_sources = \
 HB_BASE_RAGEL_GENERATED_sources = \
 	hb-buffer-deserialize-json.hh \
 	hb-buffer-deserialize-text.hh \
+	hb-number-parser.hh \
 	hb-ot-shape-complex-indic-machine.hh \
 	hb-ot-shape-complex-khmer-machine.hh \
 	hb-ot-shape-complex-myanmar-machine.hh \
@@ -1331,6 +1346,7 @@ HB_BASE_RAGEL_GENERATED_sources = \
 HB_BASE_RAGEL_sources = \
 	hb-buffer-deserialize-json.rl \
 	hb-buffer-deserialize-text.rl \
+	hb-number-parser.rl \
 	hb-ot-shape-complex-indic-machine.rl \
 	hb-ot-shape-complex-khmer-machine.rl \
 	hb-ot-shape-complex-myanmar-machine.rl \
@@ -1391,6 +1407,8 @@ HB_ICU_headers = hb-icu.h
 
 # Sources for libharfbuzz-subset
 HB_SUBSET_sources = \
+	hb-number.cc \
+	hb-number.hh \
 	hb-ot-cff1-table.cc \
 	hb-ot-cff2-table.cc \
 	hb-static.cc \
@@ -1541,7 +1559,7 @@ dump_myanmar_data_LDADD = libharfbuzz.la $(HBLIBS)
 dump_use_data_SOURCES = dump-use-data.cc hb-ot-shape-complex-use-table.cc
 dump_use_data_CPPFLAGS = $(HBCFLAGS)
 dump_use_data_LDADD = libharfbuzz.la $(HBLIBS)
-COMPILED_TESTS = test-algs test-iter test-meta test-ot-tag test-unicode-ranges test-bimap
+COMPILED_TESTS = test-algs test-iter test-meta test-number test-ot-tag test-unicode-ranges test-bimap
 COMPILED_TESTS_CPPFLAGS = $(HBCFLAGS) -DMAIN -UNDEBUG
 COMPILED_TESTS_LDADD = libharfbuzz.la $(HBLIBS)
 test_algs_SOURCES = test-algs.cc hb-static.cc
@@ -1553,6 +1571,9 @@ test_iter_LDADD = $(COMPILED_TESTS_LDADD)
 test_meta_SOURCES = test-meta.cc hb-static.cc
 test_meta_CPPFLAGS = $(COMPILED_TESTS_CPPFLAGS)
 test_meta_LDADD = $(COMPILED_TESTS_LDADD)
+test_number_SOURCES = test-number.cc hb-number.cc
+test_number_CPPFLAGS = $(COMPILED_TESTS_CPPFLAGS)
+test_number_LDADD = $(COMPILED_TESTS_LDADD)
 test_ot_tag_SOURCES = hb-ot-tag.cc
 test_ot_tag_CPPFLAGS = $(COMPILED_TESTS_CPPFLAGS)
 test_ot_tag_LDADD = $(COMPILED_TESTS_LDADD)
@@ -1825,6 +1846,10 @@ test-meta$(EXEEXT): $(test_meta_OBJECTS) $(test_meta_DEPENDENCIES) $(EXTRA_test_
 	@rm -f test-meta$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(test_meta_OBJECTS) $(test_meta_LDADD) $(LIBS)
 
+test-number$(EXEEXT): $(test_number_OBJECTS) $(test_number_DEPENDENCIES) $(EXTRA_test_number_DEPENDENCIES) 
+	@rm -f test-number$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(test_number_OBJECTS) $(test_number_LDADD) $(LIBS)
+
 test-ot-color$(EXEEXT): $(test_ot_color_OBJECTS) $(test_ot_color_DEPENDENCIES) $(EXTRA_test_ot_color_DEPENDENCIES) 
 	@rm -f test-ot-color$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(test_ot_color_OBJECTS) $(test_ot_color_LDADD) $(LIBS)
@@ -1879,6 +1904,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-graphite2.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-icu.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-map.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-number.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-ot-cff1-table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-ot-cff2-table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-ot-color.Plo@am__quote@ # am--include-marker
@@ -1916,6 +1942,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-static.Plo@am__quote@ # am--include-marker
@@ -1938,6 +1965,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_iter-test-iter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_meta-hb-static.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_meta-test-meta.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_number-hb-number.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_number-test-number.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_ot_color-test-ot-color.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_ot_meta-test-ot-meta.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_ot_name-test-ot-name.Po@am__quote@ # am--include-marker
@@ -1991,6 +2020,13 @@ libharfbuzz_icu_la-hb-icu.lo: hb-icu.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-icu.cc' object='libharfbuzz_icu_la-hb-icu.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_icu_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_icu_la-hb-icu.lo `test -f 'hb-icu.cc' || echo '$(srcdir)/'`hb-icu.cc
+
+libharfbuzz_subset_la-hb-number.lo: hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_subset_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_subset_la-hb-number.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_subset_la-hb-number.Tpo -c -o libharfbuzz_subset_la-hb-number.lo `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libharfbuzz_subset_la-hb-number.Tpo $(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-number.cc' object='libharfbuzz_subset_la-hb-number.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_subset_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_subset_la-hb-number.lo `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
 
 libharfbuzz_subset_la-hb-ot-cff1-table.lo: hb-ot-cff1-table.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_subset_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_subset_la-hb-ot-cff1-table.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Tpo -c -o libharfbuzz_subset_la-hb-ot-cff1-table.lo `test -f 'hb-ot-cff1-table.cc' || echo '$(srcdir)/'`hb-ot-cff1-table.cc
@@ -2124,6 +2160,13 @@ libharfbuzz_la-hb-map.lo: hb-map.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-map.cc' object='libharfbuzz_la-hb-map.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_la-hb-map.lo `test -f 'hb-map.cc' || echo '$(srcdir)/'`hb-map.cc
+
+libharfbuzz_la-hb-number.lo: hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_la-hb-number.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_la-hb-number.Tpo -c -o libharfbuzz_la-hb-number.lo `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libharfbuzz_la-hb-number.Tpo $(DEPDIR)/libharfbuzz_la-hb-number.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-number.cc' object='libharfbuzz_la-hb-number.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_la-hb-number.lo `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
 
 libharfbuzz_la-hb-ot-cff1-table.lo: hb-ot-cff1-table.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_la-hb-ot-cff1-table.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_la-hb-ot-cff1-table.Tpo -c -o libharfbuzz_la-hb-ot-cff1-table.lo `test -f 'hb-ot-cff1-table.cc' || echo '$(srcdir)/'`hb-ot-cff1-table.cc
@@ -2727,6 +2770,34 @@ test_meta-hb-static.obj: hb-static.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_meta_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test_meta-hb-static.obj `if test -f 'hb-static.cc'; then $(CYGPATH_W) 'hb-static.cc'; else $(CYGPATH_W) '$(srcdir)/hb-static.cc'; fi`
 
+test_number-test-number.o: test-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test_number-test-number.o -MD -MP -MF $(DEPDIR)/test_number-test-number.Tpo -c -o test_number-test-number.o `test -f 'test-number.cc' || echo '$(srcdir)/'`test-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_number-test-number.Tpo $(DEPDIR)/test_number-test-number.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test-number.cc' object='test_number-test-number.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test_number-test-number.o `test -f 'test-number.cc' || echo '$(srcdir)/'`test-number.cc
+
+test_number-test-number.obj: test-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test_number-test-number.obj -MD -MP -MF $(DEPDIR)/test_number-test-number.Tpo -c -o test_number-test-number.obj `if test -f 'test-number.cc'; then $(CYGPATH_W) 'test-number.cc'; else $(CYGPATH_W) '$(srcdir)/test-number.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_number-test-number.Tpo $(DEPDIR)/test_number-test-number.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='test-number.cc' object='test_number-test-number.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test_number-test-number.obj `if test -f 'test-number.cc'; then $(CYGPATH_W) 'test-number.cc'; else $(CYGPATH_W) '$(srcdir)/test-number.cc'; fi`
+
+test_number-hb-number.o: hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test_number-hb-number.o -MD -MP -MF $(DEPDIR)/test_number-hb-number.Tpo -c -o test_number-hb-number.o `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_number-hb-number.Tpo $(DEPDIR)/test_number-hb-number.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-number.cc' object='test_number-hb-number.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test_number-hb-number.o `test -f 'hb-number.cc' || echo '$(srcdir)/'`hb-number.cc
+
+test_number-hb-number.obj: hb-number.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test_number-hb-number.obj -MD -MP -MF $(DEPDIR)/test_number-hb-number.Tpo -c -o test_number-hb-number.obj `if test -f 'hb-number.cc'; then $(CYGPATH_W) 'hb-number.cc'; else $(CYGPATH_W) '$(srcdir)/hb-number.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_number-hb-number.Tpo $(DEPDIR)/test_number-hb-number.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-number.cc' object='test_number-hb-number.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_number_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test_number-hb-number.obj `if test -f 'hb-number.cc'; then $(CYGPATH_W) 'hb-number.cc'; else $(CYGPATH_W) '$(srcdir)/hb-number.cc'; fi`
+
 test_ot_color-test-ot-color.o: test-ot-color.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_ot_color_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test_ot_color-test-ot-color.o -MD -MP -MF $(DEPDIR)/test_ot_color-test-ot-color.Tpo -c -o test_ot_color-test-ot-color.o `test -f 'test-ot-color.cc' || echo '$(srcdir)/'`test-ot-color.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_ot_color-test-ot-color.Tpo $(DEPDIR)/test_ot_color-test-ot-color.Po
@@ -3239,6 +3310,13 @@ test-meta.log: test-meta$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-number.log: test-number$(EXEEXT)
+	@p='test-number$(EXEEXT)'; \
+	b='test-number'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-ot-tag.log: test-ot-tag$(EXEEXT)
 	@p='test-ot-tag$(EXEEXT)'; \
 	b='test-ot-tag'; \
@@ -3420,6 +3498,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-graphite2.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-icu.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-map.Plo
+	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-cff2-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-color.Plo
@@ -3457,6 +3536,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo
+	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-static.Plo
@@ -3479,6 +3559,8 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/test_iter-test-iter.Po
 	-rm -f ./$(DEPDIR)/test_meta-hb-static.Po
 	-rm -f ./$(DEPDIR)/test_meta-test-meta.Po
+	-rm -f ./$(DEPDIR)/test_number-hb-number.Po
+	-rm -f ./$(DEPDIR)/test_number-test-number.Po
 	-rm -f ./$(DEPDIR)/test_ot_color-test-ot-color.Po
 	-rm -f ./$(DEPDIR)/test_ot_meta-test-ot-meta.Po
 	-rm -f ./$(DEPDIR)/test_ot_name-test-ot-name.Po
@@ -3559,6 +3641,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-graphite2.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-icu.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-map.Plo
+	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-cff2-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ot-color.Plo
@@ -3596,6 +3679,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo
+	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-static.Plo
@@ -3618,6 +3702,8 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/test_iter-test-iter.Po
 	-rm -f ./$(DEPDIR)/test_meta-hb-static.Po
 	-rm -f ./$(DEPDIR)/test_meta-test-meta.Po
+	-rm -f ./$(DEPDIR)/test_number-hb-number.Po
+	-rm -f ./$(DEPDIR)/test_number-test-number.Po
 	-rm -f ./$(DEPDIR)/test_ot_color-test-ot-color.Po
 	-rm -f ./$(DEPDIR)/test_ot_meta-test-ot-meta.Po
 	-rm -f ./$(DEPDIR)/test_ot_name-test-ot-name.Po

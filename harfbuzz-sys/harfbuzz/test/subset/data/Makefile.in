@@ -92,7 +92,8 @@ host_triplet = @host@
 TESTS = tests/basics.tests tests/full-font.tests \
 	tests/cff-full-font.tests tests/japanese.tests \
 	tests/cff-japanese.tests tests/layout.tests \
-	tests/layout.gpos.tests $(am__EXEEXT_1)
+	tests/layout.gpos.tests tests/layout.gpos3.tests \
+	tests/cmap14.tests $(am__EXEEXT_1)
 XFAIL_TESTS = $(am__EXEEXT_1)
 subdir = test/subset/data
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -586,7 +587,8 @@ top_srcdir = @top_srcdir@
 NULL = 
 EXTRA_DIST = $(TESTS) expected/basics expected/full-font \
 	expected/cff-full-font expected/japanese expected/cff-japanese \
-	expected/layout expected/layout.gpos fonts profiles $(NULL)
+	expected/layout expected/layout.gpos expected/layout.gpos3 \
+	expected/cmap14 fonts profiles $(NULL)
 CLEANFILES = 
 SUBDIRS = 
 TEST_EXTENSIONS = .tests
