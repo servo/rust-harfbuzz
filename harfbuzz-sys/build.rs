@@ -1,5 +1,5 @@
 #[cfg(feature = "build-native-harfbuzz")]
-extern crate cmake;
+extern crate cc;
 #[cfg(feature = "build-native-harfbuzz")]
 extern crate pkg_config;
 
@@ -7,7 +7,6 @@ extern crate pkg_config;
 fn main() {
     use std::env;
     use std::path::PathBuf;
-    use std::process::Command;
 
     let target = env::var("TARGET").unwrap();
 
@@ -18,47 +17,23 @@ fn main() {
         }
     }
 
-    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    let mut cfg = cc::Build::new();
+    cfg.cpp(true)
+        .flag("-std=c++11")
+        .warnings(false)
+        .file("harfbuzz/src/harfbuzz.cc");
 
-    // On Windows, HarfBuzz configures atomics directly; otherwise,
-    // it needs assistance from configure to do so.  Just use the makefile
-    // build for now elsewhere.
-    if target.contains("windows") || target.contains("wasm32") {
-        let mut cfg = cmake::Config::new("harfbuzz");
-        if target.contains("wasm") {
-            // When building on macOS for wasm32, make sure we aren't picking up
-            // CoreText.
-            cfg.define("HB_HAVE_CORETEXT", "OFF");
-            if target == "wasm32-unknown-unknown" {
-                // Switch to the correct target triple for the underlying toolchain.
-                cfg.target("wasm32-unknown-none");
-            }
-        }
-        let dst = cfg.build();
-        println!("cargo:rustc-link-search=native={}/lib", dst.display());
-        println!("cargo:rustc-link-lib=static=harfbuzz");
-        if target.contains("gnu") {
-            println!("cargo:rustc-link-lib=stdc++");
-        }
-    } else {
-        assert!(Command::new("make")
-            .env("MAKEFLAGS", env::var("CARGO_MAKEFLAGS").unwrap_or_default())
-            .args(&["-R", "-f", "makefile.cargo"])
-            .status()
-            .unwrap()
-            .success());
-
-        println!(
-            "cargo:rustc-link-search=native={}",
-            out_dir.join("lib").display()
-        );
-        println!("cargo:rustc-link-lib=static=harfbuzz");
+    if target.contains("apple") {
+        cfg.define("HAVE_CORETEXT", "1");
     }
 
-    // DEP_HARFBUZZ_INCLUDE has the path of the vendored harfbuzz.
+    cfg.compile("embedded_harfbuzz");
+
+    let out_dir = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
+
     println!(
         "cargo:include={}",
-        out_dir.join("include").join("harfbuzz").display()
+        out_dir.join("harfbuzz").join("src").display()
     );
 }
 
