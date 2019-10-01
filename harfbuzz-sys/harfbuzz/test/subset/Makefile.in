@@ -697,7 +697,8 @@ uninstall-am:
 
 
 # Convenience targets:
-lib:
+lib: libs # Always build subsetter lib in this subdir
+libs:
 	@$(MAKE) $(AM_MAKEFLAGS) -C $(top_builddir)/src libs
 
 -include $(top_srcdir)/git.mk
