@@ -1,13 +1,13 @@
 #![allow(non_camel_case_types)]
 #![allow(clippy::unreadable_literal)]
 
-#[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
+#[cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))]
 extern crate freetype;
 
-#[cfg(target_os = "macos")]
+#[cfg(target_vendor = "apple")]
 pub mod coretext;
 
-#[cfg(any(target_os = "android", all(unix, not(target_os = "macos"))))]
+#[cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))]
 extern "C" {
     pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
 }
