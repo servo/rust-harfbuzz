@@ -91,7 +91,10 @@ hb_shape (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.htm
  turning its Unicode characters content to
 positioned glyphs. If <em class="parameter"><code>features</code></em>
  is not <code class="literal">NULL</code>, it will be used to control the
-features applied during shaping.</p>
+features applied during shaping. If two <em class="parameter"><code>features</code></em>
+ have the same tag but
+overlapping ranges the value of the feature with the higher index takes
+precedence.</p>
 <div class="refsect3">
 <a name="hb-shape.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

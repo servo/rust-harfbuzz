@@ -40,7 +40,8 @@
       Other features are more generic and can apply to several (or
       any) script, and shaping engines are expected to implement
       them. By default, HarfBuzz activates several of these features
-      on every text run. They include <code class="literal">ccmp</code>,
+      on every text run. They include <code class="literal">abvm</code>,
+      <code class="literal">blwm</code>, <code class="literal">ccmp</code>,
       <code class="literal">locl</code>, <code class="literal">mark</code>,
       <code class="literal">mkmk</code>, and <code class="literal">rlig</code>.
     </p>
@@ -48,8 +49,9 @@
       In addition, if the text direction is horizontal, HarfBuzz
       also applies the <code class="literal">calt</code>,
       <code class="literal">clig</code>, <code class="literal">curs</code>,
-      <code class="literal">kern</code>, <code class="literal">liga</code>,
-      <code class="literal">rclt</code>, and <code class="literal">frac</code> features.
+      <code class="literal">dist</code>, <code class="literal">kern</code>,
+      <code class="literal">liga</code>, <code class="literal">rclt</code>,
+      and <code class="literal">frac</code> features.
     </p>
 <p>
       If the text direction is vertical, HarfBuzz applies

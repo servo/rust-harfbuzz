@@ -154,10 +154,11 @@ am__EXEEXT_1 =
 @HAVE_GLIB_TRUE@	test-ot-ligature-carets$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-ot-name$(EXEEXT) test-ot-meta$(EXEEXT) \
 @HAVE_GLIB_TRUE@	test-ot-metrics$(EXEEXT) test-ot-tag$(EXEEXT) \
-@HAVE_GLIB_TRUE@	test-ot-extents-cff$(EXEEXT) $(am__EXEEXT_1) \
-@HAVE_GLIB_TRUE@	$(am__EXEEXT_2) $(am__EXEEXT_3) \
-@HAVE_GLIB_TRUE@	test-c$(EXEEXT) test-cplusplus$(EXEEXT) \
-@HAVE_GLIB_TRUE@	$(am__EXEEXT_1)
+@HAVE_GLIB_TRUE@	test-ot-extents-cff$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-ot-metrics-tt-var$(EXEEXT) \
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_1) $(am__EXEEXT_2) \
+@HAVE_GLIB_TRUE@	$(am__EXEEXT_3) test-c$(EXEEXT) \
+@HAVE_GLIB_TRUE@	test-cplusplus$(EXEEXT) $(am__EXEEXT_1)
 PROGRAMS = $(noinst_PROGRAMS)
 test_aat_layout_SOURCES = test-aat-layout.c
 test_aat_layout_OBJECTS = test-aat-layout.$(OBJEXT)
@@ -282,6 +283,12 @@ test_ot_metrics_LDADD = $(LDADD)
 @HAVE_GLIB_TRUE@test_ot_metrics_DEPENDENCIES =  \
 @HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
 @HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
+test_ot_metrics_tt_var_SOURCES = test-ot-metrics-tt-var.c
+test_ot_metrics_tt_var_OBJECTS = test-ot-metrics-tt-var.$(OBJEXT)
+test_ot_metrics_tt_var_LDADD = $(LDADD)
+@HAVE_GLIB_TRUE@test_ot_metrics_tt_var_DEPENDENCIES =  \
+@HAVE_GLIB_TRUE@	$(top_builddir)/src/libharfbuzz.la \
+@HAVE_GLIB_TRUE@	$(am__DEPENDENCIES_1)
 test_ot_name_SOURCES = test-ot-name.c
 test_ot_name_OBJECTS = test-ot-name.$(OBJEXT)
 test_ot_name_LDADD = $(LDADD)
@@ -392,10 +399,11 @@ am__depfiles_remade = ./$(DEPDIR)/test-aat-layout.Po \
 	./$(DEPDIR)/test-ot-color.Po \
 	./$(DEPDIR)/test-ot-extents-cff.Po ./$(DEPDIR)/test-ot-face.Po \
 	./$(DEPDIR)/test-ot-ligature-carets.Po \
-	./$(DEPDIR)/test-ot-meta.Po ./$(DEPDIR)/test-ot-metrics.Po \
-	./$(DEPDIR)/test-ot-name.Po ./$(DEPDIR)/test-ot-tag.Po \
-	./$(DEPDIR)/test-set.Po ./$(DEPDIR)/test-shape.Po \
-	./$(DEPDIR)/test-subset-cff1.Po \
+	./$(DEPDIR)/test-ot-meta.Po \
+	./$(DEPDIR)/test-ot-metrics-tt-var.Po \
+	./$(DEPDIR)/test-ot-metrics.Po ./$(DEPDIR)/test-ot-name.Po \
+	./$(DEPDIR)/test-ot-tag.Po ./$(DEPDIR)/test-set.Po \
+	./$(DEPDIR)/test-shape.Po ./$(DEPDIR)/test-subset-cff1.Po \
 	./$(DEPDIR)/test-subset-cff2.Po \
 	./$(DEPDIR)/test-subset-cmap.Po \
 	./$(DEPDIR)/test-subset-drop-tables.Po \
@@ -449,9 +457,10 @@ SOURCES = test-aat-layout.c test-baseline.c test-blob.c test-buffer.c \
 	$(test_cplusplus_SOURCES) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
 	test-ot-extents-cff.c test-ot-face.c test-ot-ligature-carets.c \
-	test-ot-math.c test-ot-meta.c test-ot-metrics.c test-ot-name.c \
-	test-ot-tag.c test-set.c test-shape.c test-subset.c \
-	test-subset-cff1.c test-subset-cff2.c test-subset-cmap.c \
+	test-ot-math.c test-ot-meta.c test-ot-metrics.c \
+	test-ot-metrics-tt-var.c test-ot-name.c test-ot-tag.c \
+	test-set.c test-shape.c test-subset.c test-subset-cff1.c \
+	test-subset-cff2.c test-subset-cmap.c \
 	test-subset-drop-tables.c test-subset-glyf.c \
 	test-subset-hdmx.c test-subset-hmtx.c test-subset-nameids.c \
 	test-subset-os2.c test-subset-post.c test-subset-vmtx.c \
@@ -461,9 +470,10 @@ DIST_SOURCES = test-aat-layout.c test-baseline.c test-blob.c \
 	$(am__test_cplusplus_SOURCES_DIST) test-font.c test-map.c \
 	test-multithread.c test-object.c test-ot-color.c \
 	test-ot-extents-cff.c test-ot-face.c test-ot-ligature-carets.c \
-	test-ot-math.c test-ot-meta.c test-ot-metrics.c test-ot-name.c \
-	test-ot-tag.c test-set.c test-shape.c test-subset.c \
-	test-subset-cff1.c test-subset-cff2.c test-subset-cmap.c \
+	test-ot-math.c test-ot-meta.c test-ot-metrics.c \
+	test-ot-metrics-tt-var.c test-ot-name.c test-ot-tag.c \
+	test-set.c test-shape.c test-subset.c test-subset-cff1.c \
+	test-subset-cff2.c test-subset-cmap.c \
 	test-subset-drop-tables.c test-subset-glyf.c \
 	test-subset-hdmx.c test-subset-hmtx.c test-subset-nameids.c \
 	test-subset-os2.c test-subset-post.c test-subset-vmtx.c \
@@ -910,9 +920,9 @@ LINK = $(CXXLINK)
 @HAVE_GLIB_TRUE@	test-version test-subset-nameids $(NULL) \
 @HAVE_GLIB_TRUE@	test-ot-color test-ot-ligature-carets \
 @HAVE_GLIB_TRUE@	test-ot-name test-ot-meta test-ot-metrics \
-@HAVE_GLIB_TRUE@	test-ot-tag test-ot-extents-cff $(NULL) \
-@HAVE_GLIB_TRUE@	$(am__append_4) $(am__append_5) test-c \
-@HAVE_GLIB_TRUE@	test-cplusplus $(NULL)
+@HAVE_GLIB_TRUE@	test-ot-tag test-ot-extents-cff \
+@HAVE_GLIB_TRUE@	test-ot-metrics-tt-var $(NULL) $(am__append_4) \
+@HAVE_GLIB_TRUE@	$(am__append_5) test-c test-cplusplus $(NULL)
 @HAVE_GLIB_TRUE@test_subset_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_cmap_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
 @HAVE_GLIB_TRUE@test_subset_drop_tables_LDADD = $(LDADD) $(top_builddir)/src/libharfbuzz-subset.la
@@ -1094,6 +1104,10 @@ test-ot-metrics$(EXEEXT): $(test_ot_metrics_OBJECTS) $(test_ot_metrics_DEPENDENC
 	@rm -f test-ot-metrics$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_metrics_OBJECTS) $(test_ot_metrics_LDADD) $(LIBS)
 
+test-ot-metrics-tt-var$(EXEEXT): $(test_ot_metrics_tt_var_OBJECTS) $(test_ot_metrics_tt_var_DEPENDENCIES) $(EXTRA_test_ot_metrics_tt_var_DEPENDENCIES) 
+	@rm -f test-ot-metrics-tt-var$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_ot_metrics_tt_var_OBJECTS) $(test_ot_metrics_tt_var_LDADD) $(LIBS)
+
 test-ot-name$(EXEEXT): $(test_ot_name_OBJECTS) $(test_ot_name_DEPENDENCIES) $(EXTRA_test_ot_name_DEPENDENCIES) 
 	@rm -f test-ot-name$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_ot_name_OBJECTS) $(test_ot_name_LDADD) $(LIBS)
@@ -1186,6 +1200,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-face.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-ligature-carets.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-meta.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-metrics-tt-var.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-metrics.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-name.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ot-tag.Po@am__quote@ # am--include-marker
@@ -1758,6 +1773,13 @@ test-ot-extents-cff.log: test-ot-extents-cff$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-ot-metrics-tt-var.log: test-ot-metrics-tt-var$(EXEEXT)
+	@p='test-ot-metrics-tt-var$(EXEEXT)'; \
+	b='test-ot-metrics-tt-var'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-multithread.log: test-multithread$(EXEEXT)
 	@p='test-multithread$(EXEEXT)'; \
 	b='test-multithread'; \
@@ -1896,6 +1918,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/test-ot-face.Po
 	-rm -f ./$(DEPDIR)/test-ot-ligature-carets.Po
 	-rm -f ./$(DEPDIR)/test-ot-meta.Po
+	-rm -f ./$(DEPDIR)/test-ot-metrics-tt-var.Po
 	-rm -f ./$(DEPDIR)/test-ot-metrics.Po
 	-rm -f ./$(DEPDIR)/test-ot-name.Po
 	-rm -f ./$(DEPDIR)/test-ot-tag.Po
@@ -1978,6 +2001,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/test-ot-face.Po
 	-rm -f ./$(DEPDIR)/test-ot-ligature-carets.Po
 	-rm -f ./$(DEPDIR)/test-ot-meta.Po
+	-rm -f ./$(DEPDIR)/test-ot-metrics-tt-var.Po
 	-rm -f ./$(DEPDIR)/test-ot-metrics.Po
 	-rm -f ./$(DEPDIR)/test-ot-name.Po
 	-rm -f ./$(DEPDIR)/test-ot-tag.Po

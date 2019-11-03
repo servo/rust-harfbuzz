@@ -965,6 +965,50 @@ hb_variation_to_string (<em class="parameter"><code><a class="link" href="harfbu
   unsigned int  end;
 } hb_feature_t;
 </pre>
+<p>The <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> is the structure that holds information about requested
+feature application. The feature will be applied with the given value to all
+glyphs which are in clusters between <em class="parameter"><code>start</code></em>
+ (inclusive) and <em class="parameter"><code>end</code></em>
+ (exclusive).
+Setting start to <em class="parameter"><code>HB_FEATURE_GLOBAL_START</code></em>
+ and end to <em class="parameter"><code>HB_FEATURE_GLOBAL_END</code></em>
+
+specifies that the feature always applies to the entire buffer.</p>
+<div class="refsect3">
+<a name="hb-feature-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="struct_members_name">
+<col class="struct_members_description">
+<col width="200px" class="struct_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> <em class="structfield"><code><a name="hb-feature-t-struct.tag"></a>tag</code></em>;</p></td>
+<td class="struct_member_description"><p>a feature tag</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><span class="type">uint32_t</span> <em class="structfield"><code><a name="hb-feature-t-struct.value"></a>value</code></em>;</p></td>
+<td class="struct_member_description"><p>0 disables the feature, non-zero (usually 1) enables the feature.
+For features implemented as lookup type 3 (like 'salt') the <em class="parameter"><code>value</code></em>
+is a one
+based index into the alternates.</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t-struct.start"></a>start</code></em>;</p></td>
+<td class="struct_member_description"><p>the cluster to start applying this feature setting (inclusive).</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t-struct.end"></a>end</code></em>;</p></td>
+<td class="struct_member_description"><p>the cluster to end applying this feature setting (exclusive).</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <hr>
 <div class="refsect2">
