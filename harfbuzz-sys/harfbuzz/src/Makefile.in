@@ -348,14 +348,14 @@ am__libharfbuzz_la_SOURCES_DIST = hb-aat-fdsc-table.hh \
 	hb-ot-shape-normalize.hh hb-ot-shape.cc hb-ot-shape.hh \
 	hb-ot-stat-table.hh hb-ot-tag-table.hh hb-ot-tag.cc \
 	hb-ot-var-avar-table.hh hb-ot-var-fvar-table.hh \
-	hb-ot-var-hvar-table.hh hb-ot-var-mvar-table.hh hb-ot-var.cc \
-	hb-ot-vorg-table.hh hb-pool.hh hb-sanitize.hh hb-serialize.hh \
-	hb-set-digest.hh hb-set.cc hb-set.hh hb-shape-plan.cc \
-	hb-shape-plan.hh hb-shape.cc hb-shaper-impl.hh \
-	hb-shaper-list.hh hb-shaper.cc hb-shaper.hh hb-static.cc \
-	hb-string-array.hh hb-ucd-table.hh hb-ucd.cc \
-	hb-unicode-emoji-table.hh hb-unicode.cc hb-unicode.hh \
-	hb-utf.hh hb-vector.hh hb-warning.cc hb.hh \
+	hb-ot-var-gvar-table.hh hb-ot-var-hvar-table.hh \
+	hb-ot-var-mvar-table.hh hb-ot-var.cc hb-ot-vorg-table.hh \
+	hb-pool.hh hb-sanitize.hh hb-serialize.hh hb-set-digest.hh \
+	hb-set.cc hb-set.hh hb-shape-plan.cc hb-shape-plan.hh \
+	hb-shape.cc hb-shaper-impl.hh hb-shaper-list.hh hb-shaper.cc \
+	hb-shaper.hh hb-static.cc hb-string-array.hh hb-ucd-table.hh \
+	hb-ucd.cc hb-unicode-emoji-table.hh hb-unicode.cc \
+	hb-unicode.hh hb-utf.hh hb-vector.hh hb.hh \
 	hb-buffer-deserialize-json.hh hb-buffer-deserialize-text.hh \
 	hb-number-parser.hh hb-ot-shape-complex-indic-machine.hh \
 	hb-ot-shape-complex-khmer-machine.hh \
@@ -402,7 +402,7 @@ am__objects_7 = libharfbuzz_la-hb-aat-layout.lo \
 	libharfbuzz_la-hb-shape-plan.lo libharfbuzz_la-hb-shape.lo \
 	libharfbuzz_la-hb-shaper.lo libharfbuzz_la-hb-static.lo \
 	libharfbuzz_la-hb-ucd.lo libharfbuzz_la-hb-unicode.lo \
-	libharfbuzz_la-hb-warning.lo $(am__objects_5)
+	$(am__objects_5)
 am__objects_8 = $(am__objects_5)
 am__objects_9 = libharfbuzz_la-hb-glib.lo
 @HAVE_GLIB_TRUE@am__objects_10 = $(am__objects_9)
@@ -606,7 +606,6 @@ am__depfiles_remade = ./$(DEPDIR)/dump_indic_data-dump-indic-data.Po \
 	./$(DEPDIR)/libharfbuzz_la-hb-ucd.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo \
 	./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo \
-	./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo \
 	./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo \
@@ -1303,6 +1302,7 @@ HB_BASE_sources = \
 	hb-ot-tag.cc \
 	hb-ot-var-avar-table.hh \
 	hb-ot-var-fvar-table.hh \
+	hb-ot-var-gvar-table.hh \
 	hb-ot-var-hvar-table.hh \
 	hb-ot-var-mvar-table.hh \
 	hb-ot-var.cc \
@@ -1329,7 +1329,6 @@ HB_BASE_sources = \
 	hb-unicode.hh \
 	hb-utf.hh \
 	hb-vector.hh \
-	hb-warning.cc \
 	hb.hh \
 	$(NULL)
 
@@ -1941,7 +1940,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-ucd.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo@am__quote@ # am--include-marker
@@ -2412,13 +2410,6 @@ libharfbuzz_la-hb-unicode.lo: hb-unicode.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-unicode.cc' object='libharfbuzz_la-hb-unicode.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_la-hb-unicode.lo `test -f 'hb-unicode.cc' || echo '$(srcdir)/'`hb-unicode.cc
-
-libharfbuzz_la-hb-warning.lo: hb-warning.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_la-hb-warning.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_la-hb-warning.Tpo -c -o libharfbuzz_la-hb-warning.lo `test -f 'hb-warning.cc' || echo '$(srcdir)/'`hb-warning.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libharfbuzz_la-hb-warning.Tpo $(DEPDIR)/libharfbuzz_la-hb-warning.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='hb-warning.cc' object='libharfbuzz_la-hb-warning.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libharfbuzz_la-hb-warning.lo `test -f 'hb-warning.cc' || echo '$(srcdir)/'`hb-warning.cc
 
 libharfbuzz_la-hb-glib.lo: hb-glib.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libharfbuzz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libharfbuzz_la-hb-glib.lo -MD -MP -MF $(DEPDIR)/libharfbuzz_la-hb-glib.Tpo -c -o libharfbuzz_la-hb-glib.lo `test -f 'hb-glib.cc' || echo '$(srcdir)/'`hb-glib.cc
@@ -3535,7 +3526,6 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ucd.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo
-	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo
@@ -3678,7 +3668,6 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-ucd.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-unicode.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-uniscribe.Plo
-	-rm -f ./$(DEPDIR)/libharfbuzz_la-hb-warning.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-number.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff1-table.Plo
 	-rm -f ./$(DEPDIR)/libharfbuzz_subset_la-hb-ot-cff2-table.Plo

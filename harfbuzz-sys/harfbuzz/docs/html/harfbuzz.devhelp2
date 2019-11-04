@@ -116,8 +116,8 @@
         <sub name="hb-icu" link="harfbuzz-hb-icu.html"/>
         <sub name="hb-uniscribe" link="harfbuzz-hb-uniscribe.html"/>
       </sub>
-      <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
       <sub name="API Index" link="api-index-full.html"/>
+      <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
       <sub name="Index of new symbols in 2.6.0" link="api-index-2-6-0.html"/>
       <sub name="Index of new symbols in 2.5.0" link="api-index-2-5-0.html"/>
       <sub name="Index of new symbols in 2.4.0" link="api-index-2-4-0.html"/>
@@ -379,6 +379,7 @@
     <keyword type="function" name="hb_font_get_glyph_v_origin ()" link="harfbuzz-hb-font.html#hb-font-get-glyph-v-origin" since="0.9.2"/>
     <keyword type="function" name="hb_font_get_nominal_glyph ()" link="harfbuzz-hb-font.html#hb-font-get-nominal-glyph" since="1.2.3"/>
     <keyword type="function" name="hb_font_get_nominal_glyph_func_t ()" link="harfbuzz-hb-font.html#hb-font-get-nominal-glyph-func-t"/>
+    <keyword type="function" name="hb_font_get_nominal_glyphs ()" link="harfbuzz-hb-font.html#hb-font-get-nominal-glyphs" since="2.6.3"/>
     <keyword type="function" name="hb_font_get_parent ()" link="harfbuzz-hb-font.html#hb-font-get-parent" since="0.9.2"/>
     <keyword type="function" name="hb_font_get_ppem ()" link="harfbuzz-hb-font.html#hb-font-get-ppem" since="0.9.2"/>
     <keyword type="function" name="hb_font_get_ptem ()" link="harfbuzz-hb-font.html#hb-font-get-ptem" since="0.9.2"/>
@@ -1254,6 +1255,10 @@
     <keyword type="member" name="hb-segment-properties-t-struct.direction" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.direction"/>
     <keyword type="member" name="hb-segment-properties-t-struct.script" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.script"/>
     <keyword type="member" name="hb-segment-properties-t-struct.language" link="harfbuzz-hb-buffer.html#hb-segment-properties-t-struct.language"/>
+    <keyword type="member" name="hb-feature-t-struct.tag" link="harfbuzz-hb-common.html#hb-feature-t-struct.tag"/>
+    <keyword type="member" name="hb-feature-t-struct.value" link="harfbuzz-hb-common.html#hb-feature-t-struct.value"/>
+    <keyword type="member" name="hb-feature-t-struct.start" link="harfbuzz-hb-common.html#hb-feature-t-struct.start"/>
+    <keyword type="member" name="hb-feature-t-struct.end" link="harfbuzz-hb-common.html#hb-feature-t-struct.end"/>
     <keyword type="member" name="hb-ot-math-glyph-variant-t-struct.glyph" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t-struct.glyph"/>
     <keyword type="member" name="hb-ot-math-glyph-variant-t-struct.advance" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t-struct.advance"/>
     <keyword type="member" name="hb-ot-math-glyph-part-t-struct.glyph" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t-struct.glyph"/>
