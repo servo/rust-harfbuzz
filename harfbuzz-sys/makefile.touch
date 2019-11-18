@@ -33,6 +33,12 @@ TOUCH_FILES = $(wildcard \
 	$(HARFBUZZ)/src/hb-version.* \
 	)
 
+# Avoid requiring Ragel to be installed: https://github.com/servo/servo/issues/24611
+TOUCH_FILES += $(wildcard \
+	$(HARFBUZZ)/src/*.rl \
+	$(HARFBUZZ)/src/*.hh \
+)
+
 touch:
 	touch -r $(HARFBUZZ)/configure $(TOUCH_FILES)
 
