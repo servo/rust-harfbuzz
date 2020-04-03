@@ -30,6 +30,10 @@ fn main() {
     if target.contains("apple") {
         cfg.define("HAVE_CORETEXT", "1");
     }
+    
+    if target.contains("windows-gnu") {
+        cfg.flag("-Wa,-mbig-obj");
+    }
 
     cfg.compile("embedded_harfbuzz");
 
