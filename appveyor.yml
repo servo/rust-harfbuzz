@@ -1,9 +1,10 @@
 platform: x64
+image: Visual Studio 2019
 
 environment:
   matrix:
     - compiler: msvc
-      generator: Visual Studio 14 Win64
+      generator: Visual Studio 16 Win64
       platform: x64
       configuration: Debug
       triplet: x64-windows
@@ -18,7 +19,6 @@ install:
   - .\bootstrap-vcpkg.bat
 
 build_script:
-  - 'vcpkg update'
   - 'vcpkg install --recurse glib:%triplet% freetype:%triplet% cairo:%triplet%'
   - 'set PATH=%PATH%;C:\Program Files (x86)\MSBuild\14.0\Bin;c:\msys64\mingw64\bin' # msys2 is added just for having "ragel" on PATH
   - 'cd %APPVEYOR_BUILD_FOLDER%\harfbuzz-sys && cargo build --verbose --verbose'
