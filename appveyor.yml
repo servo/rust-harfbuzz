@@ -9,11 +9,6 @@ environment:
       triplet: x64-windows
 
 install:
-  - set NINJA_URL="https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip"
-  - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
-  - 7z x ninja.zip -oC:\projects\deps\ninja > nul
-  - set PATH=C:\projects\deps\ninja;%PATH%
-  - ninja --version
   - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw-w64-x86_64-ragel"
   - ps: Start-FileDownload "https://static.rust-lang.org/dist/rust-nightly-x86_64-pc-windows-msvc.exe" -FileName "rust-install.exe"
   - ps: .\rust-install.exe /VERYSILENT /NORESTART /DIR="C:\rust" | Out-Null
@@ -23,6 +18,7 @@ install:
   - .\bootstrap-vcpkg.bat
 
 build_script:
+  - 'vcpkg update'
   - 'vcpkg install --recurse glib:%triplet% freetype:%triplet% cairo:%triplet%'
   - 'set PATH=%PATH%;C:\Program Files (x86)\MSBuild\14.0\Bin;c:\msys64\mingw64\bin' # msys2 is added just for having "ragel" on PATH
   - 'cd %APPVEYOR_BUILD_FOLDER%\harfbuzz-sys && cargo build --verbose --verbose'
