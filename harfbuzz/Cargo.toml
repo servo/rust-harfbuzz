@@ -12,7 +12,7 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
-version = "0.3.1"
+version = "0.4.0"
 default-features = false
 
 [features]
