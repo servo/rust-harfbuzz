@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.3.4"
+version = "0.4.0"
 
 authors = ["The Servo Project Developers"]
 license = "MIT"
@@ -32,9 +32,9 @@ core-text = "15"
 foreign-types = "0.3"
 
 [target.'cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))'.dependencies]
-freetype = { version = "0.4", default-features = false }
+freetype = { version = "0.5", default-features = false }
 
 [features]
 default = ["build-native-harfbuzz", "build-native-freetype"]
 build-native-harfbuzz = ["cc", "pkg-config"]
-build-native-freetype = ["freetype/servo-freetype-sys"]
+build-native-freetype = ["freetype/freetype-sys"]
