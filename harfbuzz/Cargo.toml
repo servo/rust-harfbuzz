@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz"
-version = "0.3.1"
+version = "0.4.0"
 
 authors = ["The Servo Project Developers"]
 license = "MIT / Apache-2.0"
@@ -12,7 +12,7 @@ keywords = ["opentype", "font", "text", "layout", "unicode"]
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
-version = "0.4.0"
+version = "0.5.0"
 default-features = false
 
 [features]
