@@ -739,11 +739,11 @@ extern "C" {
 extern "C" {
     pub fn hb_tag_to_string(tag: hb_tag_t, buf: *mut ::std::os::raw::c_char);
 }
-pub const hb_direction_t_HB_DIRECTION_INVALID: hb_direction_t = 0;
-pub const hb_direction_t_HB_DIRECTION_LTR: hb_direction_t = 4;
-pub const hb_direction_t_HB_DIRECTION_RTL: hb_direction_t = 5;
-pub const hb_direction_t_HB_DIRECTION_TTB: hb_direction_t = 6;
-pub const hb_direction_t_HB_DIRECTION_BTT: hb_direction_t = 7;
+pub const HB_DIRECTION_INVALID: hb_direction_t = 0;
+pub const HB_DIRECTION_LTR: hb_direction_t = 4;
+pub const HB_DIRECTION_RTL: hb_direction_t = 5;
+pub const HB_DIRECTION_TTB: hb_direction_t = 6;
+pub const HB_DIRECTION_BTT: hb_direction_t = 7;
 #[doc = " hb_direction_t:"]
 #[doc = " @HB_DIRECTION_INVALID: Initial, unset direction."]
 #[doc = " @HB_DIRECTION_LTR: Text is set horizontally from left to right."]
@@ -778,166 +778,166 @@ extern "C" {
 extern "C" {
     pub fn hb_language_get_default() -> hb_language_t;
 }
-pub const hb_script_t_HB_SCRIPT_COMMON: hb_script_t = 1517910393;
-pub const hb_script_t_HB_SCRIPT_INHERITED: hb_script_t = 1516858984;
-pub const hb_script_t_HB_SCRIPT_UNKNOWN: hb_script_t = 1517976186;
-pub const hb_script_t_HB_SCRIPT_ARABIC: hb_script_t = 1098015074;
-pub const hb_script_t_HB_SCRIPT_ARMENIAN: hb_script_t = 1098018158;
-pub const hb_script_t_HB_SCRIPT_BENGALI: hb_script_t = 1113943655;
-pub const hb_script_t_HB_SCRIPT_CYRILLIC: hb_script_t = 1132032620;
-pub const hb_script_t_HB_SCRIPT_DEVANAGARI: hb_script_t = 1147500129;
-pub const hb_script_t_HB_SCRIPT_GEORGIAN: hb_script_t = 1197830002;
-pub const hb_script_t_HB_SCRIPT_GREEK: hb_script_t = 1198679403;
-pub const hb_script_t_HB_SCRIPT_GUJARATI: hb_script_t = 1198877298;
-pub const hb_script_t_HB_SCRIPT_GURMUKHI: hb_script_t = 1198879349;
-pub const hb_script_t_HB_SCRIPT_HANGUL: hb_script_t = 1214344807;
-pub const hb_script_t_HB_SCRIPT_HAN: hb_script_t = 1214344809;
-pub const hb_script_t_HB_SCRIPT_HEBREW: hb_script_t = 1214603890;
-pub const hb_script_t_HB_SCRIPT_HIRAGANA: hb_script_t = 1214870113;
-pub const hb_script_t_HB_SCRIPT_KANNADA: hb_script_t = 1265525857;
-pub const hb_script_t_HB_SCRIPT_KATAKANA: hb_script_t = 1264676449;
-pub const hb_script_t_HB_SCRIPT_LAO: hb_script_t = 1281453935;
-pub const hb_script_t_HB_SCRIPT_LATIN: hb_script_t = 1281455214;
-pub const hb_script_t_HB_SCRIPT_MALAYALAM: hb_script_t = 1298954605;
-pub const hb_script_t_HB_SCRIPT_ORIYA: hb_script_t = 1332902241;
-pub const hb_script_t_HB_SCRIPT_TAMIL: hb_script_t = 1415671148;
-pub const hb_script_t_HB_SCRIPT_TELUGU: hb_script_t = 1415933045;
-pub const hb_script_t_HB_SCRIPT_THAI: hb_script_t = 1416126825;
-pub const hb_script_t_HB_SCRIPT_TIBETAN: hb_script_t = 1416192628;
-pub const hb_script_t_HB_SCRIPT_BOPOMOFO: hb_script_t = 1114599535;
-pub const hb_script_t_HB_SCRIPT_BRAILLE: hb_script_t = 1114792297;
-pub const hb_script_t_HB_SCRIPT_CANADIAN_SYLLABICS: hb_script_t = 1130458739;
-pub const hb_script_t_HB_SCRIPT_CHEROKEE: hb_script_t = 1130915186;
-pub const hb_script_t_HB_SCRIPT_ETHIOPIC: hb_script_t = 1165256809;
-pub const hb_script_t_HB_SCRIPT_KHMER: hb_script_t = 1265134962;
-pub const hb_script_t_HB_SCRIPT_MONGOLIAN: hb_script_t = 1299148391;
-pub const hb_script_t_HB_SCRIPT_MYANMAR: hb_script_t = 1299803506;
-pub const hb_script_t_HB_SCRIPT_OGHAM: hb_script_t = 1332175213;
-pub const hb_script_t_HB_SCRIPT_RUNIC: hb_script_t = 1383427698;
-pub const hb_script_t_HB_SCRIPT_SINHALA: hb_script_t = 1399418472;
-pub const hb_script_t_HB_SCRIPT_SYRIAC: hb_script_t = 1400468067;
-pub const hb_script_t_HB_SCRIPT_THAANA: hb_script_t = 1416126817;
-pub const hb_script_t_HB_SCRIPT_YI: hb_script_t = 1500080489;
-pub const hb_script_t_HB_SCRIPT_DESERET: hb_script_t = 1148416628;
-pub const hb_script_t_HB_SCRIPT_GOTHIC: hb_script_t = 1198486632;
-pub const hb_script_t_HB_SCRIPT_OLD_ITALIC: hb_script_t = 1232363884;
-pub const hb_script_t_HB_SCRIPT_BUHID: hb_script_t = 1114990692;
-pub const hb_script_t_HB_SCRIPT_HANUNOO: hb_script_t = 1214344815;
-pub const hb_script_t_HB_SCRIPT_TAGALOG: hb_script_t = 1416064103;
-pub const hb_script_t_HB_SCRIPT_TAGBANWA: hb_script_t = 1415669602;
-pub const hb_script_t_HB_SCRIPT_CYPRIOT: hb_script_t = 1131442804;
-pub const hb_script_t_HB_SCRIPT_LIMBU: hb_script_t = 1281977698;
-pub const hb_script_t_HB_SCRIPT_LINEAR_B: hb_script_t = 1281977954;
-pub const hb_script_t_HB_SCRIPT_OSMANYA: hb_script_t = 1332964705;
-pub const hb_script_t_HB_SCRIPT_SHAVIAN: hb_script_t = 1399349623;
-pub const hb_script_t_HB_SCRIPT_TAI_LE: hb_script_t = 1415670885;
-pub const hb_script_t_HB_SCRIPT_UGARITIC: hb_script_t = 1432838514;
-pub const hb_script_t_HB_SCRIPT_BUGINESE: hb_script_t = 1114990441;
-pub const hb_script_t_HB_SCRIPT_COPTIC: hb_script_t = 1131376756;
-pub const hb_script_t_HB_SCRIPT_GLAGOLITIC: hb_script_t = 1198285159;
-pub const hb_script_t_HB_SCRIPT_KHAROSHTHI: hb_script_t = 1265131890;
-pub const hb_script_t_HB_SCRIPT_NEW_TAI_LUE: hb_script_t = 1415670901;
-pub const hb_script_t_HB_SCRIPT_OLD_PERSIAN: hb_script_t = 1483761007;
-pub const hb_script_t_HB_SCRIPT_SYLOTI_NAGRI: hb_script_t = 1400466543;
-pub const hb_script_t_HB_SCRIPT_TIFINAGH: hb_script_t = 1415999079;
-pub const hb_script_t_HB_SCRIPT_BALINESE: hb_script_t = 1113681001;
-pub const hb_script_t_HB_SCRIPT_CUNEIFORM: hb_script_t = 1483961720;
-pub const hb_script_t_HB_SCRIPT_NKO: hb_script_t = 1315663727;
-pub const hb_script_t_HB_SCRIPT_PHAGS_PA: hb_script_t = 1349017959;
-pub const hb_script_t_HB_SCRIPT_PHOENICIAN: hb_script_t = 1349021304;
-pub const hb_script_t_HB_SCRIPT_CARIAN: hb_script_t = 1130459753;
-pub const hb_script_t_HB_SCRIPT_CHAM: hb_script_t = 1130914157;
-pub const hb_script_t_HB_SCRIPT_KAYAH_LI: hb_script_t = 1264675945;
-pub const hb_script_t_HB_SCRIPT_LEPCHA: hb_script_t = 1281716323;
-pub const hb_script_t_HB_SCRIPT_LYCIAN: hb_script_t = 1283023721;
-pub const hb_script_t_HB_SCRIPT_LYDIAN: hb_script_t = 1283023977;
-pub const hb_script_t_HB_SCRIPT_OL_CHIKI: hb_script_t = 1332503403;
-pub const hb_script_t_HB_SCRIPT_REJANG: hb_script_t = 1382706791;
-pub const hb_script_t_HB_SCRIPT_SAURASHTRA: hb_script_t = 1398895986;
-pub const hb_script_t_HB_SCRIPT_SUNDANESE: hb_script_t = 1400204900;
-pub const hb_script_t_HB_SCRIPT_VAI: hb_script_t = 1449224553;
-pub const hb_script_t_HB_SCRIPT_AVESTAN: hb_script_t = 1098281844;
-pub const hb_script_t_HB_SCRIPT_BAMUM: hb_script_t = 1113681269;
-pub const hb_script_t_HB_SCRIPT_EGYPTIAN_HIEROGLYPHS: hb_script_t = 1164409200;
-pub const hb_script_t_HB_SCRIPT_IMPERIAL_ARAMAIC: hb_script_t = 1098018153;
-pub const hb_script_t_HB_SCRIPT_INSCRIPTIONAL_PAHLAVI: hb_script_t = 1349020777;
-pub const hb_script_t_HB_SCRIPT_INSCRIPTIONAL_PARTHIAN: hb_script_t = 1349678185;
-pub const hb_script_t_HB_SCRIPT_JAVANESE: hb_script_t = 1247901281;
-pub const hb_script_t_HB_SCRIPT_KAITHI: hb_script_t = 1265920105;
-pub const hb_script_t_HB_SCRIPT_LISU: hb_script_t = 1281979253;
-pub const hb_script_t_HB_SCRIPT_MEETEI_MAYEK: hb_script_t = 1299473769;
-pub const hb_script_t_HB_SCRIPT_OLD_SOUTH_ARABIAN: hb_script_t = 1398895202;
-pub const hb_script_t_HB_SCRIPT_OLD_TURKIC: hb_script_t = 1332898664;
-pub const hb_script_t_HB_SCRIPT_SAMARITAN: hb_script_t = 1398893938;
-pub const hb_script_t_HB_SCRIPT_TAI_THAM: hb_script_t = 1281453665;
-pub const hb_script_t_HB_SCRIPT_TAI_VIET: hb_script_t = 1415673460;
-pub const hb_script_t_HB_SCRIPT_BATAK: hb_script_t = 1113683051;
-pub const hb_script_t_HB_SCRIPT_BRAHMI: hb_script_t = 1114792296;
-pub const hb_script_t_HB_SCRIPT_MANDAIC: hb_script_t = 1298230884;
-pub const hb_script_t_HB_SCRIPT_CHAKMA: hb_script_t = 1130457965;
-pub const hb_script_t_HB_SCRIPT_MEROITIC_CURSIVE: hb_script_t = 1298494051;
-pub const hb_script_t_HB_SCRIPT_MEROITIC_HIEROGLYPHS: hb_script_t = 1298494063;
-pub const hb_script_t_HB_SCRIPT_MIAO: hb_script_t = 1349284452;
-pub const hb_script_t_HB_SCRIPT_SHARADA: hb_script_t = 1399353956;
-pub const hb_script_t_HB_SCRIPT_SORA_SOMPENG: hb_script_t = 1399812705;
-pub const hb_script_t_HB_SCRIPT_TAKRI: hb_script_t = 1415670642;
-pub const hb_script_t_HB_SCRIPT_BASSA_VAH: hb_script_t = 1113682803;
-pub const hb_script_t_HB_SCRIPT_CAUCASIAN_ALBANIAN: hb_script_t = 1097295970;
-pub const hb_script_t_HB_SCRIPT_DUPLOYAN: hb_script_t = 1148547180;
-pub const hb_script_t_HB_SCRIPT_ELBASAN: hb_script_t = 1164730977;
-pub const hb_script_t_HB_SCRIPT_GRANTHA: hb_script_t = 1198678382;
-pub const hb_script_t_HB_SCRIPT_KHOJKI: hb_script_t = 1265135466;
-pub const hb_script_t_HB_SCRIPT_KHUDAWADI: hb_script_t = 1399418468;
-pub const hb_script_t_HB_SCRIPT_LINEAR_A: hb_script_t = 1281977953;
-pub const hb_script_t_HB_SCRIPT_MAHAJANI: hb_script_t = 1298229354;
-pub const hb_script_t_HB_SCRIPT_MANICHAEAN: hb_script_t = 1298230889;
-pub const hb_script_t_HB_SCRIPT_MENDE_KIKAKUI: hb_script_t = 1298493028;
-pub const hb_script_t_HB_SCRIPT_MODI: hb_script_t = 1299145833;
-pub const hb_script_t_HB_SCRIPT_MRO: hb_script_t = 1299345263;
-pub const hb_script_t_HB_SCRIPT_NABATAEAN: hb_script_t = 1315070324;
-pub const hb_script_t_HB_SCRIPT_OLD_NORTH_ARABIAN: hb_script_t = 1315009122;
-pub const hb_script_t_HB_SCRIPT_OLD_PERMIC: hb_script_t = 1348825709;
-pub const hb_script_t_HB_SCRIPT_PAHAWH_HMONG: hb_script_t = 1215131239;
-pub const hb_script_t_HB_SCRIPT_PALMYRENE: hb_script_t = 1348562029;
-pub const hb_script_t_HB_SCRIPT_PAU_CIN_HAU: hb_script_t = 1348564323;
-pub const hb_script_t_HB_SCRIPT_PSALTER_PAHLAVI: hb_script_t = 1349020784;
-pub const hb_script_t_HB_SCRIPT_SIDDHAM: hb_script_t = 1399415908;
-pub const hb_script_t_HB_SCRIPT_TIRHUTA: hb_script_t = 1416196712;
-pub const hb_script_t_HB_SCRIPT_WARANG_CITI: hb_script_t = 1466004065;
-pub const hb_script_t_HB_SCRIPT_AHOM: hb_script_t = 1097363309;
-pub const hb_script_t_HB_SCRIPT_ANATOLIAN_HIEROGLYPHS: hb_script_t = 1215067511;
-pub const hb_script_t_HB_SCRIPT_HATRAN: hb_script_t = 1214346354;
-pub const hb_script_t_HB_SCRIPT_MULTANI: hb_script_t = 1299541108;
-pub const hb_script_t_HB_SCRIPT_OLD_HUNGARIAN: hb_script_t = 1215655527;
-pub const hb_script_t_HB_SCRIPT_SIGNWRITING: hb_script_t = 1399287415;
-pub const hb_script_t_HB_SCRIPT_ADLAM: hb_script_t = 1097100397;
-pub const hb_script_t_HB_SCRIPT_BHAIKSUKI: hb_script_t = 1114139507;
-pub const hb_script_t_HB_SCRIPT_MARCHEN: hb_script_t = 1298231907;
-pub const hb_script_t_HB_SCRIPT_OSAGE: hb_script_t = 1332963173;
-pub const hb_script_t_HB_SCRIPT_TANGUT: hb_script_t = 1415671399;
-pub const hb_script_t_HB_SCRIPT_NEWA: hb_script_t = 1315272545;
-pub const hb_script_t_HB_SCRIPT_MASARAM_GONDI: hb_script_t = 1198485101;
-pub const hb_script_t_HB_SCRIPT_NUSHU: hb_script_t = 1316186229;
-pub const hb_script_t_HB_SCRIPT_SOYOMBO: hb_script_t = 1399814511;
-pub const hb_script_t_HB_SCRIPT_ZANABAZAR_SQUARE: hb_script_t = 1516334690;
-pub const hb_script_t_HB_SCRIPT_DOGRA: hb_script_t = 1148151666;
-pub const hb_script_t_HB_SCRIPT_GUNJALA_GONDI: hb_script_t = 1198485095;
-pub const hb_script_t_HB_SCRIPT_HANIFI_ROHINGYA: hb_script_t = 1383032935;
-pub const hb_script_t_HB_SCRIPT_MAKASAR: hb_script_t = 1298230113;
-pub const hb_script_t_HB_SCRIPT_MEDEFAIDRIN: hb_script_t = 1298490470;
-pub const hb_script_t_HB_SCRIPT_OLD_SOGDIAN: hb_script_t = 1399809903;
-pub const hb_script_t_HB_SCRIPT_SOGDIAN: hb_script_t = 1399809892;
-pub const hb_script_t_HB_SCRIPT_ELYMAIC: hb_script_t = 1164736877;
-pub const hb_script_t_HB_SCRIPT_NANDINAGARI: hb_script_t = 1315008100;
-pub const hb_script_t_HB_SCRIPT_NYIAKENG_PUACHUE_HMONG: hb_script_t = 1215131248;
-pub const hb_script_t_HB_SCRIPT_WANCHO: hb_script_t = 1466132591;
-pub const hb_script_t_HB_SCRIPT_CHORASMIAN: hb_script_t = 1130918515;
-pub const hb_script_t_HB_SCRIPT_DIVES_AKURU: hb_script_t = 1147756907;
-pub const hb_script_t_HB_SCRIPT_KHITAN_SMALL_SCRIPT: hb_script_t = 1265202291;
-pub const hb_script_t_HB_SCRIPT_YEZIDI: hb_script_t = 1499822697;
-pub const hb_script_t_HB_SCRIPT_INVALID: hb_script_t = 0;
-pub const hb_script_t__HB_SCRIPT_MAX_VALUE: hb_script_t = 2147483647;
-pub const hb_script_t__HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
+pub const HB_SCRIPT_COMMON: hb_script_t = 1517910393;
+pub const HB_SCRIPT_INHERITED: hb_script_t = 1516858984;
+pub const HB_SCRIPT_UNKNOWN: hb_script_t = 1517976186;
+pub const HB_SCRIPT_ARABIC: hb_script_t = 1098015074;
+pub const HB_SCRIPT_ARMENIAN: hb_script_t = 1098018158;
+pub const HB_SCRIPT_BENGALI: hb_script_t = 1113943655;
+pub const HB_SCRIPT_CYRILLIC: hb_script_t = 1132032620;
+pub const HB_SCRIPT_DEVANAGARI: hb_script_t = 1147500129;
+pub const HB_SCRIPT_GEORGIAN: hb_script_t = 1197830002;
+pub const HB_SCRIPT_GREEK: hb_script_t = 1198679403;
+pub const HB_SCRIPT_GUJARATI: hb_script_t = 1198877298;
+pub const HB_SCRIPT_GURMUKHI: hb_script_t = 1198879349;
+pub const HB_SCRIPT_HANGUL: hb_script_t = 1214344807;
+pub const HB_SCRIPT_HAN: hb_script_t = 1214344809;
+pub const HB_SCRIPT_HEBREW: hb_script_t = 1214603890;
+pub const HB_SCRIPT_HIRAGANA: hb_script_t = 1214870113;
+pub const HB_SCRIPT_KANNADA: hb_script_t = 1265525857;
+pub const HB_SCRIPT_KATAKANA: hb_script_t = 1264676449;
+pub const HB_SCRIPT_LAO: hb_script_t = 1281453935;
+pub const HB_SCRIPT_LATIN: hb_script_t = 1281455214;
+pub const HB_SCRIPT_MALAYALAM: hb_script_t = 1298954605;
+pub const HB_SCRIPT_ORIYA: hb_script_t = 1332902241;
+pub const HB_SCRIPT_TAMIL: hb_script_t = 1415671148;
+pub const HB_SCRIPT_TELUGU: hb_script_t = 1415933045;
+pub const HB_SCRIPT_THAI: hb_script_t = 1416126825;
+pub const HB_SCRIPT_TIBETAN: hb_script_t = 1416192628;
+pub const HB_SCRIPT_BOPOMOFO: hb_script_t = 1114599535;
+pub const HB_SCRIPT_BRAILLE: hb_script_t = 1114792297;
+pub const HB_SCRIPT_CANADIAN_SYLLABICS: hb_script_t = 1130458739;
+pub const HB_SCRIPT_CHEROKEE: hb_script_t = 1130915186;
+pub const HB_SCRIPT_ETHIOPIC: hb_script_t = 1165256809;
+pub const HB_SCRIPT_KHMER: hb_script_t = 1265134962;
+pub const HB_SCRIPT_MONGOLIAN: hb_script_t = 1299148391;
+pub const HB_SCRIPT_MYANMAR: hb_script_t = 1299803506;
+pub const HB_SCRIPT_OGHAM: hb_script_t = 1332175213;
+pub const HB_SCRIPT_RUNIC: hb_script_t = 1383427698;
+pub const HB_SCRIPT_SINHALA: hb_script_t = 1399418472;
+pub const HB_SCRIPT_SYRIAC: hb_script_t = 1400468067;
+pub const HB_SCRIPT_THAANA: hb_script_t = 1416126817;
+pub const HB_SCRIPT_YI: hb_script_t = 1500080489;
+pub const HB_SCRIPT_DESERET: hb_script_t = 1148416628;
+pub const HB_SCRIPT_GOTHIC: hb_script_t = 1198486632;
+pub const HB_SCRIPT_OLD_ITALIC: hb_script_t = 1232363884;
+pub const HB_SCRIPT_BUHID: hb_script_t = 1114990692;
+pub const HB_SCRIPT_HANUNOO: hb_script_t = 1214344815;
+pub const HB_SCRIPT_TAGALOG: hb_script_t = 1416064103;
+pub const HB_SCRIPT_TAGBANWA: hb_script_t = 1415669602;
+pub const HB_SCRIPT_CYPRIOT: hb_script_t = 1131442804;
+pub const HB_SCRIPT_LIMBU: hb_script_t = 1281977698;
+pub const HB_SCRIPT_LINEAR_B: hb_script_t = 1281977954;
+pub const HB_SCRIPT_OSMANYA: hb_script_t = 1332964705;
+pub const HB_SCRIPT_SHAVIAN: hb_script_t = 1399349623;
+pub const HB_SCRIPT_TAI_LE: hb_script_t = 1415670885;
+pub const HB_SCRIPT_UGARITIC: hb_script_t = 1432838514;
+pub const HB_SCRIPT_BUGINESE: hb_script_t = 1114990441;
+pub const HB_SCRIPT_COPTIC: hb_script_t = 1131376756;
+pub const HB_SCRIPT_GLAGOLITIC: hb_script_t = 1198285159;
+pub const HB_SCRIPT_KHAROSHTHI: hb_script_t = 1265131890;
+pub const HB_SCRIPT_NEW_TAI_LUE: hb_script_t = 1415670901;
+pub const HB_SCRIPT_OLD_PERSIAN: hb_script_t = 1483761007;
+pub const HB_SCRIPT_SYLOTI_NAGRI: hb_script_t = 1400466543;
+pub const HB_SCRIPT_TIFINAGH: hb_script_t = 1415999079;
+pub const HB_SCRIPT_BALINESE: hb_script_t = 1113681001;
+pub const HB_SCRIPT_CUNEIFORM: hb_script_t = 1483961720;
+pub const HB_SCRIPT_NKO: hb_script_t = 1315663727;
+pub const HB_SCRIPT_PHAGS_PA: hb_script_t = 1349017959;
+pub const HB_SCRIPT_PHOENICIAN: hb_script_t = 1349021304;
+pub const HB_SCRIPT_CARIAN: hb_script_t = 1130459753;
+pub const HB_SCRIPT_CHAM: hb_script_t = 1130914157;
+pub const HB_SCRIPT_KAYAH_LI: hb_script_t = 1264675945;
+pub const HB_SCRIPT_LEPCHA: hb_script_t = 1281716323;
+pub const HB_SCRIPT_LYCIAN: hb_script_t = 1283023721;
+pub const HB_SCRIPT_LYDIAN: hb_script_t = 1283023977;
+pub const HB_SCRIPT_OL_CHIKI: hb_script_t = 1332503403;
+pub const HB_SCRIPT_REJANG: hb_script_t = 1382706791;
+pub const HB_SCRIPT_SAURASHTRA: hb_script_t = 1398895986;
+pub const HB_SCRIPT_SUNDANESE: hb_script_t = 1400204900;
+pub const HB_SCRIPT_VAI: hb_script_t = 1449224553;
+pub const HB_SCRIPT_AVESTAN: hb_script_t = 1098281844;
+pub const HB_SCRIPT_BAMUM: hb_script_t = 1113681269;
+pub const HB_SCRIPT_EGYPTIAN_HIEROGLYPHS: hb_script_t = 1164409200;
+pub const HB_SCRIPT_IMPERIAL_ARAMAIC: hb_script_t = 1098018153;
+pub const HB_SCRIPT_INSCRIPTIONAL_PAHLAVI: hb_script_t = 1349020777;
+pub const HB_SCRIPT_INSCRIPTIONAL_PARTHIAN: hb_script_t = 1349678185;
+pub const HB_SCRIPT_JAVANESE: hb_script_t = 1247901281;
+pub const HB_SCRIPT_KAITHI: hb_script_t = 1265920105;
+pub const HB_SCRIPT_LISU: hb_script_t = 1281979253;
+pub const HB_SCRIPT_MEETEI_MAYEK: hb_script_t = 1299473769;
+pub const HB_SCRIPT_OLD_SOUTH_ARABIAN: hb_script_t = 1398895202;
+pub const HB_SCRIPT_OLD_TURKIC: hb_script_t = 1332898664;
+pub const HB_SCRIPT_SAMARITAN: hb_script_t = 1398893938;
+pub const HB_SCRIPT_TAI_THAM: hb_script_t = 1281453665;
+pub const HB_SCRIPT_TAI_VIET: hb_script_t = 1415673460;
+pub const HB_SCRIPT_BATAK: hb_script_t = 1113683051;
+pub const HB_SCRIPT_BRAHMI: hb_script_t = 1114792296;
+pub const HB_SCRIPT_MANDAIC: hb_script_t = 1298230884;
+pub const HB_SCRIPT_CHAKMA: hb_script_t = 1130457965;
+pub const HB_SCRIPT_MEROITIC_CURSIVE: hb_script_t = 1298494051;
+pub const HB_SCRIPT_MEROITIC_HIEROGLYPHS: hb_script_t = 1298494063;
+pub const HB_SCRIPT_MIAO: hb_script_t = 1349284452;
+pub const HB_SCRIPT_SHARADA: hb_script_t = 1399353956;
+pub const HB_SCRIPT_SORA_SOMPENG: hb_script_t = 1399812705;
+pub const HB_SCRIPT_TAKRI: hb_script_t = 1415670642;
+pub const HB_SCRIPT_BASSA_VAH: hb_script_t = 1113682803;
+pub const HB_SCRIPT_CAUCASIAN_ALBANIAN: hb_script_t = 1097295970;
+pub const HB_SCRIPT_DUPLOYAN: hb_script_t = 1148547180;
+pub const HB_SCRIPT_ELBASAN: hb_script_t = 1164730977;
+pub const HB_SCRIPT_GRANTHA: hb_script_t = 1198678382;
+pub const HB_SCRIPT_KHOJKI: hb_script_t = 1265135466;
+pub const HB_SCRIPT_KHUDAWADI: hb_script_t = 1399418468;
+pub const HB_SCRIPT_LINEAR_A: hb_script_t = 1281977953;
+pub const HB_SCRIPT_MAHAJANI: hb_script_t = 1298229354;
+pub const HB_SCRIPT_MANICHAEAN: hb_script_t = 1298230889;
+pub const HB_SCRIPT_MENDE_KIKAKUI: hb_script_t = 1298493028;
+pub const HB_SCRIPT_MODI: hb_script_t = 1299145833;
+pub const HB_SCRIPT_MRO: hb_script_t = 1299345263;
+pub const HB_SCRIPT_NABATAEAN: hb_script_t = 1315070324;
+pub const HB_SCRIPT_OLD_NORTH_ARABIAN: hb_script_t = 1315009122;
+pub const HB_SCRIPT_OLD_PERMIC: hb_script_t = 1348825709;
+pub const HB_SCRIPT_PAHAWH_HMONG: hb_script_t = 1215131239;
+pub const HB_SCRIPT_PALMYRENE: hb_script_t = 1348562029;
+pub const HB_SCRIPT_PAU_CIN_HAU: hb_script_t = 1348564323;
+pub const HB_SCRIPT_PSALTER_PAHLAVI: hb_script_t = 1349020784;
+pub const HB_SCRIPT_SIDDHAM: hb_script_t = 1399415908;
+pub const HB_SCRIPT_TIRHUTA: hb_script_t = 1416196712;
+pub const HB_SCRIPT_WARANG_CITI: hb_script_t = 1466004065;
+pub const HB_SCRIPT_AHOM: hb_script_t = 1097363309;
+pub const HB_SCRIPT_ANATOLIAN_HIEROGLYPHS: hb_script_t = 1215067511;
+pub const HB_SCRIPT_HATRAN: hb_script_t = 1214346354;
+pub const HB_SCRIPT_MULTANI: hb_script_t = 1299541108;
+pub const HB_SCRIPT_OLD_HUNGARIAN: hb_script_t = 1215655527;
+pub const HB_SCRIPT_SIGNWRITING: hb_script_t = 1399287415;
+pub const HB_SCRIPT_ADLAM: hb_script_t = 1097100397;
+pub const HB_SCRIPT_BHAIKSUKI: hb_script_t = 1114139507;
+pub const HB_SCRIPT_MARCHEN: hb_script_t = 1298231907;
+pub const HB_SCRIPT_OSAGE: hb_script_t = 1332963173;
+pub const HB_SCRIPT_TANGUT: hb_script_t = 1415671399;
+pub const HB_SCRIPT_NEWA: hb_script_t = 1315272545;
+pub const HB_SCRIPT_MASARAM_GONDI: hb_script_t = 1198485101;
+pub const HB_SCRIPT_NUSHU: hb_script_t = 1316186229;
+pub const HB_SCRIPT_SOYOMBO: hb_script_t = 1399814511;
+pub const HB_SCRIPT_ZANABAZAR_SQUARE: hb_script_t = 1516334690;
+pub const HB_SCRIPT_DOGRA: hb_script_t = 1148151666;
+pub const HB_SCRIPT_GUNJALA_GONDI: hb_script_t = 1198485095;
+pub const HB_SCRIPT_HANIFI_ROHINGYA: hb_script_t = 1383032935;
+pub const HB_SCRIPT_MAKASAR: hb_script_t = 1298230113;
+pub const HB_SCRIPT_MEDEFAIDRIN: hb_script_t = 1298490470;
+pub const HB_SCRIPT_OLD_SOGDIAN: hb_script_t = 1399809903;
+pub const HB_SCRIPT_SOGDIAN: hb_script_t = 1399809892;
+pub const HB_SCRIPT_ELYMAIC: hb_script_t = 1164736877;
+pub const HB_SCRIPT_NANDINAGARI: hb_script_t = 1315008100;
+pub const HB_SCRIPT_NYIAKENG_PUACHUE_HMONG: hb_script_t = 1215131248;
+pub const HB_SCRIPT_WANCHO: hb_script_t = 1466132591;
+pub const HB_SCRIPT_CHORASMIAN: hb_script_t = 1130918515;
+pub const HB_SCRIPT_DIVES_AKURU: hb_script_t = 1147756907;
+pub const HB_SCRIPT_KHITAN_SMALL_SCRIPT: hb_script_t = 1265202291;
+pub const HB_SCRIPT_YEZIDI: hb_script_t = 1499822697;
+pub const HB_SCRIPT_INVALID: hb_script_t = 0;
+pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 2147483647;
+pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
 pub type hb_script_t = u32;
 extern "C" {
     pub fn hb_script_from_iso15924_tag(tag: hb_tag_t) -> hb_script_t;
@@ -1146,10 +1146,10 @@ extern "C" {
 extern "C" {
     pub fn hb_color_get_blue(color: hb_color_t) -> u8;
 }
-pub const hb_memory_mode_t_HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
-pub const hb_memory_mode_t_HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
-pub const hb_memory_mode_t_HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
-pub const hb_memory_mode_t_HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: hb_memory_mode_t = 3;
+pub const HB_MEMORY_MODE_DUPLICATE: hb_memory_mode_t = 0;
+pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
+pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
+pub const HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: hb_memory_mode_t = 3;
 pub type hb_memory_mode_t = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1223,181 +1223,94 @@ extern "C" {
         length: *mut ::std::os::raw::c_uint,
     ) -> *mut ::std::os::raw::c_char;
 }
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_CONTROL:
-    hb_unicode_general_category_t = 0;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_FORMAT:
-    hb_unicode_general_category_t = 1;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_UNASSIGNED:
-    hb_unicode_general_category_t = 2;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE:
-    hb_unicode_general_category_t = 3;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_SURROGATE:
-    hb_unicode_general_category_t = 4;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER:
-    hb_unicode_general_category_t = 5;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER:
-    hb_unicode_general_category_t = 6;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER:
-    hb_unicode_general_category_t = 7;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER:
-    hb_unicode_general_category_t = 8;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER:
-    hb_unicode_general_category_t = 9;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_SPACING_MARK:
-    hb_unicode_general_category_t = 10;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK:
-    hb_unicode_general_category_t = 11;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK:
-    hb_unicode_general_category_t = 12;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER:
-    hb_unicode_general_category_t = 13;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER:
-    hb_unicode_general_category_t = 14;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER:
-    hb_unicode_general_category_t = 15;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION:
-    hb_unicode_general_category_t = 16;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION:
-    hb_unicode_general_category_t = 17;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION:
-    hb_unicode_general_category_t = 18;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION:
-    hb_unicode_general_category_t = 19;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION:
-    hb_unicode_general_category_t = 20;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION:
-    hb_unicode_general_category_t = 21;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION:
-    hb_unicode_general_category_t = 22;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL:
-    hb_unicode_general_category_t = 23;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL:
-    hb_unicode_general_category_t = 24;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL:
-    hb_unicode_general_category_t = 25;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL:
-    hb_unicode_general_category_t = 26;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR:
-    hb_unicode_general_category_t = 27;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR:
-    hb_unicode_general_category_t = 28;
-pub const hb_unicode_general_category_t_HB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR:
-    hb_unicode_general_category_t = 29;
+pub const HB_UNICODE_GENERAL_CATEGORY_CONTROL: hb_unicode_general_category_t = 0;
+pub const HB_UNICODE_GENERAL_CATEGORY_FORMAT: hb_unicode_general_category_t = 1;
+pub const HB_UNICODE_GENERAL_CATEGORY_UNASSIGNED: hb_unicode_general_category_t = 2;
+pub const HB_UNICODE_GENERAL_CATEGORY_PRIVATE_USE: hb_unicode_general_category_t = 3;
+pub const HB_UNICODE_GENERAL_CATEGORY_SURROGATE: hb_unicode_general_category_t = 4;
+pub const HB_UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER: hb_unicode_general_category_t = 5;
+pub const HB_UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER: hb_unicode_general_category_t = 6;
+pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_LETTER: hb_unicode_general_category_t = 7;
+pub const HB_UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER: hb_unicode_general_category_t = 8;
+pub const HB_UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER: hb_unicode_general_category_t = 9;
+pub const HB_UNICODE_GENERAL_CATEGORY_SPACING_MARK: hb_unicode_general_category_t = 10;
+pub const HB_UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK: hb_unicode_general_category_t = 11;
+pub const HB_UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK: hb_unicode_general_category_t = 12;
+pub const HB_UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER: hb_unicode_general_category_t = 13;
+pub const HB_UNICODE_GENERAL_CATEGORY_LETTER_NUMBER: hb_unicode_general_category_t = 14;
+pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_NUMBER: hb_unicode_general_category_t = 15;
+pub const HB_UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION: hb_unicode_general_category_t = 16;
+pub const HB_UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION: hb_unicode_general_category_t = 17;
+pub const HB_UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION: hb_unicode_general_category_t = 18;
+pub const HB_UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION: hb_unicode_general_category_t = 19;
+pub const HB_UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION: hb_unicode_general_category_t = 20;
+pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION: hb_unicode_general_category_t = 21;
+pub const HB_UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION: hb_unicode_general_category_t = 22;
+pub const HB_UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL: hb_unicode_general_category_t = 23;
+pub const HB_UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL: hb_unicode_general_category_t = 24;
+pub const HB_UNICODE_GENERAL_CATEGORY_MATH_SYMBOL: hb_unicode_general_category_t = 25;
+pub const HB_UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL: hb_unicode_general_category_t = 26;
+pub const HB_UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR: hb_unicode_general_category_t = 27;
+pub const HB_UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR: hb_unicode_general_category_t = 28;
+pub const HB_UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR: hb_unicode_general_category_t = 29;
 pub type hb_unicode_general_category_t = u32;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_NOT_REORDERED:
-    hb_unicode_combining_class_t = 0;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_OVERLAY:
-    hb_unicode_combining_class_t = 1;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_NUKTA:
-    hb_unicode_combining_class_t = 7;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_KANA_VOICING:
-    hb_unicode_combining_class_t = 8;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_VIRAMA:
-    hb_unicode_combining_class_t = 9;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC10:
-    hb_unicode_combining_class_t = 10;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC11:
-    hb_unicode_combining_class_t = 11;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC12:
-    hb_unicode_combining_class_t = 12;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC13:
-    hb_unicode_combining_class_t = 13;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC14:
-    hb_unicode_combining_class_t = 14;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC15:
-    hb_unicode_combining_class_t = 15;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC16:
-    hb_unicode_combining_class_t = 16;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC17:
-    hb_unicode_combining_class_t = 17;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC18:
-    hb_unicode_combining_class_t = 18;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC19:
-    hb_unicode_combining_class_t = 19;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC20:
-    hb_unicode_combining_class_t = 20;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC21:
-    hb_unicode_combining_class_t = 21;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC22:
-    hb_unicode_combining_class_t = 22;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC23:
-    hb_unicode_combining_class_t = 23;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC24:
-    hb_unicode_combining_class_t = 24;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC25:
-    hb_unicode_combining_class_t = 25;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC26:
-    hb_unicode_combining_class_t = 26;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC27:
-    hb_unicode_combining_class_t = 27;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC28:
-    hb_unicode_combining_class_t = 28;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC29:
-    hb_unicode_combining_class_t = 29;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC30:
-    hb_unicode_combining_class_t = 30;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC31:
-    hb_unicode_combining_class_t = 31;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC32:
-    hb_unicode_combining_class_t = 32;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC33:
-    hb_unicode_combining_class_t = 33;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC34:
-    hb_unicode_combining_class_t = 34;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC35:
-    hb_unicode_combining_class_t = 35;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC36:
-    hb_unicode_combining_class_t = 36;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC84:
-    hb_unicode_combining_class_t = 84;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC91:
-    hb_unicode_combining_class_t = 91;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC103:
-    hb_unicode_combining_class_t = 103;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC107:
-    hb_unicode_combining_class_t = 107;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC118:
-    hb_unicode_combining_class_t = 118;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC122:
-    hb_unicode_combining_class_t = 122;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC129:
-    hb_unicode_combining_class_t = 129;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC130:
-    hb_unicode_combining_class_t = 130;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_CCC133:
-    hb_unicode_combining_class_t = 132;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT:
-    hb_unicode_combining_class_t = 200;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW:
-    hb_unicode_combining_class_t = 202;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE:
-    hb_unicode_combining_class_t = 214;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE_RIGHT:
-    hb_unicode_combining_class_t = 216;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_BELOW_LEFT:
-    hb_unicode_combining_class_t = 218;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_BELOW:
-    hb_unicode_combining_class_t = 220;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_BELOW_RIGHT:
-    hb_unicode_combining_class_t = 222;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_LEFT:
-    hb_unicode_combining_class_t = 224;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_RIGHT:
-    hb_unicode_combining_class_t = 226;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ABOVE_LEFT:
-    hb_unicode_combining_class_t = 228;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ABOVE:
-    hb_unicode_combining_class_t = 230;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_ABOVE_RIGHT:
-    hb_unicode_combining_class_t = 232;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_DOUBLE_BELOW:
-    hb_unicode_combining_class_t = 233;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_DOUBLE_ABOVE:
-    hb_unicode_combining_class_t = 234;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT:
-    hb_unicode_combining_class_t = 240;
-pub const hb_unicode_combining_class_t_HB_UNICODE_COMBINING_CLASS_INVALID:
-    hb_unicode_combining_class_t = 255;
+pub const HB_UNICODE_COMBINING_CLASS_NOT_REORDERED: hb_unicode_combining_class_t = 0;
+pub const HB_UNICODE_COMBINING_CLASS_OVERLAY: hb_unicode_combining_class_t = 1;
+pub const HB_UNICODE_COMBINING_CLASS_NUKTA: hb_unicode_combining_class_t = 7;
+pub const HB_UNICODE_COMBINING_CLASS_KANA_VOICING: hb_unicode_combining_class_t = 8;
+pub const HB_UNICODE_COMBINING_CLASS_VIRAMA: hb_unicode_combining_class_t = 9;
+pub const HB_UNICODE_COMBINING_CLASS_CCC10: hb_unicode_combining_class_t = 10;
+pub const HB_UNICODE_COMBINING_CLASS_CCC11: hb_unicode_combining_class_t = 11;
+pub const HB_UNICODE_COMBINING_CLASS_CCC12: hb_unicode_combining_class_t = 12;
+pub const HB_UNICODE_COMBINING_CLASS_CCC13: hb_unicode_combining_class_t = 13;
+pub const HB_UNICODE_COMBINING_CLASS_CCC14: hb_unicode_combining_class_t = 14;
+pub const HB_UNICODE_COMBINING_CLASS_CCC15: hb_unicode_combining_class_t = 15;
+pub const HB_UNICODE_COMBINING_CLASS_CCC16: hb_unicode_combining_class_t = 16;
+pub const HB_UNICODE_COMBINING_CLASS_CCC17: hb_unicode_combining_class_t = 17;
+pub const HB_UNICODE_COMBINING_CLASS_CCC18: hb_unicode_combining_class_t = 18;
+pub const HB_UNICODE_COMBINING_CLASS_CCC19: hb_unicode_combining_class_t = 19;
+pub const HB_UNICODE_COMBINING_CLASS_CCC20: hb_unicode_combining_class_t = 20;
+pub const HB_UNICODE_COMBINING_CLASS_CCC21: hb_unicode_combining_class_t = 21;
+pub const HB_UNICODE_COMBINING_CLASS_CCC22: hb_unicode_combining_class_t = 22;
+pub const HB_UNICODE_COMBINING_CLASS_CCC23: hb_unicode_combining_class_t = 23;
+pub const HB_UNICODE_COMBINING_CLASS_CCC24: hb_unicode_combining_class_t = 24;
+pub const HB_UNICODE_COMBINING_CLASS_CCC25: hb_unicode_combining_class_t = 25;
+pub const HB_UNICODE_COMBINING_CLASS_CCC26: hb_unicode_combining_class_t = 26;
+pub const HB_UNICODE_COMBINING_CLASS_CCC27: hb_unicode_combining_class_t = 27;
+pub const HB_UNICODE_COMBINING_CLASS_CCC28: hb_unicode_combining_class_t = 28;
+pub const HB_UNICODE_COMBINING_CLASS_CCC29: hb_unicode_combining_class_t = 29;
+pub const HB_UNICODE_COMBINING_CLASS_CCC30: hb_unicode_combining_class_t = 30;
+pub const HB_UNICODE_COMBINING_CLASS_CCC31: hb_unicode_combining_class_t = 31;
+pub const HB_UNICODE_COMBINING_CLASS_CCC32: hb_unicode_combining_class_t = 32;
+pub const HB_UNICODE_COMBINING_CLASS_CCC33: hb_unicode_combining_class_t = 33;
+pub const HB_UNICODE_COMBINING_CLASS_CCC34: hb_unicode_combining_class_t = 34;
+pub const HB_UNICODE_COMBINING_CLASS_CCC35: hb_unicode_combining_class_t = 35;
+pub const HB_UNICODE_COMBINING_CLASS_CCC36: hb_unicode_combining_class_t = 36;
+pub const HB_UNICODE_COMBINING_CLASS_CCC84: hb_unicode_combining_class_t = 84;
+pub const HB_UNICODE_COMBINING_CLASS_CCC91: hb_unicode_combining_class_t = 91;
+pub const HB_UNICODE_COMBINING_CLASS_CCC103: hb_unicode_combining_class_t = 103;
+pub const HB_UNICODE_COMBINING_CLASS_CCC107: hb_unicode_combining_class_t = 107;
+pub const HB_UNICODE_COMBINING_CLASS_CCC118: hb_unicode_combining_class_t = 118;
+pub const HB_UNICODE_COMBINING_CLASS_CCC122: hb_unicode_combining_class_t = 122;
+pub const HB_UNICODE_COMBINING_CLASS_CCC129: hb_unicode_combining_class_t = 129;
+pub const HB_UNICODE_COMBINING_CLASS_CCC130: hb_unicode_combining_class_t = 130;
+pub const HB_UNICODE_COMBINING_CLASS_CCC133: hb_unicode_combining_class_t = 132;
+pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW_LEFT: hb_unicode_combining_class_t = 200;
+pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_BELOW: hb_unicode_combining_class_t = 202;
+pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE: hb_unicode_combining_class_t = 214;
+pub const HB_UNICODE_COMBINING_CLASS_ATTACHED_ABOVE_RIGHT: hb_unicode_combining_class_t = 216;
+pub const HB_UNICODE_COMBINING_CLASS_BELOW_LEFT: hb_unicode_combining_class_t = 218;
+pub const HB_UNICODE_COMBINING_CLASS_BELOW: hb_unicode_combining_class_t = 220;
+pub const HB_UNICODE_COMBINING_CLASS_BELOW_RIGHT: hb_unicode_combining_class_t = 222;
+pub const HB_UNICODE_COMBINING_CLASS_LEFT: hb_unicode_combining_class_t = 224;
+pub const HB_UNICODE_COMBINING_CLASS_RIGHT: hb_unicode_combining_class_t = 226;
+pub const HB_UNICODE_COMBINING_CLASS_ABOVE_LEFT: hb_unicode_combining_class_t = 228;
+pub const HB_UNICODE_COMBINING_CLASS_ABOVE: hb_unicode_combining_class_t = 230;
+pub const HB_UNICODE_COMBINING_CLASS_ABOVE_RIGHT: hb_unicode_combining_class_t = 232;
+pub const HB_UNICODE_COMBINING_CLASS_DOUBLE_BELOW: hb_unicode_combining_class_t = 233;
+pub const HB_UNICODE_COMBINING_CLASS_DOUBLE_ABOVE: hb_unicode_combining_class_t = 234;
+pub const HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT: hb_unicode_combining_class_t = 240;
+pub const HB_UNICODE_COMBINING_CLASS_INVALID: hb_unicode_combining_class_t = 255;
 pub type hb_unicode_combining_class_t = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2960,8 +2873,8 @@ fn bindgen_test_layout_hb_glyph_info_t() {
         )
     );
 }
-pub const hb_glyph_flags_t_HB_GLYPH_FLAG_UNSAFE_TO_BREAK: hb_glyph_flags_t = 1;
-pub const hb_glyph_flags_t_HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
+pub const HB_GLYPH_FLAG_UNSAFE_TO_BREAK: hb_glyph_flags_t = 1;
+pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
 #[doc = " hb_glyph_flags_t:"]
 #[doc = " @HB_GLYPH_FLAG_UNSAFE_TO_BREAK: Indicates that if input text is broken at the"]
 #[doc = " \t\t\t\t   beginning of the cluster this glyph is part of,"]
@@ -3200,9 +3113,9 @@ extern "C" {
         key: *mut hb_user_data_key_t,
     ) -> *mut ::std::os::raw::c_void;
 }
-pub const hb_buffer_content_type_t_HB_BUFFER_CONTENT_TYPE_INVALID: hb_buffer_content_type_t = 0;
-pub const hb_buffer_content_type_t_HB_BUFFER_CONTENT_TYPE_UNICODE: hb_buffer_content_type_t = 1;
-pub const hb_buffer_content_type_t_HB_BUFFER_CONTENT_TYPE_GLYPHS: hb_buffer_content_type_t = 2;
+pub const HB_BUFFER_CONTENT_TYPE_INVALID: hb_buffer_content_type_t = 0;
+pub const HB_BUFFER_CONTENT_TYPE_UNICODE: hb_buffer_content_type_t = 1;
+pub const HB_BUFFER_CONTENT_TYPE_GLYPHS: hb_buffer_content_type_t = 2;
 #[doc = " hb_buffer_content_type_t:"]
 #[doc = " @HB_BUFFER_CONTENT_TYPE_INVALID: Initial value for new buffer."]
 #[doc = " @HB_BUFFER_CONTENT_TYPE_UNICODE: The buffer contains input characters (before shaping)."]
@@ -3259,12 +3172,12 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_guess_segment_properties(buffer: *mut hb_buffer_t);
 }
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_DEFAULT: hb_buffer_flags_t = 0;
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_BOT: hb_buffer_flags_t = 1;
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_EOT: hb_buffer_flags_t = 2;
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 8;
-pub const hb_buffer_flags_t_HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
+pub const HB_BUFFER_FLAG_DEFAULT: hb_buffer_flags_t = 0;
+pub const HB_BUFFER_FLAG_BOT: hb_buffer_flags_t = 1;
+pub const HB_BUFFER_FLAG_EOT: hb_buffer_flags_t = 2;
+pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
+pub const HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 8;
+pub const HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
 #[doc = " hb_buffer_flags_t:"]
 #[doc = " @HB_BUFFER_FLAG_DEFAULT: the default buffer flag."]
 #[doc = " @HB_BUFFER_FLAG_BOT: flag indicating that special handling of the beginning"]
@@ -3301,13 +3214,10 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_get_flags(buffer: *mut hb_buffer_t) -> hb_buffer_flags_t;
 }
-pub const hb_buffer_cluster_level_t_HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES:
-    hb_buffer_cluster_level_t = 0;
-pub const hb_buffer_cluster_level_t_HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS:
-    hb_buffer_cluster_level_t = 1;
-pub const hb_buffer_cluster_level_t_HB_BUFFER_CLUSTER_LEVEL_CHARACTERS: hb_buffer_cluster_level_t =
-    2;
-pub const hb_buffer_cluster_level_t_HB_BUFFER_CLUSTER_LEVEL_DEFAULT: hb_buffer_cluster_level_t = 0;
+pub const HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES: hb_buffer_cluster_level_t = 0;
+pub const HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS: hb_buffer_cluster_level_t = 1;
+pub const HB_BUFFER_CLUSTER_LEVEL_CHARACTERS: hb_buffer_cluster_level_t = 2;
+pub const HB_BUFFER_CLUSTER_LEVEL_DEFAULT: hb_buffer_cluster_level_t = 0;
 #[doc = " hb_buffer_cluster_level_t:"]
 #[doc = " @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES: Return cluster values grouped by graphemes into"]
 #[doc = "   monotone order."]
@@ -3454,20 +3364,13 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_normalize_glyphs(buffer: *mut hb_buffer_t);
 }
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_DEFAULT:
-    hb_buffer_serialize_flags_t = 0;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS:
-    hb_buffer_serialize_flags_t = 1;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS:
-    hb_buffer_serialize_flags_t = 2;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES:
-    hb_buffer_serialize_flags_t = 4;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS:
-    hb_buffer_serialize_flags_t = 8;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS:
-    hb_buffer_serialize_flags_t = 16;
-pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_NO_ADVANCES:
-    hb_buffer_serialize_flags_t = 32;
+pub const HB_BUFFER_SERIALIZE_FLAG_DEFAULT: hb_buffer_serialize_flags_t = 0;
+pub const HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS: hb_buffer_serialize_flags_t = 1;
+pub const HB_BUFFER_SERIALIZE_FLAG_NO_POSITIONS: hb_buffer_serialize_flags_t = 2;
+pub const HB_BUFFER_SERIALIZE_FLAG_NO_GLYPH_NAMES: hb_buffer_serialize_flags_t = 4;
+pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_EXTENTS: hb_buffer_serialize_flags_t = 8;
+pub const HB_BUFFER_SERIALIZE_FLAG_GLYPH_FLAGS: hb_buffer_serialize_flags_t = 16;
+pub const HB_BUFFER_SERIALIZE_FLAG_NO_ADVANCES: hb_buffer_serialize_flags_t = 32;
 #[doc = " hb_buffer_serialize_flags_t:"]
 #[doc = " @HB_BUFFER_SERIALIZE_FLAG_DEFAULT: serialize glyph names, clusters and positions."]
 #[doc = " @HB_BUFFER_SERIALIZE_FLAG_NO_CLUSTERS: do not serialize glyph cluster."]
@@ -3482,12 +3385,9 @@ pub const hb_buffer_serialize_flags_t_HB_BUFFER_SERIALIZE_FLAG_NO_ADVANCES:
 #[doc = ""]
 #[doc = " Since: 0.9.20"]
 pub type hb_buffer_serialize_flags_t = u32;
-pub const hb_buffer_serialize_format_t_HB_BUFFER_SERIALIZE_FORMAT_TEXT:
-    hb_buffer_serialize_format_t = 1413830740;
-pub const hb_buffer_serialize_format_t_HB_BUFFER_SERIALIZE_FORMAT_JSON:
-    hb_buffer_serialize_format_t = 1246973774;
-pub const hb_buffer_serialize_format_t_HB_BUFFER_SERIALIZE_FORMAT_INVALID:
-    hb_buffer_serialize_format_t = 0;
+pub const HB_BUFFER_SERIALIZE_FORMAT_TEXT: hb_buffer_serialize_format_t = 1413830740;
+pub const HB_BUFFER_SERIALIZE_FORMAT_JSON: hb_buffer_serialize_format_t = 1246973774;
+pub const HB_BUFFER_SERIALIZE_FORMAT_INVALID: hb_buffer_serialize_format_t = 0;
 #[doc = " hb_buffer_serialize_format_t:"]
 #[doc = " @HB_BUFFER_SERIALIZE_FORMAT_TEXT: a human-readable, plain text format."]
 #[doc = " @HB_BUFFER_SERIALIZE_FORMAT_JSON: a machine-readable JSON format."]
@@ -3535,20 +3435,15 @@ extern "C" {
         format: hb_buffer_serialize_format_t,
     ) -> hb_bool_t;
 }
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_EQUAL: hb_buffer_diff_flags_t = 0;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH: hb_buffer_diff_flags_t =
-    1;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH: hb_buffer_diff_flags_t = 2;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT: hb_buffer_diff_flags_t = 4;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT: hb_buffer_diff_flags_t =
-    8;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: hb_buffer_diff_flags_t =
-    16;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: hb_buffer_diff_flags_t = 32;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: hb_buffer_diff_flags_t =
-    64;
-pub const hb_buffer_diff_flags_t_HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: hb_buffer_diff_flags_t =
-    128;
+pub const HB_BUFFER_DIFF_FLAG_EQUAL: hb_buffer_diff_flags_t = 0;
+pub const HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH: hb_buffer_diff_flags_t = 1;
+pub const HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH: hb_buffer_diff_flags_t = 2;
+pub const HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT: hb_buffer_diff_flags_t = 4;
+pub const HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT: hb_buffer_diff_flags_t = 8;
+pub const HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: hb_buffer_diff_flags_t = 16;
+pub const HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: hb_buffer_diff_flags_t = 32;
+pub const HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: hb_buffer_diff_flags_t = 64;
+pub const HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: hb_buffer_diff_flags_t = 128;
 pub type hb_buffer_diff_flags_t = u32;
 extern "C" {
     pub fn hb_buffer_diff(
