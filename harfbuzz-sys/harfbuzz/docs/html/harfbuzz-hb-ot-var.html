@@ -5,23 +5,22 @@
 <title>hb-ot-var: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch12.html" title="OpenType API">
+<link rel="up" href="ch13.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
-<link rel="next" href="ch13.html" title="Apple Advanced Typography API">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<link rel="next" href="ch14.html" title="Apple Advanced Typography API">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
 <a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-ot-var.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-ot-var.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+                  <a href="#harfbuzz-hb-ot-var.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch12.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch13.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-ot-shape.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="ch13.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="ch14.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="harfbuzz-hb-ot-var"></a><div class="titlepage"></div>
@@ -36,8 +35,8 @@
 <a name="harfbuzz-hb-ot-var.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -123,8 +122,8 @@
 <a name="harfbuzz-hb-ot-var.other"></a><h2>Types and Values</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="name">
-<col class="description">
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -155,12 +154,6 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="harfbuzz-hb-ot-var.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Enumeration-and-Flag-Types.html">GFlags</a>
-    <span class="lineart">╰──</span> hb_ot_var_axis_flags_t
-</pre>
-</div>
-<div class="refsect1">
 <a name="harfbuzz-hb-ot-var.includes"></a><h2>Includes</h2>
 <pre class="synopsis">#include &lt;hb-ot.h&gt;
 </pre>
@@ -174,7 +167,7 @@
 <div class="refsect2">
 <a name="hb-ot-var-has-data"></a><h3>hb_ot_var_has_data ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 <p>This function allows to verify the presence of OpenType variation data on the face.</p>
 <div class="refsect3">
 <a name="hb-ot-var-has-data.parameters"></a><h4>Parameters</h4>
@@ -186,7 +179,7 @@ hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-h
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to test</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to test</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -201,7 +194,7 @@ hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-h
 <div class="refsect2">
 <a name="hb-ot-var-find-axis-info"></a><h3>hb_ot_var_find_axis_info ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_var_find_axis_info (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_var_find_axis_info (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                           <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> axis_tag</code></em>,
                           <em class="parameter"><code><span class="type">hb_ot_var_axis_info_t</span> *axis_info</code></em>);</pre>
 <p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
@@ -210,14 +203,14 @@ hb_ot_var_find_axis_info (<em class="parameter"><code><a class="link" href="harf
 <div class="refsect2">
 <a name="hb-ot-var-get-axis-count"></a><h3>hb_ot_var_get_axis_count ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_var_get_axis_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_var_get_axis_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 <p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-ot-var-get-axis-infos"></a><h3>hb_ot_var_get_axis_infos ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_var_get_axis_infos (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_var_get_axis_infos (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                           <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                           <em class="parameter"><code>unsigned <span class="type">int</span> *axes_count</code></em>,
                           <em class="parameter"><code><span class="type">hb_ot_var_axis_info_t</span> *axes_array</code></em>);</pre>
@@ -227,14 +220,14 @@ hb_ot_var_get_axis_infos (<em class="parameter"><code><a class="link" href="harf
 <div class="refsect2">
 <a name="hb-ot-var-get-named-instance-count"></a><h3>hb_ot_var_get_named_instance_count ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_var_get_named_instance_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_var_get_named_instance_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-ot-var-named-instance-get-subfamily-name-id"></a><h3>hb_ot_var_named_instance_get_subfamily_name_id ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="returnvalue">hb_ot_name_id_t</span></a>
 hb_ot_var_named_instance_get_subfamily_name_id
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>);</pre>
 </div>
 <hr>
@@ -242,7 +235,7 @@ hb_ot_var_named_instance_get_subfamily_name_id
 <a name="hb-ot-var-named-instance-get-postscript-name-id"></a><h3>hb_ot_var_named_instance_get_postscript_name_id ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="returnvalue">hb_ot_name_id_t</span></a>
 hb_ot_var_named_instance_get_postscript_name_id
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>);</pre>
 </div>
 <hr>
@@ -250,7 +243,7 @@ hb_ot_var_named_instance_get_postscript_name_id
 <a name="hb-ot-var-named-instance-get-design-coords"></a><h3>hb_ot_var_named_instance_get_design_coords ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_var_named_instance_get_design_coords
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> *coords_length</code></em>,
                                 <em class="parameter"><code><span class="type">float</span> *coords</code></em>);</pre>
@@ -259,7 +252,7 @@ hb_ot_var_named_instance_get_design_coords
 <div class="refsect2">
 <a name="hb-ot-var-normalize-variations"></a><h3>hb_ot_var_normalize_variations ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_var_normalize_variations (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_var_normalize_variations (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-variation-t" title="hb_variation_t"><span class="type">hb_variation_t</span></a> *variations</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> variations_length</code></em>,
                                 <em class="parameter"><code><span class="type">int</span> *coords</code></em>,
@@ -270,7 +263,7 @@ hb_ot_var_normalize_variations (<em class="parameter"><code><a class="link" href
 <div class="refsect2">
 <a name="hb-ot-var-normalize-coords"></a><h3>hb_ot_var_normalize_coords ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_var_normalize_coords (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_var_normalize_coords (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                             <em class="parameter"><code>unsigned <span class="type">int</span> coords_length</code></em>,
                             <em class="parameter"><code>const <span class="type">float</span> *design_coords</code></em>,
                             <em class="parameter"><code><span class="type">int</span> *normalized_coords</code></em>);</pre>
@@ -340,6 +333,6 @@ hb_ot_var_normalize_coords (<em class="parameter"><code><a class="link" href="ha
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>

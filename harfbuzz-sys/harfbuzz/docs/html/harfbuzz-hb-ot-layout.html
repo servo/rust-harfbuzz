@@ -5,21 +5,20 @@
 <title>hb-ot-layout: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch12.html" title="OpenType API">
+<link rel="up" href="ch13.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-font.html" title="hb-ot-font">
 <link rel="next" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
 <a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-ot-layout.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-ot-layout.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+                  <a href="#harfbuzz-hb-ot-layout.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch12.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch13.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-ot-font.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-ot-math.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -36,8 +35,8 @@
 <a name="harfbuzz-hb-ot-layout.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -235,6 +234,14 @@
 </tr>
 <tr>
 <td class="function_type">
+<span class="returnvalue">unsigned</span>
+</td>
+<td class="function_name">
+<a class="link" href="harfbuzz-hb-ot-layout.html#hb-ot-layout-lookup-get-glyph-alternates" title="hb_ot_layout_lookup_get_glyph_alternates ()">hb_ot_layout_lookup_get_glyph_alternates</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
 <span class="returnvalue">void</span>
 </td>
 <td class="function_name">
@@ -332,8 +339,8 @@
 <a name="harfbuzz-hb-ot-layout.other"></a><h2>Types and Values</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="name">
-<col class="description">
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -398,13 +405,6 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="refsect1">
-<a name="harfbuzz-hb-ot-layout.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Enumeration-and-Flag-Types.html">GEnum</a>
-    <span class="lineart">├──</span> hb_ot_layout_baseline_tag_t
-    <span class="lineart">╰──</span> hb_ot_layout_glyph_class_t
-</pre>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-ot-layout.includes"></a><h2>Includes</h2>
@@ -547,12 +547,12 @@ and
 <div class="refsect2">
 <a name="hb-ot-layout-collect-lookups"></a><h3>hb_ot_layout_collect_lookups ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_layout_collect_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_collect_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *scripts</code></em>,
                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *languages</code></em>,
                               <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *features</code></em>,
-                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
+                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
 <p>Fetches a list of all feature-lookup indexes in the specified face's GSUB
 table or GPOS table, underneath the specified scripts, languages, and
 features. If no list of scripts is provided, all scripts will be queried.
@@ -569,7 +569,7 @@ list of features is provided, all features will be queried.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -606,12 +606,12 @@ list of features is provided, all features will be queried.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-collect-features"></a><h3>hb_ot_layout_collect_features ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_layout_collect_features (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_collect_features (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *scripts</code></em>,
                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *languages</code></em>,
                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *features</code></em>,
-                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *feature_indexes</code></em>);</pre>
+                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *feature_indexes</code></em>);</pre>
 <p>Fetches a list of all feature indexes in the specified face's GSUB table
 or GPOS table, underneath the specified scripts, languages, and features.
 If no list of scripts is provided, all scripts will be queried. If no list
@@ -628,7 +628,7 @@ features is provided, all features will be queried.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -665,7 +665,7 @@ features is provided, all features will be queried.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-feature-get-characters"></a><h3>hb_ot_layout_feature_get_characters ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_feature_get_characters (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_feature_get_characters (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> feature_index</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
@@ -673,11 +673,6 @@ hb_ot_layout_feature_get_characters (<em class="parameter"><code><a class="link"
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *characters</code></em>);</pre>
 <p>Fetches a list of the characters defined as having a variant under the specified
 "Character Variant" ("cvXX") feature tag.</p>
-<div class="note">Note: If the char_count output value is equal to its input value, then there
-      is a chance there were more characters defined under the feature tag than were
-      returned. This function can be called with incrementally larger start_offset
-      until the char_count output value is lower than its input value, or the size
-      of the characters array can be increased.</div>
 <div class="refsect3">
 <a name="hb-ot-layout-feature-get-characters.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -689,7 +684,7 @@ hb_ot_layout_feature_get_characters (<em class="parameter"><code><a class="link"
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -733,7 +728,7 @@ glyph variants. </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-feature-get-lookups"></a><h3>hb_ot_layout_feature_get_lookups ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_feature_get_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_feature_get_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                   <em class="parameter"><code>unsigned <span class="type">int</span> feature_index</code></em>,
                                   <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
@@ -753,7 +748,7 @@ begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -791,7 +786,7 @@ Output = the actual number of lookups returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-feature-get-name-ids"></a><h3>hb_ot_layout_feature_get_name_ids ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_feature_get_name_ids (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_feature_get_name_ids (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                    <em class="parameter"><code>unsigned <span class="type">int</span> feature_index</code></em>,
                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *label_id</code></em>,
@@ -812,7 +807,7 @@ hb_ot_layout_feature_get_name_ids (<em class="parameter"><code><a class="link" h
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -870,7 +865,7 @@ parameters. (Must be zero if numParameters is zero.). </p></td>
 <a name="hb-ot-layout-feature-with-variations-get-lookups"></a><h3>hb_ot_layout_feature_with_variations_get_lookups ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_layout_feature_with_variations_get_lookups
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> feature_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> variations_index</code></em>,
@@ -891,7 +886,7 @@ variations index. The list returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -933,7 +928,7 @@ Output = the actual number of lookups returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-get-attach-points"></a><h3>hb_ot_layout_get_attach_points ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_get_attach_points (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_get_attach_points (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> glyph</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> *point_count</code></em>,
@@ -952,7 +947,7 @@ table of the face. The list returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -984,7 +979,7 @@ Output = the actual number of attachment points returned (may be zero). </p></td
 <div class="refsect2">
 <a name="hb-ot-layout-get-baseline"></a><h3>hb_ot_layout_get_baseline ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_get_baseline (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
+hb_ot_layout_get_baseline (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> *font</code></em>,
                            <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-layout.html#hb-ot-layout-baseline-tag-t" title="enum hb_ot_layout_baseline_tag_t"><span class="type">hb_ot_layout_baseline_tag_t</span></a> baseline_tag</code></em>,
                            <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-direction-t" title="enum hb_direction_t"><span class="type">hb_direction_t</span></a> direction</code></em>,
                            <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> script_tag</code></em>,
@@ -1035,7 +1030,7 @@ hb_ot_layout_get_baseline (<em class="parameter"><code><a class="link" href="har
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-get-baseline.returns"></a><h4>Returns</h4>
-<p> if found baseline value in the the font.</p>
+<p> if found baseline value in the font.</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-6-0.html#api-index-2.6.0">2.6.0</a></p>
 </div>
@@ -1043,7 +1038,7 @@ hb_ot_layout_get_baseline (<em class="parameter"><code><a class="link" href="har
 <div class="refsect2">
 <a name="hb-ot-layout-get-glyph-class"></a><h3>hb_ot_layout_get_glyph_class ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-ot-layout.html#hb-ot-layout-glyph-class-t" title="enum hb_ot_layout_glyph_class_t"><span class="returnvalue">hb_ot_layout_glyph_class_t</span></a>
-hb_ot_layout_get_glyph_class (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_get_glyph_class (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> glyph</code></em>);</pre>
 <p>Fetches the GDEF class of the requested glyph in the specified face.</p>
 <div class="refsect3">
@@ -1057,7 +1052,7 @@ hb_ot_layout_get_glyph_class (<em class="parameter"><code><a class="link" href="
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1079,9 +1074,9 @@ point in the GDEF table of the face.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-get-glyphs-in-class"></a><h3>hb_ot_layout_get_glyphs_in_class ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_layout_get_glyphs_in_class (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_get_glyphs_in_class (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-layout.html#hb-ot-layout-glyph-class-t" title="enum hb_ot_layout_glyph_class_t"><span class="type">hb_ot_layout_glyph_class_t</span></a> klass</code></em>,
-                                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
+                                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
 <p>Retrieves the set of all glyphs from the face that belong to the requested
 glyph class in the face's GDEF table.</p>
 <div class="refsect3">
@@ -1095,7 +1090,7 @@ glyph class in the face's GDEF table.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1105,7 +1100,7 @@ glyph class in the face's GDEF table.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>glyphs</p></td>
-<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> set of all glyphs belonging to the requested
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> set of all glyphs belonging to the requested
 class. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
@@ -1118,7 +1113,7 @@ class. </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-get-ligature-carets"></a><h3>hb_ot_layout_get_ligature_carets ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_get_ligature_carets (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
+hb_ot_layout_get_ligature_carets (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> *font</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-direction-t" title="enum hb_direction_t"><span class="type">hb_direction_t</span></a> direction</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> glyph</code></em>,
                                   <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
@@ -1137,7 +1132,7 @@ table of the font. The list returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>font</p></td>
-<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> to work on</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> to work on</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1174,7 +1169,7 @@ Output = the actual number of caret positions returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-get-size-params"></a><h3>hb_ot_layout_get_size_params ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_get_size_params (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_get_size_params (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *design_size</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> *subfamily_id</code></em>,
                               <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> *subfamily_name_id</code></em>,
@@ -1185,8 +1180,7 @@ the subfamily_id and the subfamily name string (accessible via the subfamily_nam
 as used here are defined as pertaining only to fonts within a font family that differ
 specifically in their respective size ranges; other ways to differentiate fonts within
 a subfamily are not covered by the <code class="literal">size</code> feature.</p>
-<p>For more information on this distinction, see the <code class="literal">size</code> documentation at
-https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt<span class="type">tag-39size39</span></p>
+<p>For more information on this distinction, see the <a class="ulink" href="https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt#tag-size" target="_top"><code class="literal">size</code> feature documentation</a>.</p>
 <div class="refsect3">
 <a name="hb-ot-layout-get-size-params.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1198,7 +1192,7 @@ https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt<span class
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1239,7 +1233,7 @@ https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt<span class
 <div class="refsect2">
 <a name="hb-ot-layout-glyph-sequence-func-t"></a><h3>hb_ot_layout_glyph_sequence_func_t ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-<span class="c_punctuation">(</span>*hb_ot_layout_glyph_sequence_func_t<span class="c_punctuation">)</span> (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>,
+<span class="c_punctuation">(</span>*hb_ot_layout_glyph_sequence_func_t<span class="c_punctuation">)</span> (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> *font</code></em>,
                                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                        <em class="parameter"><code>unsigned <span class="type">int</span> lookup_index</code></em>,
                                        <em class="parameter"><code>const <span class="type">hb_ot_layout_glyph_sequence_t</span> *sequence</code></em>,
@@ -1249,7 +1243,7 @@ https://docs.microsoft.com/en-us/typography/opentype/spec/features_pt<span class
 <div class="refsect2">
 <a name="hb-ot-layout-has-glyph-classes"></a><h3>hb_ot_layout_has_glyph_classes ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_has_glyph_classes (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_layout_has_glyph_classes (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 <p>Tests whether a face has any glyph classes defined in its GDEF table.</p>
 <div class="refsect3">
 <a name="hb-ot-layout-has-glyph-classes.parameters"></a><h4>Parameters</h4>
@@ -1261,7 +1255,7 @@ hb_ot_layout_has_glyph_classes (<em class="parameter"><code><a class="link" href
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -1275,7 +1269,7 @@ hb_ot_layout_has_glyph_classes (<em class="parameter"><code><a class="link" href
 <div class="refsect2">
 <a name="hb-ot-layout-has-positioning"></a><h3>hb_ot_layout_has_positioning ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_has_positioning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_layout_has_positioning (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 <div class="refsect3">
 <a name="hb-ot-layout-has-positioning.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1286,7 +1280,7 @@ hb_ot_layout_has_positioning (<em class="parameter"><code><a class="link" href="
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -1300,7 +1294,7 @@ hb_ot_layout_has_positioning (<em class="parameter"><code><a class="link" href="
 <div class="refsect2">
 <a name="hb-ot-layout-has-substitution"></a><h3>hb_ot_layout_has_substitution ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_has_substitution (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+hb_ot_layout_has_substitution (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
 <p>Tests whether the specified face includes any GSUB substitutions.</p>
 <div class="refsect3">
 <a name="hb-ot-layout-has-substitution.parameters"></a><h4>Parameters</h4>
@@ -1312,7 +1306,7 @@ hb_ot_layout_has_substitution (<em class="parameter"><code><a class="link" href=
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -1326,7 +1320,7 @@ hb_ot_layout_has_substitution (<em class="parameter"><code><a class="link" href=
 <div class="refsect2">
 <a name="hb-ot-layout-language-find-feature"></a><h3>hb_ot_layout_language_find_feature ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_language_find_feature (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_language_find_feature (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> language_index</code></em>,
@@ -1345,7 +1339,7 @@ or GPOS table, underneath the specified script and language.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1386,7 +1380,7 @@ or GPOS table, underneath the specified script and language.</p>
 <a name="hb-ot-layout-language-get-feature-indexes"></a><h3>hb_ot_layout_language_get_feature_indexes ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_layout_language_get_feature_indexes
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> language_index</code></em>,
@@ -1407,7 +1401,7 @@ returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1450,7 +1444,7 @@ Output: the actual number of feature tags returned (may be zero). </p></td>
 <a name="hb-ot-layout-language-get-feature-tags"></a><h3>hb_ot_layout_language_get_feature_tags ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_layout_language_get_feature_tags
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> language_index</code></em>,
@@ -1471,7 +1465,7 @@ returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1514,7 +1508,7 @@ Output = the actual number of feature tags returned (may be zero). </p></td>
 <a name="hb-ot-layout-language-get-required-feature"></a><h3>hb_ot_layout_language_get_required_feature ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_ot_layout_language_get_required_feature
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> language_index</code></em>,
@@ -1533,7 +1527,7 @@ underneath the specified script and language.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1553,8 +1547,8 @@ underneath the specified script and language.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>feature_index</p></td>
-<td class="parameter_description"><p>The index of the requested feature</p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p>The index of the requested feature. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>feature_tag</p></td>
@@ -1574,13 +1568,13 @@ underneath the specified script and language.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-lookup-collect-glyphs"></a><h3>hb_ot_layout_lookup_collect_glyphs ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_layout_lookup_collect_glyphs (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_lookup_collect_glyphs (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> lookup_index</code></em>,
-                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs_before</code></em>,
-                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs_input</code></em>,
-                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs_after</code></em>,
-                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs_output</code></em>);</pre>
+                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs_before</code></em>,
+                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs_input</code></em>,
+                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs_after</code></em>,
+                                    <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs_output</code></em>);</pre>
 <p>Fetches a list of all glyphs affected by the specified lookup in the
 specified face's GSUB table or GPOS table.</p>
 <div class="refsect3">
@@ -1594,7 +1588,7 @@ specified face's GSUB table or GPOS table.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1619,7 +1613,7 @@ specified face's GSUB table or GPOS table.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>glyphs_after</p></td>
-<td class="parameter_description"><p>Array of glyphs following the substition range. </p></td>
+<td class="parameter_description"><p>Array of glyphs following the substitution range. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -1634,12 +1628,74 @@ specified face's GSUB table or GPOS table.</p>
 </div>
 <hr>
 <div class="refsect2">
+<a name="hb-ot-layout-lookup-get-glyph-alternates"></a><h3>hb_ot_layout_lookup_get_glyph_alternates ()</h3>
+<pre class="programlisting"><span class="returnvalue">unsigned</span>
+hb_ot_layout_lookup_get_glyph_alternates
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                                <em class="parameter"><code><span class="type">unsigned </span> lookup_index</code></em>,
+                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> glyph</code></em>,
+                                <em class="parameter"><code><span class="type">unsigned </span> start_offset</code></em>,
+                                <em class="parameter"><code><span class="type">unsigned</span> *alternate_count</code></em>,
+                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *alternate_glyphs</code></em>);</pre>
+<p>Fetches alternates of a glyph from a given GSUB lookup index.</p>
+<div class="refsect3">
+<a name="hb-ot-layout-lookup-get-glyph-alternates.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>a face.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>lookup_index</p></td>
+<td class="parameter_description"><p>index of the feature lookup to query.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>glyph</p></td>
+<td class="parameter_description"><p>a glyph id.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>start_offset</p></td>
+<td class="parameter_description"><p>starting offset.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>alternate_count</p></td>
+<td class="parameter_description"><p>Input = the maximum number of alternate glyphs to return;
+Output = the actual number of alternate glyphs returned (may be zero). </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>alternate_glyphs</p></td>
+<td class="parameter_description"><p>A glyphs buffer.
+Alternate glyphs associated with the glyph id. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=alternate_count]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-layout-lookup-get-glyph-alternates.returns"></a><h4>Returns</h4>
+<p> total number of alternates found in the specific lookup index for the given glyph id.</p>
+</div>
+<p class="since">Since: 2.6.8</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="hb-ot-layout-lookup-substitute-closure"></a><h3>hb_ot_layout_lookup_substitute_closure ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_ot_layout_lookup_substitute_closure
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> lookup_index</code></em>,
-                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
+                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
 <p>Compute the transitive closure of glyphs needed for a
 specified lookup.</p>
 <div class="refsect3">
@@ -1653,7 +1709,7 @@ specified lookup.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1676,9 +1732,9 @@ specified lookup.</p>
 <a name="hb-ot-layout-lookups-substitute-closure"></a><h3>hb_ot_layout_lookups_substitute_closure ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_ot_layout_lookups_substitute_closure
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
-                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *lookups</code></em>,
-                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                                <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *lookups</code></em>,
+                                <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *glyphs</code></em>);</pre>
 <p>Compute the transitive closure of glyphs needed for all of the
 provided lookups.</p>
 <div class="refsect3">
@@ -1692,7 +1748,7 @@ provided lookups.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1714,7 +1770,7 @@ provided lookups.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-lookup-would-substitute"></a><h3>hb_ot_layout_lookup_would_substitute ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_lookup_would_substitute (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_lookup_would_substitute (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> lookup_index</code></em>,
                                       <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> *glyphs</code></em>,
                                       <em class="parameter"><code>unsigned <span class="type">int</span> glyphs_length</code></em>,
@@ -1732,7 +1788,7 @@ trigger a substitution on the given glyph sequence.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1768,7 +1824,7 @@ trigger a substitution on the given glyph sequence.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-script-get-language-tags"></a><h3>hb_ot_layout_script_get_language_tags ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_script_get_language_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_script_get_language_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                        <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                        <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
@@ -1787,7 +1843,7 @@ the specified script index. The list returned will begin at the offset provided.
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1824,7 +1880,7 @@ Output = the actual number of language tags returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-script-select-language"></a><h3>hb_ot_layout_script_select_language ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_script_select_language (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_script_select_language (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> language_count</code></em>,
@@ -1843,7 +1899,7 @@ or GPOS table, underneath the specified script index.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1885,7 +1941,7 @@ or GPOS table, underneath the specified script index.</p>
 <a name="hb-ot-layout-table-find-feature-variations"></a><h3>hb_ot_layout_table_find_feature_variations ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_ot_layout_table_find_feature_variations
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
@@ -1903,7 +1959,7 @@ or GPOS table, at the specified variation coordinates.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1934,7 +1990,7 @@ or GPOS table, at the specified variation coordinates.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-table-get-feature-tags"></a><h3>hb_ot_layout_table_get_feature_tags ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_table_get_feature_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_table_get_feature_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                                      <em class="parameter"><code>unsigned <span class="type">int</span> *feature_count</code></em>,
@@ -1951,7 +2007,7 @@ hb_ot_layout_table_get_feature_tags (<em class="parameter"><code><a class="link"
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -1983,7 +2039,7 @@ Output = the actual number of feature tags returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-table-get-script-tags"></a><h3>hb_ot_layout_table_get_script_tags ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_table_get_script_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_table_get_script_tags (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                     <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                                     <em class="parameter"><code>unsigned <span class="type">int</span> *script_count</code></em>,
@@ -2001,7 +2057,7 @@ or GPOS table. The list returned will begin at the offset provided.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -2033,7 +2089,7 @@ Output = the actual number of script tags returned (may be zero). </p></td>
 <div class="refsect2">
 <a name="hb-ot-layout-table-get-lookup-count"></a><h3>hb_ot_layout_table_get_lookup_count ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_layout_table_get_lookup_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_table_get_lookup_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>);</pre>
 <p>Fetches the total number of lookups enumerated in the specified
 face's GSUB table or GPOS table.</p>
@@ -2048,7 +2104,7 @@ face's GSUB table or GPOS table.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -2065,7 +2121,7 @@ face's GSUB table or GPOS table.</p>
 <div class="refsect2">
 <a name="hb-ot-layout-table-select-script"></a><h3>hb_ot_layout_table_select_script ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
-hb_ot_layout_table_select_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_layout_table_select_script (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                   <em class="parameter"><code>unsigned <span class="type">int</span> script_count</code></em>,
                                   <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> *script_tags</code></em>,
@@ -2082,7 +2138,7 @@ hb_ot_layout_table_select_script (<em class="parameter"><code><a class="link" hr
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -2119,9 +2175,9 @@ hb_ot_layout_table_select_script (<em class="parameter"><code><a class="link" hr
 <div class="refsect2">
 <a name="hb-ot-shape-plan-collect-lookups"></a><h3>hb_ot_shape_plan_collect_lookups ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_ot_shape_plan_collect_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
+hb_ot_shape_plan_collect_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
-                                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
+                                  <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
 </div>
 <hr>
@@ -2129,7 +2185,7 @@ hb_ot_shape_plan_collect_lookups (<em class="parameter"><code><a class="link" hr
 <a name="hb-ot-layout-language-get-required-feature-index"></a><h3>hb_ot_layout_language_get_required_feature_index ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_ot_layout_language_get_required_feature_index
-                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+                               (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> script_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> language_index</code></em>,
@@ -2147,7 +2203,7 @@ underneath the specified script and language.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -2397,6 +2453,6 @@ In vertical writing mode when mathematical characters rotated 90 degrees clockwi
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>

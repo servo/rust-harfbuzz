@@ -5,21 +5,20 @@
 <title>hb-common: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch11.html" title="Core API">
+<link rel="up" href="ch12.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-buffer.html" title="hb-buffer">
 <link rel="next" href="harfbuzz-hb-deprecated.html" title="hb-deprecated">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
 <a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-common.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
-                  <a href="#harfbuzz-hb-common.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+                  <a href="#harfbuzz-hb-common.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch11.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch12.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-buffer.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-deprecated.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -36,8 +35,8 @@
 <a name="harfbuzz-hb-common.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -217,12 +216,12 @@
 </tbody>
 </table></div>
 </div>
-<a name="hb-feature-t"></a><a name="hb-user-data-key-t"></a><div class="refsect1">
+<div class="refsect1">
 <a name="harfbuzz-hb-common.other"></a><h2>Types and Values</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="name">
-<col class="description">
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -243,7 +242,7 @@
 </tr>
 <tr>
 <td class="datatype_keyword"> </td>
-<td class="function_name"><a class="link" href="harfbuzz-hb-common.html#hb-feature-t-struct" title="hb_feature_t">hb_feature_t</a></td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t">hb_feature_t</a></td>
 </tr>
 <tr>
 <td class="datatype_keyword"> </td>
@@ -267,7 +266,7 @@
 </tr>
 <tr>
 <td class="datatype_keyword"> </td>
-<td class="function_name"><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t-struct" title="hb_user_data_key_t">hb_user_data_key_t</a></td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t" title="hb_user_data_key_t">hb_user_data_key_t</a></td>
 </tr>
 <tr>
 <td class="datatype_keyword"> </td>
@@ -299,16 +298,6 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="refsect1">
-<a name="harfbuzz-hb-common.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
-    <span class="lineart">├──</span> hb_feature_t
-    <span class="lineart">╰──</span> hb_user_data_key_t
-    <a href="/usr/share/gtk-doc/html/gobject/gobject-Enumeration-and-Flag-Types.html">GEnum</a>
-    <span class="lineart">├──</span> hb_direction_t
-    <span class="lineart">╰──</span> hb_script_t
-</pre>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-common.includes"></a><h2>Includes</h2>
@@ -406,7 +395,7 @@ hb_direction_to_string (<em class="parameter"><code><a class="link" href="harfbu
 <a name="hb-script-from-iso15924-tag"></a><h3>hb_script_from_iso15924_tag ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="returnvalue">hb_script_t</span></a>
 hb_script_from_iso15924_tag (<em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> tag</code></em>);</pre>
-<p>Converts an ISO 15924 script tag to a corresponding <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a>.</p>
+<p>Converts an ISO 15924 script tag to a corresponding <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a>.</p>
 <div class="refsect3">
 <a name="hb-script-from-iso15924-tag.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -417,14 +406,14 @@ hb_script_from_iso15924_tag (<em class="parameter"><code><a class="link" href="h
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>tag</p></td>
-<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> representing an ISO 15924 tag.</p></td>
+<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> representing an ISO 15924 tag.</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-script-from-iso15924-tag.returns"></a><h4>Returns</h4>
-<p>An <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a> corresponding to the ISO 15924 tag.</p>
+<p>An <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a> corresponding to the ISO 15924 tag.</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
 </div>
@@ -435,7 +424,7 @@ hb_script_from_iso15924_tag (<em class="parameter"><code><a class="link" href="h
 hb_script_from_string (<em class="parameter"><code>const <span class="type">char</span> *str</code></em>,
                        <em class="parameter"><code><span class="type">int</span> len</code></em>);</pre>
 <p>Converts a string <em class="parameter"><code>str</code></em>
- representing an ISO 15924 script tag to a
+ representing an ISO 15924 script tag to a
 corresponding <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a>. Shorthand for <a class="link" href="harfbuzz-hb-common.html#hb-tag-from-string" title="hb_tag_from_string ()"><code class="function">hb_tag_from_string()</code></a> then
 <a class="link" href="harfbuzz-hb-common.html#hb-script-from-iso15924-tag" title="hb_script_from_iso15924_tag ()"><code class="function">hb_script_from_iso15924_tag()</code></a>.</p>
 <div class="refsect3">
@@ -450,13 +439,13 @@ corresponding <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="
 <tr>
 <td class="parameter_name"><p>str</p></td>
 <td class="parameter_description"><p>a string representing an
-ISO 15924 tag. </p></td>
+ISO 15924 tag. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of the <em class="parameter"><code>str</code></em>
-, or -1 if it is <code class="literal">NULL</code>-terminated.</p></td>
+, or -1 if it is <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -464,7 +453,7 @@ ISO 15924 tag. </p></td>
 </div>
 <div class="refsect3">
 <a name="hb-script-from-string.returns"></a><h4>Returns</h4>
-<p>An <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a> corresponding to the ISO 15924 tag.</p>
+<p>An <a class="link" href="harfbuzz-hb-common.html#hb-script-t" title="enum hb_script_t"><span class="type">hb_script_t</span></a> corresponding to the ISO 15924 tag.</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
 </div>
@@ -491,7 +480,7 @@ hb_script_to_iso15924_tag (<em class="parameter"><code><a class="link" href="har
 </div>
 <div class="refsect3">
 <a name="hb-script-to-iso15924-tag.returns"></a><h4>Returns</h4>
-<p>An <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> representing an ISO 15924 script tag.</p>
+<p>An <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> representing an ISO 15924 script tag.</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
 </div>
@@ -509,7 +498,7 @@ hb_script_get_horizontal_direction (<em class="parameter"><code><a class="link" 
 hb_language_from_string (<em class="parameter"><code>const <span class="type">char</span> *str</code></em>,
                          <em class="parameter"><code><span class="type">int</span> len</code></em>);</pre>
 <p>Converts <em class="parameter"><code>str</code></em>
- representing a BCP 47 language tag to the corresponding
+ representing a BCP 47 language tag to the corresponding
 <a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a>.</p>
 <div class="refsect3">
 <a name="hb-language-from-string.parameters"></a><h4>Parameters</h4>
@@ -523,13 +512,13 @@ hb_language_from_string (<em class="parameter"><code>const <span class="type">ch
 <tr>
 <td class="parameter_name"><p>str</p></td>
 <td class="parameter_description"><p>a string representing
-a BCP 47 language tag. </p></td>
+a BCP 47 language tag. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> uint8_t]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of the <em class="parameter"><code>str</code></em>
-, or -1 if it is <code class="literal">NULL</code>-terminated.</p></td>
+, or -1 if it is <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -537,7 +526,7 @@ a BCP 47 language tag. </p></td>
 </div>
 <div class="refsect3">
 <a name="hb-language-from-string.returns"></a><h4>Returns</h4>
-<p>The <a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> corresponding to the BCP 47 language tag. </p>
+<p>The <a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> corresponding to the BCP 47 language tag. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
@@ -565,7 +554,7 @@ hb_language_to_string (<em class="parameter"><code><a class="link" href="harfbuz
 </div>
 <div class="refsect3">
 <a name="hb-language-to-string.returns"></a><h4>Returns</h4>
-<p>A <code class="literal">NULL</code>-terminated string representing the <em class="parameter"><code>language</code></em>
+<p>A <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated string representing the <em class="parameter"><code>language</code></em>
 . Must not be freed by
 the caller. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
@@ -597,8 +586,8 @@ HarfBuzz itself.</p>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_feature_from_string (<em class="parameter"><code>const <span class="type">char</span> *str</code></em>,
                         <em class="parameter"><code><span class="type">int</span> len</code></em>,
-                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *feature</code></em>);</pre>
-<p>Parses a string into a <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a>.</p>
+                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> *feature</code></em>);</pre>
+<p>Parses a string into a <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a>.</p>
 <p>The format for specifying feature strings follows. All valid CSS
 font-feature-settings values other than 'normal' and the global values are
 also accepted, though not documented below. CSS string escapes are not
@@ -753,12 +742,12 @@ position before the first character is always 0.</p>
 <tr>
 <td class="parameter_name"><p>len</p></td>
 <td class="parameter_description"><p>length of <em class="parameter"><code>str</code></em>
-, or -1 if string is <code class="literal">NULL</code> terminated</p></td>
+, or -1 if string is <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>feature</p></td>
-<td class="parameter_description"><p>the <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
+<td class="parameter_description"><p>the <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> to initialize with the parsed values. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -775,10 +764,10 @@ is successfully parsed, <code class="literal">false</code> otherwise.</p>
 <div class="refsect2">
 <a name="hb-feature-to-string"></a><h3>hb_feature_to_string ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
-hb_feature_to_string (<em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> *feature</code></em>,
+hb_feature_to_string (<em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> *feature</code></em>,
                       <em class="parameter"><code><span class="type">char</span> *buf</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> size</code></em>);</pre>
-<p>Converts a <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> into a <code class="literal">NULL</code>-terminated string in the format
+<p>Converts a <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> into a <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated string in the format
 understood by <a class="link" href="harfbuzz-hb-common.html#hb-feature-from-string" title="hb_feature_from_string ()"><code class="function">hb_feature_from_string()</code></a>. The client in responsible for
 allocating big enough size for <em class="parameter"><code>buf</code></em>
 , 128 bytes is more than enough.</p>
@@ -793,7 +782,7 @@ allocating big enough size for <em class="parameter"><code>buf</code></em>
 <tbody>
 <tr>
 <td class="parameter_name"><p>feature</p></td>
-<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> to convert</p></td>
+<td class="parameter_description"><p>an <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> to convert</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -957,7 +946,7 @@ hb_variation_to_string (<em class="parameter"><code><a class="link" href="harfbu
 </div>
 <hr>
 <div class="refsect2">
-<a name="hb-feature-t-struct"></a><h3>hb_feature_t</h3>
+<a name="hb-feature-t"></a><h3>hb_feature_t</h3>
 <pre class="programlisting">typedef struct {
   hb_tag_t      tag;
   uint32_t      value;
@@ -965,7 +954,7 @@ hb_variation_to_string (<em class="parameter"><code><a class="link" href="harfbu
   unsigned int  end;
 } hb_feature_t;
 </pre>
-<p>The <a class="link" href="harfbuzz-hb-common.html#hb-feature-t"><span class="type">hb_feature_t</span></a> is the structure that holds information about requested
+<p>The <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> is the structure that holds information about requested
 feature application. The feature will be applied with the given value to all
 glyphs which are in clusters between <em class="parameter"><code>start</code></em>
  (inclusive) and <em class="parameter"><code>end</code></em>
@@ -984,12 +973,12 @@ specifies that the feature always applies to the entire buffer.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> <em class="structfield"><code><a name="hb-feature-t-struct.tag"></a>tag</code></em>;</p></td>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> <em class="structfield"><code><a name="hb-feature-t.tag"></a>tag</code></em>;</p></td>
 <td class="struct_member_description"><p>a feature tag</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
 <tr>
-<td class="struct_member_name"><p><span class="type">uint32_t</span> <em class="structfield"><code><a name="hb-feature-t-struct.value"></a>value</code></em>;</p></td>
+<td class="struct_member_name"><p><span class="type">uint32_t</span> <em class="structfield"><code><a name="hb-feature-t.value"></a>value</code></em>;</p></td>
 <td class="struct_member_description"><p>0 disables the feature, non-zero (usually 1) enables the feature.
 For features implemented as lookup type 3 (like 'salt') the <em class="parameter"><code>value</code></em>
 is a one
@@ -997,12 +986,12 @@ based index into the alternates.</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
 <tr>
-<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t-struct.start"></a>start</code></em>;</p></td>
+<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t.start"></a>start</code></em>;</p></td>
 <td class="struct_member_description"><p>the cluster to start applying this feature setting (inclusive).</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
 <tr>
-<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t-struct.end"></a>end</code></em>;</p></td>
+<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-feature-t.end"></a>end</code></em>;</p></td>
 <td class="struct_member_description"><p>the cluster to end applying this feature setting (exclusive).</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
@@ -1076,6 +1065,11 @@ based index into the alternates.</p></td>
 <td> </td>
 </tr>
 <tr>
+<td class="enum_member_name"><p><a name="HB-SCRIPT-CHORASMIAN:CAPS"></a>HB_SCRIPT_CHORASMIAN</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
 <td class="enum_member_name"><p><a name="HB-SCRIPT-INVALID:CAPS"></a>HB_SCRIPT_INVALID</p></td>
 <td> </td>
 <td> </td>
@@ -1096,7 +1090,7 @@ based index into the alternates.</p></td>
 </div>
 <hr>
 <div class="refsect2">
-<a name="hb-user-data-key-t-struct"></a><h3>hb_user_data_key_t</h3>
+<a name="hb-user-data-key-t"></a><h3>hb_user_data_key_t</h3>
 <pre class="programlisting">typedef struct {
 } hb_user_data_key_t;
 </pre>
@@ -1146,6 +1140,6 @@ based index into the alternates.</p></td>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>

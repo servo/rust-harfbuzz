@@ -8,7 +8,7 @@
 <link rel="up" href="pt01.html" title="Part I. User's manual">
 <link rel="prev" href="level-2.html" title="Level 2">
 <link rel="next" href="utilities-common-types-apis.html" title="Common data types and APIs">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -44,8 +44,8 @@
 <a name="utilities-command-line-tools"></a>Command-line tools</h2></div></div></div>
 <p>
       HarfBuzz include three command-line tools:
-      <span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span>, <span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span>, and
-      <span style="color: red">&lt;program&gt;hb-subset&lt;/program&gt;</span>. They can be used to examine
+      <span class="command"><strong>hb-shape</strong></span>, <span class="command"><strong>hb-view</strong></span>, and
+      <span class="command"><strong>hb-subset</strong></span>. They can be used to examine
       HarfBuzz's functionality, debug font binaries, or explore the
       various shaping models and features from a terminal.
     </p>
@@ -53,12 +53,12 @@
 <div class="titlepage"><div><div><h3 class="title">
 <a name="utilities-command-line-hbshape"></a>hb-shape</h3></div></div></div>
 <p>
-	<span class="emphasis"><em><span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span></em></span> allows you to run HarfBuzz's
+	<span class="emphasis"><em><span class="command"><strong>hb-shape</strong></span></em></span> allows you to run HarfBuzz's
 	<code class="function">hb_shape()</code> function on an input string and
 	to examine the outcome, in human-readable form, as terminal
-	output. <span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span> does
+	output. <span class="command"><strong>hb-shape</strong></span> does
 	<span class="emphasis"><em>not</em></span> render the results of the shaping call
-	into rendered text (you can use <span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span>, below, for
+	into rendered text (you can use <span class="command"><strong>hb-view</strong></span>, below, for
 	that). Instead, it prints out the final glyph indices and
 	positions, taking all shaping operations into account, as if the
 	input string were a HarfBuzz input buffer.
@@ -106,10 +106,10 @@
 <div class="titlepage"><div><div><h3 class="title">
 <a name="utilities-command-line-hbview"></a>hb-view</h3></div></div></div>
 <p>
-	<span class="emphasis"><em><span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span></em></span> allows you to
+	<span class="emphasis"><em><span class="command"><strong>hb-view</strong></span></em></span> allows you to
 	see the shaped output of an input string in rendered
-	form. Like <span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span>,
-	<span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span> takes a font file and a text string
+	form. Like <span class="command"><strong>hb-shape</strong></span>,
+	<span class="command"><strong>hb-view</strong></span> takes a font file and a text string
 	as its arguments:
       </p>
 <pre class="programlisting">
@@ -118,7 +118,7 @@
 	<em class="parameter"><code>yourinputtext</code></em>
       </pre>
 <p>
-	By default, <span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span> renders the shaped
+	By default, <span class="command"><strong>hb-view</strong></span> renders the shaped
 	text in ASCII block-character images as terminal output. By
 	appending the
 	<span class="command"><strong>--output-file=[<span class="optional">filename</span>]</strong></span>
@@ -126,7 +126,7 @@
 	(among other formats).
       </p>
 <p>
-	As with <span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span>, a lengthy set of options
+	As with <span class="command"><strong>hb-shape</strong></span>, a lengthy set of options
 	is available, with which you can  enable or disable
 	specific font features, set variation-font axis values,
 	alter the language, script, direction, and clustering settings
@@ -140,10 +140,10 @@
 	with 
       </p>
 <p>
-	In general, <span style="color: red">&lt;program&gt;hb-view&lt;/program&gt;</span> is a quick way to
+	In general, <span class="command"><strong>hb-view</strong></span> is a quick way to
 	verify that the output of HarfBuzz's shaping operation looks
 	correct for a given text-and-font combination, but you may
-	want to use <span style="color: red">&lt;program&gt;hb-shape&lt;/program&gt;</span> to figure out exactly
+	want to use <span class="command"><strong>hb-shape</strong></span> to figure out exactly
 	why something does not appear as expected.
       </p>
 </div>
@@ -151,13 +151,13 @@
 <div class="titlepage"><div><div><h3 class="title">
 <a name="utilities-command-line-hbsubset"></a>hb-subset</h3></div></div></div>
 <p>
-	<span class="emphasis"><em><span style="color: red">&lt;program&gt;hb-subset&lt;/program&gt;</span></em></span> allows you
+	<span class="emphasis"><em><span class="command"><strong>hb-subset</strong></span></em></span> allows you
 	to generate a subset of a given font, with a limited set of
 	supported characters, features, and variation settings.
       </p>
 <p>
 	By default, you provide an input font and an input text string
-	as the arguments to <span style="color: red">&lt;program&gt;hb-subset&lt;/program&gt;</span>, and it will
+	as the arguments to <span class="command"><strong>hb-subset</strong></span>, and it will
 	generate a font that covers the input text exactly like the
 	input font does, but includes no other characters or features.
       </p>
@@ -183,6 +183,6 @@
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>

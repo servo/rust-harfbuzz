@@ -5,10 +5,10 @@
 <title>hb-uniscribe: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch14.html" title="Integration API">
+<link rel="up" href="ch15.html" title="Integration API">
 <link rel="prev" href="harfbuzz-hb-icu.html" title="hb-icu">
 <link rel="next" href="api-index-full.html" title="API Index">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
                   <a href="#harfbuzz-hb-uniscribe.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch14.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch15.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-icu.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="api-index-full.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -35,8 +35,8 @@
 <a name="harfbuzz-hb-uniscribe.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -65,27 +65,66 @@
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-uniscribe.description"></a><h2>Description</h2>
-<p>Functions for using HarfBuzz with the Windows fonts.</p>
+<p>Functions for using HarfBuzz with Windows fonts.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-uniscribe.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
 <a name="hb-uniscribe-font-get-hfont"></a><h3>hb_uniscribe_font_get_hfont ()</h3>
 <pre class="programlisting"><span class="returnvalue">HFONT</span>
-hb_uniscribe_font_get_hfont (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+hb_uniscribe_font_get_hfont (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+<p>Fetches the HFONT handle that corresponds to the
+specified <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> font.</p>
+<div class="refsect3">
+<a name="hb-uniscribe-font-get-hfont.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>font</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> to work upon</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-uniscribe-font-get-hfont.returns"></a><h4>Returns</h4>
+<p> the HFONT retreieved</p>
+</div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-uniscribe-font-get-logfontw"></a><h3>hb_uniscribe_font_get_logfontw ()</h3>
 <pre class="programlisting"><span class="returnvalue">LOGFONTW</span> *
-hb_uniscribe_font_get_logfontw (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+hb_uniscribe_font_get_logfontw (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> *font</code></em>);</pre>
+<p>Fetches the LOGFONTW structure that corresponds to the
+specified <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> font.</p>
+<div class="refsect3">
+<a name="hb-uniscribe-font-get-logfontw.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>font</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> to work upon</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-uniscribe-font-get-logfontw.returns"></a><h4>Returns</h4>
+<p> a pointer to the LOGFONTW retrieved</p>
 </div>
 </div>
-<div class="refsect1">
-<a name="harfbuzz-hb-uniscribe.other_details"></a><h2>Types and Values</h2>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>

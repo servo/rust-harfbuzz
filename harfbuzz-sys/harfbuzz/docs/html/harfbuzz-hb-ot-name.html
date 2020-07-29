@@ -5,10 +5,10 @@
 <title>hb-ot-name: HarfBuzz Manual</title>
 <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
-<link rel="up" href="ch12.html" title="OpenType API">
+<link rel="up" href="ch13.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
 <link rel="next" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
-<meta name="generator" content="GTK-Doc V1.29 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
                   <a href="#harfbuzz-hb-ot-name.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch12.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch13.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="harfbuzz-hb-ot-math.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-ot-shape.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
@@ -35,8 +35,8 @@
 <a name="harfbuzz-hb-ot-name.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -74,8 +74,8 @@
 <a name="harfbuzz-hb-ot-name.other"></a><h2>Types and Values</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="name">
-<col class="description">
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
 </colgroup>
 <tbody><tr>
 <td class="typedef_keyword">typedef</td>
@@ -97,7 +97,7 @@
 <div class="refsect2">
 <a name="hb-ot-name-list-names"></a><h3>hb_ot_name_list_names ()</h3>
 <pre class="programlisting">const <span class="returnvalue">hb_ot_name_entry_t</span> *
-hb_ot_name_list_names (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_list_names (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> *num_entries</code></em>);</pre>
 <p>Enumerates all available name IDs and language combinations. Returned
 array is owned by the <em class="parameter"><code>face</code></em>
@@ -137,7 +137,7 @@ used as long as <em class="parameter"><code>face</code></em>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf16"></a><h3>hb_ot_name_get_utf16 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf16 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf16 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -195,7 +195,7 @@ text written to buffer. </p></td>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf32"></a><h3>hb_ot_name_get_utf32 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf32 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf32 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -253,7 +253,7 @@ text written to buffer. </p></td>
 <div class="refsect2">
 <a name="hb-ot-name-get-utf8"></a><h3>hb_ot_name_get_utf8 ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
-hb_ot_name_get_utf8 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t"><span class="type">hb_face_t</span></a> *face</code></em>,
+hb_ot_name_get_utf8 (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> name_id</code></em>,
                      <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> language</code></em>,
                      <em class="parameter"><code>unsigned <span class="type">int</span> *text_size</code></em>,
@@ -322,6 +322,6 @@ API.  These can be used to fetch name strings from a font face.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.29</div>
+<hr>Generated by GTK-Doc V1.32.1</div>
 </body>
 </html>
