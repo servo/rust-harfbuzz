@@ -7,12 +7,12 @@ pub type hb_mask_t = u32;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union _hb_var_int_t {
-    pub u32_: u32,
-    pub i32_: i32,
-    pub u16_: [u16; 2usize],
-    pub i16_: [i16; 2usize],
-    pub u8_: [u8; 4usize],
-    pub i8_: [i8; 4usize],
+    pub u32: u32,
+    pub i32: i32,
+    pub u16: [u16; 2usize],
+    pub i16: [i16; 2usize],
+    pub u8: [u8; 4usize],
+    pub i8: [i8; 4usize],
     _bindgen_union_align: u32,
 }
 #[test]
@@ -28,63 +28,63 @@ fn bindgen_test_layout__hb_var_int_t() {
         concat!("Alignment of ", stringify!(_hb_var_int_t))
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u32_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u32 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(u32_)
+            stringify!(u32)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i32_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i32 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(i32_)
+            stringify!(i32)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u16_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u16 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(u16_)
+            stringify!(u16)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i16_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i16 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(i16_)
+            stringify!(i16)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u8_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).u8 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(u8_)
+            stringify!(u8)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i8_ as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<_hb_var_int_t>())).i8 as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
             stringify!(_hb_var_int_t),
             "::",
-            stringify!(i8_)
+            stringify!(i8)
         )
     );
 }
@@ -439,7 +439,7 @@ extern "C" {
 #[derive(Debug, Copy, Clone)]
 pub struct hb_variation_t {
     pub tag: hb_tag_t,
-    pub value: f32,
+    pub value: ::std::os::raw::c_float,
 }
 #[test]
 fn bindgen_test_layout_hb_variation_t() {
@@ -2106,10 +2106,10 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: f32);
+    pub fn hb_font_set_ptem(font: *mut hb_font_t, ptem: ::std::os::raw::c_float);
 }
 extern "C" {
-    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> f32;
+    pub fn hb_font_get_ptem(font: *mut hb_font_t) -> ::std::os::raw::c_float;
 }
 extern "C" {
     pub fn hb_font_set_variations(
@@ -2121,7 +2121,7 @@ extern "C" {
 extern "C" {
     pub fn hb_font_set_var_coords_design(
         font: *mut hb_font_t,
-        coords: *const f32,
+        coords: *const ::std::os::raw::c_float,
         coords_length: ::std::os::raw::c_uint,
     );
 }
