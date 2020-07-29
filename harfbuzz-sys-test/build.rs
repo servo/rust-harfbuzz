@@ -46,5 +46,5 @@ fn main() {
 
     // Generate the tests, passing the path to the `*-sys` library as well as
     // the module to generate.
-    cfg.generate("../harfbuzz-sys/src/lib.rs", "all.rs");
+    cfg.generate("../harfbuzz-sys/src/bindings.rs", "all.rs");
 }
