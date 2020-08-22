@@ -3141,3 +3141,1845 @@ extern "C" {
         micro: ::std::os::raw::c_uint,
     ) -> hb_bool_t;
 }
+pub type hb_ot_name_id_t = ::std::os::raw::c_uint;
+#[doc = " hb_ot_name_entry_t:"]
+#[doc = " @name_id: name ID"]
+#[doc = " @language: language"]
+#[doc = ""]
+#[doc = " Structure representing a name ID in a particular language."]
+#[doc = ""]
+#[doc = " Since: 2.1.0"]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hb_ot_name_entry_t {
+    pub name_id: hb_ot_name_id_t,
+    pub var: hb_var_int_t,
+    pub language: hb_language_t,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_name_entry_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_name_entry_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(hb_ot_name_entry_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_name_entry_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(hb_ot_name_entry_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).name_id as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).var as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(var)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_name_entry_t>())).language as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_name_entry_t),
+            "::",
+            stringify!(language)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_name_list_names(
+        face: *mut hb_face_t,
+        num_entries: *mut ::std::os::raw::c_uint,
+    ) -> *const hb_ot_name_entry_t;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf8(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf16(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut u16,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_name_get_utf32(
+        face: *mut hb_face_t,
+        name_id: hb_ot_name_id_t,
+        language: hb_language_t,
+        text_size: *mut ::std::os::raw::c_uint,
+        text: *mut u32,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_palettes(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_name_id(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_color_get_name_id(
+        face: *mut hb_face_t,
+        color_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+pub const HB_OT_COLOR_PALETTE_FLAG_DEFAULT: hb_ot_color_palette_flags_t = 0;
+pub const HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_LIGHT_BACKGROUND: hb_ot_color_palette_flags_t = 1;
+pub const HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: hb_ot_color_palette_flags_t = 2;
+#[doc = " hb_ot_color_palette_flags_t:"]
+#[doc = " @HB_OT_COLOR_PALETTE_FLAG_DEFAULT: Default indicating that there is nothing special"]
+#[doc = "   to note about a color palette."]
+#[doc = " @HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_LIGHT_BACKGROUND: Flag indicating that the color"]
+#[doc = "   palette is appropriate to use when displaying the font on a light background such as white."]
+#[doc = " @HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: Flag indicating that the color"]
+#[doc = "   palette is appropriate to use when displaying the font on a dark background such as black."]
+#[doc = ""]
+#[doc = " Since: 2.1.0"]
+pub type hb_ot_color_palette_flags_t = u32;
+extern "C" {
+    pub fn hb_ot_color_palette_get_flags(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_color_palette_flags_t;
+}
+extern "C" {
+    pub fn hb_ot_color_palette_get_colors(
+        face: *mut hb_face_t,
+        palette_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        color_count: *mut ::std::os::raw::c_uint,
+        colors: *mut hb_color_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_layers(face: *mut hb_face_t) -> hb_bool_t;
+}
+#[doc = " hb_ot_color_layer_t:"]
+#[doc = ""]
+#[doc = " Pairs of glyph and color index."]
+#[doc = ""]
+#[doc = " Since: 2.1.0"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_color_layer_t {
+    pub glyph: hb_codepoint_t,
+    pub color_index: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_color_layer_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_color_layer_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(hb_ot_color_layer_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_color_layer_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_color_layer_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_color_layer_t>())).glyph as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_color_layer_t),
+            "::",
+            stringify!(glyph)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_color_layer_t>())).color_index as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_color_layer_t),
+            "::",
+            stringify!(color_index)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_get_layers(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+        start_offset: ::std::os::raw::c_uint,
+        layer_count: *mut ::std::os::raw::c_uint,
+        layers: *mut hb_ot_color_layer_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_color_has_svg(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_reference_svg(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+    ) -> *mut hb_blob_t;
+}
+extern "C" {
+    pub fn hb_ot_color_has_png(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_color_glyph_reference_png(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+    ) -> *mut hb_blob_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_choose_script(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_tags: *const hb_tag_t,
+        script_index: *mut ::std::os::raw::c_uint,
+        chosen_script: *mut hb_tag_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_script_find_language(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_tag: hb_tag_t,
+        language_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_tags_from_script(
+        script: hb_script_t,
+        script_tag_1: *mut hb_tag_t,
+        script_tag_2: *mut hb_tag_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_tag_from_language(language: hb_language_t) -> hb_tag_t;
+}
+#[doc = " hb_ot_var_axis_t:"]
+#[doc = ""]
+#[doc = " Since: 1.4.2"]
+#[doc = " Deprecated: 2.2.0"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_var_axis_t {
+    pub tag: hb_tag_t,
+    pub name_id: hb_ot_name_id_t,
+    pub min_value: ::std::os::raw::c_float,
+    pub default_value: ::std::os::raw::c_float,
+    pub max_value: ::std::os::raw::c_float,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_var_axis_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_var_axis_t>(),
+        20usize,
+        concat!("Size of: ", stringify!(hb_ot_var_axis_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_var_axis_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_var_axis_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).tag as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_t),
+            "::",
+            stringify!(tag)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).name_id as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).min_value as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_t),
+            "::",
+            stringify!(min_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).default_value as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_t),
+            "::",
+            stringify!(default_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_t>())).max_value as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_t),
+            "::",
+            stringify!(max_value)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_var_get_axes(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        axes_count: *mut ::std::os::raw::c_uint,
+        axes_array: *mut hb_ot_var_axis_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_var_find_axis(
+        face: *mut hb_face_t,
+        axis_tag: hb_tag_t,
+        axis_index: *mut ::std::os::raw::c_uint,
+        axis_info: *mut hb_ot_var_axis_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_font_set_funcs(font: *mut hb_font_t);
+}
+extern "C" {
+    pub fn hb_ot_tags_from_script_and_language(
+        script: hb_script_t,
+        language: hb_language_t,
+        script_count: *mut ::std::os::raw::c_uint,
+        script_tags: *mut hb_tag_t,
+        language_count: *mut ::std::os::raw::c_uint,
+        language_tags: *mut hb_tag_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_tag_to_script(tag: hb_tag_t) -> hb_script_t;
+}
+extern "C" {
+    pub fn hb_ot_tag_to_language(tag: hb_tag_t) -> hb_language_t;
+}
+extern "C" {
+    pub fn hb_ot_tags_to_script_and_language(
+        script_tag: hb_tag_t,
+        language_tag: hb_tag_t,
+        script: *mut hb_script_t,
+        language: *mut hb_language_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_has_glyph_classes(face: *mut hb_face_t) -> hb_bool_t;
+}
+pub const HB_OT_LAYOUT_GLYPH_CLASS_UNCLASSIFIED: hb_ot_layout_glyph_class_t = 0;
+pub const HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH: hb_ot_layout_glyph_class_t = 1;
+pub const HB_OT_LAYOUT_GLYPH_CLASS_LIGATURE: hb_ot_layout_glyph_class_t = 2;
+pub const HB_OT_LAYOUT_GLYPH_CLASS_MARK: hb_ot_layout_glyph_class_t = 3;
+pub const HB_OT_LAYOUT_GLYPH_CLASS_COMPONENT: hb_ot_layout_glyph_class_t = 4;
+#[doc = " hb_ot_layout_glyph_class_t:"]
+#[doc = " @HB_OT_LAYOUT_GLYPH_CLASS_UNCLASSIFIED: Glyphs not matching the other classifications"]
+#[doc = " @HB_OT_LAYOUT_GLYPH_CLASS_BASE_GLYPH: Spacing, single characters, capable of accepting marks"]
+#[doc = " @HB_OT_LAYOUT_GLYPH_CLASS_LIGATURE: Glyphs that represent ligation of multiple characters"]
+#[doc = " @HB_OT_LAYOUT_GLYPH_CLASS_MARK: Non-spacing, combining glyphs that represent marks"]
+#[doc = " @HB_OT_LAYOUT_GLYPH_CLASS_COMPONENT: Spacing glyphs that represent part of a single character"]
+#[doc = ""]
+#[doc = " The GDEF classes defined for glyphs."]
+#[doc = ""]
+pub type hb_ot_layout_glyph_class_t = u32;
+extern "C" {
+    pub fn hb_ot_layout_get_glyph_class(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+    ) -> hb_ot_layout_glyph_class_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_get_glyphs_in_class(
+        face: *mut hb_face_t,
+        klass: hb_ot_layout_glyph_class_t,
+        glyphs: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_get_attach_points(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+        start_offset: ::std::os::raw::c_uint,
+        point_count: *mut ::std::os::raw::c_uint,
+        point_array: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_get_ligature_carets(
+        font: *mut hb_font_t,
+        direction: hb_direction_t,
+        glyph: hb_codepoint_t,
+        start_offset: ::std::os::raw::c_uint,
+        caret_count: *mut ::std::os::raw::c_uint,
+        caret_array: *mut hb_position_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_get_script_tags(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        start_offset: ::std::os::raw::c_uint,
+        script_count: *mut ::std::os::raw::c_uint,
+        script_tags: *mut hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_find_script(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_tag: hb_tag_t,
+        script_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_select_script(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_count: ::std::os::raw::c_uint,
+        script_tags: *const hb_tag_t,
+        script_index: *mut ::std::os::raw::c_uint,
+        chosen_script: *mut hb_tag_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_get_feature_tags(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        start_offset: ::std::os::raw::c_uint,
+        feature_count: *mut ::std::os::raw::c_uint,
+        feature_tags: *mut hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_script_get_language_tags(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        language_count: *mut ::std::os::raw::c_uint,
+        language_tags: *mut hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_script_select_language(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_count: ::std::os::raw::c_uint,
+        language_tags: *const hb_tag_t,
+        language_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_language_get_required_feature_index(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_index: ::std::os::raw::c_uint,
+        feature_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_language_get_required_feature(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_index: ::std::os::raw::c_uint,
+        feature_index: *mut ::std::os::raw::c_uint,
+        feature_tag: *mut hb_tag_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_language_get_feature_indexes(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        feature_count: *mut ::std::os::raw::c_uint,
+        feature_indexes: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_language_get_feature_tags(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        feature_count: *mut ::std::os::raw::c_uint,
+        feature_tags: *mut hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_language_find_feature(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        script_index: ::std::os::raw::c_uint,
+        language_index: ::std::os::raw::c_uint,
+        feature_tag: hb_tag_t,
+        feature_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_feature_get_lookups(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        feature_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        lookup_count: *mut ::std::os::raw::c_uint,
+        lookup_indexes: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_table_get_lookup_count(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_collect_features(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        scripts: *const hb_tag_t,
+        languages: *const hb_tag_t,
+        features: *const hb_tag_t,
+        feature_indexes: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_collect_lookups(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        scripts: *const hb_tag_t,
+        languages: *const hb_tag_t,
+        features: *const hb_tag_t,
+        lookup_indexes: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_lookup_collect_glyphs(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        lookup_index: ::std::os::raw::c_uint,
+        glyphs_before: *mut hb_set_t,
+        glyphs_input: *mut hb_set_t,
+        glyphs_after: *mut hb_set_t,
+        glyphs_output: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_table_find_feature_variations(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        coords: *const ::std::os::raw::c_int,
+        num_coords: ::std::os::raw::c_uint,
+        variations_index: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_feature_with_variations_get_lookups(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        feature_index: ::std::os::raw::c_uint,
+        variations_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        lookup_count: *mut ::std::os::raw::c_uint,
+        lookup_indexes: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_has_substitution(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_lookup_get_glyph_alternates(
+        face: *mut hb_face_t,
+        lookup_index: ::std::os::raw::c_uint,
+        glyph: hb_codepoint_t,
+        start_offset: ::std::os::raw::c_uint,
+        alternate_count: *mut ::std::os::raw::c_uint,
+        alternate_glyphs: *mut hb_codepoint_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_layout_lookup_would_substitute(
+        face: *mut hb_face_t,
+        lookup_index: ::std::os::raw::c_uint,
+        glyphs: *const hb_codepoint_t,
+        glyphs_length: ::std::os::raw::c_uint,
+        zero_context: hb_bool_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_lookup_substitute_closure(
+        face: *mut hb_face_t,
+        lookup_index: ::std::os::raw::c_uint,
+        glyphs: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_lookups_substitute_closure(
+        face: *mut hb_face_t,
+        lookups: *const hb_set_t,
+        glyphs: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_layout_has_positioning(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_get_size_params(
+        face: *mut hb_face_t,
+        design_size: *mut ::std::os::raw::c_uint,
+        subfamily_id: *mut ::std::os::raw::c_uint,
+        subfamily_name_id: *mut hb_ot_name_id_t,
+        range_start: *mut ::std::os::raw::c_uint,
+        range_end: *mut ::std::os::raw::c_uint,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_feature_get_name_ids(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        feature_index: ::std::os::raw::c_uint,
+        label_id: *mut hb_ot_name_id_t,
+        tooltip_id: *mut hb_ot_name_id_t,
+        sample_id: *mut hb_ot_name_id_t,
+        num_named_parameters: *mut ::std::os::raw::c_uint,
+        first_param_id: *mut hb_ot_name_id_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_feature_get_characters(
+        face: *mut hb_face_t,
+        table_tag: hb_tag_t,
+        feature_index: ::std::os::raw::c_uint,
+        start_offset: ::std::os::raw::c_uint,
+        char_count: *mut ::std::os::raw::c_uint,
+        characters: *mut hb_codepoint_t,
+    ) -> ::std::os::raw::c_uint;
+}
+pub const HB_OT_LAYOUT_BASELINE_TAG_ROMAN: hb_ot_layout_baseline_tag_t = 1919905134;
+pub const HB_OT_LAYOUT_BASELINE_TAG_HANGING: hb_ot_layout_baseline_tag_t = 1751215719;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_BOTTOM_OR_LEFT: hb_ot_layout_baseline_tag_t =
+    1768121954;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
+    1768121972;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: hb_ot_layout_baseline_tag_t =
+    1768187247;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
+    1768191088;
+pub const HB_OT_LAYOUT_BASELINE_TAG_MATH: hb_ot_layout_baseline_tag_t = 1835103336;
+pub const _HB_OT_LAYOUT_BASELINE_TAG_MAX_VALUE: hb_ot_layout_baseline_tag_t = 2147483647;
+#[doc = " hb_ot_layout_baseline_tag_t:"]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_ROMAN: The baseline used by alphabetic scripts such as Latin, Cyrillic and Greek."]
+#[doc = " In vertical writing mode, the alphabetic baseline for characters rotated 90 degrees clockwise."]
+#[doc = " (This would not apply to alphabetic characters that remain upright in vertical writing mode, since these"]
+#[doc = " characters are not rotated.)"]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_HANGING: The hanging baseline. In horizontal direction, this is the horizontal"]
+#[doc = " line from which syllables seem, to hang in Tibetan and other similar scripts. In vertical writing mode,"]
+#[doc = " for Tibetan (or some other similar script) characters rotated 90 degrees clockwise."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_BOTTOM_OR_LEFT: Ideographic character face bottom or left edge,"]
+#[doc = " if the direction is horizontal or vertical, respectively."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: Ideographic character face top or right edge,"]
+#[doc = " if the direction is horizontal or vertical, respectively."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: Ideographic em-box bottom or left edge,"]
+#[doc = " if the direction is horizontal or vertical, respectively."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: Ideographic em-box top or right edge baseline,"]
+#[doc = " if the direction is horizontal or vertical, respectively."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_MATH: The baseline about which mathematical characters are centered."]
+#[doc = " In vertical writing mode when mathematical characters rotated 90 degrees clockwise, are centered."]
+#[doc = ""]
+#[doc = " Baseline tags from https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags"]
+#[doc = ""]
+#[doc = " Since: 2.6.0"]
+pub type hb_ot_layout_baseline_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_layout_get_baseline(
+        font: *mut hb_font_t,
+        baseline_tag: hb_ot_layout_baseline_tag_t,
+        direction: hb_direction_t,
+        script_tag: hb_tag_t,
+        language_tag: hb_tag_t,
+        coord: *mut hb_position_t,
+    ) -> hb_bool_t;
+}
+pub const HB_OT_MATH_CONSTANT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 0;
+pub const HB_OT_MATH_CONSTANT_SCRIPT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 1;
+pub const HB_OT_MATH_CONSTANT_DELIMITED_SUB_FORMULA_MIN_HEIGHT: hb_ot_math_constant_t = 2;
+pub const HB_OT_MATH_CONSTANT_DISPLAY_OPERATOR_MIN_HEIGHT: hb_ot_math_constant_t = 3;
+pub const HB_OT_MATH_CONSTANT_MATH_LEADING: hb_ot_math_constant_t = 4;
+pub const HB_OT_MATH_CONSTANT_AXIS_HEIGHT: hb_ot_math_constant_t = 5;
+pub const HB_OT_MATH_CONSTANT_ACCENT_BASE_HEIGHT: hb_ot_math_constant_t = 6;
+pub const HB_OT_MATH_CONSTANT_FLATTENED_ACCENT_BASE_HEIGHT: hb_ot_math_constant_t = 7;
+pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_SHIFT_DOWN: hb_ot_math_constant_t = 8;
+pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_TOP_MAX: hb_ot_math_constant_t = 9;
+pub const HB_OT_MATH_CONSTANT_SUBSCRIPT_BASELINE_DROP_MIN: hb_ot_math_constant_t = 10;
+pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP: hb_ot_math_constant_t = 11;
+pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP_CRAMPED: hb_ot_math_constant_t = 12;
+pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MIN: hb_ot_math_constant_t = 13;
+pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BASELINE_DROP_MAX: hb_ot_math_constant_t = 14;
+pub const HB_OT_MATH_CONSTANT_SUB_SUPERSCRIPT_GAP_MIN: hb_ot_math_constant_t = 15;
+pub const HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MAX_WITH_SUBSCRIPT: hb_ot_math_constant_t = 16;
+pub const HB_OT_MATH_CONSTANT_SPACE_AFTER_SCRIPT: hb_ot_math_constant_t = 17;
+pub const HB_OT_MATH_CONSTANT_UPPER_LIMIT_GAP_MIN: hb_ot_math_constant_t = 18;
+pub const HB_OT_MATH_CONSTANT_UPPER_LIMIT_BASELINE_RISE_MIN: hb_ot_math_constant_t = 19;
+pub const HB_OT_MATH_CONSTANT_LOWER_LIMIT_GAP_MIN: hb_ot_math_constant_t = 20;
+pub const HB_OT_MATH_CONSTANT_LOWER_LIMIT_BASELINE_DROP_MIN: hb_ot_math_constant_t = 21;
+pub const HB_OT_MATH_CONSTANT_STACK_TOP_SHIFT_UP: hb_ot_math_constant_t = 22;
+pub const HB_OT_MATH_CONSTANT_STACK_TOP_DISPLAY_STYLE_SHIFT_UP: hb_ot_math_constant_t = 23;
+pub const HB_OT_MATH_CONSTANT_STACK_BOTTOM_SHIFT_DOWN: hb_ot_math_constant_t = 24;
+pub const HB_OT_MATH_CONSTANT_STACK_BOTTOM_DISPLAY_STYLE_SHIFT_DOWN: hb_ot_math_constant_t = 25;
+pub const HB_OT_MATH_CONSTANT_STACK_GAP_MIN: hb_ot_math_constant_t = 26;
+pub const HB_OT_MATH_CONSTANT_STACK_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 27;
+pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_TOP_SHIFT_UP: hb_ot_math_constant_t = 28;
+pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_BOTTOM_SHIFT_DOWN: hb_ot_math_constant_t = 29;
+pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_ABOVE_MIN: hb_ot_math_constant_t = 30;
+pub const HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_BELOW_MIN: hb_ot_math_constant_t = 31;
+pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_SHIFT_UP: hb_ot_math_constant_t = 32;
+pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_DISPLAY_STYLE_SHIFT_UP: hb_ot_math_constant_t = 33;
+pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_SHIFT_DOWN: hb_ot_math_constant_t = 34;
+pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_DISPLAY_STYLE_SHIFT_DOWN: hb_ot_math_constant_t =
+    35;
+pub const HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_GAP_MIN: hb_ot_math_constant_t = 36;
+pub const HB_OT_MATH_CONSTANT_FRACTION_NUM_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 37;
+pub const HB_OT_MATH_CONSTANT_FRACTION_RULE_THICKNESS: hb_ot_math_constant_t = 38;
+pub const HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_GAP_MIN: hb_ot_math_constant_t = 39;
+pub const HB_OT_MATH_CONSTANT_FRACTION_DENOM_DISPLAY_STYLE_GAP_MIN: hb_ot_math_constant_t = 40;
+pub const HB_OT_MATH_CONSTANT_SKEWED_FRACTION_HORIZONTAL_GAP: hb_ot_math_constant_t = 41;
+pub const HB_OT_MATH_CONSTANT_SKEWED_FRACTION_VERTICAL_GAP: hb_ot_math_constant_t = 42;
+pub const HB_OT_MATH_CONSTANT_OVERBAR_VERTICAL_GAP: hb_ot_math_constant_t = 43;
+pub const HB_OT_MATH_CONSTANT_OVERBAR_RULE_THICKNESS: hb_ot_math_constant_t = 44;
+pub const HB_OT_MATH_CONSTANT_OVERBAR_EXTRA_ASCENDER: hb_ot_math_constant_t = 45;
+pub const HB_OT_MATH_CONSTANT_UNDERBAR_VERTICAL_GAP: hb_ot_math_constant_t = 46;
+pub const HB_OT_MATH_CONSTANT_UNDERBAR_RULE_THICKNESS: hb_ot_math_constant_t = 47;
+pub const HB_OT_MATH_CONSTANT_UNDERBAR_EXTRA_DESCENDER: hb_ot_math_constant_t = 48;
+pub const HB_OT_MATH_CONSTANT_RADICAL_VERTICAL_GAP: hb_ot_math_constant_t = 49;
+pub const HB_OT_MATH_CONSTANT_RADICAL_DISPLAY_STYLE_VERTICAL_GAP: hb_ot_math_constant_t = 50;
+pub const HB_OT_MATH_CONSTANT_RADICAL_RULE_THICKNESS: hb_ot_math_constant_t = 51;
+pub const HB_OT_MATH_CONSTANT_RADICAL_EXTRA_ASCENDER: hb_ot_math_constant_t = 52;
+pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_BEFORE_DEGREE: hb_ot_math_constant_t = 53;
+pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_AFTER_DEGREE: hb_ot_math_constant_t = 54;
+pub const HB_OT_MATH_CONSTANT_RADICAL_DEGREE_BOTTOM_RAISE_PERCENT: hb_ot_math_constant_t = 55;
+#[doc = " hb_ot_math_constant_t:"]
+#[doc = ""]
+#[doc = " The 'MATH' table constants specified at"]
+#[doc = " https://docs.microsoft.com/en-us/typography/opentype/spec/math"]
+#[doc = ""]
+#[doc = " Since: 1.3.3"]
+pub type hb_ot_math_constant_t = u32;
+pub const HB_OT_MATH_KERN_TOP_RIGHT: hb_ot_math_kern_t = 0;
+pub const HB_OT_MATH_KERN_TOP_LEFT: hb_ot_math_kern_t = 1;
+pub const HB_OT_MATH_KERN_BOTTOM_RIGHT: hb_ot_math_kern_t = 2;
+pub const HB_OT_MATH_KERN_BOTTOM_LEFT: hb_ot_math_kern_t = 3;
+#[doc = " hb_ot_math_kern_t:"]
+#[doc = ""]
+#[doc = " The math kerning-table types defined for the four corners"]
+#[doc = " of a glyph."]
+#[doc = ""]
+#[doc = " Since: 1.3.3"]
+pub type hb_ot_math_kern_t = u32;
+#[doc = " hb_ot_math_glyph_variant_t:"]
+#[doc = " @glyph: The glyph index of the variant"]
+#[doc = " @advance: The advance width of the variant"]
+#[doc = ""]
+#[doc = " Data type to hold math-variant information for a glyph."]
+#[doc = ""]
+#[doc = " Since: 1.3.3"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_math_glyph_variant_t {
+    pub glyph: hb_codepoint_t,
+    pub advance: hb_position_t,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_math_glyph_variant_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_math_glyph_variant_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(hb_ot_math_glyph_variant_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_math_glyph_variant_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_math_glyph_variant_t))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_glyph_variant_t>())).glyph as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_variant_t),
+            "::",
+            stringify!(glyph)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_glyph_variant_t>())).advance as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_variant_t),
+            "::",
+            stringify!(advance)
+        )
+    );
+}
+pub const HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
+#[doc = " hb_ot_math_glyph_part_flags_t:"]
+#[doc = ""]
+#[doc = " Flags for math glyph parts."]
+#[doc = ""]
+#[doc = " Since: 1.3.3"]
+pub type hb_ot_math_glyph_part_flags_t = u32;
+#[doc = " hb_ot_math_glyph_part_t:"]
+#[doc = " @glyph: The glyph index of the variant part"]
+#[doc = " @start_connector_length: The length of the connector on the starting side of the variant part"]
+#[doc = " @end_connector_length: The length of the connector on the ending side of the variant part"]
+#[doc = " @full_advance: The total advance of the part"]
+#[doc = " @flags: #hb_ot_math_glyph_part_flags_t flags for the part"]
+#[doc = ""]
+#[doc = " Data type to hold information for a \"part\" component of a math-variant glyph."]
+#[doc = " Large variants for stretchable math glyphs (such as parentheses) can be constructed"]
+#[doc = " on the fly from parts."]
+#[doc = ""]
+#[doc = " Since: 1.3.3"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_math_glyph_part_t {
+    pub glyph: hb_codepoint_t,
+    pub start_connector_length: hb_position_t,
+    pub end_connector_length: hb_position_t,
+    pub full_advance: hb_position_t,
+    pub flags: hb_ot_math_glyph_part_flags_t,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_math_glyph_part_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_math_glyph_part_t>(),
+        20usize,
+        concat!("Size of: ", stringify!(hb_ot_math_glyph_part_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_math_glyph_part_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_math_glyph_part_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_math_glyph_part_t>())).glyph as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_part_t),
+            "::",
+            stringify!(glyph)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_glyph_part_t>())).start_connector_length as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_part_t),
+            "::",
+            stringify!(start_connector_length)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_glyph_part_t>())).end_connector_length as *const _
+                as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_part_t),
+            "::",
+            stringify!(end_connector_length)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_glyph_part_t>())).full_advance as *const _ as usize
+        },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_part_t),
+            "::",
+            stringify!(full_advance)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_math_glyph_part_t>())).flags as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_glyph_part_t),
+            "::",
+            stringify!(flags)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_math_has_data(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_constant(
+        font: *mut hb_font_t,
+        constant: hb_ot_math_constant_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_glyph_italics_correction(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_glyph_top_accent_attachment(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_math_is_glyph_extended_shape(
+        face: *mut hb_face_t,
+        glyph: hb_codepoint_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_glyph_kerning(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+        kern: hb_ot_math_kern_t,
+        correction_height: hb_position_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_glyph_variants(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+        direction: hb_direction_t,
+        start_offset: ::std::os::raw::c_uint,
+        variants_count: *mut ::std::os::raw::c_uint,
+        variants: *mut hb_ot_math_glyph_variant_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_math_get_min_connector_overlap(
+        font: *mut hb_font_t,
+        direction: hb_direction_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_math_get_glyph_assembly(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+        direction: hb_direction_t,
+        start_offset: ::std::os::raw::c_uint,
+        parts_count: *mut ::std::os::raw::c_uint,
+        parts: *mut hb_ot_math_glyph_part_t,
+        italics_correction: *mut hb_position_t,
+    ) -> ::std::os::raw::c_uint;
+}
+pub const HB_OT_META_TAG_DESIGN_LANGUAGES: hb_ot_meta_tag_t = 1684827751;
+pub const HB_OT_META_TAG_SUPPORTED_LANGUAGES: hb_ot_meta_tag_t = 1936485991;
+pub const _HB_OT_META_TAG_MAX_VALUE: hb_ot_meta_tag_t = 2147483647;
+#[doc = " hb_ot_meta_tag_t:"]
+#[doc = " @HB_OT_META_TAG_DESIGN_LANGUAGES: Design languages. Text, using only"]
+#[doc = " Basic Latin (ASCII) characters. Indicates languages and/or scripts"]
+#[doc = " for the user audiences that the font was primarily designed for."]
+#[doc = " @HB_OT_META_TAG_SUPPORTED_LANGUAGES: Supported languages. Text, using"]
+#[doc = " only Basic Latin (ASCII) characters. Indicates languages and/or scripts"]
+#[doc = " that the font is declared to be capable of supporting."]
+#[doc = ""]
+#[doc = " Known metadata tags from https://docs.microsoft.com/en-us/typography/opentype/spec/meta"]
+#[doc = ""]
+#[doc = " Since: 2.6.0"]
+pub type hb_ot_meta_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_meta_get_entry_tags(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        entries_count: *mut ::std::os::raw::c_uint,
+        entries: *mut hb_ot_meta_tag_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_meta_reference_entry(
+        face: *mut hb_face_t,
+        meta_tag: hb_ot_meta_tag_t,
+    ) -> *mut hb_blob_t;
+}
+pub const HB_OT_METRICS_TAG_HORIZONTAL_ASCENDER: hb_ot_metrics_tag_t = 1751216995;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_DESCENDER: hb_ot_metrics_tag_t = 1751413603;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_LINE_GAP: hb_ot_metrics_tag_t = 1751934832;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_ASCENT: hb_ot_metrics_tag_t = 1751346273;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_DESCENT: hb_ot_metrics_tag_t = 1751346276;
+pub const HB_OT_METRICS_TAG_VERTICAL_ASCENDER: hb_ot_metrics_tag_t = 1986098019;
+pub const HB_OT_METRICS_TAG_VERTICAL_DESCENDER: hb_ot_metrics_tag_t = 1986294627;
+pub const HB_OT_METRICS_TAG_VERTICAL_LINE_GAP: hb_ot_metrics_tag_t = 1986815856;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_RISE: hb_ot_metrics_tag_t = 1751347827;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_RUN: hb_ot_metrics_tag_t = 1751347822;
+pub const HB_OT_METRICS_TAG_HORIZONTAL_CARET_OFFSET: hb_ot_metrics_tag_t = 1751347046;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_RISE: hb_ot_metrics_tag_t = 1986228851;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_RUN: hb_ot_metrics_tag_t = 1986228846;
+pub const HB_OT_METRICS_TAG_VERTICAL_CARET_OFFSET: hb_ot_metrics_tag_t = 1986228070;
+pub const HB_OT_METRICS_TAG_X_HEIGHT: hb_ot_metrics_tag_t = 2020108148;
+pub const HB_OT_METRICS_TAG_CAP_HEIGHT: hb_ot_metrics_tag_t = 1668311156;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_SIZE: hb_ot_metrics_tag_t = 1935833203;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_SIZE: hb_ot_metrics_tag_t = 1935833459;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_OFFSET: hb_ot_metrics_tag_t = 1935833199;
+pub const HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_OFFSET: hb_ot_metrics_tag_t = 1935833455;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_SIZE: hb_ot_metrics_tag_t = 1936750707;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_SIZE: hb_ot_metrics_tag_t = 1936750963;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_OFFSET: hb_ot_metrics_tag_t = 1936750703;
+pub const HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_OFFSET: hb_ot_metrics_tag_t = 1936750959;
+pub const HB_OT_METRICS_TAG_STRIKEOUT_SIZE: hb_ot_metrics_tag_t = 1937011315;
+pub const HB_OT_METRICS_TAG_STRIKEOUT_OFFSET: hb_ot_metrics_tag_t = 1937011311;
+pub const HB_OT_METRICS_TAG_UNDERLINE_SIZE: hb_ot_metrics_tag_t = 1970168947;
+pub const HB_OT_METRICS_TAG_UNDERLINE_OFFSET: hb_ot_metrics_tag_t = 1970168943;
+pub const _HB_OT_METRICS_TAG_MAX_VALUE: hb_ot_metrics_tag_t = 2147483647;
+#[doc = " hb_ot_metrics_tag_t:"]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_ASCENDER: horizontal ascender."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_DESCENDER: horizontal descender."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_LINE_GAP: horizontal line gap."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_ASCENT: horizontal clipping ascent."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_DESCENT: horizontal clipping descent."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_ASCENDER: vertical ascender."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_DESCENDER: vertical descender."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_LINE_GAP: vertical line gap."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_CARET_RISE: horizontal caret rise."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_CARET_RUN: horizontal caret run."]
+#[doc = " @HB_OT_METRICS_TAG_HORIZONTAL_CARET_OFFSET: horizontal caret offset."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_CARET_RISE: vertical caret rise."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_CARET_RUN: vertical caret run."]
+#[doc = " @HB_OT_METRICS_TAG_VERTICAL_CARET_OFFSET: vertical caret offset."]
+#[doc = " @HB_OT_METRICS_TAG_X_HEIGHT: x height."]
+#[doc = " @HB_OT_METRICS_TAG_CAP_HEIGHT: cap height."]
+#[doc = " @HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_SIZE: subscript em x size."]
+#[doc = " @HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_SIZE: subscript em y size."]
+#[doc = " @HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_OFFSET: subscript em x offset."]
+#[doc = " @HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_OFFSET: subscript em y offset."]
+#[doc = " @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_SIZE: superscript em x size."]
+#[doc = " @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_SIZE: superscript em y size."]
+#[doc = " @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_OFFSET: superscript em x offset."]
+#[doc = " @HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_OFFSET: superscript em y offset."]
+#[doc = " @HB_OT_METRICS_TAG_STRIKEOUT_SIZE: strikeout size."]
+#[doc = " @HB_OT_METRICS_TAG_STRIKEOUT_OFFSET: strikeout offset."]
+#[doc = " @HB_OT_METRICS_TAG_UNDERLINE_SIZE: underline size."]
+#[doc = " @HB_OT_METRICS_TAG_UNDERLINE_OFFSET: underline offset."]
+#[doc = ""]
+#[doc = " From https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags"]
+#[doc = ""]
+#[doc = " Since: 2.6.0"]
+pub type hb_ot_metrics_tag_t = u32;
+extern "C" {
+    pub fn hb_ot_metrics_get_position(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+        position: *mut hb_position_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> ::std::os::raw::c_float;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_x_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_y_variation(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+    ) -> hb_position_t;
+}
+extern "C" {
+    pub fn hb_ot_shape_glyphs_closure(
+        font: *mut hb_font_t,
+        buffer: *mut hb_buffer_t,
+        features: *const hb_feature_t,
+        num_features: ::std::os::raw::c_uint,
+        glyphs: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_shape_plan_collect_lookups(
+        shape_plan: *mut hb_shape_plan_t,
+        table_tag: hb_tag_t,
+        lookup_indexes: *mut hb_set_t,
+    );
+}
+extern "C" {
+    pub fn hb_ot_var_has_data(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_var_get_axis_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+pub const HB_OT_VAR_AXIS_FLAG_HIDDEN: hb_ot_var_axis_flags_t = 1;
+pub const _HB_OT_VAR_AXIS_FLAG_MAX_VALUE: hb_ot_var_axis_flags_t = 2147483647;
+#[doc = " hb_ot_var_axis_flags_t:"]
+#[doc = " @HB_OT_VAR_AXIS_FLAG_HIDDEN: The axis should not be exposed directly in user interfaces."]
+#[doc = ""]
+#[doc = " Since: 2.2.0"]
+pub type hb_ot_var_axis_flags_t = u32;
+#[doc = " hb_ot_var_axis_info_t:"]
+#[doc = ""]
+#[doc = " Since: 2.2.0"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_var_axis_info_t {
+    pub axis_index: ::std::os::raw::c_uint,
+    pub tag: hb_tag_t,
+    pub name_id: hb_ot_name_id_t,
+    pub flags: hb_ot_var_axis_flags_t,
+    pub min_value: ::std::os::raw::c_float,
+    pub default_value: ::std::os::raw::c_float,
+    pub max_value: ::std::os::raw::c_float,
+    pub reserved: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_var_axis_info_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_var_axis_info_t>(),
+        32usize,
+        concat!("Size of: ", stringify!(hb_ot_var_axis_info_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_var_axis_info_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_var_axis_info_t))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).axis_index as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(axis_index)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).tag as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(tag)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).name_id as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).flags as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(flags)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).min_value as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(min_value)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).default_value as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(default_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).max_value as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(max_value)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_ot_var_axis_info_t>())).reserved as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_var_axis_info_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_ot_var_get_axis_infos(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        axes_count: *mut ::std::os::raw::c_uint,
+        axes_array: *mut hb_ot_var_axis_info_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_var_find_axis_info(
+        face: *mut hb_face_t,
+        axis_tag: hb_tag_t,
+        axis_info: *mut hb_ot_var_axis_info_t,
+    ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_var_get_named_instance_count(face: *mut hb_face_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_subfamily_name_id(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_postscript_name_id(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+    ) -> hb_ot_name_id_t;
+}
+extern "C" {
+    pub fn hb_ot_var_named_instance_get_design_coords(
+        face: *mut hb_face_t,
+        instance_index: ::std::os::raw::c_uint,
+        coords_length: *mut ::std::os::raw::c_uint,
+        coords: *mut ::std::os::raw::c_float,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_ot_var_normalize_variations(
+        face: *mut hb_face_t,
+        variations: *const hb_variation_t,
+        variations_length: ::std::os::raw::c_uint,
+        coords: *mut ::std::os::raw::c_int,
+        coords_length: ::std::os::raw::c_uint,
+    );
+}
+extern "C" {
+    pub fn hb_ot_var_normalize_coords(
+        face: *mut hb_face_t,
+        coords_length: ::std::os::raw::c_uint,
+        design_coords: *const ::std::os::raw::c_float,
+        normalized_coords: *mut ::std::os::raw::c_int,
+    );
+}
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_INVALID: hb_aat_layout_feature_type_t = 65535;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC: hb_aat_layout_feature_type_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LIGATURES: hb_aat_layout_feature_type_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CURISVE_CONNECTION: hb_aat_layout_feature_type_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LETTER_CASE: hb_aat_layout_feature_type_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_SUBSTITUTION: hb_aat_layout_feature_type_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LINGUISTIC_REARRANGEMENT: hb_aat_layout_feature_type_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_SPACING: hb_aat_layout_feature_type_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE: hb_aat_layout_feature_type_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_DIACRITICS_TYPE: hb_aat_layout_feature_type_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_POSITION: hb_aat_layout_feature_type_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_FRACTIONS: hb_aat_layout_feature_type_t = 11;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE: hb_aat_layout_feature_type_t = 13;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TYPOGRAPHIC_EXTRAS: hb_aat_layout_feature_type_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_MATHEMATICAL_EXTRAS: hb_aat_layout_feature_type_t = 15;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ORNAMENT_SETS_TYPE: hb_aat_layout_feature_type_t = 16;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_ALTERNATIVES: hb_aat_layout_feature_type_t = 17;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_DESIGN_COMPLEXITY_TYPE: hb_aat_layout_feature_type_t = 18;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_STYLE_OPTIONS: hb_aat_layout_feature_type_t = 19;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_SHAPE: hb_aat_layout_feature_type_t = 20;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_CASE: hb_aat_layout_feature_type_t = 21;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TEXT_SPACING: hb_aat_layout_feature_type_t = 22;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_TRANSLITERATION: hb_aat_layout_feature_type_t = 23;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ANNOTATION_TYPE: hb_aat_layout_feature_type_t = 24;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_KANA_SPACING_TYPE: hb_aat_layout_feature_type_t = 25;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_SPACING_TYPE: hb_aat_layout_feature_type_t = 26;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_UNICODE_DECOMPOSITION_TYPE: hb_aat_layout_feature_type_t = 27;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_RUBY_KANA: hb_aat_layout_feature_type_t = 28;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_SYMBOL_ALTERNATIVES_TYPE: hb_aat_layout_feature_type_t =
+    29;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_ALTERNATIVES_TYPE: hb_aat_layout_feature_type_t =
+    30;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_VERTICAL_ROMAN_PLACEMENT_TYPE:
+    hb_aat_layout_feature_type_t = 31;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ITALIC_CJK_ROMAN: hb_aat_layout_feature_type_t = 32;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CASE_SENSITIVE_LAYOUT: hb_aat_layout_feature_type_t = 33;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_ALTERNATE_KANA: hb_aat_layout_feature_type_t = 34;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_STYLISTIC_ALTERNATIVES: hb_aat_layout_feature_type_t = 35;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CONTEXTUAL_ALTERNATIVES: hb_aat_layout_feature_type_t = 36;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LOWER_CASE: hb_aat_layout_feature_type_t = 37;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_UPPER_CASE: hb_aat_layout_feature_type_t = 38;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE: hb_aat_layout_feature_type_t = 39;
+pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE: hb_aat_layout_feature_type_t = 103;
+pub const _HB_AAT_LAYOUT_FEATURE_TYPE_MAX_VALUE: hb_aat_layout_feature_type_t = 2147483647;
+#[doc = " hb_aat_layout_feature_type_t:"]
+#[doc = ""]
+#[doc = ""]
+#[doc = " Since: 2.2.0"]
+pub type hb_aat_layout_feature_type_t = u32;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVALID: hb_aat_layout_feature_selector_t = 65535;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RARE_LIGATURES_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RARE_LIGATURES_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOGOS_ON: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOGOS_OFF: hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REBUS_PICTURES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_REBUS_PICTURES_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIPHTHONG_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIPHTHONG_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SQUARED_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SQUARED_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ABBREV_SQUARED_LIGATURES_ON:
+    hb_aat_layout_feature_selector_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ABBREV_SQUARED_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 15;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SYMBOL_LIGATURES_ON: hb_aat_layout_feature_selector_t = 16;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SYMBOL_LIGATURES_OFF: hb_aat_layout_feature_selector_t =
+    17;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    18;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 19;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    20;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 21;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UNCONNECTED: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PARTIALLY_CONNECTED: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CURSIVE: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_AND_LOWER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_CAPS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_LOWER_CASE: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMALL_CAPS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS_AND_SMALL_CAPS:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MONOSPACED_NUMBERS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_NUMBERS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_NUMBERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_QUARTER_WIDTH_NUMBERS: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_INITIAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_INITIAL_SWASHES_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LINE_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_OFF: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SHOW_DIACRITICS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HIDE_DIACRITICS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DECOMPOSE_DIACRITICS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NORMAL_POSITION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SUPERIORS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INFERIORS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ORDINALS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SCIENTIFIC_INFERIORS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_FRACTIONS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_VERTICAL_FRACTIONS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIAGONAL_FRACTIONS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_OFF: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_OFF: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASHED_ZERO_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASHED_ZERO_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FORM_INTERROBANG_ON: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FORM_INTERROBANG_OFF: hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMART_QUOTES_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SMART_QUOTES_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_ON: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_OFF: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASH_TO_DIVIDE_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SLASH_TO_DIVIDE_OFF: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INEQUALITY_LIGATURES_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INEQUALITY_LIGATURES_OFF:
+    hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPONENTS_ON: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPONENTS_OFF: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ORNAMENTS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DINGBATS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PI_CHARACTERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FLEURONS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DECORATIVE_BORDERS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INTERNATIONAL_SYMBOLS: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MATH_SYMBOLS: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ALTERNATES: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL1: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL2: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL3: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL4: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL5: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_STYLE_OPTIONS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DISPLAY_TEXT: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ENGRAVED_TEXT: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ILLUMINATED_CAPS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TITLING_CAPS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TALL_CAPS: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_CHARACTERS: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SIMPLIFIED_CHARACTERS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1978_CHARACTERS: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1983_CHARACTERS: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS1990_CHARACTERS: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_ONE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_TWO: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_THREE: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_FOUR: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_ALT_FIVE: hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_EXPERT_CHARACTERS: hb_aat_layout_feature_selector_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_JIS2004_CHARACTERS: hb_aat_layout_feature_selector_t = 11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HOJO_CHARACTERS: hb_aat_layout_feature_selector_t = 12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NLCCHARACTERS: hb_aat_layout_feature_selector_t = 13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRADITIONAL_NAMES_CHARACTERS:
+    hb_aat_layout_feature_selector_t = 14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_NUMBERS: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_NUMBERS: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_TEXT: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_MONOSPACED_TEXT: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_QUARTER_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALT_PROPORTIONAL_TEXT: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALT_HALF_WIDTH_TEXT: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_TRANSLITERATION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HIRAGANA_TO_KATAKANA: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_KATAKANA_TO_HIRAGANA: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_KANA_TO_ROMANIZATION: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMANIZATION_TO_HIRAGANA:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMANIZATION_TO_KATAKANA:
+    hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_ONE: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_TWO: hb_aat_layout_feature_selector_t =
+    8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_THREE:
+    hb_aat_layout_feature_selector_t = 9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_ANNOTATION: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_BOX_ANNOTATION: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROUNDED_BOX_ANNOTATION: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CIRCLE_ANNOTATION: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_CIRCLE_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PARENTHESIS_ANNOTATION: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PERIOD_ANNOTATION: hb_aat_layout_feature_selector_t = 6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ROMAN_NUMERAL_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DIAMOND_ANNOTATION: hb_aat_layout_feature_selector_t = 8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_BOX_ANNOTATION: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_INVERTED_ROUNDED_BOX_ANNOTATION:
+    hb_aat_layout_feature_selector_t = 10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_KANA: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_KANA: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_IDEOGRAPHS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_ON:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_RUBY_KANA: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_RUBY_KANA_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_CJK_SYMBOL_ALTERNATIVES:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_ONE: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_TWO: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_THREE: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FOUR: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FIVE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_IDEOGRAPHIC_ALTERNATIVES:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_ONE: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_TWO: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_THREE: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FOUR: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FIVE: hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_CENTERED:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_HBASELINE:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_CJK_ITALIC_ROMAN: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN: hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_ON:
+    hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_OFF:
+    hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_ON: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_ON: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_NO_STYLISTIC_ALTERNATES: hb_aat_layout_feature_selector_t =
+    0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_OFF: hb_aat_layout_feature_selector_t =
+    3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_ON: hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_OFF: hb_aat_layout_feature_selector_t =
+    5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THREE_ON: hb_aat_layout_feature_selector_t =
+    6;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THREE_OFF: hb_aat_layout_feature_selector_t =
+    7;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOUR_ON: hb_aat_layout_feature_selector_t =
+    8;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOUR_OFF: hb_aat_layout_feature_selector_t =
+    9;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIVE_ON: hb_aat_layout_feature_selector_t =
+    10;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIVE_OFF: hb_aat_layout_feature_selector_t =
+    11;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIX_ON: hb_aat_layout_feature_selector_t =
+    12;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIX_OFF: hb_aat_layout_feature_selector_t =
+    13;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVEN_ON: hb_aat_layout_feature_selector_t =
+    14;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVEN_OFF: hb_aat_layout_feature_selector_t =
+    15;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHT_ON: hb_aat_layout_feature_selector_t =
+    16;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHT_OFF: hb_aat_layout_feature_selector_t =
+    17;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINE_ON: hb_aat_layout_feature_selector_t =
+    18;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINE_OFF: hb_aat_layout_feature_selector_t =
+    19;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TEN_ON: hb_aat_layout_feature_selector_t =
+    20;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TEN_OFF: hb_aat_layout_feature_selector_t =
+    21;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ELEVEN_ON: hb_aat_layout_feature_selector_t =
+    22;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ELEVEN_OFF:
+    hb_aat_layout_feature_selector_t = 23;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWELVE_ON: hb_aat_layout_feature_selector_t =
+    24;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWELVE_OFF:
+    hb_aat_layout_feature_selector_t = 25;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THIRTEEN_ON:
+    hb_aat_layout_feature_selector_t = 26;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_THIRTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 27;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOURTEEN_ON:
+    hb_aat_layout_feature_selector_t = 28;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FOURTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 29;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIFTEEN_ON:
+    hb_aat_layout_feature_selector_t = 30;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_FIFTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 31;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIXTEEN_ON:
+    hb_aat_layout_feature_selector_t = 32;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SIXTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 33;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVENTEEN_ON:
+    hb_aat_layout_feature_selector_t = 34;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_SEVENTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 35;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHTEEN_ON:
+    hb_aat_layout_feature_selector_t = 36;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_EIGHTEEN_OFF:
+    hb_aat_layout_feature_selector_t = 37;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINETEEN_ON:
+    hb_aat_layout_feature_selector_t = 38;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_NINETEEN_OFF:
+    hb_aat_layout_feature_selector_t = 39;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_ON: hb_aat_layout_feature_selector_t =
+    40;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_OFF:
+    hb_aat_layout_feature_selector_t = 41;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_ON:
+    hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_OFF:
+    hb_aat_layout_feature_selector_t = 1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_ON: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_OFF: hb_aat_layout_feature_selector_t = 3;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_ON:
+    hb_aat_layout_feature_selector_t = 4;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_OFF:
+    hb_aat_layout_feature_selector_t = 5;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_LOWER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_SMALL_CAPS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_LOWER_CASE_PETITE_CAPS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_UPPER_CASE: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_SMALL_CAPS: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_UPPER_CASE_PETITE_CAPS: hb_aat_layout_feature_selector_t =
+    2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_CJK_ROMAN: hb_aat_layout_feature_selector_t = 0;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_CJK_ROMAN: hb_aat_layout_feature_selector_t =
+    1;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_CJK_ROMAN: hb_aat_layout_feature_selector_t = 2;
+pub const HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_CJK_ROMAN: hb_aat_layout_feature_selector_t = 3;
+pub const _HB_AAT_LAYOUT_FEATURE_SELECTOR_MAX_VALUE: hb_aat_layout_feature_selector_t = 2147483647;
+#[doc = " hb_aat_layout_feature_selector_t:"]
+#[doc = ""]
+#[doc = ""]
+#[doc = " Since: 2.2.0"]
+pub type hb_aat_layout_feature_selector_t = u32;
+extern "C" {
+    pub fn hb_aat_layout_get_feature_types(
+        face: *mut hb_face_t,
+        start_offset: ::std::os::raw::c_uint,
+        feature_count: *mut ::std::os::raw::c_uint,
+        features: *mut hb_aat_layout_feature_type_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_aat_layout_feature_type_get_name_id(
+        face: *mut hb_face_t,
+        feature_type: hb_aat_layout_feature_type_t,
+    ) -> hb_ot_name_id_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_aat_layout_feature_selector_info_t {
+    pub name_id: hb_ot_name_id_t,
+    pub enable: hb_aat_layout_feature_selector_t,
+    pub disable: hb_aat_layout_feature_selector_t,
+    pub reserved: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_hb_aat_layout_feature_selector_info_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_aat_layout_feature_selector_info_t>(),
+        16usize,
+        concat!(
+            "Size of: ",
+            stringify!(hb_aat_layout_feature_selector_info_t)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_aat_layout_feature_selector_info_t>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(hb_aat_layout_feature_selector_info_t)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).name_id as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(name_id)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).enable as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(enable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).disable as *const _
+                as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(disable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_aat_layout_feature_selector_info_t>())).reserved as *const _
+                as usize
+        },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_aat_layout_feature_selector_info_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+extern "C" {
+    pub fn hb_aat_layout_feature_type_get_selector_infos(
+        face: *mut hb_face_t,
+        feature_type: hb_aat_layout_feature_type_t,
+        start_offset: ::std::os::raw::c_uint,
+        selector_count: *mut ::std::os::raw::c_uint,
+        selectors: *mut hb_aat_layout_feature_selector_info_t,
+        default_index: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn hb_aat_layout_has_substitution(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_aat_layout_has_positioning(face: *mut hb_face_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_aat_layout_has_tracking(face: *mut hb_face_t) -> hb_bool_t;
+}
