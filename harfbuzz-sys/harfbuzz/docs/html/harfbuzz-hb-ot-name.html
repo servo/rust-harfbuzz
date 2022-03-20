@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-ot-name: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch13.html" title="OpenType API">
-<link rel="prev" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
+<link rel="prev" href="harfbuzz-hb-ot-metrics.html" title="hb-ot-metrics">
 <link rel="next" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="ch13.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="harfbuzz-hb-ot-math.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="harfbuzz-hb-ot-metrics.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="harfbuzz-hb-ot-shape.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
@@ -40,7 +40,7 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="function_type">const <span class="returnvalue">hb_ot_name_entry_t</span> *
+<td class="function_type">const <a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t" title="hb_ot_name_entry_t"><span class="returnvalue">hb_ot_name_entry_t</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-list-names" title="hb_ot_name_list_names ()">hb_ot_name_list_names</a> <span class="c_punctuation">()</span>
@@ -77,10 +77,16 @@
 <col width="150px" class="other_proto_type">
 <col class="other_proto_name">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="typedef_keyword">typedef</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t">hb_ot_name_id_t</a></td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t" title="hb_ot_name_entry_t">hb_ot_name_entry_t</a></td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="refsect1">
@@ -96,7 +102,7 @@
 <a name="harfbuzz-hb-ot-name.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
 <a name="hb-ot-name-list-names"></a><h3>hb_ot_name_list_names ()</h3>
-<pre class="programlisting">const <span class="returnvalue">hb_ot_name_entry_t</span> *
+<pre class="programlisting">const <a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t" title="hb_ot_name_entry_t"><span class="returnvalue">hb_ot_name_entry_t</span></a> *
 hb_ot_name_list_names (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> *num_entries</code></em>);</pre>
 <p>Enumerates all available name IDs and language combinations. Returned
@@ -319,9 +325,42 @@ There are predefined name IDs, as well as name IDs return from other
 API.  These can be used to fetch name strings from a font face.</p>
 <p class="since">Since: <a class="link" href="api-index-2-0-0.html#api-index-2.0.0">2.0.0</a></p>
 </div>
+<hr>
+<div class="refsect2">
+<a name="hb-ot-name-entry-t"></a><h3>hb_ot_name_entry_t</h3>
+<pre class="programlisting">typedef struct {
+  hb_ot_name_id_t name_id;
+  hb_language_t   language;
+} hb_ot_name_entry_t;
+</pre>
+<p>Structure representing a name ID in a particular language.</p>
+<div class="refsect3">
+<a name="hb-ot-name-entry-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="struct_members_name">
+<col class="struct_members_description">
+<col width="200px" class="struct_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> <em class="structfield"><code><a name="hb-ot-name-entry-t.name-id"></a>name_id</code></em>;</p></td>
+<td class="struct_member_description"><p>name ID</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-common.html#hb-language-t" title="hb_language_t"><span class="type">hb_language_t</span></a> <em class="structfield"><code><a name="hb-ot-name-entry-t.language"></a>language</code></em>;</p></td>
+<td class="struct_member_description"><p>language</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-1-0.html#api-index-2.1.0">2.1.0</a></p>
+</div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

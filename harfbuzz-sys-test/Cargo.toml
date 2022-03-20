@@ -11,4 +11,7 @@ libc = "0.2"
 
 [build-dependencies]
 pkg-config = "0.3"
-ctest = "0.2"
+ctest2 = "0.4"
+
+[features]
+build-native-harfbuzz = [ "harfbuzz-sys/build-native-harfbuzz" ]

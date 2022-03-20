@@ -38,6 +38,7 @@ TESTS = \
 	tests/mark-attachment.tests \
 	tests/mark-filtering-sets.tests \
 	tests/mongolian-variation-selector.tests \
+	tests/myanmar-misc.tests \
 	tests/myanmar-syllable.tests \
 	tests/myanmar-zawgyi.tests \
 	tests/none-directional.tests \
@@ -55,7 +56,9 @@ TESTS = \
 	tests/use-marchen.tests \
 	tests/use-syllable.tests \
 	tests/use.tests \
+	tests/variations-rounding.tests \
 	tests/variations-rvrn.tests \
+	tests/variations-space.tests \
 	tests/vertical.tests \
 	tests/zero-width-marks.tests \
 	$(NULL)

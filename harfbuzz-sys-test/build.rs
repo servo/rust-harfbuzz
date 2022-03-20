@@ -1,10 +1,10 @@
-extern crate ctest;
+extern crate ctest2;
 extern crate pkg_config;
 
 use std::env;
 
 fn main() {
-    let mut cfg = ctest::TestGenerator::new();
+    let mut cfg = ctest2::TestGenerator::new();
 
     // Get the include paths from harfbuzz-sys or pkg-config.
     if let Some(path) = &env::var_os("DEP_HARFBUZZ_INCLUDE") {

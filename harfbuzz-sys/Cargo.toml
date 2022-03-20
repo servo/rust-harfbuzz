@@ -23,8 +23,8 @@ links = "harfbuzz"
 build = "build.rs"
 
 [build-dependencies]
+ndk-build = { version = "0.4", optional = true }
 pkg-config = { version = "0.3", optional = true }
-cc = { version = "1", optional = true }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
 core-graphics = "0.22"
@@ -36,5 +36,5 @@ freetype = { version = "0.7", default-features = false }
 
 [features]
 default = ["build-native-harfbuzz", "build-native-freetype"]
-build-native-harfbuzz = ["cc", "pkg-config"]
+build-native-harfbuzz = ["ndk-build", "pkg-config"]
 build-native-freetype = ["freetype/freetype-sys"]

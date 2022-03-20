@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-deprecated: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch12.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-common.html" title="hb-common">
 <link rel="next" href="harfbuzz-hb-face.html" title="hb-face">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -117,6 +117,10 @@
 <td class="function_name"><a class="link" href="harfbuzz-hb-deprecated.html#HB-OT-VAR-NO-AXIS-INDEX:CAPS" title="HB_OT_VAR_NO_AXIS_INDEX">HB_OT_VAR_NO_AXIS_INDEX</a></td>
 </tr>
 <tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-deprecated.html#hb-ot-var-axis-t" title="hb_ot_var_axis_t">hb_ot_var_axis_t</a></td>
+</tr>
+<tr>
 <td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-deprecated.html#HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS" title="HB_UNICODE_MAX_DECOMPOSITION_LEN">HB_UNICODE_MAX_DECOMPOSITION_LEN</a></td>
 </tr>
@@ -194,7 +198,7 @@ or GPOS table.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-table-find-script.returns"></a><h4>Returns</h4>
-<p> true if the script is found, false otherwise</p>
+<p> <code class="literal">true</code> if the script is found, false otherwise</p>
 </div>
 </div>
 <hr>
@@ -306,6 +310,10 @@ hb_font_get_glyph_v_kerning (<em class="parameter"><code><a class="link" href="h
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> top_glyph</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> bottom_glyph</code></em>);</pre>
 <div class="warning"><p><code class="literal">hb_font_get_glyph_v_kerning</code> has been deprecated since version 2.0.0 and should not be used in newly-written code.</p></div>
+<p>Fetches the kerning-adjustment value for a glyph-pair in
+the specified font, in vertical text segments.</p>
+<div class="note">It handles legacy kerning only (as returned by the corresponding
+<a class="link" href="harfbuzz-hb-font.html#hb-font-funcs-t" title="hb_font_funcs_t"><span class="type">hb_font_funcs_t</span></a> function).</div>
 <div class="refsect3">
 <a name="hb-font-get-glyph-v-kerning.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -314,12 +322,28 @@ hb_font_get_glyph_v_kerning (<em class="parameter"><code><a class="link" href="h
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>font</p></td>
-<td class="parameter_description"><p>a font.</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>top_glyph</p></td>
+<td class="parameter_description"><p>The glyph ID of the top glyph in the glyph pair</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>bottom_glyph</p></td>
+<td class="parameter_description"><p>The glyph ID of the bottom glyph in the glyph pair</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-font-get-glyph-v-kerning.returns"></a><h4>Returns</h4>
+<p> The kerning adjustment value</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-2.html#api-index-0.9.2">0.9.2</a></p>
 </div>
@@ -363,6 +387,20 @@ hb_font_get_glyph_v_kerning (<em class="parameter"><code><a class="link" href="h
 </div>
 <hr>
 <div class="refsect2">
+<a name="hb-ot-var-axis-t"></a><h3>hb_ot_var_axis_t</h3>
+<pre class="programlisting">typedef struct {
+  hb_tag_t tag;
+  hb_ot_name_id_t name_id;
+  float min_value;
+  float default_value;
+  float max_value;
+} hb_ot_var_axis_t;
+</pre>
+<div class="warning"><p><code class="literal">hb_ot_var_axis_t</code> has been deprecated since version 2.2.0 and should not be used in newly-written code.</p></div>
+<p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS"></a><h3>HB_UNICODE_MAX_DECOMPOSITION_LEN</h3>
 <pre class="programlisting">#define HB_UNICODE_MAX_DECOMPOSITION_LEN (18+1) /* codepoints */
 </pre>
@@ -379,6 +417,6 @@ hb_font_get_glyph_v_kerning (<em class="parameter"><code><a class="link" href="h
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>
