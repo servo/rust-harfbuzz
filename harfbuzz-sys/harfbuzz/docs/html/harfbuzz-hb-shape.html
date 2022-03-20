@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-shape: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch12.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-shape-plan.html" title="hb-shape-plan">
 <link rel="next" href="harfbuzz-hb-unicode.html" title="hb-unicode">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -90,7 +90,7 @@ hb_shape (<em class="parameter"><code><a class="link" href="harfbuzz-hb-font.htm
  using <em class="parameter"><code>font</code></em>
  turning its Unicode characters content to
 positioned glyphs. If <em class="parameter"><code>features</code></em>
- is not <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it will be used to control the
+ is not <code class="literal">NULL</code>, it will be used to control the
 features applied during shaping. If two <em class="parameter"><code>features</code></em>
  have the same tag but
 overlapping ranges the value of the feature with the higher index takes
@@ -117,7 +117,7 @@ precedence.</p>
 <tr>
 <td class="parameter_name"><p>features</p></td>
 <td class="parameter_description"><p>an array of user
-specified <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+specified <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -141,7 +141,7 @@ hb_shape_full (<em class="parameter"><code><a class="link" href="harfbuzz-hb-fon
                <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>,
                <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
 <p>See <a class="link" href="harfbuzz-hb-shape.html#hb-shape" title="hb_shape ()"><code class="function">hb_shape()</code></a> for details. If <em class="parameter"><code>shaper_list</code></em>
- is not <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the specified
+ is not <code class="literal">NULL</code>, the specified
 shapers will be used in the given order, otherwise the default shapers list
 will be used.</p>
 <div class="refsect3">
@@ -166,7 +166,7 @@ will be used.</p>
 <tr>
 <td class="parameter_name"><p>features</p></td>
 <td class="parameter_description"><p>an array of user
-specified <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+specified <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -177,8 +177,8 @@ array</p></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p>a <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated
-array of shapers to use or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p>a <code class="literal">NULL</code>-terminated
+array of shapers to use or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -207,6 +207,6 @@ constant strings. </p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

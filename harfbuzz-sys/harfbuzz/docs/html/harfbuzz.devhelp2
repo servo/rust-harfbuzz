@@ -108,6 +108,8 @@
         <sub name="hb-ot-font" link="harfbuzz-hb-ot-font.html"/>
         <sub name="hb-ot-layout" link="harfbuzz-hb-ot-layout.html"/>
         <sub name="hb-ot-math" link="harfbuzz-hb-ot-math.html"/>
+        <sub name="hb-ot-meta" link="harfbuzz-hb-ot-meta.html"/>
+        <sub name="hb-ot-metrics" link="harfbuzz-hb-ot-metrics.html"/>
         <sub name="hb-ot-name" link="harfbuzz-hb-ot-name.html"/>
         <sub name="hb-ot-shape" link="harfbuzz-hb-ot-shape.html"/>
         <sub name="hb-ot-var" link="harfbuzz-hb-ot-var.html"/>
@@ -123,9 +125,12 @@
         <sub name="hb-graphite2" link="harfbuzz-hb-graphite2.html"/>
         <sub name="hb-icu" link="harfbuzz-hb-icu.html"/>
         <sub name="hb-uniscribe" link="harfbuzz-hb-uniscribe.html"/>
+        <sub name="hb-gdi" link="harfbuzz-hb-gdi.html"/>
+        <sub name="hb-directwrite" link="harfbuzz-hb-directwrite.html"/>
       </sub>
       <sub name="API Index" link="api-index-full.html"/>
       <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+      <sub name="Index of new symbols in 2.7.3" link="api-index-2-7-3.html"/>
       <sub name="Index of new symbols in 2.6.0" link="api-index-2-6-0.html"/>
       <sub name="Index of new symbols in 2.5.0" link="api-index-2-5-0.html"/>
       <sub name="Index of new symbols in 2.4.0" link="api-index-2-4-0.html"/>
@@ -144,6 +149,7 @@
       <sub name="Index of new symbols in 1.5.0" link="api-index-1-5-0.html"/>
       <sub name="Index of new symbols in 1.4.3" link="api-index-1-4-3.html"/>
       <sub name="Index of new symbols in 1.4.2" link="api-index-1-4-2.html"/>
+      <sub name="Index of new symbols in 1.4.0" link="api-index-1-4-0.html"/>
       <sub name="Index of new symbols in 1.3.3" link="api-index-1-3-3.html"/>
       <sub name="Index of new symbols in 1.2.3" link="api-index-1-2-3.html"/>
       <sub name="Index of new symbols in 1.1.3" link="api-index-1-1-3.html"/>
@@ -222,6 +228,7 @@
     <keyword type="function" name="hb_buffer_get_user_data ()" link="harfbuzz-hb-buffer.html#hb-buffer-get-user-data" since="0.9.2"/>
     <keyword type="function" name="hb_buffer_get_glyph_infos ()" link="harfbuzz-hb-buffer.html#hb-buffer-get-glyph-infos" since="0.9.2"/>
     <keyword type="function" name="hb_buffer_get_glyph_positions ()" link="harfbuzz-hb-buffer.html#hb-buffer-get-glyph-positions" since="0.9.2"/>
+    <keyword type="function" name="hb_buffer_has_positions ()" link="harfbuzz-hb-buffer.html#hb-buffer-has-positions" since="2.7.3"/>
     <keyword type="function" name="hb_buffer_get_invisible_glyph ()" link="harfbuzz-hb-buffer.html#hb-buffer-get-invisible-glyph" since="2.0.0"/>
     <keyword type="function" name="hb_buffer_set_invisible_glyph ()" link="harfbuzz-hb-buffer.html#hb-buffer-set-invisible-glyph" since="2.0.0"/>
     <keyword type="function" name="hb_buffer_set_replacement_codepoint ()" link="harfbuzz-hb-buffer.html#hb-buffer-set-replacement-codepoint" since="0.9.31"/>
@@ -230,8 +237,11 @@
     <keyword type="function" name="hb_buffer_reverse ()" link="harfbuzz-hb-buffer.html#hb-buffer-reverse" since="0.9.2"/>
     <keyword type="function" name="hb_buffer_reverse_range ()" link="harfbuzz-hb-buffer.html#hb-buffer-reverse-range" since="0.9.41"/>
     <keyword type="function" name="hb_buffer_reverse_clusters ()" link="harfbuzz-hb-buffer.html#hb-buffer-reverse-clusters" since="0.9.2"/>
+    <keyword type="function" name="hb_buffer_serialize ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize" since="2.7.3"/>
     <keyword type="function" name="hb_buffer_serialize_glyphs ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-glyphs" since="0.9.7"/>
     <keyword type="function" name="hb_buffer_deserialize_glyphs ()" link="harfbuzz-hb-buffer.html#hb-buffer-deserialize-glyphs" since="0.9.7"/>
+    <keyword type="function" name="hb_buffer_serialize_unicode ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-unicode" since="2.7.3"/>
+    <keyword type="function" name="hb_buffer_deserialize_unicode ()" link="harfbuzz-hb-buffer.html#hb-buffer-deserialize-unicode" since="2.7.3"/>
     <keyword type="function" name="hb_buffer_serialize_format_from_string ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-format-from-string" since="0.9.7"/>
     <keyword type="function" name="hb_buffer_serialize_format_to_string ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-format-to-string" since="0.9.7"/>
     <keyword type="function" name="hb_buffer_serialize_list_formats ()" link="harfbuzz-hb-buffer.html#hb-buffer-serialize-list-formats" since="0.9.7"/>
@@ -244,6 +254,7 @@
     <keyword type="macro" name="HB_SEGMENT_PROPERTIES_DEFAULT" link="harfbuzz-hb-buffer.html#HB-SEGMENT-PROPERTIES-DEFAULT:CAPS"/>
     <keyword type="macro" name="HB_BUFFER_REPLACEMENT_CODEPOINT_DEFAULT" link="harfbuzz-hb-buffer.html#HB-BUFFER-REPLACEMENT-CODEPOINT-DEFAULT:CAPS" since="0.9.31"/>
     <keyword type="typedef" name="hb_buffer_t" link="harfbuzz-hb-buffer.html#hb-buffer-t"/>
+    <keyword type="struct" name="hb_glyph_info_t" link="harfbuzz-hb-buffer.html#hb-glyph-info-t"/>
     <keyword type="enum" name="enum hb_glyph_flags_t" link="harfbuzz-hb-buffer.html#hb-glyph-flags-t" since="1.5.0"/>
     <keyword type="struct" name="hb_glyph_position_t" link="harfbuzz-hb-buffer.html#hb-glyph-position-t"/>
     <keyword type="enum" name="enum hb_buffer_content_type_t" link="harfbuzz-hb-buffer.html#hb-buffer-content-type-t"/>
@@ -306,6 +317,7 @@
     <keyword type="macro" name="HB_SCRIPT_CANADIAN_ABORIGINAL" link="harfbuzz-hb-deprecated.html#HB-SCRIPT-CANADIAN-ABORIGINAL:CAPS" deprecated=""/>
     <keyword type="macro" name="HB_MATH_GLYPH_PART_FLAG_EXTENDER" link="harfbuzz-hb-deprecated.html#HB-MATH-GLYPH-PART-FLAG-EXTENDER:CAPS" deprecated=""/>
     <keyword type="macro" name="HB_OT_VAR_NO_AXIS_INDEX" link="harfbuzz-hb-deprecated.html#HB-OT-VAR-NO-AXIS-INDEX:CAPS" deprecated="2.2.0" since="1.4.2"/>
+    <keyword type="struct" name="hb_ot_var_axis_t" link="harfbuzz-hb-deprecated.html#hb-ot-var-axis-t" deprecated="2.2.0" since="1.4.2"/>
     <keyword type="macro" name="HB_UNICODE_MAX_DECOMPOSITION_LEN" link="harfbuzz-hb-deprecated.html#HB-UNICODE-MAX-DECOMPOSITION-LEN:CAPS" deprecated="2.0.0"/>
     <keyword type="typedef" name="hb_font_get_glyph_v_kerning_func_t" link="harfbuzz-hb-deprecated.html#hb-font-get-glyph-v-kerning-func-t" deprecated=""/>
     <keyword type="function" name="hb_face_count ()" link="harfbuzz-hb-face.html#hb-face-count" since="1.7.7"/>
@@ -436,6 +448,8 @@
     <keyword type="typedef" name="hb_font_t" link="harfbuzz-hb-font.html#hb-font-t"/>
     <keyword type="typedef" name="hb_font_get_font_h_extents_func_t" link="harfbuzz-hb-font.html#hb-font-get-font-h-extents-func-t"/>
     <keyword type="typedef" name="hb_font_get_font_v_extents_func_t" link="harfbuzz-hb-font.html#hb-font-get-font-v-extents-func-t"/>
+    <keyword type="struct" name="hb_font_extents_t" link="harfbuzz-hb-font.html#hb-font-extents-t"/>
+    <keyword type="struct" name="hb_glyph_extents_t" link="harfbuzz-hb-font.html#hb-glyph-extents-t"/>
     <keyword type="function" name="hb_map_allocation_successful ()" link="harfbuzz-hb-map.html#hb-map-allocation-successful" since="1.7.7"/>
     <keyword type="function" name="hb_map_clear ()" link="harfbuzz-hb-map.html#hb-map-clear" since="1.7.7"/>
     <keyword type="function" name="hb_map_create ()" link="harfbuzz-hb-map.html#hb-map-create" since="1.7.7"/>
@@ -484,8 +498,8 @@
     <keyword type="typedef" name="hb_set_t" link="harfbuzz-hb-set.html#hb-set-t"/>
     <keyword type="function" name="hb_shape_plan_create ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create" since="0.9.7"/>
     <keyword type="function" name="hb_shape_plan_create_cached ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached" since="0.9.7"/>
-    <keyword type="function" name="hb_shape_plan_create2 ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create2"/>
-    <keyword type="function" name="hb_shape_plan_create_cached2 ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached2"/>
+    <keyword type="function" name="hb_shape_plan_create2 ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create2" since="1.4.0"/>
+    <keyword type="function" name="hb_shape_plan_create_cached2 ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached2" since="1.4.0"/>
     <keyword type="function" name="hb_shape_plan_destroy ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-destroy" since="0.9.7"/>
     <keyword type="function" name="hb_shape_plan_execute ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-execute" since="0.9.7"/>
     <keyword type="function" name="hb_shape_plan_get_empty ()" link="harfbuzz-hb-shape-plan.html#hb-shape-plan-get-empty" since="0.9.7"/>
@@ -505,7 +519,7 @@
     <keyword type="function" name="hb_unicode_decompose_func_t ()" link="harfbuzz-hb-unicode.html#hb-unicode-decompose-func-t"/>
     <keyword type="function" name="hb_unicode_funcs_create ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-create" since="0.9.2"/>
     <keyword type="function" name="hb_unicode_funcs_destroy ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-destroy" since="0.9.2"/>
-    <keyword type="function" name="hb_unicode_funcs_get_default ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-get-default"/>
+    <keyword type="function" name="hb_unicode_funcs_get_default ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-get-default" since="0.9.2"/>
     <keyword type="function" name="hb_unicode_funcs_get_empty ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-get-empty" since="0.9.2"/>
     <keyword type="function" name="hb_unicode_funcs_get_parent ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-get-parent" since="0.9.2"/>
     <keyword type="function" name="hb_unicode_funcs_get_user_data ()" link="harfbuzz-hb-unicode.html#hb-unicode-funcs-get-user-data" since="0.9.2"/>
@@ -555,6 +569,7 @@
     <keyword type="function" name="hb_ot_color_palette_get_flags ()" link="harfbuzz-hb-ot-color.html#hb-ot-color-palette-get-flags" since="2.1.0"/>
     <keyword type="function" name="hb_ot_color_palette_get_name_id ()" link="harfbuzz-hb-ot-color.html#hb-ot-color-palette-get-name-id" since="2.1.0"/>
     <keyword type="typedef" name="hb_color_t" link="harfbuzz-hb-ot-color.html#hb-color-t" since="2.1.0"/>
+    <keyword type="struct" name="hb_ot_color_layer_t" link="harfbuzz-hb-ot-color.html#hb-ot-color-layer-t" since="2.1.0"/>
     <keyword type="enum" name="enum hb_ot_color_palette_flags_t" link="harfbuzz-hb-ot-color.html#hb-ot-color-palette-flags-t" since="2.1.0"/>
     <keyword type="function" name="hb_ot_font_set_funcs ()" link="harfbuzz-hb-ot-font.html#hb-ot-font-set-funcs" since="0.9.28"/>
     <keyword type="function" name="hb_ot_tag_to_language ()" link="harfbuzz-hb-ot-layout.html#hb-ot-tag-to-language" since="0.9.2"/>
@@ -626,20 +641,29 @@
     <keyword type="struct" name="hb_ot_math_glyph_variant_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t" since="1.3.3"/>
     <keyword type="enum" name="enum hb_ot_math_glyph_part_flags_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-flags-t" since="1.3.3"/>
     <keyword type="struct" name="hb_ot_math_glyph_part_t" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t" since="1.3.3"/>
+    <keyword type="function" name="hb_ot_meta_get_entry_tags ()" link="harfbuzz-hb-ot-meta.html#hb-ot-meta-get-entry-tags" since="2.6.0"/>
+    <keyword type="function" name="hb_ot_meta_reference_entry ()" link="harfbuzz-hb-ot-meta.html#hb-ot-meta-reference-entry" since="2.6.0"/>
+    <keyword type="enum" name="enum hb_ot_meta_tag_t" link="harfbuzz-hb-ot-meta.html#hb-ot-meta-tag-t" since="2.6.0"/>
+    <keyword type="function" name="hb_ot_metrics_get_position ()" link="harfbuzz-hb-ot-metrics.html#hb-ot-metrics-get-position" since="2.6.0"/>
+    <keyword type="function" name="hb_ot_metrics_get_variation ()" link="harfbuzz-hb-ot-metrics.html#hb-ot-metrics-get-variation" since="2.6.0"/>
+    <keyword type="function" name="hb_ot_metrics_get_x_variation ()" link="harfbuzz-hb-ot-metrics.html#hb-ot-metrics-get-x-variation" since="2.6.0"/>
+    <keyword type="function" name="hb_ot_metrics_get_y_variation ()" link="harfbuzz-hb-ot-metrics.html#hb-ot-metrics-get-y-variation" since="2.6.0"/>
+    <keyword type="enum" name="enum hb_ot_metrics_tag_t" link="harfbuzz-hb-ot-metrics.html#hb-ot-metrics-tag-t" since="2.6.0"/>
     <keyword type="function" name="hb_ot_name_list_names ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-list-names" since="2.1.0"/>
     <keyword type="function" name="hb_ot_name_get_utf16 ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-get-utf16" since="2.1.0"/>
     <keyword type="function" name="hb_ot_name_get_utf32 ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-get-utf32" since="2.1.0"/>
     <keyword type="function" name="hb_ot_name_get_utf8 ()" link="harfbuzz-hb-ot-name.html#hb-ot-name-get-utf8" since="2.1.0"/>
     <keyword type="typedef" name="hb_ot_name_id_t" link="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" since="2.0.0"/>
+    <keyword type="struct" name="hb_ot_name_entry_t" link="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t" since="2.1.0"/>
     <keyword type="function" name="hb_ot_shape_glyphs_closure ()" link="harfbuzz-hb-ot-shape.html#hb-ot-shape-glyphs-closure" since="0.9.2"/>
     <keyword type="function" name="hb_ot_var_has_data ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-has-data" since="1.4.2"/>
     <keyword type="function" name="hb_ot_var_find_axis_info ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-find-axis-info" since="2.2.0"/>
     <keyword type="function" name="hb_ot_var_get_axis_count ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-get-axis-count" since="1.4.2"/>
     <keyword type="function" name="hb_ot_var_get_axis_infos ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-get-axis-infos" since="2.2.0"/>
-    <keyword type="function" name="hb_ot_var_get_named_instance_count ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-get-named-instance-count"/>
-    <keyword type="function" name="hb_ot_var_named_instance_get_subfamily_name_id ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-subfamily-name-id"/>
-    <keyword type="function" name="hb_ot_var_named_instance_get_postscript_name_id ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-postscript-name-id"/>
-    <keyword type="function" name="hb_ot_var_named_instance_get_design_coords ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-design-coords"/>
+    <keyword type="function" name="hb_ot_var_get_named_instance_count ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-get-named-instance-count" since="2.2.0"/>
+    <keyword type="function" name="hb_ot_var_named_instance_get_subfamily_name_id ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-subfamily-name-id" since="2.2.0"/>
+    <keyword type="function" name="hb_ot_var_named_instance_get_postscript_name_id ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-postscript-name-id" since="2.2.0"/>
+    <keyword type="function" name="hb_ot_var_named_instance_get_design_coords ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-named-instance-get-design-coords" since="2.2.0"/>
     <keyword type="function" name="hb_ot_var_normalize_variations ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-normalize-variations" since="1.4.2"/>
     <keyword type="function" name="hb_ot_var_normalize_coords ()" link="harfbuzz-hb-ot-var.html#hb-ot-var-normalize-coords" since="1.4.2"/>
     <keyword type="macro" name="HB_OT_TAG_VAR_AXIS_ITALIC" link="harfbuzz-hb-ot-var.html#HB-OT-TAG-VAR-AXIS-ITALIC:CAPS"/>
@@ -648,15 +672,17 @@
     <keyword type="macro" name="HB_OT_TAG_VAR_AXIS_WEIGHT" link="harfbuzz-hb-ot-var.html#HB-OT-TAG-VAR-AXIS-WEIGHT:CAPS"/>
     <keyword type="macro" name="HB_OT_TAG_VAR_AXIS_WIDTH" link="harfbuzz-hb-ot-var.html#HB-OT-TAG-VAR-AXIS-WIDTH:CAPS"/>
     <keyword type="enum" name="enum hb_ot_var_axis_flags_t" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-flags-t" since="2.2.0"/>
+    <keyword type="struct" name="hb_ot_var_axis_info_t" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t" since="2.2.0"/>
     <keyword type="function" name="hb_aat_layout_feature_type_get_name_id ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-get-name-id" since="2.2.0"/>
     <keyword type="function" name="hb_aat_layout_feature_type_get_selector_infos ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-get-selector-infos"/>
     <keyword type="function" name="hb_aat_layout_get_feature_types ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-get-feature-types" since="2.2.0"/>
-    <keyword type="function" name="hb_aat_layout_has_positioning ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-positioning"/>
-    <keyword type="function" name="hb_aat_layout_has_substitution ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-substitution"/>
-    <keyword type="function" name="hb_aat_layout_has_tracking ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-tracking"/>
+    <keyword type="function" name="hb_aat_layout_has_positioning ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-positioning" since="2.3.0"/>
+    <keyword type="function" name="hb_aat_layout_has_substitution ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-substitution" since="2.3.0"/>
+    <keyword type="function" name="hb_aat_layout_has_tracking ()" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-has-tracking" since="2.3.0"/>
     <keyword type="macro" name="HB_AAT_LAYOUT_NO_SELECTOR_INDEX" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-NO-SELECTOR-INDEX:CAPS"/>
     <keyword type="enum" name="enum hb_aat_layout_feature_type_t" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-type-t" since="2.2.0"/>
     <keyword type="enum" name="enum hb_aat_layout_feature_selector_t" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-selector-t" since="2.2.0"/>
+    <keyword type="struct" name="hb_aat_layout_feature_selector_info_t" link="harfbuzz-hb-aat-layout.html#hb-aat-layout-feature-selector-info-t"/>
     <keyword type="function" name="hb_coretext_face_create ()" link="harfbuzz-hb-coretext.html#hb-coretext-face-create" since="0.9.10"/>
     <keyword type="function" name="hb_coretext_font_create ()" link="harfbuzz-hb-coretext.html#hb-coretext-font-create" since="1.7.2"/>
     <keyword type="function" name="hb_coretext_face_get_cg_font ()" link="harfbuzz-hb-coretext.html#hb-coretext-face-get-cg-font" since="0.9.10"/>
@@ -687,6 +713,9 @@
     <keyword type="function" name="hb_icu_script_to_script ()" link="harfbuzz-hb-icu.html#hb-icu-script-to-script"/>
     <keyword type="function" name="hb_uniscribe_font_get_hfont ()" link="harfbuzz-hb-uniscribe.html#hb-uniscribe-font-get-hfont"/>
     <keyword type="function" name="hb_uniscribe_font_get_logfontw ()" link="harfbuzz-hb-uniscribe.html#hb-uniscribe-font-get-logfontw"/>
+    <keyword type="function" name="hb_gdi_face_create ()" link="harfbuzz-hb-gdi.html#hb-gdi-face-create" since="2.6.0"/>
+    <keyword type="function" name="hb_directwrite_face_create ()" link="harfbuzz-hb-directwrite.html#hb-directwrite-face-create" since="2.4.0"/>
+    <keyword type="function" name="hb_directwrite_face_get_font_face ()" link="harfbuzz-hb-directwrite.html#hb-directwrite-face-get-font-face" since="2.5.0"/>
     <keyword type="constant" name="HB_MEMORY_MODE_DUPLICATE" link="harfbuzz-hb-blob.html#HB-MEMORY-MODE-DUPLICATE:CAPS"/>
     <keyword type="constant" name="HB_MEMORY_MODE_READONLY" link="harfbuzz-hb-blob.html#HB-MEMORY-MODE-READONLY:CAPS"/>
     <keyword type="constant" name="HB_MEMORY_MODE_WRITABLE" link="harfbuzz-hb-blob.html#HB-MEMORY-MODE-WRITABLE:CAPS"/>
@@ -903,6 +932,38 @@
     <keyword type="constant" name="HB_OT_MATH_KERN_BOTTOM_RIGHT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-KERN-BOTTOM-RIGHT:CAPS"/>
     <keyword type="constant" name="HB_OT_MATH_KERN_BOTTOM_LEFT" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-KERN-BOTTOM-LEFT:CAPS"/>
     <keyword type="constant" name="HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER" link="harfbuzz-hb-ot-math.html#HB-OT-MATH-GLYPH-PART-FLAG-EXTENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_META_TAG_DESIGN_LANGUAGES" link="harfbuzz-hb-ot-meta.html#HB-OT-META-TAG-DESIGN-LANGUAGES:CAPS"/>
+    <keyword type="constant" name="HB_OT_META_TAG_SUPPORTED_LANGUAGES" link="harfbuzz-hb-ot-meta.html#HB-OT-META-TAG-SUPPORTED-LANGUAGES:CAPS"/>
+    <keyword type="constant" name="_HB_OT_META_TAG_MAX_VALUE" link="harfbuzz-hb-ot-meta.html#HB-OT-META-TAG-MAX-VALUE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_ASCENDER" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-ASCENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_DESCENDER" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-DESCENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_LINE_GAP" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-LINE-GAP:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_ASCENT" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-CLIPPING-ASCENT:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_CLIPPING_DESCENT" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-CLIPPING-DESCENT:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_ASCENDER" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-ASCENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_DESCENDER" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-DESCENDER:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_LINE_GAP" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-LINE-GAP:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_CARET_RISE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-CARET-RISE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_CARET_RUN" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-CARET-RUN:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_HORIZONTAL_CARET_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-HORIZONTAL-CARET-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_CARET_RISE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-CARET-RISE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_CARET_RUN" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-CARET-RUN:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_VERTICAL_CARET_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-VERTICAL-CARET-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_X_HEIGHT" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-X-HEIGHT:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_CAP_HEIGHT" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-CAP-HEIGHT:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUBSCRIPT-EM-X-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUBSCRIPT-EM-Y-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUBSCRIPT_EM_X_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUBSCRIPT-EM-X-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUBSCRIPT_EM_Y_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUBSCRIPT-EM-Y-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUPERSCRIPT-EM-X-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUPERSCRIPT-EM-Y-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUPERSCRIPT_EM_X_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUPERSCRIPT-EM-X-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_SUPERSCRIPT_EM_Y_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-SUPERSCRIPT-EM-Y-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_STRIKEOUT_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-STRIKEOUT-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_STRIKEOUT_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-STRIKEOUT-OFFSET:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_UNDERLINE_SIZE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-UNDERLINE-SIZE:CAPS"/>
+    <keyword type="constant" name="HB_OT_METRICS_TAG_UNDERLINE_OFFSET" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-UNDERLINE-OFFSET:CAPS"/>
+    <keyword type="constant" name="_HB_OT_METRICS_TAG_MAX_VALUE" link="harfbuzz-hb-ot-metrics.html#HB-OT-METRICS-TAG-MAX-VALUE:CAPS"/>
     <keyword type="constant" name="HB_OT_VAR_AXIS_FLAG_HIDDEN" link="harfbuzz-hb-ot-var.html#HB-OT-VAR-AXIS-FLAG-HIDDEN:CAPS"/>
     <keyword type="constant" name="_HB_OT_VAR_AXIS_FLAG_MAX_VALUE" link="harfbuzz-hb-ot-var.html#HB-OT-VAR-AXIS-FLAG-MAX-VALUE:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_TYPE_INVALID" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-INVALID:CAPS"/>
@@ -945,7 +1006,6 @@
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_TYPE_UPPER_CASE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-UPPER-CASE:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-LANGUAGE-TAG-TYPE:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-CJK-ROMAN-SPACING-TYPE:CAPS"/>
-    <keyword type="constant" name="_HB_AAT_LAYOUT_FEATURE_TYPE_MAX_VALUE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-TYPE-MAX-VALUE:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_INVALID" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-INVALID:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_ON" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-ALL-TYPE-FEATURES-ON:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_OFF" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-ALL-TYPE-FEATURES-OFF:CAPS"/>
@@ -1197,7 +1257,8 @@
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_CJK_ROMAN" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-PROPORTIONAL-CJK-ROMAN:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_DEFAULT_CJK_ROMAN" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-DEFAULT-CJK-ROMAN:CAPS"/>
     <keyword type="constant" name="HB_AAT_LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_CJK_ROMAN" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-FULL-WIDTH-CJK-ROMAN:CAPS"/>
-    <keyword type="constant" name="_HB_AAT_LAYOUT_FEATURE_SELECTOR_MAX_VALUE" link="harfbuzz-hb-aat-layout.html#HB-AAT-LAYOUT-FEATURE-SELECTOR-MAX-VALUE:CAPS"/>
+    <keyword type="member" name="hb-glyph-info-t.codepoint" link="harfbuzz-hb-buffer.html#hb-glyph-info-t.codepoint"/>
+    <keyword type="member" name="hb-glyph-info-t.cluster" link="harfbuzz-hb-buffer.html#hb-glyph-info-t.cluster"/>
     <keyword type="member" name="hb-glyph-position-t.x-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.x-advance"/>
     <keyword type="member" name="hb-glyph-position-t.y-advance" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.y-advance"/>
     <keyword type="member" name="hb-glyph-position-t.x-offset" link="harfbuzz-hb-buffer.html#hb-glyph-position-t.x-offset"/>
@@ -1209,6 +1270,15 @@
     <keyword type="member" name="hb-feature-t.value" link="harfbuzz-hb-common.html#hb-feature-t.value"/>
     <keyword type="member" name="hb-feature-t.start" link="harfbuzz-hb-common.html#hb-feature-t.start"/>
     <keyword type="member" name="hb-feature-t.end" link="harfbuzz-hb-common.html#hb-feature-t.end"/>
+    <keyword type="member" name="hb-variation-t.tag" link="harfbuzz-hb-common.html#hb-variation-t.tag"/>
+    <keyword type="member" name="hb-variation-t.value" link="harfbuzz-hb-common.html#hb-variation-t.value"/>
+    <keyword type="member" name="hb-font-extents-t.ascender" link="harfbuzz-hb-font.html#hb-font-extents-t.ascender"/>
+    <keyword type="member" name="hb-font-extents-t.descender" link="harfbuzz-hb-font.html#hb-font-extents-t.descender"/>
+    <keyword type="member" name="hb-font-extents-t.line-gap" link="harfbuzz-hb-font.html#hb-font-extents-t.line-gap"/>
+    <keyword type="member" name="hb-glyph-extents-t.x-bearing" link="harfbuzz-hb-font.html#hb-glyph-extents-t.x-bearing"/>
+    <keyword type="member" name="hb-glyph-extents-t.y-bearing" link="harfbuzz-hb-font.html#hb-glyph-extents-t.y-bearing"/>
+    <keyword type="member" name="hb-glyph-extents-t.width" link="harfbuzz-hb-font.html#hb-glyph-extents-t.width"/>
+    <keyword type="member" name="hb-glyph-extents-t.height" link="harfbuzz-hb-font.html#hb-glyph-extents-t.height"/>
     <keyword type="member" name="hb-ot-math-glyph-variant-t.glyph" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t.glyph"/>
     <keyword type="member" name="hb-ot-math-glyph-variant-t.advance" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-variant-t.advance"/>
     <keyword type="member" name="hb-ot-math-glyph-part-t.glyph" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t.glyph"/>
@@ -1216,5 +1286,14 @@
     <keyword type="member" name="hb-ot-math-glyph-part-t.end-connector-length" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t.end-connector-length"/>
     <keyword type="member" name="hb-ot-math-glyph-part-t.full-advance" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t.full-advance"/>
     <keyword type="member" name="hb-ot-math-glyph-part-t.flags" link="harfbuzz-hb-ot-math.html#hb-ot-math-glyph-part-t.flags"/>
+    <keyword type="member" name="hb-ot-name-entry-t.name-id" link="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t.name-id"/>
+    <keyword type="member" name="hb-ot-name-entry-t.language" link="harfbuzz-hb-ot-name.html#hb-ot-name-entry-t.language"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.axis-index" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.axis-index"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.tag" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.tag"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.name-id" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.name-id"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.flags" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.flags"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.min-value" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.min-value"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.default-value" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.default-value"/>
+    <keyword type="member" name="hb-ot-var-axis-info-t.max-value" link="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t.max-value"/>
   </functions>
 </book>

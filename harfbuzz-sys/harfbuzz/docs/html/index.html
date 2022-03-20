@@ -3,11 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HarfBuzz Manual: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
-<meta name="description" content="HarfBuzz  HarfBuzz is an OpenType text shaping engine. Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output—for any writing system and language. The canonical source-code tree is available at github.com/harfbuzz/harfbuzz. See for release tarballs.">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="description" content="HarfBuzz  HarfBuzz is a text shaping library. Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output—for any writing system and language. The canonical source-code tree is available at github.com/harfbuzz/harfbuzz. See for release tarballs.">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="next" href="pt01.html" title="Part I. User's manual">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,8 +19,7 @@
 <p class="title"><b>HarfBuzz</b></p>
 <div align="center"><img src="HarfBuzz.png" align="middle"></div>
 <p>
-        HarfBuzz is an <a class="ulink" href="http://www.microsoft.com/typography/otspec/" target="_top">OpenType</a>
-        text shaping engine. Using the HarfBuzz library allows
+        HarfBuzz is a text shaping library. Using the HarfBuzz library allows
 	programs to convert a sequence of Unicode input into
 	properly formatted and positioned glyph output—for any writing
 	system and language.
@@ -164,7 +163,7 @@
 <span class="refentrytitle"><a href="harfbuzz-hb-map.html">hb-map</a></span><span class="refpurpose"> — Object representing integer to integer mapping</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="harfbuzz-hb-set.html">hb-set</a></span><span class="refpurpose"> — Object representing a set of integers</span>
+<span class="refentrytitle"><a href="harfbuzz-hb-set.html">hb-set</a></span><span class="refpurpose"> — Objects representing a set of integers</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="harfbuzz-hb-shape-plan.html">hb-shape-plan</a></span><span class="refpurpose"> — Object representing a shaping plan</span>
@@ -192,6 +191,12 @@
 </dt>
 <dt>
 <span class="refentrytitle"><a href="harfbuzz-hb-ot-math.html">hb-ot-math</a></span><span class="refpurpose"> — OpenType Math information</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-meta.html">hb-ot-meta</a></span><span class="refpurpose"> — OpenType Metadata</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-ot-metrics.html">hb-ot-metrics</a></span><span class="refpurpose"> — OpenType Metrics</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="harfbuzz-hb-ot-name.html">hb-ot-name</a></span><span class="refpurpose"> — OpenType font name information</span>
@@ -230,13 +235,60 @@
 <dt>
 <span class="refentrytitle"><a href="harfbuzz-hb-uniscribe.html">hb-uniscribe</a></span><span class="refpurpose"> — Windows integration</span>
 </dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-gdi.html">hb-gdi</a></span><span class="refpurpose"> — GDI integration</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="harfbuzz-hb-directwrite.html">hb-directwrite</a></span><span class="refpurpose"> — DirectWrite integration</span>
+</dt>
 </dl></dd>
 <dt><span class="index"><a href="api-index-full.html">API Index</a></span></dt>
+<dt><span class="index"><a href="deprecated-api-index.html">Index of deprecated API</a></span></dt>
+<dt><span class="index"><a href="api-index-2-7-3.html">Index of new symbols in 2.7.3</a></span></dt>
+<dt><span class="index"><a href="api-index-2-6-0.html">Index of new symbols in 2.6.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-5-0.html">Index of new symbols in 2.5.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-4-0.html">Index of new symbols in 2.4.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-3-0.html">Index of new symbols in 2.3.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-2-0.html">Index of new symbols in 2.2.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-1-0.html">Index of new symbols in 2.1.0</a></span></dt>
+<dt><span class="index"><a href="api-index-2-0-0.html">Index of new symbols in 2.0.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-9-0.html">Index of new symbols in 1.9.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-8-6.html">Index of new symbols in 1.8.6</a></span></dt>
+<dt><span class="index"><a href="api-index-1-8-5.html">Index of new symbols in 1.8.5</a></span></dt>
+<dt><span class="index"><a href="api-index-1-8-1.html">Index of new symbols in 1.8.1</a></span></dt>
+<dt><span class="index"><a href="api-index-1-8-0.html">Index of new symbols in 1.8.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-7-7.html">Index of new symbols in 1.7.7</a></span></dt>
+<dt><span class="index"><a href="api-index-1-7-5.html">Index of new symbols in 1.7.5</a></span></dt>
+<dt><span class="index"><a href="api-index-1-6-0.html">Index of new symbols in 1.6.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-5-0.html">Index of new symbols in 1.5.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-4-3.html">Index of new symbols in 1.4.3</a></span></dt>
+<dt><span class="index"><a href="api-index-1-4-2.html">Index of new symbols in 1.4.2</a></span></dt>
+<dt><span class="index"><a href="api-index-1-4-0.html">Index of new symbols in 1.4.0</a></span></dt>
+<dt><span class="index"><a href="api-index-1-3-3.html">Index of new symbols in 1.3.3</a></span></dt>
+<dt><span class="index"><a href="api-index-1-2-3.html">Index of new symbols in 1.2.3</a></span></dt>
+<dt><span class="index"><a href="api-index-1-1-3.html">Index of new symbols in 1.1.3</a></span></dt>
+<dt><span class="index"><a href="api-index-1-1-2.html">Index of new symbols in 1.1.2</a></span></dt>
+<dt><span class="index"><a href="api-index-1-0-5.html">Index of new symbols in 1.0.5</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-42.html">Index of new symbols in 0.9.42</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-41.html">Index of new symbols in 0.9.41</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-39.html">Index of new symbols in 0.9.39</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-38.html">Index of new symbols in 0.9.38</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-31.html">Index of new symbols in 0.9.31</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-30.html">Index of new symbols in 0.9.30</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-28.html">Index of new symbols in 0.9.28</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-22.html">Index of new symbols in 0.9.22</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-20.html">Index of new symbols in 0.9.20</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-11.html">Index of new symbols in 0.9.11</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-10.html">Index of new symbols in 0.9.10</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-8.html">Index of new symbols in 0.9.8</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-7.html">Index of new symbols in 0.9.7</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-5.html">Index of new symbols in 0.9.5</a></span></dt>
+<dt><span class="index"><a href="api-index-0-9-2.html">Index of new symbols in 0.9.2</a></span></dt>
 <dt><span class="glossary"><a href="annotation-glossary.html">Annotation Glossary</a></span></dt>
 </dl></dd>
 </dl></div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

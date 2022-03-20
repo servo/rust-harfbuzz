@@ -10,15 +10,17 @@ import subprocess
 import sys
 import tempfile
 import shutil
+import io
 
 from subset_test_suite import SubsetTestSuite
 
-fonttools = shutil.which ("fonttools")
-ots_sanitize = shutil.which ("ots-sanitize")
-
-if not fonttools:
+try:
+	from fontTools.ttLib import TTFont
+except ImportError:
 	print ("fonttools is not present, skipping test.")
 	sys.exit (77)
+
+ots_sanitize = shutil.which ("ots-sanitize")
 
 def cmd (command):
 	p = subprocess.Popen (
@@ -28,18 +30,14 @@ def cmd (command):
 	print (stderrdata, end="", file=sys.stderr)
 	return stdoutdata, p.returncode
 
-def read_binary (file_path):
-	with open (file_path, 'rb') as f:
-		return f.read ()
-
 def fail_test (test, cli_args, message):
 	print ('ERROR: %s' % message)
 	print ('Test State:')
 	print ('  test.font_path    %s' % os.path.abspath (test.font_path))
 	print ('  test.profile_path %s' % os.path.abspath (test.profile_path))
 	print ('  test.unicodes	    %s' % test.unicodes ())
-	expected_file = os.path.join(test_suite.get_output_directory (),
-				     test.get_font_name ())
+	expected_file = os.path.join (test_suite.get_output_directory (),
+				      test.get_font_name ())
 	print ('  expected_file	    %s' % os.path.abspath (expected_file))
 	return 1
 
@@ -50,7 +48,7 @@ def run_test (test, should_check_ots):
 		    "--output-file=" + out_file,
 		    "--unicodes=%s" % test.unicodes (),
 		    "--drop-tables+=DSIG,GPOS,GSUB,GDEF",
-                    "--drop-tables-=sbix"]
+		    "--drop-tables-=sbix"]
 	cli_args.extend (test.get_profile_flags ())
 	print (' '.join (cli_args))
 	_, return_code = cmd (cli_args)
@@ -58,36 +56,26 @@ def run_test (test, should_check_ots):
 	if return_code:
 		return fail_test (test, cli_args, "%s returned %d" % (' '.join (cli_args), return_code))
 
-	expected_ttx = tempfile.mktemp ()
-	_, return_code = run_ttx (os.path.join (test_suite.get_output_directory (),
-					    					test.get_font_name ()),
-							  expected_ttx)
-	if return_code:
-		if os.path.exists (expected_ttx): os.remove (expected_ttx)
-		return fail_test (test, cli_args, "ttx (expected) returned %d" % (return_code))
-
-	actual_ttx = tempfile.mktemp ()
-	_, return_code = run_ttx (out_file, actual_ttx)
-	if return_code:
-		if os.path.exists (expected_ttx): os.remove (expected_ttx)
-		if os.path.exists (actual_ttx): os.remove (actual_ttx)
-		return fail_test (test, cli_args, "ttx (actual) returned %d" % (return_code))
-
-	with open (expected_ttx, encoding='utf-8') as f:
-		expected_ttx_text = f.read ()
-	with open (actual_ttx, encoding='utf-8') as f:
-		actual_ttx_text = f.read ()
-
-	# cleanup
+	expected_ttx = io.StringIO ()
 	try:
-		os.remove (expected_ttx)
-		os.remove (actual_ttx)
-	except:
-		pass
+		with TTFont (os.path.join (test_suite.get_output_directory (), test.get_font_name ())) as font:
+			font.saveXML (expected_ttx)
+	except Exception as e:
+		print (e)
+		return fail_test (test, cli_args, "ttx failed to parse the expected result")
 
-	print ("stripping checksums.")
-	expected_ttx_text = strip_check_sum (expected_ttx_text)
-	actual_ttx_text = strip_check_sum (actual_ttx_text)
+	actual_ttx = io.StringIO ()
+	try:
+		with TTFont (out_file) as font:
+			font.saveXML (actual_ttx)
+	except Exception as e:
+		print (e)
+		return fail_test (test, cli_args, "ttx failed to parse the actual result")
+
+	expected_ttx_text = strip_check_sum (expected_ttx.getvalue ())
+	expected_ttx.close ()
+	actual_ttx_text = strip_check_sum (actual_ttx.getvalue ())
+	actual_ttx.close ()
 
 	if not actual_ttx_text == expected_ttx_text:
 		for line in unified_diff (expected_ttx_text.splitlines (1), actual_ttx_text.splitlines (1)):
@@ -102,10 +90,6 @@ def run_test (test, should_check_ots):
 
 	return 0
 
-def run_ttx (font_path, ttx_output_path):
-	print ("fonttools ttx %s" % font_path)
-	return cmd ([fonttools, "ttx", "-q", "-o", ttx_output_path, font_path])
-
 def strip_check_sum (ttx_string):
 	return re.sub ('checkSumAdjustment value=["]0x([0-9a-fA-F])+["]',
 		       'checkSumAdjustment value="0x00000000"',
@@ -113,7 +97,7 @@ def strip_check_sum (ttx_string):
 
 def has_ots ():
 	if not ots_sanitize:
-		print("OTS is not present, skipping all ots checks.")
+		print ("OTS is not present, skipping all ots checks.")
 		return False
 	return True
 

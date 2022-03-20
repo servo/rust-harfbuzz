@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-map: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch12.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-font.html" title="hb-font">
 <link rel="next" href="harfbuzz-hb-set.html" title="hb-set">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -189,6 +189,7 @@ use if desired.</p>
 <a name="hb-map-allocation-successful"></a><h3>hb_map_allocation_successful ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_map_allocation_successful (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Tests whether memory allocation for a set was successful.</p>
 <div class="refsect3">
 <a name="hb-map-allocation-successful.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -199,10 +200,14 @@ hb_map_allocation_successful (<em class="parameter"><code>const <a class="link" 
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-map-allocation-successful.returns"></a><h4>Returns</h4>
+<p> <code class="literal">true</code> if allocation succeeded, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
@@ -211,6 +216,8 @@ hb_map_allocation_successful (<em class="parameter"><code>const <a class="link" 
 <a name="hb-map-clear"></a><h3>hb_map_clear ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_map_clear (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Clears out the contents of <em class="parameter"><code>map</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-map-clear.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -221,7 +228,7 @@ hb_map_clear (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -233,10 +240,11 @@ hb_map_clear (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.
 <a name="hb-map-create"></a><h3>hb_map_create ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="returnvalue">hb_map_t</span></a> *
 hb_map_create (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Creates a new, initially empty map.</p>
 <p><span class="annotation">[Xconstructor]</span></p>
 <div class="refsect3">
 <a name="hb-map-create.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The new <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -247,6 +255,9 @@ hb_map_create (<em class="parameter"><code><span class="type">void</span></code>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_map_del (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>,
             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> key</code></em>);</pre>
+<p>Removes <em class="parameter"><code>key</code></em>
+ and its stored value from <em class="parameter"><code>map</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-map-del.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -255,11 +266,18 @@ hb_map_del (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.ht
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The key to delete</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -269,6 +287,9 @@ hb_map_del (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.ht
 <a name="hb-map-destroy"></a><h3>hb_map_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_map_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Decreases the reference count on a map. When
+the reference count reaches zero, the map is
+destroyed, freeing all memory.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-map-destroy.parameters"></a><h4>Parameters</h4>
@@ -280,7 +301,7 @@ hb_map_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-ma
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -293,6 +314,9 @@ hb_map_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-ma
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="returnvalue">hb_codepoint_t</span></a>
 hb_map_get (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>,
             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> key</code></em>);</pre>
+<p>Fetches the value stored for <em class="parameter"><code>key</code></em>
+ in <em class="parameter"><code>map</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-map-get.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -301,11 +325,18 @@ hb_map_get (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The key to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -315,9 +346,10 @@ hb_map_get (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-
 <a name="hb-map-get-empty"></a><h3>hb_map_get_empty ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="returnvalue">hb_map_t</span></a> *
 hb_map_get_empty (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Fetches the singleton empty <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a>.</p>
 <div class="refsect3">
 <a name="hb-map-get-empty.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The empty <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -327,6 +359,7 @@ hb_map_get_empty (<em class="parameter"><code><span class="type">void</span></co
 <a name="hb-map-get-population"></a><h3>hb_map_get_population ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_map_get_population (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Returns the number of key-value pairs in the map.</p>
 <div class="refsect3">
 <a name="hb-map-get-population.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -337,10 +370,15 @@ hb_map_get_population (<em class="parameter"><code>const <a class="link" href="h
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-map-get-population.returns"></a><h4>Returns</h4>
+<p> The population of <em class="parameter"><code>map</code></em>
+</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
@@ -350,6 +388,8 @@ hb_map_get_population (<em class="parameter"><code>const <a class="link" href="h
 <pre class="programlisting"><span class="returnvalue">void</span> *
 hb_map_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t" title="hb_user_data_key_t"><span class="type">hb_user_data_key_t</span></a> *key</code></em>);</pre>
+<p>Fetches the user data associated with the specified key,
+attached to the specified map.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-map-get-user-data.parameters"></a><h4>Parameters</h4>
@@ -359,16 +399,23 @@ hb_map_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The user-data key to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-map-get-user-data.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>A pointer to the user data. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -379,6 +426,9 @@ hb_map_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_map_has (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>,
             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> key</code></em>);</pre>
+<p>Tests whether <em class="parameter"><code>key</code></em>
+ is an element of <em class="parameter"><code>map</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-map-has.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -387,12 +437,25 @@ hb_map_has (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The key to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-map-has.returns"></a><h4>Returns</h4>
+<p> <code class="literal">true</code> if <em class="parameter"><code>key</code></em>
+is found in <em class="parameter"><code>map</code></em>
+, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
@@ -401,6 +464,8 @@ hb_map_has (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-
 <a name="hb-map-is-empty"></a><h3>hb_map_is_empty ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_map_is_empty (<em class="parameter"><code>const <a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Tests whether <em class="parameter"><code>map</code></em>
+ is empty (contains no elements).</p>
 <div class="refsect3">
 <a name="hb-map-is-empty.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -411,10 +476,15 @@ hb_map_is_empty (<em class="parameter"><code>const <a class="link" href="harfbuz
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-map-is-empty.returns"></a><h4>Returns</h4>
+<p> <code class="literal">true</code> if <em class="parameter"><code>map</code></em>
+is empty</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
@@ -423,6 +493,7 @@ hb_map_is_empty (<em class="parameter"><code>const <a class="link" href="harfbuz
 <a name="hb-map-reference"></a><h3>hb_map_reference ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="returnvalue">hb_map_t</span></a> *
 hb_map_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>);</pre>
+<p>Increases the reference count on a map.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-map-reference.parameters"></a><h4>Parameters</h4>
@@ -434,14 +505,14 @@ hb_map_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-map-reference.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The map. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -453,6 +524,9 @@ hb_map_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-
 hb_map_set (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.html#hb-map-t" title="hb_map_t"><span class="type">hb_map_t</span></a> *map</code></em>,
             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> key</code></em>,
             <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-codepoint-t" title="hb_codepoint_t"><span class="type">hb_codepoint_t</span></a> value</code></em>);</pre>
+<p>Stores <em class="parameter"><code>key</code></em>
+:<em class="parameter"><code>value</code></em>
+ in the map.</p>
 <div class="refsect3">
 <a name="hb-map-set.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -461,11 +535,24 @@ hb_map_set (<em class="parameter"><code><a class="link" href="harfbuzz-hb-map.ht
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The key to store in the map</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>value</p></td>
+<td class="parameter_description"><p>The value to store for <em class="parameter"><code>key</code></em>
+</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
@@ -479,6 +566,7 @@ hb_map_set_user_data (<em class="parameter"><code><a class="link" href="harfbuzz
                       <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>,
                       <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="type">hb_bool_t</span></a> replace</code></em>);</pre>
+<p>Attaches a user-data key/data pair to the specified map.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-map-set-user-data.parameters"></a><h4>Parameters</h4>
@@ -488,12 +576,39 @@ hb_map_set_user_data (<em class="parameter"><code><a class="link" href="harfbuzz
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>map</p></td>
-<td class="parameter_description"><p>a map.</p></td>
+<td class="parameter_description"><p>A map</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The user-data key to set</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>data</p></td>
+<td class="parameter_description"><p>A pointer to the user data to set</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>destroy</p></td>
+<td class="parameter_description"><p>A callback to call when <em class="parameter"><code>data</code></em>
+is not needed anymore. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed instead of a pointer to a location."><span class="acronym">optional</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>replace</p></td>
+<td class="parameter_description"><p>Whether to replace an existing data with the same key</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
+</div>
+<div class="refsect3">
+<a name="hb-map-set-user-data.returns"></a><h4>Returns</h4>
+<p> <code class="literal">true</code> if success, <code class="literal">false</code> otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-7-7.html#api-index-1.7.7">1.7.7</a></p>
 </div>
@@ -510,10 +625,11 @@ hb_map_set_user_data (<em class="parameter"><code><a class="link" href="harfbuzz
 <a name="hb-map-t"></a><h3>hb_map_t</h3>
 <pre class="programlisting">typedef struct hb_map_t hb_map_t;
 </pre>
+<p>Data type for holding integer-to-integer hash maps.</p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>
