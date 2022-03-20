@@ -11,7 +11,7 @@ jobs:
     name: stable, Linux, static linking, no pkg-config
     runs-on: ubuntu-latest
     env:
-      - HARFBUZZ_SYS_NO_PKG_CONFIG: 1
+      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v2
 
