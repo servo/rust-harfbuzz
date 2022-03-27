@@ -30,7 +30,7 @@ jobs:
           # Make harfbuzz  available for linking and confirm expected location
           TEMP_PATH="$(pkg-config --variable=libdir harfbuzz)"
           echo "LD_LIBRARY_PATH=$TEMP_PATH" >> $GITHUB_ENV
-          [[ "$LD_LIBRARY_PATH" == "$PREFIX/lib" ]] || exit 1
+          [[ "$TEMP_PATH" == "$PREFIX/lib" ]] || exit 1
           popd
 
       - name: Install nightly toolchain
