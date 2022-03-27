@@ -7,7 +7,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  linux-ci:
+  linux-ci-static:
+    name: stable, Linux, shared library
+    runs-on: ubuntu-latest
+    env:
+      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
+    steps:
+      - uses: actions/checkout@v2
+      
+      # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
+      # build to avoid contaminating the source tree.
+      - name: Build harfbuzz
+        env:
+          PREFIX: /usr/local
+        run: |
+          make -f harfbuzz-sys/makefile.touch touch HARFBUZZ=harfbuzz-sys/harfbuzz
+          HARFDIR=`pwd`
+          pushd $RUNNER_TEMP
+          $HARFDIR/harfbuzz-sys/harfbuzz/configure --prefix=$PREFIX --without-icu --without-freetype --without-glib
+          make
+          sudo make install
+          # Make harfbuzz  available for linking and confirm expected location
+          TEMP_PATH="$(pkg-config --variable=libdir harfbuzz)"
+          echo "LD_LIBRARY_PATH=$TEMP_PATH" >> $GITHUB_ENV
+          [[ "$LD_LIBRARY_PATH" == "$PREFIX/lib" ]] || exit 1
+          popd
+
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      
+      - name: Cargo build
+        run: cargo build --all
+
+      - name: Cargo test
+        run: cargo test --all
+        env:
+          RUST_BACKTRACE: 1
+      
+      - name: ctest tests
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
+
+  linux-ci-shared:
     name: stable, Linux, static linking, no pkg-config
     runs-on: ubuntu-latest
     env:
@@ -39,7 +83,8 @@ jobs:
       - name: ctest tests
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
-  mac-ci:
+
+  mac-ci-shared:
     name: stable, macOS, shared library
     runs-on: macos-latest
 
@@ -93,8 +138,9 @@ jobs:
     name: homu build finished
     runs-on: ubuntu-latest
     needs:
-      - "linux-ci"
-      - "mac-ci"
+      - "linux-ci-static"
+      - "linux-ci-shared"
+      - "mac-ci-shared"
       - "windows-ci"
 
     steps:
