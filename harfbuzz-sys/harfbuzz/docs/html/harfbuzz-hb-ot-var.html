@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-ot-var: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch13.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-shape.html" title="hb-ot-shape">
 <link rel="next" href="ch14.html" title="Apple Advanced Typography API">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -150,6 +150,10 @@
 <td class="datatype_keyword">enum</td>
 <td class="function_name"><a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-flags-t" title="enum hb_ot_var_axis_flags_t">hb_ot_var_axis_flags_t</a></td>
 </tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t" title="hb_ot_var_axis_info_t">hb_ot_var_axis_info_t</a></td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -168,7 +172,7 @@
 <a name="hb-ot-var-has-data"></a><h3>hb_ot_var_has_data ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
-<p>This function allows to verify the presence of OpenType variation data on the face.</p>
+<p>Tests whether a face includes any OpenType variation data in the <code class="literal">fvar</code> table.</p>
 <div class="refsect3">
 <a name="hb-ot-var-has-data.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -179,14 +183,14 @@ hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-h
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>face</p></td>
-<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to test</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-ot-var-has-data.returns"></a><h4>Returns</h4>
-<p> true if face has a `fvar' table and false otherwise</p>
+<p> true if data found, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
 </div>
@@ -196,7 +200,40 @@ hb_ot_var_has_data (<em class="parameter"><code><a class="link" href="harfbuzz-h
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="returnvalue">hb_bool_t</span></a>
 hb_ot_var_find_axis_info (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                           <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> axis_tag</code></em>,
-                          <em class="parameter"><code><span class="type">hb_ot_var_axis_info_t</span> *axis_info</code></em>);</pre>
+                          <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t" title="hb_ot_var_axis_info_t"><span class="type">hb_ot_var_axis_info_t</span></a> *axis_info</code></em>);</pre>
+<p>Fetches the variation-axis information corresponding to the specified axis tag
+in the specified face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-find-axis-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>axis_tag</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> of the variation axis to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>axis_info</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t" title="hb_ot_var_axis_info_t"><span class="type">hb_ot_var_axis_info_t</span></a> of the axis tag queried. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-find-axis-info.returns"></a><h4>Returns</h4>
+<p> true if data found, false otherwise</p>
+</div>
 <p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
@@ -204,6 +241,26 @@ hb_ot_var_find_axis_info (<em class="parameter"><code><a class="link" href="harf
 <a name="hb-ot-var-get-axis-count"></a><h3>hb_ot_var_get_axis_count ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_var_get_axis_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+<p>Fetches the number of OpenType variation axes included in the face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-get-axis-count.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-get-axis-count.returns"></a><h4>Returns</h4>
+<p> the number of variation axes defined</p>
+</div>
 <p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
 </div>
 <hr>
@@ -213,7 +270,46 @@ hb_ot_var_get_axis_count (<em class="parameter"><code><a class="link" href="harf
 hb_ot_var_get_axis_infos (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                           <em class="parameter"><code>unsigned <span class="type">int</span> start_offset</code></em>,
                           <em class="parameter"><code>unsigned <span class="type">int</span> *axes_count</code></em>,
-                          <em class="parameter"><code><span class="type">hb_ot_var_axis_info_t</span> *axes_array</code></em>);</pre>
+                          <em class="parameter"><code><a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-info-t" title="hb_ot_var_axis_info_t"><span class="type">hb_ot_var_axis_info_t</span></a> *axes_array</code></em>);</pre>
+<p>Fetches a list of all variation axes in the specified face. The list returned will begin
+at the offset provided.</p>
+<div class="refsect3">
+<a name="hb-ot-var-get-axis-infos.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work upon</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>start_offset</p></td>
+<td class="parameter_description"><p>offset of the first lookup to retrieve</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>axes_count</p></td>
+<td class="parameter_description"><p>Input = the maximum number of variation axes to return;
+Output = the actual number of variation axes returned (may be zero). </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>axes_array</p></td>
+<td class="parameter_description"><p>The array of variation axes found. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=axes_count]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-get-axis-infos.returns"></a><h4>Returns</h4>
+<p> the number of variation axes in the face</p>
+</div>
 <p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
@@ -221,6 +317,27 @@ hb_ot_var_get_axis_infos (<em class="parameter"><code><a class="link" href="harf
 <a name="hb-ot-var-get-named-instance-count"></a><h3>hb_ot_var_get_named_instance_count ()</h3>
 <pre class="programlisting">unsigned <span class="returnvalue">int</span>
 hb_ot_var_get_named_instance_count (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>);</pre>
+<p>Fetches the number of named instances included in the face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-get-named-instance-count.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-get-named-instance-count.returns"></a><h4>Returns</h4>
+<p> the number of named instances defined</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -229,6 +346,35 @@ hb_ot_var_get_named_instance_count (<em class="parameter"><code><a class="link" 
 hb_ot_var_named_instance_get_subfamily_name_id
                                (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>);</pre>
+<p>Fetches the <code class="literal">name</code> table Name ID that provides display names for
+the "Subfamily name" defined for the given named instance in the face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-subfamily-name-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>instance_index</p></td>
+<td class="parameter_description"><p>The index of the named instance to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-subfamily-name-id.returns"></a><h4>Returns</h4>
+<p> the Name ID found for the Subfamily name</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -237,6 +383,35 @@ hb_ot_var_named_instance_get_subfamily_name_id
 hb_ot_var_named_instance_get_postscript_name_id
                                (<em class="parameter"><code><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> *face</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>);</pre>
+<p>Fetches the <code class="literal">name</code> table Name ID that provides display names for
+the "PostScript name" defined for the given named instance in the face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-postscript-name-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>instance_index</p></td>
+<td class="parameter_description"><p>The index of the named instance to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-postscript-name-id.returns"></a><h4>Returns</h4>
+<p> the Name ID found for the PostScript name</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -247,6 +422,46 @@ hb_ot_var_named_instance_get_design_coords
                                 <em class="parameter"><code>unsigned <span class="type">int</span> instance_index</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> *coords_length</code></em>,
                                 <em class="parameter"><code><span class="type">float</span> *coords</code></em>);</pre>
+<p>Fetches the design-space coordinates corresponding to the given
+named instance in the face.</p>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-design-coords.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>instance_index</p></td>
+<td class="parameter_description"><p>The index of the named instance to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords_length</p></td>
+<td class="parameter_description"><p>Input = the maximum number of coordinates to return;
+Output = the actual number of coordinates returned (may be zero). </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords</p></td>
+<td class="parameter_description"><p>The array of coordinates found for the query. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=coords_length]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-ot-var-named-instance-get-design-coords.returns"></a><h4>Returns</h4>
+<p> the number of variation axes in the face</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -257,6 +472,44 @@ hb_ot_var_normalize_variations (<em class="parameter"><code><a class="link" href
                                 <em class="parameter"><code>unsigned <span class="type">int</span> variations_length</code></em>,
                                 <em class="parameter"><code><span class="type">int</span> *coords</code></em>,
                                 <em class="parameter"><code>unsigned <span class="type">int</span> coords_length</code></em>);</pre>
+<p>Normalizes all of the coordinates in the given list of variation axes.</p>
+<div class="refsect3">
+<a name="hb-ot-var-normalize-variations.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>variations</p></td>
+<td class="parameter_description"><p>The array of variations to normalize</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>variations_length</p></td>
+<td class="parameter_description"><p>The number of variations to normalize</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords</p></td>
+<td class="parameter_description"><p>The array of normalized coordinates. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=coords_length]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords_length</p></td>
+<td class="parameter_description"><p>The length of the coordinate array</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
 </div>
 <hr>
@@ -267,6 +520,43 @@ hb_ot_var_normalize_coords (<em class="parameter"><code><a class="link" href="ha
                             <em class="parameter"><code>unsigned <span class="type">int</span> coords_length</code></em>,
                             <em class="parameter"><code>const <span class="type">float</span> *design_coords</code></em>,
                             <em class="parameter"><code><span class="type">int</span> *normalized_coords</code></em>);</pre>
+<p>Normalizes the given design-space coordinates. The minimum and maximum
+values for the axis are mapped to the interval [-1,1], with the default
+axis value mapped to 0.</p>
+<p>Any additional scaling defined in the face's <code class="literal">avar</code> table is also
+applied, as described at https://docs.microsoft.com/en-us/typography/opentype/spec/avar</p>
+<div class="refsect3">
+<a name="hb-ot-var-normalize-coords.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to work on</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords_length</p></td>
+<td class="parameter_description"><p>The length of the coordinate array</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>design_coords</p></td>
+<td class="parameter_description"><p>The design-space coordinates to normalize</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>normalized_coords</p></td>
+<td class="parameter_description"><p>The normalized coordinates. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <p class="since">Since: <a class="link" href="api-index-1-4-2.html#api-index-1.4.2">1.4.2</a></p>
 </div>
 </div>
@@ -330,9 +620,75 @@ hb_ot_var_normalize_coords (<em class="parameter"><code><a class="link" href="ha
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
 </div>
+<hr>
+<div class="refsect2">
+<a name="hb-ot-var-axis-info-t"></a><h3>hb_ot_var_axis_info_t</h3>
+<pre class="programlisting">typedef struct {
+  unsigned int			axis_index;
+  hb_tag_t			tag;
+  hb_ot_name_id_t		name_id;
+  hb_ot_var_axis_flags_t flags;
+  float				min_value;
+  float				default_value;
+  float				max_value;
+} hb_ot_var_axis_info_t;
+</pre>
+<p>Data type for holding variation-axis values.</p>
+<p>The minimum, default, and maximum values are in un-normalized, user scales.</p>
+<div class="note">Note: at present, the only flag defined for <em class="parameter"><code>flags</code></em> is
+<a class="link" href="harfbuzz-hb-ot-var.html#HB-OT-VAR-AXIS-FLAG-HIDDEN:CAPS"><span class="type">HB_OT_VAR_AXIS_FLAG_HIDDEN</span></a>.</div>
+<div class="refsect3">
+<a name="hb-ot-var-axis-info-t.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="300px" class="struct_members_name">
+<col class="struct_members_description">
+<col width="200px" class="struct_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="struct_member_name"><p>unsigned <span class="type">int</span> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.axis-index"></a>axis_index</code></em>;</p></td>
+<td class="struct_member_description"><p>Index of the axis in the variation-axis array</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.tag"></a>tag</code></em>;</p></td>
+<td class="struct_member_description"><p>The <a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> tag identifying the design variation of the axis</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-ot-name.html#hb-ot-name-id-t" title="hb_ot_name_id_t"><span class="type">hb_ot_name_id_t</span></a> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.name-id"></a>name_id</code></em>;</p></td>
+<td class="struct_member_description"><p>The <code class="literal">name</code> table Name ID that provides display names for the axis</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-flags-t" title="enum hb_ot_var_axis_flags_t"><span class="type">hb_ot_var_axis_flags_t</span></a> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.flags"></a>flags</code></em>;</p></td>
+<td class="struct_member_description"><p>The <a class="link" href="harfbuzz-hb-ot-var.html#hb-ot-var-axis-flags-t" title="enum hb_ot_var_axis_flags_t"><span class="type">hb_ot_var_axis_flags_t</span></a> flags for the axis</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><span class="type">float</span> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.min-value"></a>min_value</code></em>;</p></td>
+<td class="struct_member_description"><p>The mininum value on the variation axis that the font covers</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><span class="type">float</span> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.default-value"></a>default_value</code></em>;</p></td>
+<td class="struct_member_description"><p>The position on the variation axis corresponding to the font's defaults</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><span class="type">float</span> <em class="structfield"><code><a name="hb-ot-var-axis-info-t.max-value"></a>max_value</code></em>;</p></td>
+<td class="struct_member_description"><p>The maximum value on the variation axis that the font covers</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-2-0.html#api-index-2.2.0">2.2.0</a></p>
+</div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

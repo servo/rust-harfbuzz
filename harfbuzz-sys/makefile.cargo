@@ -28,13 +28,11 @@ CXXFLAGS += $(FLAGS)
 
 CONFIGURE_FLAGS = \
 	--prefix=$(OUT_DIR) \
-	--host=$(TARGET) \
-	--enable-static \
-	--disable-shared \
-	--without-icu \
-	--without-freetype \
-	--without-glib \
-	--with-coretext=auto
+	--default-library static \
+	-Dicu=disabled \
+	-Dfreetype=disabled \
+	-Dglib=disabled \
+	-Dcoretext=auto \
 
 # Create a unique temporary build directory
 BUILD_DIR := $(shell mktemp -d $(OUT_DIR)/rust_build.XXXXX)
@@ -46,9 +44,8 @@ all:
 	$(MAKE) -f $(CARGO_MANIFEST_DIR)/makefile.touch touch HARFBUZZ="$(BUILD_DIR)"
 	# Configure and build in BUILD_DIR, install from BUILD_DIR into OUT_DIR.
 	cd $(BUILD_DIR) && \
-	  ./configure $(CONFIGURE_FLAGS) CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)" && \
-	  make -j$(NUM_JOBS) && \
-	  make install
+	  CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)" meson build $(CONFIGURE_FLAGS) && \
+	  meson compile -C build
 	# Remove the no-longer-needed BUILD_DIR to save space.
 	rm -rf $(BUILD_DIR)
 

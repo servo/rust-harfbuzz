@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-ot-layout: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch13.html" title="OpenType API">
 <link rel="prev" href="harfbuzz-hb-ot-font.html" title="hb-ot-font">
 <link rel="next" href="harfbuzz-hb-ot-math.html" title="hb-ot-math">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -856,7 +856,7 @@ parameters. (Must be zero if numParameters is zero.). </p></td>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-feature-get-name-ids.returns"></a><h4>Returns</h4>
-<p> true if data found, false otherwise</p>
+<p> <code class="literal">true</code> if data found, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-0-0.html#api-index-2.0.0">2.0.0</a></p>
 </div>
@@ -1225,7 +1225,7 @@ a subfamily are not covered by the <code class="literal">size</code> feature.</p
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-get-size-params.returns"></a><h4>Returns</h4>
-<p> true if data found, false otherwise</p>
+<p> <code class="literal">true</code> if data found, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-10.html#api-index-0.9.10">0.9.10</a></p>
 </div>
@@ -1262,7 +1262,7 @@ hb_ot_layout_has_glyph_classes (<em class="parameter"><code><a class="link" href
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-has-glyph-classes.returns"></a><h4>Returns</h4>
-<p> true if data found, false otherwise</p>
+<p> <code class="literal">true</code> if data found, false otherwise</p>
 </div>
 </div>
 <hr>
@@ -1287,7 +1287,7 @@ hb_ot_layout_has_positioning (<em class="parameter"><code><a class="link" href="
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-has-positioning.returns"></a><h4>Returns</h4>
-<p> true if the face has GPOS data, false otherwise</p>
+<p> <code class="literal">true</code> if the face has GPOS data, false otherwise</p>
 </div>
 </div>
 <hr>
@@ -1313,7 +1313,7 @@ hb_ot_layout_has_substitution (<em class="parameter"><code><a class="link" href=
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-has-substitution.returns"></a><h4>Returns</h4>
-<p> true if data found, false otherwise</p>
+<p> <code class="literal">true</code> if data found, false otherwise</p>
 </div>
 </div>
 <hr>
@@ -1372,7 +1372,7 @@ or GPOS table, underneath the specified script and language.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-language-find-feature.returns"></a><h4>Returns</h4>
-<p> true if the feature is found, false otherwise</p>
+<p> <code class="literal">true</code> if the feature is found, false otherwise</p>
 </div>
 </div>
 <hr>
@@ -1560,7 +1560,7 @@ underneath the specified script and language.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-language-get-required-feature.returns"></a><h4>Returns</h4>
-<p> true if the feature is found, false otherwise</p>
+<p> <code class="literal">true</code> if the feature is found, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-30.html#api-index-0.9.30">0.9.30</a></p>
 </div>
@@ -1618,7 +1618,7 @@ specified face's GSUB table or GPOS table.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>glyphs_output</p></td>
-<td class="parameter_description"><p>Array of glyphs that would be the substitued output of the lookup. </p></td>
+<td class="parameter_description"><p>Array of glyphs that would be the substituted output of the lookup. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -1816,7 +1816,7 @@ trigger a substitution on the given glyph sequence.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-lookup-would-substitute.returns"></a><h4>Returns</h4>
-<p> true if a substitution would be triggered, false otherwise</p>
+<p> <code class="literal">true</code> if a substitution would be triggered, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
 </div>
@@ -1932,7 +1932,7 @@ or GPOS table, underneath the specified script index.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-script-select-language.returns"></a><h4>Returns</h4>
-<p> true if the language tag is found, false otherwise</p>
+<p> <code class="literal">true</code> if the language tag is found, false otherwise</p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-0-0.html#api-index-2.0.0">2.0.0</a></p>
 </div>
@@ -1974,7 +1974,7 @@ or GPOS table, at the specified variation coordinates.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>num_coords</p></td>
-<td class="parameter_description"><p>The number of variation coorinates</p></td>
+<td class="parameter_description"><p>The number of variation coordinates</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -2178,6 +2178,36 @@ hb_ot_layout_table_select_script (<em class="parameter"><code><a class="link" hr
 hb_ot_shape_plan_collect_lookups (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-tag-t" title="hb_tag_t"><span class="type">hb_tag_t</span></a> table_tag</code></em>,
                                   <em class="parameter"><code><a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> *lookup_indexes</code></em>);</pre>
+<p>Computes the complete set of GSUB or GPOS lookups that are applicable
+under a given <em class="parameter"><code>shape_plan</code></em>
+.</p>
+<div class="refsect3">
+<a name="hb-ot-shape-plan-collect-lookups.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>shape_plan</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>table_tag</p></td>
+<td class="parameter_description"><p>GSUB or GPOS</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>lookup_indexes</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-set.html#hb-set-t" title="hb_set_t"><span class="type">hb_set_t</span></a> set of lookups returned. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
 </div>
 <hr>
@@ -2231,7 +2261,7 @@ underneath the specified script and language.</p>
 </div>
 <div class="refsect3">
 <a name="hb-ot-layout-language-get-required-feature-index.returns"></a><h4>Returns</h4>
-<p> true if the feature is found, false otherwise</p>
+<p> <code class="literal">true</code> if the feature is found, false otherwise</p>
 </div>
 </div>
 </div>
@@ -2453,6 +2483,6 @@ In vertical writing mode when mathematical characters rotated 90 degrees clockwi
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

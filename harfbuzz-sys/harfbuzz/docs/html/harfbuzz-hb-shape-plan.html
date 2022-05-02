@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hb-shape-plan: HarfBuzz Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="HarfBuzz Manual">
 <link rel="up" href="ch12.html" title="Core API">
 <link rel="prev" href="harfbuzz-hb-set.html" title="hb-set">
 <link rel="next" href="harfbuzz-hb-shape.html" title="hb-shape">
-<meta name="generator" content="GTK-Doc V1.32.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -149,10 +149,15 @@
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-shape-plan.description"></a><h2>Description</h2>
-<p>Shape plans are not used for shaping directly, but can be access to query
-certain information about how shaping will perform given a set of input
-parameters (script, language, direction, features, etc.)
-Most client would not need to deal with shape plans directly.</p>
+<p>Shape plans are an internal mechanism. Each plan contains state
+describing how HarfBuzz will shape a particular text segment, based on
+the combination of segment properties and the capabilities in the
+font face in use.</p>
+<p>Shape plans are not used for shaping directly, but can be queried to
+access certain information about how shaping will perform, given a set
+of specific input parameters (script, language, direction, features,
+etc.).</p>
+<p>Most client programs will not need to deal with shape plans directly.</p>
 </div>
 <div class="refsect1">
 <a name="harfbuzz-hb-shape-plan.functions_details"></a><h2>Functions</h2>
@@ -164,6 +169,12 @@ hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz
                       <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                       <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                       <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+<p>Constructs a shaping plan for a combination of <em class="parameter"><code>face</code></em>
+, <em class="parameter"><code>user_features</code></em>
+, <em class="parameter"><code>props</code></em>
+,
+and <em class="parameter"><code>shaper_list</code></em>
+.</p>
 <p><span class="annotation">[Xconstructor]</span></p>
 <div class="refsect3">
 <a name="hb-shape-plan-create.parameters"></a><h4>Parameters</h4>
@@ -175,13 +186,28 @@ hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz
 </colgroup>
 <tbody>
 <tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to use</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>props</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t" title="hb_segment_properties_t"><span class="type">hb_segment_properties_t</span></a> of the segment</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
 <td class="parameter_name"><p>user_features</p></td>
-<td class="parameter_description"><p>. </p></td>
+<td class="parameter_description"><p>The list of user-selected features. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_user_features]</span></td>
 </tr>
 <tr>
+<td class="parameter_name"><p>num_user_features</p></td>
+<td class="parameter_description"><p>The number of user-selected features</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p>. </p></td>
+<td class="parameter_description"><p>List of shapers to try. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></td>
 </tr>
 </tbody>
@@ -189,7 +215,7 @@ hb_shape_plan_create (<em class="parameter"><code><a class="link" href="harfbuzz
 </div>
 <div class="refsect3">
 <a name="hb-shape-plan-create.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The shaping plan. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -203,6 +229,12 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
                              <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> *user_features</code></em>,
                              <em class="parameter"><code>unsigned <span class="type">int</span> num_user_features</code></em>,
                              <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+<p>Creates a cached shaping plan suitable for reuse, for a combination
+of <em class="parameter"><code>face</code></em>
+, <em class="parameter"><code>user_features</code></em>
+, <em class="parameter"><code>props</code></em>
+, and <em class="parameter"><code>shaper_list</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-shape-plan-create-cached.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -213,13 +245,28 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
 </colgroup>
 <tbody>
 <tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to use</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>props</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t" title="hb_segment_properties_t"><span class="type">hb_segment_properties_t</span></a> of the segment</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
 <td class="parameter_name"><p>user_features</p></td>
-<td class="parameter_description"><p>. </p></td>
+<td class="parameter_description"><p>The list of user-selected features. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_user_features]</span></td>
 </tr>
 <tr>
+<td class="parameter_name"><p>num_user_features</p></td>
+<td class="parameter_description"><p>The number of user-selected features</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
 <td class="parameter_name"><p>shaper_list</p></td>
-<td class="parameter_description"><p>. </p></td>
+<td class="parameter_description"><p>List of shapers to try. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></td>
 </tr>
 </tbody>
@@ -227,7 +274,7 @@ hb_shape_plan_create_cached (<em class="parameter"><code><a class="link" href="h
 </div>
 <div class="refsect3">
 <a name="hb-shape-plan-create-cached.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The shaping plan. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -243,6 +290,68 @@ hb_shape_plan_create2 (<em class="parameter"><code><a class="link" href="harfbuz
                        <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
                        <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+<p>The variable-font version of <a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-create" title="hb_shape_plan_create ()"><span class="type">hb_shape_plan_create</span></a>. 
+Constructs a shaping plan for a combination of <em class="parameter"><code>face</code></em>
+, <em class="parameter"><code>user_features</code></em>
+, <em class="parameter"><code>props</code></em>
+,
+and <em class="parameter"><code>shaper_list</code></em>
+, plus the variation-space coordinates <em class="parameter"><code>coords</code></em>
+.</p>
+<p><span class="annotation">[Xconstructor]</span></p>
+<div class="refsect3">
+<a name="hb-shape-plan-create2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to use</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>props</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t" title="hb_segment_properties_t"><span class="type">hb_segment_properties_t</span></a> of the segment</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_features</p></td>
+<td class="parameter_description"><p>The list of user-selected features. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_user_features]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>num_user_features</p></td>
+<td class="parameter_description"><p>The number of user-selected features</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords</p></td>
+<td class="parameter_description"><p>The list of variation-space coordinates. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_coords]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>num_coords</p></td>
+<td class="parameter_description"><p>The number of variation-space coordinates</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>shaper_list</p></td>
+<td class="parameter_description"><p>List of shapers to try. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-shape-plan-create2.returns"></a><h4>Returns</h4>
+<p>The shaping plan. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-4-0.html#api-index-1.4.0">1.4.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
@@ -255,12 +364,77 @@ hb_shape_plan_create_cached2 (<em class="parameter"><code><a class="link" href="
                               <em class="parameter"><code>const <span class="type">int</span> *coords</code></em>,
                               <em class="parameter"><code>unsigned <span class="type">int</span> num_coords</code></em>,
                               <em class="parameter"><code>const <span class="type">char</span> * const *shaper_list</code></em>);</pre>
+<p>The variable-font version of <a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-create-cached" title="hb_shape_plan_create_cached ()"><span class="type">hb_shape_plan_create_cached</span></a>. 
+Creates a cached shaping plan suitable for reuse, for a combination
+of <em class="parameter"><code>face</code></em>
+, <em class="parameter"><code>user_features</code></em>
+, <em class="parameter"><code>props</code></em>
+, and <em class="parameter"><code>shaper_list</code></em>
+, plus the
+variation-space coordinates <em class="parameter"><code>coords</code></em>
+.</p>
+<div class="refsect3">
+<a name="hb-shape-plan-create-cached2.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>face</p></td>
+<td class="parameter_description"><p><a class="link" href="harfbuzz-hb-face.html#hb-face-t" title="hb_face_t"><span class="type">hb_face_t</span></a> to use</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>props</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-buffer.html#hb-segment-properties-t" title="hb_segment_properties_t"><span class="type">hb_segment_properties_t</span></a> of the segment</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_features</p></td>
+<td class="parameter_description"><p>The list of user-selected features. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_user_features]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>num_user_features</p></td>
+<td class="parameter_description"><p>The number of user-selected features</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>coords</p></td>
+<td class="parameter_description"><p>The list of variation-space coordinates. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_coords]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>num_coords</p></td>
+<td class="parameter_description"><p>The number of variation-space coordinates</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>shaper_list</p></td>
+<td class="parameter_description"><p>List of shapers to try. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="hb-shape-plan-create-cached2.returns"></a><h4>Returns</h4>
+<p>The shaping plan. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-1-4-0.html#api-index-1.4.0">1.4.0</a></p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="hb-shape-plan-destroy"></a><h3>hb_shape_plan_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 hb_shape_plan_destroy (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
+<p>Decreases the reference count on the given shaping plan. When the
+reference count reaches zero, the shaping plan is destroyed,
+freeing all memory.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-shape-plan-destroy.parameters"></a><h4>Parameters</h4>
@@ -272,7 +446,7 @@ hb_shape_plan_destroy (<em class="parameter"><code><a class="link" href="harfbuz
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
@@ -288,6 +462,10 @@ hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuz
                        <em class="parameter"><code><a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t" title="hb_buffer_t"><span class="type">hb_buffer_t</span></a> *buffer</code></em>,
                        <em class="parameter"><code>const <a class="link" href="harfbuzz-hb-common.html#hb-feature-t" title="hb_feature_t"><span class="type">hb_feature_t</span></a> *features</code></em>,
                        <em class="parameter"><code>unsigned <span class="type">int</span> num_features</code></em>);</pre>
+<p>Executes the given shaping plan on the specified buffer, using
+the given <em class="parameter"><code>font</code></em>
+ and <em class="parameter"><code>features</code></em>
+.</p>
 <div class="refsect3">
 <a name="hb-shape-plan-execute.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -299,23 +477,28 @@ hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuz
 <tbody>
 <tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>font</p></td>
-<td class="parameter_description"><p>a font.</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-font.html#hb-font-t" title="hb_font_t"><span class="type">hb_font_t</span></a> to use</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>buffer</p></td>
-<td class="parameter_description"><p>a buffer.</p></td>
+<td class="parameter_description"><p>The <a class="link" href="harfbuzz-hb-buffer.html#hb-buffer-t" title="hb_buffer_t"><span class="type">hb_buffer_t</span></a> to work upon</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
 <td class="parameter_name"><p>features</p></td>
-<td class="parameter_description"><p>. </p></td>
+<td class="parameter_description"><p>Features to enable. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=num_features]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>num_features</p></td>
+<td class="parameter_description"><p>The number of features to enable</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
@@ -327,9 +510,10 @@ hb_shape_plan_execute (<em class="parameter"><code><a class="link" href="harfbuz
 <a name="hb-shape-plan-get-empty"></a><h3>hb_shape_plan_get_empty ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_get_empty (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Fetches the singleton empty shaping plan.</p>
 <div class="refsect3">
 <a name="hb-shape-plan-get-empty.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The empty shaping plan. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -339,6 +523,7 @@ hb_shape_plan_get_empty (<em class="parameter"><code><span class="type">void</sp
 <a name="hb-shape-plan-get-shaper"></a><h3>hb_shape_plan_get_shaper ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *
 hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
+<p>Fetches the shaper from a given shaping plan.</p>
 <div class="refsect3">
 <a name="hb-shape-plan-get-shaper.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -349,14 +534,14 @@ hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harf
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-shape-plan-get-shaper.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>The shaper. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -367,6 +552,8 @@ hb_shape_plan_get_shaper (<em class="parameter"><code><a class="link" href="harf
 <pre class="programlisting"><span class="returnvalue">void</span> *
 hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-user-data-key-t" title="hb_user_data_key_t"><span class="type">hb_user_data_key_t</span></a> *key</code></em>);</pre>
+<p>Fetches the user data associated with the specified key, 
+attached to the specified shaping plan.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-shape-plan-get-user-data.parameters"></a><h4>Parameters</h4>
@@ -376,16 +563,23 @@ hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="h
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The user-data key to query</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-shape-plan-get-user-data.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p>A pointer to the user data. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -395,6 +589,7 @@ hb_shape_plan_get_user_data (<em class="parameter"><code><a class="link" href="h
 <a name="hb-shape-plan-reference"></a><h3>hb_shape_plan_reference ()</h3>
 <pre class="programlisting"><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="returnvalue">hb_shape_plan_t</span></a> *
 hb_shape_plan_reference (<em class="parameter"><code><a class="link" href="harfbuzz-hb-shape-plan.html#hb-shape-plan-t" title="hb_shape_plan_t"><span class="type">hb_shape_plan_t</span></a> *shape_plan</code></em>);</pre>
+<p>Increases the reference count on the given shaping plan.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-shape-plan-reference.parameters"></a><h4>Parameters</h4>
@@ -406,14 +601,15 @@ hb_shape_plan_reference (<em class="parameter"><code><a class="link" href="harfb
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="hb-shape-plan-reference.returns"></a><h4>Returns</h4>
-<p>. </p>
+<p><em class="parameter"><code>shape_plan</code></em>
+. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -427,6 +623,7 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
                              <em class="parameter"><code><span class="type">void</span> *data</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-destroy-func-t" title="hb_destroy_func_t ()"><span class="type">hb_destroy_func_t</span></a> destroy</code></em>,
                              <em class="parameter"><code><a class="link" href="harfbuzz-hb-common.html#hb-bool-t" title="hb_bool_t"><span class="type">hb_bool_t</span></a> replace</code></em>);</pre>
+<p>Attaches a user-data key/data pair to the given shaping plan.</p>
 <p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
 <div class="refsect3">
 <a name="hb-shape-plan-set-user-data.parameters"></a><h4>Parameters</h4>
@@ -436,11 +633,34 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
 <col class="parameters_description">
 <col width="200px" class="parameters_annotations">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="parameter_name"><p>shape_plan</p></td>
-<td class="parameter_description"><p>a shape plan.</p></td>
+<td class="parameter_description"><p>A shaping plan</p></td>
 <td class="parameter_annotations"> </td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="parameter_name"><p>key</p></td>
+<td class="parameter_description"><p>The user-data key to set</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>data</p></td>
+<td class="parameter_description"><p>A pointer to the user data</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>destroy</p></td>
+<td class="parameter_description"><p>A callback to call when <em class="parameter"><code>data</code></em>
+is not needed anymore. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed instead of a pointer to a location."><span class="acronym">optional</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>replace</p></td>
+<td class="parameter_description"><p>Whether to replace an existing data with the same key</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <p class="since">Since: <a class="link" href="api-index-0-9-7.html#api-index-0.9.7">0.9.7</a></p>
@@ -452,10 +672,17 @@ hb_shape_plan_set_user_data (<em class="parameter"><code><a class="link" href="h
 <a name="hb-shape-plan-t"></a><h3>hb_shape_plan_t</h3>
 <pre class="programlisting">typedef struct hb_shape_plan_t hb_shape_plan_t;
 </pre>
+<p>Data type for holding a shaping plan. </p>
+<p>Shape plans contain information about how HarfBuzz will shape a
+particular text segment, based on the segment's properties and the
+capabilities in the font face in use.</p>
+<p>Shape plans can be queried about how shaping will perform, given a set
+of specific input parameters (script, language, direction, features,
+etc.).</p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.32.1</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

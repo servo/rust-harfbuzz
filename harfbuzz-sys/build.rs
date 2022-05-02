@@ -19,7 +19,7 @@ fn main() {
 
     let mut cfg = cc::Build::new();
     cfg.cpp(true)
-        .flag("-std=c++11")
+        .flag_if_supported("-std=c++11") // for unix
         .warnings(false)
         .file("harfbuzz/src/harfbuzz.cc");
 
@@ -30,7 +30,7 @@ fn main() {
     if target.contains("apple") {
         cfg.define("HAVE_CORETEXT", "1");
     }
-    
+
     if target.contains("windows-gnu") {
         cfg.flag("-Wa,-mbig-obj");
     }
