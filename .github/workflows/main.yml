@@ -14,7 +14,7 @@ jobs:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v2
-      
+
       # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
       # build to avoid contaminating the source tree.
       - name: Build harfbuzz
@@ -39,7 +39,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      
+
       - name: Cargo build
         run: cargo build --all
 
@@ -47,7 +47,7 @@ jobs:
         run: cargo test --all
         env:
           RUST_BACKTRACE: 1
-      
+
       - name: ctest tests
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
@@ -65,7 +65,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      
+
       # Test the harfbuzz-sys package build to check the 'exclude's. We should
       # do this where the embedded harfbuzz is statically linked, but we don't
       # need to do it for every environment.
@@ -79,10 +79,9 @@ jobs:
         run: cargo test --all
         env:
           RUST_BACKTRACE: 1
-      
+
       - name: ctest tests
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
-
 
   mac-ci-shared:
     name: stable, macOS, shared library
@@ -105,9 +104,42 @@ jobs:
         run: cargo test --all
         env:
           RUST_BACKTRACE: 1
-      
+
       - name: ctest tests
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
+
+  mac-ci-shared-bindgen-latest:
+    name: stable, macOS, shared library, bindgen with harfbuzz latest version
+    runs-on: macos-latest
+    env:
+      PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: install harfbuzz latest
+        run: brew install harfbuzz
+
+      - name: harfbuzz version
+        run: pkg-config --modversion harfbuzz
+
+      - name: Cargo build
+        run: cargo build --all --features bindgen
+
+      - name: Cargo test
+        run: cargo test --all --features bindgen
+        env:
+          RUST_BACKTRACE: 1
+
+      - name: ctest tests
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --features bindgen
 
   windows-ci:
     name: Windows
@@ -122,7 +154,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          
+
       - name: Dependency install
         run: vcpkg install --recurse glib:x64-windows fontconfig:x64-windows freetype:x64-windows cairo:x64-windows
 
@@ -141,6 +173,7 @@ jobs:
       - "linux-ci-static"
       - "linux-ci-shared"
       - "mac-ci-shared"
+      - "mac-ci-shared-bindgen-latest"
       - "windows-ci"
 
     steps:
@@ -150,4 +183,3 @@ jobs:
       - name: Mark the job as unsuccessful
         run: exit 1
         if: "!success()"
-

@@ -11,4 +11,7 @@ libc = "0.2"
 
 [build-dependencies]
 pkg-config = "0.3"
-ctest = "0.2"
+ctest = { package = "ctest2", version = "0.4" }
+
+[features]
+bindgen = ["harfbuzz-sys/bindgen"]

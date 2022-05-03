@@ -20,8 +20,9 @@ fn main() {
     // Include the header files where the C APIs are defined.
     cfg.header("hb.h").header("hb-ot.h").header("hb-aat.h");
 
-    #[cfg(target_os = "macos")]
-    cfg.header("hb-coretext.h");
+    if cfg!(target_os = "macos") {
+        cfg.header("hb-coretext.h");
+    }
 
     // Skip structs that are empty on the Rust side.
     cfg.skip_struct(|s| {
@@ -38,11 +39,7 @@ fn main() {
     });
 
     // FIXME: I'm not sure why these functions must be skipped.
-    cfg.skip_fn(|s| {
-        s == "hb_coretext_face_create"
-            || s == "hb_coretext_face_get_cg_font"
-            || s == "hb_ft_font_create_referenced"
-    });
+    cfg.skip_fn(|s| s == "hb_buffer_append");
 
     // Generate the tests, passing the path to the `*-sys` library as well as
     // the module to generate.
