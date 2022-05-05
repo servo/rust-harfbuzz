@@ -1,0 +1,3 @@
+[submodule "harfbuzz"]
+	path = harfbuzz-sys/harfbuzz
+	url = https://github.com/harfbuzz/harfbuzz

@@ -107,6 +107,101 @@ fn bindgen_test_layout__hb_var_int_t() {
     );
 }
 pub type hb_var_int_t = _hb_var_int_t;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union _hb_var_num_t {
+    pub f: ::std::os::raw::c_float,
+    pub u32: u32,
+    pub i32: i32,
+    pub u16: [u16; 2usize],
+    pub i16: [i16; 2usize],
+    pub u8: [u8; 4usize],
+    pub i8: [i8; 4usize],
+}
+#[test]
+fn bindgen_test_layout__hb_var_num_t() {
+    assert_eq!(
+        ::std::mem::size_of::<_hb_var_num_t>(),
+        4usize,
+        concat!("Size of: ", stringify!(_hb_var_num_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_hb_var_num_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(_hb_var_num_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).f as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(f)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).u32 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(u32)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).i32 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(i32)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).u16 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(u16)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).i16 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(i16)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).u8 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(u8)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_hb_var_num_t>())).i8 as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_hb_var_num_t),
+            "::",
+            stringify!(i8)
+        )
+    );
+}
+pub type hb_var_num_t = _hb_var_num_t;
 #[doc = " hb_tag_t:"]
 #[doc = ""]
 #[doc = " Data type for tag identifiers. Tags are four"]
@@ -159,6 +254,11 @@ extern "C" {
 pub struct hb_language_impl_t {
     _unused: [u8; 0],
 }
+#[doc = " hb_language_t:"]
+#[doc = ""]
+#[doc = " Data type for languages. Each #hb_language_t corresponds to a BCP 47"]
+#[doc = " language tag."]
+#[doc = ""]
 pub type hb_language_t = *const hb_language_impl_t;
 extern "C" {
     pub fn hb_language_from_string(
@@ -329,164 +429,180 @@ pub const HB_SCRIPT_CHORASMIAN: hb_script_t = 1130918515;
 pub const HB_SCRIPT_DIVES_AKURU: hb_script_t = 1147756907;
 pub const HB_SCRIPT_KHITAN_SMALL_SCRIPT: hb_script_t = 1265202291;
 pub const HB_SCRIPT_YEZIDI: hb_script_t = 1499822697;
+pub const HB_SCRIPT_CYPRO_MINOAN: hb_script_t = 1131441518;
+pub const HB_SCRIPT_OLD_UYGHUR: hb_script_t = 1333094258;
+pub const HB_SCRIPT_TANGSA: hb_script_t = 1416524641;
+pub const HB_SCRIPT_TOTO: hb_script_t = 1416590447;
+pub const HB_SCRIPT_VITHKUQI: hb_script_t = 1449751656;
+pub const HB_SCRIPT_MATH: hb_script_t = 1517122664;
 pub const HB_SCRIPT_INVALID: hb_script_t = 0;
 pub const _HB_SCRIPT_MAX_VALUE: hb_script_t = 2147483647;
 pub const _HB_SCRIPT_MAX_VALUE_SIGNED: hb_script_t = 2147483647;
 #[doc = " hb_script_t:"]
-#[doc = " @HB_SCRIPT_COMMON: HB_TAG ('Z','y','y','y')"]
-#[doc = " @HB_SCRIPT_INHERITED: HB_TAG ('Z','i','n','h')"]
-#[doc = " @HB_SCRIPT_UNKNOWN: HB_TAG ('Z','z','z','z')"]
-#[doc = " @HB_SCRIPT_ARABIC"]
-#[doc = " @HB_SCRIPT_ARMENIAN"]
-#[doc = " @HB_SCRIPT_BENGALI"]
-#[doc = " @HB_SCRIPT_CYRILLIC"]
-#[doc = " @HB_SCRIPT_DEVANAGARI"]
-#[doc = " @HB_SCRIPT_GEORGIAN"]
-#[doc = " @HB_SCRIPT_GREEK"]
-#[doc = " @HB_SCRIPT_GUJARATI"]
-#[doc = " @HB_SCRIPT_GURMUKHI"]
-#[doc = " @HB_SCRIPT_HANGUL"]
-#[doc = " @HB_SCRIPT_HAN"]
-#[doc = " @HB_SCRIPT_HEBREW"]
-#[doc = " @HB_SCRIPT_HIRAGANA"]
-#[doc = " @HB_SCRIPT_KANNADA"]
-#[doc = " @HB_SCRIPT_KATAKANA"]
-#[doc = " @HB_SCRIPT_LAO"]
-#[doc = " @HB_SCRIPT_LATIN"]
-#[doc = " @HB_SCRIPT_MALAYALAM"]
-#[doc = " @HB_SCRIPT_ORIYA"]
-#[doc = " @HB_SCRIPT_TAMIL"]
-#[doc = " @HB_SCRIPT_TELUGU"]
-#[doc = " @HB_SCRIPT_THAI"]
-#[doc = " @HB_SCRIPT_TIBETAN"]
-#[doc = " @HB_SCRIPT_BOPOMOFO"]
-#[doc = " @HB_SCRIPT_BRAILLE"]
-#[doc = " @HB_SCRIPT_CANADIAN_SYLLABICS"]
-#[doc = " @HB_SCRIPT_CHEROKEE"]
-#[doc = " @HB_SCRIPT_ETHIOPIC"]
-#[doc = " @HB_SCRIPT_KHMER"]
-#[doc = " @HB_SCRIPT_MONGOLIAN"]
-#[doc = " @HB_SCRIPT_MYANMAR"]
-#[doc = " @HB_SCRIPT_OGHAM"]
-#[doc = " @HB_SCRIPT_RUNIC"]
-#[doc = " @HB_SCRIPT_SINHALA"]
-#[doc = " @HB_SCRIPT_SYRIAC"]
-#[doc = " @HB_SCRIPT_THAANA"]
-#[doc = " @HB_SCRIPT_YI"]
-#[doc = " @HB_SCRIPT_DESERET"]
-#[doc = " @HB_SCRIPT_GOTHIC"]
-#[doc = " @HB_SCRIPT_OLD_ITALIC"]
-#[doc = " @HB_SCRIPT_BUHID"]
-#[doc = " @HB_SCRIPT_HANUNOO"]
-#[doc = " @HB_SCRIPT_TAGALOG"]
-#[doc = " @HB_SCRIPT_TAGBANWA"]
-#[doc = " @HB_SCRIPT_CYPRIOT"]
-#[doc = " @HB_SCRIPT_LIMBU"]
-#[doc = " @HB_SCRIPT_LINEAR_B"]
-#[doc = " @HB_SCRIPT_OSMANYA"]
-#[doc = " @HB_SCRIPT_SHAVIAN"]
-#[doc = " @HB_SCRIPT_TAI_LE"]
-#[doc = " @HB_SCRIPT_UGARITIC"]
-#[doc = " @HB_SCRIPT_BUGINESE"]
-#[doc = " @HB_SCRIPT_COPTIC"]
-#[doc = " @HB_SCRIPT_GLAGOLITIC"]
-#[doc = " @HB_SCRIPT_KHAROSHTHI"]
-#[doc = " @HB_SCRIPT_NEW_TAI_LUE"]
-#[doc = " @HB_SCRIPT_OLD_PERSIAN"]
-#[doc = " @HB_SCRIPT_SYLOTI_NAGRI"]
-#[doc = " @HB_SCRIPT_TIFINAGH"]
-#[doc = " @HB_SCRIPT_BALINESE"]
-#[doc = " @HB_SCRIPT_CUNEIFORM"]
-#[doc = " @HB_SCRIPT_NKO"]
-#[doc = " @HB_SCRIPT_PHAGS_PA"]
-#[doc = " @HB_SCRIPT_PHOENICIAN"]
-#[doc = " @HB_SCRIPT_CARIAN"]
-#[doc = " @HB_SCRIPT_CHAM"]
-#[doc = " @HB_SCRIPT_KAYAH_LI"]
-#[doc = " @HB_SCRIPT_LEPCHA"]
-#[doc = " @HB_SCRIPT_LYCIAN"]
-#[doc = " @HB_SCRIPT_LYDIAN"]
-#[doc = " @HB_SCRIPT_OL_CHIKI"]
-#[doc = " @HB_SCRIPT_REJANG"]
-#[doc = " @HB_SCRIPT_SAURASHTRA"]
-#[doc = " @HB_SCRIPT_SUNDANESE"]
-#[doc = " @HB_SCRIPT_VAI"]
-#[doc = " @HB_SCRIPT_AVESTAN"]
-#[doc = " @HB_SCRIPT_BAMUM"]
-#[doc = " @HB_SCRIPT_EGYPTIAN_HIEROGLYPHS"]
-#[doc = " @HB_SCRIPT_IMPERIAL_ARAMAIC"]
-#[doc = " @HB_SCRIPT_INSCRIPTIONAL_PAHLAVI"]
-#[doc = " @HB_SCRIPT_INSCRIPTIONAL_PARTHIAN"]
-#[doc = " @HB_SCRIPT_JAVANESE"]
-#[doc = " @HB_SCRIPT_KAITHI"]
-#[doc = " @HB_SCRIPT_LISU"]
-#[doc = " @HB_SCRIPT_MEETEI_MAYEK"]
-#[doc = " @HB_SCRIPT_OLD_SOUTH_ARABIAN"]
-#[doc = " @HB_SCRIPT_OLD_TURKIC"]
-#[doc = " @HB_SCRIPT_SAMARITAN"]
-#[doc = " @HB_SCRIPT_TAI_THAM"]
-#[doc = " @HB_SCRIPT_TAI_VIET"]
-#[doc = " @HB_SCRIPT_BATAK"]
-#[doc = " @HB_SCRIPT_BRAHMI"]
-#[doc = " @HB_SCRIPT_MANDAIC"]
-#[doc = " @HB_SCRIPT_CHAKMA"]
-#[doc = " @HB_SCRIPT_MEROITIC_CURSIVE"]
-#[doc = " @HB_SCRIPT_MEROITIC_HIEROGLYPHS"]
-#[doc = " @HB_SCRIPT_MIAO"]
-#[doc = " @HB_SCRIPT_SHARADA"]
-#[doc = " @HB_SCRIPT_SORA_SOMPENG"]
-#[doc = " @HB_SCRIPT_TAKRI"]
-#[doc = " @HB_SCRIPT_BASSA_VAH"]
-#[doc = " @HB_SCRIPT_CAUCASIAN_ALBANIAN"]
-#[doc = " @HB_SCRIPT_DUPLOYAN"]
-#[doc = " @HB_SCRIPT_ELBASAN"]
-#[doc = " @HB_SCRIPT_GRANTHA"]
-#[doc = " @HB_SCRIPT_KHOJKI"]
-#[doc = " @HB_SCRIPT_KHUDAWADI"]
-#[doc = " @HB_SCRIPT_LINEAR_A"]
-#[doc = " @HB_SCRIPT_MAHAJANI"]
-#[doc = " @HB_SCRIPT_MANICHAEAN"]
-#[doc = " @HB_SCRIPT_MENDE_KIKAKUI"]
-#[doc = " @HB_SCRIPT_MODI"]
-#[doc = " @HB_SCRIPT_MRO"]
-#[doc = " @HB_SCRIPT_NABATAEAN"]
-#[doc = " @HB_SCRIPT_OLD_NORTH_ARABIAN"]
-#[doc = " @HB_SCRIPT_OLD_PERMIC"]
-#[doc = " @HB_SCRIPT_PAHAWH_HMONG"]
-#[doc = " @HB_SCRIPT_PALMYRENE"]
-#[doc = " @HB_SCRIPT_PAU_CIN_HAU"]
-#[doc = " @HB_SCRIPT_PSALTER_PAHLAVI"]
-#[doc = " @HB_SCRIPT_SIDDHAM"]
-#[doc = " @HB_SCRIPT_TIRHUTA"]
-#[doc = " @HB_SCRIPT_WARANG_CITI"]
-#[doc = " @HB_SCRIPT_AHOM"]
-#[doc = " @HB_SCRIPT_ANATOLIAN_HIEROGLYPHS"]
-#[doc = " @HB_SCRIPT_HATRAN"]
-#[doc = " @HB_SCRIPT_MULTANI"]
-#[doc = " @HB_SCRIPT_OLD_HUNGARIAN"]
-#[doc = " @HB_SCRIPT_SIGNWRITING"]
-#[doc = " @HB_SCRIPT_ADLAM"]
-#[doc = " @HB_SCRIPT_BHAIKSUKI"]
-#[doc = " @HB_SCRIPT_MARCHEN"]
-#[doc = " @HB_SCRIPT_OSAGE"]
-#[doc = " @HB_SCRIPT_TANGUT"]
-#[doc = " @HB_SCRIPT_NEWA"]
-#[doc = " @HB_SCRIPT_MASARAM_GONDI"]
-#[doc = " @HB_SCRIPT_NUSHU"]
-#[doc = " @HB_SCRIPT_SOYOMBO"]
-#[doc = " @HB_SCRIPT_ZANABAZAR_SQUARE"]
-#[doc = " @HB_SCRIPT_DOGRA"]
-#[doc = " @HB_SCRIPT_GUNJALA_GONDI"]
-#[doc = " @HB_SCRIPT_HANIFI_ROHINGYA"]
-#[doc = " @HB_SCRIPT_MAKASAR"]
-#[doc = " @HB_SCRIPT_MEDEFAIDRIN"]
-#[doc = " @HB_SCRIPT_OLD_SOGDIAN"]
-#[doc = " @HB_SCRIPT_SOGDIAN"]
-#[doc = " @HB_SCRIPT_ELYMAIC"]
-#[doc = " @HB_SCRIPT_NANDINAGARI"]
-#[doc = " @HB_SCRIPT_NYIAKENG_PUACHUE_HMONG"]
-#[doc = " @HB_SCRIPT_WANCHO"]
-#[doc = " @HB_SCRIPT_INVALID: #HB_TAG_NONE"]
+#[doc = " @HB_SCRIPT_COMMON: `Zyyy`"]
+#[doc = " @HB_SCRIPT_INHERITED: `Zinh`"]
+#[doc = " @HB_SCRIPT_UNKNOWN: `Zzzz`"]
+#[doc = " @HB_SCRIPT_ARABIC: `Arab`"]
+#[doc = " @HB_SCRIPT_ARMENIAN: `Armn`"]
+#[doc = " @HB_SCRIPT_BENGALI: `Beng`"]
+#[doc = " @HB_SCRIPT_CYRILLIC: `Cyrl`"]
+#[doc = " @HB_SCRIPT_DEVANAGARI: `Deva`"]
+#[doc = " @HB_SCRIPT_GEORGIAN: `Geor`"]
+#[doc = " @HB_SCRIPT_GREEK: `Grek`"]
+#[doc = " @HB_SCRIPT_GUJARATI: `Gujr`"]
+#[doc = " @HB_SCRIPT_GURMUKHI: `Guru`"]
+#[doc = " @HB_SCRIPT_HANGUL: `Hang`"]
+#[doc = " @HB_SCRIPT_HAN: `Hani`"]
+#[doc = " @HB_SCRIPT_HEBREW: `Hebr`"]
+#[doc = " @HB_SCRIPT_HIRAGANA: `Hira`"]
+#[doc = " @HB_SCRIPT_KANNADA: `Knda`"]
+#[doc = " @HB_SCRIPT_KATAKANA: `Kana`"]
+#[doc = " @HB_SCRIPT_LAO: `Laoo`"]
+#[doc = " @HB_SCRIPT_LATIN: `Latn`"]
+#[doc = " @HB_SCRIPT_MALAYALAM: `Mlym`"]
+#[doc = " @HB_SCRIPT_ORIYA: `Orya`"]
+#[doc = " @HB_SCRIPT_TAMIL: `Taml`"]
+#[doc = " @HB_SCRIPT_TELUGU: `Telu`"]
+#[doc = " @HB_SCRIPT_THAI: `Thai`"]
+#[doc = " @HB_SCRIPT_TIBETAN: `Tibt`"]
+#[doc = " @HB_SCRIPT_BOPOMOFO: `Bopo`"]
+#[doc = " @HB_SCRIPT_BRAILLE: `Brai`"]
+#[doc = " @HB_SCRIPT_CANADIAN_SYLLABICS: `Cans`"]
+#[doc = " @HB_SCRIPT_CHEROKEE: `Cher`"]
+#[doc = " @HB_SCRIPT_ETHIOPIC: `Ethi`"]
+#[doc = " @HB_SCRIPT_KHMER: `Khmr`"]
+#[doc = " @HB_SCRIPT_MONGOLIAN: `Mong`"]
+#[doc = " @HB_SCRIPT_MYANMAR: `Mymr`"]
+#[doc = " @HB_SCRIPT_OGHAM: `Ogam`"]
+#[doc = " @HB_SCRIPT_RUNIC: `Runr`"]
+#[doc = " @HB_SCRIPT_SINHALA: `Sinh`"]
+#[doc = " @HB_SCRIPT_SYRIAC: `Syrc`"]
+#[doc = " @HB_SCRIPT_THAANA: `Thaa`"]
+#[doc = " @HB_SCRIPT_YI: `Yiii`"]
+#[doc = " @HB_SCRIPT_DESERET: `Dsrt`"]
+#[doc = " @HB_SCRIPT_GOTHIC: `Goth`"]
+#[doc = " @HB_SCRIPT_OLD_ITALIC: `Ital`"]
+#[doc = " @HB_SCRIPT_BUHID: `Buhd`"]
+#[doc = " @HB_SCRIPT_HANUNOO: `Hano`"]
+#[doc = " @HB_SCRIPT_TAGALOG: `Tglg`"]
+#[doc = " @HB_SCRIPT_TAGBANWA: `Tagb`"]
+#[doc = " @HB_SCRIPT_CYPRIOT: `Cprt`"]
+#[doc = " @HB_SCRIPT_LIMBU: `Limb`"]
+#[doc = " @HB_SCRIPT_LINEAR_B: `Linb`"]
+#[doc = " @HB_SCRIPT_OSMANYA: `Osma`"]
+#[doc = " @HB_SCRIPT_SHAVIAN: `Shaw`"]
+#[doc = " @HB_SCRIPT_TAI_LE: `Tale`"]
+#[doc = " @HB_SCRIPT_UGARITIC: `Ugar`"]
+#[doc = " @HB_SCRIPT_BUGINESE: `Bugi`"]
+#[doc = " @HB_SCRIPT_COPTIC: `Copt`"]
+#[doc = " @HB_SCRIPT_GLAGOLITIC: `Glag`"]
+#[doc = " @HB_SCRIPT_KHAROSHTHI: `Khar`"]
+#[doc = " @HB_SCRIPT_NEW_TAI_LUE: `Talu`"]
+#[doc = " @HB_SCRIPT_OLD_PERSIAN: `Xpeo`"]
+#[doc = " @HB_SCRIPT_SYLOTI_NAGRI: `Sylo`"]
+#[doc = " @HB_SCRIPT_TIFINAGH: `Tfng`"]
+#[doc = " @HB_SCRIPT_BALINESE: `Bali`"]
+#[doc = " @HB_SCRIPT_CUNEIFORM: `Xsux`"]
+#[doc = " @HB_SCRIPT_NKO: `Nkoo`"]
+#[doc = " @HB_SCRIPT_PHAGS_PA: `Phag`"]
+#[doc = " @HB_SCRIPT_PHOENICIAN: `Phnx`"]
+#[doc = " @HB_SCRIPT_CARIAN: `Cari`"]
+#[doc = " @HB_SCRIPT_CHAM: `Cham`"]
+#[doc = " @HB_SCRIPT_KAYAH_LI: `Kali`"]
+#[doc = " @HB_SCRIPT_LEPCHA: `Lepc`"]
+#[doc = " @HB_SCRIPT_LYCIAN: `Lyci`"]
+#[doc = " @HB_SCRIPT_LYDIAN: `Lydi`"]
+#[doc = " @HB_SCRIPT_OL_CHIKI: `Olck`"]
+#[doc = " @HB_SCRIPT_REJANG: `Rjng`"]
+#[doc = " @HB_SCRIPT_SAURASHTRA: `Saur`"]
+#[doc = " @HB_SCRIPT_SUNDANESE: `Sund`"]
+#[doc = " @HB_SCRIPT_VAI: `Vaii`"]
+#[doc = " @HB_SCRIPT_AVESTAN: `Avst`"]
+#[doc = " @HB_SCRIPT_BAMUM: `Bamu`"]
+#[doc = " @HB_SCRIPT_EGYPTIAN_HIEROGLYPHS: `Egyp`"]
+#[doc = " @HB_SCRIPT_IMPERIAL_ARAMAIC: `Armi`"]
+#[doc = " @HB_SCRIPT_INSCRIPTIONAL_PAHLAVI: `Phli`"]
+#[doc = " @HB_SCRIPT_INSCRIPTIONAL_PARTHIAN: `Prti`"]
+#[doc = " @HB_SCRIPT_JAVANESE: `Java`"]
+#[doc = " @HB_SCRIPT_KAITHI: `Kthi`"]
+#[doc = " @HB_SCRIPT_LISU: `Lisu`"]
+#[doc = " @HB_SCRIPT_MEETEI_MAYEK: `Mtei`"]
+#[doc = " @HB_SCRIPT_OLD_SOUTH_ARABIAN: `Sarb`"]
+#[doc = " @HB_SCRIPT_OLD_TURKIC: `Orkh`"]
+#[doc = " @HB_SCRIPT_SAMARITAN: `Samr`"]
+#[doc = " @HB_SCRIPT_TAI_THAM: `Lana`"]
+#[doc = " @HB_SCRIPT_TAI_VIET: `Tavt`"]
+#[doc = " @HB_SCRIPT_BATAK: `Batk`"]
+#[doc = " @HB_SCRIPT_BRAHMI: `Brah`"]
+#[doc = " @HB_SCRIPT_MANDAIC: `Mand`"]
+#[doc = " @HB_SCRIPT_CHAKMA: `Cakm`"]
+#[doc = " @HB_SCRIPT_MEROITIC_CURSIVE: `Merc`"]
+#[doc = " @HB_SCRIPT_MEROITIC_HIEROGLYPHS: `Mero`"]
+#[doc = " @HB_SCRIPT_MIAO: `Plrd`"]
+#[doc = " @HB_SCRIPT_SHARADA: `Shrd`"]
+#[doc = " @HB_SCRIPT_SORA_SOMPENG: `Sora`"]
+#[doc = " @HB_SCRIPT_TAKRI: `Takr`"]
+#[doc = " @HB_SCRIPT_BASSA_VAH: `Bass`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_CAUCASIAN_ALBANIAN: `Aghb`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_DUPLOYAN: `Dupl`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_ELBASAN: `Elba`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_GRANTHA: `Gran`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_KHOJKI: `Khoj`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_KHUDAWADI: `Sind`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_LINEAR_A: `Lina`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MAHAJANI: `Mahj`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MANICHAEAN: `Mani`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MENDE_KIKAKUI: `Mend`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MODI: `Modi`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MRO: `Mroo`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_NABATAEAN: `Nbat`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_OLD_NORTH_ARABIAN: `Narb`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_OLD_PERMIC: `Perm`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_PAHAWH_HMONG: `Hmng`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_PALMYRENE: `Palm`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_PAU_CIN_HAU: `Pauc`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_PSALTER_PAHLAVI: `Phlp`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_SIDDHAM: `Sidd`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_TIRHUTA: `Tirh`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_WARANG_CITI: `Wara`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_AHOM: `Ahom`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_ANATOLIAN_HIEROGLYPHS: `Hluw`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_HATRAN: `Hatr`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_MULTANI: `Mult`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_OLD_HUNGARIAN: `Hung`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_SIGNWRITING: `Sgnw`, Since: 0.9.30"]
+#[doc = " @HB_SCRIPT_ADLAM: `Adlm`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_BHAIKSUKI: `Bhks`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_MARCHEN: `Marc`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_OSAGE: `Osge`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_TANGUT: `Tang`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_NEWA: `Newa`, Since: 1.3.0"]
+#[doc = " @HB_SCRIPT_MASARAM_GONDI: `Gonm`, Since: 1.6.0"]
+#[doc = " @HB_SCRIPT_NUSHU: `Nshu`, Since: 1.6.0"]
+#[doc = " @HB_SCRIPT_SOYOMBO: `Soyo`, Since: 1.6.0"]
+#[doc = " @HB_SCRIPT_ZANABAZAR_SQUARE: `Zanb`, Since: 1.6.0"]
+#[doc = " @HB_SCRIPT_DOGRA: `Dogr`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_GUNJALA_GONDI: `Gong`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_HANIFI_ROHINGYA: `Rohg`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_MAKASAR: `Maka`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_MEDEFAIDRIN: `Medf`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_OLD_SOGDIAN: `Sogo`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_SOGDIAN: `Sogd`, Since: 1.8.0"]
+#[doc = " @HB_SCRIPT_ELYMAIC: `Elym`, Since: 2.4.0"]
+#[doc = " @HB_SCRIPT_NANDINAGARI: `Nand`, Since: 2.4.0"]
+#[doc = " @HB_SCRIPT_NYIAKENG_PUACHUE_HMONG: `Hmnp`, Since: 2.4.0"]
+#[doc = " @HB_SCRIPT_WANCHO: `Wcho`, Since: 2.4.0"]
+#[doc = " @HB_SCRIPT_CHORASMIAN: `Chrs`, Since: 2.6.7"]
+#[doc = " @HB_SCRIPT_DIVES_AKURU: `Diak`, Since: 2.6.7"]
+#[doc = " @HB_SCRIPT_KHITAN_SMALL_SCRIPT: `Kits`, Since: 2.6.7"]
+#[doc = " @HB_SCRIPT_YEZIDI: `Yezi`, Since: 2.6.7"]
+#[doc = " @HB_SCRIPT_CYPRO_MINOAN: `Cpmn`, Since: 3.0.0"]
+#[doc = " @HB_SCRIPT_OLD_UYGHUR: `Ougr`, Since: 3.0.0"]
+#[doc = " @HB_SCRIPT_TANGSA: `Tnsa`, Since: 3.0.0"]
+#[doc = " @HB_SCRIPT_TOTO: `Toto`, Since: 3.0.0"]
+#[doc = " @HB_SCRIPT_VITHKUQI: `Vith`, Since: 3.0.0"]
+#[doc = " @HB_SCRIPT_MATH: `Zmth`, Since: 3.4.0"]
+#[doc = " @HB_SCRIPT_INVALID: No script set"]
 #[doc = ""]
 #[doc = " Data type for scripts. Each #hb_script_t's value is an #hb_tag_t corresponding"]
 #[doc = " to the four-letter values defined by [ISO 15924](https://unicode.org/iso15924/)."]
@@ -541,6 +657,11 @@ fn bindgen_test_layout_hb_user_data_key_t() {
         )
     );
 }
+#[doc = " hb_destroy_func_t:"]
+#[doc = " @user_data: the data to be destroyed"]
+#[doc = ""]
+#[doc = " A virtual method for destroy user-data callbacks."]
+#[doc = ""]
 pub type hb_destroy_func_t =
     ::std::option::Option<unsafe extern "C" fn(user_data: *mut ::std::os::raw::c_void)>;
 #[doc = " hb_feature_t:"]
@@ -554,7 +675,7 @@ pub type hb_destroy_func_t =
 #[doc = " The #hb_feature_t is the structure that holds information about requested"]
 #[doc = " feature application. The feature will be applied with the given value to all"]
 #[doc = " glyphs which are in clusters between @start (inclusive) and @end (exclusive)."]
-#[doc = " Setting start to @HB_FEATURE_GLOBAL_START and end to @HB_FEATURE_GLOBAL_END"]
+#[doc = " Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END"]
 #[doc = " specifies that the feature always applies to the entire buffer."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -636,8 +757,8 @@ extern "C" {
 #[doc = " @value: The value of the variation axis"]
 #[doc = ""]
 #[doc = " Data type for holding variation data. Registered OpenType"]
-#[doc = " variation-axis tags are listed at"]
-#[doc = " https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg"]
+#[doc = " variation-axis tags are listed in"]
+#[doc = " [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg)."]
 #[doc = ""]
 #[doc = " Since: 1.4.2"]
 #[repr(C)]
@@ -717,10 +838,12 @@ pub const HB_MEMORY_MODE_READONLY: hb_memory_mode_t = 1;
 pub const HB_MEMORY_MODE_WRITABLE: hb_memory_mode_t = 2;
 pub const HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: hb_memory_mode_t = 3;
 #[doc = " hb_memory_mode_t:"]
-#[doc = " @HB_MEMORY_MODE_DUPLICATE"]
-#[doc = " @HB_MEMORY_MODE_READONLY"]
-#[doc = " @HB_MEMORY_MODE_WRITABLE"]
-#[doc = " @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE"]
+#[doc = " @HB_MEMORY_MODE_DUPLICATE: HarfBuzz immediately makes a copy of the data."]
+#[doc = " @HB_MEMORY_MODE_READONLY: HarfBuzz client will never modify the data,"]
+#[doc = "     and HarfBuzz will never modify the data."]
+#[doc = " @HB_MEMORY_MODE_WRITABLE: HarfBuzz client made a copy of the data solely"]
+#[doc = "     for HarfBuzz, so HarfBuzz may modify the data."]
+#[doc = " @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE: See above"]
 #[doc = ""]
 #[doc = " Data type holding the memory modes available to"]
 #[doc = " client programs."]
@@ -758,7 +881,21 @@ extern "C" {
     ) -> *mut hb_blob_t;
 }
 extern "C" {
+    pub fn hb_blob_create_or_fail(
+        data: *const ::std::os::raw::c_char,
+        length: ::std::os::raw::c_uint,
+        mode: hb_memory_mode_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    ) -> *mut hb_blob_t;
+}
+extern "C" {
     pub fn hb_blob_create_from_file(file_name: *const ::std::os::raw::c_char) -> *mut hb_blob_t;
+}
+extern "C" {
+    pub fn hb_blob_create_from_file_or_fail(
+        file_name: *const ::std::os::raw::c_char,
+    ) -> *mut hb_blob_t;
 }
 extern "C" {
     pub fn hb_blob_create_sub_blob(
@@ -1143,7 +1280,7 @@ pub type hb_unicode_script_func_t = ::std::option::Option<
 #[doc = " The method must return an #hb_bool_t indicating the success"]
 #[doc = " of the composition."]
 #[doc = ""]
-#[doc = " Return value: True is @a,@b composed, false otherwise"]
+#[doc = " Return value: %true is @a,@b composed, %false otherwise"]
 #[doc = ""]
 pub type hb_unicode_compose_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1168,7 +1305,7 @@ pub type hb_unicode_compose_func_t = ::std::option::Option<
 #[doc = " output parameters (if successful). The method must return an"]
 #[doc = " #hb_bool_t indicating the success of the composition."]
 #[doc = ""]
-#[doc = " Return value: True if @ab decomposed, false otherwise"]
+#[doc = " Return value: %true if @ab decomposed, %false otherwise"]
 #[doc = ""]
 pub type hb_unicode_decompose_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1184,7 +1321,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_combining_class_func_t."]
     #[doc = ""]
@@ -1201,7 +1338,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_general_category_func_t."]
     #[doc = ""]
@@ -1218,7 +1355,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_mirroring_func_t."]
     #[doc = ""]
@@ -1235,7 +1372,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_script_func_t."]
     #[doc = ""]
@@ -1252,7 +1389,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_compose_func_t."]
     #[doc = ""]
@@ -1269,7 +1406,7 @@ extern "C" {
     #[doc = " @ufuncs: A Unicode-functions structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_unicode_decompose_func_t."]
     #[doc = ""]
@@ -1346,18 +1483,6 @@ extern "C" {
     ) -> hb_script_t;
 }
 extern "C" {
-    #[doc = " hb_unicode_compose:"]
-    #[doc = " @ufuncs: The Unicode-functions structure"]
-    #[doc = " @a: The first code point to compose"]
-    #[doc = " @b: The second code point to compose"]
-    #[doc = " @ab: (out): The composed code point"]
-    #[doc = ""]
-    #[doc = " Composes the code point sequence @a,@b by canonical equivalence into"]
-    #[doc = " code point @ab."]
-    #[doc = ""]
-    #[doc = " Return value: True is @a,@b composed, false otherwise"]
-    #[doc = ""]
-    #[doc = " Since: 0.9.2"]
     pub fn hb_unicode_compose(
         ufuncs: *mut hb_unicode_funcs_t,
         a: hb_codepoint_t,
@@ -1366,18 +1491,6 @@ extern "C" {
     ) -> hb_bool_t;
 }
 extern "C" {
-    #[doc = " hb_unicode_decompose:"]
-    #[doc = " @ufuncs: The Unicode-functions structure"]
-    #[doc = " @ab: The code point to decompose"]
-    #[doc = " @a: (out): The first decomposed code point"]
-    #[doc = " @b: (out): The second decomposed code point"]
-    #[doc = ""]
-    #[doc = " Decomposes code point @ab by canonical equivalence, into code points"]
-    #[doc = " @a and @b."]
-    #[doc = ""]
-    #[doc = " Return value: True if @ab decomposed, false otherwise"]
-    #[doc = ""]
-    #[doc = " Since: 0.9.2"]
     pub fn hb_unicode_decompose(
         ufuncs: *mut hb_unicode_funcs_t,
         ab: hb_codepoint_t,
@@ -1421,10 +1534,16 @@ extern "C" {
     pub fn hb_set_allocation_successful(set: *const hb_set_t) -> hb_bool_t;
 }
 extern "C" {
+    pub fn hb_set_copy(set: *const hb_set_t) -> *mut hb_set_t;
+}
+extern "C" {
     pub fn hb_set_clear(set: *mut hb_set_t);
 }
 extern "C" {
     pub fn hb_set_is_empty(set: *const hb_set_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_set_invert(set: *mut hb_set_t);
 }
 extern "C" {
     pub fn hb_set_has(set: *const hb_set_t, codepoint: hb_codepoint_t) -> hb_bool_t;
@@ -1434,6 +1553,13 @@ extern "C" {
 }
 extern "C" {
     pub fn hb_set_add_range(set: *mut hb_set_t, first: hb_codepoint_t, last: hb_codepoint_t);
+}
+extern "C" {
+    pub fn hb_set_add_sorted_array(
+        set: *mut hb_set_t,
+        sorted_codepoints: *const hb_codepoint_t,
+        num_codepoints: ::std::os::raw::c_uint,
+    );
 }
 extern "C" {
     pub fn hb_set_del(set: *mut hb_set_t, codepoint: hb_codepoint_t);
@@ -1492,6 +1618,14 @@ extern "C" {
     ) -> hb_bool_t;
 }
 extern "C" {
+    pub fn hb_set_next_many(
+        set: *const hb_set_t,
+        codepoint: hb_codepoint_t,
+        out: *mut hb_codepoint_t,
+        size: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
     pub fn hb_face_count(blob: *mut hb_blob_t) -> ::std::os::raw::c_uint;
 }
 #[repr(C)]
@@ -1502,6 +1636,16 @@ pub struct hb_face_t {
 extern "C" {
     pub fn hb_face_create(blob: *mut hb_blob_t, index: ::std::os::raw::c_uint) -> *mut hb_face_t;
 }
+#[doc = " hb_reference_table_func_t:"]
+#[doc = " @face: an #hb_face_t to reference table for"]
+#[doc = " @tag: the tag of the table to reference"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " Callback function for hb_face_create_for_tables()."]
+#[doc = ""]
+#[doc = " Return value: (transfer full): A pointer to the @tag table within @face"]
+#[doc = ""]
+#[doc = " Since: 0.9.2"]
 pub type hb_reference_table_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         face: *mut hb_face_t,
@@ -1600,6 +1744,442 @@ extern "C" {
         tag: hb_tag_t,
         blob: *mut hb_blob_t,
     ) -> hb_bool_t;
+}
+#[doc = " hb_draw_state_t"]
+#[doc = " @path_open: Whether there is an open path"]
+#[doc = " @path_start_x: X component of the start of current path"]
+#[doc = " @path_start_y: Y component of the start of current path"]
+#[doc = " @current_x: X component of current point"]
+#[doc = " @current_y: Y component of current point"]
+#[doc = ""]
+#[doc = " Current drawing state."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hb_draw_state_t {
+    pub path_open: hb_bool_t,
+    pub path_start_x: ::std::os::raw::c_float,
+    pub path_start_y: ::std::os::raw::c_float,
+    pub current_x: ::std::os::raw::c_float,
+    pub current_y: ::std::os::raw::c_float,
+    pub reserved1: hb_var_num_t,
+    pub reserved2: hb_var_num_t,
+    pub reserved3: hb_var_num_t,
+    pub reserved4: hb_var_num_t,
+    pub reserved5: hb_var_num_t,
+    pub reserved6: hb_var_num_t,
+    pub reserved7: hb_var_num_t,
+}
+#[test]
+fn bindgen_test_layout_hb_draw_state_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_draw_state_t>(),
+        48usize,
+        concat!("Size of: ", stringify!(hb_draw_state_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_draw_state_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_draw_state_t))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).path_open as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(path_open)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).path_start_x as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(path_start_x)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).path_start_y as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(path_start_y)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).current_x as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(current_x)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).current_y as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(current_y)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved1 as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved1)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved2 as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved2)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved3 as *const _ as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved3)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved4 as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved4)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved5 as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved5)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved6 as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved6)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<hb_draw_state_t>())).reserved7 as *const _ as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_draw_state_t),
+            "::",
+            stringify!(reserved7)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_draw_funcs_t {
+    _unused: [u8; 0],
+}
+#[doc = " hb_draw_move_to_func_t:"]
+#[doc = " @dfuncs: draw functions object"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @st: current draw state"]
+#[doc = " @to_x: X component of target point"]
+#[doc = " @to_y: Y component of target point"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_draw_funcs_t to perform a \"move-to\" draw"]
+#[doc = " operation."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_draw_move_to_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
+#[doc = " hb_draw_line_to_func_t:"]
+#[doc = " @dfuncs: draw functions object"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @st: current draw state"]
+#[doc = " @to_x: X component of target point"]
+#[doc = " @to_y: Y component of target point"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_draw_funcs_t to perform a \"line-to\" draw"]
+#[doc = " operation."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_draw_line_to_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
+#[doc = " hb_draw_quadratic_to_func_t:"]
+#[doc = " @dfuncs: draw functions object"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @st: current draw state"]
+#[doc = " @control_x: X component of control point"]
+#[doc = " @control_y: Y component of control point"]
+#[doc = " @to_x: X component of target point"]
+#[doc = " @to_y: Y component of target point"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_draw_funcs_t to perform a \"quadratic-to\" draw"]
+#[doc = " operation."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_draw_quadratic_to_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        control_x: ::std::os::raw::c_float,
+        control_y: ::std::os::raw::c_float,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
+#[doc = " hb_draw_cubic_to_func_t:"]
+#[doc = " @dfuncs: draw functions object"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @st: current draw state"]
+#[doc = " @control1_x: X component of first control point"]
+#[doc = " @control1_y: Y component of first control point"]
+#[doc = " @control2_x: X component of second control point"]
+#[doc = " @control2_y: Y component of second control point"]
+#[doc = " @to_x: X component of target point"]
+#[doc = " @to_y: Y component of target point"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_draw_funcs_t to perform a \"cubic-to\" draw"]
+#[doc = " operation."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_draw_cubic_to_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        control1_x: ::std::os::raw::c_float,
+        control1_y: ::std::os::raw::c_float,
+        control2_x: ::std::os::raw::c_float,
+        control2_y: ::std::os::raw::c_float,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
+#[doc = " hb_draw_close_path_func_t:"]
+#[doc = " @dfuncs: draw functions object"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @st: current draw state"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_draw_funcs_t to perform a \"close-path\" draw"]
+#[doc = " operation."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_draw_close_path_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
+extern "C" {
+    #[doc = " hb_draw_funcs_set_move_to_func:"]
+    #[doc = " @dfuncs: draw functions object"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): move-to callback"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets move-to callback to the draw functions object."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_draw_funcs_set_move_to_func(
+        dfuncs: *mut hb_draw_funcs_t,
+        func: hb_draw_move_to_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    #[doc = " hb_draw_funcs_set_line_to_func:"]
+    #[doc = " @dfuncs: draw functions object"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): line-to callback"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets line-to callback to the draw functions object."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_draw_funcs_set_line_to_func(
+        dfuncs: *mut hb_draw_funcs_t,
+        func: hb_draw_line_to_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    #[doc = " hb_draw_funcs_set_quadratic_to_func:"]
+    #[doc = " @dfuncs: draw functions object"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): quadratic-to callback"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets quadratic-to callback to the draw functions object."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_draw_funcs_set_quadratic_to_func(
+        dfuncs: *mut hb_draw_funcs_t,
+        func: hb_draw_quadratic_to_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    #[doc = " hb_draw_funcs_set_cubic_to_func:"]
+    #[doc = " @dfuncs: draw functions"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): cubic-to callback"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets cubic-to callback to the draw functions object."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_draw_funcs_set_cubic_to_func(
+        dfuncs: *mut hb_draw_funcs_t,
+        func: hb_draw_cubic_to_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    #[doc = " hb_draw_funcs_set_close_path_func:"]
+    #[doc = " @dfuncs: draw functions object"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): close-path callback"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets close-path callback to the draw functions object."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_draw_funcs_set_close_path_func(
+        dfuncs: *mut hb_draw_funcs_t,
+        func: hb_draw_close_path_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    pub fn hb_draw_funcs_create() -> *mut hb_draw_funcs_t;
+}
+extern "C" {
+    pub fn hb_draw_funcs_reference(dfuncs: *mut hb_draw_funcs_t) -> *mut hb_draw_funcs_t;
+}
+extern "C" {
+    pub fn hb_draw_funcs_destroy(dfuncs: *mut hb_draw_funcs_t);
+}
+extern "C" {
+    pub fn hb_draw_funcs_make_immutable(dfuncs: *mut hb_draw_funcs_t);
+}
+extern "C" {
+    pub fn hb_draw_funcs_is_immutable(dfuncs: *mut hb_draw_funcs_t) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_draw_move_to(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+    );
+}
+extern "C" {
+    pub fn hb_draw_line_to(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+    );
+}
+extern "C" {
+    pub fn hb_draw_quadratic_to(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        control_x: ::std::os::raw::c_float,
+        control_y: ::std::os::raw::c_float,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+    );
+}
+extern "C" {
+    pub fn hb_draw_cubic_to(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+        control1_x: ::std::os::raw::c_float,
+        control1_y: ::std::os::raw::c_float,
+        control2_x: ::std::os::raw::c_float,
+        control2_y: ::std::os::raw::c_float,
+        to_x: ::std::os::raw::c_float,
+        to_y: ::std::os::raw::c_float,
+    );
+}
+extern "C" {
+    pub fn hb_draw_close_path(
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        st: *mut hb_draw_state_t,
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1872,6 +2452,14 @@ fn bindgen_test_layout_hb_glyph_extents_t() {
         )
     );
 }
+#[doc = " hb_font_get_font_extents_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @extents: (out): The font extents retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " This method should retrieve the extents for a font."]
+#[doc = ""]
 pub type hb_font_get_font_extents_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         font: *mut hb_font_t,
@@ -1884,7 +2472,7 @@ pub type hb_font_get_font_extents_func_t = ::std::option::Option<
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
-#[doc = " This method should retrieve the extents for a font, in horizontal-direction"]
+#[doc = " This method should retrieve the extents for a font, for horizontal-direction"]
 #[doc = " text segments. Extents must be returned in an #hb_glyph_extents output"]
 #[doc = " parameter."]
 #[doc = ""]
@@ -1893,17 +2481,24 @@ pub type hb_font_get_font_h_extents_func_t = hb_font_get_font_extents_func_t;
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
-#[doc = " This method should retrieve the extents for a font, in vertical-direction"]
+#[doc = " This method should retrieve the extents for a font, for vertical-direction"]
 #[doc = " text segments. Extents must be returned in an #hb_glyph_extents output"]
 #[doc = " parameter."]
 #[doc = ""]
 pub type hb_font_get_font_v_extents_func_t = hb_font_get_font_extents_func_t;
 #[doc = " hb_font_get_nominal_glyph_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @unicode: The Unicode code point to query"]
+#[doc = " @glyph: (out): The glyph ID retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the nominal glyph ID for a specified Unicode code"]
 #[doc = " point. Glyph IDs must be returned in a #hb_codepoint_t output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_nominal_glyph_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1915,12 +2510,20 @@ pub type hb_font_get_nominal_glyph_func_t = ::std::option::Option<
     ) -> hb_bool_t,
 >;
 #[doc = " hb_font_get_variation_glyph_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @unicode: The Unicode code point to query"]
+#[doc = " @variation_selector: The  variation-selector code point to query"]
+#[doc = " @glyph: (out): The glyph ID retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the glyph ID for a specified Unicode code point"]
 #[doc = " followed by a specified Variation Selector code point. Glyph IDs must be"]
 #[doc = " returned in a #hb_codepoint_t output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_variation_glyph_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1933,12 +2536,22 @@ pub type hb_font_get_variation_glyph_func_t = ::std::option::Option<
     ) -> hb_bool_t,
 >;
 #[doc = " hb_font_get_nominal_glyphs_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @count: number of code points to query"]
+#[doc = " @first_unicode: The first Unicode code point to query"]
+#[doc = " @unicode_stride: The stride between successive code points"]
+#[doc = " @first_glyph: (out): The first glyph ID retrieved"]
+#[doc = " @glyph_stride: The stride between successive glyph IDs"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the nominal glyph IDs for a sequence of"]
 #[doc = " Unicode code points. Glyph IDs must be returned in a #hb_codepoint_t"]
 #[doc = " output parameter."]
+#[doc = ""]
+#[doc = " Return value: the number of code points processed"]
 #[doc = ""]
 pub type hb_font_get_nominal_glyphs_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1953,11 +2566,17 @@ pub type hb_font_get_nominal_glyphs_func_t = ::std::option::Option<
     ) -> ::std::os::raw::c_uint,
 >;
 #[doc = " hb_font_get_glyph_advance_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the advance for a specified glyph. The"]
 #[doc = " method must return an #hb_position_t."]
+#[doc = ""]
+#[doc = " Return value: The advance of @glyph within @font"]
 #[doc = ""]
 pub type hb_font_get_glyph_advance_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -1986,6 +2605,14 @@ pub type hb_font_get_glyph_h_advance_func_t = hb_font_get_glyph_advance_func_t;
 #[doc = ""]
 pub type hb_font_get_glyph_v_advance_func_t = hb_font_get_glyph_advance_func_t;
 #[doc = " hb_font_get_glyph_advances_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @count: The number of glyph IDs in the sequence queried"]
+#[doc = " @first_glyph: The first glyph ID to query"]
+#[doc = " @glyph_stride: The stride between successive glyph IDs"]
+#[doc = " @first_advance: (out): The first advance retrieved"]
+#[doc = " @advance_stride: The stride between successive advances"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
@@ -2020,12 +2647,20 @@ pub type hb_font_get_glyph_h_advances_func_t = hb_font_get_glyph_advances_func_t
 #[doc = ""]
 pub type hb_font_get_glyph_v_advances_func_t = hb_font_get_glyph_advances_func_t;
 #[doc = " hb_font_get_glyph_origin_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @x: (out): The X coordinate of the origin"]
+#[doc = " @y: (out): The Y coordinate of the origin"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the (X,Y) coordinates (in font units) of the"]
 #[doc = " origin for a glyph. Each coordinate must be returned in an #hb_position_t"]
 #[doc = " output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_glyph_origin_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -2042,7 +2677,7 @@ pub type hb_font_get_glyph_origin_func_t = ::std::option::Option<
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the (X,Y) coordinates (in font units) of the"]
-#[doc = " origin for a glyph, in horizontal-direction text segments. Each"]
+#[doc = " origin for a glyph, for horizontal-direction text segments. Each"]
 #[doc = " coordinate must be returned in an #hb_position_t output parameter."]
 #[doc = ""]
 pub type hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
@@ -2051,10 +2686,20 @@ pub type hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the (X,Y) coordinates (in font units) of the"]
-#[doc = " origin for a glyph, in vertical-direction text segments. Each coordinate"]
+#[doc = " origin for a glyph, for vertical-direction text segments. Each coordinate"]
 #[doc = " must be returned in an #hb_position_t output parameter."]
 #[doc = ""]
 pub type hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
+#[doc = " hb_font_get_glyph_kerning_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @first_glyph: The glyph ID of the first glyph in the glyph pair"]
+#[doc = " @second_glyph: The glyph ID of the second glyph in the glyph pair"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " This method should retrieve the kerning-adjustment value for a glyph-pair in"]
+#[doc = " the specified font, for horizontal text segments."]
+#[doc = ""]
 pub type hb_font_get_glyph_kerning_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         font: *mut hb_font_t,
@@ -2064,13 +2709,27 @@ pub type hb_font_get_glyph_kerning_func_t = ::std::option::Option<
         user_data: *mut ::std::os::raw::c_void,
     ) -> hb_position_t,
 >;
+#[doc = " hb_font_get_glyph_h_kerning_func_t:"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
+#[doc = ""]
+#[doc = " This method should retrieve the kerning-adjustment value for a glyph-pair in"]
+#[doc = " the specified font, for horizontal text segments."]
+#[doc = ""]
 pub type hb_font_get_glyph_h_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 #[doc = " hb_font_get_glyph_extents_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @extents: (out): The #hb_glyph_extents_t retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the extents for a specified glyph. Extents must be"]
 #[doc = " returned in an #hb_glyph_extents output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_glyph_extents_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -2082,12 +2741,21 @@ pub type hb_font_get_glyph_extents_func_t = ::std::option::Option<
     ) -> hb_bool_t,
 >;
 #[doc = " hb_font_get_glyph_contour_point_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @point_index: The contour-point index to query"]
+#[doc = " @x: (out): The X value retrieved for the contour point"]
+#[doc = " @y: (out): The Y value retrieved for the contour point"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the (X,Y) coordinates (in font units) for a"]
 #[doc = " specified contour point in a glyph. Each coordinate must be returned as"]
 #[doc = " an #hb_position_t output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_glyph_contour_point_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -2101,11 +2769,19 @@ pub type hb_font_get_glyph_contour_point_func_t = ::std::option::Option<
     ) -> hb_bool_t,
 >;
 #[doc = " hb_font_get_glyph_name_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @name: (out) (array length=size): Name string retrieved for the glyph ID"]
+#[doc = " @size: Length of the glyph-name string retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the glyph name that corresponds to a"]
 #[doc = " glyph ID. The name should be returned in a string output parameter."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_glyph_name_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -2118,11 +2794,19 @@ pub type hb_font_get_glyph_name_func_t = ::std::option::Option<
     ) -> hb_bool_t,
 >;
 #[doc = " hb_font_get_glyph_from_name_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @name: (array length=len): The name string to query"]
+#[doc = " @len: The length of the name queried"]
+#[doc = " @glyph: (out): The glyph ID retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
 #[doc = ""]
 #[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
 #[doc = ""]
 #[doc = " This method should retrieve the glyph ID that corresponds to a glyph-name"]
 #[doc = " string."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
 #[doc = ""]
 pub type hb_font_get_glyph_from_name_func_t = ::std::option::Option<
     unsafe extern "C" fn(
@@ -2134,12 +2818,34 @@ pub type hb_font_get_glyph_from_name_func_t = ::std::option::Option<
         user_data: *mut ::std::os::raw::c_void,
     ) -> hb_bool_t,
 >;
+#[doc = " hb_font_get_glyph_shape_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @glyph: The glyph ID to query"]
+#[doc = " @draw_funcs: The draw functions to send the shape data to"]
+#[doc = " @draw_data: The data accompanying the draw functions"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
+#[doc = ""]
+#[doc = " Since: 4.0.0"]
+#[doc = ""]
+pub type hb_font_get_glyph_shape_func_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        font: *mut hb_font_t,
+        font_data: *mut ::std::os::raw::c_void,
+        glyph: hb_codepoint_t,
+        draw_funcs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+        user_data: *mut ::std::os::raw::c_void,
+    ),
+>;
 extern "C" {
     #[doc = " hb_font_funcs_set_font_h_extents_func:"]
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_font_h_extents_func_t."]
     #[doc = ""]
@@ -2156,7 +2862,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_font_v_extents_func_t."]
     #[doc = ""]
@@ -2173,7 +2879,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_nominal_glyph_func_t."]
     #[doc = ""]
@@ -2190,7 +2896,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_nominal_glyphs_func_t."]
     #[doc = ""]
@@ -2207,7 +2913,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_variation_glyph_func_t."]
     #[doc = ""]
@@ -2224,7 +2930,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_h_advance_func_t."]
     #[doc = ""]
@@ -2241,7 +2947,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_v_advance_func_t."]
     #[doc = ""]
@@ -2258,7 +2964,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_h_advances_func_t."]
     #[doc = ""]
@@ -2275,7 +2981,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_v_advances_func_t."]
     #[doc = ""]
@@ -2292,7 +2998,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_h_origin_func_t."]
     #[doc = ""]
@@ -2309,7 +3015,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_v_origin_func_t."]
     #[doc = ""]
@@ -2323,12 +3029,12 @@ extern "C" {
 }
 extern "C" {
     #[doc = " hb_font_funcs_set_glyph_h_kerning_func:"]
-    #[doc = " @ffuncs: font functions."]
-    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified):"]
-    #[doc = " @user_data:"]
-    #[doc = " @destroy:"]
+    #[doc = " @ffuncs: A font-function structure"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
-    #[doc = ""]
+    #[doc = " Sets the implementation function for #hb_font_get_glyph_h_kerning_func_t."]
     #[doc = ""]
     #[doc = " Since: 0.9.2"]
     pub fn hb_font_funcs_set_glyph_h_kerning_func(
@@ -2343,7 +3049,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_extents_func_t."]
     #[doc = ""]
@@ -2360,7 +3066,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_contour_point_func_t."]
     #[doc = ""]
@@ -2377,7 +3083,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_name_func_t."]
     #[doc = ""]
@@ -2394,7 +3100,7 @@ extern "C" {
     #[doc = " @ffuncs: A font-function structure"]
     #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
     #[doc = " @user_data: Data to pass to @func"]
-    #[doc = " @destroy: (optional): The function to call when @user_data is not needed anymore"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
     #[doc = " Sets the implementation function for #hb_font_get_glyph_from_name_func_t."]
     #[doc = ""]
@@ -2402,6 +3108,23 @@ extern "C" {
     pub fn hb_font_funcs_set_glyph_from_name_func(
         ffuncs: *mut hb_font_funcs_t,
         func: hb_font_get_glyph_from_name_func_t,
+        user_data: *mut ::std::os::raw::c_void,
+        destroy: hb_destroy_func_t,
+    );
+}
+extern "C" {
+    #[doc = " hb_font_funcs_set_glyph_shape_func:"]
+    #[doc = " @ffuncs: A font-function structure"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets the implementation function for #hb_font_get_glyph_shape_func_t."]
+    #[doc = ""]
+    #[doc = " Since: 4.0.0"]
+    pub fn hb_font_funcs_set_glyph_shape_func(
+        ffuncs: *mut hb_font_funcs_t,
+        func: hb_font_get_glyph_shape_func_t,
         user_data: *mut ::std::os::raw::c_void,
         destroy: hb_destroy_func_t,
     );
@@ -2529,6 +3252,14 @@ extern "C" {
         len: ::std::os::raw::c_int,
         glyph: *mut hb_codepoint_t,
     ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_font_get_glyph_shape(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+        dfuncs: *mut hb_draw_funcs_t,
+        draw_data: *mut ::std::os::raw::c_void,
+    );
 }
 extern "C" {
     pub fn hb_font_get_glyph(
@@ -2734,6 +3465,12 @@ extern "C" {
     pub fn hb_font_get_ptem(font: *mut hb_font_t) -> ::std::os::raw::c_float;
 }
 extern "C" {
+    pub fn hb_font_set_synthetic_slant(font: *mut hb_font_t, slant: ::std::os::raw::c_float);
+}
+extern "C" {
+    pub fn hb_font_get_synthetic_slant(font: *mut hb_font_t) -> ::std::os::raw::c_float;
+}
+extern "C" {
     pub fn hb_font_set_variations(
         font: *mut hb_font_t,
         variations: *const hb_variation_t,
@@ -2746,6 +3483,12 @@ extern "C" {
         coords: *const ::std::os::raw::c_float,
         coords_length: ::std::os::raw::c_uint,
     );
+}
+extern "C" {
+    pub fn hb_font_get_var_coords_design(
+        font: *mut hb_font_t,
+        length: *mut ::std::os::raw::c_uint,
+    ) -> *const ::std::os::raw::c_float;
 }
 extern "C" {
     pub fn hb_font_set_var_coords_normalized(
@@ -2856,24 +3599,81 @@ fn bindgen_test_layout_hb_glyph_info_t() {
     );
 }
 pub const HB_GLYPH_FLAG_UNSAFE_TO_BREAK: hb_glyph_flags_t = 1;
-pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 1;
+pub const HB_GLYPH_FLAG_UNSAFE_TO_CONCAT: hb_glyph_flags_t = 2;
+pub const HB_GLYPH_FLAG_DEFINED: hb_glyph_flags_t = 3;
 #[doc = " hb_glyph_flags_t:"]
 #[doc = " @HB_GLYPH_FLAG_UNSAFE_TO_BREAK: Indicates that if input text is broken at the"]
 #[doc = " \t\t\t\t   beginning of the cluster this glyph is part of,"]
 #[doc = " \t\t\t\t   then both sides need to be re-shaped, as the"]
-#[doc = " \t\t\t\t   result might be different.  On the flip side,"]
-#[doc = " \t\t\t\t   it means that when this flag is not present,"]
-#[doc = " \t\t\t\t   then it's safe to break the glyph-run at the"]
-#[doc = " \t\t\t\t   beginning of this cluster, and the two sides"]
-#[doc = " \t\t\t\t   represent the exact same result one would get"]
-#[doc = " \t\t\t\t   if breaking input text at the beginning of"]
-#[doc = " \t\t\t\t   this cluster and shaping the two sides"]
-#[doc = " \t\t\t\t   separately.  This can be used to optimize"]
-#[doc = " \t\t\t\t   paragraph layout, by avoiding re-shaping"]
-#[doc = " \t\t\t\t   of each line after line-breaking, or limiting"]
-#[doc = " \t\t\t\t   the reshaping to a small piece around the"]
-#[doc = " \t\t\t\t   breaking point only."]
+#[doc = " \t\t\t\t   result might be different."]
+#[doc = " \t\t\t\t   On the flip side, it means that when this"]
+#[doc = " \t\t\t\t   flag is not present, then it is safe to break"]
+#[doc = " \t\t\t\t   the glyph-run at the beginning of this"]
+#[doc = " \t\t\t\t   cluster, and the two sides will represent the"]
+#[doc = " \t\t\t\t   exact same result one would get if breaking"]
+#[doc = " \t\t\t\t   input text at the beginning of this cluster"]
+#[doc = " \t\t\t\t   and shaping the two sides separately."]
+#[doc = " \t\t\t\t   This can be used to optimize paragraph"]
+#[doc = " \t\t\t\t   layout, by avoiding re-shaping of each line"]
+#[doc = " \t\t\t\t   after line-breaking."]
+#[doc = " @HB_GLYPH_FLAG_UNSAFE_TO_CONCAT: Indicates that if input text is changed on one"]
+#[doc = " \t\t\t\t   side of the beginning of the cluster this glyph"]
+#[doc = " \t\t\t\t   is part of, then the shaping results for the"]
+#[doc = " \t\t\t\t   other side might change."]
+#[doc = " \t\t\t\t   Note that the absence of this flag will NOT by"]
+#[doc = " \t\t\t\t   itself mean that it IS safe to concat text."]
+#[doc = " \t\t\t\t   Only two pieces of text both of which clear of"]
+#[doc = " \t\t\t\t   this flag can be concatenated safely."]
+#[doc = " \t\t\t\t   This can be used to optimize paragraph"]
+#[doc = " \t\t\t\t   layout, by avoiding re-shaping of each line"]
+#[doc = " \t\t\t\t   after line-breaking, by limiting the"]
+#[doc = " \t\t\t\t   reshaping to a small piece around the"]
+#[doc = " \t\t\t\t   breaking positin only, even if the breaking"]
+#[doc = " \t\t\t\t   position carries the"]
+#[doc = " \t\t\t\t   #HB_GLYPH_FLAG_UNSAFE_TO_BREAK or when"]
+#[doc = " \t\t\t\t   hyphenation or other text transformation"]
+#[doc = " \t\t\t\t   happens at line-break position, in the following"]
+#[doc = " \t\t\t\t   way:"]
+#[doc = " \t\t\t\t   1. Iterate back from the line-break position"]
+#[doc = " \t\t\t\t   until the first cluster start position that is"]
+#[doc = " \t\t\t\t   NOT unsafe-to-concat, 2. shape the segment from"]
+#[doc = " \t\t\t\t   there till the end of line, 3. check whether the"]
+#[doc = " \t\t\t\t   resulting glyph-run also is clear of the"]
+#[doc = " \t\t\t\t   unsafe-to-concat at its start-of-text position;"]
+#[doc = " \t\t\t\t   if it is, just splice it into place and the line"]
+#[doc = " \t\t\t\t   is shaped; If not, move on to a position further"]
+#[doc = " \t\t\t\t   back that is clear of unsafe-to-concat and retry"]
+#[doc = " \t\t\t\t   from there, and repeat."]
+#[doc = " \t\t\t\t   At the start of next line a similar algorithm can"]
+#[doc = " \t\t\t\t   be implemented. That is: 1. Iterate forward from"]
+#[doc = " \t\t\t\t   the line-break position until the first cluster"]
+#[doc = " \t\t\t\t   start position that is NOT unsafe-to-concat, 2."]
+#[doc = " \t\t\t\t   shape the segment from beginning of the line to"]
+#[doc = " \t\t\t\t   that position, 3. check whether the resulting"]
+#[doc = " \t\t\t\t   glyph-run also is clear of the unsafe-to-concat"]
+#[doc = " \t\t\t\t   at its end-of-text position; if it is, just splice"]
+#[doc = " \t\t\t\t   it into place and the beginning is shaped; If not,"]
+#[doc = " \t\t\t\t   move on to a position further forward that is clear"]
+#[doc = " \t\t\t\t   of unsafe-to-concat and retry up to there, and repeat."]
+#[doc = " \t\t\t\t   A slight complication will arise in the"]
+#[doc = " \t\t\t\t   implementation of the algorithm above,"]
+#[doc = " \t\t\t\t   because while our buffer API has a way to"]
+#[doc = " \t\t\t\t   return flags for position corresponding to"]
+#[doc = " \t\t\t\t   start-of-text, there is currently no position"]
+#[doc = " \t\t\t\t   corresponding to end-of-text.  This limitation"]
+#[doc = " \t\t\t\t   can be alleviated by shaping more text than needed"]
+#[doc = " \t\t\t\t   and looking for unsafe-to-concat flag within text"]
+#[doc = " \t\t\t\t   clusters."]
+#[doc = " \t\t\t\t   The #HB_GLYPH_FLAG_UNSAFE_TO_BREAK flag will"]
+#[doc = " \t\t\t\t   always imply this flag."]
+#[doc = "\t\t\t\t   To use this flag, you must enable the buffer flag"]
+#[doc = "\t\t\t\t   @HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT during"]
+#[doc = "\t\t\t\t   shaping, otherwise the buffer flag will not be"]
+#[doc = "\t\t\t\t   reliably produced."]
+#[doc = " \t\t\t\t   Since: 4.0.0"]
 #[doc = " @HB_GLYPH_FLAG_DEFINED: All the currently defined flags."]
+#[doc = ""]
+#[doc = " Flags for #hb_glyph_info_t."]
 #[doc = ""]
 #[doc = " Since: 1.5.0"]
 pub type hb_glyph_flags_t = ::std::os::raw::c_uint;
@@ -3063,6 +3863,12 @@ extern "C" {
 extern "C" {
     pub fn hb_segment_properties_hash(p: *const hb_segment_properties_t) -> ::std::os::raw::c_uint;
 }
+extern "C" {
+    pub fn hb_segment_properties_overlay(
+        p: *mut hb_segment_properties_t,
+        src: *const hb_segment_properties_t,
+    );
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_buffer_t {
@@ -3070,6 +3876,12 @@ pub struct hb_buffer_t {
 }
 extern "C" {
     pub fn hb_buffer_create() -> *mut hb_buffer_t;
+}
+extern "C" {
+    pub fn hb_buffer_create_similar(src: *const hb_buffer_t) -> *mut hb_buffer_t;
+}
+extern "C" {
+    pub fn hb_buffer_reset(buffer: *mut hb_buffer_t);
 }
 extern "C" {
     pub fn hb_buffer_get_empty() -> *mut hb_buffer_t;
@@ -3102,6 +3914,8 @@ pub const HB_BUFFER_CONTENT_TYPE_GLYPHS: hb_buffer_content_type_t = 2;
 #[doc = " @HB_BUFFER_CONTENT_TYPE_INVALID: Initial value for new buffer."]
 #[doc = " @HB_BUFFER_CONTENT_TYPE_UNICODE: The buffer contains input characters (before shaping)."]
 #[doc = " @HB_BUFFER_CONTENT_TYPE_GLYPHS: The buffer contains output glyphs (after shaping)."]
+#[doc = ""]
+#[doc = " The type of #hb_buffer_t contents."]
 pub type hb_buffer_content_type_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_buffer_set_content_type(
@@ -3160,6 +3974,8 @@ pub const HB_BUFFER_FLAG_EOT: hb_buffer_flags_t = 2;
 pub const HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 4;
 pub const HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES: hb_buffer_flags_t = 8;
 pub const HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
+pub const HB_BUFFER_FLAG_VERIFY: hb_buffer_flags_t = 32;
+pub const HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT: hb_buffer_flags_t = 64;
 #[doc = " hb_buffer_flags_t:"]
 #[doc = " @HB_BUFFER_FLAG_DEFAULT: the default buffer flag."]
 #[doc = " @HB_BUFFER_FLAG_BOT: flag indicating that special handling of the beginning"]
@@ -3186,7 +4002,21 @@ pub const HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE: hb_buffer_flags_t = 16;
 #[doc = " @HB_BUFFER_FLAG_DO_NOT_INSERT_DOTTED_CIRCLE:"]
 #[doc = "                      flag indicating that a dotted circle should"]
 #[doc = "                      not be inserted in the rendering of incorrect"]
-#[doc = "                      character sequences (such at <0905 093E>). Since: 2.4"]
+#[doc = "                      character sequences (such at <0905 093E>). Since: 2.4.0"]
+#[doc = " @HB_BUFFER_FLAG_VERIFY:"]
+#[doc = "                      flag indicating that the hb_shape() call and its variants"]
+#[doc = "                      should perform various verification processes on the results"]
+#[doc = "                      of the shaping operation on the buffer.  If the verification"]
+#[doc = "                      fails, then either a buffer message is sent, if a message"]
+#[doc = "                      handler is installed on the buffer, or a message is written"]
+#[doc = "                      to standard error.  In either case, the shaping result might"]
+#[doc = "                      be modified to show the failed output. Since: 3.4.0"]
+#[doc = " @HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT:"]
+#[doc = "                      flag indicating that the @HB_GLYPH_FLAG_UNSAFE_TO_CONCAT"]
+#[doc = "                      glyph-flag should be produced by the shaper. By default"]
+#[doc = "                      it will not be produced since it incurs a cost. Since: 4.0.0"]
+#[doc = ""]
+#[doc = " Flags for #hb_buffer_t."]
 #[doc = ""]
 #[doc = " Since: 0.9.20"]
 pub type hb_buffer_flags_t = ::std::os::raw::c_uint;
@@ -3252,7 +4082,10 @@ extern "C" {
     pub fn hb_buffer_get_invisible_glyph(buffer: *mut hb_buffer_t) -> hb_codepoint_t;
 }
 extern "C" {
-    pub fn hb_buffer_reset(buffer: *mut hb_buffer_t);
+    pub fn hb_buffer_set_not_found_glyph(buffer: *mut hb_buffer_t, not_found: hb_codepoint_t);
+}
+extern "C" {
+    pub fn hb_buffer_get_not_found_glyph(buffer: *mut hb_buffer_t) -> hb_codepoint_t;
 }
 extern "C" {
     pub fn hb_buffer_clear_contents(buffer: *mut hb_buffer_t);
@@ -3334,7 +4167,7 @@ extern "C" {
 extern "C" {
     pub fn hb_buffer_append(
         buffer: *mut hb_buffer_t,
-        source: *mut hb_buffer_t,
+        source: *const hb_buffer_t,
         start: ::std::os::raw::c_uint,
         end: ::std::os::raw::c_uint,
     );
@@ -3480,6 +4313,33 @@ pub const HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: hb_buffer_diff_flags_t = 16;
 pub const HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: hb_buffer_diff_flags_t = 32;
 pub const HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: hb_buffer_diff_flags_t = 64;
 pub const HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: hb_buffer_diff_flags_t = 128;
+#[doc = " hb_buffer_diff_flags_t:"]
+#[doc = " @HB_BUFFER_DIFF_FLAG_EQUAL: equal buffers."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_CONTENT_TYPE_MISMATCH: buffers with different"]
+#[doc = "     #hb_buffer_content_type_t."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_LENGTH_MISMATCH: buffers with differing length."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_NOTDEF_PRESENT: `.notdef` glyph is present in the"]
+#[doc = "     reference buffer."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_DOTTED_CIRCLE_PRESENT: dotted circle glyph is present"]
+#[doc = "     in the reference buffer."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_CODEPOINT_MISMATCH: difference in #hb_glyph_info_t.codepoint"]
+#[doc = " @HB_BUFFER_DIFF_FLAG_CLUSTER_MISMATCH: difference in #hb_glyph_info_t.cluster"]
+#[doc = " @HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH: difference in #hb_glyph_flags_t."]
+#[doc = " @HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH: difference in #hb_glyph_position_t."]
+#[doc = ""]
+#[doc = " Flags from comparing two #hb_buffer_t's."]
+#[doc = ""]
+#[doc = " Buffer with different #hb_buffer_content_type_t cannot be meaningfully"]
+#[doc = " compared in any further detail."]
+#[doc = ""]
+#[doc = " For buffers with differing length, the per-glyph comparison is not"]
+#[doc = " attempted, though we do still scan reference buffer for dotted circle and"]
+#[doc = " `.notdef` glyphs."]
+#[doc = ""]
+#[doc = " If the buffers have the same length, we compare them glyph-by-glyph and"]
+#[doc = " report which aspect(s) of the glyph info/position are different."]
+#[doc = ""]
+#[doc = " Since: 1.5.0"]
 pub type hb_buffer_diff_flags_t = ::std::os::raw::c_uint;
 extern "C" {
     pub fn hb_buffer_diff(
@@ -3489,6 +4349,21 @@ extern "C" {
         position_fuzz: ::std::os::raw::c_uint,
     ) -> hb_buffer_diff_flags_t;
 }
+#[doc = " hb_buffer_message_func_t:"]
+#[doc = " @buffer: An #hb_buffer_t to work upon"]
+#[doc = " @font: The #hb_font_t the @buffer is shaped with"]
+#[doc = " @message: %NULL-terminated message passed to the function"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A callback method for #hb_buffer_t. The method gets called with the"]
+#[doc = " #hb_buffer_t it was set on, the #hb_font_t the buffer is shaped with and a"]
+#[doc = " message describing what step of the shaping process will be performed."]
+#[doc = " Returning %false from this method will skip this shaping step and move to"]
+#[doc = " the next one."]
+#[doc = ""]
+#[doc = " Return value: %true to perform the shaping step, %false to skip it."]
+#[doc = ""]
+#[doc = " Since: 1.1.3"]
 pub type hb_buffer_message_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         buffer: *mut hb_buffer_t,
@@ -3505,6 +4380,22 @@ extern "C" {
         destroy: hb_destroy_func_t,
     );
 }
+#[doc = " hb_font_get_glyph_func_t:"]
+#[doc = " @font: #hb_font_t to work upon"]
+#[doc = " @font_data: @font user data pointer"]
+#[doc = " @unicode: The Unicode code point to query"]
+#[doc = " @variation_selector: The  variation-selector code point to query"]
+#[doc = " @glyph: (out): The glyph ID retrieved"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
+#[doc = ""]
+#[doc = " This method should retrieve the glyph ID for a specified Unicode code point"]
+#[doc = " font, with an optional variation selector."]
+#[doc = ""]
+#[doc = " Return value: %true if data found, %false otherwise"]
+#[doc = " Deprecated: 1.2.3"]
+#[doc = ""]
 pub type hb_font_get_glyph_func_t = ::std::option::Option<
     unsafe extern "C" fn(
         font: *mut hb_font_t,
@@ -3523,10 +4414,12 @@ extern "C" {
         destroy: hb_destroy_func_t,
     );
 }
-extern "C" {
-    pub fn hb_set_invert(set: *mut hb_set_t);
-}
 #[doc = " hb_unicode_eastasian_width_func_t:"]
+#[doc = " @ufuncs: A Unicode-functions structure"]
+#[doc = " @unicode: The code point to query"]
+#[doc = " @user_data: User data pointer passed by the caller"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_unicode_funcs_t structure."]
 #[doc = ""]
 #[doc = " Deprecated: 2.0.0"]
 pub type hb_unicode_eastasian_width_func_t = ::std::option::Option<
@@ -3538,12 +4431,12 @@ pub type hb_unicode_eastasian_width_func_t = ::std::option::Option<
 >;
 extern "C" {
     #[doc = " hb_unicode_funcs_set_eastasian_width_func:"]
-    #[doc = " @ufuncs: a Unicode function structure"]
-    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified):"]
-    #[doc = " @user_data:"]
-    #[doc = " @destroy:"]
+    #[doc = " @ufuncs: a Unicode-function structure"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
-    #[doc = ""]
+    #[doc = " Sets the implementation function for #hb_unicode_eastasian_width_func_t."]
     #[doc = ""]
     #[doc = " Since: 0.9.2"]
     #[doc = " Deprecated: 2.0.0"]
@@ -3556,6 +4449,10 @@ extern "C" {
 }
 extern "C" {
     #[doc = " hb_unicode_eastasian_width:"]
+    #[doc = " @ufuncs: a Unicode-function structure"]
+    #[doc = " @unicode: The code point to query"]
+    #[doc = ""]
+    #[doc = " Don't use. Not used by HarfBuzz."]
     #[doc = ""]
     #[doc = " Since: 0.9.2"]
     #[doc = " Deprecated: 2.0.0"]
@@ -3567,7 +4464,7 @@ extern "C" {
 #[doc = " hb_unicode_decompose_compatibility_func_t:"]
 #[doc = " @ufuncs: a Unicode function structure"]
 #[doc = " @u: codepoint to decompose"]
-#[doc = " @decomposed: address of codepoint array (of length %HB_UNICODE_MAX_DECOMPOSITION_LEN) to write decomposition into"]
+#[doc = " @decomposed: address of codepoint array (of length #HB_UNICODE_MAX_DECOMPOSITION_LEN) to write decomposition into"]
 #[doc = " @user_data: user data pointer as passed to hb_unicode_funcs_set_decompose_compatibility_func()"]
 #[doc = ""]
 #[doc = " Fully decompose @u to its Unicode compatibility decomposition. The codepoints of the decomposition will be written to @decomposed."]
@@ -3575,7 +4472,7 @@ extern "C" {
 #[doc = ""]
 #[doc = " If @u has no compatibility decomposition, zero should be returned."]
 #[doc = ""]
-#[doc = " The Unicode standard guarantees that a buffer of length %HB_UNICODE_MAX_DECOMPOSITION_LEN codepoints will always be sufficient for any"]
+#[doc = " The Unicode standard guarantees that a buffer of length #HB_UNICODE_MAX_DECOMPOSITION_LEN codepoints will always be sufficient for any"]
 #[doc = " compatibility decomposition plus an terminating value of 0.  Consequently, @decompose must be allocated by the caller to be at least this length.  Implementations"]
 #[doc = " of this function type must ensure that they do not write past the provided array."]
 #[doc = ""]
@@ -3592,10 +4489,12 @@ pub type hb_unicode_decompose_compatibility_func_t = ::std::option::Option<
 >;
 extern "C" {
     #[doc = " hb_unicode_funcs_set_decompose_compatibility_func:"]
-    #[doc = " @ufuncs: a Unicode function structure"]
-    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified):"]
-    #[doc = " @user_data:"]
-    #[doc = " @destroy:"]
+    #[doc = " @ufuncs: A Unicode-functions structure"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
+    #[doc = ""]
+    #[doc = " Sets the implementation function for #hb_unicode_decompose_compatibility_func_t."]
     #[doc = ""]
     #[doc = ""]
     #[doc = ""]
@@ -3615,15 +4514,22 @@ extern "C" {
         decomposed: *mut hb_codepoint_t,
     ) -> ::std::os::raw::c_uint;
 }
+#[doc = " hb_font_get_glyph_v_kerning_func_t:"]
+#[doc = ""]
+#[doc = " A virtual method for the #hb_font_funcs_t of an #hb_font_t object."]
+#[doc = ""]
+#[doc = " This method should retrieve the kerning-adjustment value for a glyph-pair in"]
+#[doc = " the specified font, for vertical text segments."]
+#[doc = ""]
 pub type hb_font_get_glyph_v_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 extern "C" {
     #[doc = " hb_font_funcs_set_glyph_v_kerning_func:"]
-    #[doc = " @ffuncs: font functions."]
-    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified):"]
-    #[doc = " @user_data:"]
-    #[doc = " @destroy:"]
+    #[doc = " @ffuncs: A font-function structure"]
+    #[doc = " @func: (closure user_data) (destroy destroy) (scope notified): The callback function to assign"]
+    #[doc = " @user_data: Data to pass to @func"]
+    #[doc = " @destroy: (nullable): The function to call when @user_data is not needed anymore"]
     #[doc = ""]
-    #[doc = ""]
+    #[doc = " Sets the implementation function for #hb_font_get_glyph_v_kerning_func_t."]
     #[doc = ""]
     #[doc = " Since: 0.9.2"]
     #[doc = " Deprecated: 2.0.0"]
@@ -3800,6 +4706,41 @@ extern "C" {
         shape_plan: *mut hb_shape_plan_t,
     ) -> *const ::std::os::raw::c_char;
 }
+pub const HB_STYLE_TAG_ITALIC: hb_style_tag_t = 1769234796;
+pub const HB_STYLE_TAG_OPTICAL_SIZE: hb_style_tag_t = 1869640570;
+pub const HB_STYLE_TAG_SLANT_ANGLE: hb_style_tag_t = 1936486004;
+pub const HB_STYLE_TAG_SLANT_RATIO: hb_style_tag_t = 1399615092;
+pub const HB_STYLE_TAG_WIDTH: hb_style_tag_t = 2003072104;
+pub const HB_STYLE_TAG_WEIGHT: hb_style_tag_t = 2003265652;
+pub const _HB_STYLE_TAG_MAX_VALUE: hb_style_tag_t = 2147483647;
+#[doc = " hb_style_tag_t:"]
+#[doc = " @HB_STYLE_TAG_ITALIC: Used to vary between non-italic and italic."]
+#[doc = " A value of 0 can be interpreted as \"Roman\" (non-italic); a value of 1 can"]
+#[doc = " be interpreted as (fully) italic."]
+#[doc = " @HB_STYLE_TAG_OPTICAL_SIZE: Used to vary design to suit different text sizes."]
+#[doc = " Non-zero. Values can be interpreted as text size, in points."]
+#[doc = " @HB_STYLE_TAG_SLANT_ANGLE: Used to vary between upright and slanted text. Values"]
+#[doc = " must be greater than -90 and less than +90. Values can be interpreted as"]
+#[doc = " the angle, in counter-clockwise degrees, of oblique slant from whatever the"]
+#[doc = " designer considers to be upright for that font design. Typical right-leaning"]
+#[doc = " Italic fonts have a negative slant angle (typically around -12)"]
+#[doc = " @HB_STYLE_TAG_SLANT_RATIO: same as @HB_STYLE_TAG_SLANT_ANGLE expression as ratio."]
+#[doc = " Typical right-leaning Italic fonts have a positive slant ratio (typically around 0.2)"]
+#[doc = " @HB_STYLE_TAG_WIDTH: Used to vary width of text from narrower to wider."]
+#[doc = " Non-zero. Values can be interpreted as a percentage of whatever the font"]
+#[doc = " designer considers “normal width” for that font design."]
+#[doc = " @HB_STYLE_TAG_WEIGHT: Used to vary stroke thicknesses or other design details"]
+#[doc = " to give variation from lighter to blacker. Values can be interpreted in direct"]
+#[doc = " comparison to values for usWeightClass in the OS/2 table,"]
+#[doc = " or the CSS font-weight property."]
+#[doc = ""]
+#[doc = " Defined by [OpenType Design-Variation Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg)."]
+#[doc = ""]
+#[doc = " Since: 3.0.0"]
+pub type hb_style_tag_t = ::std::os::raw::c_uint;
+extern "C" {
+    pub fn hb_style_get_value(font: *mut hb_font_t, style_tag: hb_style_tag_t) -> ::std::os::raw::c_float;
+}
 extern "C" {
     pub fn hb_version(
         major: *mut ::std::os::raw::c_uint,
@@ -3937,6 +4878,8 @@ pub const HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: hb_ot_color_pale
 #[doc = " @HB_OT_COLOR_PALETTE_FLAG_USABLE_WITH_DARK_BACKGROUND: Flag indicating that the color"]
 #[doc = "   palette is appropriate to use when displaying the font on a dark background such as black."]
 #[doc = ""]
+#[doc = " Flags that describe the properties of color palette."]
+#[doc = ""]
 #[doc = " Since: 2.1.0"]
 pub type hb_ot_color_palette_flags_t = ::std::os::raw::c_uint;
 extern "C" {
@@ -3958,6 +4901,8 @@ extern "C" {
     pub fn hb_ot_color_has_layers(face: *mut hb_face_t) -> hb_bool_t;
 }
 #[doc = " hb_ot_color_layer_t:"]
+#[doc = " @glyph: the glyph ID of the layer"]
+#[doc = " @color_index: the palette color index of the layer"]
 #[doc = ""]
 #[doc = " Pairs of glyph and color index."]
 #[doc = ""]
@@ -4057,6 +5002,13 @@ extern "C" {
     pub fn hb_ot_tag_from_language(language: hb_language_t) -> hb_tag_t;
 }
 #[doc = " hb_ot_var_axis_t:"]
+#[doc = " @tag: axis tag"]
+#[doc = " @name_id: axis name identifier"]
+#[doc = " @min_value: minimum value of the axis"]
+#[doc = " @default_value: default value of the axis"]
+#[doc = " @max_value: maximum value of the axis"]
+#[doc = ""]
+#[doc = " Use #hb_ot_var_axis_info_t instead."]
 #[doc = ""]
 #[doc = " Since: 1.4.2"]
 #[doc = " Deprecated: 2.2.0"]
@@ -4476,10 +5428,12 @@ pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_BOTTOM_OR_LEFT: hb_ot_layout_basel
     1768121954;
 pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
     1768121972;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_CENTRAL: hb_ot_layout_baseline_tag_t = 1231251043;
 pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: hb_ot_layout_baseline_tag_t =
     1768187247;
 pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: hb_ot_layout_baseline_tag_t =
     1768191088;
+pub const HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_CENTRAL: hb_ot_layout_baseline_tag_t = 1231315813;
 pub const HB_OT_LAYOUT_BASELINE_TAG_MATH: hb_ot_layout_baseline_tag_t = 1835103336;
 pub const _HB_OT_LAYOUT_BASELINE_TAG_MAX_VALUE: hb_ot_layout_baseline_tag_t = 2147483647;
 #[doc = " hb_ot_layout_baseline_tag_t:"]
@@ -4494,17 +5448,24 @@ pub const _HB_OT_LAYOUT_BASELINE_TAG_MAX_VALUE: hb_ot_layout_baseline_tag_t = 21
 #[doc = " if the direction is horizontal or vertical, respectively."]
 #[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_TOP_OR_RIGHT: Ideographic character face top or right edge,"]
 #[doc = " if the direction is horizontal or vertical, respectively."]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_FACE_CENTRAL: The center of the ideographic character face. Since: 4.0.0"]
 #[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_BOTTOM_OR_LEFT: Ideographic em-box bottom or left edge,"]
 #[doc = " if the direction is horizontal or vertical, respectively."]
 #[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_TOP_OR_RIGHT: Ideographic em-box top or right edge baseline,"]
+#[doc = " @HB_OT_LAYOUT_BASELINE_TAG_IDEO_EMBOX_CENTRAL: The center of the ideographic em-box. Since: 4.0.0"]
 #[doc = " if the direction is horizontal or vertical, respectively."]
 #[doc = " @HB_OT_LAYOUT_BASELINE_TAG_MATH: The baseline about which mathematical characters are centered."]
 #[doc = " In vertical writing mode when mathematical characters rotated 90 degrees clockwise, are centered."]
 #[doc = ""]
-#[doc = " Baseline tags from https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags"]
+#[doc = " Baseline tags from [Baseline Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/baselinetags) registry."]
 #[doc = ""]
 #[doc = " Since: 2.6.0"]
 pub type hb_ot_layout_baseline_tag_t = ::std::os::raw::c_uint;
+extern "C" {
+    pub fn hb_ot_layout_get_horizontal_baseline_tag_for_script(
+        script: hb_script_t,
+    ) -> hb_ot_layout_baseline_tag_t;
+}
 extern "C" {
     pub fn hb_ot_layout_get_baseline(
         font: *mut hb_font_t,
@@ -4514,6 +5475,16 @@ extern "C" {
         language_tag: hb_tag_t,
         coord: *mut hb_position_t,
     ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_layout_get_baseline_with_fallback(
+        font: *mut hb_font_t,
+        baseline_tag: hb_ot_layout_baseline_tag_t,
+        direction: hb_direction_t,
+        script_tag: hb_tag_t,
+        language_tag: hb_tag_t,
+        coord: *mut hb_position_t,
+    );
 }
 pub const HB_OT_MATH_CONSTANT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 0;
 pub const HB_OT_MATH_CONSTANT_SCRIPT_SCRIPT_PERCENT_SCALE_DOWN: hb_ot_math_constant_t = 1;
@@ -4573,9 +5544,66 @@ pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_BEFORE_DEGREE: hb_ot_math_constant_t 
 pub const HB_OT_MATH_CONSTANT_RADICAL_KERN_AFTER_DEGREE: hb_ot_math_constant_t = 54;
 pub const HB_OT_MATH_CONSTANT_RADICAL_DEGREE_BOTTOM_RAISE_PERCENT: hb_ot_math_constant_t = 55;
 #[doc = " hb_ot_math_constant_t:"]
+#[doc = " @HB_OT_MATH_CONSTANT_SCRIPT_PERCENT_SCALE_DOWN: scriptPercentScaleDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_SCRIPT_SCRIPT_PERCENT_SCALE_DOWN: scriptScriptPercentScaleDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_DELIMITED_SUB_FORMULA_MIN_HEIGHT: delimitedSubFormulaMinHeight"]
+#[doc = " @HB_OT_MATH_CONSTANT_DISPLAY_OPERATOR_MIN_HEIGHT: displayOperatorMinHeight"]
+#[doc = " @HB_OT_MATH_CONSTANT_MATH_LEADING: mathLeading"]
+#[doc = " @HB_OT_MATH_CONSTANT_AXIS_HEIGHT: axisHeight"]
+#[doc = " @HB_OT_MATH_CONSTANT_ACCENT_BASE_HEIGHT: accentBaseHeight"]
+#[doc = " @HB_OT_MATH_CONSTANT_FLATTENED_ACCENT_BASE_HEIGHT: flattenedAccentBaseHeight"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUBSCRIPT_SHIFT_DOWN: subscriptShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUBSCRIPT_TOP_MAX: subscriptTopMax"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUBSCRIPT_BASELINE_DROP_MIN: subscriptBaselineDropMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP: superscriptShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUPERSCRIPT_SHIFT_UP_CRAMPED: superscriptShiftUpCramped"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MIN: superscriptBottomMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUPERSCRIPT_BASELINE_DROP_MAX: superscriptBaselineDropMax"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUB_SUPERSCRIPT_GAP_MIN: subSuperscriptGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_SUPERSCRIPT_BOTTOM_MAX_WITH_SUBSCRIPT: superscriptBottomMaxWithSubscript"]
+#[doc = " @HB_OT_MATH_CONSTANT_SPACE_AFTER_SCRIPT: spaceAfterScript"]
+#[doc = " @HB_OT_MATH_CONSTANT_UPPER_LIMIT_GAP_MIN: upperLimitGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_UPPER_LIMIT_BASELINE_RISE_MIN: upperLimitBaselineRiseMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_LOWER_LIMIT_GAP_MIN: lowerLimitGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_LOWER_LIMIT_BASELINE_DROP_MIN: lowerLimitBaselineDropMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_TOP_SHIFT_UP: stackTopShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_TOP_DISPLAY_STYLE_SHIFT_UP: stackTopDisplayStyleShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_BOTTOM_SHIFT_DOWN: stackBottomShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_BOTTOM_DISPLAY_STYLE_SHIFT_DOWN: stackBottomDisplayStyleShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_GAP_MIN: stackGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_STACK_DISPLAY_STYLE_GAP_MIN: stackDisplayStyleGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_STRETCH_STACK_TOP_SHIFT_UP: stretchStackTopShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_STRETCH_STACK_BOTTOM_SHIFT_DOWN: stretchStackBottomShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_ABOVE_MIN: stretchStackGapAboveMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_STRETCH_STACK_GAP_BELOW_MIN: stretchStackGapBelowMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_SHIFT_UP: fractionNumeratorShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_DISPLAY_STYLE_SHIFT_UP: fractionNumeratorDisplayStyleShiftUp"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_SHIFT_DOWN: fractionDenominatorShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_DISPLAY_STYLE_SHIFT_DOWN: fractionDenominatorDisplayStyleShiftDown"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_NUMERATOR_GAP_MIN: fractionNumeratorGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_NUM_DISPLAY_STYLE_GAP_MIN: fractionNumDisplayStyleGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_RULE_THICKNESS: fractionRuleThickness"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_DENOMINATOR_GAP_MIN: fractionDenominatorGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_FRACTION_DENOM_DISPLAY_STYLE_GAP_MIN: fractionDenomDisplayStyleGapMin"]
+#[doc = " @HB_OT_MATH_CONSTANT_SKEWED_FRACTION_HORIZONTAL_GAP: skewedFractionHorizontalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_SKEWED_FRACTION_VERTICAL_GAP: skewedFractionVerticalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_OVERBAR_VERTICAL_GAP: overbarVerticalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_OVERBAR_RULE_THICKNESS: overbarRuleThickness"]
+#[doc = " @HB_OT_MATH_CONSTANT_OVERBAR_EXTRA_ASCENDER: overbarExtraAscender"]
+#[doc = " @HB_OT_MATH_CONSTANT_UNDERBAR_VERTICAL_GAP: underbarVerticalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_UNDERBAR_RULE_THICKNESS: underbarRuleThickness"]
+#[doc = " @HB_OT_MATH_CONSTANT_UNDERBAR_EXTRA_DESCENDER: underbarExtraDescender"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_VERTICAL_GAP: radicalVerticalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_DISPLAY_STYLE_VERTICAL_GAP: radicalDisplayStyleVerticalGap"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_RULE_THICKNESS: radicalRuleThickness"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_EXTRA_ASCENDER: radicalExtraAscender"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_KERN_BEFORE_DEGREE: radicalKernBeforeDegree"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_KERN_AFTER_DEGREE: radicalKernAfterDegree"]
+#[doc = " @HB_OT_MATH_CONSTANT_RADICAL_DEGREE_BOTTOM_RAISE_PERCENT: radicalDegreeBottomRaisePercent"]
 #[doc = ""]
-#[doc = " The 'MATH' table constants specified at"]
-#[doc = " https://docs.microsoft.com/en-us/typography/opentype/spec/math"]
+#[doc = " The 'MATH' table constants, refer to"]
+#[doc = " [OpenType documentation](https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table)"]
+#[doc = " For more explanations."]
 #[doc = ""]
 #[doc = " Since: 1.3.3"]
 pub type hb_ot_math_constant_t = ::std::os::raw::c_uint;
@@ -4584,12 +5612,67 @@ pub const HB_OT_MATH_KERN_TOP_LEFT: hb_ot_math_kern_t = 1;
 pub const HB_OT_MATH_KERN_BOTTOM_RIGHT: hb_ot_math_kern_t = 2;
 pub const HB_OT_MATH_KERN_BOTTOM_LEFT: hb_ot_math_kern_t = 3;
 #[doc = " hb_ot_math_kern_t:"]
+#[doc = " @HB_OT_MATH_KERN_TOP_RIGHT: The top right corner of the glyph."]
+#[doc = " @HB_OT_MATH_KERN_TOP_LEFT: The top left corner of the glyph."]
+#[doc = " @HB_OT_MATH_KERN_BOTTOM_RIGHT: The bottom right corner of the glyph."]
+#[doc = " @HB_OT_MATH_KERN_BOTTOM_LEFT: The bottom left corner of the glyph."]
 #[doc = ""]
 #[doc = " The math kerning-table types defined for the four corners"]
 #[doc = " of a glyph."]
 #[doc = ""]
 #[doc = " Since: 1.3.3"]
 pub type hb_ot_math_kern_t = ::std::os::raw::c_uint;
+#[doc = " hb_ot_math_kern_entry_t:"]
+#[doc = " @max_correction_height: The maximum height at which this entry should be used"]
+#[doc = " @kern_value: The kern value of the entry"]
+#[doc = ""]
+#[doc = " Data type to hold math kerning (cut-in) information for a glyph."]
+#[doc = ""]
+#[doc = " Since: 3.4.0"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct hb_ot_math_kern_entry_t {
+    pub max_correction_height: hb_position_t,
+    pub kern_value: hb_position_t,
+}
+#[test]
+fn bindgen_test_layout_hb_ot_math_kern_entry_t() {
+    assert_eq!(
+        ::std::mem::size_of::<hb_ot_math_kern_entry_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(hb_ot_math_kern_entry_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<hb_ot_math_kern_entry_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(hb_ot_math_kern_entry_t))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_kern_entry_t>())).max_correction_height as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_kern_entry_t),
+            "::",
+            stringify!(max_correction_height)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<hb_ot_math_kern_entry_t>())).kern_value as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(hb_ot_math_kern_entry_t),
+            "::",
+            stringify!(kern_value)
+        )
+    );
+}
 #[doc = " hb_ot_math_glyph_variant_t:"]
 #[doc = " @glyph: The glyph index of the variant"]
 #[doc = " @advance: The advance width of the variant"]
@@ -4642,6 +5725,8 @@ fn bindgen_test_layout_hb_ot_math_glyph_variant_t() {
 }
 pub const HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER: hb_ot_math_glyph_part_flags_t = 1;
 #[doc = " hb_ot_math_glyph_part_flags_t:"]
+#[doc = " @HB_OT_MATH_GLYPH_PART_FLAG_EXTENDER: This is an extender glyph part that"]
+#[doc = " can be repeated to reach the desired length."]
 #[doc = ""]
 #[doc = " Flags for math glyph parts."]
 #[doc = ""]
@@ -4775,6 +5860,16 @@ extern "C" {
     ) -> hb_position_t;
 }
 extern "C" {
+    pub fn hb_ot_math_get_glyph_kernings(
+        font: *mut hb_font_t,
+        glyph: hb_codepoint_t,
+        kern: hb_ot_math_kern_t,
+        start_offset: ::std::os::raw::c_uint,
+        entries_count: *mut ::std::os::raw::c_uint,
+        kern_entries: *mut hb_ot_math_kern_entry_t,
+    ) -> ::std::os::raw::c_uint;
+}
+extern "C" {
     pub fn hb_ot_math_get_glyph_variants(
         font: *mut hb_font_t,
         glyph: hb_codepoint_t,
@@ -4889,7 +5984,8 @@ pub const _HB_OT_METRICS_TAG_MAX_VALUE: hb_ot_metrics_tag_t = 2147483647;
 #[doc = " @HB_OT_METRICS_TAG_UNDERLINE_SIZE: underline size."]
 #[doc = " @HB_OT_METRICS_TAG_UNDERLINE_OFFSET: underline offset."]
 #[doc = ""]
-#[doc = " From https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags"]
+#[doc = " Metric tags corresponding to [MVAR Value"]
+#[doc = " Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags)"]
 #[doc = ""]
 #[doc = " Since: 2.6.0"]
 pub type hb_ot_metrics_tag_t = ::std::os::raw::c_uint;
@@ -4899,6 +5995,13 @@ extern "C" {
         metrics_tag: hb_ot_metrics_tag_t,
         position: *mut hb_position_t,
     ) -> hb_bool_t;
+}
+extern "C" {
+    pub fn hb_ot_metrics_get_position_with_fallback(
+        font: *mut hb_font_t,
+        metrics_tag: hb_ot_metrics_tag_t,
+        position: *mut hb_position_t,
+    );
 }
 extern "C" {
     pub fn hb_ot_metrics_get_variation(
@@ -4945,6 +6048,8 @@ pub const _HB_OT_VAR_AXIS_FLAG_MAX_VALUE: hb_ot_var_axis_flags_t = 2147483647;
 #[doc = " hb_ot_var_axis_flags_t:"]
 #[doc = " @HB_OT_VAR_AXIS_FLAG_HIDDEN: The axis should not be exposed directly in user interfaces."]
 #[doc = ""]
+#[doc = " Flags for #hb_ot_var_axis_info_t."]
+#[doc = ""]
 #[doc = " Since: 2.2.0"]
 pub type hb_ot_var_axis_flags_t = ::std::os::raw::c_uint;
 #[doc = " hb_ot_var_axis_info_t:"]
@@ -4952,7 +6057,7 @@ pub type hb_ot_var_axis_flags_t = ::std::os::raw::c_uint;
 #[doc = " @tag: The #hb_tag_t tag identifying the design variation of the axis"]
 #[doc = " @name_id: The `name` table Name ID that provides display names for the axis"]
 #[doc = " @flags: The #hb_ot_var_axis_flags_t flags for the axis"]
-#[doc = " @min_value: The mininum value on the variation axis that the font covers"]
+#[doc = " @min_value: The minimum value on the variation axis that the font covers"]
 #[doc = " @default_value: The position on the variation axis corresponding to the font's defaults"]
 #[doc = " @max_value: The maximum value on the variation axis that the font covers"]
 #[doc = ""]
@@ -5174,47 +6279,47 @@ pub const HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE: hb_aat_layout_featu
 pub const _HB_AAT_LAYOUT_FEATURE_TYPE_MAX_VALUE: hb_aat_layout_feature_type_t = 2147483647;
 #[doc = " hb_aat_layout_feature_type_t:"]
 #[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_INVALID: Initial, unset feature type"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LIGATURES:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CURISVE_CONNECTION:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LETTER_CASE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_SUBSTITUTION:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LINGUISTIC_REARRANGEMENT:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_SPACING:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_DIACRITICS_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_POSITION:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_FRACTIONS:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TYPOGRAPHIC_EXTRAS:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_MATHEMATICAL_EXTRAS:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ORNAMENT_SETS_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_ALTERNATIVES:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_DESIGN_COMPLEXITY_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_STYLE_OPTIONS:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_SHAPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_CASE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TEXT_SPACING:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TRANSLITERATION:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ANNOTATION_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_KANA_SPACING_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_SPACING_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_UNICODE_DECOMPOSITION_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_RUBY_KANA:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_SYMBOL_ALTERNATIVES_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_ALTERNATIVES_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_VERTICAL_ROMAN_PLACEMENT_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ITALIC_CJK_ROMAN:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CASE_SENSITIVE_LAYOUT:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ALTERNATE_KANA:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_STYLISTIC_ALTERNATIVES:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CONTEXTUAL_ALTERNATIVES:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LOWER_CASE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_UPPER_CASE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE:"]
-#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE:"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC: [All Typographic Features](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type0)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LIGATURES: [Ligatures](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type1)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CURISVE_CONNECTION: [Cursive Connection](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type2)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LETTER_CASE: [Letter Case](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type3)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_SUBSTITUTION: [Vertical Substitution](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type4)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LINGUISTIC_REARRANGEMENT: [Linguistic Rearrangement](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type5)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_SPACING: [Number Spacing](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type6)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE: [Smart Swash](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type8)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_DIACRITICS_TYPE: [Diacritics](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type9)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_VERTICAL_POSITION: [Vertical Position](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type10)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_FRACTIONS: [Fractions](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type11)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE: [Overlapping Characters](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type13)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TYPOGRAPHIC_EXTRAS: [Typographic Extras](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type14)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_MATHEMATICAL_EXTRAS: [Mathematical Extras](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type15)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ORNAMENT_SETS_TYPE: [Ornament Sets](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type16)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_ALTERNATIVES: [Character Alternatives](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type17)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_DESIGN_COMPLEXITY_TYPE: [Design Complexity](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type18)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_STYLE_OPTIONS: [Style Options](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type19)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_SHAPE: [Character Shape](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type20)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_NUMBER_CASE: [Number Case](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type21)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TEXT_SPACING: [Text Spacing](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type22)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_TRANSLITERATION: [Transliteration](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type23)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ANNOTATION_TYPE: [Annotation](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type24)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_KANA_SPACING_TYPE: [Kana Spacing](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type25)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_SPACING_TYPE: [Ideographic Spacing](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type26)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_UNICODE_DECOMPOSITION_TYPE: [Unicode Decomposition](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type27)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_RUBY_KANA: [Ruby Kana](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type28)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_SYMBOL_ALTERNATIVES_TYPE: [CJK Symbol Alternatives](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type29)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_IDEOGRAPHIC_ALTERNATIVES_TYPE: [Ideographic Alternatives](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type30)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_VERTICAL_ROMAN_PLACEMENT_TYPE: [CJK Vertical Roman Placement](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type31)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ITALIC_CJK_ROMAN: [Italic CJK Roman](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type32)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CASE_SENSITIVE_LAYOUT: [Case Sensitive Layout](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type33)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_ALTERNATE_KANA: [Alternate Kana](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type34)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_STYLISTIC_ALTERNATIVES: [Stylistic Alternatives](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type35)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CONTEXTUAL_ALTERNATIVES: [Contextual Alternatives](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type36)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LOWER_CASE: [Lower Case](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type37)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_UPPER_CASE: [Upper Case](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type38)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE: [Language Tag](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type39)"]
+#[doc = " @HB_AAT_LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE: [CJK Roman Spacing](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html#Type103)"]
 #[doc = ""]
-#[doc = " The possible feature types defined for AAT shaping."]
+#[doc = " The possible feature types defined for AAT shaping, from Apple [Font Feature Registry](https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html)."]
 #[doc = ""]
 #[doc = " Since: 2.2.0"]
 pub type hb_aat_layout_feature_type_t = ::std::os::raw::c_uint;
@@ -5868,6 +6973,12 @@ extern "C" {
         feature_type: hb_aat_layout_feature_type_t,
     ) -> hb_ot_name_id_t;
 }
+#[doc = " hb_aat_layout_feature_selector_info_t:"]
+#[doc = " @name_id: The selector's name identifier"]
+#[doc = " @enable: The value to turn the selector on"]
+#[doc = " @disable: The value to turn the selector off"]
+#[doc = ""]
+#[doc = " Structure representing a setting for an #hb_aat_layout_feature_type_t."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct hb_aat_layout_feature_selector_info_t {

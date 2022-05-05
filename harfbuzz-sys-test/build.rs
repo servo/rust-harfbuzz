@@ -36,10 +36,12 @@ fn main() {
             || s == "hb_buffer_t"
             || s == "hb_map_t"
             || s == "hb_shape_plan_t"
+            || s == "hb_ot_math_kern_entry_t"
+            || s == "hb_draw_funcs_t"
     });
 
     // FIXME: I'm not sure why these functions must be skipped.
-    cfg.skip_fn(|s| s == "hb_buffer_append");
+    cfg.skip_fn(|s| s == "hb_buffer_append" || s == "hb_ot_math_get_glyph_kernings");
 
     // Generate the tests, passing the path to the `*-sys` library as well as
     // the module to generate.
