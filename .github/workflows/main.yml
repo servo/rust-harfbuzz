@@ -83,6 +83,35 @@ jobs:
       - name: ctest tests
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
+  linux-ci-bindgen:
+    name: stable, Linux, system pkg-config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Install harfbuzz
+        run: sudo apt install libharfbuzz-dev -y
+
+      - name: Cargo package
+        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --features bindgen
+
+      - name: Cargo build
+        run: cargo build --all --features bindgen
+
+      - name: Cargo test
+        run: cargo test --all --features bindgen
+        env:
+          RUST_BACKTRACE: 1
+
+      - name: ctest tests
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --features bindgen
+
   mac-ci-shared:
     name: stable, macOS, shared library
     runs-on: macos-latest
