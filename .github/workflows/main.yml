@@ -8,12 +8,14 @@ on:
 
 jobs:
   linux-ci-static:
-    name: stable, Linux, shared library
+    name: stable, Linux, static library, no pkg-config
     runs-on: ubuntu-latest
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
       # build to avoid contaminating the source tree.
@@ -21,17 +23,43 @@ jobs:
         env:
           PREFIX: /usr/local
         run: |
-          make -f harfbuzz-sys/makefile.touch touch HARFBUZZ=harfbuzz-sys/harfbuzz
-          HARFDIR=`pwd`
-          pushd $RUNNER_TEMP
-          $HARFDIR/harfbuzz-sys/harfbuzz/configure --prefix=$PREFIX --without-icu --without-freetype --without-glib
-          make
-          sudo make install
-          # Make harfbuzz  available for linking and confirm expected location
-          TEMP_PATH="$(pkg-config --variable=libdir harfbuzz)"
+          sudo pip install meson
+          sudo apt update
+          sudo apt install ninja-build -y
+          meson $RUNNER_TEMP/build harfbuzz-sys/harfbuzz --prefix $PREFIX --libdir lib --default-library static -Dicu=disabled -Dfreetype=disabled -Dglib=disabled
+          meson compile -C $RUNNER_TEMP/build
+          sudo meson install -C $RUNNER_TEMP/build
+          TEMP_PATH="$PREFIX/lib"
           echo "LD_LIBRARY_PATH=$TEMP_PATH" >> $GITHUB_ENV
           [[ "$TEMP_PATH" == "$PREFIX/lib" ]] || exit 1
-          popd
+
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Cargo build
+        run: cargo build --all --no-default-features
+
+      - name: Cargo test
+        run: cargo test --all --no-default-features
+        env:
+          RUST_BACKTRACE: 1
+
+      - name: ctest tests
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --no-default-features
+
+  linux-ci-static-buildrs:
+    name: stable, Linux, build by build.rs, static library, no pkg-config
+    runs-on: ubuntu-latest
+    env:
+      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -52,12 +80,14 @@ jobs:
         run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
   linux-ci-shared:
-    name: stable, Linux, static linking, no pkg-config
+    name: stable, Linux, shared linking, no pkg-config
     runs-on: ubuntu-latest
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -66,25 +96,39 @@ jobs:
           toolchain: stable
           override: true
 
+      - name: Build harfbuzz
+        env:
+          PREFIX: /usr/local
+        run: |
+          sudo pip install meson
+          sudo apt update
+          sudo apt install ninja-build -y
+          meson $RUNNER_TEMP/build harfbuzz-sys/harfbuzz --prefix $PREFIX --libdir lib --default-library shared -Dicu=disabled -Dfreetype=disabled -Dglib=disabled
+          meson compile -C $RUNNER_TEMP/build
+          sudo meson install -C $RUNNER_TEMP/build
+          TEMP_PATH="$PREFIX/lib"
+          echo "LD_LIBRARY_PATH=$TEMP_PATH" >> $GITHUB_ENV
+          [[ "$TEMP_PATH" == "$PREFIX/lib" ]] || exit 1
+
       # Test the harfbuzz-sys package build to check the 'exclude's. We should
       # do this where the embedded harfbuzz is statically linked, but we don't
       # need to do it for every environment.
       - name: Cargo package
-        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml
+        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --no-default-features
 
       - name: Cargo build
-        run: cargo build --all
+        run: cargo build --all --no-default-features
 
       - name: Cargo test
-        run: cargo test --all
+        run: cargo test --all --no-default-features
         env:
           RUST_BACKTRACE: 1
 
       - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --no-default-features
 
   linux-ci-bindgen:
-    name: stable, Linux, system pkg-config
+    name: stable, Linux, system pkg-config and bindgen
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -96,21 +140,23 @@ jobs:
           toolchain: stable
           override: true
       - name: Install harfbuzz
-        run: sudo apt install libharfbuzz-dev -y
+        run: |
+          sudo apt update
+          sudo apt install libharfbuzz-dev -y
 
       - name: Cargo package
-        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --features bindgen
+        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --no-default-features --features bindgen
 
       - name: Cargo build
-        run: cargo build --all --features bindgen
+        run: cargo build --all --no-default-features --features bindgen
 
       - name: Cargo test
-        run: cargo test --all --features bindgen
+        run: cargo test --all --no-default-features --features bindgen
         env:
           RUST_BACKTRACE: 1
 
       - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --features bindgen
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --no-default-features --features bindgen
 
   mac-ci-shared:
     name: stable, macOS, shared library
@@ -118,6 +164,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -156,19 +204,16 @@ jobs:
       - name: install harfbuzz latest
         run: brew install harfbuzz
 
-      - name: harfbuzz version
-        run: pkg-config --modversion harfbuzz
-
       - name: Cargo build
-        run: cargo build --all --features bindgen
+        run: cargo build --all --no-default-features --features bindgen
 
       - name: Cargo test
-        run: cargo test --all --features bindgen
+        run: cargo test --all --no-default-features --features bindgen
         env:
           RUST_BACKTRACE: 1
 
       - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --features bindgen
+        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml --no-default-features --features bindgen
 
   windows-ci:
     name: Windows
@@ -176,6 +221,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -199,8 +246,10 @@ jobs:
     name: homu build finished
     runs-on: ubuntu-latest
     needs:
-      - "linux-ci-static"
+      - "linux-ci-bindgen"
       - "linux-ci-shared"
+      - "linux-ci-static"
+      - "linux-ci-static-buildrs"
       - "mac-ci-shared"
       - "mac-ci-shared-bindgen-latest"
       - "windows-ci"

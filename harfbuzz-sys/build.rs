@@ -81,25 +81,6 @@ fn main() {
 
     let target = env::var("TARGET").unwrap();
 
-    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        match pkg_config::Config::new()
-            .range_version("4.2".."5")
-            .probe("harfbuzz")
-        {
-            Ok(_lib) => {
-                #[cfg(feature = "bindgen")]
-                {
-                    bindings::gen(&_lib.include_paths);
-                }
-                return;
-            }
-            Err(_) => {
-                println!("cargo:warning=harfbuzz >= 4.2 not found, building from source.");
-            }
-        }
-    }
-
     let mut cfg = cc::Build::new();
     cfg.cpp(true)
         .flag_if_supported("-std=c++11") // for unix
@@ -132,4 +113,27 @@ fn main() {
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
-fn main() {}
+fn main() {
+    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
+    if target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
+        #[allow(unused_mut)]
+        let mut pkgcfg = pkg_config::Config::new();
+
+        // allow other version of harfbuzz when bindgen enabled.
+        #[cfg(not(feature = "bindgen"))]
+        pkgcfg.range_version("4.2".."5");
+
+        match pkgcfg.probe("harfbuzz") {
+            Ok(_lib) => {
+                #[cfg(feature = "bindgen")]
+                {
+                    bindings::gen(&_lib.include_paths);
+                }
+                return;
+            }
+            Err(_) => {
+                // println!("cargo:warning=harfbuzz >= 4.2 not found by pkgconfig.");
+            }
+        }
+    }
+}

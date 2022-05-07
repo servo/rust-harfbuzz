@@ -26,7 +26,7 @@ build = "build.rs"
 cc = { version = "1", optional = true }
 regex = { version = "1", optional = true }
 bindgen_ = { version = "0.59", optional = true, package = "bindgen" }
-pkg-config = { version = "0.3", optional = true }
+pkg-config = { version = "0.3" }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
 core-graphics = "0.22"
@@ -39,5 +39,5 @@ freetype = { version = "0.7", default-features = false }
 [features]
 default = ["build-native-harfbuzz", "build-native-freetype"]
 bindgen = ["bindgen_", "regex"]
-build-native-harfbuzz = ["cc", "pkg-config"]
+build-native-harfbuzz = ["cc"]
 build-native-freetype = ["freetype/freetype-sys"]

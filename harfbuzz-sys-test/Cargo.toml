@@ -6,7 +6,7 @@ edition = "2018"
 build = "build.rs"
 
 [dependencies]
-harfbuzz-sys = { path = "../harfbuzz-sys" }
+harfbuzz-sys = { path = "../harfbuzz-sys", default-features = false }
 libc = "0.2"
 
 [build-dependencies]
@@ -15,3 +15,6 @@ ctest = { package = "ctest2", version = "0.4" }
 
 [features]
 bindgen = ["harfbuzz-sys/bindgen"]
+default = ["build-native-harfbuzz", "build-native-freetype"]
+build-native-harfbuzz = ["harfbuzz-sys/build-native-harfbuzz"]
+build-native-freetype = ["harfbuzz-sys/build-native-freetype"]
