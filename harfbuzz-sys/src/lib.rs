@@ -13,16 +13,11 @@ extern "C" {
 #[allow(non_snake_case)]
 #[allow(non_upper_case_globals)]
 #[allow(clippy::unreadable_literal)]
-#[cfg(not(feature = "bindgen"))]
-mod bindings;
-
-#[allow(non_camel_case_types)]
-#[allow(non_snake_case)]
-#[allow(non_upper_case_globals)]
-#[allow(clippy::unreadable_literal)]
-#[cfg(feature = "bindgen")]
 mod bindings {
+    #[cfg(feature = "bindgen")]
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+    #[cfg(not(feature = "bindgen"))]
+    include!("bindings.rs");
 }
 
 pub use bindings::*;

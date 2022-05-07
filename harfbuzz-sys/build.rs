@@ -2,8 +2,10 @@
 extern crate bindgen_;
 #[cfg(feature = "build-native-harfbuzz")]
 extern crate cc;
-#[cfg(feature = "build-native-harfbuzz")]
 extern crate pkg_config;
+
+use std::env;
+use std::path::{Path, PathBuf};
 
 #[cfg(feature = "bindgen")]
 mod bindings {
@@ -11,6 +13,11 @@ mod bindings {
     use std::fs;
     use std::io::prelude::*;
     use std::path::{Path, PathBuf};
+
+    static WRAPPER: &'static str = "#include \"hb.h\"
+#include \"hb-ot.h\"
+#include \"hb-aat.h\"
+";
 
     struct BindingsWriter {
         file: fs::File,
@@ -58,10 +65,7 @@ mod bindings {
             .prepend_enum_name(false)
             .allowlist_type("hb_.*")
             .allowlist_function("hb_.*")
-            .header_contents(
-                "wrapper.h",
-                "#include \"hb.h\"\n#include \"hb-ot.h\"\n#include \"hb-aat.h\"",
-            );
+            .header_contents("wrapper.h", WRAPPER);
 
         for include_dir in include_dirs {
             builder = builder
@@ -70,15 +74,13 @@ mod bindings {
         }
 
         let writer = BindingsWriter::new(&out_dir.join("bindings.rs"));
+        println!("cargo:bindings={}", out_dir.join("bindings.rs").display());
         builder.generate().unwrap().write(Box::new(writer)).unwrap();
     }
 }
 
 #[cfg(feature = "build-native-harfbuzz")]
 fn main() {
-    use std::env;
-    use std::path::PathBuf;
-
     let target = env::var("TARGET").unwrap();
 
     let mut cfg = cc::Build::new();
@@ -104,36 +106,44 @@ fn main() {
     let out_dir = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
     let include_dir = out_dir.join("harfbuzz").join("src");
 
-    #[cfg(feature = "bindgen")]
-    {
-        bindings::gen(&[include_dir.clone()]);
-    }
-
     println!("cargo:include={}", include_dir.display());
 }
 
 #[cfg(not(feature = "build-native-harfbuzz"))]
 fn main() {
-    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        #[allow(unused_mut)]
-        let mut pkgcfg = pkg_config::Config::new();
+    #[allow(unused_mut)]
+    let mut pkgcfg = pkg_config::Config::new();
 
-        // allow other version of harfbuzz when bindgen enabled.
-        #[cfg(not(feature = "bindgen"))]
-        pkgcfg.range_version("4.2".."5");
+    // allow other version of harfbuzz when bindgen enabled.
+    #[cfg(not(feature = "bindgen"))]
+    pkgcfg.range_version("4.2".."5");
 
-        match pkgcfg.probe("harfbuzz") {
-            Ok(_lib) => {
-                #[cfg(feature = "bindgen")]
-                {
-                    bindings::gen(&_lib.include_paths);
-                }
-                return;
-            }
-            Err(_) => {
-                // println!("cargo:warning=harfbuzz >= 4.2 not found by pkgconfig.");
-            }
+    match pkgcfg.probe("harfbuzz") {
+        Ok(_lib) => {
+            #[cfg(feature = "bindgen")]
+            bindings::gen(&_lib.include_paths);
+            return;
+        }
+        Err(_) => {}
+    }
+
+    if let Ok(libdir) = env::var("HARFBUZZ_LIB_DIR") {
+        println!("cargo:rustc-link-search=native={}", &libdir);
+        if is_static_available("harfbuzz", &PathBuf::from(&libdir)) {
+            println!("cargo:rustc-link-lib=static={}", "harfbuzz");
+        } else {
+            println!("cargo:rustc-link-lib={}", "harfbuzz");
         }
     }
+    if let Ok(include_dir) = env::var("HARFBUZZ_INCLUDE_DIR") {
+        #[cfg(feature = "bindgen")]
+        bindings::gen(&[PathBuf::from(&include_dir)]);
+    }
+}
+
+#[allow(dead_code)]
+/// System libraries should only be linked dynamically
+fn is_static_available(name: &str, dir: &Path) -> bool {
+    let libname = format!("lib{}.a", name);
+    dir.join(&libname).exists()
 }
