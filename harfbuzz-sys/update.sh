@@ -1,7 +1,7 @@
 set -ex
 cd harfbuzz && \
 git fetch -t && \
-git checkout 4.2.1 && \
+git checkout 4.3.0 && \
 cd - && \
 bindgen --no-prepend-enum-name \
     --whitelist-function hb_.\* \
