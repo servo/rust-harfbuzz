@@ -9,7 +9,7 @@ fn main() {
     #[allow(unused_mut)]
     let mut pkgconfig = pkg_config::Config::new();
     #[cfg(not(feature = "bindgen"))]
-    pkgconfig.range_version("4.2".."5");
+    pkgconfig.range_version("7.1".."8");
 
     // Get the include paths from harfbuzz-sys or pkg-config.
     if let Some(path) = &env::var_os("DEP_HARFBUZZ_INCLUDE") {

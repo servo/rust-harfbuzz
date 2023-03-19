@@ -116,7 +116,7 @@ fn main() {
 
     // allow other version of harfbuzz when bindgen enabled.
     #[cfg(not(feature = "bindgen"))]
-    pkgcfg.range_version("4.2".."5");
+    pkgcfg.range_version("7.1".."8");
 
     match pkgcfg.probe("harfbuzz") {
         Ok(_lib) => {
