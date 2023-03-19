@@ -33,11 +33,20 @@ core-graphics = "0.22"
 core-text = "19"
 foreign-types = "0.3"
 
+[target.'cfg(target_family = "windows")'.dependencies.winapi]
+version = "0.3"
+features = ["dwrite"]
+
 [target.'cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))'.dependencies]
 freetype = { version = "0.7", default-features = false }
+
+[dependencies.freetype]
+version = "0.7"
+default-features = false
+optional = true
 
 [features]
 default = ["build-native-harfbuzz", "build-native-freetype"]
 bindgen = ["bindgen_", "regex"]
 build-native-harfbuzz = ["cc"]
-build-native-freetype = ["freetype/freetype-sys"]
+build-native-freetype = ["freetype", "freetype/freetype-sys"]

@@ -97,6 +97,10 @@ fn main() {
         cfg.define("HAVE_CORETEXT", "1");
     }
 
+    if target.contains("windows") {
+        cfg.define("HAVE_DIRECTWRITE", "1");
+    }
+
     if target.contains("windows-gnu") {
         cfg.flag("-Wa,-mbig-obj");
     }
