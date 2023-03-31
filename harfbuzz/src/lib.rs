@@ -31,3 +31,13 @@ pub use self::language::Language;
 
 mod blob;
 pub use self::blob::Blob;
+
+mod unicode_funcs;
+pub use self::unicode_funcs::CombiningClassFunc;
+pub use self::unicode_funcs::ComposeFunc;
+pub use self::unicode_funcs::DecomposeFunc;
+pub use self::unicode_funcs::GeneralCategoryFunc;
+pub use self::unicode_funcs::MirroringFunc;
+pub use self::unicode_funcs::ScriptFunc;
+pub use self::unicode_funcs::UnicodeFuncs;
+pub use self::unicode_funcs::UnicodeFuncsBuilder;

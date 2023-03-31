@@ -10,6 +10,8 @@
 use std;
 use sys;
 
+use crate::UnicodeFuncs;
+
 use {Direction, Language};
 
 /// A series of Unicode characters.
@@ -118,6 +120,13 @@ impl Buffer {
         let mut b = Buffer::default();
         b.reserve(capacity);
         b
+    }
+
+    /// Sets a [`UnicodeFuncs`] instance to use with this buffer.
+    ///
+    /// Note: `unicode_funcs` is reference counted by HarfBuzz.
+    pub fn set_unicode_funcs(&mut self, unicode_funcs: &UnicodeFuncs) {
+        unsafe { sys::hb_buffer_set_unicode_funcs(self.raw, unicode_funcs.as_ptr()) }
     }
 
     /// Add UTF-8 encoded text to the buffer.
