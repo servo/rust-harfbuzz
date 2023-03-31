@@ -8,6 +8,7 @@
 // except according to those terms.
 
 use crate::sys::*;
+use crate::Error;
 use std::ffi::c_void;
 
 /// An object to map from code points to general category properties.
@@ -17,23 +18,11 @@ pub trait GeneralCategoryFunc {
     fn general_category(&self, ch: u32) -> hb_unicode_general_category_t;
 }
 
-impl GeneralCategoryFunc for () {
-    fn general_category(&self, ch: u32) -> hb_unicode_general_category_t {
-        panic!("Stub implementation of GeneralCategoryFunc")
-    }
-}
-
 /// An object to map from code points to combining classes.
 pub trait CombiningClassFunc {
     /// Given a code point, return the combining class as a
     /// [`hb_unicode_combining_class_t`].
     fn combining_class(&self, ch: u32) -> hb_unicode_combining_class_t;
-}
-
-impl CombiningClassFunc for () {
-    fn combining_class(&self, ch: u32) -> hb_unicode_combining_class_t {
-        panic!("Stub implementation of CombiningClassFunc")
-    }
 }
 
 /// An object to map from code points to mirrored code points.
@@ -42,22 +31,10 @@ pub trait MirroringFunc {
     fn mirroring(&self, ch: u32) -> u32;
 }
 
-impl MirroringFunc for () {
-    fn mirroring(&self, ch: u32) -> u32 {
-        panic!("Stub implementation of MirroringFunc")
-    }
-}
-
 /// An object to map from code points to script names.
 pub trait ScriptFunc {
     /// Given a code point, return the script as a 4-byte script name.
     fn script(&self, ch: u32) -> [u8; 4];
-}
-
-impl ScriptFunc for () {
-    fn script(&self, ch: u32) -> [u8; 4] {
-        panic!("Stub implementation of ScriptFunc")
-    }
 }
 
 /// An object to compose two characters.
@@ -66,243 +43,244 @@ pub trait ComposeFunc {
     fn compose(&self, a: u32, b: u32) -> Option<u32>;
 }
 
-impl ComposeFunc for () {
-    fn compose(&self, a: u32, b: u32) -> Option<u32> {
-        panic!("Stub implementation of ComposeFunc")
-    }
-}
-
 /// An object to decompose a character.
 pub trait DecomposeFunc {
     /// Given a code point, return the two decomposed code points.
     fn decompose(&self, ab: u32) -> Option<(u32, u32)>;
 }
 
-impl DecomposeFunc for () {
-    fn decompose(&self, ab: u32) -> Option<(u32, u32)> {
-        panic!("Stub implementation of DecomposeFunc")
-    }
-}
-
 /// A builder for [`UnicodeFuncs`].
 ///
 /// If one or more of the functions is not provided, set its type parameter to `()`.
 #[non_exhaustive]
-pub struct UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
-    /// Optional implementation of [`hb_unicode_general_category_func_t`].
-    pub general_category: Option<Box<F0>>,
-    /// Optional implementation of [`hb_unicode_combining_class_func_t`].
-    pub combining_class: Option<Box<F1>>,
-    /// Optional implementation of [`hb_unicode_mirroring_func_t`].
-    pub mirroring: Option<Box<F2>>,
-    /// Optional implementation of [`hb_unicode_script_func_t`].
-    pub script: Option<Box<F3>>,
-    /// Optional implementation of [`hb_unicode_compose_func_t`].
-    pub compose: Option<Box<F4>>,
-    /// Optional implementation of [`hb_unicode_decompose_func_t`].
-    pub decompose: Option<Box<F5>>,
-    /// Parent unicode_funcs_t instance.
-    pub raw_parent: *mut hb_unicode_funcs_t,
+#[derive(Debug)]
+pub struct UnicodeFuncsBuilder {
+    raw: *mut hb_unicode_funcs_t,
 }
 
-impl<F0, F1, F2, F3, F4, F5> UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
+impl UnicodeFuncsBuilder {
     /// Creates a new, empty builder.
-    pub fn new_with_empty_parent() -> Self {
-        Self {
-            general_category: None,
-            combining_class: None,
-            mirroring: None,
-            script: None,
-            compose: None,
-            decompose: None,
-            raw_parent: unsafe { hb_unicode_funcs_get_empty() },
-        }
-    }
-
-    /// Creates a new, empty builder, with the parent set to the HarfBuzz default.
-    pub fn new_with_harfbuzz_default_parent() -> Self {
-        Self {
-            general_category: None,
-            combining_class: None,
-            mirroring: None,
-            script: None,
-            compose: None,
-            decompose: None,
-            raw_parent: unsafe { hb_unicode_funcs_get_default() },
-        }
-    }
-}
-
-impl<F0, F1, F2, F3, F4, F5> UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5>
-where
-    F0: GeneralCategoryFunc,
-    F1: CombiningClassFunc,
-    F2: MirroringFunc,
-    F3: ScriptFunc,
-    F4: ComposeFunc,
-    F5: DecomposeFunc,
-{
-    /// Creates a [`UnicodeFuncs`] based on the fields in this builder.
-    pub fn build(self) -> Result<UnicodeFuncs, ()> {
-        unsafe { self.build_unsafe() }
-    }
-
-    unsafe fn build_unsafe(self) -> Result<UnicodeFuncs, ()> {
+    pub fn new_with_empty_parent() -> Result<Self, Error> {
+        let parent = unsafe { hb_unicode_funcs_get_empty() };
         // The HarfBuzz refcounting convention is that "create"
         // sets refcount to one, not zero.
         // https://harfbuzz.github.io/object-model-lifecycle.html
-        let ufuncs = hb_unicode_funcs_create(self.raw_parent);
-        if ufuncs == self.raw_parent {
-            // return Err(HarfBuzzError::Alloc);
-            return Err(());
+        let ufuncs = unsafe { hb_unicode_funcs_create(parent) };
+        if ufuncs == parent {
+            return Err(Error::Alloc);
         }
+        Ok(Self { raw: ufuncs })
+    }
 
-        if let Some(general_category) = self.general_category {
-            let general_category_ptr: *mut F0 = Box::into_raw(general_category);
-            extern "C" fn impl_general_category<F0: GeneralCategoryFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                unicode: hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_unicode_general_category_t {
-                unsafe { &*(user_data as *mut F0) }.general_category(unicode)
-            }
-            extern "C" fn destroy_general_category<F0>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F0) };
-            }
+    /// Creates a new builder with the parent set to the HarfBuzz default.
+    pub fn new_with_harfbuzz_default_parent() -> Result<Self, Error> {
+        let parent = unsafe { hb_unicode_funcs_get_default() };
+        // The HarfBuzz refcounting convention is that "create"
+        // sets refcount to one, not zero.
+        // https://harfbuzz.github.io/object-model-lifecycle.html
+        let ufuncs = unsafe { hb_unicode_funcs_create(parent) };
+        if ufuncs == parent {
+            return Err(Error::Alloc);
+        }
+        Ok(Self { raw: ufuncs })
+    }
+
+    /// Sets an implementation of [`hb_unicode_general_category_func_t`].
+    pub fn set_general_category_func<F: GeneralCategoryFunc>(&mut self, f: Box<F>) {
+        let general_category_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_general_category<F: GeneralCategoryFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            unicode: hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_unicode_general_category_t {
+            unsafe { &*(user_data as *mut F) }.general_category(unicode)
+        }
+        extern "C" fn destroy_general_category<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_general_category_func(
-                ufuncs,
-                Some(impl_general_category::<F0>),
+                self.raw,
+                Some(impl_general_category::<F>),
                 general_category_ptr as *mut c_void,
-                Some(destroy_general_category::<F0>),
+                Some(destroy_general_category::<F>),
             );
         }
+    }
 
-        if let Some(combining_class) = self.combining_class {
-            let combining_class_ptr: *mut F1 = Box::into_raw(combining_class);
-            extern "C" fn impl_combining_class<F1: CombiningClassFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                unicode: hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_unicode_combining_class_t {
-                unsafe { &*(user_data as *mut F1) }.combining_class(unicode)
-            }
-            extern "C" fn destroy_combining_class<F1>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F1) };
-            }
+    /// Sets an implementation of [`hb_unicode_combining_class_func_t`].
+    pub fn set_combining_class_func<F: CombiningClassFunc>(&mut self, f: Box<F>) {
+        let combining_class_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_combining_class<F: CombiningClassFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            unicode: hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_unicode_combining_class_t {
+            unsafe { &*(user_data as *mut F) }.combining_class(unicode)
+        }
+        extern "C" fn destroy_combining_class<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_combining_class_func(
-                ufuncs,
-                Some(impl_combining_class::<F1>),
+                self.raw,
+                Some(impl_combining_class::<F>),
                 combining_class_ptr as *mut c_void,
-                Some(destroy_combining_class::<F1>),
+                Some(destroy_combining_class::<F>),
             );
         }
+    }
 
-        if let Some(mirroring) = self.mirroring {
-            let mirroring_ptr: *mut F2 = Box::into_raw(mirroring);
-            extern "C" fn impl_mirroring<F2: MirroringFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                unicode: hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_codepoint_t {
-                unsafe { &*(user_data as *mut F2) }.mirroring(unicode)
-            }
-            extern "C" fn destroy_mirroring<F2>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F2) };
-            }
+    /// Sets an implementation of [`hb_unicode_mirroring_func_t`].
+    pub fn set_mirroring_func<F: MirroringFunc>(&mut self, f: Box<F>) {
+        let mirroring_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_mirroring<F: MirroringFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            unicode: hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_codepoint_t {
+            unsafe { &*(user_data as *mut F) }.mirroring(unicode)
+        }
+        extern "C" fn destroy_mirroring<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_mirroring_func(
-                ufuncs,
-                Some(impl_mirroring::<F2>),
+                self.raw,
+                Some(impl_mirroring::<F>),
                 mirroring_ptr as *mut c_void,
-                Some(destroy_mirroring::<F2>),
+                Some(destroy_mirroring::<F>),
             );
         }
+    }
 
-        if let Some(script) = self.script {
-            let script_ptr: *mut F3 = Box::into_raw(script);
-            extern "C" fn impl_script<F3: ScriptFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                unicode: hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_codepoint_t {
-                let code = unsafe { &*(user_data as *mut F3) }.script(unicode);
-                unsafe { hb_script_from_string(code.as_ptr() as *const i8, 4) }
-            }
-            extern "C" fn destroy_script<F3>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F3) };
-            }
+    /// Sets an implementation of [`hb_unicode_script_func_t`].
+    pub fn set_script_func<F: ScriptFunc>(&mut self, f: Box<F>) {
+        let script_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_script<F: ScriptFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            unicode: hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_codepoint_t {
+            let code = unsafe { &*(user_data as *mut F) }.script(unicode);
+            unsafe { hb_script_from_string(code.as_ptr() as *const i8, 4) }
+        }
+        extern "C" fn destroy_script<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_script_func(
-                ufuncs,
-                Some(impl_script::<F3>),
+                self.raw,
+                Some(impl_script::<F>),
                 script_ptr as *mut c_void,
-                Some(destroy_script::<F3>),
+                Some(destroy_script::<F>),
             );
         }
+    }
 
-        if let Some(compose) = self.compose {
-            let compose_ptr: *mut F4 = Box::into_raw(compose);
-            extern "C" fn impl_compose<F4: ComposeFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                a: hb_codepoint_t,
-                b: hb_codepoint_t,
-                ab: *mut hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_bool_t {
-                let result = unsafe { &*(user_data as *mut F4) }.compose(a, b);
-                match result {
-                    Some(ab_x) => {
-                        unsafe { *ab = ab_x };
-                        true as hb_bool_t
-                    }
-                    None => false as hb_bool_t,
+    /// Sets an implementation of [`hb_unicode_compose_func_t`].
+    pub fn set_compose_func<F: ComposeFunc>(&mut self, f: Box<F>) {
+        let compose_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_compose<F: ComposeFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            a: hb_codepoint_t,
+            b: hb_codepoint_t,
+            ab: *mut hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_bool_t {
+            let result = unsafe { &*(user_data as *mut F) }.compose(a, b);
+            match result {
+                Some(ab_x) => {
+                    unsafe { *ab = ab_x };
+                    true as hb_bool_t
                 }
+                None => false as hb_bool_t,
             }
-            extern "C" fn destroy_compose<F4>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F4) };
-            }
+        }
+        extern "C" fn destroy_compose<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_compose_func(
-                ufuncs,
-                Some(impl_compose::<F4>),
+                self.raw,
+                Some(impl_compose::<F>),
                 compose_ptr as *mut c_void,
-                Some(destroy_compose::<F4>),
+                Some(destroy_compose::<F>),
             );
         }
+    }
 
-        if let Some(decompose) = self.decompose {
-            let decompose_ptr: *mut F5 = Box::into_raw(decompose);
-            extern "C" fn impl_decompose<F5: DecomposeFunc>(
-                _ufuncs: *mut hb_unicode_funcs_t,
-                ab: hb_codepoint_t,
-                a: *mut hb_codepoint_t,
-                b: *mut hb_codepoint_t,
-                user_data: *mut c_void,
-            ) -> hb_bool_t {
-                let result = unsafe { &*(user_data as *mut F5) }.decompose(ab);
-                match result {
-                    Some((a_x, b_x)) => {
-                        unsafe { *a = a_x };
-                        unsafe { *b = b_x };
-                        true as hb_bool_t
-                    }
-                    None => false as hb_bool_t,
+    /// Sets an implementation of [`hb_unicode_decompose_func_t`].
+    pub fn set_decompose_func<F: DecomposeFunc>(&mut self, f: Box<F>) {
+        let decompose_ptr: *mut F = Box::into_raw(f);
+        extern "C" fn impl_decompose<F: DecomposeFunc>(
+            _ufuncs: *mut hb_unicode_funcs_t,
+            ab: hb_codepoint_t,
+            a: *mut hb_codepoint_t,
+            b: *mut hb_codepoint_t,
+            user_data: *mut c_void,
+        ) -> hb_bool_t {
+            let result = unsafe { &*(user_data as *mut F) }.decompose(ab);
+            match result {
+                Some((a_x, b_x)) => {
+                    unsafe { *a = a_x };
+                    unsafe { *b = b_x };
+                    true as hb_bool_t
                 }
+                None => false as hb_bool_t,
             }
-            extern "C" fn destroy_decompose<F5>(user_data: *mut c_void) {
-                let _ = unsafe { Box::from_raw(user_data as *mut F5) };
-            }
+        }
+        extern "C" fn destroy_decompose<F>(user_data: *mut c_void) {
+            let _ = unsafe { Box::from_raw(user_data as *mut F) };
+        }
+        unsafe {
             hb_unicode_funcs_set_decompose_func(
-                ufuncs,
-                Some(impl_decompose::<F5>),
+                self.raw,
+                Some(impl_decompose::<F>),
                 decompose_ptr as *mut c_void,
-                Some(destroy_decompose::<F5>),
+                Some(destroy_decompose::<F>),
             );
         }
+    }
 
-        // Compatibility decomposition and East Asian Width lookups
-        // are deprecated, and there's no need to set up the callbacks
-        // for those.
+    /// Creates a [`UnicodeFuncs`] based on this builder.
+    pub fn build(self) -> UnicodeFuncs {
+        let raw = self.raw;
+        unsafe {
+            hb_unicode_funcs_make_immutable(raw);
+        }
+        core::mem::forget(self);
+        // Safety: Ownership is being transferred
+        unsafe { UnicodeFuncs::from_raw(raw) }
+    }
 
-        hb_unicode_funcs_make_immutable(ufuncs);
-        Ok(UnicodeFuncs::from_raw(ufuncs))
+    /// Takes ownership of a `*mut hb_unicode_funcs_t` without incrementing
+    /// the refcount.
+    ///
+    /// # Safety
+    ///
+    /// After the call, the previous owner must not call
+    /// `hb_unicode_funcs_destroy()`, since `UnicodeFuncs` will now
+    /// take care of it.
+    pub unsafe fn from_raw(raw: *mut hb_unicode_funcs_t) -> Self {
+        Self { raw }
+    }
+
+    /// Transfers the ownership of the wrapped pointer to the caller.
+    /// The caller is responsible for calling `hb_unicode_funcs_destroy()`;
+    /// `UnicodeFuncs` will no longer take care of it.
+    pub fn into_raw(self) -> *mut hb_unicode_funcs_t {
+        let ret = self.raw;
+        core::mem::forget(self);
+        ret
+    }
+}
+
+impl Drop for UnicodeFuncsBuilder {
+    fn drop(&mut self) {
+        unsafe {
+            hb_unicode_funcs_destroy(self.raw);
+        }
     }
 }
 
@@ -322,9 +300,9 @@ where
 ///     }
 /// }
 ///
-/// let mut unicode_funcs = UnicodeFuncsBuilder::<_, (), (), (), (), ()>::new_with_empty_parent();
-/// unicode_funcs.general_category = Some(Box::new(GeneralCategoryCalculator));
-/// let unicode_funcs = unicode_funcs.build().unwrap();
+/// let mut unicode_funcs = UnicodeFuncsBuilder::new_with_empty_parent().unwrap();
+/// unicode_funcs.set_general_category_func(Box::new(GeneralCategoryCalculator));
+/// let unicode_funcs = unicode_funcs.build();
 ///
 /// let mut b = Buffer::with("مساء الخير");
 /// b.set_unicode_funcs(&unicode_funcs);
@@ -352,9 +330,9 @@ impl UnicodeFuncs {
     /// Transfers the ownership of the wrapped pointer to the caller.
     /// The caller is responsible for calling `hb_unicode_funcs_destroy()`;
     /// `UnicodeFuncs` will no longer take care of it.
-    pub fn into_raw(funcs: Self) -> *mut hb_unicode_funcs_t {
-        let ret = funcs.raw;
-        core::mem::forget(funcs);
+    pub fn into_raw(self) -> *mut hb_unicode_funcs_t {
+        let ret = self.raw;
+        core::mem::forget(self);
         ret
     }
 

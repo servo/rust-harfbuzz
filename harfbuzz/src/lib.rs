@@ -20,6 +20,14 @@
 
 pub extern crate harfbuzz_sys as sys;
 
+/// An error type for this crate
+#[derive(Debug)]
+pub enum HarfBuzzError {
+    /// Allocation failed within HarfBuzz itself
+    Alloc,
+}
+pub use HarfBuzzError as Error;
+
 mod buffer;
 pub use self::buffer::Buffer;
 
