@@ -19,7 +19,7 @@ pub trait GeneralCategoryFunc {
 
 impl GeneralCategoryFunc for () {
     fn general_category(&self, ch: u32) -> hb_unicode_general_category_t {
-        unreachable!()
+        panic!("Stub implementation of GeneralCategoryFunc")
     }
 }
 
@@ -32,7 +32,7 @@ pub trait CombiningClassFunc {
 
 impl CombiningClassFunc for () {
     fn combining_class(&self, ch: u32) -> hb_unicode_combining_class_t {
-        unreachable!()
+        panic!("Stub implementation of CombiningClassFunc")
     }
 }
 
@@ -44,7 +44,7 @@ pub trait MirroringFunc {
 
 impl MirroringFunc for () {
     fn mirroring(&self, ch: u32) -> u32 {
-        unreachable!()
+        panic!("Stub implementation of MirroringFunc")
     }
 }
 
@@ -56,7 +56,7 @@ pub trait ScriptFunc {
 
 impl ScriptFunc for () {
     fn script(&self, ch: u32) -> [u8; 4] {
-        unreachable!()
+        panic!("Stub implementation of ScriptFunc")
     }
 }
 
@@ -68,7 +68,7 @@ pub trait ComposeFunc {
 
 impl ComposeFunc for () {
     fn compose(&self, a: u32, b: u32) -> Option<u32> {
-        unreachable!()
+        panic!("Stub implementation of ComposeFunc")
     }
 }
 
@@ -80,11 +80,13 @@ pub trait DecomposeFunc {
 
 impl DecomposeFunc for () {
     fn decompose(&self, ab: u32) -> Option<(u32, u32)> {
-        unreachable!()
+        panic!("Stub implementation of DecomposeFunc")
     }
 }
 
 /// A builder for [`UnicodeFuncs`].
+///
+/// If one or more of the functions is not provided, set its type parameter to `()`.
 #[non_exhaustive]
 pub struct UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
     /// Optional implementation of [`hb_unicode_general_category_func_t`].
@@ -99,11 +101,13 @@ pub struct UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
     pub compose: Option<Box<F4>>,
     /// Optional implementation of [`hb_unicode_decompose_func_t`].
     pub decompose: Option<Box<F5>>,
+    /// Parent unicode_funcs_t instance.
+    pub raw_parent: *mut hb_unicode_funcs_t,
 }
 
 impl<F0, F1, F2, F3, F4, F5> UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
     /// Creates a new, empty builder.
-    pub fn new() -> Self {
+    pub fn new_with_empty_parent() -> Self {
         Self {
             general_category: None,
             combining_class: None,
@@ -111,6 +115,20 @@ impl<F0, F1, F2, F3, F4, F5> UnicodeFuncsBuilder<F0, F1, F2, F3, F4, F5> {
             script: None,
             compose: None,
             decompose: None,
+            raw_parent: unsafe { hb_unicode_funcs_get_empty() },
+        }
+    }
+
+    /// Creates a new, empty builder, with the parent set to the HarfBuzz default.
+    pub fn new_with_harfbuzz_default_parent() -> Self {
+        Self {
+            general_category: None,
+            combining_class: None,
+            mirroring: None,
+            script: None,
+            compose: None,
+            decompose: None,
+            raw_parent: unsafe { hb_unicode_funcs_get_default() },
         }
     }
 }
@@ -130,12 +148,11 @@ where
     }
 
     unsafe fn build_unsafe(self) -> Result<UnicodeFuncs, ()> {
-        let empty = hb_unicode_funcs_get_empty();
         // The HarfBuzz refcounting convention is that "create"
         // sets refcount to one, not zero.
         // https://harfbuzz.github.io/object-model-lifecycle.html
-        let ufuncs = hb_unicode_funcs_create(empty);
-        if ufuncs == empty {
+        let ufuncs = hb_unicode_funcs_create(self.raw_parent);
+        if ufuncs == self.raw_parent {
             // return Err(HarfBuzzError::Alloc);
             return Err(());
         }
@@ -305,7 +322,7 @@ where
 ///     }
 /// }
 ///
-/// let mut unicode_funcs = UnicodeFuncsBuilder::<_, (), (), (), (), ()>::new();
+/// let mut unicode_funcs = UnicodeFuncsBuilder::<_, (), (), (), (), ()>::new_with_empty_parent();
 /// unicode_funcs.general_category = Some(Box::new(GeneralCategoryCalculator));
 /// let unicode_funcs = unicode_funcs.build().unwrap();
 ///
