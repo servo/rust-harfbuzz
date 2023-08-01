@@ -7,7 +7,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std;
 use sys;
 
 use crate::UnicodeFuncs;
@@ -104,7 +103,7 @@ impl Buffer {
     /// Gives up ownership and returns a raw pointer to the buffer.
     pub fn into_raw(self) -> *mut sys::hb_buffer_t {
         let raw = self.raw;
-        std::mem::forget(self);
+        core::mem::forget(self);
         raw
     }
 
@@ -134,10 +133,10 @@ impl Buffer {
         unsafe {
             sys::hb_buffer_add_utf8(
                 self.raw,
-                text.as_ptr() as *const std::os::raw::c_char,
-                text.len() as std::os::raw::c_int,
+                text.as_ptr() as *const core::ffi::c_char,
+                text.len() as core::ffi::c_int,
                 0,
-                text.len() as std::os::raw::c_int,
+                text.len() as core::ffi::c_int,
             )
         };
     }
@@ -156,8 +155,8 @@ impl Buffer {
             sys::hb_buffer_append(
                 self.raw,
                 other.raw,
-                start as std::os::raw::c_uint,
-                end as std::os::raw::c_uint,
+                start as core::ffi::c_uint,
+                end as core::ffi::c_uint,
             )
         };
     }
@@ -309,8 +308,8 @@ impl Buffer {
     }
 }
 
-impl std::fmt::Debug for Buffer {
-    fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl core::fmt::Debug for Buffer {
+    fn fmt(&self, fmt: &mut core::fmt::Formatter) -> core::fmt::Result {
         fmt.debug_struct("Buffer")
             .field("direction", &self.get_direction())
             .field("script", &self.get_script())

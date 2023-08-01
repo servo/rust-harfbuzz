@@ -10,6 +10,7 @@
 //! HarfBuzz is a text shaping engine. It solves the problem of selecting
 //! and positioning glyphs from a font given a Unicode string.
 
+#![no_std]
 #![warn(missing_docs)]
 #![deny(
     trivial_numeric_casts,
@@ -18,6 +19,12 @@
     unused_qualifications
 )]
 
+extern crate alloc;
+
+#[cfg(feature = "std")]
+extern crate std;
+
+#[cfg(feature = "harfbuzz-sys")]
 pub extern crate harfbuzz_sys as sys;
 
 /// An error type for this crate
@@ -28,24 +35,35 @@ pub enum HarfBuzzError {
 }
 pub use HarfBuzzError as Error;
 
+#[cfg(feature = "harfbuzz-sys")]
 mod buffer;
+#[cfg(feature = "harfbuzz-sys")]
 pub use self::buffer::Buffer;
 
+#[cfg(feature = "harfbuzz-sys")]
 mod direction;
+#[cfg(feature = "harfbuzz-sys")]
 pub use self::direction::Direction;
 
+#[cfg(feature = "harfbuzz-sys")]
 mod language;
+#[cfg(feature = "harfbuzz-sys")]
 pub use self::language::Language;
 
+#[cfg(feature = "harfbuzz-sys")]
 mod blob;
+#[cfg(feature = "harfbuzz-sys")]
 pub use self::blob::Blob;
 
+mod traits;
+pub use self::traits::CombiningClassFunc;
+pub use self::traits::ComposeFunc;
+pub use self::traits::DecomposeFunc;
+pub use self::traits::GeneralCategoryFunc;
+pub use self::traits::MirroringFunc;
+pub use self::traits::ScriptFunc;
+
+#[cfg(feature = "harfbuzz-sys")]
 mod unicode_funcs;
-pub use self::unicode_funcs::CombiningClassFunc;
-pub use self::unicode_funcs::ComposeFunc;
-pub use self::unicode_funcs::DecomposeFunc;
-pub use self::unicode_funcs::GeneralCategoryFunc;
-pub use self::unicode_funcs::MirroringFunc;
-pub use self::unicode_funcs::ScriptFunc;
-pub use self::unicode_funcs::UnicodeFuncs;
-pub use self::unicode_funcs::UnicodeFuncsBuilder;
+#[cfg(feature = "harfbuzz-sys")]
+pub use self::unicode_funcs::{UnicodeFuncs, UnicodeFuncsBuilder};

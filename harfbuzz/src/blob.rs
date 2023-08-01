@@ -7,11 +7,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::marker::PhantomData;
-use std::os::raw::{c_char, c_uint, c_void};
-use std::sync::Arc;
-use std::{mem, ops, ptr, slice};
+use core::ffi::{c_char, c_uint};
+use core::marker::PhantomData;
+use core::{mem, ops, ptr, slice};
 use sys;
+
+#[cfg(feature = "std")]
+use std::{ffi::c_void, sync::Arc, vec::Vec};
 
 /// Blobs wrap a chunk of binary data to handle lifecycle management of data
 /// while it is passed between client and HarfBuzz.
@@ -63,6 +65,7 @@ impl<'a> Blob<'a> {
     /// assert_eq!(blob.len(), 256);
     /// assert!(!blob.is_empty());
     /// ```
+    #[cfg(feature = "std")]
     pub fn new_from_arc_vec(data: Arc<Vec<u8>>) -> Blob<'static> {
         let len = data.len();
         assert!(len <= c_uint::max_value() as usize);
