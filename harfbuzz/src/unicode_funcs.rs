@@ -15,7 +15,9 @@ use sys::*;
 
 /// A builder for [`UnicodeFuncs`].
 ///
-/// If one or more of the functions is not provided, set its type parameter to `()`.
+/// Not all of the functions need to be provided. If a function is missing,
+/// the one from the parent will be called, either empty (returning invalid
+/// placeholder data) or default (using the built-in Harfbuzz properties).
 #[non_exhaustive]
 #[derive(Debug)]
 pub struct UnicodeFuncsBuilder {
@@ -254,18 +256,56 @@ impl Drop for UnicodeFuncsBuilder {
 ///
 /// # Example
 ///
+/// Implementing a custom properties provider for HarfBuzz:
+///
 /// ```
 /// # use harfbuzz::{Buffer, Direction, UnicodeFuncsBuilder, sys};
-/// struct GeneralCategoryCalculator;
+/// struct PropertyProvider;
 ///
-/// impl harfbuzz::GeneralCategoryFunc for GeneralCategoryCalculator {
-///     fn general_category(&self, ch: u32) -> harfbuzz::sys::hb_unicode_general_category_t {
-///         todo!()
+/// impl harfbuzz::GeneralCategoryFunc for PropertyProvider {
+///     fn general_category(&self, ch: u32) -> core::ffi::c_uint {
+///         todo!("GeneralCategoryFunc")
+///     }
+/// }
+///
+/// impl harfbuzz::CombiningClassFunc for PropertyProvider {
+///     fn combining_class(&self, ch: u32) -> core::ffi::c_uint {
+///         todo!("CombiningClassFunc")
+///     }
+/// }
+///
+/// impl harfbuzz::MirroringFunc for PropertyProvider {
+///     fn mirroring(&self, ch: u32) -> u32 {
+///         todo!("MirroringFunc")
+///     }
+/// }
+///
+/// impl harfbuzz::ScriptFunc for PropertyProvider {
+///     fn script(&self, ch: u32) -> [u8; 4] {
+///         debug_assert!(ch >= 0x0600 && ch <= 0x06FF); // Arab code points
+///         *b"Arab"
+///     }
+/// }
+///
+/// impl harfbuzz::ComposeFunc for PropertyProvider {
+///     fn compose(&self, a: u32, b:u32) -> Option<u32> {
+///         todo!("ComposeFunc")
+///     }
+/// }
+///
+/// impl harfbuzz::DecomposeFunc for PropertyProvider {
+///     fn decompose(&self, ab: u32) -> Option<(u32, u32)> {
+///         todo!("DecomposeFunc")
 ///     }
 /// }
 ///
 /// let mut unicode_funcs = UnicodeFuncsBuilder::new_with_empty_parent().unwrap();
-/// unicode_funcs.set_general_category_func(Box::new(GeneralCategoryCalculator));
+/// unicode_funcs.set_general_category_func(Box::new(PropertyProvider));
+/// unicode_funcs.set_combining_class_func(Box::new(PropertyProvider));
+/// unicode_funcs.set_mirroring_func(Box::new(PropertyProvider));
+/// unicode_funcs.set_script_func(Box::new(PropertyProvider));
+/// unicode_funcs.set_compose_func(Box::new(PropertyProvider));
+/// unicode_funcs.set_decompose_func(Box::new(PropertyProvider));
 /// let unicode_funcs = unicode_funcs.build();
 ///
 /// let mut b = Buffer::with("مساء الخير");
@@ -273,6 +313,21 @@ impl Drop for UnicodeFuncsBuilder {
 /// b.guess_segment_properties();
 /// assert_eq!(b.get_direction(), Direction::RTL);
 /// assert_eq!(b.get_script(), sys::HB_SCRIPT_ARABIC);
+/// ```
+///
+/// Without the provider, the results are unexpected:
+///
+/// ```
+/// # use harfbuzz::{Buffer, Direction, UnicodeFuncsBuilder, sys};
+///
+/// let mut unicode_funcs = UnicodeFuncsBuilder::new_with_empty_parent().unwrap();
+/// let unicode_funcs = unicode_funcs.build();
+///
+/// let mut b = Buffer::with("مساء الخير");
+/// b.set_unicode_funcs(&unicode_funcs);
+/// b.guess_segment_properties();
+/// assert_eq!(b.get_direction(), Direction::LTR); // WRONG!
+/// assert_eq!(b.get_script(), sys::HB_SCRIPT_INVALID); // WRONG!
 /// ```
 pub struct UnicodeFuncs {
     raw: *mut hb_unicode_funcs_t,
