@@ -1,4 +1,8 @@
-#[cfg(any(target_os = "android", all(unix, not(target_vendor = "apple")), feature="build-native-freetype"))]
+#[cfg(any(
+    target_os = "android",
+    all(unix, not(target_vendor = "apple")),
+    feature = "build-native-freetype"
+))]
 extern crate freetype;
 
 #[cfg(target_vendor = "apple")]
@@ -7,7 +11,11 @@ pub mod coretext;
 #[cfg(target_family = "windows")]
 pub mod directwrite;
 
-#[cfg(any(target_os = "android", all(unix, not(target_vendor = "apple")), feature="build-native-freetype"))]
+#[cfg(any(
+    target_os = "android",
+    all(unix, not(target_vendor = "apple")),
+    feature = "build-native-freetype"
+))]
 extern "C" {
     pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
 }
