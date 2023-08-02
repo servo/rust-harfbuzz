@@ -13,7 +13,7 @@ jobs:
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
       # build to avoid contaminating the source tree.
@@ -54,7 +54,7 @@ jobs:
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -82,7 +82,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
@@ -104,7 +104,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
