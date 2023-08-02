@@ -78,6 +78,11 @@ jobs:
 
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Cargo fmt
+        run: cargo fmt --all -- --check
 
       - name: Cargo build
         run: cargo build --workspace
