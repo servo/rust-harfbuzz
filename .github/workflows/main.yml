@@ -13,7 +13,7 @@ jobs:
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
       # build to avoid contaminating the source tree.
@@ -33,23 +33,16 @@ jobs:
           [[ "$TEMP_PATH" == "$PREFIX/lib" ]] || exit 1
           popd
 
-      - name: Install nightly toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Cargo build
-        run: cargo build --all
+        run: cargo build --workspace
 
       - name: Cargo test
-        run: cargo test --all
+        run: cargo test --workspace
         env:
           RUST_BACKTRACE: 1
-      
-      - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
   linux-ci-shared:
     name: stable, Linux, static linking, no pkg-config
@@ -57,15 +50,11 @@ jobs:
     env:
       HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Install nightly toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-      
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       # Test the harfbuzz-sys package build to check the 'exclude's. We should
       # do this where the embedded harfbuzz is statically linked, but we don't
       # need to do it for every environment.
@@ -73,64 +62,54 @@ jobs:
         run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml
 
       - name: Cargo build
-        run: cargo build --all
+        run: cargo build --workspace
 
       - name: Cargo test
-        run: cargo test --all
+        run: cargo test --workspace
         env:
           RUST_BACKTRACE: 1
-      
-      - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
-
 
   mac-ci-shared:
     name: stable, macOS, shared library
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Install nightly toolchain
-        uses: actions-rs/toolchain@v1
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
-          toolchain: stable
-          override: true
+          components: rustfmt
+
+      - name: Cargo fmt
+        run: cargo fmt --all -- --check
 
       - name: Cargo build
-        run: cargo build --all
+        run: cargo build --workspace
 
       - name: Cargo test
-        run: cargo test --all
+        run: cargo test --workspace
         env:
           RUST_BACKTRACE: 1
-      
-      - name: ctest tests
-        run: cargo run --manifest-path=harfbuzz-sys-test/Cargo.toml
 
   windows-ci:
     name: Windows
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Install nightly toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Dependency install
         run: vcpkg install --recurse glib:x64-windows fontconfig:x64-windows freetype:x64-windows cairo:x64-windows
 
       - name: Cargo build
-        run: cargo build --all
+        run: cargo build --workspace
 
       - name: Cargo test
-        run: cargo test --all
+        run: cargo test --workspace
         env:
           RUST_BACKTRACE: 1
 
