@@ -11,10 +11,10 @@ fn main() {
     let target = env::var("TARGET").unwrap();
 
     println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        if pkg_config::probe_library("harfbuzz").is_ok() {
-            return;
-        }
+    if (target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none())
+        && pkg_config::probe_library("harfbuzz").is_ok()
+    {
+        return;
     }
 
     let mut cfg = cc::Build::new();
