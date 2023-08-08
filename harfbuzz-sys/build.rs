@@ -1,9 +1,4 @@
 #[cfg(feature = "build-native-harfbuzz")]
-extern crate cc;
-#[cfg(feature = "build-native-harfbuzz")]
-extern crate pkg_config;
-
-#[cfg(feature = "build-native-harfbuzz")]
 fn main() {
     use std::env;
     use std::path::PathBuf;

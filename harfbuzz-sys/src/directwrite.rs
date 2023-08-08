@@ -1,8 +1,6 @@
-extern crate winapi;
+use crate::hb_face_t;
 
-use hb_face_t;
-
-use self::winapi::um::dwrite::IDWriteFontFace;
+use winapi::um::dwrite::IDWriteFontFace;
 
 extern "C" {
     pub fn hb_directwrite_face_create(font_face: *mut IDWriteFontFace) -> *mut hb_face_t;

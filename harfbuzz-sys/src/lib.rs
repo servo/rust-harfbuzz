@@ -1,10 +1,3 @@
-#[cfg(any(
-    target_os = "android",
-    all(unix, not(target_vendor = "apple")),
-    feature = "build-native-freetype"
-))]
-extern crate freetype;
-
 #[cfg(target_vendor = "apple")]
 pub mod coretext;
 
@@ -26,4 +19,4 @@ extern "C" {
 #[allow(clippy::unreadable_literal)]
 mod bindings;
 
-pub use bindings::*;
+pub use crate::bindings::*;

@@ -18,7 +18,7 @@
     unused_qualifications
 )]
 
-pub extern crate harfbuzz_sys as sys;
+pub use harfbuzz_sys as sys;
 
 mod buffer;
 pub use self::buffer::Buffer;
