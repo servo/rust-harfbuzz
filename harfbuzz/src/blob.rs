@@ -7,11 +7,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use crate::sys;
 use std::marker::PhantomData;
 use std::os::raw::{c_char, c_uint, c_void};
 use std::sync::Arc;
 use std::{mem, ops, ptr, slice};
-use sys;
 
 /// Blobs wrap a chunk of binary data to handle lifecycle management of data
 /// while it is passed between client and HarfBuzz.

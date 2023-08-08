@@ -1,12 +1,8 @@
-extern crate core_graphics;
-extern crate core_text;
-extern crate foreign_types;
+use crate::{hb_face_t, hb_font_t};
 
-use {hb_face_t, hb_font_t};
-
-use self::core_graphics::font::CGFont;
-use self::core_text::font::CTFontRef;
-use self::foreign_types::ForeignType;
+use core_graphics::font::CGFont;
+use core_text::font::CTFontRef;
+use foreign_types::ForeignType;
 
 type CGFontRef = *mut <CGFont as ForeignType>::CType;
 
