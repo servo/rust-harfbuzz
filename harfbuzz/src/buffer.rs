@@ -8,8 +8,6 @@
 // except according to those terms.
 
 use crate::sys;
-use std;
-
 use crate::{Direction, Language};
 
 /// A series of Unicode characters.
