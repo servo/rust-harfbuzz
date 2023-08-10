@@ -10,7 +10,6 @@
 #![allow(missing_docs)]
 
 use crate::sys;
-use std;
 
 #[derive(Copy, Clone, PartialEq, PartialOrd)]
 pub struct Language {
