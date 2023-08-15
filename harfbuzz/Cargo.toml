@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz"
-version = "0.4.0"
+version = "0.4.1"
 edition = "2018"
 
 authors = ["The Servo Project Developers"]
@@ -20,3 +20,4 @@ default-features = false
 default = ["build-native-harfbuzz", "build-native-freetype"]
 build-native-harfbuzz = ["harfbuzz-sys/build-native-harfbuzz"]
 build-native-freetype = ["harfbuzz-sys/build-native-freetype"]
+static = ["harfbuzz-sys/static"]
