@@ -1,16 +1,14 @@
+#[cfg(feature = "use-pkg-config-harfbuzz")]
+fn find_harfbuzz_via_pkgconfig() {
+    pkg_config::probe_library("harfbuzz").is_ok();
+}
+
 #[cfg(feature = "build-native-harfbuzz")]
-fn main() {
+fn build_harfbuzz() {
     use std::env;
     use std::path::PathBuf;
 
     let target = env::var("TARGET").unwrap();
-
-    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if (target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none())
-        && pkg_config::probe_library("harfbuzz").is_ok()
-    {
-        return;
-    }
 
     let mut cfg = cc::Build::new();
     cfg.cpp(true)
@@ -44,5 +42,13 @@ fn main() {
     );
 }
 
-#[cfg(not(feature = "build-native-harfbuzz"))]
-fn main() {}
+fn main() {
+    #[cfg(feature = "use-pkg-config-harfbuzz")]
+    {
+        find_harfbuzz_via_pkgconfig();
+        return;
+    }
+
+    #[cfg(feature = "build-native-harfbuzz")]
+    build_harfbuzz();
+}

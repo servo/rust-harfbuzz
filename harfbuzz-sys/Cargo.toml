@@ -46,5 +46,6 @@ optional = true
 
 [features]
 default = ["build-native-harfbuzz", "build-native-freetype"]
-build-native-harfbuzz = ["cc", "pkg-config"]
+build-native-harfbuzz = ["cc"]
 build-native-freetype = ["freetype", "freetype/freetype-sys"]
+use-pkg-config-harfbuzz = ["pkg-config"]

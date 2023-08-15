@@ -20,3 +20,4 @@ default-features = false
 default = ["build-native-harfbuzz", "build-native-freetype"]
 build-native-harfbuzz = ["harfbuzz-sys/build-native-harfbuzz"]
 build-native-freetype = ["harfbuzz-sys/build-native-freetype"]
+use-pkg-config-harfbuzz = ["harfbuzz-sys/use-pkg-config-harfbuzz"]

@@ -11,7 +11,7 @@ on:
 
 jobs:
   linux-ci-shared:
-    name: stable, Linux, shared library
+    name: stable, Linux, shared library, pkg-config
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -38,18 +38,16 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Cargo build
-        run: cargo build --workspace
+        run: cargo build --no-default-features --features use-pkg-config-harfbuzz --workspace
 
       - name: Cargo test
-        run: cargo test --workspace
+        run: cargo test --no-default-features --features use-pkg-config-harfbuzz --workspace
         env:
           RUST_BACKTRACE: 1
 
   linux-ci-static:
-    name: stable, Linux, static linking, no pkg-config
+    name: stable, Linux, static linking
     runs-on: ubuntu-latest
-    env:
-      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v3
 
@@ -90,18 +88,16 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Cargo build
-        run: cargo build --workspace
+        run: cargo build --no-default-features --features use-pkg-config-harfbuzz --workspace
 
       - name: Cargo test
-        run: cargo test --workspace
+        run: cargo test --no-default-features --features use-pkg-config-harfbuzz --workspace
         env:
           RUST_BACKTRACE: 1
 
   mac-ci-static:
     name: stable, macOS, static library
     runs-on: macos-latest
-    env:
-      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
 
     steps:
       - uses: actions/checkout@v3
