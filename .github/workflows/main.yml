@@ -77,6 +77,35 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: install harfbuzz from homebrew
+        run: |
+          brew install harfbuzz
+
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Cargo fmt
+        run: cargo fmt --all -- --check
+
+      - name: Cargo build
+        run: cargo build --workspace
+
+      - name: Cargo test
+        run: cargo test --workspace
+        env:
+          RUST_BACKTRACE: 1
+
+  mac-ci-static:
+    name: stable, macOS, static library
+    runs-on: macos-latest
+    env:
+      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
+
+    steps:
+      - uses: actions/checkout@v3
+
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -118,6 +147,7 @@ jobs:
       - "linux-ci-static"
       - "linux-ci-shared"
       - "mac-ci-shared"
+      - "mac-ci-static"
       - "windows-ci"
 
     steps:
