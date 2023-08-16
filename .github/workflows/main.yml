@@ -16,23 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # Install harfbuzz from the source in harfbuzz-sys. Use an out-of-tree
-      # build to avoid contaminating the source tree.
-      - name: Build harfbuzz
-        env:
-          PREFIX: /usr/local
+      - name: install harfbuzz from apt
         run: |
-          make -f harfbuzz-sys/makefile.touch touch HARFBUZZ=harfbuzz-sys/harfbuzz
-          HARFDIR=`pwd`
-          pushd $RUNNER_TEMP
-          $HARFDIR/harfbuzz-sys/harfbuzz/configure --prefix=$PREFIX --without-icu --without-freetype --without-glib
-          make
-          sudo make install
-          # Make harfbuzz  available for linking and confirm expected location
-          TEMP_PATH="$(pkg-config --variable=libdir harfbuzz)"
-          echo "LD_LIBRARY_PATH=$TEMP_PATH" >> $GITHUB_ENV
-          [[ "$TEMP_PATH" == "$PREFIX/lib" ]] || exit 1
-          popd
+          sudo apt update
+          sudo apt install libharfbuzz-dev
 
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
