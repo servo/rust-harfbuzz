@@ -9,7 +9,8 @@ license = "MIT OR Apache-2.0"
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz/"
-keywords = ["opentype", "font", "text", "layout", "unicode"]
+keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+categories = ["text-processing"]
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
