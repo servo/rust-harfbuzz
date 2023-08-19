@@ -1,4 +1,4 @@
-#[cfg(target_vendor = "apple")]
+#[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
 
 #[cfg(all(target_family = "windows", feature = "directwrite"))]

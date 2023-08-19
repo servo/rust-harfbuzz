@@ -28,9 +28,9 @@ pkg-config = { version = "0.3", optional = true }
 cc = { version = "1", optional = true }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
-core-graphics = "0.22"
-core-text = "19"
-foreign-types = "0.3"
+core-graphics = { version = "0.22", optional = true }
+core-text = { version = "19", optional = true }
+foreign-types = { version = "0.3", optional = true }
 
 [target.'cfg(target_family = "windows")'.dependencies.winapi]
 version = "0.3"
@@ -42,6 +42,7 @@ version = "0.7"
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "directwrite", "freetype"]
+default = ["build-native-harfbuzz", "coretext", "directwrite", "freetype"]
+coretext = ["core-graphics", "core-text", "foreign-types"]
 directwrite = ["winapi"]
 build-native-harfbuzz = ["cc", "pkg-config"]
