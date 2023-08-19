@@ -15,6 +15,12 @@ given a Unicode string.
 This crate provides a higher level API (than the
 [raw C bindings](https://crates.io/crates/harfbuzz-sys)).
 
+## Features
+
+- `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
+- `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
+- `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+
 ## License
 
 Licensed under either of

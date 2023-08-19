@@ -14,6 +14,12 @@ given a Unicode string.
 
 This crate provides low-level bindings to the C API.
 
+## Features
+
+- `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
+- `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
+- `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+
 ## License
 
 Licensed under the MIT license ([LICENSE](LICENSE) or <https://opensource.org/licenses/MIT>).

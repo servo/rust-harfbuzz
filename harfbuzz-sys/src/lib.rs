@@ -1,3 +1,14 @@
+//! # harfbuzz-sys
+//!
+//! This crate provides raw bindings to the [HarfBuzz](https://harfbuzz.github.io/)
+//! text shaping library.
+//!
+//! ## Features
+//!
+//! - `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
+//! - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
+//! - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+
 #[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
 
