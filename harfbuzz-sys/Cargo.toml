@@ -5,6 +5,7 @@ edition = "2018"
 
 authors = ["The Servo Project Developers"]
 license = "MIT"
+readme = "README.md"
 
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
