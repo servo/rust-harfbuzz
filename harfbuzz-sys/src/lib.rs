@@ -1,7 +1,7 @@
 #[cfg(target_vendor = "apple")]
 pub mod coretext;
 
-#[cfg(target_family = "windows")]
+#[cfg(all(target_family = "windows", feature = "directwrite"))]
 pub mod directwrite;
 
 #[cfg(feature = "freetype")]

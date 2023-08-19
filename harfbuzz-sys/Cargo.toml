@@ -34,6 +34,7 @@ foreign-types = "0.3"
 
 [target.'cfg(target_family = "windows")'.dependencies.winapi]
 version = "0.3"
+optional = true
 features = ["dwrite"]
 
 [dependencies.freetype]
@@ -41,5 +42,6 @@ version = "0.7"
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "freetype"]
+default = ["build-native-harfbuzz", "directwrite", "freetype"]
+directwrite = ["winapi"]
 build-native-harfbuzz = ["cc", "pkg-config"]

@@ -19,6 +19,7 @@ version = "0.5.0"
 default-features = false
 
 [features]
-default = ["build-native-harfbuzz", "freetype"]
+default = ["build-native-harfbuzz", "directwrite", "freetype"]
 build-native-harfbuzz = ["harfbuzz-sys/build-native-harfbuzz"]
+directwrite = ["harfbuzz-sys/directwrite"]
 freetype = ["harfbuzz-sys/freetype"]
