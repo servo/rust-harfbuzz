@@ -36,15 +36,10 @@ foreign-types = "0.3"
 version = "0.3"
 features = ["dwrite"]
 
-[target.'cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))'.dependencies]
-freetype = { version = "0.7", default-features = false }
-
 [dependencies.freetype]
 version = "0.7"
-default-features = false
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "build-native-freetype"]
+default = ["build-native-harfbuzz", "freetype"]
 build-native-harfbuzz = ["cc", "pkg-config"]
-build-native-freetype = ["freetype", "freetype/freetype-sys"]
