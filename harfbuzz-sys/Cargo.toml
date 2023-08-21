@@ -28,23 +28,21 @@ pkg-config = { version = "0.3", optional = true }
 cc = { version = "1", optional = true }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
-core-graphics = "0.22"
-core-text = "19"
-foreign-types = "0.3"
+core-graphics = { version = "0.22", optional = true }
+core-text = { version = "19", optional = true }
+foreign-types = { version = "0.3", optional = true }
 
 [target.'cfg(target_family = "windows")'.dependencies.winapi]
 version = "0.3"
+optional = true
 features = ["dwrite"]
-
-[target.'cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))'.dependencies]
-freetype = { version = "0.7", default-features = false }
 
 [dependencies.freetype]
 version = "0.7"
-default-features = false
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "build-native-freetype"]
+default = ["build-native-harfbuzz", "coretext", "directwrite", "freetype"]
+coretext = ["core-graphics", "core-text", "foreign-types"]
+directwrite = ["winapi"]
 build-native-harfbuzz = ["cc", "pkg-config"]
-build-native-freetype = ["freetype", "freetype/freetype-sys"]

@@ -1,15 +1,23 @@
-#[cfg(target_vendor = "apple")]
+//! # harfbuzz-sys
+//!
+//! This crate provides raw bindings to the [HarfBuzz](https://harfbuzz.github.io/)
+//! text shaping library.
+//!
+//! ## Features
+//!
+//! - `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
+//! - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
+//! - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+
+#[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
 
-#[cfg(target_family = "windows")]
+#[cfg(all(target_family = "windows", feature = "directwrite"))]
 pub mod directwrite;
 
-#[cfg(any(
-    target_os = "android",
-    all(unix, not(target_vendor = "apple")),
-    feature = "build-native-freetype"
-))]
+#[cfg(feature = "freetype")]
 extern "C" {
+    /// This requires that the `freetype` feature is enabled.
     pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
 }
 
