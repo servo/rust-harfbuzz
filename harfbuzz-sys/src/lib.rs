@@ -8,6 +8,8 @@
 //! - `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
 //! - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
 //! - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+//!
+//! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
 
 #[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
