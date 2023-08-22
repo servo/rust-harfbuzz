@@ -48,8 +48,6 @@ jobs:
   linux-ci-static:
     name: stable, Linux, static linking, no pkg-config
     runs-on: ubuntu-latest
-    env:
-      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
     steps:
       - uses: actions/checkout@v3
 
@@ -60,13 +58,13 @@ jobs:
       # do this where the embedded harfbuzz is statically linked, but we don't
       # need to do it for every environment.
       - name: Cargo package
-        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml
+        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --features bundled
 
       - name: Cargo build
-        run: cargo build --workspace
+        run: cargo build --workspace --features bundled
 
       - name: Cargo test
-        run: cargo test --workspace
+        run: cargo test --workspace --features bundled
         env:
           RUST_BACKTRACE: 1
 
@@ -100,8 +98,6 @@ jobs:
   mac-ci-static:
     name: stable, macOS, static library
     runs-on: macos-latest
-    env:
-      HARFBUZZ_SYS_NO_PKG_CONFIG: 1
 
     steps:
       - uses: actions/checkout@v3
@@ -115,10 +111,10 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Cargo build
-        run: cargo build --workspace
+        run: cargo build --workspace --features bundled
 
       - name: Cargo test
-        run: cargo test --workspace
+        run: cargo test --workspace --features bundled
         env:
           RUST_BACKTRACE: 1
 
@@ -133,10 +129,10 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Cargo build
-        run: cargo build --workspace
+        run: cargo build --workspace --features bundled
 
       - name: Cargo test
-        run: cargo test --workspace
+        run: cargo test --workspace --features bundled
         env:
           RUST_BACKTRACE: 1
 
@@ -157,7 +153,7 @@ jobs:
           target: wasm32-unknown-emscripten
 
       - name: Cargo build
-        run: cargo build --target wasm32-unknown-emscripten --workspace --no-default-features --features build-native-harfbuzz
+        run: cargo build --target wasm32-unknown-emscripten --workspace --no-default-features --features bundled
 
   ios-ci-static:
     name: stable, iOS, static library
@@ -172,7 +168,7 @@ jobs:
           target: aarch64-apple-ios
 
       - name: Cargo build
-        run: cargo build --target aarch64-apple-ios --workspace --no-default-features --features "build-native-harfbuzz, coretext"
+        run: cargo build --target aarch64-apple-ios --workspace --no-default-features --features "bundled, coretext"
 
   build_result:
     name: Result

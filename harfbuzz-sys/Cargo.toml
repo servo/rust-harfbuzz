@@ -24,8 +24,8 @@ links = "harfbuzz"
 build = "build.rs"
 
 [build-dependencies]
-pkg-config = { version = "0.3", optional = true }
-cc = { version = "1", optional = true }
+pkg-config = { version = "0.3" }
+cc = { version = "1" }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
 core-graphics = { version = "0.22", optional = true }
@@ -42,7 +42,7 @@ version = "0.7"
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "coretext", "directwrite", "freetype"]
+default = ["coretext", "directwrite", "freetype"]
+bundled = []
 coretext = ["core-graphics", "core-text", "foreign-types"]
 directwrite = ["winapi"]
-build-native-harfbuzz = ["cc", "pkg-config"]

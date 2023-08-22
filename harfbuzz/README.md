@@ -21,6 +21,8 @@ This crate provides a higher level API (than the
 - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
 - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
 
+- `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
+
 ## License
 
 Licensed under either of
