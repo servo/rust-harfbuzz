@@ -18,10 +18,7 @@ pub mod coretext;
 pub mod directwrite;
 
 #[cfg(feature = "freetype")]
-extern "C" {
-    /// This requires that the `freetype` feature is enabled.
-    pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
-}
+pub mod freetype;
 
 #[allow(non_camel_case_types)]
 #[allow(non_snake_case)]
