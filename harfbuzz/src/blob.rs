@@ -87,6 +87,10 @@ impl<'a> Blob<'a> {
     }
 
     /// Construct a `Blob` from a raw pointer. Takes ownership of the blob.
+    ///
+    /// # Safety
+    ///
+    /// The pointer must be valid and must not be used after this function is called.
     pub unsafe fn from_raw(raw: *mut sys::hb_blob_t) -> Self {
         Blob {
             raw,

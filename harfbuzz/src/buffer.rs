@@ -83,6 +83,10 @@ impl Buffer {
     }
 
     /// Construct a `Buffer` from a raw pointer. Takes ownership of the buffer.
+    ///
+    /// # Safety
+    ///
+    /// The pointer must be valid and must not be used after this function is called.
     pub unsafe fn from_raw(raw: *mut sys::hb_buffer_t) -> Self {
         Buffer { raw }
     }
