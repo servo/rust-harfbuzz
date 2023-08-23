@@ -39,6 +39,11 @@ impl Language {
             .unwrap()
     }
 
+    /// Construct a `Language` from a raw pointer.
+    ///
+    /// # Safety
+    ///
+    /// The pointer must be a valid pointer.
     pub unsafe fn from_raw(raw: sys::hb_language_t) -> Self {
         Language { raw }
     }

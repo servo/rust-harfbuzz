@@ -63,6 +63,9 @@ jobs:
       - name: Cargo build
         run: cargo build --workspace --features bundled
 
+      - name: Cargo clippy
+        run: cargo clippy --workspace --features bundled -- -D warnings
+
       - name: Cargo test
         run: cargo test --workspace --features bundled
         env:
