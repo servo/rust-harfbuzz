@@ -1,21 +1,17 @@
-#[cfg(feature = "build-native-harfbuzz")]
-extern crate cc;
-#[cfg(feature = "build-native-harfbuzz")]
-extern crate pkg_config;
+// Copyright 2023 The Servo Project Developers. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
-#[cfg(feature = "build-native-harfbuzz")]
-fn main() {
+fn build_harfbuzz() {
     use std::env;
     use std::path::PathBuf;
 
     let target = env::var("TARGET").unwrap();
-
-    println!("cargo:rerun-if-env-changed=HARFBUZZ_SYS_NO_PKG_CONFIG");
-    if target.contains("wasm32") || env::var_os("HARFBUZZ_SYS_NO_PKG_CONFIG").is_none() {
-        if pkg_config::probe_library("harfbuzz").is_ok() {
-            return;
-        }
-    }
 
     let mut cfg = cc::Build::new();
     cfg.cpp(true)
@@ -49,5 +45,11 @@ fn main() {
     );
 }
 
-#[cfg(not(feature = "build-native-harfbuzz"))]
-fn main() {}
+fn main() {
+    if cfg!(feature = "bundled") {
+        build_harfbuzz();
+    } else {
+        // Use the pre-installed harfbuzz.
+        pkg_config::probe_library("harfbuzz").unwrap();
+    }
+}

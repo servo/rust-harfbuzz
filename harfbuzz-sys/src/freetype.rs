@@ -7,11 +7,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use crate::hb_face_t;
-
-use winapi::um::dwrite::IDWriteFontFace;
+use crate::hb_font_t;
 
 extern "C" {
-    /// This requires that the `directwrite` feature is enabled.
-    pub fn hb_directwrite_face_create(font_face: *mut IDWriteFontFace) -> *mut hb_face_t;
+    /// This requires that the `freetype` feature is enabled.
+    pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
 }

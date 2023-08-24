@@ -7,11 +7,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use sys;
-
+use crate::sys;
 use crate::UnicodeFuncs;
-
-use {Direction, Language};
+use crate::{Direction, Language};
 
 /// A series of Unicode characters.
 ///
@@ -42,20 +40,20 @@ use {Direction, Language};
 ///
 /// * Direction: The direction in which the output glyphs flow. This is
 ///   typically left to right or right to left. This is controlled via
-///   the [`set_direction`] method on `Buffer`.
+///   the [`Buffer::set_direction()`] method.
 /// * Script: Script is crucial for choosing the proper shaping behaviour
 ///   for scripts that require it (e.g. Arabic) and the which OpenType
 ///   features defined in the font to be applied. This is controlled via
-///   the [`set_script`] method on `Buffer`.
+///   the [`Buffer::set_script()`] method.
 /// * Language: Languages are crucial for selecting which OpenType feature
 ///   to apply to the buffer which can result in applying language-specific
 ///   behaviour. Languages are orthogonal to the scripts, and though they
 ///   are related, they are different concepts and should not be confused
-///   with each other. This is controlled via the [`set_language`] method
-///   on `Buffer`.
+///   with each other. This is controlled via the [`Buffer::set_language()`]
+///   method.
 ///
 /// Additionally, Harfbuzz can attempt to infer the values for these
-/// properties using the [`guess_segment_properties`] method on `Buffer`:
+/// properties using the [`Buffer::guess_segment_properties()`] method:
 ///
 /// ```
 /// # use harfbuzz::{Buffer, Direction, sys};
@@ -64,11 +62,6 @@ use {Direction, Language};
 /// assert_eq!(b.get_direction(), Direction::RTL);
 /// assert_eq!(b.get_script(), sys::HB_SCRIPT_ARABIC);
 /// ```
-///
-/// [`set_direction`]: #method.set_direction
-/// [`set_script`]: #method.set_script
-/// [`set_language`]: #method.set_language
-/// [`guess_segment_properties`]: #method.guess_segment_properties
 pub struct Buffer {
     /// The underlying `hb_buffer_t` from the `harfbuzz-sys` crate.
     ///
@@ -91,6 +84,10 @@ impl Buffer {
     }
 
     /// Construct a `Buffer` from a raw pointer. Takes ownership of the buffer.
+    ///
+    /// # Safety
+    ///
+    /// The pointer must be valid and must not be used after this function is called.
     pub unsafe fn from_raw(raw: *mut sys::hb_buffer_t) -> Self {
         Buffer { raw }
     }
@@ -203,7 +200,7 @@ impl Buffer {
     /// that has a script other than `HB_SCRIPT_COMMON`,
     /// `HB_SCRIPT_INHERITED`, and `HB_SCRIPT_UNKNOWN`.
     ///
-    /// Next, if buffer direction is not set (ie. is `Direction::Invalid`),
+    /// Next, if buffer direction is not set (ie. is [`Direction::Invalid`]),
     /// it will be set to the natural horizontal direction of the buffer
     /// script as returned by `hb_script_get_horizontal_direction()`.
     ///
@@ -222,12 +219,12 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`get_direction`](#method.get_direction)
-    /// * [`set_direction`](#method.set_direction)
-    /// * [`get_script`](#method.get_script)
-    /// * [`set_script`](#method.set_script)
-    /// * [`get_language`](#method.get_language)
-    /// * [`set_language`](#method.set_language)
+    /// * [`Buffer::get_direction`]
+    /// * [`Buffer::set_direction`]
+    /// * [`Buffer::get_script`]
+    /// * [`Buffer::set_script`]
+    /// * [`Buffer::get_language`]
+    /// * [`Buffer::set_language`]
     pub fn guess_segment_properties(&mut self) {
         unsafe { sys::hb_buffer_guess_segment_properties(self.raw) };
     }
@@ -244,8 +241,8 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`get_direction`](#method.get_direction)
-    /// * [`guess_segment_properties`](#method.guess_segment_properties)
+    /// * [`Buffer::get_direction()`]
+    /// * [`Buffer::guess_segment_properties()`]
     pub fn set_direction(&mut self, direction: Direction) {
         unsafe { sys::hb_buffer_set_direction(self.raw, direction.into()) };
     }
@@ -254,7 +251,7 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`set_direction`](#method.set_direction)
+    /// * [`Buffer::set_direction()`]
     pub fn get_direction(&self) -> Direction {
         (unsafe { sys::hb_buffer_get_direction(self.raw) }).into()
     }
@@ -267,8 +264,8 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`get_script`](#method.get_script)
-    /// * [`guess_segment_properties`](#method.guess_segment_properties)
+    /// * [`Buffer::get_script()`]
+    /// * [`Buffer::guess_segment_properties()`]
     pub fn set_script(&mut self, script: sys::hb_script_t) {
         unsafe { sys::hb_buffer_set_script(self.raw, script) };
     }
@@ -277,7 +274,7 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`set_script`](#method.set_script)
+    /// * [`Buffer::set_script()`]
     pub fn get_script(&self) -> sys::hb_script_t {
         unsafe { sys::hb_buffer_get_script(self.raw) }
     }
@@ -292,8 +289,8 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`get_language`](#method.get_language)
-    /// * [`guess_segment_properties`](#method.guess_segment_properties)
+    /// * [`Buffer::get_language()`]
+    /// * [`Buffer::guess_segment_properties()`]
     pub fn set_language(&mut self, language: Language) {
         unsafe { sys::hb_buffer_set_language(self.raw, language.as_raw()) };
     }
@@ -302,7 +299,7 @@ impl Buffer {
     ///
     /// See also:
     ///
-    /// * [`set_language`](#method.set_language)
+    /// * [`Buffer::set_language()`]
     pub fn get_language(&self) -> Language {
         unsafe { Language::from_raw(sys::hb_buffer_get_language(self.raw)) }
     }

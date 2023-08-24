@@ -9,6 +9,16 @@
 
 //! HarfBuzz is a text shaping engine. It solves the problem of selecting
 //! and positioning glyphs from a font given a Unicode string.
+//!
+//! ## Features
+//!
+//! - `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
+//! - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
+//! - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+//!
+//! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
+//!
+//! TODO: Add more feature docs here
 
 #![no_std]
 #![warn(missing_docs)]
@@ -25,7 +35,7 @@ extern crate alloc;
 extern crate std;
 
 #[cfg(feature = "harfbuzz-sys")]
-pub extern crate harfbuzz_sys as sys;
+pub use harfbuzz_sys as sys;
 
 /// An error type for this crate
 #[derive(Debug)]

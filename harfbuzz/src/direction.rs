@@ -7,12 +7,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use sys;
+use crate::sys;
 
 /// Direction of text flow during layout.
 ///
-/// This maps to the [`hb_direction_t`] from
-/// [`harfbuzz-sys`]. It can be converted to
+/// This maps to the [`hb_direction_t`](crate::sys::hb_direction_t) from
+/// [`harfbuzz-sys`](crate::sys). It can be converted to
 /// or from `hb_direction_t` using the [`From`]
 /// and [`Into`] traits:
 ///
@@ -27,42 +27,27 @@ use sys;
 /// let dir: Direction = sys::HB_DIRECTION_TTB.into();
 /// assert_eq!(dir, Direction::TTB);
 /// ```
-///
-/// [`hb_direction_t`]: ../harfbuzz_sys/type.hb_direction_t.html
-/// [`harfbuzz-sys`]: ../harfbuzz_sys/index.html
-/// [`From`]: https://doc.rust-lang.org/std/convert/trait.From.html
-/// [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html
 #[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
 pub enum Direction {
     /// Initial, unset direction.
     ///
-    /// This corresponds to [`HB_DIRECTION_INVALID`].
-    ///
-    /// [`HB_DIRECTION_INVALID`]: ../harfbuzz_sys/constant.HB_DIRECTION_INVALID.html
+    /// This corresponds to [`HB_DIRECTION_INVALID`](crate::sys::HB_DIRECTION_INVALID).
     Invalid,
     /// Text is set horizontally from left to right.
     ///
-    /// This corresponds to [`HB_DIRECTION_LTR`].
-    ///
-    /// [`HB_DIRECTION_LTR`]: ../harfbuzz_sys/constant.HB_DIRECTION_LTR.html
+    /// This corresponds to [`HB_DIRECTION_LTR`](crate::sys::HB_DIRECTION_LTR).
     LTR,
     /// Text is set horizontally from right to left.
     ///
-    /// This corresponds to [`HB_DIRECTION_RTL`].
-    ///
-    /// [`HB_DIRECTION_RTL`]: ../harfbuzz_sys/constant.HB_DIRECTION_RTL.html
+    /// This corresponds to [`HB_DIRECTION_RTL`](crate::sys::HB_DIRECTION_RTL).
     RTL,
     /// Text is set vertically from top to bottom.
     ///
-    /// This corresponds to [`HB_DIRECTION_TTB`].
-    ///
-    /// [`HB_DIRECTION_TTB`]: ../harfbuzz_sys/constant.HB_DIRECTION_TTB.html
+    /// This corresponds to [`HB_DIRECTION_TTB`](crate::sys::HB_DIRECTION_TTB).
     TTB,
     /// Text is set vertically from bottom to top.
     ///
-    /// This corresponds to [`HB_DIRECTION_BTT`].
-    ///
-    /// [`HB_DIRECTION_BTT`]: ../harfbuzz_sys/constant.HB_DIRECTION_BTT.html
+    /// This corresponds to [`HB_DIRECTION_BTT`](crate::sys::HB_DIRECTION_BTT).
     BTT,
 }
 

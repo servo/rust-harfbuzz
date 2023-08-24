@@ -7,10 +7,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use core::ffi::{c_char, c_uint};
+use crate::sys;
 use core::marker::PhantomData;
+use core::ffi::{c_char, c_uint};
 use core::{mem, ops, ptr, slice};
-use sys;
 
 #[cfg(feature = "std")]
 use std::{ffi::c_void, sync::Arc, vec::Vec};
@@ -90,6 +90,10 @@ impl<'a> Blob<'a> {
     }
 
     /// Construct a `Blob` from a raw pointer. Takes ownership of the blob.
+    ///
+    /// # Safety
+    ///
+    /// The pointer must be valid and must not be used after this function is called.
     pub unsafe fn from_raw(raw: *mut sys::hb_blob_t) -> Self {
         Blob {
             raw,

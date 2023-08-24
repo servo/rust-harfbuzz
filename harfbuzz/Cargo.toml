@@ -1,14 +1,17 @@
 [package]
 name = "harfbuzz"
 version = "0.4.0"
+edition = "2021"
 
 authors = ["The Servo Project Developers"]
-license = "MIT / Apache-2.0"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz/"
-keywords = ["opentype", "font", "text", "layout", "unicode"]
+keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+categories = ["text-processing"]
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
@@ -17,8 +20,10 @@ default-features = false
 optional = true
 
 [features]
-default = ["harfbuzz-sys", "std", "build-native-harfbuzz", "build-native-freetype"]
+default = ["coretext", "directwrite", "freetype", "harfbuzz-sys", "std"]
+bundled = ["harfbuzz-sys?/bundled"]
+coretext = ["harfbuzz-sys?/coretext"]
+directwrite = ["harfbuzz-sys?/directwrite"]
+freetype = ["harfbuzz-sys?/freetype"]
 harfbuzz-sys = ["dep:harfbuzz-sys"]
 std = []
-build-native-harfbuzz = ["harfbuzz-sys?/build-native-harfbuzz"]
-build-native-freetype = ["harfbuzz-sys?/build-native-freetype"]

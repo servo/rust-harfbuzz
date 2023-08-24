@@ -1,2 +1,3 @@
 [workspace]
-members = ["harfbuzz", "harfbuzz-sys", "harfbuzz-sys-test"]
+resolver = "2"
+members = ["harfbuzz", "harfbuzz-sys"]

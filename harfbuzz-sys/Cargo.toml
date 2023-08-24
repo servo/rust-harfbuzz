@@ -1,49 +1,48 @@
 [package]
 name = "harfbuzz-sys"
 version = "0.5.0"
+edition = "2021"
 
 authors = ["The Servo Project Developers"]
-license = "MIT"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz-sys/"
-keywords = ["opentype", "font", "text", "layout", "unicode"]
-categories = ["external-ffi-bindings", "internationalization"]
+keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+categories = ["external-ffi-bindings", "internationalization", "text-processing"]
 
 exclude = [
-    "harfbuzz/test/subset/data/fonts/*",
-    "harfbuzz/test/fuzzing/fonts/*",
-    "harfbuzz/test/shaping/data/text-rendering-tests/fonts/*",
-    "harfbuzz/test/shaping/data/aots/fonts/*",
-    "harfbuzz/test/shaping/data/in-house/fonts/*",
+    "harfbuzz/docs/*",
+    "harfbuzz/subprojects/benchmark-1.5.2/*",
+    "harfbuzz/test/*",
+    "update.sh",
 ]
 
 links = "harfbuzz"
 build = "build.rs"
 
 [build-dependencies]
-pkg-config = { version = "0.3", optional = true }
-cc = { version = "1", optional = true }
+pkg-config = { version = "0.3" }
+cc = { version = "1" }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
-core-graphics = "0.22"
-core-text = "19"
-foreign-types = "0.3"
+core-graphics = { version = "0.22", optional = true }
+core-text = { version = "19", optional = true }
+foreign-types = { version = "0.3", optional = true }
 
 [target.'cfg(target_family = "windows")'.dependencies.winapi]
 version = "0.3"
+optional = true
 features = ["dwrite"]
-
-[target.'cfg(any(target_os = "android", all(unix, not(target_vendor = "apple"))))'.dependencies]
-freetype = { version = "0.7", default-features = false }
 
 [dependencies.freetype]
 version = "0.7"
-default-features = false
 optional = true
 
 [features]
-default = ["build-native-harfbuzz", "build-native-freetype"]
-build-native-harfbuzz = ["cc", "pkg-config"]
-build-native-freetype = ["freetype", "freetype/freetype-sys"]
+default = ["coretext", "directwrite", "freetype"]
+bundled = []
+coretext = ["core-graphics", "core-text", "foreign-types"]
+directwrite = ["winapi"]
