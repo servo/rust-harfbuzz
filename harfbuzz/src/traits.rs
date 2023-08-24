@@ -8,6 +8,8 @@
 // except according to those terms.
 
 /// A general category value. Equivalent to [`hb_unicode_general_category_t`].
+///
+/// [`hb_unicode_general_category_t`]: crate::sys::hb_unicode_general_category_t
 #[repr(u8)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 #[allow(non_camel_case_types)] // the names are defined by Unicode
@@ -57,6 +59,8 @@ pub trait CombiningClassFunc {
     /// [`hb_unicode_combining_class_t`]. Note that the
     /// [Unicode stability policy](https://www.unicode.org/policies/stability_policy.html)
     /// guarantees that Canonical Combining Class numeric values fit in a `u8`.
+    ///
+    /// [`hb_unicode_combining_class_t`]: crate::sys::hb_unicode_combining_class_t
     fn combining_class(&self, ch: u32) -> u8;
 }
 
