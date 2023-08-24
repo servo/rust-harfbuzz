@@ -84,6 +84,7 @@ impl UnicodeFuncsBuilder {
             user_data: *mut c_void,
         ) -> hb_unicode_combining_class_t {
             unsafe { &*(user_data as *mut F) }.combining_class(unicode)
+                as hb_unicode_combining_class_t
         }
         extern "C" fn destroy_combining_class<F>(user_data: *mut c_void) {
             let _ = unsafe { Box::from_raw(user_data as *mut F) };
@@ -270,7 +271,7 @@ impl Drop for UnicodeFuncsBuilder {
 /// }
 ///
 /// impl harfbuzz::CombiningClassFunc for PropertyProvider {
-///     fn combining_class(&self, ch: u32) -> core::ffi::c_uint {
+///     fn combining_class(&self, ch: u32) -> u8 {
 ///         todo!("CombiningClassFunc")
 ///     }
 /// }

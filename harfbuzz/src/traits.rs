@@ -53,9 +53,11 @@ pub trait GeneralCategoryFunc {
 
 /// An object to map from code points to combining classes.
 pub trait CombiningClassFunc {
-    /// Given a code point, return the combining class as a
-    /// [`hb_unicode_combining_class_t`].
-    fn combining_class(&self, ch: u32) -> core::ffi::c_uint;
+    /// Given a code point, return the combining class as a `u8` corresponding to a
+    /// [`hb_unicode_combining_class_t`]. Note that the
+    /// [Unicode stability policy](https://www.unicode.org/policies/stability_policy.html)
+    /// guarantees that Canonical Combining Class numeric values fit in a `u8`.
+    fn combining_class(&self, ch: u32) -> u8;
 }
 
 /// An object to map from code points to mirrored code points.
