@@ -121,7 +121,28 @@ jobs:
         env:
           RUST_BACKTRACE: 1
 
-  windows-ci:
+  windows-ci-shared:
+    name: stable, Windows, shared library
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install harfbuzz from vckpkg
+        run: vcpkg install harfbuzz:x64-windows
+
+      - name: Cargo build
+        run: cargo build --workspace
+
+      - name: Cargo test
+        run: cargo test --workspace
+        env:
+          RUST_BACKTRACE: 1
+
+  windows-ci-static:
     name: stable, Windows, static library
     runs-on: windows-latest
 
@@ -189,7 +210,8 @@ jobs:
       - "mac-ci-shared"
       - "mac-ci-static"
       - "wasm32-emscripten-ci"
-      - "windows-ci"
+      - "windows-ci-shared"
+      - "windows-ci-static"
 
     steps:
       - name: Mark the job as successful
