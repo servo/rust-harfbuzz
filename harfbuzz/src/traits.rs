@@ -7,11 +7,48 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+/// A general category value. Equivalent to [`hb_unicode_general_category_t`].
+#[repr(u8)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[allow(non_camel_case_types)] // the names are defined by Unicode
+#[allow(missing_docs)] // the categories are defined by Unicode
+pub enum GeneralCategory {
+    Control = 0,
+    Format = 1,
+    Unassigned = 2,
+    Private_use = 3,
+    Surrogate = 4,
+    Lowercase_Letter = 5,
+    Modifier_Letter = 6,
+    Other_Letter = 7,
+    Titlecase_Letter = 8,
+    Uppercase_Letter = 9,
+    Spacing_Mark = 10,
+    Enclosing_Mark = 11,
+    Non_Spacing_Mark = 12,
+    Decimal_Number = 13,
+    Letter_Number = 14,
+    Other_Number = 15,
+    Connect_Punctuation = 16,
+    Dash_Punctuation = 17,
+    Close_Punctuation = 18,
+    Final_Punctuation = 19,
+    Initial_Punctuation = 20,
+    Other_Punctuation = 21,
+    Open_Punctuation = 22,
+    Currency_Symbol = 23,
+    Modifier_Symbol = 24,
+    Math_Symbol = 25,
+    Other_Symbol = 26,
+    Line_Separator = 27,
+    Paragraph_Separator = 28,
+    Space_Separator = 29,
+}
+
 /// An object to map from code points to general category properties.
 pub trait GeneralCategoryFunc {
-    /// Given a code point, return the general category as a
-    /// [`hb_unicode_general_category_t`].
-    fn general_category(&self, ch: u32) -> core::ffi::c_uint;
+    /// Given a code point, return the general category as a [`GeneralCategory`].
+    fn general_category(&self, ch: u32) -> GeneralCategory;
 }
 
 /// An object to map from code points to combining classes.

@@ -69,6 +69,7 @@ mod traits;
 pub use self::traits::CombiningClassFunc;
 pub use self::traits::ComposeFunc;
 pub use self::traits::DecomposeFunc;
+pub use self::traits::GeneralCategory;
 pub use self::traits::GeneralCategoryFunc;
 pub use self::traits::MirroringFunc;
 pub use self::traits::ScriptFunc;

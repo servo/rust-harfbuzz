@@ -60,6 +60,7 @@ impl UnicodeFuncsBuilder {
             user_data: *mut c_void,
         ) -> hb_unicode_general_category_t {
             unsafe { &*(user_data as *mut F) }.general_category(unicode)
+                as hb_unicode_general_category_t
         }
         extern "C" fn destroy_general_category<F>(user_data: *mut c_void) {
             let _ = unsafe { Box::from_raw(user_data as *mut F) };
@@ -263,7 +264,7 @@ impl Drop for UnicodeFuncsBuilder {
 /// struct PropertyProvider;
 ///
 /// impl harfbuzz::GeneralCategoryFunc for PropertyProvider {
-///     fn general_category(&self, ch: u32) -> core::ffi::c_uint {
+///     fn general_category(&self, ch: u32) -> harfbuzz::GeneralCategory {
 ///         todo!("GeneralCategoryFunc")
 ///     }
 /// }
