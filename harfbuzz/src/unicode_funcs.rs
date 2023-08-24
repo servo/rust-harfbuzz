@@ -7,11 +7,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+use crate::sys::*;
 use crate::traits::*;
 use crate::Error;
 use alloc::boxed::Box;
 use core::ffi::c_void;
-use sys::*;
 
 /// A builder for [`UnicodeFuncs`].
 ///

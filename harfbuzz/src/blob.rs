@@ -8,8 +8,8 @@
 // except according to those terms.
 
 use crate::sys;
-use core::marker::PhantomData;
 use core::ffi::{c_char, c_uint};
+use core::marker::PhantomData;
 use core::{mem, ops, ptr, slice};
 
 #[cfg(feature = "std")]
