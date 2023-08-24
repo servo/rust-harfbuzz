@@ -50,7 +50,7 @@ pub enum GeneralCategory {
 /// An object to map from code points to general category properties.
 pub trait GeneralCategoryFunc {
     /// Given a code point, return the general category as a [`GeneralCategory`].
-    fn general_category(&self, ch: u32) -> GeneralCategory;
+    fn general_category(&self, ch: char) -> GeneralCategory;
 }
 
 /// An object to map from code points to combining classes.
@@ -61,29 +61,29 @@ pub trait CombiningClassFunc {
     /// guarantees that Canonical Combining Class numeric values fit in a `u8`.
     ///
     /// [`hb_unicode_combining_class_t`]: crate::sys::hb_unicode_combining_class_t
-    fn combining_class(&self, ch: u32) -> u8;
+    fn combining_class(&self, ch: char) -> u8;
 }
 
 /// An object to map from code points to mirrored code points.
 pub trait MirroringFunc {
     /// Given a code point, return the mirrored code point.
-    fn mirroring(&self, ch: u32) -> u32;
+    fn mirroring(&self, ch: char) -> char;
 }
 
 /// An object to map from code points to script names.
 pub trait ScriptFunc {
     /// Given a code point, return the script as a 4-byte script name.
-    fn script(&self, ch: u32) -> [u8; 4];
+    fn script(&self, ch: char) -> [u8; 4];
 }
 
 /// An object to compose two characters.
 pub trait ComposeFunc {
     /// Given two code points, return the composed code point.
-    fn compose(&self, a: u32, b: u32) -> Option<u32>;
+    fn compose(&self, a: char, b: char) -> Option<char>;
 }
 
 /// An object to decompose a character.
 pub trait DecomposeFunc {
     /// Given a code point, return the two decomposed code points.
-    fn decompose(&self, ab: u32) -> Option<(u32, u32)>;
+    fn decompose(&self, ab: char) -> Option<(char, char)>;
 }

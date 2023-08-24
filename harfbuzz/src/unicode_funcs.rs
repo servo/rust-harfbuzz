@@ -13,6 +13,12 @@ use crate::Error;
 use alloc::boxed::Box;
 use core::ffi::c_void;
 
+/// Converts from `hb_codepoint_t`, assumed to be valid, to `char`.
+#[inline]
+fn hb_codepoint_t_to_char(input: hb_codepoint_t) -> char {
+    unsafe { char::from_u32_unchecked(input) }
+}
+
 /// A builder for [`UnicodeFuncs`].
 ///
 /// Not all of the functions need to be provided. If a function is missing,
@@ -59,7 +65,7 @@ impl UnicodeFuncsBuilder {
             unicode: hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_unicode_general_category_t {
-            unsafe { &*(user_data as *mut F) }.general_category(unicode)
+            unsafe { &*(user_data as *mut F) }.general_category(hb_codepoint_t_to_char(unicode))
                 as hb_unicode_general_category_t
         }
         extern "C" fn destroy_general_category<F>(user_data: *mut c_void) {
@@ -83,7 +89,7 @@ impl UnicodeFuncsBuilder {
             unicode: hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_unicode_combining_class_t {
-            unsafe { &*(user_data as *mut F) }.combining_class(unicode)
+            unsafe { &*(user_data as *mut F) }.combining_class(hb_codepoint_t_to_char(unicode))
                 as hb_unicode_combining_class_t
         }
         extern "C" fn destroy_combining_class<F>(user_data: *mut c_void) {
@@ -107,7 +113,8 @@ impl UnicodeFuncsBuilder {
             unicode: hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_codepoint_t {
-            unsafe { &*(user_data as *mut F) }.mirroring(unicode)
+            unsafe { &*(user_data as *mut F) }.mirroring(hb_codepoint_t_to_char(unicode))
+                as hb_codepoint_t
         }
         extern "C" fn destroy_mirroring<F>(user_data: *mut c_void) {
             let _ = unsafe { Box::from_raw(user_data as *mut F) };
@@ -130,7 +137,7 @@ impl UnicodeFuncsBuilder {
             unicode: hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_codepoint_t {
-            let code = unsafe { &*(user_data as *mut F) }.script(unicode);
+            let code = unsafe { &*(user_data as *mut F) }.script(hb_codepoint_t_to_char(unicode));
             unsafe { hb_script_from_string(code.as_ptr() as *const i8, 4) }
         }
         extern "C" fn destroy_script<F>(user_data: *mut c_void) {
@@ -156,10 +163,11 @@ impl UnicodeFuncsBuilder {
             ab: *mut hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_bool_t {
-            let result = unsafe { &*(user_data as *mut F) }.compose(a, b);
+            let result = unsafe { &*(user_data as *mut F) }
+                .compose(hb_codepoint_t_to_char(a), hb_codepoint_t_to_char(b));
             match result {
                 Some(ab_x) => {
-                    unsafe { *ab = ab_x };
+                    unsafe { *ab = ab_x as hb_codepoint_t };
                     true as hb_bool_t
                 }
                 None => false as hb_bool_t,
@@ -188,11 +196,11 @@ impl UnicodeFuncsBuilder {
             b: *mut hb_codepoint_t,
             user_data: *mut c_void,
         ) -> hb_bool_t {
-            let result = unsafe { &*(user_data as *mut F) }.decompose(ab);
+            let result = unsafe { &*(user_data as *mut F) }.decompose(hb_codepoint_t_to_char(ab));
             match result {
                 Some((a_x, b_x)) => {
-                    unsafe { *a = a_x };
-                    unsafe { *b = b_x };
+                    unsafe { *a = a_x as hb_codepoint_t };
+                    unsafe { *b = b_x as hb_codepoint_t };
                     true as hb_bool_t
                 }
                 None => false as hb_bool_t,
@@ -265,38 +273,38 @@ impl Drop for UnicodeFuncsBuilder {
 /// struct PropertyProvider;
 ///
 /// impl harfbuzz::GeneralCategoryFunc for PropertyProvider {
-///     fn general_category(&self, ch: u32) -> harfbuzz::GeneralCategory {
+///     fn general_category(&self, ch: char) -> harfbuzz::GeneralCategory {
 ///         todo!("GeneralCategoryFunc")
 ///     }
 /// }
 ///
 /// impl harfbuzz::CombiningClassFunc for PropertyProvider {
-///     fn combining_class(&self, ch: u32) -> u8 {
+///     fn combining_class(&self, ch: char) -> u8 {
 ///         todo!("CombiningClassFunc")
 ///     }
 /// }
 ///
 /// impl harfbuzz::MirroringFunc for PropertyProvider {
-///     fn mirroring(&self, ch: u32) -> u32 {
+///     fn mirroring(&self, ch: char) -> char {
 ///         todo!("MirroringFunc")
 ///     }
 /// }
 ///
 /// impl harfbuzz::ScriptFunc for PropertyProvider {
-///     fn script(&self, ch: u32) -> [u8; 4] {
-///         debug_assert!(ch >= 0x0600 && ch <= 0x06FF); // Arab code points
+///     fn script(&self, ch: char) -> [u8; 4] {
+///         debug_assert!(ch as u32 >= 0x0600 && ch as u32 <= 0x06FF); // Arab code points
 ///         *b"Arab"
 ///     }
 /// }
 ///
 /// impl harfbuzz::ComposeFunc for PropertyProvider {
-///     fn compose(&self, a: u32, b:u32) -> Option<u32> {
+///     fn compose(&self, a: char, b:char) -> Option<char> {
 ///         todo!("ComposeFunc")
 ///     }
 /// }
 ///
 /// impl harfbuzz::DecomposeFunc for PropertyProvider {
-///     fn decompose(&self, ab: u32) -> Option<(u32, u32)> {
+///     fn decompose(&self, ab: char) -> Option<(char, char)> {
 ///         todo!("DecomposeFunc")
 ///     }
 /// }
