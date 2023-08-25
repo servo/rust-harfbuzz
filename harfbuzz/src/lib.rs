@@ -39,3 +39,6 @@ pub use self::language::Language;
 
 mod blob;
 pub use self::blob::Blob;
+
+mod version;
+pub use self::version::{version, version_atleast, version_string};
