@@ -26,15 +26,15 @@ impl Language {
         Language {
             raw: unsafe {
                 sys::hb_language_from_string(
-                    lang.as_ptr() as *const std::os::raw::c_char,
-                    lang.len() as std::os::raw::c_int,
+                    lang.as_ptr() as *const core::ffi::c_char,
+                    lang.len() as core::ffi::c_int,
                 )
             },
         }
     }
 
     pub fn to_string(&self) -> &str {
-        unsafe { std::ffi::CStr::from_ptr(sys::hb_language_to_string(self.raw)) }
+        unsafe { core::ffi::CStr::from_ptr(sys::hb_language_to_string(self.raw)) }
             .to_str()
             .unwrap()
     }
@@ -63,8 +63,8 @@ impl Language {
     }
 }
 
-impl std::fmt::Debug for Language {
-    fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl core::fmt::Debug for Language {
+    fn fmt(&self, fmt: &mut core::fmt::Formatter) -> core::fmt::Result {
         fmt.write_str(self.to_string())
     }
 }

@@ -8,10 +8,12 @@
 // except according to those terms.
 
 use crate::sys;
-use std::marker::PhantomData;
-use std::os::raw::{c_char, c_uint, c_void};
-use std::sync::Arc;
-use std::{mem, ops, ptr, slice};
+use core::ffi::{c_char, c_uint};
+use core::marker::PhantomData;
+use core::{mem, ops, ptr, slice};
+
+#[cfg(feature = "std")]
+use std::{ffi::c_void, sync::Arc, vec::Vec};
 
 /// Blobs wrap a chunk of binary data to handle lifecycle management of data
 /// while it is passed between client and HarfBuzz.
@@ -55,6 +57,8 @@ impl<'a> Blob<'a> {
     /// data may be shared by Rust code and the blob. The `Vec` is freed
     /// when all references are dropped.
     ///
+    /// ✨ *Enabled with the `std` Cargo feature.*
+    ///
     /// ```
     /// # use std::sync::Arc;
     /// # use harfbuzz::Blob;
@@ -63,6 +67,7 @@ impl<'a> Blob<'a> {
     /// assert_eq!(blob.len(), 256);
     /// assert!(!blob.is_empty());
     /// ```
+    #[cfg(feature = "std")]
     pub fn new_from_arc_vec(data: Arc<Vec<u8>>) -> Blob<'static> {
         let len = data.len();
         assert!(len <= c_uint::max_value() as usize);
