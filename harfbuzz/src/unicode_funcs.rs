@@ -8,7 +8,7 @@
 // except according to those terms.
 
 use crate::sys::*;
-use crate::traits::*;
+use harfbuzz_traits::*;
 use crate::Error;
 use alloc::boxed::Box;
 use core::ffi::c_void;
