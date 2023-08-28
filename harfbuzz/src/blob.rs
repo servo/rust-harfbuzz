@@ -57,6 +57,8 @@ impl<'a> Blob<'a> {
     /// data may be shared by Rust code and the blob. The `Vec` is freed
     /// when all references are dropped.
     ///
+    /// ✨ *Enabled with the `std` Cargo feature.*
+    ///
     /// ```
     /// # use std::sync::Arc;
     /// # use harfbuzz::Blob;

@@ -20,6 +20,8 @@
 //!
 //! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
 
+#![no_std]
+
 #[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
 
