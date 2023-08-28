@@ -23,11 +23,11 @@ fn build_harfbuzz() {
         cfg.define("HAVE_PTHREAD", "1");
     }
 
-    if target.contains("apple") {
+    if target.contains("apple") && cfg!(feature = "coretext") {
         cfg.define("HAVE_CORETEXT", "1");
     }
 
-    if target.contains("windows") {
+    if target.contains("windows") && cfg!(feature = "directwrite") {
         cfg.define("HAVE_DIRECTWRITE", "1");
     }
 

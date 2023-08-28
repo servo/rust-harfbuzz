@@ -59,3 +59,6 @@ pub use self::blob::Blob;
 
 mod unicode_funcs;
 pub use self::unicode_funcs::{UnicodeFuncs, UnicodeFuncsBuilder};
+
+mod version;
+pub use self::version::{version, version_atleast, version_string};

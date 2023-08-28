@@ -206,7 +206,7 @@ impl Buffer {
     ///
     /// Finally, if buffer language is not set (ie. is `HB_LANGUAGE_INVALID`),
     /// it will be set to the process's default language as returned by
-    /// `hb_language_get_default()`. This may change in the future by
+    /// [`Language::get_process_default()`]. This may change in the future by
     /// taking buffer script into consideration when choosing a language.
     ///
     /// ```
