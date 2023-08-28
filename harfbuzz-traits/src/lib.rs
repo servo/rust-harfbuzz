@@ -12,6 +12,8 @@
 //! This crate provides traits for the `harfbuzz` crate that can be implememted without
 //! depending on [HarfBuzz](https://harfbuzz.github.io/) itself.
 
+#![no_std]
+
 mod unicode_funcs_traits;
 
 pub use unicode_funcs_traits::*;
