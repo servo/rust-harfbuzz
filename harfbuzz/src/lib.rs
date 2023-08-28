@@ -35,7 +35,6 @@ extern crate alloc;
 #[cfg(feature = "std")]
 extern crate std;
 
-#[cfg(feature = "harfbuzz-sys")]
 pub use harfbuzz_sys as sys;
 
 /// An error type for this crate
@@ -46,24 +45,16 @@ pub enum HarfBuzzError {
 }
 pub use HarfBuzzError as Error;
 
-#[cfg(feature = "harfbuzz-sys")]
 mod buffer;
-#[cfg(feature = "harfbuzz-sys")]
 pub use self::buffer::Buffer;
 
-#[cfg(feature = "harfbuzz-sys")]
 mod direction;
-#[cfg(feature = "harfbuzz-sys")]
 pub use self::direction::Direction;
 
-#[cfg(feature = "harfbuzz-sys")]
 mod language;
-#[cfg(feature = "harfbuzz-sys")]
 pub use self::language::Language;
 
-#[cfg(feature = "harfbuzz-sys")]
 mod blob;
-#[cfg(feature = "harfbuzz-sys")]
 pub use self::blob::Blob;
 
 mod traits;
@@ -75,7 +66,5 @@ pub use self::traits::GeneralCategoryFunc;
 pub use self::traits::MirroringFunc;
 pub use self::traits::ScriptFunc;
 
-#[cfg(feature = "harfbuzz-sys")]
 mod unicode_funcs;
-#[cfg(feature = "harfbuzz-sys")]
 pub use self::unicode_funcs::{UnicodeFuncs, UnicodeFuncsBuilder};

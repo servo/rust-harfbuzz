@@ -17,7 +17,6 @@ categories = ["text-processing"]
 path = "../harfbuzz-sys"
 version = "0.5.0"
 default-features = false
-optional = true
 
 [dependencies.harfbuzz-traits]
 path = "../harfbuzz-traits"
@@ -25,10 +24,9 @@ version = "0.1.0"
 default-features = false
 
 [features]
-default = ["coretext", "directwrite", "freetype", "harfbuzz-sys", "std"]
-bundled = ["harfbuzz-sys?/bundled"]
-coretext = ["harfbuzz-sys?/coretext"]
-directwrite = ["harfbuzz-sys?/directwrite"]
-freetype = ["harfbuzz-sys?/freetype"]
-harfbuzz-sys = ["dep:harfbuzz-sys"]
+default = ["coretext", "directwrite", "freetype", "std"]
+bundled = ["harfbuzz-sys/bundled"]
+coretext = ["harfbuzz-sys/coretext"]
+directwrite = ["harfbuzz-sys/directwrite"]
+freetype = ["harfbuzz-sys/freetype"]
 std = []
