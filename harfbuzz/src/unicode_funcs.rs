@@ -272,38 +272,38 @@ impl Drop for UnicodeFuncsBuilder {
 /// # use harfbuzz::{Buffer, Direction, UnicodeFuncsBuilder, sys};
 /// struct PropertyProvider;
 ///
-/// impl harfbuzz::GeneralCategoryFunc for PropertyProvider {
-///     fn general_category(&self, ch: char) -> harfbuzz::GeneralCategory {
+/// impl harfbuzz_traits::GeneralCategoryFunc for PropertyProvider {
+///     fn general_category(&self, ch: char) -> harfbuzz_traits::GeneralCategory {
 ///         todo!("GeneralCategoryFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz::CombiningClassFunc for PropertyProvider {
+/// impl harfbuzz_traits::CombiningClassFunc for PropertyProvider {
 ///     fn combining_class(&self, ch: char) -> u8 {
 ///         todo!("CombiningClassFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz::MirroringFunc for PropertyProvider {
+/// impl harfbuzz_traits::MirroringFunc for PropertyProvider {
 ///     fn mirroring(&self, ch: char) -> char {
 ///         todo!("MirroringFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz::ScriptFunc for PropertyProvider {
+/// impl harfbuzz_traits::ScriptFunc for PropertyProvider {
 ///     fn script(&self, ch: char) -> [u8; 4] {
 ///         debug_assert!(ch as u32 >= 0x0600 && ch as u32 <= 0x06FF); // Arab code points
 ///         *b"Arab"
 ///     }
 /// }
 ///
-/// impl harfbuzz::ComposeFunc for PropertyProvider {
+/// impl harfbuzz_traits::ComposeFunc for PropertyProvider {
 ///     fn compose(&self, a: char, b:char) -> Option<char> {
 ///         todo!("ComposeFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz::DecomposeFunc for PropertyProvider {
+/// impl harfbuzz_traits::DecomposeFunc for PropertyProvider {
 ///     fn decompose(&self, ab: char) -> Option<(char, char)> {
 ///         todo!("DecomposeFunc")
 ///     }
