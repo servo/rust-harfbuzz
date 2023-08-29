@@ -18,8 +18,6 @@
 //! - `std` - Enable certain functions that require the standard library. (Enabled by default.)
 //!
 //! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
-//!
-//! TODO: Add more feature docs here
 
 #![no_std]
 #![warn(missing_docs)]
