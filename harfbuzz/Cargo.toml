@@ -19,8 +19,9 @@ version = "0.5.0"
 default-features = false
 
 [features]
-default = ["coretext", "directwrite", "freetype"]
+default = ["coretext", "directwrite", "freetype", "std"]
 bundled = ["harfbuzz-sys/bundled"]
 coretext = ["harfbuzz-sys/coretext"]
 directwrite = ["harfbuzz-sys/directwrite"]
 freetype = ["harfbuzz-sys/freetype"]
+std = []

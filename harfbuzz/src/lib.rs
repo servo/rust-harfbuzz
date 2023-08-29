@@ -15,9 +15,11 @@
 //! - `freetype` - Enables bindings to the FreeType font engine. (Enabled by default.)
 //! - `coretext` - Enables bindings to the CoreText font engine. (Apple platforms only) (Enabled by default.)
 //! - `directwrite` - Enables bindings to the DirectWrite font engine. (Windows only) (Enabled by default.)
+//! - `std` - Enable certain functions that require the standard library. (Enabled by default.)
 //!
 //! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
 
+#![no_std]
 #![warn(missing_docs)]
 #![deny(
     trivial_numeric_casts,
@@ -25,6 +27,11 @@
     unused_import_braces,
     unused_qualifications
 )]
+
+extern crate alloc;
+
+#[cfg(feature = "std")]
+extern crate std;
 
 pub use harfbuzz_sys as sys;
 
