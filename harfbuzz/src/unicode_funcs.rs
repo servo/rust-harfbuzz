@@ -8,10 +8,10 @@
 // except according to those terms.
 
 use crate::sys::*;
-use harfbuzz_traits::*;
 use crate::Error;
 use alloc::boxed::Box;
 use core::ffi::c_void;
+use harfbuzz_traits::*;
 
 /// Converts from `hb_codepoint_t`, assumed to be valid, to `char`.
 #[inline]
