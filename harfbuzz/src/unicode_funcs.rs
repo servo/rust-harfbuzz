@@ -8,10 +8,10 @@
 // except according to those terms.
 
 use crate::sys::*;
+use crate::traits::*;
 use crate::Error;
 use alloc::boxed::Box;
 use core::ffi::c_void;
-use harfbuzz_traits::*;
 
 /// Converts from `hb_codepoint_t`, assumed to be valid, to `char`.
 #[inline]
@@ -272,38 +272,38 @@ impl Drop for UnicodeFuncsBuilder {
 /// # use harfbuzz::{Buffer, Direction, UnicodeFuncsBuilder, sys};
 /// struct PropertyProvider;
 ///
-/// impl harfbuzz_traits::GeneralCategoryFunc for PropertyProvider {
-///     fn general_category(&self, ch: char) -> harfbuzz_traits::GeneralCategory {
+/// impl harfbuzz::traits::GeneralCategoryFunc for PropertyProvider {
+///     fn general_category(&self, ch: char) -> harfbuzz::traits::GeneralCategory {
 ///         todo!("GeneralCategoryFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz_traits::CombiningClassFunc for PropertyProvider {
+/// impl harfbuzz::traits::CombiningClassFunc for PropertyProvider {
 ///     fn combining_class(&self, ch: char) -> u8 {
 ///         todo!("CombiningClassFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz_traits::MirroringFunc for PropertyProvider {
+/// impl harfbuzz::traits::MirroringFunc for PropertyProvider {
 ///     fn mirroring(&self, ch: char) -> char {
 ///         todo!("MirroringFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz_traits::ScriptFunc for PropertyProvider {
+/// impl harfbuzz::traits::ScriptFunc for PropertyProvider {
 ///     fn script(&self, ch: char) -> [u8; 4] {
 ///         debug_assert!(ch as u32 >= 0x0600 && ch as u32 <= 0x06FF); // Arab code points
 ///         *b"Arab"
 ///     }
 /// }
 ///
-/// impl harfbuzz_traits::ComposeFunc for PropertyProvider {
+/// impl harfbuzz::traits::ComposeFunc for PropertyProvider {
 ///     fn compose(&self, a: char, b:char) -> Option<char> {
 ///         todo!("ComposeFunc")
 ///     }
 /// }
 ///
-/// impl harfbuzz_traits::DecomposeFunc for PropertyProvider {
+/// impl harfbuzz::traits::DecomposeFunc for PropertyProvider {
 ///     fn decompose(&self, ab: char) -> Option<(char, char)> {
 ///         todo!("DecomposeFunc")
 ///     }
