@@ -34,6 +34,7 @@ extern crate alloc;
 extern crate std;
 
 pub use harfbuzz_sys as sys;
+pub use harfbuzz_traits as traits;
 
 /// An error type for this crate
 #[derive(Debug)]
