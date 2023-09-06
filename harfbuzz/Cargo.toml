@@ -18,6 +18,11 @@ path = "../harfbuzz-sys"
 version = "0.5.0"
 default-features = false
 
+[dependencies.harfbuzz-traits]
+path = "../harfbuzz-traits"
+version = "0.1.0"
+default-features = false
+
 [features]
 default = ["coretext", "directwrite", "freetype", "std"]
 bundled = ["harfbuzz-sys/bundled"]

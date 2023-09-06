@@ -34,6 +34,15 @@ extern crate alloc;
 extern crate std;
 
 pub use harfbuzz_sys as sys;
+pub use harfbuzz_traits as traits;
+
+/// An error type for this crate
+#[derive(Debug)]
+pub enum HarfBuzzError {
+    /// Allocation failed within HarfBuzz itself
+    Alloc,
+}
+pub use HarfBuzzError as Error;
 
 mod buffer;
 pub use self::buffer::Buffer;
@@ -46,6 +55,9 @@ pub use self::language::Language;
 
 mod blob;
 pub use self::blob::Blob;
+
+mod unicode_funcs;
+pub use self::unicode_funcs::{UnicodeFuncs, UnicodeFuncsBuilder};
 
 mod version;
 pub use self::version::{version, version_atleast, version_string};

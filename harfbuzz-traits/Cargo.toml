@@ -1,0 +1,16 @@
+[package]
+name = "harfbuzz-traits"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["The Servo Project Developers"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+
+description = "Rust Traits for the HarfBuzz text shaping engine"
+repository = "https://github.com/servo/rust-harfbuzz"
+documentation = "https://docs.rs/harfbuzz/"
+keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+categories = ["text-processing"]
+
+[features]
