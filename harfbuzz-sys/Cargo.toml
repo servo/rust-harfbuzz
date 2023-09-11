@@ -37,8 +37,8 @@ version = "0.3"
 optional = true
 features = ["dwrite"]
 
-[dependencies.freetype]
-version = "0.7"
+[dependencies.freetype-sys]
+version = "0.18"
 optional = true
 
 [features]
@@ -46,3 +46,4 @@ default = ["coretext", "directwrite", "freetype"]
 bundled = []
 coretext = ["core-graphics", "core-text", "foreign-types"]
 directwrite = ["winapi"]
+freetype = ["freetype-sys"]

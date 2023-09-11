@@ -11,5 +11,5 @@ use crate::hb_font_t;
 
 extern "C" {
     /// This requires that the `freetype` feature is enabled.
-    pub fn hb_ft_font_create_referenced(face: freetype::freetype::FT_Face) -> *mut hb_font_t;
+    pub fn hb_ft_font_create_referenced(face: freetype_sys::FT_Face) -> *mut hb_font_t;
 }
