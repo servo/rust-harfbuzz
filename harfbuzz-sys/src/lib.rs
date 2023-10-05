@@ -21,6 +21,7 @@
 //! - `bundled` - Use the bundled copy of the harfbuzz library rather than one installed on the system.
 
 #![no_std]
+#![warn(clippy::doc_markdown)]
 
 #[cfg(all(target_vendor = "apple", feature = "coretext"))]
 pub mod coretext;
