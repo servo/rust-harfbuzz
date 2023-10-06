@@ -134,7 +134,7 @@ impl Buffer {
                 text.len() as core::ffi::c_int,
                 0,
                 text.len() as core::ffi::c_int,
-            )
+            );
         };
     }
 
@@ -154,7 +154,7 @@ impl Buffer {
                 other.raw,
                 start as core::ffi::c_uint,
                 end as core::ffi::c_uint,
-            )
+            );
         };
     }
 

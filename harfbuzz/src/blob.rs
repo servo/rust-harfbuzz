@@ -77,7 +77,7 @@ impl<'a> Blob<'a> {
 
             // This has type hb_destroy_func_t
             unsafe extern "C" fn arc_vec_blob_destroy(user_data: *mut c_void) {
-                drop(Arc::from_raw(user_data as *const Vec<u8>))
+                drop(Arc::from_raw(user_data as *const Vec<u8>));
             }
 
             let hb_blob = sys::hb_blob_create(
