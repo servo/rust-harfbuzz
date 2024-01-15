@@ -38,7 +38,7 @@ optional = true
 features = ["dwrite"]
 
 [dependencies.freetype-sys]
-version = "0.18"
+version = "0.19"
 optional = true
 
 [features]
