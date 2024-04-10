@@ -10,7 +10,7 @@ readme = "README.md"
 description = "Rust Traits for the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz/"
-keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+keywords = ["opentype", "font", "text", "unicode", "shaping"]
 categories = ["text-processing"]
 
 [features]

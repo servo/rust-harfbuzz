@@ -10,7 +10,7 @@ readme = "README.md"
 description = "Rust bindings to the HarfBuzz text shaping engine"
 repository = "https://github.com/servo/rust-harfbuzz"
 documentation = "https://docs.rs/harfbuzz-sys/"
-keywords = ["opentype", "font", "text", "layout", "unicode", "shaping"]
+keywords = ["opentype", "font", "text", "unicode", "shaping"]
 categories = ["external-ffi-bindings", "internationalization", "text-processing"]
 
 exclude = [
