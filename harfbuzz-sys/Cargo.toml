@@ -1,17 +1,16 @@
 [package]
 name = "harfbuzz-sys"
-version = "0.6.0"
-edition = "2021"
-
-authors = ["The Servo Project Developers"]
-license = "MIT OR Apache-2.0"
+version = "0.6.1"
 readme = "README.md"
-
-description = "Rust bindings to the HarfBuzz text shaping engine"
-repository = "https://github.com/servo/rust-harfbuzz"
-documentation = "https://docs.rs/harfbuzz-sys/"
-keywords = ["opentype", "font", "text", "unicode", "shaping"]
 categories = ["external-ffi-bindings", "internationalization", "text-processing"]
+description = "Rust bindings to the HarfBuzz text shaping engine"
+
+authors = { workspace = true }
+documentation = { workspace = true }
+edition = { workspace = true }
+keywords = { workspace = true }
+license = { workspace = true }
+repository = { workspace = true }
 
 exclude = [
     "harfbuzz/docs/*",
