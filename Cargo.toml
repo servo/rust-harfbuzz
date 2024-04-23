@@ -1,3 +1,12 @@
 [workspace]
 resolver = "2"
 members = ["harfbuzz", "harfbuzz-sys", "harfbuzz-traits"]
+
+[workspace.package]
+edition = "2021"
+authors = ["The Servo Project Developers"]
+license = "MIT OR Apache-2.0"
+documentation = "https://docs.rs/harfbuzz/"
+keywords = ["opentype", "font", "text", "unicode", "shaping"]
+categories = ["text-processing"]
+repository = "https://github.com/servo/rust-harfbuzz"
