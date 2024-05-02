@@ -39,7 +39,7 @@ impl<'a> Blob<'a> {
     /// assert!(!blob.is_empty());
     /// ```
     pub fn new_read_only(data: &'a [u8]) -> Blob<'a> {
-        assert!(data.len() <= c_uint::max_value() as usize);
+        assert!(data.len() <= c_uint::MAX as usize);
         unsafe {
             Blob::from_raw(sys::hb_blob_create(
                 data.as_ptr() as *const c_char,
@@ -70,7 +70,7 @@ impl<'a> Blob<'a> {
     #[cfg(feature = "std")]
     pub fn new_from_arc_vec(data: Arc<Vec<u8>>) -> Blob<'static> {
         let len = data.len();
-        assert!(len <= c_uint::max_value() as usize);
+        assert!(len <= c_uint::MAX as usize);
         unsafe {
             let data_ptr = data.as_ptr();
             let ptr = Arc::into_raw(data);
