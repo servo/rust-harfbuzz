@@ -31,10 +31,10 @@ core-graphics = { version = "0.23", optional = true }
 core-text = { version = "20", optional = true }
 foreign-types = { version = "0.5", optional = true }
 
-[target.'cfg(target_family = "windows")'.dependencies.winapi]
-version = "0.3"
+[target.'cfg(target_family = "windows")'.dependencies.windows]
+version = "0.57"
 optional = true
-features = ["dwrite"]
+features = ["Win32_Graphics_DirectWrite"]
 
 [dependencies.freetype-sys]
 version = "0.20.1"
@@ -44,5 +44,5 @@ optional = true
 default = ["coretext", "directwrite", "freetype"]
 bundled = []
 coretext = ["core-graphics", "core-text", "foreign-types"]
-directwrite = ["winapi"]
+directwrite = ["windows"]
 freetype = ["freetype-sys"]

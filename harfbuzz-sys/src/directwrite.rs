@@ -9,7 +9,7 @@
 
 use crate::hb_face_t;
 
-use winapi::um::dwrite::IDWriteFontFace;
+use windows::Win32::Graphics::DirectWrite::IDWriteFontFace;
 
 extern "C" {
     /// This requires that the `directwrite` feature is enabled.
