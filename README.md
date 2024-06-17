@@ -21,3 +21,9 @@ Or, after a clone:
 ```
 git submodule update --init
 ```
+
+## FreeType Support
+
+The `freetype` feature is enabled by default. If your system does not have FreeType
+or FreeType development packages, which is typically the case for Windows, you can
+either disable default features or enable the `freetype-sys/bundled` feature.

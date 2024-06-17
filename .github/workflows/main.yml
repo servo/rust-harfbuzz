@@ -12,16 +12,16 @@ on:
 jobs:
   linux-ci-shared:
     name: stable, Linux, shared library
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      
-      - name: install harfbuzz from apt
+
+      - name: Install harfbuzz from apt
         run: |
           sudo apt update
-          sudo apt install libharfbuzz-dev
+          sudo apt install libharfbuzz-dev libfreetype-dev
 
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -54,16 +54,16 @@ jobs:
       # do this where the embedded harfbuzz is statically linked, but we don't
       # need to do it for every environment.
       - name: Cargo package
-        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --features bundled
+        run: cargo package --manifest-path=harfbuzz-sys/Cargo.toml --features "freetype-sys/bundled bundled"
 
       - name: Cargo build
-        run: cargo build --workspace --features bundled
+        run: cargo build --workspace --features "freetype-sys/bundled bundled"
 
       - name: Cargo clippy
-        run: cargo clippy --workspace --features bundled -- -D warnings
+        run: cargo clippy --workspace --features "freetype-sys/bundled bundled" -- -D warnings
 
       - name: Cargo test
-        run: cargo test --workspace --features bundled
+        run: cargo test --workspace --features "freetype-sys/bundled bundled"
         env:
           RUST_BACKTRACE: 1
 
@@ -134,10 +134,10 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Cargo build
-        run: cargo build --workspace --features bundled
+        run: cargo build --workspace --features "freetype-sys/bundled bundled"
 
       - name: Cargo test
-        run: cargo test --workspace --features bundled
+        run: cargo test --workspace --features "freetype-sys/bundled bundled"
         env:
           RUST_BACKTRACE: 1
 
