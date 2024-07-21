@@ -9,7 +9,7 @@
 
 //! # harfbuzz-traits
 //!
-//! This crate provides traits for the `harfbuzz` crate that can be implememted without
+//! This crate provides traits for the `harfbuzz` crate that can be implemented without
 //! depending on [HarfBuzz](https://harfbuzz.github.io/) itself.
 
 #![no_std]
