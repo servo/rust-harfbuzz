@@ -138,7 +138,7 @@ impl<'a> Blob<'a> {
     }
 }
 
-impl<'a> ops::Deref for Blob<'a> {
+impl ops::Deref for Blob<'_> {
     type Target = [u8];
 
     fn deref(&self) -> &[u8] {
@@ -151,7 +151,7 @@ impl<'a> ops::Deref for Blob<'a> {
     }
 }
 
-impl<'a> ops::DerefMut for Blob<'a> {
+impl ops::DerefMut for Blob<'_> {
     fn deref_mut(&mut self) -> &mut [u8] {
         unsafe {
             let mut len = 0;
@@ -162,7 +162,7 @@ impl<'a> ops::DerefMut for Blob<'a> {
     }
 }
 
-impl<'a> Drop for Blob<'a> {
+impl Drop for Blob<'_> {
     /// Decrement the reference count, and destroy the blob if the reference count is zero.
     fn drop(&mut self) {
         unsafe {
