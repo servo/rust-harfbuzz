@@ -38,7 +38,7 @@ impl UnicodeFuncsBuilder {
         // sets refcount to one, not zero.
         // https://harfbuzz.github.io/object-model-lifecycle.html
         let ufuncs = unsafe { hb_unicode_funcs_create(parent) };
-        if ufuncs == parent {
+        if core::ptr::eq(ufuncs, parent) {
             return Err(Error::Alloc);
         }
         Ok(Self { raw: ufuncs })
@@ -51,7 +51,7 @@ impl UnicodeFuncsBuilder {
         // sets refcount to one, not zero.
         // https://harfbuzz.github.io/object-model-lifecycle.html
         let ufuncs = unsafe { hb_unicode_funcs_create(parent) };
-        if ufuncs == parent {
+        if core::ptr::eq(ufuncs, parent) {
             return Err(Error::Alloc);
         }
         Ok(Self { raw: ufuncs })
