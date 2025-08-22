@@ -36,6 +36,7 @@ pub mod freetype;
 #[allow(non_snake_case)]
 #[allow(non_upper_case_globals)]
 #[allow(clippy::unreadable_literal)]
+#[allow(clippy::doc_markdown)]
 #[allow(rustdoc::bare_urls)]
 #[allow(rustdoc::broken_intra_doc_links)]
 mod bindings;
