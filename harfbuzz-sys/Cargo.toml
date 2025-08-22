@@ -37,7 +37,7 @@ optional = true
 features = ["Win32_Graphics_DirectWrite"]
 
 [dependencies.freetype-sys]
-version = "0.21.0"
+version = "0.23.0"
 optional = true
 
 [features]
