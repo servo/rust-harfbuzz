@@ -17,7 +17,12 @@ fn build_harfbuzz() {
     cfg.cpp(true)
         .flag_if_supported("-std=c++11") // for unix
         .warnings(false)
+        .include("freetype-sys/freetype2/include/")
         .file("harfbuzz/src/harfbuzz.cc");
+
+    if cfg!(feature = "freetype") {
+        cfg.define("HAVE_FREETYPE", "1");
+    }
 
     if !target.contains("windows") {
         cfg.define("HAVE_PTHREAD", "1");
