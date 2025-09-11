@@ -6,11 +6,11 @@
 
 Bindings to the HarfBuzz text shaping engine.
 
-## Vendored Harfbuzz Sources
+## Vendored HarfBuzz Sources
 
-This repository contains a vendored copy of the `harfbuzz` sources
-as a git submodule. If building with the `bundled` feature, be sure
-to initialize submodules:
+This repository contains a vendored copy of the `harfbuzz` sources as a Git
+submodule. If building with the `bundled` feature, be sure to initialize
+submodules:
 
 ```
 git clone --recursive https://github.com/servo/rust-harfbuzz.git
@@ -24,6 +24,7 @@ git submodule update --init
 
 ## FreeType Support
 
-The `freetype` feature is enabled by default. If your system does not have FreeType
-or FreeType development packages, which is typically the case for Windows, you can
-either disable default features or enable the `freetype-sys/bundled` feature.
+The `freetype` feature is enabled by default. If your system does not have
+FreeType or FreeType development packages, which is typically the case for
+Windows, you can either disable default features or enable the
+`freetype-sys/bundled` feature.
