@@ -68,6 +68,11 @@ impl Language {
     /// assert_eq!(lang.to_string(), "en-us");
     /// ```
     pub fn to_string(&self) -> &str {
+        // Since we panic if we have a non-UTF-8 language tag,
+        // we might as well panic on an invalid language tag,
+        // which is possible if allocation failed within HarfBuzz
+        // itself.
+        assert!(self.is_valid());
         unsafe { core::ffi::CStr::from_ptr(sys::hb_language_to_string(self.raw)) }
             .to_str()
             .unwrap()
