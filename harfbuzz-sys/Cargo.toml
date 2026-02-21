@@ -27,9 +27,8 @@ pkg-config = { version = "0.3" }
 cc = { version = "1" }
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
-core-graphics = { version = "0.23", optional = true }
-core-text = { version = "20", optional = true }
-foreign-types = { version = "0.5", optional = true }
+objc2-core-graphics = { version = "0.3.2", default-features = false, features = ["CGFont"], optional = true }
+objc2-core-text = { version = "0.3.2", default-features = false, features = ["CTFont"], optional = true }
 
 [target.'cfg(target_family = "windows")'.dependencies.windows]
 version = "0.59"
@@ -43,6 +42,6 @@ optional = true
 [features]
 default = ["coretext", "directwrite", "freetype"]
 bundled = []
-coretext = ["dep:core-graphics", "dep:core-text", "dep:foreign-types"]
+coretext = ["dep:objc2-core-graphics", "dep:objc2-core-text"]
 directwrite = ["dep:windows"]
 freetype = ["dep:freetype-sys"]

@@ -9,19 +9,16 @@
 
 use crate::{hb_face_t, hb_font_t};
 
-use core_graphics::font::CGFont;
-use core_text::font::CTFontRef;
-use foreign_types::ForeignType;
-
-type CGFontRef = *mut <CGFont as ForeignType>::CType;
+use objc2_core_graphics::CGFont;
+use objc2_core_text::CTFont;
 
 extern "C" {
     /// This requires that the `coretext` feature is enabled.
-    pub fn hb_coretext_face_create(cg_font: CGFontRef) -> *mut hb_face_t;
+    pub fn hb_coretext_face_create(cg_font: &CGFont) -> *mut hb_face_t;
     /// This requires that the `coretext` feature is enabled.
-    pub fn hb_coretext_font_create(ct_font: CTFontRef) -> *mut hb_font_t;
+    pub fn hb_coretext_font_create(ct_font: &CTFont) -> *mut hb_font_t;
     /// This requires that the `coretext` feature is enabled.
-    pub fn hb_coretext_face_get_cg_font(face: *mut hb_face_t) -> CGFontRef;
+    pub fn hb_coretext_face_get_cg_font(face: *mut hb_face_t) -> *mut CGFont;
     /// This requires that the `coretext` feature is enabled.
-    pub fn hb_coretext_font_get_ct_font(font: *mut hb_font_t) -> CTFontRef;
+    pub fn hb_coretext_font_get_ct_font(font: *mut hb_font_t) -> *mut CTFont;
 }
