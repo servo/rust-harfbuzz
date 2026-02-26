@@ -138,7 +138,7 @@ impl UnicodeFuncsBuilder {
             user_data: *mut c_void,
         ) -> hb_codepoint_t {
             let code = unsafe { &*(user_data as *mut F) }.script(hb_codepoint_t_to_char(unicode));
-            unsafe { hb_script_from_string(code.as_ptr() as *const i8, 4) }
+            unsafe { hb_script_from_string(code.as_ptr() as *const core::ffi::c_char, 4) }
         }
         extern "C" fn destroy_script<F>(user_data: *mut c_void) {
             let _ = unsafe { Box::from_raw(user_data as *mut F) };
