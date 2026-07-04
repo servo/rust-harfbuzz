@@ -1,6 +1,6 @@
 [package]
 name = "harfbuzz"
-version = "0.6.0"
+version = "0.7.0"
 readme = "README.md"
 description = "High-level Rust bindings to the HarfBuzz text shaping engine"
 
@@ -14,7 +14,7 @@ repository = { workspace = true }
 
 [dependencies.harfbuzz-sys]
 path = "../harfbuzz-sys"
-version = "0.6.1"
+version = "0.7.0"
 default-features = false
 
 [dependencies.harfbuzz-traits]
