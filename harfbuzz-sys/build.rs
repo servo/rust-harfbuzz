@@ -16,6 +16,10 @@ fn build_harfbuzz() {
     let mut cfg = cc::Build::new();
     cfg.cpp(true)
         .flag_if_supported("-std=c++11") // for unix
+        .flag_if_supported("-fno-exceptions")
+        .flag_if_supported("-fno-rtti")
+        .flag_if_supported("/GR-")
+        .cpp_link_stdlib(None)
         .warnings(false)
         .file("harfbuzz/src/harfbuzz.cc");
 
